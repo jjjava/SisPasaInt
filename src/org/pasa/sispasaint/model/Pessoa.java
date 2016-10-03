@@ -48,14 +48,23 @@ public class Pessoa extends EntidadeBase {
     @Temporal(TemporalType.DATE)
     private Date dataObito;
 
+    @Column(name = "NM_MAE")
+    private String nomeMae;
+
+    @Column(name = "NM_PAI")
+    private String nomePai;
+
+    @Column(name = "EM_PESSOA")
+    private String email;
+
     @OneToOne
     @JoinColumn(name = "ID_ENDERECO")
     Endereco endereco;
-    
+
     @OneToOne
     @JoinColumn(name = "ID_DOCUMENTOS")
     Documentos documentos;
-    
+
     public Pessoa() {
     }
 
@@ -122,5 +131,29 @@ public class Pessoa extends EntidadeBase {
 
     public void setDocumentos(Documentos documentos) {
         this.documentos = documentos;
+    }
+
+    public String getNomeMae() {
+        return nomeMae;
+    }
+
+    public void setNomeMae(String nomeMae) {
+        this.nomeMae = nomeMae;
+    }
+
+    public String getNomePai() {
+        return nomePai;
+    }
+
+    public void setNomePai(String nomePai) {
+        this.nomePai = nomePai;
+    }
+
+    public String getEmail() {
+        return email;
+    }
+
+    public void setEmail(String email) {
+        this.email = email;
     }
 }
