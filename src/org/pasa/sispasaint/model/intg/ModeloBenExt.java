@@ -45,7 +45,7 @@ public class ModeloBenExt implements Serializable {
     private String sexo;
     private String empresaAtualizador;
     private String matriculaAtulizador;
-    private String tipoBeneficiario;
+    private String tipoBeneficiario;//->
     private String codigoDireitoPasa;
     private String grauEscolaridade;
     private String indicadorConclusao;

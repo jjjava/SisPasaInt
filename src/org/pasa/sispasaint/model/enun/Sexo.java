@@ -1,4 +1,4 @@
-package org.pasa.sispasaint.model;
+package org.pasa.sispasaint.model.enun;
 
 /**
  *
