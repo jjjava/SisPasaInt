@@ -113,9 +113,6 @@ public class Funcionario extends Pessoa {
     @Column(name = "CD_CENTRO_DE_CUSTO")
     private String centroDeCusto;
     
-    @Column(name = "CD_EMPRESA_PEOPLE")
-    private String matriculaParticipante;
-    
     @Column(name = "BL_PLANO_DE_RECIPROCIDADE_CASSI")
     private Integer planoDeReciprocidadeCassi;
     
@@ -366,14 +363,6 @@ public class Funcionario extends Pessoa {
 
     public void setCentroDeCusto(String centroDeCusto) {
         this.centroDeCusto = centroDeCusto;
-    }
-
-    public String getMatriculaParticipante() {
-        return matriculaParticipante;
-    }
-
-    public void setMatriculaParticipante(String matriculaParticipante) {
-        this.matriculaParticipante = matriculaParticipante;
     }
 
     public Integer getPlanoDeReciprocidadeCassi() {
