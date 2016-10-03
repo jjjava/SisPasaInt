@@ -11,7 +11,7 @@ import javax.persistence.Id;
 import javax.persistence.Inheritance;
 import javax.persistence.InheritanceType;
 import javax.persistence.JoinColumn;
-import javax.persistence.ManyToOne;
+import javax.persistence.OneToOne;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 
@@ -48,10 +48,14 @@ public class Pessoa extends EntidadeBase {
     @Temporal(TemporalType.DATE)
     private Date dataObito;
 
-    @ManyToOne
+    @OneToOne
     @JoinColumn(name = "ID_ENDERECO")
     Endereco endereco;
-
+    
+    @OneToOne
+    @JoinColumn(name = "ID_DOCUMENTOS")
+    Documentos documentos;
+    
     public Pessoa() {
     }
 
@@ -112,4 +116,11 @@ public class Pessoa extends EntidadeBase {
         this.endereco = endereco;
     }
 
+    public Documentos getDocumentos() {
+        return documentos;
+    }
+
+    public void setDocumentos(Documentos documentos) {
+        this.documentos = documentos;
+    }
 }
