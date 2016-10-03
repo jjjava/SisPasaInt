@@ -17,6 +17,7 @@ import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
+import org.pasa.sispasaint.model.enun.NivelEscolaridade;
 import org.pasa.sispasaint.model.enun.Sexo;
 
 /**
@@ -63,14 +64,21 @@ public class Pessoa extends EntidadeBase {
 
     @OneToOne
     @JoinColumn(name = "ID_ENDERECO")
-    Endereco endereco;
+    private Endereco endereco;
 
     @OneToMany
     @JoinTable(name = "DOCUMENTO_PESSOA", joinColumns = {
     @JoinColumn(name = "ID_PESSOA", referencedColumnName = "id")},
     inverseJoinColumns = {
     @JoinColumn(name = "ID_DOCUMENTO", referencedColumnName = "id")})
-    List<Documento> listaDocumentos;
+    private List<Documento> listaDocumentos;
+
+    @Column(name = "NV_ESCOLARIDADE")
+    @Enumerated(EnumType.ORDINAL)
+    private NivelEscolaridade nivelEscolaridade;
+    
+    @Column(name = "BL_INDICADOR_CONCLUSAO")
+    private Integer indicadorConclusao;
 
     public Pessoa() {
     }
@@ -162,5 +170,21 @@ public class Pessoa extends EntidadeBase {
 
     public void setEmail(String email) {
         this.email = email;
+    }
+
+    public NivelEscolaridade getNivelEscolaridade() {
+        return nivelEscolaridade;
+    }
+
+    public void setNivelEscolaridade(NivelEscolaridade nivelEscolaridade) {
+        this.nivelEscolaridade = nivelEscolaridade;
+    }
+
+    public Integer getIndicadorConclusao() {
+        return indicadorConclusao;
+    }
+
+    public void setIndicadorConclusao(Integer indicadorConclusao) {
+        this.indicadorConclusao = indicadorConclusao;
     }
 }

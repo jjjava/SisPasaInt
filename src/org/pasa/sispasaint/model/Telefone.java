@@ -1,5 +1,6 @@
 package org.pasa.sispasaint.model;
 
+import org.pasa.sispasaint.model.enun.TipoTelefone;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.EnumType;
