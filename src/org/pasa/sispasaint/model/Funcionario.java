@@ -36,34 +36,82 @@ public class Funcionario extends Pessoa {
     @Column(name = "CD_BENEFICIARIO")
     private String codBeneficiario;
 
-    @Column(name = "DT_ADMISSAO")
-    @Temporal(TemporalType.DATE)
-    private Date dataAdmissao;
+    @Column(name = "BOL_DIREITO_AMS_CREDENCIAMENTO")
+    private Integer direitoAMSCredenciamento;
 
-    @Column(name = "DT_DESLIGAMENTO")
+    @Column(name = "DT_VALIDADE_CREDENCIADO")
     @Temporal(TemporalType.DATE)
-    private Date dataDesligamento;
+    private Date dataValidadeCredenciado;
 
-    @Column(name = "BL_INDICADOR_CARGA_MANUAL")
-    private int indicadorCargaManual;
+    @Column(name = "BOL_DIREITO_AMS_REEMBOLSO")
+    private Integer direitoAmsReembolso;
+
+    @Column(name = "DT_VALIDADE_REEMBOLSO")
+    @Temporal(TemporalType.DATE)
+    private Date dataValidadeReembolso;
+
+    @Column(name = "DT_DE_ATUALIZACAO")
+    @Temporal(TemporalType.DATE)
+    private Date dataDeAtualizacao;
 
     @Column(name = "CD_CR")
     private String codigoCR;
 
-    @Column(name = "NM_ORGAO_PESSOAL")
+    @Column(name = "VL_ORGAO_PESSOAL")
     private String orgaoPessoal;
 
-    @Column(name = "NM_CONTRATO_TRABALHO")
+    @Column(name = "VL_VINCULO")
+    private String vinculo;
+
+    @Column(name= "CD_PLANO")
+    private String plano;
+    
+    @Column(name = "CD_FAIXA_NIVEL")
+    private String faixaNivel;
+    
+    @Column(name = "BOL_DIREITO_ABATER_IR")
+    private Integer direitoAbaterIR;
+    
+    @Column(name = "VL_NUCLEO_AMS")
+    private String nucleoDaAms;
+
+    @Column(name = "DT_ADMISSAO")
+    @Temporal(TemporalType.DATE)
+    private Date dataAdmissao;
+    
+    @Column(name = "NM_FIMANCEIRA")
+    private String financeira;
+    
+    @Column(name = "CD_CONTRATO_DE_TRABALHO")
     private String contratoTrabalho;
 
-    @Column(name = "NM_MATRICULA_PASA")
-    private String matriculaPASA;
+    @Column(name = "CD_EMPRESA_ATUALIZADOR")
+    private String empresaAtualizador;
+    
+    @Column(name = "CD_MATRICULA_ATUALIZADOR")
+    private String matriculaAtulizador;
 
-    @Column(name = "NM_MATRICULA_ORIGEM")
+    @Column(name = "CD_DIREITO_PASA")
+    private String codigoDireitoPasa;
+
+    @Column(name = "NR_MATRICULA_PASA")
+    private String matriculaPasa;
+
+    @Column(name = "CD_EMPRESA_ORIGEM")
+    private String empresaOrigem;
+    
     private String matriculaOrigem;
-
-    @Column(name = "NM_CENTRO_CUSTO")
-    private String centroCusto;
+    private String empresaPeople;
+    private String matriculaPeople;
+    private String unidadeDeControle;
+    private String centroDeCusto;
+    private String matriculaParticipante;
+    private String matriculaRepresentanteLegal;
+    private String planoDeReciprocidadeCassi;
+    private String codigoNacionalDeSaude;
+    private String cassiData;// BRANCO
+    private String branco;
+    private String codigoFilialVLI;
 
     public Funcionario() {
     }
