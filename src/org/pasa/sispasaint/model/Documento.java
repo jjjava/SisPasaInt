@@ -38,6 +38,9 @@ public class Documento extends EntidadeBase {
     @Column(name = "DT_VALIDADE")
     @Temporal(TemporalType.DATE)
     private Date dataValidade;
+    
+    public Documento() {
+    }
 
     @Override
     protected Long getId() {
@@ -46,9 +49,6 @@ public class Documento extends EntidadeBase {
 
     public void setId(Long id) {
         this.id = id;
-    }
-
-    public Documento() {
     }
 
     public String getNumeroDocumento() {

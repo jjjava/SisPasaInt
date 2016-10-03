@@ -23,17 +23,14 @@ public class DadosBancarios extends EntidadeBase {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @Column(name = "ID_ENTIDADE")
-    private Long idEntidade;
-
     @Column(name = "CD_BANCO")
     private int codigoBanco;
 
     @Column(name = "NR_AGENCIA")
     private int numeroAgencia;
 
-    @Column(name = "NR_CONTA_CORRENTE")
-    private int numeroContaCorrente;
+    @Column(name = "NR_CONTA")
+    private int numeroConta;
 
     public DadosBancarios() {
     }
@@ -45,14 +42,6 @@ public class DadosBancarios extends EntidadeBase {
 
     public void setId(Long id) {
         this.id = id;
-    }
-
-    public Long getIdEntidade() {
-        return idEntidade;
-    }
-
-    public void setIdEntidade(Long idEntidade) {
-        this.idEntidade = idEntidade;
     }
 
     public int getCodigoBanco() {
@@ -72,10 +61,10 @@ public class DadosBancarios extends EntidadeBase {
     }
 
     public int getNumeroContaCorrente() {
-        return numeroContaCorrente;
+        return numeroConta;
     }
 
-    public void setNumeroContaCorrente(int numeroContaCorrente) {
-        this.numeroContaCorrente = numeroContaCorrente;
+    public void setNumeroContaCorrente(int numeroConta) {
+        this.numeroConta = numeroConta;
     }
 }

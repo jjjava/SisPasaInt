@@ -25,54 +25,18 @@ public class Funcionario extends Pessoa {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @Column(name = "CD_EMPRESA")
+    @Column(name = "CODIGO_EMPRESA")
     private String codEmpresa;
 
     @Column(name = "CD_MATRICULA")
     private String matricula;
 
-    @Column(name = "CD_BENEFICIARIO")
-    private String codBeneficiario;
-
-    @Column(name = "BOL_DIREITO_AMS_CREDENCIAMENTO")
-    private Integer direitoAMSCredenciamento;
-
-    @Column(name = "DT_VALIDADE_CREDENCIADO")
-    @Temporal(TemporalType.DATE)
-    private Date dataValidadeCredenciado;
-
-    @Column(name = "BOL_DIREITO_AMS_REEMBOLSO")
-    private Integer direitoAmsReembolso;
-
-    @Column(name = "DT_VALIDADE_REEMBOLSO")
-    @Temporal(TemporalType.DATE)
-    private Date dataValidadeReembolso;
-
-    @Column(name = "DT_DE_ATUALIZACAO")
-    @Temporal(TemporalType.DATE)
-    private Date dataDeAtualizacao;
-
-    @Column(name = "CD_CR")
-    private String codigoCR;
-
-    @Column(name = "VL_ORGAO_PESSOAL")
-    private String orgaoPessoal;
-
     @Column(name = "VL_VINCULO")
     private String vinculo;
 
-    @Column(name= "CD_PLANO")
-    private String plano;
-    
-    @Column(name = "CD_FAIXA_NIVEL")
-    private String faixaNivel;
-    
     @Column(name = "BOL_DIREITO_ABATER_IR")
     private Integer direitoAbaterIR;
     
-    @Column(name = "VL_NUCLEO_AMS")
-    private String nucleoDaAms;
-
     @Column(name = "DT_ADMISSAO")
     @Temporal(TemporalType.DATE)
     private Date dataAdmissao;
@@ -113,15 +77,6 @@ public class Funcionario extends Pessoa {
     @Column(name = "CD_CENTRO_DE_CUSTO")
     private String centroDeCusto;
     
-    @Column(name = "BL_PLANO_DE_RECIPROCIDADE_CASSI")
-    private Integer planoDeReciprocidadeCassi;
-    
-    @Column(name = "CD_NACIONAL_DE_SAUDE")
-    private String codigoNacionalDeSaude;
-    
-    @Column(name = "BR_CASSI_DATA")
-    private String cassiData;// BRANCO
-    
     @Column(name = "BR_BRANCO")
     private String branco;
     
@@ -157,70 +112,6 @@ public class Funcionario extends Pessoa {
         this.codEmpresa = codEmpresa;
     }
 
-    public String getCodBeneficiario() {
-        return codBeneficiario;
-    }
-
-    public void setCodBeneficiario(String codBeneficiario) {
-        this.codBeneficiario = codBeneficiario;
-    }
-
-    public Integer getDireitoAMSCredenciamento() {
-        return direitoAMSCredenciamento;
-    }
-
-    public void setDireitoAMSCredenciamento(Integer direitoAMSCredenciamento) {
-        this.direitoAMSCredenciamento = direitoAMSCredenciamento;
-    }
-
-    public Date getDataValidadeCredenciado() {
-        return dataValidadeCredenciado;
-    }
-
-    public void setDataValidadeCredenciado(Date dataValidadeCredenciado) {
-        this.dataValidadeCredenciado = dataValidadeCredenciado;
-    }
-
-    public Integer getDireitoAmsReembolso() {
-        return direitoAmsReembolso;
-    }
-
-    public void setDireitoAmsReembolso(Integer direitoAmsReembolso) {
-        this.direitoAmsReembolso = direitoAmsReembolso;
-    }
-
-    public Date getDataValidadeReembolso() {
-        return dataValidadeReembolso;
-    }
-
-    public void setDataValidadeReembolso(Date dataValidadeReembolso) {
-        this.dataValidadeReembolso = dataValidadeReembolso;
-    }
-
-    public Date getDataDeAtualizacao() {
-        return dataDeAtualizacao;
-    }
-
-    public void setDataDeAtualizacao(Date dataDeAtualizacao) {
-        this.dataDeAtualizacao = dataDeAtualizacao;
-    }
-
-    public String getCodigoCR() {
-        return codigoCR;
-    }
-
-    public void setCodigoCR(String codigoCR) {
-        this.codigoCR = codigoCR;
-    }
-
-    public String getOrgaoPessoal() {
-        return orgaoPessoal;
-    }
-
-    public void setOrgaoPessoal(String orgaoPessoal) {
-        this.orgaoPessoal = orgaoPessoal;
-    }
-
     public String getVinculo() {
         return vinculo;
     }
@@ -229,36 +120,12 @@ public class Funcionario extends Pessoa {
         this.vinculo = vinculo;
     }
 
-    public String getPlano() {
-        return plano;
-    }
-
-    public void setPlano(String plano) {
-        this.plano = plano;
-    }
-
-    public String getFaixaNivel() {
-        return faixaNivel;
-    }
-
-    public void setFaixaNivel(String faixaNivel) {
-        this.faixaNivel = faixaNivel;
-    }
-
     public Integer getDireitoAbaterIR() {
         return direitoAbaterIR;
     }
 
     public void setDireitoAbaterIR(Integer direitoAbaterIR) {
         this.direitoAbaterIR = direitoAbaterIR;
-    }
-
-    public String getNucleoDaAms() {
-        return nucleoDaAms;
-    }
-
-    public void setNucleoDaAms(String nucleoDaAms) {
-        this.nucleoDaAms = nucleoDaAms;
     }
 
     public Date getDataAdmissao() {
@@ -365,30 +232,6 @@ public class Funcionario extends Pessoa {
         this.centroDeCusto = centroDeCusto;
     }
 
-    public Integer getPlanoDeReciprocidadeCassi() {
-        return planoDeReciprocidadeCassi;
-    }
-
-    public void setPlanoDeReciprocidadeCassi(Integer planoDeReciprocidadeCassi) {
-        this.planoDeReciprocidadeCassi = planoDeReciprocidadeCassi;
-    }
-
-    public String getCodigoNacionalDeSaude() {
-        return codigoNacionalDeSaude;
-    }
-
-    public void setCodigoNacionalDeSaude(String codigoNacionalDeSaude) {
-        this.codigoNacionalDeSaude = codigoNacionalDeSaude;
-    }
-
-    public String getCassiData() {
-        return cassiData;
-    }
-
-    public void setCassiData(String cassiData) {
-        this.cassiData = cassiData;
-    }
-
     public String getBranco() {
         return branco;
     }
@@ -403,5 +246,5 @@ public class Funcionario extends Pessoa {
 
     public void setCodigoFilialVLI(String codigoFilialVLI) {
         this.codigoFilialVLI = codigoFilialVLI;
-    }
+    } 
 }
