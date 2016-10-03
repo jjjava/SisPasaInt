@@ -4,7 +4,7 @@ import java.util.List;
 import org.pasa.sispasaint.bean.ImpBenPeopleTempBean;
 import org.pasa.sispasaint.dao.impl.ImpBenPeopleTempDAOImpl;
 import org.pasa.sispasaint.model.intg.ModeloBenPeople;
-import org.sispasa.sispasaint.rw.LerArquivoBenPeople;
+import org.pasa.sispasaint.rw.LerArquivoBenPeople;
 
 /**
  *

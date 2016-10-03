@@ -1,4 +1,4 @@
-package org.sispasa.sispasaint.rw;
+package org.pasa.sispasaint.rw;
 
 import java.io.BufferedReader;
 import java.io.File;
@@ -9,7 +9,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 import org.pasa.sispasaint.config.Configuracao;
-import org.sispasa.sispasaint.rw.PosicaoCampo;
+import org.pasa.sispasaint.rw.PosicaoCampo;
 import org.pasa.sispasaint.map.CamposEndVLI;
 import org.pasa.sispasaint.map.MapaCamposEndVLI;
 import org.pasa.sispasaint.model.intg.ModeloEndPeople;

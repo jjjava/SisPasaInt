@@ -4,7 +4,7 @@ import java.util.List;
 import org.pasa.sispasaint.bean.ImpBenVLITempBean;
 import org.pasa.sispasaint.dao.impl.ImpBenVLITempDAOImpl;
 import org.pasa.sispasaint.model.intg.ModeloBenVLI;
-import org.sispasa.sispasaint.rw.LerArquivoBenVLI;
+import org.pasa.sispasaint.rw.LerArquivoBenVLI;
 
 /**
  *

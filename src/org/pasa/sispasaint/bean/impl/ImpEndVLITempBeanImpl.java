@@ -5,7 +5,7 @@ import org.pasa.sispasaint.bean.ImpEndVLITempBean;
 import org.pasa.sispasaint.dao.impl.ImpEndVLITempDAOImpl;
 import org.pasa.sispasaint.model.intg.ModeloBenVLI;
 import org.pasa.sispasaint.model.intg.ModeloEndVLI;
-import org.sispasa.sispasaint.rw.LerArquivoEndVLI;
+import org.pasa.sispasaint.rw.LerArquivoEndVLI;
 
 /**
  *

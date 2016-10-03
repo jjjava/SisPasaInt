@@ -5,7 +5,7 @@ import org.pasa.sispasaint.bean.ImpEndExtTempBean;
 import org.pasa.sispasaint.dao.impl.ImpEndExtTempDAOImpl;
 import org.pasa.sispasaint.model.intg.ModeloBenExt;
 import org.pasa.sispasaint.model.intg.ModeloEndExt;
-import org.sispasa.sispasaint.rw.LerArquivoEndExt;
+import org.pasa.sispasaint.rw.LerArquivoEndExt;
 
 /**
  *

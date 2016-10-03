@@ -1,4 +1,4 @@
-package org.sispasa.sispasaint.rw;
+package org.pasa.sispasaint.rw;
 
 import java.io.BufferedReader;
 import java.io.File;

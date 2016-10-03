@@ -4,7 +4,7 @@ import java.util.List;
 import org.pasa.sispasaint.bean.ImpBenExtTempBean;
 import org.pasa.sispasaint.dao.impl.ImpBenExtTempDAOImpl;
 import org.pasa.sispasaint.model.intg.ModeloBenExt;
-import org.sispasa.sispasaint.rw.LerArquivoBenExt;
+import org.pasa.sispasaint.rw.LerArquivoBenExt;
 
 /**
  *

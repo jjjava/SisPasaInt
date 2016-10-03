@@ -4,7 +4,7 @@ import java.util.List;
 import org.pasa.sispasaint.bean.ImpEndPeopleTempBean;
 import org.pasa.sispasaint.dao.impl.ImpEndPeopleTempDAOImpl;
 import org.pasa.sispasaint.model.intg.ModeloEndPeople;
-import org.sispasa.sispasaint.rw.LerArquivoEndPeople;
+import org.pasa.sispasaint.rw.LerArquivoEndPeople;
 
 /**
  *

@@ -2,7 +2,7 @@ package org.pasa.sispasaint.map;
 
 import java.util.HashMap;
 import java.util.Map;
-import org.sispasa.sispasaint.rw.PosicaoCampo;
+import org.pasa.sispasaint.rw.PosicaoCampo;
 
 /**
  *
