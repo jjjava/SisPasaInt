@@ -16,7 +16,7 @@ import javax.persistence.TemporalType;
  */
 @Entity
 @Table(name = "DOCUMENTO")
-public class Documentos extends EntidadeBase {
+public class Documento extends EntidadeBase {
 
     private static final long serialVersionUID = 1L;
 
@@ -24,7 +24,7 @@ public class Documentos extends EntidadeBase {
     @Column(name = "ID_DOCUMENTO")
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-   
+
     @Column(name = "NR_DOCUMENTO")
     private String numeroDocumento;
 
@@ -38,7 +38,7 @@ public class Documentos extends EntidadeBase {
     @Column(name = "DT_VALIDADE")
     @Temporal(TemporalType.DATE)
     private Date dataValidade;
-   
+
     @Override
     protected Long getId() {
         return id;
@@ -47,4 +47,40 @@ public class Documentos extends EntidadeBase {
     public void setId(Long id) {
         this.id = id;
     }
+
+    public Documento() {
+    }
+
+    public String getNumeroDocumento() {
+        return numeroDocumento;
+    }
+
+    public void setNumeroDocumento(String numeroDocumento) {
+        this.numeroDocumento = numeroDocumento;
+    }
+
+    public String getOrgaoEmissor() {
+        return orgaoEmissor;
+    }
+
+    public void setOrgaoEmissor(String orgaoEmissor) {
+        this.orgaoEmissor = orgaoEmissor;
+    }
+
+    public Date getDataEmissao() {
+        return dataEmissao;
+    }
+
+    public void setDataEmissao(Date dataEmissao) {
+        this.dataEmissao = dataEmissao;
+    }
+
+    public Date getDataValidade() {
+        return dataValidade;
+    }
+
+    public void setDataValidade(Date dataValidade) {
+        this.dataValidade = dataValidade;
+    }
+
 }

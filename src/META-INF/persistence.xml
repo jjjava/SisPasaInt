@@ -18,9 +18,9 @@
     <class>org.pasa.sispasaint.model.intg.ModeloEndVLI</class>
     <class>org.pasa.sispasaint.model.CPF</class>
     <class>org.pasa.sispasaint.model.DadosBancarios</class>
-    <class>org.pasa.sispasaint.model.Documentos</class>
     <class>org.pasa.sispasaint.model.Identidade</class>
     <class>org.pasa.sispasaint.model.PIS</class>
+    <class>org.pasa.sispasaint.model.Documento</class>
     <properties>
       <property name="javax.persistence.jdbc.url" value="jdbc:jtds:sqlserver://127.0.0.1:1433;instance=PASA;DatabaseName=sispasaint"/>
       <property name="javax.persistence.jdbc.user" value="sispasa"/>

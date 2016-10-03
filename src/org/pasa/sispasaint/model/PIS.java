@@ -13,6 +13,7 @@ import javax.persistence.Table;
  */
 @Entity
 @Table(name = "PIS")
+@Deprecated
 public class PIS extends EntidadeBase {
 
     @Id

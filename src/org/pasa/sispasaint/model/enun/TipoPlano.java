@@ -1,4 +1,4 @@
-package org.pasa.sispasa.core.enumeration;
+package org.pasa.sispasaint.model.enun;
 
 /**
  *

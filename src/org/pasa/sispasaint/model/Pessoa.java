@@ -64,7 +64,7 @@ public class Pessoa extends EntidadeBase {
 
     @OneToOne
     @JoinColumn(name = "ID_DOCUMENTOS")
-    Documentos documentos;
+    Documento documentos;
 
     public Pessoa() {
     }
@@ -126,11 +126,11 @@ public class Pessoa extends EntidadeBase {
         this.endereco = endereco;
     }
 
-    public Documentos getDocumentos() {
+    public Documento getDocumentos() {
         return documentos;
     }
 
-    public void setDocumentos(Documentos documentos) {
+    public void setDocumentos(Documento documentos) {
         this.documentos = documentos;
     }
 

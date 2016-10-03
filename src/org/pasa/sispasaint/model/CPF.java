@@ -13,6 +13,7 @@ import javax.persistence.Table;
  */
 @Entity
 @Table(name = "CPF")
+@Deprecated
 public class CPF extends EntidadeBase {
 
     private static final long serialVersionUID = 1L;

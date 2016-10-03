@@ -17,6 +17,7 @@ import javax.persistence.TemporalType;
  */
 @Entity
 @Table(name = "IDENTIDADE")
+@Deprecated
 public class Identidade extends EntidadeBase {
 
     private static final long serialVersionUID = 1L;
