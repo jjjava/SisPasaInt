@@ -1,6 +1,7 @@
 package org.pasa.sispasaint.model;
 
 import java.util.Date;
+import java.util.List;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.EnumType;
@@ -11,6 +12,9 @@ import javax.persistence.Id;
 import javax.persistence.Inheritance;
 import javax.persistence.InheritanceType;
 import javax.persistence.JoinColumn;
+import javax.persistence.JoinTable;
+import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
@@ -62,9 +66,12 @@ public class Pessoa extends EntidadeBase {
     @JoinColumn(name = "ID_ENDERECO")
     Endereco endereco;
 
-    @OneToOne
-    @JoinColumn(name = "ID_DOCUMENTOS")
-    Documento documentos;
+    @OneToMany
+    @JoinTable(name = "DOCUMENTO_PESSOA", joinColumns = {
+    @JoinColumn(name = "ID_PESSOA", referencedColumnName = "id")},
+    inverseJoinColumns = {
+    @JoinColumn(name = "ID_DOCUMENTO", referencedColumnName = "id")})
+    List<Documento> listaDocumentos;
 
     public Pessoa() {
     }
@@ -126,12 +133,12 @@ public class Pessoa extends EntidadeBase {
         this.endereco = endereco;
     }
 
-    public Documento getDocumentos() {
-        return documentos;
+    public List<Documento> getListaDocumentos() {
+        return listaDocumentos;
     }
 
-    public void setDocumentos(Documento documentos) {
-        this.documentos = documentos;
+    public void setListaDocumentos(List<Documento> listaDocumentos) {
+        this.listaDocumentos = listaDocumentos;
     }
 
     public String getNomeMae() {
