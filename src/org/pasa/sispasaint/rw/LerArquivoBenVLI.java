@@ -12,6 +12,7 @@ import org.pasa.sispasaint.config.Configuracao;
 import org.pasa.sispasaint.map.CamposBenVLI;
 import org.pasa.sispasaint.map.MapaCamposBenVLI;
 import org.pasa.sispasaint.model.intg.ModeloBenVLI;
+import org.pasa.sispasaint.util.StringUtil;
 
 /**
  *
@@ -62,7 +63,7 @@ public class LerArquivoBenVLI {
     }
 
     private ModeloBenVLI parseCampos(String line) {
-
+        line = StringUtil.removeCharsEspeciais(line);
         System.out.println(line);
 
         ModeloBenVLI modelo = new ModeloBenVLI();

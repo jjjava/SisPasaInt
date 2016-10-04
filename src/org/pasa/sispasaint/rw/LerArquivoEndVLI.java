@@ -12,6 +12,7 @@ import org.pasa.sispasaint.config.Configuracao;
 import org.pasa.sispasaint.map.CamposEndVLI;
 import org.pasa.sispasaint.map.MapaCamposEndVLI;
 import org.pasa.sispasaint.model.intg.ModeloEndVLI;
+import org.pasa.sispasaint.util.StringUtil;
 
 /**
  *
@@ -62,6 +63,7 @@ public class LerArquivoEndVLI {
     }
 
     private ModeloEndVLI parseCampos(String line) {
+        line = StringUtil.removeCharsEspeciais(line);
         System.out.println(line);
         ModeloEndVLI modelo = new ModeloEndVLI();
         Map<String, PosicaoCampo> mapa = new MapaCamposEndVLI().getMapa();
