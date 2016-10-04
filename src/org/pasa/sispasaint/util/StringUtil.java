@@ -1,8 +1,3 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package org.pasa.sispasaint.util;
 
 import java.util.Date;
@@ -43,11 +38,6 @@ public class StringUtil {
                 .replace('ç', 'c')
                 .replace('Ç', 'C')
                 .replace('ñ', 'n')
-                .replace('Ñ', 'N')
-                .replaceAll("[^a-zA-Z0-9,\\s/-]", "");
-    }
-
-    public static Date parseData(String d) {
-        return null;
+                .replace('Ñ', 'N');
     }
 }
