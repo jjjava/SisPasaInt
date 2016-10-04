@@ -15,8 +15,8 @@ public class MapaCamposEndVLI {
     public MapaCamposEndVLI() {
         mapa = new HashMap<>();
         mapa.put(CamposEndVLI.EMPRESA, new PosicaoCampo(1, 3));
-        mapa.put(CamposEndVLI.MATRICULA, new PosicaoCampo(4, 10));
-        mapa.put(CamposEndVLI.COD_BENEFICIARIO, new PosicaoCampo(11, 13));
+        mapa.put(CamposEndVLI.MATRICULA, new PosicaoCampo(3, 9));
+        mapa.put(CamposEndVLI.COD_BENEFICIARIO, new PosicaoCampo(9, 11));
         mapa.put(CamposEndVLI.TELEFONE1, new PosicaoCampo(11, 30));
         mapa.put(CamposEndVLI.TELEFONE2, new PosicaoCampo(31, 50));
         mapa.put(CamposEndVLI.BRANCO, new PosicaoCampo(51, 59));

@@ -13,15 +13,18 @@ import org.pasa.sispasaint.model.intg.ModeloEndVLI;
 public class CargaVLIBeanImpl implements CargaVLIBean {
 
     public CargaVLIBeanImpl() {
-        System.out.println("carga");
     }
 
     @Override
     public void cargaArquivosTemp() {
+        System.out.println("benVLi");
         ImpBenVLITempBeanImpl impBenVLITempBeanImpl = new ImpBenVLITempBeanImpl();
         impBenVLITempBeanImpl.limparTbTemp();
+        System.out.println("limpou tb");
         impBenVLITempBeanImpl.resetarIdentity();
+        System.out.println("resetou tabela");
         impBenVLITempBeanImpl.carregarArquivo();
+        System.out.println("ben-fim");
 
         ImpEndVLITempBeanImpl impEndVLITempBeanImpl = new ImpEndVLITempBeanImpl();
         impEndVLITempBeanImpl.limparTbTemp();
@@ -31,33 +34,22 @@ public class CargaVLIBeanImpl implements CargaVLIBean {
 
     @Override
     public void mapearEntidades() {
-        ImpBenVLITempBeanImpl impBenVLITempBeanImpl = new ImpBenVLITempBeanImpl();
-        ImpEndVLITempBeanImpl impEndVLITempBeanImpl = new ImpEndVLITempBeanImpl();
 
-        FuncionarioBeanImpl funcionarioBeanImpl = new FuncionarioBeanImpl();
-
-        Long t = impBenVLITempBeanImpl.contar();
-        System.out.println("@@@@@@@@@@@@@@@@@@@@@@@"+t);
-
+        Long t = new ImpBenVLITempBeanImpl().contar();
         for (Long k = 1L; k < t; k++) {
-            ModeloBenVLI modeloBenVLI = impBenVLITempBeanImpl.obter(k);
-//            System.out.println(modeloBenVLI.getNomeBeneficiario());
-//            System.out.println(modeloBenVLI.getChaveMatricula());
+            System.out.println(k);
+            ModeloBenVLI modeloBenVLI = new ImpBenVLITempBeanImpl().obter(k);
+            System.out.println(modeloBenVLI.getNomeBeneficiario());
+
 //            
-
-            ModeloEndVLI modeloEndVLI = impEndVLITempBeanImpl.obterPorMatricula(modeloBenVLI);
+            ModeloEndVLI modeloEndVLI = new ImpEndVLITempBeanImpl().obterPorMatricula(modeloBenVLI);
+            if (modeloBenVLI.getId() != null) {
+                System.out.println("Cidade :" + modeloEndVLI.getCidade());
+                System.out.println("emp :" + modeloEndVLI.getEmpresa());
+                System.out.println("matri :" + modeloEndVLI.getMatricula());
+                System.out.println("cod ben :" + modeloEndVLI.getCodBeneficiario());
+            }
 //
-//            System.out.println("Cidade :"+modeloEndVLI.getCidade());
-//            System.out.println("emp :"+modeloEndVLI.getEmpresa());
-//            System.out.println("matri :"+modeloEndVLI.getMatricula());
-//            System.out.println("cod ben :"+modeloEndVLI.getCodBeneficiario());
-
-            Funcionario funcionario = new Funcionario();
-            funcionario.setNome(modeloBenVLI.getNomeBeneficiario());
-            funcionario.setMatricula(modeloBenVLI.getMatricula());
-
-            Endereco endereco = new Endereco();
-            endereco.setBairro(modeloEndVLI.getBairro());
 
             //funcionarioBeanImpl.cadastar(funcionario)
         }

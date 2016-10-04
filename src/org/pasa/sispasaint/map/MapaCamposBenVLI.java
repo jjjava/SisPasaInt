@@ -41,8 +41,8 @@ public class MapaCamposBenVLI {
         mapa.put(CamposBenVLI.SEXO, new PosicaoCampo(125, 126));
         mapa.put(CamposBenVLI.EMPRESA_ATUALIZADOR, new PosicaoCampo(126, 127));
         mapa.put(CamposBenVLI.MATRICULA_ATUALIZADOR, new PosicaoCampo(128, 133));
-        mapa.put(CamposBenVLI.TIPO_BENEFICIARIO, new PosicaoCampo(134, 134));
-        mapa.put(CamposBenVLI.CODIGO_DIREITO_PASA, new PosicaoCampo(135, 135));
+        mapa.put(CamposBenVLI.TIPO_BENEFICIARIO, new PosicaoCampo(134, 135));
+        mapa.put(CamposBenVLI.CODIGO_DIREITO_PASA, new PosicaoCampo(135, 136));
         mapa.put(CamposBenVLI.GRAU_ESCOLARIDADE, new PosicaoCampo(136, 136));
         mapa.put(CamposBenVLI.INDICAR_CONCLUSAO, new PosicaoCampo(137, 137));
         mapa.put(CamposBenVLI.DATA_FALECIMENTO, new PosicaoCampo(138, 148));

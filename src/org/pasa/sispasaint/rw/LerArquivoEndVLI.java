@@ -62,13 +62,12 @@ public class LerArquivoEndVLI {
     }
 
     private ModeloEndVLI parseCampos(String line) {
-        //System.out.println(line);
+        System.out.println(line);
         ModeloEndVLI modelo = new ModeloEndVLI();
         Map<String, PosicaoCampo> mapa = new MapaCamposEndVLI().getMapa();
         PosicaoCampo campo;
 
         try {
-
             campo = (PosicaoCampo) mapa.get(CamposEndVLI.EMPRESA);
             modelo.setEmpresa(line.substring(campo.getInicioCampo(), campo.getFimCampo()));
 

@@ -33,9 +33,7 @@ public class ImpBenVLITempDAOImpl extends DaoGenerico<ModeloBenVLI> implements I
                 getEntityManager().getTransaction().commit();
             } catch (Exception ex) {
                 System.err.println(ex);
-                getEntityManager().getTransaction().begin();
                 getEntityManager().getTransaction().rollback();
-                getEntityManager().getTransaction().commit();
             }
         }
     }

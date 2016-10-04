@@ -68,9 +68,9 @@ public class Pessoa extends EntidadeBase {
 
     @OneToMany
     @JoinTable(name = "DOCUMENTO_PESSOA", joinColumns = {
-    @JoinColumn(name = "ID_PESSOA", referencedColumnName = "id")},
+    @JoinColumn(name = "ID_PESSOA")},
     inverseJoinColumns = {
-    @JoinColumn(name = "ID_DOCUMENTO", referencedColumnName = "id")})
+    @JoinColumn(name = "ID_DOCUMENTO")})
     private List<Documento> listaDocumentos;
 
     @Column(name = "NV_ESCOLARIDADE")
