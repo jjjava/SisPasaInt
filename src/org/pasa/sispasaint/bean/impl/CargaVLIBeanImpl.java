@@ -1,11 +1,12 @@
 package org.pasa.sispasaint.bean.impl;
 
 import org.pasa.sispasaint.bean.CargaVLIBean;
+import org.pasa.sispasaint.dao.impl.FuncionarioDAOImpl;
+import org.pasa.sispasaint.model.Beneficiario;
 import org.pasa.sispasaint.model.Endereco;
 import org.pasa.sispasaint.model.Estado;
 import org.pasa.sispasaint.model.Funcionario;
 import org.pasa.sispasaint.model.Municipio;
-import static org.pasa.sispasaint.model.Pessoa_.endereco;
 import org.pasa.sispasaint.model.intg.ModeloBenVLI;
 import org.pasa.sispasaint.model.intg.ModeloEndVLI;
 import org.pasa.sispasaint.util.DateUtil;
@@ -39,11 +40,12 @@ public class CargaVLIBeanImpl implements CargaVLIBean {
         Long t = new ImpBenVLITempBeanImpl().contar();
         for (Long k = 1L; k < t; k++) {
             ModeloBenVLI modeloBenVLI = new ImpBenVLITempBeanImpl().obter(k);
-            System.out.println(modeloBenVLI.getNomeBeneficiario());
+
             ModeloEndVLI modeloEndVLI = new ImpEndVLITempBeanImpl().obterPorMatricula(modeloBenVLI);
 
             if (modeloBenVLI.getId() != null) {
                 if (modeloBenVLI.getTipoBeneficiario().equalsIgnoreCase(SisPasaIntCommon.FUNCIONARIO)) {
+                                System.out.println(modeloBenVLI.getNomeBeneficiario());
                     Funcionario funcionario = new Funcionario();
 
                     funcionario.setCodEmpresa(modeloBenVLI.getEmpresa());
@@ -72,14 +74,24 @@ public class CargaVLIBeanImpl implements CargaVLIBean {
                     Municipio municipio = new Municipio();
                     municipio.setNome(modeloEndVLI.getCidade());
                     municipio.setEstado(estado);
-
+                   
                     Endereco endereco = new Endereco();
                     endereco.setLogradouro(modeloEndVLI.getEndereco());
                     endereco.setBairro(modeloEndVLI.getBairro());
                     endereco.setCep(modeloEndVLI.getCep());
                     endereco.setEstado(estado);
+                    
+                    funcionario.setEndereco(endereco);
 
                     new FuncionarioBeanImpl().atualizar(funcionario);
+                }
+                else{
+                    Beneficiario beneficiario = new Beneficiario();
+                                System.out.println(modeloBenVLI.getNomeBeneficiario());
+                    
+                    Funcionario  funcionario = new FuncionarioBeanImpl().obter(modeloBenVLI.getEmpresa(), modeloBenVLI.getMatricula());
+                    System.err.println(funcionario.getId());
+                    System.err.println(funcionario.getNomeAbreviado());
                 }
             }
         }

@@ -27,5 +27,4 @@ public class DateUtil {
         }
         return retorno;
     }
-
 }
