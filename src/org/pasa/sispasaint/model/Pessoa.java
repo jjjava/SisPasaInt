@@ -6,6 +6,7 @@ import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.EnumType;
 import javax.persistence.Enumerated;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -62,11 +63,11 @@ public class Pessoa extends EntidadeBase {
     @Column(name = "EM_PESSOA")
     private String email;
 
-    @OneToOne
+    @OneToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "ID_ENDERECO")
     private Endereco endereco;
 
-    @OneToMany
+    @OneToMany(fetch = FetchType.LAZY)
     @JoinTable(name = "DOCUMENTO_PESSOA", joinColumns = {
     @JoinColumn(name = "ID_PESSOA")},
     inverseJoinColumns = {
