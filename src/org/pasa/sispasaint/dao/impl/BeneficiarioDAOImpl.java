@@ -6,7 +6,6 @@ import javax.persistence.Query;
 import org.pasa.sispasaint.dao.BeneficiarioDAO;
 import org.pasa.sispasaint.dao.DaoGenerico;
 import org.pasa.sispasaint.model.Beneficiario;
-import org.pasa.sispasaint.model.Funcionario;
 
 /**
  *
