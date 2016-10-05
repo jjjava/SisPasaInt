@@ -3,9 +3,12 @@ package org.pasa.sispasaint.model;
 import java.util.Date;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.OneToOne;
 import javax.persistence.PrimaryKeyJoinColumn;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
@@ -24,9 +27,10 @@ public class Funcionario extends Pessoa {
     @Column(name = "ID_FUNCIONARIO")
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-
-    @Column(name = "CODIGO_EMPRESA")
-    private String codEmpresa;
+    
+    @OneToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "ID_EMPRESA")
+    private Empresa empresa;
 
     @Column(name = "CD_MATRICULA")
     private String matricula;
@@ -96,20 +100,20 @@ public class Funcionario extends Pessoa {
         this.id = id;
     }
 
+    public Empresa getEmpresa() {
+        return empresa;
+    }
+
+    public void setEmpresa(Empresa empresa) {
+        this.empresa = empresa;
+    }
+    
     public String getMatricula() {
         return matricula;
     }
 
     public void setMatricula(String matricula) {
         this.matricula = matricula;
-    }
-
-    public String getCodEmpresa() {
-        return codEmpresa;
-    }
-
-    public void setCodEmpresa(String codEmpresa) {
-        this.codEmpresa = codEmpresa;
     }
 
     public String getVinculo() {

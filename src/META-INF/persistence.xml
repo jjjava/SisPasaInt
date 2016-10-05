@@ -19,6 +19,7 @@
     <class>org.pasa.sispasaint.model.intg.ModeloEndExt</class>
     <class>org.pasa.sispasaint.model.intg.ModeloEndPeople</class>
     <class>org.pasa.sispasaint.model.intg.ModeloEndVLI</class>
+    <class>org.pasa.sispasaint.model.Empresa</class>
     <properties>
       <property name="javax.persistence.jdbc.url" value="jdbc:jtds:sqlserver://127.0.0.1:1433;instance=PASA;DatabaseName=sispasaint"/>
       <property name="javax.persistence.jdbc.user" value="sispasa"/>

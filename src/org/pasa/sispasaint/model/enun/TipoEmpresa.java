@@ -12,8 +12,8 @@ public enum TipoEmpresa {
 	Congenere(1,"Congenre"),
 	Reciprocidade(2,"Reciprocidade");
 	
-	private int indice;
-	private String descricao;
+	private final int indice;
+	private final String descricao;
 	
 	private TipoEmpresa(int indice, String descricao) {
 		this.indice = indice;

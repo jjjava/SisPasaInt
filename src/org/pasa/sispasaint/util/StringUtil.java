@@ -1,6 +1,6 @@
 package org.pasa.sispasaint.util;
 
-import java.util.Date;
+import org.pasa.sispasaint.model.enun.Sexo;
 
 /**
  *
@@ -23,7 +23,14 @@ public class StringUtil {
             return 0;
         }
     }
-
+    public static Sexo parseSexo(String s){
+        if(s.equalsIgnoreCase("M")){
+            return Sexo.Masculino;
+        }else{
+            return Sexo.Feminino;
+        }
+    }
+    
     public static String removeCharsEspeciais(String value) {
         return value.replaceAll("[ãâàáä]", "a")
                 .replaceAll("[êèéë]", "e")

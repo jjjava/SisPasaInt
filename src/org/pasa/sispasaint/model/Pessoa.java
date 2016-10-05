@@ -57,12 +57,6 @@ public class Pessoa extends EntidadeBase {
     @Column(name = "NM_MAE")
     private String nomeMae;
 
-    @Column(name = "NM_PAI")
-    private String nomePai;
-
-    @Column(name = "EM_PESSOA")
-    private String email;
-
     @OneToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "ID_ENDERECO")
     private Endereco endereco;
@@ -155,22 +149,6 @@ public class Pessoa extends EntidadeBase {
 
     public void setNomeMae(String nomeMae) {
         this.nomeMae = nomeMae;
-    }
-
-    public String getNomePai() {
-        return nomePai;
-    }
-
-    public void setNomePai(String nomePai) {
-        this.nomePai = nomePai;
-    }
-
-    public String getEmail() {
-        return email;
-    }
-
-    public void setEmail(String email) {
-        this.email = email;
     }
 
     public NivelEscolaridade getNivelEscolaridade() {
