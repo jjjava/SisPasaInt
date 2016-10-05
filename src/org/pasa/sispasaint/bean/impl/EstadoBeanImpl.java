@@ -4,6 +4,7 @@ import java.util.List;
 import org.pasa.sispasaint.bean.EstadoBean;
 import org.pasa.sispasaint.dao.impl.EstadoDAOImpl;
 import org.pasa.sispasaint.model.Estado;
+import org.pasa.sispasaint.model.Funcionario;
 
 /**
  *
@@ -32,6 +33,11 @@ public class EstadoBeanImpl implements EstadoBean {
     @Override
     public Estado obter(Long id) {
         return new EstadoDAOImpl().obter(id);
+    }
+
+    @Override
+    public Estado obter(String uf) {
+        return new EstadoDAOImpl().obter(uf);
     }
 
     @Override

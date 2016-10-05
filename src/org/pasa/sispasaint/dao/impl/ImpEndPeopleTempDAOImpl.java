@@ -26,7 +26,6 @@ public class ImpEndPeopleTempDAOImpl extends DaoGenerico<ModeloEndPeople> implem
             Query q1 = getEntityManager().createNativeQuery("select * from TEMP_END_PEOPLE where empresa = '" + empresa
                     + "' and matricula = '" + matricula + "' and codbeneficiario = '" + codBeneficiario + "' ");
             m = (ModeloEndPeople) q1.getSingleResult();
-            System.err.println("Bairo: "+m.getBairro());
             getEntityManager().getTransaction().commit();
             
         } catch (NoResultException e) {

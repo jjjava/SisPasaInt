@@ -18,6 +18,11 @@ public class FuncionarioBeanImpl implements FuncionarioBean {
     public Funcionario obter(Funcionario f) {
         return new FuncionarioDAOImpl().obter(f.getId());
     }
+    
+    @Override
+    public Funcionario obter(String empresa, String matricula){
+        return new FuncionarioDAOImpl().obter(empresa, matricula);
+    }
 
     @Override
     public void cadastar(Funcionario funcionario) {

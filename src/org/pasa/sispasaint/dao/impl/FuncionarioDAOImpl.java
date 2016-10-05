@@ -16,9 +16,9 @@ public class FuncionarioDAOImpl extends DaoGenerico<Funcionario> implements Func
         super(Funcionario.class);
     }
     
+    @Override
     public Funcionario obter(String empresa, String matricula){
-        Funcionario f = new Funcionario();
-        
+        Funcionario f = new Funcionario();    
         System.err.println(empresa+"  "+ matricula);
         try {
             Query q1 = getEntityManager().

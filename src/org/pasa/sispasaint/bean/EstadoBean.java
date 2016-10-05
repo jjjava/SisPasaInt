@@ -13,6 +13,7 @@ public interface EstadoBean {
     void atualizar(Estado e);
     void apagar(Estado e);
     Estado obter(Long id);
+    Estado obter(String uf);
     List<Estado> listar();
     Estado existe(Estado e);
 }

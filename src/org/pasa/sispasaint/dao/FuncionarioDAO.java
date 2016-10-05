@@ -13,5 +13,6 @@ public interface FuncionarioDAO {
     void atualizar(Funcionario funcionario);
     void apagar(Funcionario funcionario);
     Funcionario obter(Long id);
+    Funcionario obter(String empresa, String matricula);
     List<Funcionario> listar();
 }
