@@ -68,7 +68,7 @@ public class Beneficiario extends Pessoa {
     @Column(name = "VL_NUCLEO_AMS")
     private String nucleoDaAms;
 
-    @ManyToOne(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
+    @ManyToOne(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
     @JoinColumn(name = "ID_GRAU_PARENTESCO")
     private GrauParentesco grauParentesco;
 

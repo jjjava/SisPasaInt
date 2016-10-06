@@ -30,13 +30,13 @@ public class Telefone extends EntidadeBase {
     private String codigoNacional;
 
     @Column(name = "NR_DDD")
-    private int ddd;
+    private String ddd;
 
     @Column(name = "NR_TELEFONE")
-    private int numeroTelefone;
+    private String numeroTelefone;
 
     @Column(name = "NR_RAMAL")
-    private int ramal;
+    private String ramal;
 
     @Column(name = "NM_PRESTADORA")
     private String prestadora;
@@ -65,27 +65,27 @@ public class Telefone extends EntidadeBase {
         this.codigoNacional = codigoNacional;
     }
 
-    public int getDdd() {
+    public String getDdd() {
         return ddd;
     }
 
-    public void setDdd(int ddd) {
+    public void setDdd(String ddd) {
         this.ddd = ddd;
     }
 
-    public int getNumeroTelefone() {
+    public String getNumeroTelefone() {
         return numeroTelefone;
     }
 
-    public void setNumeroTelefone(int numeroTelefone) {
+    public void setNumeroTelefone(String numeroTelefone) {
         this.numeroTelefone = numeroTelefone;
     }
 
-    public int getRamal() {
+    public String getRamal() {
         return ramal;
     }
 
-    public void setRamal(int ramal) {
+    public void setRamal(String ramal) {
         this.ramal = ramal;
     }
 

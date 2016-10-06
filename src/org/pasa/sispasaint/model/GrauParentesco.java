@@ -25,6 +25,9 @@ public class GrauParentesco extends EntidadeBase{
     @Column(name = "NM_GRAU_PARENTESCO")
     private String grauParentesco;
     
+    @Column(name= "VL_DESCRICAO")
+    private String descricao;
+    
     public GrauParentesco(){
     }
 
@@ -43,5 +46,13 @@ public class GrauParentesco extends EntidadeBase{
 
     public void setGrauParentesco(String grauParentesco) {
         this.grauParentesco = grauParentesco;
+    }
+
+    public String getDescricao() {
+        return descricao;
+    }
+
+    public void setDescricao(String descricao) {
+        this.descricao = descricao;
     }
 }

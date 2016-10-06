@@ -24,13 +24,13 @@ public class DadosBancarios extends EntidadeBase {
     private Long id;
 
     @Column(name = "CD_BANCO")
-    private int codigoBanco;
+    private String codigoBanco;
 
     @Column(name = "NR_AGENCIA")
-    private int numeroAgencia;
+    private String numeroAgencia;
 
     @Column(name = "NR_CONTA")
-    private int numeroConta;
+    private String numeroConta;
 
     public DadosBancarios() {
     }
@@ -44,27 +44,27 @@ public class DadosBancarios extends EntidadeBase {
         this.id = id;
     }
 
-    public int getCodigoBanco() {
+    public String getCodigoBanco() {
         return codigoBanco;
     }
 
-    public void setCodigoBanco(int codigoBanco) {
+    public void setCodigoBanco(String codigoBanco) {
         this.codigoBanco = codigoBanco;
     }
 
-    public int getNumeroAgencia() {
+    public String getNumeroAgencia() {
         return numeroAgencia;
     }
 
-    public void setNumeroAgencia(int numeroAgencia) {
+    public void setNumeroAgencia(String numeroAgencia) {
         this.numeroAgencia = numeroAgencia;
     }
 
-    public int getNumeroContaCorrente() {
+    public String getNumeroConta() {
         return numeroConta;
     }
 
-    public void setNumeroContaCorrente(int numeroConta) {
+    public void setNumeroConta(String numeroConta) {
         this.numeroConta = numeroConta;
     }
 }

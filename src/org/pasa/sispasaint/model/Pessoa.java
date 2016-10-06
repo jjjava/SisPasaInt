@@ -1,5 +1,6 @@
 package org.pasa.sispasaint.model;
 
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 import javax.persistence.Column;
@@ -60,22 +61,35 @@ public class Pessoa extends EntidadeBase {
     @OneToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "ID_ENDERECO")
     private Endereco endereco;
+    
+    @OneToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "ID_DADOS_BANCARIOS")
+    private DadosBancarios dadosBancarios;
 
     @OneToMany(fetch = FetchType.LAZY)
     @JoinTable(name = "DOCUMENTO_PESSOA", joinColumns = {
-    @JoinColumn(name = "ID_PESSOA")},
-    inverseJoinColumns = {
-    @JoinColumn(name = "ID_DOCUMENTO")})
+        @JoinColumn(name = "ID_PESSOA")},
+            inverseJoinColumns = {
+                @JoinColumn(name = "ID_DOCUMENTO")})
     private List<Documento> listaDocumentos;
+    
+    @OneToMany(fetch = FetchType.LAZY)
+    @JoinTable(name = "TELEFONE_PESSOA", joinColumns = {
+        @JoinColumn(name = "ID_PESSOA")},
+            inverseJoinColumns = {
+                @JoinColumn(name = "ID_TELEFONE")})
+    private List<Telefone> listaTelefone;
 
     @Column(name = "NV_ESCOLARIDADE")
     @Enumerated(EnumType.ORDINAL)
     private NivelEscolaridade nivelEscolaridade;
-    
+
     @Column(name = "BL_INDICADOR_CONCLUSAO")
     private Integer indicadorConclusao;
 
     public Pessoa() {
+        listaDocumentos = new ArrayList<>();
+        listaTelefone = new ArrayList<>();
     }
 
     @Override
@@ -93,6 +107,14 @@ public class Pessoa extends EntidadeBase {
 
     public void setId(Long id) {
         this.id = id;
+    }
+
+    public void addDocumento(Documento doc) {
+        listaDocumentos.add(doc);
+    }
+    
+    public void addTelefone(Telefone tel){
+        listaTelefone.add(tel);
     }
 
     public String getNomeAbreviado() {
@@ -166,4 +188,20 @@ public class Pessoa extends EntidadeBase {
     public void setIndicadorConclusao(Integer indicadorConclusao) {
         this.indicadorConclusao = indicadorConclusao;
     }
+
+    public DadosBancarios getDadosBancarios() {
+        return dadosBancarios;
+    }
+
+    public void setDadosBancarios(DadosBancarios dadosBancarios) {
+        this.dadosBancarios = dadosBancarios;
+    }
+
+    public List<Telefone> getListaTelefone() {
+        return listaTelefone;
+    }
+
+    public void setListaTelefone(List<Telefone> listaTelefone) {
+        this.listaTelefone = listaTelefone;
+    } 
 }

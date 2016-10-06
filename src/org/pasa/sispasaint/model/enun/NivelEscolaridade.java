@@ -7,12 +7,11 @@ package org.pasa.sispasaint.model.enun;
  */
 public enum NivelEscolaridade {
 
-    Fundamental(0, "Ensio Fundamental"),
-    Medio(1, "Ensino Médio"),
-    Superior(2, "Ensino Superior"),
-    Pos(3, "Pós Graduação"),
-    Mestrado(4, "Mestrado"),
-    Doutorado(5, "Doutorado");
+    Sem(0,"Sem Instrução"),
+    Fundamental(1, "Ensio Fundamental"),
+    Medio(2, "Ensino Médio"),
+    Superior(3, "Ensino Superior");
+
     
     private final int indice;
     private final String descricao;
