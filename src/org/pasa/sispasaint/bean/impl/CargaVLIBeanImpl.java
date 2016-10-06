@@ -164,6 +164,8 @@ public class CargaVLIBeanImpl implements CargaVLIBean {
         beneficiario.setCodigoNacionalDeSaude(modeloBenVLI.getCodigoNacionalDeSaude());
         beneficiario.setDeclaracaoNascidoVivo(modeloBenVLI.getDeclaracaoNascidoVivo());
         beneficiario.setCassiData(modeloBenVLI.getCassiData());
+        beneficiario.setPlano(modeloBenVLI.getPlano());
+        beneficiario.setPlano(modeloBenVLI.getPlano());
 
         beneficiario.setEndereco(endereco);
         beneficiario.addDocumento(cpf);
@@ -230,6 +232,10 @@ public class CargaVLIBeanImpl implements CargaVLIBean {
         endereco.setEstado(estado);
         endereco.setMunicipio(municipio);
         beneficiario.setEndereco(endereco);
+        
+        GrauParentesco grauParentesco = new GrauParentesco();
+        grauParentesco.setGrauParentesco(modeloBenVLI.getGrauParentesco());
+        beneficiario.setGrauParentesco(grauParentesco);
 
         Telefone tel1 = new Telefone();
         tel1.setNumeroTelefone(modeloEndVLI.getTelefone1());

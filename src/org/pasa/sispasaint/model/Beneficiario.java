@@ -93,7 +93,7 @@ public class Beneficiario extends Pessoa {
 
     @Column(name = "BR_CASSI_DATA")
     private String cassiData;// BRANCO
-
+    
     public Beneficiario() {
     }
 
