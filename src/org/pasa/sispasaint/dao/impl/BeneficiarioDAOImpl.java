@@ -38,5 +38,4 @@ public class BeneficiarioDAOImpl extends DaoGenerico<Beneficiario> implements Be
         }
         return null;
     }
-    
 }

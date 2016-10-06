@@ -32,7 +32,7 @@ public class Empresa extends EntidadeBase {
     }
 
     @Override
-    protected Long getId() {
+    public Long getId() {
         return id;
     }
     
