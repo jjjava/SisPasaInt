@@ -195,7 +195,7 @@ public class CargaVLIBeanImpl implements CargaVLIBean {
                     endereco.setMunicipio(municipio);
                     beneficiario.setEndereco(endereco);
                     
-                     Telefone tel1 = new Telefone();
+                    Telefone tel1 = new Telefone();
                     tel1.setNumeroTelefone(modeloEndVLI.getTelefone1());
                     Telefone tel2 = new Telefone();
                     tel2.setNumeroTelefone(modeloEndVLI.getTelefone2());
