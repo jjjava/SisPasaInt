@@ -17,7 +17,7 @@ public class MapaCamposBenVLI {
         mapa.put(CamposBenVLI.EMPRESA, new PosicaoCampo(1, 3));
         mapa.put(CamposBenVLI.MATRICULA, new PosicaoCampo(3, 9));
         mapa.put(CamposBenVLI.COD_BENEFICIARIO, new PosicaoCampo(9, 11));
-        mapa.put(CamposBenVLI.DIREITO_AMS_CREDENCIAMENTO, new PosicaoCampo(11, 11));
+        mapa.put(CamposBenVLI.DIREITO_AMS_CREDENCIAMENTO, new PosicaoCampo(11, 12));
         mapa.put(CamposBenVLI.DATA_VALIDADE_CREDENCIADO, new PosicaoCampo(12, 22));
         mapa.put(CamposBenVLI.DIREITO_AMS_REEMBOLSO, new PosicaoCampo(22, 23));
         mapa.put(CamposBenVLI.DATA_VALIDADE_REEMBOLSO, new PosicaoCampo(23, 33));

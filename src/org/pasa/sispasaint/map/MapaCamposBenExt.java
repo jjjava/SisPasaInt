@@ -14,10 +14,10 @@ public class MapaCamposBenExt {
 
     public MapaCamposBenExt() {
         mapa = new HashMap<>();
-        mapa.put(CamposBenVLI.EMPRESA, new PosicaoCampo(1, 3));
+         mapa.put(CamposBenVLI.EMPRESA, new PosicaoCampo(1, 3));
         mapa.put(CamposBenVLI.MATRICULA, new PosicaoCampo(3, 9));
         mapa.put(CamposBenVLI.COD_BENEFICIARIO, new PosicaoCampo(9, 11));
-        mapa.put(CamposBenVLI.DIREITO_AMS_CREDENCIAMENTO, new PosicaoCampo(11, 11));
+        mapa.put(CamposBenVLI.DIREITO_AMS_CREDENCIAMENTO, new PosicaoCampo(11, 12));
         mapa.put(CamposBenVLI.DATA_VALIDADE_CREDENCIADO, new PosicaoCampo(12, 22));
         mapa.put(CamposBenVLI.DIREITO_AMS_REEMBOLSO, new PosicaoCampo(22, 23));
         mapa.put(CamposBenVLI.DATA_VALIDADE_REEMBOLSO, new PosicaoCampo(23, 33));
@@ -35,16 +35,16 @@ public class MapaCamposBenExt {
         mapa.put(CamposBenVLI.BANCO, new PosicaoCampo(98, 100));
         mapa.put(CamposBenVLI.CONTA_CORRENTE, new PosicaoCampo(101, 111));
         mapa.put(CamposBenVLI.DATA_ADMISSAO, new PosicaoCampo(112, 122));
-        mapa.put(CamposBenVLI.GRAU_PARENTESCO, new PosicaoCampo(122, 122));
-        mapa.put(CamposBenVLI.FINACEIRA, new PosicaoCampo(123, 123));
-        mapa.put(CamposBenVLI.CONTRATO_TRABALHO, new PosicaoCampo(124, 124));
+        mapa.put(CamposBenVLI.GRAU_PARENTESCO, new PosicaoCampo(122, 123));
+        mapa.put(CamposBenVLI.FINACEIRA, new PosicaoCampo(123, 124));
+        mapa.put(CamposBenVLI.CONTRATO_TRABALHO, new PosicaoCampo(124, 125));
         mapa.put(CamposBenVLI.SEXO, new PosicaoCampo(125, 126));
         mapa.put(CamposBenVLI.EMPRESA_ATUALIZADOR, new PosicaoCampo(126, 127));
         mapa.put(CamposBenVLI.MATRICULA_ATUALIZADOR, new PosicaoCampo(128, 133));
-        mapa.put(CamposBenVLI.TIPO_BENEFICIARIO, new PosicaoCampo(134, 134));
-        mapa.put(CamposBenVLI.CODIGO_DIREITO_PASA, new PosicaoCampo(135, 135));
-        mapa.put(CamposBenVLI.GRAU_ESCOLARIDADE, new PosicaoCampo(136, 136));
-        mapa.put(CamposBenVLI.INDICAR_CONCLUSAO, new PosicaoCampo(137, 137));
+        mapa.put(CamposBenVLI.TIPO_BENEFICIARIO, new PosicaoCampo(134, 135));
+        mapa.put(CamposBenVLI.CODIGO_DIREITO_PASA, new PosicaoCampo(135, 136));
+        mapa.put(CamposBenVLI.GRAU_ESCOLARIDADE, new PosicaoCampo(136, 137));
+        mapa.put(CamposBenVLI.INDICAR_CONCLUSAO, new PosicaoCampo(137, 138));
         mapa.put(CamposBenVLI.DATA_FALECIMENTO, new PosicaoCampo(138, 148));
         mapa.put(CamposBenVLI.MATRICULA_PASA, new PosicaoCampo(148, 153));
         mapa.put(CamposBenVLI.NOME_DA_MAE, new PosicaoCampo(154, 223));
