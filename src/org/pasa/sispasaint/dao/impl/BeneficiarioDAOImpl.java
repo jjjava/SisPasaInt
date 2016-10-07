@@ -20,8 +20,8 @@ public class BeneficiarioDAOImpl extends DaoGenerico<Beneficiario> implements Be
     @Override
     public Beneficiario obter(String empresa, String matricula, String codBeneficiario) {
        Query q1 = getEntityManager().
-                createQuery("select b from Beneficiario b where b. = :emp AND b.matricula = :mat AND b.codBeneficiario =: cod" );
-        q1.setParameter("emp", empresa);
+                createQuery("select b from Beneficiario b where b.matricula = :mat AND b.codBeneficiario = :cod" );
+      //  q1.setParameter("emp", empresa);
         q1.setParameter("mat", matricula);
         q1.setParameter("cod", codBeneficiario);
         q1.setMaxResults(1);

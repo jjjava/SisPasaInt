@@ -28,7 +28,7 @@ public class Funcionario extends Pessoa {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     
-    @OneToOne(fetch = FetchType.LAZY)
+    @OneToOne
     @JoinColumn(name = "ID_EMPRESA")
     private Empresa empresa;
 

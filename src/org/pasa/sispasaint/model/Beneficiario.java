@@ -31,6 +31,9 @@ public class Beneficiario extends Pessoa {
     @Column(name = "ID_BENEFICIARIO")
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
+    
+    @Column(name = "NR_MATRICULA")
+    private String matricula;
 
     @Column(name = "CD_BENEFICIARIO")
     private String codBeneficiario;
@@ -68,7 +71,7 @@ public class Beneficiario extends Pessoa {
     @Column(name = "VL_NUCLEO_AMS")
     private String nucleoDaAms;
 
-    @ManyToOne(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+    @ManyToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "ID_GRAU_PARENTESCO")
     private GrauParentesco grauParentesco;
 
@@ -257,5 +260,13 @@ public class Beneficiario extends Pessoa {
 
     public void setCassiData(String cassiData) {
         this.cassiData = cassiData;
+    }
+
+    public String getMatricula() {
+        return matricula;
+    }
+
+    public void setMatricula(String matricula) {
+        this.matricula = matricula;
     }
 }

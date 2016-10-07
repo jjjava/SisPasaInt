@@ -10,7 +10,7 @@ abstract class EntidadeBase implements Serializable {
     private static final long serialVersionUID = 1L;
     protected abstract Long getId();
     
-    private String situacao;
+    private Integer situacao;
     private Integer status;
 
     public Integer getStatus() {
@@ -21,11 +21,11 @@ abstract class EntidadeBase implements Serializable {
         this.status = status;
     }
 
-    public String getSituacao() {
+    public Integer getSituacao() {
         return situacao;
     }
 
-    public void setSituacao(String situacao) {
+    public void setSituacao(Integer situacao) {
         this.situacao = situacao;
     }
 }

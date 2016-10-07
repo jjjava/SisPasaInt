@@ -58,7 +58,7 @@ public class Pessoa extends EntidadeBase {
     @Column(name = "NM_MAE")
     private String nomeMae;
 
-    @OneToOne(fetch = FetchType.LAZY)
+    @OneToOne
     @JoinColumn(name = "ID_ENDERECO")
     private Endereco endereco;
     
