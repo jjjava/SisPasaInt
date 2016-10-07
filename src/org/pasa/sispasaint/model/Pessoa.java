@@ -62,7 +62,7 @@ public class Pessoa extends EntidadeBase {
     @JoinColumn(name = "ID_ENDERECO")
     private Endereco endereco;
     
-    @OneToOne(fetch = FetchType.LAZY)
+    @OneToOne
     @JoinColumn(name = "ID_DADOS_BANCARIOS")
     private DadosBancarios dadosBancarios;
 

@@ -67,13 +67,11 @@ public class CargaVLIBeanImpl implements CargaVLIBean {
     private void handlerFuncionario(ModeloBenVLI modeloBenVLI, ModeloEndVLI modeloEndVLI) {
         System.out.println(modeloBenVLI.getNomeBeneficiario());
         Funcionario funcionario = new FuncionarioBeanImpl().obter(modeloBenVLI.getEmpresa(), modeloBenVLI.getMatricula());
-
         if (funcionario == null) {
             funcionario = new Funcionario();
         }
 
         Beneficiario beneficiario = new BeneficiarioBeanImpl().obter(modeloBenVLI.getEmpresa(), modeloBenVLI.getMatricula(), modeloBenVLI.getCodBeneficiario());
-
         if (beneficiario == null) {
             beneficiario = new Beneficiario();
         }
@@ -97,7 +95,6 @@ public class CargaVLIBeanImpl implements CargaVLIBean {
         tel1.setNumeroTelefone(modeloEndVLI.getTelefone1());
         Telefone tel2 = new Telefone();
         tel2.setNumeroTelefone(modeloEndVLI.getTelefone2());
-
         funcionario.addTelefone(tel1);
         funcionario.addTelefone(tel2);
 
@@ -152,6 +149,7 @@ public class CargaVLIBeanImpl implements CargaVLIBean {
         //Funcionario
         Empresa empresa = funcionario.getEmpresa();
         if (empresa == null) {
+            System.out.println("null");
             empresa = new Empresa();
         }
         empresa.setCodEmpresa(modeloBenVLI.getEmpresa());
@@ -179,7 +177,14 @@ public class CargaVLIBeanImpl implements CargaVLIBean {
         funcionario.setStatus(SisPasaIntCommon.ATIVO);
         funcionario.setSituacao(SisPasaIntCommon.ATUALIZADO);
         new FuncionarioBeanImpl().atualizar(funcionario);
-
+        
+        //###
+        //###
+        //###
+        
+        FuncionarioBeanImpl funcionarioBeanImpl = new  FuncionarioBeanImpl();
+        Funcionario funcBeneficiario = funcionarioBeanImpl.obter(modeloBenVLI.getEmpresa(), modeloBenVLI.getMatricula());
+        
         beneficiario.setMatricula(modeloBenVLI.getMatricula());
         beneficiario.setCodBeneficiario(modeloBenVLI.getCodBeneficiario());
 
@@ -208,12 +213,11 @@ public class CargaVLIBeanImpl implements CargaVLIBean {
         beneficiario.setDeclaracaoNascidoVivo(modeloBenVLI.getDeclaracaoNascidoVivo());
         beneficiario.setCassiData(modeloBenVLI.getCassiData());
         beneficiario.setPlano(modeloBenVLI.getPlano());
-        beneficiario.setPlano(modeloBenVLI.getPlano());
 
-        beneficiario.setEndereco(endereco);
-        beneficiario.addDocumento(cpf);
-        beneficiario.addDocumento(pis);
-        beneficiario.setDadosBancarios(dadosBancarios);
+       
+        beneficiario.setEndereco(funcBeneficiario.getEndereco());
+        beneficiario.setListaDocumentos(funcBeneficiario.getListaDocumentos());
+        beneficiario.setDadosBancarios(funcBeneficiario.getDadosBancarios());
 
         beneficiario.setStatus(SisPasaIntCommon.ATIVO);
         beneficiario.setSituacao(SisPasaIntCommon.ATUALIZADO);

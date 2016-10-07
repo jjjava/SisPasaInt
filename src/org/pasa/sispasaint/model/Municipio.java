@@ -27,7 +27,7 @@ public class Municipio extends EntidadeBase {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @Column(name = "NM_Estado")
+    @Column(name = "NM_MUNICIPIO")
     private String nome;
 
     @ManyToOne(cascade = CascadeType.ALL, fetch = FetchType.EAGER)

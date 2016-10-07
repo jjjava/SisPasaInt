@@ -50,6 +50,7 @@ public class EstadoDAOImpl extends DaoGenerico<Estado> implements EstadoDAO {
             return null;
         }
         if (estado.size() > 0) {
+            System.out.println(estado.get(0).getUf());
             return estado.get(0);
         }
         return null;
