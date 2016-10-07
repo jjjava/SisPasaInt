@@ -11,5 +11,7 @@ public class SisPasaIntCommon {
     public static final String INCOMPLETO = "I";
     public static final Integer VERDADEIRO = 1;
     public static final Integer FALSO = 0;
+    public static final Integer ATIVO = 1;
+    public static final Integer INATIVO = 0;
             
 }
