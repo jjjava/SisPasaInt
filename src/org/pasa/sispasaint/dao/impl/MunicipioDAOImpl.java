@@ -18,10 +18,10 @@ public class MunicipioDAOImpl extends DaoGenerico<Municipio> implements Municipi
     }
 
     @Override
-    public Municipio existe(Municipio m) {
+    public Municipio existe(String nome) {
         Query q1 = getEntityManager().
         createQuery("select m from Municipio m where m.nome = :nome");
-        q1.setParameter("nome", m.getNome());
+        q1.setParameter("nome", nome);
         q1.setMaxResults(1);
         List<Municipio> municipio = null;
         try {

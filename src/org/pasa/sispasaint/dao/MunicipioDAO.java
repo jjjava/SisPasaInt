@@ -15,5 +15,5 @@ public interface MunicipioDAO {
     void apagar(Municipio m);
     Municipio obter(Long id);
     List<Municipio> listar();
-    Municipio existe(Municipio m);
+    Municipio existe(String nome);
 }

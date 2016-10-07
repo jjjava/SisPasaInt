@@ -3,12 +3,15 @@ package org.pasa.sispasaint.model;
 import java.util.Date;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.EnumType;
+import javax.persistence.Enumerated;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
+import org.pasa.sispasaint.model.enun.TipoDocumento;
 
 /**
  *
@@ -38,6 +41,10 @@ public class Documento extends EntidadeBase {
     @Column(name = "DT_VALIDADE")
     @Temporal(TemporalType.DATE)
     private Date dataValidade;
+    
+    @Column(name = "TP_DOCUMENTO")
+    @Enumerated(EnumType.ORDINAL)
+    private TipoDocumento tipoDocumento;
     
     public Documento() {
     }
@@ -83,4 +90,11 @@ public class Documento extends EntidadeBase {
         this.dataValidade = dataValidade;
     }
 
+    public TipoDocumento getTipoDocumento() {
+        return tipoDocumento;
+    }
+
+    public void setTipoDocumento(TipoDocumento tipoDocumento) {
+        this.tipoDocumento = tipoDocumento;
+    }
 }

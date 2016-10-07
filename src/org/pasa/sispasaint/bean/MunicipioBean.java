@@ -14,5 +14,5 @@ public interface MunicipioBean {
     void atualizar(Municipio m);
     void apagar(Municipio m);
     List<Municipio> listar();
-    Municipio existe(Municipio m);
+    Municipio existe(String nome);
 }

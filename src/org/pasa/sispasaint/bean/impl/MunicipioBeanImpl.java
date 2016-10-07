@@ -40,7 +40,7 @@ public class MunicipioBeanImpl implements MunicipioBean {
     }
 
     @Override
-    public Municipio existe(Municipio m) {
-        return new MunicipioDAOImpl().existe(m);
+    public Municipio existe(String nome) {
+        return new MunicipioDAOImpl().existe(nome);
     }
 }
