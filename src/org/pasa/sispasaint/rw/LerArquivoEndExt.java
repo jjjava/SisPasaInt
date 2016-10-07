@@ -11,9 +11,7 @@ import java.util.Map;
 import org.pasa.sispasaint.config.Configuracao;
 import org.pasa.sispasaint.map.CamposEndExt;
 import org.pasa.sispasaint.map.MapaCamposEndExt;
-import org.pasa.sispasaint.map.MapaCamposEndExt;
 import org.pasa.sispasaint.model.intg.ModeloEndExt;
-import org.pasa.sispasaint.model.intg.ModeloEndVLI;
 
 /**
  *

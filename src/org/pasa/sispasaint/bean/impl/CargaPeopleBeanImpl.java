@@ -14,19 +14,25 @@ public class CargaPeopleBeanImpl implements CargaPeopleBean {
 
     @Override
     public void cargaArquivosTemp() {
-        ImpBenPeopleTempBeanImpl impBenPeopleTempBeanImpl = new ImpBenPeopleTempBeanImpl();
-        impBenPeopleTempBeanImpl.limparTbTemp();
-        impBenPeopleTempBeanImpl.resetarIdentity();
-        impBenPeopleTempBeanImpl.carregarArquivo();
-
-        ImpEndPeopleTempBeanImpl impEndPeopleTempBeanImpl = new ImpEndPeopleTempBeanImpl();
-        impEndPeopleTempBeanImpl.limparTbTemp();
-        impEndPeopleTempBeanImpl.resetarIdentity();
-        impEndPeopleTempBeanImpl.carregarArquivo();
     }
 
     @Override
     public void mapearEntidades() {
-        
+        cargaArquivosBenTemp();
+        cargaArquivosEndTemp();
+    }
+
+    private void cargaArquivosBenTemp() {
+        ImpBenPeopleTempBeanImpl impBenPeopleTempBeanImpl = new ImpBenPeopleTempBeanImpl();
+        impBenPeopleTempBeanImpl.limparTbTemp();
+        impBenPeopleTempBeanImpl.resetarIdentity();
+        impBenPeopleTempBeanImpl.carregarArquivo();
+    }
+
+    private void cargaArquivosEndTemp() {
+        ImpEndPeopleTempBeanImpl impEndPeopleTempBeanImpl = new ImpEndPeopleTempBeanImpl();
+        impEndPeopleTempBeanImpl.limparTbTemp();
+        impEndPeopleTempBeanImpl.resetarIdentity();
+        impEndPeopleTempBeanImpl.carregarArquivo();
     }
 }

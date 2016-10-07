@@ -9,20 +9,30 @@ import org.pasa.sispasaint.bean.CargaExtBean;
 public class CargaExtBeanImpl implements CargaExtBean {
 
     public CargaExtBeanImpl() {
-        System.out.println("carga");
     }
 
     @Override
     public void cargaArquivosTemp() {
+        cargaArquivosBenTemp();
+        cargaArquivosEndTemp();
+    }
+
+    @Override
+    public void mapearEntidades() {
+
+    }
+
+    private void cargaArquivosBenTemp() {
         ImpBenExtTempBeanImpl impBenExtTempBeanImpl = new ImpBenExtTempBeanImpl();
         impBenExtTempBeanImpl.limparTbTemp();
         impBenExtTempBeanImpl.resetarIdentity();
         impBenExtTempBeanImpl.carregarArquivo();
     }
 
-    @Override
-    public void mapearEntidades() {
-        
+    private void cargaArquivosEndTemp() {
+        ImpEndExtTempBeanImpl impEndExtTempBeanImpl = new ImpEndExtTempBeanImpl();
+        impEndExtTempBeanImpl.limparTbTemp();
+        impEndExtTempBeanImpl.resetarIdentity();
+        impEndExtTempBeanImpl.carregarArquivo();
     }
-
 }
