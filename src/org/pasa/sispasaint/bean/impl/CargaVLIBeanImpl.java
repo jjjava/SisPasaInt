@@ -25,16 +25,16 @@ import org.pasa.sispasaint.util.StringUtil;
  * @author Hudson Schumaker
  */
 public class CargaVLIBeanImpl implements CargaVLIBean {
-    
+
     public CargaVLIBeanImpl() {
     }
-    
+
     @Override
     public void cargaArquivosTemp() {
         cargaArquivosBenTemp();
         cargaArquivosEndTemp();
     }
-    
+
     @Override
     public void mapearEntidades() {
         Long t = new ImpBenVLITempBeanImpl().contar();
@@ -50,33 +50,33 @@ public class CargaVLIBeanImpl implements CargaVLIBean {
             }
         }
     }
-    
+
     private void cargaArquivosBenTemp() {
         ImpBenVLITempBeanImpl impBenVLITempBeanImpl = new ImpBenVLITempBeanImpl();
         impBenVLITempBeanImpl.limparTbTemp();
         impBenVLITempBeanImpl.resetarIdentity();
         impBenVLITempBeanImpl.carregarArquivo();
     }
-    
+
     private void cargaArquivosEndTemp() {
         ImpEndVLITempBeanImpl impEndVLITempBeanImpl = new ImpEndVLITempBeanImpl();
         impEndVLITempBeanImpl.limparTbTemp();
         impEndVLITempBeanImpl.resetarIdentity();
         impEndVLITempBeanImpl.carregarArquivo();
     }
-    
+
     private void handlerFuncionario(ModeloBenVLI modeloBenVLI, ModeloEndVLI modeloEndVLI) {
         System.out.println(modeloBenVLI.getNomeBeneficiario());
         Funcionario funcionario = new FuncionarioBeanImpl().obter(modeloBenVLI.getEmpresa(), modeloBenVLI.getMatricula());
         if (funcionario == null) {
             funcionario = new Funcionario();
         }
-        
+
         Beneficiario beneficiario = new BeneficiarioBeanImpl().obter(modeloBenVLI.getEmpresa(), modeloBenVLI.getMatricula(), modeloBenVLI.getCodBeneficiario());
         if (beneficiario == null) {
             beneficiario = new Beneficiario();
         }
-        
+
         funcionario.setNome(modeloBenVLI.getNomeBeneficiario());
         funcionario.setNomeAbreviado(modeloBenVLI.getNomeBeneficiarioAbreviado());
         funcionario.setNomeMae(modeloBenVLI.getNomeDaMae());
@@ -85,7 +85,7 @@ public class CargaVLIBeanImpl implements CargaVLIBean {
         funcionario.setSexo(StringUtil.parseSexo(modeloBenVLI.getSexo()));
         funcionario.setNivelEscolaridade(StringUtil.parseEscolocaridade(modeloBenVLI.getGrauEscolaridade()));
         funcionario.setIndicadorConclusao(StringUtil.parserIndicadorConclusao(modeloBenVLI.getIndicadorConclusao()));
-        
+
         DadosBancarios dadosBancarios = funcionario.getDadosBancarios();
         if (dadosBancarios == null) {
             dadosBancarios = new DadosBancarios();
@@ -94,7 +94,7 @@ public class CargaVLIBeanImpl implements CargaVLIBean {
         dadosBancarios.setNumeroAgencia(modeloBenVLI.getAgenciaBancaria());
         dadosBancarios.setNumeroConta(modeloBenVLI.getContaCorrente());
         funcionario.setDadosBancarios(dadosBancarios);
-        
+
         Telefone tel1 = null;
         Telefone tel2 = null;
         List<Telefone> listaTelefones = funcionario.getListaTelefone();
@@ -140,14 +140,14 @@ public class CargaVLIBeanImpl implements CargaVLIBean {
             estado = new Estado();
         }
         estado.setUf(modeloEndVLI.getUf());
-        
+
         Municipio municipio = new MunicipioBeanImpl().existe(modeloEndVLI.getCidade());
         if (municipio == null) {
             municipio = new Municipio();
         }
         municipio.setNome(modeloEndVLI.getCidade());
         municipio.setEstado(estado);
-        
+
         Endereco endereco = funcionario.getEndereco();
         if (endereco == null) {
             endereco = new Endereco();
@@ -166,7 +166,7 @@ public class CargaVLIBeanImpl implements CargaVLIBean {
         }
         empresa.setCodEmpresa(modeloBenVLI.getEmpresa());
         funcionario.setEmpresa(empresa);
-        
+
         funcionario.setMatricula(modeloBenVLI.getMatricula());
         funcionario.setVinculo(modeloBenVLI.getVinculo());
         funcionario.setDireitoAbaterIR(StringUtil.parseBoolean(modeloBenVLI.getDireitoAbaterIR()));
@@ -185,7 +185,7 @@ public class CargaVLIBeanImpl implements CargaVLIBean {
         funcionario.setCentroDeCusto(modeloBenVLI.getCentroDeCusto());
         funcionario.setBranco(modeloBenVLI.getBranco());
         funcionario.setCodigoFilialVLI(modeloBenVLI.getCodigoFilialVLI());
-        
+
         funcionario.setStatus(SisPasaIntCommon.ATIVO);
         funcionario.setSituacao(SisPasaIntCommon.ATUALIZADO);
         new FuncionarioBeanImpl().atualizar(funcionario);
@@ -194,7 +194,7 @@ public class CargaVLIBeanImpl implements CargaVLIBean {
         Funcionario funcBeneficiario = new FuncionarioBeanImpl().obter(modeloBenVLI.getEmpresa(), modeloBenVLI.getMatricula());
         beneficiario.setMatricula(modeloBenVLI.getMatricula());
         beneficiario.setCodBeneficiario(modeloBenVLI.getCodBeneficiario());
-        
+
         beneficiario.setNome(modeloBenVLI.getNomeBeneficiario());
         beneficiario.setNomeAbreviado(modeloBenVLI.getNomeBeneficiarioAbreviado());
         beneficiario.setNomeMae(modeloBenVLI.getNomeDaMae());
@@ -220,22 +220,22 @@ public class CargaVLIBeanImpl implements CargaVLIBean {
         beneficiario.setDeclaracaoNascidoVivo(modeloBenVLI.getDeclaracaoNascidoVivo());
         beneficiario.setCassiData(modeloBenVLI.getCassiData());
         beneficiario.setPlano(modeloBenVLI.getPlano());
-        
+
         beneficiario.setEndereco(funcBeneficiario.getEndereco());
         beneficiario.setListaDocumentos(funcBeneficiario.getListaDocumentos());
         beneficiario.setDadosBancarios(funcBeneficiario.getDadosBancarios());
-        
+
         beneficiario.setStatus(SisPasaIntCommon.ATIVO);
         beneficiario.setSituacao(SisPasaIntCommon.ATUALIZADO);
         new BeneficiarioBeanImpl().atualizar(beneficiario);
     }
-    
+
     private void handlerBeneficiario(ModeloBenVLI modeloBenVLI, ModeloEndVLI modeloEndVLI) {
         Beneficiario beneficiario = new BeneficiarioBeanImpl().obter(modeloBenVLI.getEmpresa(), modeloBenVLI.getMatricula(), modeloBenVLI.getCodBeneficiario());
         if (beneficiario == null) {
             beneficiario = new Beneficiario();
         }
-        
+
         beneficiario.setMatricula(modeloBenVLI.getMatricula());
         beneficiario.setCodBeneficiario(modeloBenVLI.getCodBeneficiario());
         beneficiario.setNome(modeloBenVLI.getNomeBeneficiario());
@@ -272,7 +272,7 @@ public class CargaVLIBeanImpl implements CargaVLIBean {
         dadosBancarios.setCodigoBanco(modeloBenVLI.getBanco());
         dadosBancarios.setNumeroAgencia(modeloBenVLI.getAgenciaBancaria());
         dadosBancarios.setNumeroConta(modeloBenVLI.getContaCorrente());
-        
+
         Telefone tel1 = null;
         Telefone tel2 = null;
         List<Telefone> listaTelefones = beneficiario.getListaTelefone();
@@ -288,7 +288,7 @@ public class CargaVLIBeanImpl implements CargaVLIBean {
                 beneficiario.addTelefone(t);
             }
         }
-        
+
         Documento cpf = null;
         Documento pis = null;
         List<Documento> listaDocs = beneficiario.getListaDocumentos();
@@ -304,12 +304,18 @@ public class CargaVLIBeanImpl implements CargaVLIBean {
         } else {
             for (Documento d : listaDocs) {
                 if (d.getTipoDocumento() == TipoDocumento.CPF) {
-                    cpf = d;
+                    beneficiario.addDocumento(d);
                 }
                 if (d.getTipoDocumento() == TipoDocumento.PIS) {
-                    pis = d;
+                    beneficiario.addDocumento(d);
                 }
             }
+            cpf = new Documento();
+            pis = new Documento();
+            cpf.setNumeroDocumento(modeloBenVLI.getCpf());
+            cpf.setTipoDocumento(TipoDocumento.CPF);
+            pis.setNumeroDocumento(modeloBenVLI.getPis());
+            pis.setTipoDocumento(TipoDocumento.PIS);
             beneficiario.addDocumento(cpf);
             beneficiario.addDocumento(pis);
         }
@@ -320,14 +326,14 @@ public class CargaVLIBeanImpl implements CargaVLIBean {
             estado = new Estado();
         }
         estado.setUf(modeloEndVLI.getUf());
-        
+
         Municipio municipio = new MunicipioBeanImpl().existe(modeloEndVLI.getCidade());
         if (municipio == null) {
             municipio = new Municipio();
         }
         municipio.setNome(modeloEndVLI.getCidade());
         municipio.setEstado(estado);
-        
+
         Endereco endereco = beneficiario.getEndereco();
         if (endereco == null) {
             endereco = new Endereco();
@@ -338,11 +344,15 @@ public class CargaVLIBeanImpl implements CargaVLIBean {
         endereco.setEstado(estado);
         endereco.setMunicipio(municipio);
         beneficiario.setEndereco(endereco);
-        
-        GrauParentesco grauParentesco = new GrauParentesco();
+
+        GrauParentesco grauParentesco = new GrauParentescoBeanImpl().existe(modeloBenVLI.getGrauParentesco());
+        if (grauParentesco == null) {
+            grauParentesco = new GrauParentesco();
+        }
         grauParentesco.setGrauParentesco(modeloBenVLI.getGrauParentesco());
+        grauParentesco.setDescricao(StringUtil.parseParentesco(grauParentesco.getGrauParentesco()));
         beneficiario.setGrauParentesco(grauParentesco);
-        
+
         beneficiario.setStatus(SisPasaIntCommon.ATIVO);
         beneficiario.setSituacao(SisPasaIntCommon.ATUALIZADO);
         new BeneficiarioBeanImpl().atualizar(beneficiario);

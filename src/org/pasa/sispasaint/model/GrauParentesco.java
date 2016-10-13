@@ -22,7 +22,7 @@ public class GrauParentesco extends EntidadeBase{
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     
-    @Column(name = "NM_GRAU_PARENTESCO")
+    @Column(name = "CD_GRAU_PARENTESCO")
     private String grauParentesco;
     
     @Column(name= "VL_DESCRICAO")
@@ -32,11 +32,11 @@ public class GrauParentesco extends EntidadeBase{
     }
 
     @Override
-    protected Long getId() {
+    public Long getId() {
         return id;
     }
     
-     public void setId(Long id) {
+    public void setId(Long id) {
         this.id = id;
     }
 
