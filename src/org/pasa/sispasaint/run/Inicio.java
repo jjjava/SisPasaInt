@@ -13,7 +13,7 @@ public class Inicio {
     public static void main(String args[]) {
         Configuracao.getInstance().getNomeBenVLIarq();
         CargaVLIBeanImpl carga = new CargaVLIBeanImpl();
-        carga.cargaArquivosTemp();
+       // carga.cargaArquivosTemp();
         carga.mapearEntidades();
         System.out.println("It is over");
     }

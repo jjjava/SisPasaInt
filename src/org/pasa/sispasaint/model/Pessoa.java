@@ -1,5 +1,6 @@
 package org.pasa.sispasaint.model;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
@@ -28,7 +29,7 @@ import org.pasa.sispasaint.model.enun.Sexo;
  */
 @Entity
 @Inheritance(strategy = InheritanceType.JOINED)
-public class Pessoa extends EntidadeBase {
+public class Pessoa implements Serializable {
 
     private static final long serialVersionUID = 1L;
 
@@ -86,15 +87,21 @@ public class Pessoa extends EntidadeBase {
 
     @Column(name = "BL_INDICADOR_CONCLUSAO")
     private Integer indicadorConclusao;
+    
+    private Integer status;
+    private Integer situacao;
 
     public Pessoa() {
         listaDocumentos = new ArrayList<>();
         listaTelefone = new ArrayList<>();
     }
 
-    @Override
-    protected Long getId() {
+    public Long getId() {
         return id;
+    }
+    
+    public void setId(Long id) {
+        this.id = id;
     }
 
     public String getNome() {
@@ -103,10 +110,6 @@ public class Pessoa extends EntidadeBase {
 
     public void setNome(String nome) {
         this.nome = nome;
-    }
-
-    public void setId(Long id) {
-        this.id = id;
     }
 
     public void addDocumento(Documento doc) {
@@ -204,4 +207,20 @@ public class Pessoa extends EntidadeBase {
     public void setListaTelefone(List<Telefone> listaTelefone) {
         this.listaTelefone = listaTelefone;
     } 
+
+    public Integer getStatus() {
+        return status;
+    }
+
+    public void setStatus(Integer status) {
+        this.status = status;
+    }
+
+    public Integer getSituacao() {
+        return situacao;
+    }
+
+    public void setSituacao(Integer situacao) {
+        this.situacao = situacao;
+    }
 }

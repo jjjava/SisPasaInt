@@ -6,7 +6,6 @@ import javax.persistence.Query;
 import org.pasa.sispasaint.dao.DaoGenerico;
 import org.pasa.sispasaint.dao.EmpresaDAO;
 import org.pasa.sispasaint.model.Empresa;
-import org.pasa.sispasaint.model.Municipio;
 
 /**
  *
@@ -19,10 +18,10 @@ public class EmpresaDAOImpl extends DaoGenerico<Empresa> implements EmpresaDAO{
     }
 
     @Override
-    public Empresa existe(Empresa e) {
+    public Empresa existe(String codigo) {
         Query q1 = getEntityManager().
         createQuery("select e from Empresa e where e.codEmpresa = :cod");
-        q1.setParameter("cod", e.getNome());
+        q1.setParameter("cod", codigo);
         q1.setMaxResults(1);
         List<Empresa> empresa = null;
         try {

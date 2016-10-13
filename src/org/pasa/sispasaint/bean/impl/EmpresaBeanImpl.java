@@ -41,7 +41,7 @@ public class EmpresaBeanImpl implements EmpresaBean{
     }
 
     @Override
-    public Empresa existe(Empresa e) {
-        return new EmpresaDAOImpl().existe(e);
+    public Empresa existe(String codigo) {
+        return new EmpresaDAOImpl().existe(codigo);
     }
 }

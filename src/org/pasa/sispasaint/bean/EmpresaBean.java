@@ -13,5 +13,5 @@ public interface EmpresaBean {
     void atualizar(Empresa e);
     void apagar(Empresa e);
     List<Empresa> listar();
-    Empresa existe(Empresa e);
+    Empresa existe(String codigo);
 }
