@@ -16,11 +16,8 @@ public class DateUtil {
     public static Date toDate(final String data) {
         Date retorno;
         try {
-            final SimpleDateFormat simpleDateFormat = 
-                    new SimpleDateFormat(PATTERN_DATA, Locale.getDefault());
+            final SimpleDateFormat simpleDateFormat = new SimpleDateFormat(PATTERN_DATA, Locale.getDefault());
             retorno = simpleDateFormat.parse(data);
-            
-            System.err.println(retorno.toString());
         } catch (ParseException e) {
             System.err.println(e);
             retorno = null;

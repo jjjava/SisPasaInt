@@ -6,12 +6,14 @@
     <class>org.pasa.sispasaint.model.Beneficiario</class>
     <class>org.pasa.sispasaint.model.DadosBancarios</class>
     <class>org.pasa.sispasaint.model.Documento</class>
+    <class>org.pasa.sispasaint.model.Empresa</class>
     <class>org.pasa.sispasaint.model.Endereco</class>
     <class>org.pasa.sispasaint.model.Estado</class>
     <class>org.pasa.sispasaint.model.Funcionario</class>
     <class>org.pasa.sispasaint.model.GrauParentesco</class>
     <class>org.pasa.sispasaint.model.Municipio</class>
     <class>org.pasa.sispasaint.model.Pessoa</class>
+    <class>org.pasa.sispasaint.model.Plano</class>
     <class>org.pasa.sispasaint.model.Telefone</class>
     <class>org.pasa.sispasaint.model.intg.ModeloBenExt</class>
     <class>org.pasa.sispasaint.model.intg.ModeloBenPeople</class>
@@ -19,7 +21,6 @@
     <class>org.pasa.sispasaint.model.intg.ModeloEndExt</class>
     <class>org.pasa.sispasaint.model.intg.ModeloEndPeople</class>
     <class>org.pasa.sispasaint.model.intg.ModeloEndVLI</class>
-    <class>org.pasa.sispasaint.model.Empresa</class>
     <properties>
       <property name="javax.persistence.jdbc.url" value="jdbc:jtds:sqlserver://127.0.0.1:1433;instance=PASA;DatabaseName=sispasaint"/>
       <property name="javax.persistence.jdbc.user" value="sispasa"/>

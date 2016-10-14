@@ -5,7 +5,6 @@ import javax.persistence.NoResultException;
 import javax.persistence.Query;
 import org.pasa.sispasaint.dao.DaoGenerico;
 import org.pasa.sispasaint.dao.PlanoDAO;
-import org.pasa.sispasaint.model.Estado;
 import org.pasa.sispasaint.model.Plano;
 
 /**

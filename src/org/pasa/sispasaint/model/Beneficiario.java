@@ -11,6 +11,7 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
+import javax.persistence.OneToOne;
 import javax.persistence.PrimaryKeyJoinColumn;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
@@ -61,8 +62,9 @@ public class Beneficiario extends Pessoa {
     @Column(name = "VL_ORGAO_PESSOAL")
     private String orgaoPessoal;
 
-    @Column(name = "CD_PLANO")
-    private String plano;
+    @OneToOne
+    @JoinColumn(name = "ID_PLANO")
+    private Plano plano;
 
     @Column(name = "CD_FAIXA_NIVEL")
     private String faixaNivel;
@@ -173,11 +175,11 @@ public class Beneficiario extends Pessoa {
         this.orgaoPessoal = orgaoPessoal;
     }
 
-    public String getPlano() {
+    public Plano getPlano() {
         return plano;
     }
 
-    public void setPlano(String plano) {
+    public void setPlano(Plano plano) {
         this.plano = plano;
     }
 

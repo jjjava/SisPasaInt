@@ -11,6 +11,7 @@ import org.pasa.sispasaint.model.Estado;
 import org.pasa.sispasaint.model.Funcionario;
 import org.pasa.sispasaint.model.GrauParentesco;
 import org.pasa.sispasaint.model.Municipio;
+import org.pasa.sispasaint.model.Plano;
 import org.pasa.sispasaint.model.Telefone;
 import org.pasa.sispasaint.model.enun.TipoBeneficiario;
 import org.pasa.sispasaint.model.enun.TipoDocumento;
@@ -125,10 +126,12 @@ public class CargaVLIBeanImpl implements CargaVLIBean {
         } else {
             for (Documento d : listaDocs) {
                 if (d.getTipoDocumento() == TipoDocumento.CPF) {
-                    cpf = d;
+                    cpf = new Documento();
+                    cpf.setNumeroDocumento(modeloBenVLI.getCpf());
                 }
                 if (d.getTipoDocumento() == TipoDocumento.PIS) {
-                    pis = d;
+                    pis = new Documento();
+                    pis.setNumeroDocumento(modeloBenVLI.getPis());
                 }
             }
             funcionario.addDocumento(cpf);
@@ -219,11 +222,17 @@ public class CargaVLIBeanImpl implements CargaVLIBean {
         beneficiario.setCodigoNacionalDeSaude(modeloBenVLI.getCodigoNacionalDeSaude());
         beneficiario.setDeclaracaoNascidoVivo(modeloBenVLI.getDeclaracaoNascidoVivo());
         beneficiario.setCassiData(modeloBenVLI.getCassiData());
-        beneficiario.setPlano(modeloBenVLI.getPlano());
 
         beneficiario.setEndereco(funcBeneficiario.getEndereco());
         beneficiario.setListaDocumentos(funcBeneficiario.getListaDocumentos());
         beneficiario.setDadosBancarios(funcBeneficiario.getDadosBancarios());
+
+        Plano plano = new PlanoBeanImpl().existe(modeloBenVLI.getPlano());
+        if (plano == null) {
+            plano = new Plano();
+        }
+        plano.setCodPlano(modeloBenVLI.getPlano());
+        beneficiario.setPlano(plano);
 
         beneficiario.setStatus(SisPasaIntCommon.ATIVO);
         beneficiario.setSituacao(SisPasaIntCommon.ATUALIZADO);
@@ -256,7 +265,7 @@ public class CargaVLIBeanImpl implements CargaVLIBean {
         beneficiario.setOrgaoPessoal(modeloBenVLI.getOrgaoPessoal());
         beneficiario.setFaixaNivel(modeloBenVLI.getFaixaNivel());
         beneficiario.setNucleoDaAms(modeloBenVLI.getNucleoDaAms());
-        beneficiario.setTipoBeneficiario(TipoBeneficiario.Titular);
+        beneficiario.setTipoBeneficiario(TipoBeneficiario.Dependente);
         beneficiario.setMatriculaParticipante(modeloBenVLI.getMatriculaParticipante());
         beneficiario.setMatriculaRepresentanteLegal(modeloBenVLI.getMatriculaRepresentanteLegal());
         beneficiario.setPlanoDeReciprocidadeCassi(StringUtil.parseBoolean(modeloBenVLI.getPlanoDeReciprocidadeCassi()));
@@ -284,9 +293,10 @@ public class CargaVLIBeanImpl implements CargaVLIBean {
             beneficiario.addTelefone(tel1);
             beneficiario.addTelefone(tel2);
         } else {
-            for (Telefone t : listaTelefones) {
-                beneficiario.addTelefone(t);
-            }
+            tel1 = listaTelefones.get(0);
+            tel2 = listaTelefones.get(1);
+            tel1.setNumeroTelefone(modeloEndVLI.getTelefone1());
+            tel2.setNumeroTelefone(modeloEndVLI.getTelefone2());
         }
 
         Documento cpf = null;
@@ -304,18 +314,14 @@ public class CargaVLIBeanImpl implements CargaVLIBean {
         } else {
             for (Documento d : listaDocs) {
                 if (d.getTipoDocumento() == TipoDocumento.CPF) {
-                    beneficiario.addDocumento(d);
+                    cpf = new Documento();
+                    cpf.setNumeroDocumento(modeloBenVLI.getCpf());
                 }
                 if (d.getTipoDocumento() == TipoDocumento.PIS) {
-                    beneficiario.addDocumento(d);
+                    pis = new Documento();
+                    pis.setNumeroDocumento(modeloBenVLI.getPis());
                 }
             }
-            cpf = new Documento();
-            pis = new Documento();
-            cpf.setNumeroDocumento(modeloBenVLI.getCpf());
-            cpf.setTipoDocumento(TipoDocumento.CPF);
-            pis.setNumeroDocumento(modeloBenVLI.getPis());
-            pis.setTipoDocumento(TipoDocumento.PIS);
             beneficiario.addDocumento(cpf);
             beneficiario.addDocumento(pis);
         }
@@ -352,6 +358,13 @@ public class CargaVLIBeanImpl implements CargaVLIBean {
         grauParentesco.setGrauParentesco(modeloBenVLI.getGrauParentesco());
         grauParentesco.setDescricao(StringUtil.parseParentesco(grauParentesco.getGrauParentesco()));
         beneficiario.setGrauParentesco(grauParentesco);
+
+        Plano plano = new PlanoBeanImpl().existe(modeloBenVLI.getPlano());
+        if (plano == null) {
+            plano = new Plano();
+        }
+        plano.setCodPlano(modeloBenVLI.getPlano());
+        beneficiario.setPlano(plano);
 
         beneficiario.setStatus(SisPasaIntCommon.ATIVO);
         beneficiario.setSituacao(SisPasaIntCommon.ATUALIZADO);
