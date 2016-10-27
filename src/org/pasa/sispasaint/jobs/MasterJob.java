@@ -18,7 +18,10 @@ public class MasterJob implements Job {
 
         JobDataMap dataMap = context.getJobDetail().getJobDataMap();
         String tipo = dataMap.getString("tipo");
+        System.out.println("aqui");
         if(tipo.equalsIgnoreCase(SisPasaIntCommon.CARGA_VLI)){
+            
+             System.out.println("aqui2");
             CargaVLIBeanImpl cargaVLIBeanImpl = new CargaVLIBeanImpl();
             cargaVLIBeanImpl.cargaArquivosTemp();
             cargaVLIBeanImpl.mapearEntidades();

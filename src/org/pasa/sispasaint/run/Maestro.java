@@ -43,7 +43,7 @@ public class Maestro {
             try {
                 JobDetail job = JobBuilder.newJob(MasterJob.class)
                         .withIdentity(a.getDescricao(), a.getGrupo())
-                        .usingJobData("tipo", 3.141f)
+                        .usingJobData("tipo", a.getDescricao())
                         .build();
 
                 Trigger trigger = TriggerBuilder
