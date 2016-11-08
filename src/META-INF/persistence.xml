@@ -38,18 +38,6 @@
     <class>org.pasa.sispasa.core.model.TipoVinculoEmpregaticio</class>
     <class>org.pasa.sispasaint.config.DadosConfig</class>
     <class>org.pasa.sispasaint.mail.MailConfig</class>
-    <class>org.pasa.sispasaint.model.Beneficiario</class>
-    <class>org.pasa.sispasaint.model.DadosBancarios</class>
-    <class>org.pasa.sispasaint.model.Documento</class>
-    <class>org.pasa.sispasaint.model.Empresa</class>
-    <class>org.pasa.sispasaint.model.Endereco</class>
-    <class>org.pasa.sispasaint.model.Estado</class>
-    <class>org.pasa.sispasaint.model.Funcionario</class>
-    <class>org.pasa.sispasaint.model.GrauParentesco</class>
-    <class>org.pasa.sispasaint.model.Municipio</class>
-    <class>org.pasa.sispasaint.model.Pessoa</class>
-    <class>org.pasa.sispasaint.model.Plano</class>
-    <class>org.pasa.sispasaint.model.Telefone</class>
     <class>org.pasa.sispasaint.model.intg.Agenda</class>
     <class>org.pasa.sispasaint.model.intg.ModeloBenExt</class>
     <class>org.pasa.sispasaint.model.intg.ModeloBenPeople</class>
