@@ -2,9 +2,9 @@
 package org.pasa.sispasaint.bean.impl;
 
 import java.util.List;
+import org.pasa.sispasa.core.model.Empresa;
 import org.pasa.sispasaint.bean.EmpresaBean;
 import org.pasa.sispasaint.dao.impl.EmpresaDAOImpl;
-import org.pasa.sispasaint.model.Empresa;
 
 /**
  *

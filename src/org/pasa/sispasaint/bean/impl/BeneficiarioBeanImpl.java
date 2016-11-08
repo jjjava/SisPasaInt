@@ -2,7 +2,7 @@ package org.pasa.sispasaint.bean.impl;
 
 import org.pasa.sispasaint.bean.BeneficiarioBean;
 import org.pasa.sispasaint.dao.impl.BeneficiarioDAOImpl;
-import org.pasa.sispasaint.model.Beneficiario;
+import org.pasa.sispasa.core.model.Beneficiario;
 
 /**
  *

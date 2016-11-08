@@ -43,7 +43,7 @@ public class MailConfig implements Serializable {
 
     public String getSenha() {
         try {
-            return Criptografia.criptografarBase64(usuario);
+            return Criptografia.criptografarBase64(senha);
         } catch (EncoderException ex) {
             Logger.getLogger(MailConfig.class.getName()).log(Level.SEVERE, null, ex);
         }

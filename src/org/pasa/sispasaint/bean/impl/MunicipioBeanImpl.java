@@ -1,9 +1,9 @@
 package org.pasa.sispasaint.bean.impl;
 
 import java.util.List;
+import org.pasa.sispasa.core.model.Municipio;
 import org.pasa.sispasaint.bean.MunicipioBean;
 import org.pasa.sispasaint.dao.impl.MunicipioDAOImpl;
-import org.pasa.sispasaint.model.Municipio;
 
 /**
  *

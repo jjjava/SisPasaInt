@@ -1,9 +1,10 @@
 package org.pasa.sispasaint.bean.impl;
 
 import java.util.List;
+import org.pasa.sispasa.core.model.GrauParentesco;
 import org.pasa.sispasaint.bean.GrauParentescoBean;
 import org.pasa.sispasaint.dao.impl.GrauParentescoDAOImpl;
-import org.pasa.sispasaint.model.GrauParentesco;
+
 
 /**
  *

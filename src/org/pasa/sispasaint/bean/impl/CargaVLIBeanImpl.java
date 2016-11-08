@@ -1,18 +1,13 @@
 package org.pasa.sispasaint.bean.impl;
 
 import java.util.List;
+import org.pasa.sispasa.core.model.Beneficiario;
+import org.pasa.sispasa.core.model.DadosBancarios;
+import org.pasa.sispasa.core.model.Empresa;
+import org.pasa.sispasa.core.model.Funcionario;
+import org.pasa.sispasa.core.model.GrauParentesco;
+import org.pasa.sispasa.core.model.Municipio;
 import org.pasa.sispasaint.bean.CargaVLIBean;
-import org.pasa.sispasaint.model.Beneficiario;
-import org.pasa.sispasaint.model.DadosBancarios;
-import org.pasa.sispasaint.model.Documento;
-import org.pasa.sispasaint.model.Empresa;
-import org.pasa.sispasaint.model.Endereco;
-import org.pasa.sispasaint.model.Estado;
-import org.pasa.sispasaint.model.Funcionario;
-import org.pasa.sispasaint.model.GrauParentesco;
-import org.pasa.sispasaint.model.Municipio;
-import org.pasa.sispasaint.model.Plano;
-import org.pasa.sispasaint.model.Telefone;
 import org.pasa.sispasaint.model.enun.TipoBeneficiario;
 import org.pasa.sispasaint.model.enun.TipoDocumento;
 import org.pasa.sispasaint.model.intg.ModeloBenVLI;

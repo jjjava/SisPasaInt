@@ -2,7 +2,7 @@ package org.pasa.sispasaint.bean;
 
 
 import java.util.List;
-import org.pasa.sispasaint.model.Endereco;
+import org.pasa.sispasa.core.model.Endereco;
 
 /**
  *

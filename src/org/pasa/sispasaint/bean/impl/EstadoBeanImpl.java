@@ -1,11 +1,9 @@
 package org.pasa.sispasaint.bean.impl;
 
 import java.util.List;
+import org.pasa.sispasa.core.model.Estado;
 import org.pasa.sispasaint.bean.EstadoBean;
 import org.pasa.sispasaint.dao.impl.EstadoDAOImpl;
-import org.pasa.sispasaint.model.Estado;
-import org.pasa.sispasaint.model.Funcionario;
-
 /**
  *
  * @author Hudson Schumaker

@@ -1,7 +1,7 @@
 package org.pasa.sispasaint.bean;
 
 import java.util.List;
-import org.pasa.sispasaint.model.Empresa;
+import org.pasa.sispasa.core.model.Empresa;
 
 /**
  *

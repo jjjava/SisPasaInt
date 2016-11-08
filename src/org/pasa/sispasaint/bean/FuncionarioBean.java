@@ -1,6 +1,6 @@
 package org.pasa.sispasaint.bean;
 
-import org.pasa.sispasaint.model.Funcionario;
+import org.pasa.sispasa.core.model.Funcionario;
 
 /**
 *

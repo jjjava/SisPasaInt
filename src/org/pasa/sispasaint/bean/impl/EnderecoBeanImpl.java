@@ -1,9 +1,10 @@
 package org.pasa.sispasaint.bean.impl;
 
 import java.util.List;
+import org.pasa.sispasa.core.model.Endereco;
 import org.pasa.sispasaint.bean.EnderecoBean;
 import org.pasa.sispasaint.dao.impl.EnderecoDAOImpl;
-import org.pasa.sispasaint.model.Endereco;
+
 
 /**
  *

@@ -1,9 +1,10 @@
 package org.pasa.sispasaint.bean.impl;
 
 import java.util.List;
+import org.pasa.sispasa.core.model.Plano;
 import org.pasa.sispasaint.bean.PlanoBean;
 import org.pasa.sispasaint.dao.impl.PlanoDAOImpl;
-import org.pasa.sispasaint.model.Plano;
+
 
 /**
  *

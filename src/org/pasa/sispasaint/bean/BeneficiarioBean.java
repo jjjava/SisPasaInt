@@ -1,6 +1,6 @@
 package org.pasa.sispasaint.bean;
 
-import org.pasa.sispasaint.model.Beneficiario;
+import org.pasa.sispasa.core.model.Beneficiario;
 
 /**
  *
