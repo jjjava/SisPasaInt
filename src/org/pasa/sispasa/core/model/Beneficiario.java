@@ -1,10 +1,12 @@
 package org.pasa.sispasa.core.model;
 
 import java.util.Date;
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
+import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.PrimaryKeyJoinColumn;
 import javax.persistence.Table;
@@ -100,15 +102,15 @@ public class Beneficiario extends Pessoa {
 	private Date dataUltAtulizacao;
 	
 	@ManyToOne
-	@Column(name = "ID_FUNCIONARIO")
+	@JoinColumn(name = "ID_FUNCIONARIO")
 	private Funcionario funcionario;
 	
 	@ManyToOne
-	@Column(name = "ID_GRAU_PARENT")
+	@JoinColumn(name = "ID_GRAU_PARENT")
 	private GrauParentesco grauParentesco;
 	
 	@ManyToOne
-	@Column(name = "ID_PLANO")
+	@JoinColumn(name = "ID_PLANO")
 	private Plano plano;
 
 	public Beneficiario() {

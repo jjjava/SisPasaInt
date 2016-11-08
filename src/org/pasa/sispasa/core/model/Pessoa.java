@@ -96,27 +96,27 @@ public class Pessoa implements Serializable {
 	private List<Telefone> telefones;
 
 	@ManyToOne
-	@Column(name = "ID_PAIS", nullable = false)
+	@JoinColumn(name = "ID_PAIS", nullable = false)
 	private Pais pais;
 
 	@ManyToOne
-	@Column(name = "ID_ESTADO", nullable = false)
+	@JoinColumn(name = "ID_ESTADO", nullable = false)
 	private Estado estado;
 	
 	@ManyToOne
-	@Column(name = "ID_MUNICIPIO", nullable = false)
+	@JoinColumn(name = "ID_MUNICIPIO", nullable = false)
 	private Municipio municipio;
 	
 	@ManyToOne
-	@Column(name = "ID_NIVEL_ESCOL", nullable = false)
+	@JoinColumn(name = "ID_NIVEL_ESCOL", nullable = false)
 	private NivelEscolaridade nivelEscolaridade;
 	
 	@ManyToOne
-	@Column(name = "ID_ORIGEM_INFO", nullable = false)
+	@JoinColumn(name = "ID_ORIGEM_INFO", nullable = false)
 	private OrigemInformacoes origemInformacoes;
 	
 	@ManyToOne
-	@Column(name = "ID_ESTADO_CIVIL", nullable = false)
+	@JoinColumn(name = "ID_ESTADO_CIVIL", nullable = false)
 	private EstadoCivil estadoCivil;
 
 	public Pessoa() {

@@ -8,76 +8,78 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
+import javax.persistence.Temporal;
+import javax.persistence.TemporalType;
 
 /**
  *
  * @author Hudson Schumaker
  * @version 1.0.0
  */
-
 @Entity
 @Table(name = "OPERADORA")
 public class Operadora implements Serializable {
 
-	private static final long serialVersionUID = 1L;
+    private static final long serialVersionUID = 1L;
 
-	@Id
-	@Column(name = "ID_OPERADORA")
-	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	private Long id;
+    @Id
+    @Column(name = "ID_OPERADORA")
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long id;
 
-	@Column(name = "NOME", length = 30, nullable = false)
-	private String nome;
+    @Column(name = "NOME", length = 30, nullable = false)
+    private String nome;
 
-	@Column(name = "REGISTRO_AMS")
-	private String registroANS;
+    @Column(name = "REGISTRO_AMS")
+    private String registroANS;
 
-	@Column(name = "IND_ATIVO", nullable = false)
-	private Integer indAtivo;
-	
-	@Column(name = "DT_ULT_ATULZ")
-	private Date dataUltAtulizacao;
+    @Column(name = "IND_ATIVO", nullable = false)
+    private Integer indAtivo;
 
-	public Operadora() {
-	}
+    @Column(name = "DT_ULT_ATULZ")
+    @Temporal(TemporalType.DATE)
+    private Date dataUltAtulizacao;
 
-	public Long getId() {
-		return id;
-	}
+    public Operadora() {
+    }
 
-	public void setId(Long id) {
-		this.id = id;
-	}
+    public Long getId() {
+        return id;
+    }
 
-	public String getNome() {
-		return nome;
-	}
+    public void setId(Long id) {
+        this.id = id;
+    }
 
-	public void setNome(String nome) {
-		this.nome = nome;
-	}
+    public String getNome() {
+        return nome;
+    }
 
-	public String getRegistroANS() {
-		return registroANS;
-	}
+    public void setNome(String nome) {
+        this.nome = nome;
+    }
 
-	public void setRegistroANS(String registroANS) {
-		this.registroANS = registroANS;
-	}
+    public String getRegistroANS() {
+        return registroANS;
+    }
 
-	public Integer getIndAtivo() {
-		return indAtivo;
-	}
+    public void setRegistroANS(String registroANS) {
+        this.registroANS = registroANS;
+    }
 
-	public void setIndAtivo(Integer indAtivo) {
-		this.indAtivo = indAtivo;
-	}
+    public Integer getIndAtivo() {
+        return indAtivo;
+    }
 
-	public Date getDataUltAtulizacao() {
-		return dataUltAtulizacao;
-	}
+    public void setIndAtivo(Integer indAtivo) {
+        this.indAtivo = indAtivo;
+    }
 
-	public void setDataUltAtulizacao(Date dataUltAtulizacao) {
-		this.dataUltAtulizacao = dataUltAtulizacao;
-	}
+    public Date getDataUltAtulizacao() {
+        return dataUltAtulizacao;
+    }
+
+    public void setDataUltAtulizacao(Date dataUltAtulizacao) {
+        this.dataUltAtulizacao = dataUltAtulizacao;
+    }
 }

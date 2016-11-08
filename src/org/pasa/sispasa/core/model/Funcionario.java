@@ -1,10 +1,12 @@
 package org.pasa.sispasa.core.model;
 
 import java.util.Date;
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
+import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.PrimaryKeyJoinColumn;
 import javax.persistence.Table;
@@ -83,19 +85,19 @@ public class Funcionario extends Pessoa {
 	private Date dataUltAtulizacao;
 	
 	@ManyToOne
-	@Column(name = "ID_EMPRESA")
+	@JoinColumn(name = "ID_EMPRESA")
 	private Empresa empresa;
 	
 	@ManyToOne
-	@Column(name = "ID_TP_VINC_EMPREG")
+	@JoinColumn(name = "ID_TP_VINC_EMPREG")
 	private TipoVinculoEmpregaticio tipoVinculoEmpregaticio;
 	
 	@ManyToOne
-	@Column(name = "ID_DADOS_BANC")
+	@JoinColumn(name = "ID_DADOS_BANC")
 	private DadosBancarios dadosBancarios;
 	
 	@ManyToOne
-	@Column(name = "ID_MOTIVO_DESLIGAMENTO")
+	@JoinColumn(name = "ID_MOTIVO_DESLIGAMENTO")
 	private MotivoDesligamento motivoDesligamento;
 	
 	public Funcionario() {
