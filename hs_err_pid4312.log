@@ -1,0 +1,293 @@
+#
+# A fatal error has been detected by the Java Runtime Environment:
+#
+#  EXCEPTION_ACCESS_VIOLATION (0xc0000005) at pc=0x000000006e16513a, pid=4312, tid=0x000000000000213c
+#
+# JRE version: Java(TM) SE Runtime Environment (8.0_101-b13) (build 1.8.0_101-b13)
+# Java VM: Java HotSpot(TM) 64-Bit Server VM (25.101-b13 mixed mode windows-amd64 compressed oops)
+# Problematic frame:
+# V  [jvm.dll+0xc513a]
+#
+# Failed to write core dump. Minidumps are not enabled by default on client versions of Windows
+#
+# If you would like to submit a bug report, please visit:
+#   http://bugreport.java.com/bugreport/crash.jsp
+#
+
+---------------  T H R E A D  ---------------
+
+Current thread (0x00000000028a0800):  JavaThread "main" [_thread_in_vm, id=8508, stack(0x0000000002700000,0x0000000002800000)]
+
+siginfo: ExceptionCode=0xc0000005, reading address 0x00000007c42197c0
+
+Registers:
+RAX=0x0000000021779e88, RBX=0x00000000027fd040, RCX=0x00000000027fd040, RDX=0x00000000027fd070
+RSP=0x00000000027fcf30, RBP=0x00000000028a0800, RSI=0x00000000028a0800, RDI=0x00000000028a0800
+R8 =0x00000007c4219730, R9 =0x00000000027fd0b0, R10=0x00000000027fcfa0, R11=0x000000006e0a0000
+R12=0x00000000028a0c60, R13=0x00000000027fd040, R14=0x0000000021779fe0, R15=0x00000000027fd030
+RIP=0x000000006e16513a, EFLAGS=0x0000000000010206
+
+Top of Stack: (sp=0x00000000027fcf30)
+0x00000000027fcf30:   0000000000000000 00000000028a0800
+0x00000000027fcf40:   00000000027fd000 00000000027fcfa0
+0x00000000027fcf50:   00000000028a0c50 000000006e16d661
+0x00000000027fcf60:   0000000002a9ede0 00000000028a0c60
+0x00000000027fcf70:   00000000028a0801 00000000027fd090
+0x00000000027fcf80:   00000000028a0800 000000006e166d43
+0x00000000027fcf90:   0000000021779fe0 00000000028a0800
+0x00000000027fcfa0:   0000000002a9ede0 00000000028a0800
+0x00000000027fcfb0:   00000000028a0800 00000007c0219428
+0x00000000027fcfc0:   00000000028a1038 000000006e0d9f81
+0x00000000027fcfd0:   00000000000003d8 000000000000043a
+0x00000000027fcfe0:   00000007c0219428 00000000028a0800
+0x00000000027fcff0:   00000000028a1038 000000006e16712d
+0x00000000027fd000:   0000000002a9ede0 00000000028a0c50
+0x00000000027fd010:   000000001e510258 000000001e518228
+0x00000000027fd020:   00000000028a0800 00000000027fd2f0 
+
+Instructions: (pc=0x000000006e16513a)
+0x000000006e16511a:   48 89 74 24 18 57 48 83 ec 50 48 8b 41 08 48 8b
+0x000000006e16512a:   f2 4c 8d 49 70 4c 8b 40 18 48 8d 51 30 48 8b d9
+0x000000006e16513a:   49 8b a8 90 00 00 00 4c 8d 81 a0 00 00 00 48 89
+0x000000006e16514a:   74 24 20 48 8b cd e8 cb 6d 03 00 48 83 7e 08 00 
+
+
+Register to memory mapping:
+
+RAX=0x0000000021779e88 is pointing into metadata
+RBX=0x00000000027fd040 is pointing into the stack for thread: 0x00000000028a0800
+RCX=0x00000000027fd040 is pointing into the stack for thread: 0x00000000028a0800
+RDX=0x00000000027fd070 is pointing into the stack for thread: 0x00000000028a0800
+RSP=0x00000000027fcf30 is pointing into the stack for thread: 0x00000000028a0800
+RBP=0x00000000028a0800 is a thread
+RSI=0x00000000028a0800 is a thread
+RDI=0x00000000028a0800 is a thread
+R8 =0x00000007c4219730 is an unknown value
+R9 =0x00000000027fd0b0 is pointing into the stack for thread: 0x00000000028a0800
+R10=0x00000000027fcfa0 is pointing into the stack for thread: 0x00000000028a0800
+R11=0x000000006e0a0000 is an unknown value
+R12=0x00000000028a0c60 is an unknown value
+R13=0x00000000027fd040 is pointing into the stack for thread: 0x00000000028a0800
+R14=0x0000000021779fe0 is pointing into metadata
+R15=0x00000000027fd030 is pointing into the stack for thread: 0x00000000028a0800
+
+
+Stack: [0x0000000002700000,0x0000000002800000],  sp=0x00000000027fcf30,  free space=1011k
+Native frames: (J=compiled Java code, j=interpreted, Vv=VM code, C=native code)
+V  [jvm.dll+0xc513a]
+V  [jvm.dll+0xc6d43]
+V  [jvm.dll+0xc712d]
+V  [jvm.dll+0x11021c]
+V  [jvm.dll+0x114c37]
+V  [jvm.dll+0x115115]
+V  [jvm.dll+0xbb82d]
+C  0x0000000002ac5335
+
+Java frames: (J=compiled Java code, j=interpreted, Vv=VM code)
+j  org.eclipse.persistence.jpa.jpql.parser.JPQLGrammar2_1.initializeBNFs()V+34
+j  org.eclipse.persistence.jpa.jpql.parser.AbstractJPQLGrammar.initialize()V+44
+j  org.eclipse.persistence.jpa.jpql.parser.AbstractJPQLGrammar.<init>()V+5
+j  org.eclipse.persistence.jpa.jpql.parser.JPQLGrammar2_1.<init>()V+1
+j  org.eclipse.persistence.jpa.jpql.parser.JPQLGrammar2_1.<clinit>()V+4
+v  ~StubRoutines::call_stub
+j  org.eclipse.persistence.jpa.jpql.parser.EclipseLinkJPQLGrammar2_4.buildBaseGrammar()Lorg/eclipse/persistence/jpa/jpql/parser/JPQLGrammar;+0
+j  org.eclipse.persistence.jpa.jpql.parser.AbstractJPQLGrammar.initialize()V+2
+j  org.eclipse.persistence.jpa.jpql.parser.AbstractJPQLGrammar.<init>()V+5
+j  org.eclipse.persistence.jpa.jpql.parser.EclipseLinkJPQLGrammar2_4.<init>()V+1
+j  org.eclipse.persistence.jpa.jpql.parser.EclipseLinkJPQLGrammar2_4.<clinit>()V+4
+v  ~StubRoutines::call_stub
+j  org.eclipse.persistence.jpa.jpql.parser.EclipseLinkJPQLGrammar2_5.buildBaseGrammar()Lorg/eclipse/persistence/jpa/jpql/parser/JPQLGrammar;+0
+j  org.eclipse.persistence.jpa.jpql.parser.AbstractJPQLGrammar.initialize()V+2
+j  org.eclipse.persistence.jpa.jpql.parser.AbstractJPQLGrammar.<init>()V+5
+j  org.eclipse.persistence.jpa.jpql.parser.EclipseLinkJPQLGrammar2_5.<init>()V+1
+j  org.eclipse.persistence.jpa.jpql.parser.EclipseLinkJPQLGrammar2_5.<clinit>()V+4
+v  ~StubRoutines::call_stub
+j  org.eclipse.persistence.jpa.jpql.parser.DefaultEclipseLinkJPQLGrammar.instance()Lorg/eclipse/persistence/jpa/jpql/parser/JPQLGrammar;+0
+j  org.eclipse.persistence.internal.jpa.jpql.HermesParser.populateQueryImp(Ljava/lang/CharSequence;Lorg/eclipse/persistence/queries/DatabaseQuery;Lorg/eclipse/persistence/internal/sessions/AbstractSession;)Lorg/eclipse/persistence/queries/DatabaseQuery;+5
+j  org.eclipse.persistence.internal.jpa.jpql.HermesParser.buildQuery(Ljava/lang/CharSequence;Lorg/eclipse/persistence/internal/sessions/AbstractSession;)Lorg/eclipse/persistence/queries/DatabaseQuery;+4
+j  org.eclipse.persistence.internal.jpa.EJBQueryImpl.buildEJBQLDatabaseQuery(Ljava/lang/String;Ljava/lang/String;Lorg/eclipse/persistence/internal/sessions/AbstractSession;Ljava/lang/Enum;Ljava/util/Map;Ljava/lang/ClassLoader;)Lorg/eclipse/persistence/queries/DatabaseQuery;+63
+j  org.eclipse.persistence.internal.jpa.EJBQueryImpl.buildEJBQLDatabaseQuery(Ljava/lang/String;Lorg/eclipse/persistence/internal/sessions/AbstractSession;)Lorg/eclipse/persistence/queries/DatabaseQuery;+17
+j  org.eclipse.persistence.internal.jpa.EJBQueryImpl.<init>(Ljava/lang/String;Lorg/eclipse/persistence/internal/jpa/EntityManagerImpl;Z)V+30
+j  org.eclipse.persistence.internal.jpa.EJBQueryImpl.<init>(Ljava/lang/String;Lorg/eclipse/persistence/internal/jpa/EntityManagerImpl;)V+4
+j  org.eclipse.persistence.internal.jpa.EntityManagerImpl.createQuery(Ljava/lang/String;)Ljavax/persistence/Query;+10
+j  org.pasa.sispasaint.dao.impl.ImpEndVLITempDAOImpl.obterPorMatricula(Ljava/lang/String;Ljava/lang/String;Ljava/lang/String;)Lorg/pasa/sispasaint/model/intg/ModeloEndVLI;+15
+j  org.pasa.sispasaint.bean.impl.ImpEndVLITempBeanImpl.obterPorMatricula(Lorg/pasa/sispasaint/model/intg/ModeloBenVLI;)Lorg/pasa/sispasaint/model/intg/ModeloEndVLI;+19
+j  org.pasa.sispasaint.bean.impl.CargaVLIBeanImpl.mapearEntidades()V+48
+j  org.pasa.sispasaint.run.Inicio.main([Ljava/lang/String;)V+9
+v  ~StubRoutines::call_stub
+
+---------------  P R O C E S S  ---------------
+
+Java Threads: ( => current thread )
+  0x000000001e539800 JavaThread "Service Thread" daemon [_thread_blocked, id=6956, stack(0x000000001f0a0000,0x000000001f1a0000)]
+  0x000000001e501000 JavaThread "C1 CompilerThread3" daemon [_thread_blocked, id=11932, stack(0x000000001efa0000,0x000000001f0a0000)]
+  0x000000001e4d4000 JavaThread "C2 CompilerThread2" daemon [_thread_blocked, id=3840, stack(0x000000001eea0000,0x000000001efa0000)]
+  0x000000001e4cb800 JavaThread "C2 CompilerThread1" daemon [_thread_blocked, id=6592, stack(0x000000001eda0000,0x000000001eea0000)]
+  0x000000001e4c7000 JavaThread "C2 CompilerThread0" daemon [_thread_blocked, id=13572, stack(0x000000001eca0000,0x000000001eda0000)]
+  0x000000001e4c5800 JavaThread "Attach Listener" daemon [_thread_blocked, id=4744, stack(0x000000001eba0000,0x000000001eca0000)]
+  0x000000001e4c4800 JavaThread "Signal Dispatcher" daemon [_thread_blocked, id=4324, stack(0x000000001eaa0000,0x000000001eba0000)]
+  0x000000000299e000 JavaThread "Finalizer" daemon [_thread_blocked, id=3144, stack(0x000000001e8a0000,0x000000001e9a0000)]
+  0x0000000002995000 JavaThread "Reference Handler" daemon [_thread_blocked, id=5496, stack(0x000000001e3a0000,0x000000001e4a0000)]
+=>0x00000000028a0800 JavaThread "main" [_thread_in_vm, id=8508, stack(0x0000000002700000,0x0000000002800000)]
+
+Other Threads:
+  0x000000001c5b9000 VMThread [stack: 0x000000001e2a0000,0x000000001e3a0000] [id=1052]
+  0x000000001e53c800 WatcherThread [stack: 0x000000001f1a0000,0x000000001f2a0000] [id=8444]
+
+VM state:not at safepoint (normal execution)
+
+VM Mutex/Monitor currently owned by a thread: None
+
+Heap:
+ PSYoungGen      total 153088K, used 121095K [0x000000076ab00000, 0x0000000775580000, 0x00000007c0000000)
+  eden space 131584K, 92% used [0x000000076ab00000,0x0000000772141ec0,0x0000000772b80000)
+  from space 21504K, 0% used [0x0000000774080000,0x0000000774080000,0x0000000775580000)
+  to   space 21504K, 0% used [0x0000000772b80000,0x0000000772b80000,0x0000000774080000)
+ ParOldGen       total 349696K, used 0K [0x00000006c0000000, 0x00000006d5580000, 0x000000076ab00000)
+  object space 349696K, 0% used [0x00000006c0000000,0x00000006c0000000,0x00000006d5580000)
+ Metaspace       used 19628K, capacity 19834K, committed 20096K, reserved 1067008K
+  class space    used 2302K, capacity 2373K, committed 2432K, reserved 1048576K
+
+Card table byte_map: [0x0000000011e60000,0x0000000012670000] byte_map_base: 0x000000000e860000
+
+Marking Bits: (ParMarkBitMap*) 0x000000006e8ba6d0
+ Begin Bits: [0x00000000133d0000, 0x00000000173d0000)
+ End Bits:   [0x00000000173d0000, 0x000000001b3d0000)
+
+Polling page: 0x0000000000a50000
+
+CodeCache: size=245760Kb used=4372Kb max_used=4372Kb free=241387Kb
+ bounds [0x0000000002aa0000, 0x0000000002ef0000, 0x0000000011aa0000]
+ total_blobs=1740 nmethods=1356 adapters=296
+ compilation: enabled
+
+Compilation events (10 events):
+Event: 1.278 Thread 0x000000001e501000 nmethod 1349 0x0000000002ee0dd0 code [0x0000000002ee0f40, 0x0000000002ee10e8]
+Event: 1.278 Thread 0x000000001e501000 1350       3       java.util.LinkedList::linkLast (59 bytes)
+Event: 1.278 Thread 0x000000001e501000 nmethod 1350 0x0000000002ee07d0 code [0x0000000002ee0940, 0x0000000002ee0c90]
+Event: 1.278 Thread 0x000000001e501000 1351       3       java.util.LinkedList::<init> (10 bytes)
+Event: 1.278 Thread 0x000000001e501000 nmethod 1351 0x0000000002edf810 code [0x0000000002edf980, 0x0000000002edfc50]
+Event: 1.278 Thread 0x000000001e501000 1352       3       java.util.AbstractSequentialList::<init> (5 bytes)
+Event: 1.278 Thread 0x000000001e501000 nmethod 1352 0x0000000002ee02d0 code [0x0000000002ee0440, 0x0000000002ee06b0]
+Event: 1.279 Thread 0x000000001e501000 1353       1       org.eclipse.persistence.jpa.jpql.parser.ExpressionFactory::getId (5 bytes)
+Event: 1.279 Thread 0x000000001e501000 nmethod 1353 0x0000000002edf550 code [0x0000000002edf6a0, 0x0000000002edf7b0]
+Event: 1.280 Thread 0x000000001e501000 1354       3       org.eclipse.persistence.jpa.jpql.parser.AbstractJPQLGrammar::registerIdentifierRole (10 bytes)
+
+GC Heap History (0 events):
+No events
+
+Deoptimization events (10 events):
+Event: 0.708 Thread 0x00000000028a0800 Uncommon trap: reason=class_check action=maybe_recompile pc=0x0000000002d95670 method=java.util.regex.Pattern$Curly.match(Ljava/util/regex/Matcher;ILjava/lang/CharSequence;)Z @ 19
+Event: 0.708 Thread 0x00000000028a0800 Uncommon trap: reason=class_check action=maybe_recompile pc=0x0000000002d95670 method=java.util.regex.Pattern$Curly.match(Ljava/util/regex/Matcher;ILjava/lang/CharSequence;)Z @ 19
+Event: 0.708 Thread 0x00000000028a0800 Uncommon trap: reason=class_check action=maybe_recompile pc=0x0000000002c02c3c method=java.util.regex.Pattern$Slice.match(Ljava/util/regex/Matcher;ILjava/lang/CharSequence;)Z @ 75
+Event: 0.710 Thread 0x00000000028a0800 Uncommon trap: reason=class_check action=maybe_recompile pc=0x0000000002c02c3c method=java.util.regex.Pattern$Slice.match(Ljava/util/regex/Matcher;ILjava/lang/CharSequence;)Z @ 75
+Event: 0.710 Thread 0x00000000028a0800 Uncommon trap: reason=class_check action=maybe_recompile pc=0x0000000002c02c3c method=java.util.regex.Pattern$Slice.match(Ljava/util/regex/Matcher;ILjava/lang/CharSequence;)Z @ 75
+Event: 0.711 Thread 0x00000000028a0800 Uncommon trap: reason=class_check action=maybe_recompile pc=0x0000000002c02c3c method=java.util.regex.Pattern$Slice.match(Ljava/util/regex/Matcher;ILjava/lang/CharSequence;)Z @ 75
+Event: 0.929 Thread 0x00000000028a0800 Uncommon trap: reason=unstable_if action=reinterpret pc=0x0000000002d86030 method=java.util.HashMap.putVal(ILjava/lang/Object;Ljava/lang/Object;ZZ)Ljava/lang/Object; @ 162
+Event: 0.934 Thread 0x00000000028a0800 Uncommon trap: reason=unstable_if action=reinterpret pc=0x0000000002d55c54 method=java.lang.CharacterDataLatin1.digit(II)I @ 82
+Event: 1.030 Thread 0x00000000028a0800 Uncommon trap: reason=unstable_if action=reinterpret pc=0x0000000002cc49e8 method=java.util.HashMap.getNode(ILjava/lang/Object;)Ljava/util/HashMap$Node; @ 62
+Event: 1.030 Thread 0x00000000028a0800 Uncommon trap: reason=unstable_if action=reinterpret pc=0x0000000002cc65c8 method=java.util.HashMap.getNode(ILjava/lang/Object;)Ljava/util/HashMap$Node; @ 62
+
+Internal exceptions (9 events):
+Event: 0.025 Thread 0x00000000028a0800 Exception <a 'java/lang/NoSuchMethodError': Method sun.misc.Unsafe.defineClass(Ljava/lang/String;[BII)Ljava/lang/Class; name or signature does not match> (0x000000076ab07cc0) thrown at [C:\re\workspace\8-2-build-windows-amd64-cygwin\jdk8u101\7261\hotspot\s«m¨*ç°™?
+Event: 0.025 Thread 0x00000000028a0800 Exception <a 'java/lang/NoSuchMethodError': Method sun.misc.Unsafe.prefetchRead(Ljava/lang/Object;J)V name or signature does not match> (0x000000076ab07fa8) thrown at [C:\re\workspace\8-2-build-windows-amd64-cygwin\jdk8u101\7261\hotspot\src\share\vm\prims\üÒšo>¹?
+Event: 0.099 Thread 0x00000000028a0800 Exception <a 'java/security/PrivilegedActionException'> (0x000000076ac2a568) thrown at [C:\re\workspace\8-2-build-windows-amd64-cygwin\jdk8u101\7261\hotspot\src\share\vm\prims\jvm.cpp, line 1386]
+Event: 0.099 Thread 0x00000000028a0800 Exception <a 'java/security/PrivilegedActionException'> (0x000000076ac2a778) thrown at [C:\re\workspace\8-2-build-windows-amd64-cygwin\jdk8u101\7261\hotspot\src\share\vm\prims\jvm.cpp, line 1386]
+Event: 0.100 Thread 0x00000000028a0800 Exception <a 'java/security/PrivilegedActionException'> (0x000000076ac2e660) thrown at [C:\re\workspace\8-2-build-windows-amd64-cygwin\jdk8u101\7261\hotspot\src\share\vm\prims\jvm.cpp, line 1386]
+Event: 0.100 Thread 0x00000000028a0800 Exception <a 'java/security/PrivilegedActionException'> (0x000000076ac2e870) thrown at [C:\re\workspace\8-2-build-windows-amd64-cygwin\jdk8u101\7261\hotspot\src\share\vm\prims\jvm.cpp, line 1386]
+Event: 0.574 Thread 0x00000000028a0800 Exception <a 'java/lang/NoClassDefFoundError': javax/validation/Validation> (0x000000076c925ab0) thrown at [C:\re\workspace\8-2-build-windows-amd64-cygwin\jdk8u101\7261\hotspot\src\share\vm\classfile\systemDictionary.cpp, line 199]
+Event: 0.696 Thread 0x00000000028a0800 Exception <a 'java/lang/NoSuchFieldError': method resolution failed> (0x000000076d0a5920) thrown at [C:\re\workspace\8-2-build-windows-amd64-cygwin\jdk8u101\7261\hotspot\src\share\vm\prims\methodHandles.cpp, line 1146]
+Event: 0.697 Thread 0x00000000028a0800 Exception <a 'java/lang/NoSuchFieldError': method resolution failed> (0x000000076d0b2fe0) thrown at [C:\re\workspace\8-2-build-windows-amd64-cygwin\jdk8u101\7261\hotspot\src\share\vm\prims\methodHandles.cpp, line 1146]
+
+Events (10 events):
+Event: 1.279 loading class org/eclipse/persistence/jpa/jpql/parser/NullIfExpression
+Event: 1.279 loading class org/eclipse/persistence/jpa/jpql/parser/NullIfExpression done
+Event: 1.279 loading class org/eclipse/persistence/jpa/jpql/parser/ResultVariable
+Event: 1.279 loading class org/eclipse/persistence/jpa/jpql/parser/ResultVariable done
+Event: 1.279 loading class org/eclipse/persistence/jpa/jpql/parser/TypeExpression
+Event: 1.279 loading class org/eclipse/persistence/jpa/jpql/parser/TypeExpression done
+Event: 1.280 loading class org/eclipse/persistence/jpa/jpql/parser/ValueExpression
+Event: 1.280 loading class org/eclipse/persistence/jpa/jpql/parser/ValueExpression done
+Event: 1.280 loading class org/eclipse/persistence/jpa/jpql/parser/WhenClause
+Event: 1.280 loading class org/eclipse/persistence/jpa/jpql/parser/WhenClause done
+
+
+Dynamic libraries:
+0x00007ff6e7450000 - 0x00007ff6e7487000 	C:\Program Files\Java\jdk1.8.0_101\bin\java.exe
+0x00007ffd8d920000 - 0x00007ffd8dae1000 	C:\Windows\SYSTEM32\ntdll.dll
+0x00007ffd8cbe0000 - 0x00007ffd8cc8d000 	C:\Windows\system32\KERNEL32.DLL
+0x00007ffd89fd0000 - 0x00007ffd8a1b8000 	C:\Windows\system32\KERNELBASE.dll
+0x00007ffd8d6e0000 - 0x00007ffd8d787000 	C:\Windows\system32\ADVAPI32.dll
+0x00007ffd8b010000 - 0x00007ffd8b0ad000 	C:\Windows\system32\msvcrt.dll
+0x00007ffd8afb0000 - 0x00007ffd8b00b000 	C:\Windows\system32\sechost.dll
+0x00007ffd8b110000 - 0x00007ffd8b22c000 	C:\Windows\system32\RPCRT4.dll
+0x00007ffd8d310000 - 0x00007ffd8d466000 	C:\Windows\system32\USER32.dll
+0x00007ffd8d790000 - 0x00007ffd8d916000 	C:\Windows\system32\GDI32.dll
+0x00007ffd7ebb0000 - 0x00007ffd7ee24000 	C:\Windows\WinSxS\amd64_microsoft.windows.common-controls_6595b64144ccf1df_6.0.10586.589_none_a2ddb3caa539acce\COMCTL32.dll
+0x00007ffd8b2a0000 - 0x00007ffd8b51d000 	C:\Windows\system32\combase.dll
+0x00007ffd8a440000 - 0x00007ffd8a4aa000 	C:\Windows\system32\bcryptPrimitives.dll
+0x00007ffd8d4e0000 - 0x00007ffd8d51b000 	C:\Windows\system32\IMM32.DLL
+0x000000006db00000 - 0x000000006dbd2000 	C:\Program Files\Java\jdk1.8.0_101\jre\bin\msvcr100.dll
+0x000000006e0a0000 - 0x000000006e93a000 	C:\Program Files\Java\jdk1.8.0_101\jre\bin\server\jvm.dll
+0x00007ffd8d300000 - 0x00007ffd8d308000 	C:\Windows\system32\PSAPI.DLL
+0x00007ffd87d80000 - 0x00007ffd87da3000 	C:\Windows\SYSTEM32\WINMM.dll
+0x00007ffd808b0000 - 0x00007ffd808b9000 	C:\Windows\SYSTEM32\WSOCK32.dll
+0x00007ffd87f80000 - 0x00007ffd87f8a000 	C:\Windows\SYSTEM32\VERSION.dll
+0x00007ffd8d470000 - 0x00007ffd8d4db000 	C:\Windows\system32\WS2_32.dll
+0x00007ffd87d50000 - 0x00007ffd87d7c000 	C:\Windows\SYSTEM32\winmmbase.dll
+0x00007ffd8a1c0000 - 0x00007ffd8a203000 	C:\Windows\system32\cfgmgr32.dll
+0x000000006f180000 - 0x000000006f18f000 	C:\Program Files\Java\jdk1.8.0_101\jre\bin\verify.dll
+0x000000006e070000 - 0x000000006e099000 	C:\Program Files\Java\jdk1.8.0_101\jre\bin\java.dll
+0x000000006f160000 - 0x000000006f176000 	C:\Program Files\Java\jdk1.8.0_101\jre\bin\zip.dll
+0x00007ffd8b520000 - 0x00007ffd8ca7c000 	C:\Windows\system32\SHELL32.dll
+0x00007ffd8a620000 - 0x00007ffd8ac65000 	C:\Windows\system32\windows.storage.dll
+0x00007ffd8b240000 - 0x00007ffd8b292000 	C:\Windows\system32\shlwapi.dll
+0x00007ffd89f70000 - 0x00007ffd89f7f000 	C:\Windows\system32\kernel.appcore.dll
+0x00007ffd8a4d0000 - 0x00007ffd8a585000 	C:\Windows\system32\shcore.dll
+0x00007ffd89f80000 - 0x00007ffd89fcb000 	C:\Windows\system32\powrprof.dll
+0x00007ffd89f40000 - 0x00007ffd89f54000 	C:\Windows\system32\profapi.dll
+0x000000006d750000 - 0x000000006d774000 	C:\Program Files\Java\jdk1.8.0_101\jre\bin\sunec.dll
+0x000000006dae0000 - 0x000000006dafa000 	C:\Program Files\Java\jdk1.8.0_101\jre\bin\net.dll
+0x00007ffd897b0000 - 0x00007ffd8980c000 	C:\Windows\system32\mswsock.dll
+0x00007ffd81bb0000 - 0x00007ffd81bc6000 	C:\Windows\system32\napinsp.dll
+0x00007ffd81bf0000 - 0x00007ffd81c0a000 	C:\Windows\system32\pnrpnsp.dll
+0x00007ffd87050000 - 0x00007ffd87068000 	C:\Windows\system32\NLAapi.dll
+0x00007ffd88030000 - 0x00007ffd880da000 	C:\Windows\SYSTEM32\DNSAPI.dll
+0x00007ffd8d6d0000 - 0x00007ffd8d6d8000 	C:\Windows\system32\NSI.dll
+0x00007ffd81cb0000 - 0x00007ffd81cbd000 	C:\Windows\System32\winrnr.dll
+0x000000006ff00000 - 0x000000006ff26000 	C:\Program Files\Bonjour\mdnsNSP.dll
+0x00007ffd876b0000 - 0x00007ffd876e8000 	C:\Windows\SYSTEM32\Iphlpapi.DLL
+0x00007ffd85cf0000 - 0x00007ffd85cfa000 	C:\Windows\System32\rasadhlp.dll
+0x00007ffd867d0000 - 0x00007ffd86837000 	C:\Windows\System32\fwpuclnt.dll
+0x00007ffd89db0000 - 0x00007ffd89dd9000 	C:\Windows\SYSTEM32\bcrypt.dll
+0x00007ffd87030000 - 0x00007ffd87046000 	C:\Windows\SYSTEM32\dhcpcsvc6.DLL
+0x00007ffd87010000 - 0x00007ffd8702a000 	C:\Windows\SYSTEM32\dhcpcsvc.DLL
+0x00007ffd59ef0000 - 0x00007ffd5a07c000 	C:\Windows\SYSTEM32\dbghelp.dll
+
+VM Arguments:
+jvm_args: -Dfile.encoding=UTF-8 -Xmx4096m -Xms512m 
+java_command: org.pasa.sispasaint.run.Inicio
+java_class_path (initial): C:\Temp\Driver\net\sourceforge\jtds\main\jtds-1.3.1.jar;C:\Program Files\NetBeans 8.1\java\modules\ext\eclipselink\eclipselink.jar;C:\Program Files\NetBeans 8.1\java\modules\ext\eclipselink\javax.persistence_2.1.0.v201304241213.jar;C:\Program Files\NetBeans 8.1\java\modules\ext\eclipselink\org.eclipse.persistence.jpa.jpql_2.5.2.v20140319-9ad6abd.jar;C:\Users\90J00318\Documents\NetBeansProjects\SisPasaInt\build\classes
+Launcher Type: SUN_STANDARD
+
+Environment Variables:
+PATH=C:\ProgramData\Oracle\Java\javapath;C:\Windows\system32;C:\Windows;C:\Windows\System32\Wbem;C:\Windows\System32\WindowsPowerShell\v1.0\;C:\Program Files (x86)\ATI Technologies\ATI.ACE\Core-Static;C:\Program Files (x86)\Skype\Phone\;C:\Program Files\Microsoft SQL Server\Client SDK\ODBC\110\Tools\Binn\;C:\Program Files (x86)\Microsoft SQL Server\120\Tools\Binn\;C:\Program Files\Microsoft SQL Server\120\Tools\Binn\;C:\Program Files\Microsoft SQL Server\120\DTS\Binn\;C:\Program Files (x86)\Microsoft SQL Server\120\Tools\Binn\ManagementStudio\;C:\Program Files (x86)\Microsoft SQL Server\120\DTS\Binn\;C:\Program Files\TortoiseSVN\bin
+USERNAME=90J00318
+OS=Windows_NT
+PROCESSOR_IDENTIFIER=Intel64 Family 6 Model 94 Stepping 3, GenuineIntel
+
+
+
+---------------  S Y S T E M  ---------------
+
+OS: Windows 10.0 , 64 bit Build 10586 (10.0.10586.589)
+
+CPU:total 8 (4 cores per cpu, 2 threads per core) family 6 model 94 stepping 3, cmov, cx8, fxsr, mmx, sse, sse2, sse3, ssse3, sse4.1, sse4.2, popcnt, avx, avx2, aes, clmul, erms, rtm, 3dnowpref, lzcnt, ht, tsc, tscinvbit, bmi1, bmi2, adx
+
+Memory: 4k page, physical 16728484k(11849436k free), swap 19218852k(13450888k free)
+
+vm_info: Java HotSpot(TM) 64-Bit Server VM (25.101-b13) for windows-amd64 JRE (1.8.0_101-b13), built on Jun 22 2016 01:21:29 by "java_re" with MS VC++ 10.0 (VS2010)
+
+time: Fri Oct 14 10:52:04 2016
+elapsed time: 1 seconds (0d 0h 0m 1s)
+

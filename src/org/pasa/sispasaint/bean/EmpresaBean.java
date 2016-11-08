@@ -2,7 +2,6 @@ package org.pasa.sispasaint.bean;
 
 import java.util.List;
 import org.pasa.sispasa.core.model.Empresa;
-
 /**
  *
  * @author 90J00318

@@ -3,9 +3,9 @@ package org.pasa.sispasaint.dao.impl;
 import java.util.List;
 import javax.persistence.NoResultException;
 import javax.persistence.Query;
+import org.pasa.sispasa.core.model.Empresa;
 import org.pasa.sispasaint.dao.DaoGenerico;
 import org.pasa.sispasaint.dao.EmpresaDAO;
-import org.pasa.sispasaint.model.Empresa;
 
 /**
  *

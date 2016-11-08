@@ -1,4 +1,3 @@
-
 package org.pasa.sispasaint.bean.impl;
 
 import java.util.List;
