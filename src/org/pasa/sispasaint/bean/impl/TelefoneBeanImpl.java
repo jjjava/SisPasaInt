@@ -1,16 +1,9 @@
 package org.pasa.sispasaint.bean.impl;
 
 import java.util.List;
-
 import org.pasa.sispasa.core.model.Telefone;
 import org.pasa.sispasaint.bean.TelefoneBean;
 import org.pasa.sispasaint.dao.impl.TelefoneDAOImpl;
-
-
-import org.pasa.sispasaint.bean.TelefoneBean;
-import org.pasa.sispasaint.dao.impl.TelefoneDAOImpl;
-import org.pasa.sispasaint.model.Telefone;
-
 
 /**
  *

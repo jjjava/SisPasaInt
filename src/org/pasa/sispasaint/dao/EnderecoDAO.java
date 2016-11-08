@@ -1,8 +1,7 @@
 package org.pasa.sispasaint.dao;
 
 import java.util.List;
-import org.pasa.sispasaint.model.Endereco;
-
+import org.pasa.sispasa.core.model.Endereco;
 /**
  *
  * @author Hudson Schumaker

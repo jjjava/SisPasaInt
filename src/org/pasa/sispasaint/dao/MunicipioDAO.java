@@ -1,13 +1,11 @@
 package org.pasa.sispasaint.dao;
 
 import java.util.List;
-import org.pasa.sispasaint.model.Municipio;
-
+import org.pasa.sispasa.core.model.Municipio;
 /**
  *
  * @author Hudson Schumaker
  */
-
 public interface MunicipioDAO {
 
     void cadastrar(Municipio m);

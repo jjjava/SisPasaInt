@@ -1,8 +1,8 @@
 package org.pasa.sispasaint.dao.impl;
 
+import org.pasa.sispasa.core.model.Endereco;
 import org.pasa.sispasaint.dao.DaoGenerico;
 import org.pasa.sispasaint.dao.EnderecoDAO;
-import org.pasa.sispasaint.model.Endereco;
 
 /**
  *

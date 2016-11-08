@@ -5,7 +5,6 @@ import org.pasa.sispasa.core.model.Endereco;
 import org.pasa.sispasaint.bean.EnderecoBean;
 import org.pasa.sispasaint.dao.impl.EnderecoDAOImpl;
 
-
 /**
  *
  * @author Hudson Schumaker

@@ -1,9 +1,7 @@
-
 package org.pasa.sispasaint.dao;
 
 import java.util.List;
-import org.pasa.sispasaint.model.Beneficiario;
-
+import org.pasa.sispasa.core.model.Beneficiario;
 /**
  *
  * @author 90J00318

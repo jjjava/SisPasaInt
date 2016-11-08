@@ -3,9 +3,9 @@ package org.pasa.sispasaint.dao.impl;
 import java.util.List;
 import javax.persistence.NoResultException;
 import javax.persistence.Query;
+import org.pasa.sispasa.core.model.Municipio;
 import org.pasa.sispasaint.dao.DaoGenerico;
 import org.pasa.sispasaint.dao.MunicipioDAO;
-import org.pasa.sispasaint.model.Municipio;
 
 /**
  *

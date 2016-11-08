@@ -2,8 +2,7 @@
 package org.pasa.sispasaint.dao;
 
 import java.util.List;
-import org.pasa.sispasaint.model.Plano;
-
+import org.pasa.sispasa.core.model.Plano;
 /**
  *
  * @author 90J00318

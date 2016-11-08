@@ -3,10 +3,9 @@ package org.pasa.sispasaint.dao.impl;
 import java.util.List;
 import javax.persistence.NoResultException;
 import javax.persistence.Query;
+import org.pasa.sispasa.core.model.Estado;
 import org.pasa.sispasaint.dao.DaoGenerico;
 import org.pasa.sispasaint.dao.EstadoDAO;
-import org.pasa.sispasaint.model.Estado;
-
 /**
  *
  * @author Hudson Schumaker

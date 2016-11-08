@@ -3,10 +3,10 @@ package org.pasa.sispasaint.dao.impl;
 import java.util.List;
 import javax.persistence.NoResultException;
 import javax.persistence.Query;
+import org.pasa.sispasa.core.model.GrauParentesco;
 import org.pasa.sispasaint.dao.DaoGenerico;
 import org.pasa.sispasaint.dao.GrauParentescoDAO;
-import org.pasa.sispasaint.model.Funcionario;
-import org.pasa.sispasaint.model.GrauParentesco;
+
 
 /**
  *

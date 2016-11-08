@@ -3,10 +3,9 @@ package org.pasa.sispasaint.dao.impl;
 import java.util.List;
 import javax.persistence.NoResultException;
 import javax.persistence.Query;
+import org.pasa.sispasa.core.model.Funcionario;
 import org.pasa.sispasaint.dao.DaoGenerico;
 import org.pasa.sispasaint.dao.FuncionarioDAO;
-import org.pasa.sispasaint.model.Funcionario;
-
 /**
  *
  * @author Hudson Schumaker

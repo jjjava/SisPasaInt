@@ -1,7 +1,8 @@
 package org.pasa.sispasaint.dao;
 
 import java.util.List;
-import org.pasa.sispasaint.model.Estado;
+import org.pasa.sispasa.core.model.Estado;
+
 
 
 /**

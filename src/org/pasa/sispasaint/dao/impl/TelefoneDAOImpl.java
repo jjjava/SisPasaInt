@@ -1,9 +1,8 @@
 package org.pasa.sispasaint.dao.impl;
 
+import org.pasa.sispasa.core.model.Telefone;
 import org.pasa.sispasaint.dao.DaoGenerico;
 import org.pasa.sispasaint.dao.TelefoneDAO;
-import org.pasa.sispasaint.model.Telefone;
-
 /**
  *
  * @author Hudson Schumaker

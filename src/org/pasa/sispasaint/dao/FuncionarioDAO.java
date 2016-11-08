@@ -1,7 +1,7 @@
 package org.pasa.sispasaint.dao;
 
 import java.util.List;
-import org.pasa.sispasaint.model.Funcionario;
+import org.pasa.sispasa.core.model.Funcionario;
 
 /**
  *

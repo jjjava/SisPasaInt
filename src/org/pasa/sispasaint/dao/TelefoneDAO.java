@@ -1,9 +1,7 @@
 package org.pasa.sispasaint.dao;
 
 import java.util.List;
-import org.pasa.sispasaint.model.Telefone;
-
-
+import org.pasa.sispasa.core.model.Telefone;
 /**
  *
  * @author Hudson Schumaker
