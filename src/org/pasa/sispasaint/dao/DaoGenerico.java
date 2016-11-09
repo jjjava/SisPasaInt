@@ -4,6 +4,7 @@ import java.util.List;
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.Persistence;
+import javax.persistence.PersistenceContext;
 import javax.persistence.criteria.CriteriaBuilder;
 import javax.persistence.criteria.CriteriaDelete;
 import javax.persistence.criteria.CriteriaQuery;
@@ -16,6 +17,7 @@ import javax.persistence.criteria.CriteriaQuery;
 
 public abstract class DaoGenerico<T> {
 
+    @PersistenceContext
     private final EntityManager em;
     private final EntityManagerFactory emf;
     private final Class<T> entityClass;

@@ -89,7 +89,7 @@ public class Pessoa implements Serializable {
     @JoinTable(name = "PESSOA_ENDERECO",
             joinColumns = @JoinColumn(name = "ID_PESSOA"),
             inverseJoinColumns = @JoinColumn(name = "ID_ENDERECO"))
-    private List<Endereco> endereco;
+    private List<Endereco> enderecos;
 
     @ManyToMany
     @JoinTable(name = "PESSOA_TELEFONE",
@@ -129,10 +129,20 @@ public class Pessoa implements Serializable {
 
     public Pessoa() {
         telefones = new ArrayList<>();
+        enderecos = new ArrayList<>();
+        documentos = new ArrayList<>();
     }
 
     public void addTelefone(Telefone t){
         telefones.add(t);
+    }
+    
+    public void addEndereco(Endereco e){
+        enderecos.add(e);
+    }
+    
+    public void addDocumento(Documento d){
+        documentos.add(d);
     }
     
     public Long getId() {
@@ -239,35 +249,12 @@ public class Pessoa implements Serializable {
         this.indConclusaoEscolaridade = indConclusaoEscolaridade;
     }
 
-//    public Long getIdUsuario() {
-//        return idUsuario;
-//    }
-//
-//    public void setIdUsuario(Long idUsuario) {
-//        this.idUsuario = idUsuario;
-//    }
-//
-//    public Integer getIndAtivo() {
-//        return indAtivo;
-//    }
-//
-//    public void setIndAtivo(Integer indAtivo) {
-//        this.indAtivo = indAtivo;
-//    }
-//
-//    public Date getDataAtulizacao() {
-//        return dataAtulizacao;
-//    }
-//
-//    public void setDataAtulizacao(Date dataAtulizacao) {
-//        this.dataAtulizacao = dataAtulizacao;
-//    }
-    public List<Endereco> getEndereco() {
-        return endereco;
+    public List<Endereco> getEnderecos() {
+        return enderecos;
     }
 
-    public void setEndereco(List<Endereco> endereco) {
-        this.endereco = endereco;
+    public void setEndereco(List<Endereco> enderecos) {
+        this.enderecos = enderecos;
     }
 
     public List<Telefone> getTelefones() {
