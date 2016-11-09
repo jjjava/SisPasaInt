@@ -5,7 +5,7 @@ package org.pasa.sispasaint.model.enun;
  * @author Hudson Schumaker
  * @version 1.0.0
  */
-public enum TipoBeneficiario {
+public enum EnunTipoBeneficiario {
 
     Titular(0, "Titular"),
     Dependente(1, "Dependente"),
@@ -14,7 +14,7 @@ public enum TipoBeneficiario {
     private final int indice;
     private final String descricao;
 
-    private TipoBeneficiario(int indice, String descricao) {
+    private EnunTipoBeneficiario(int indice, String descricao) {
         this.indice = indice;
         this.descricao = descricao;
     }

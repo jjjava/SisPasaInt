@@ -4,7 +4,7 @@ package org.pasa.sispasaint.model.enun;
  *
  * @author 90J00318
  */
-public enum TipoDocumento {
+public enum EnunTipoDocumento {
     RG(0, "Identidade"),
     CPF(1, "Ensino Médio"),
     PIS(2, "Ensino Superior"),
@@ -15,7 +15,7 @@ public enum TipoDocumento {
     private final int indice;
     private final String descricao;
     
-    private TipoDocumento(int indice, String descricao) {
+    private EnunTipoDocumento(int indice, String descricao) {
         this.indice = indice;
         this.descricao = descricao;
     }

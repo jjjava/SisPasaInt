@@ -6,7 +6,7 @@ package org.pasa.sispasaint.model.enun;
 * @version 1.0.0
 */
 
-public enum TipoReciprocidade {
+public enum EnunTipoReciprocidade {
 
 	PASA(0,"PASA"),
 	RedeConveniada(1, "Rede Conveniada");
@@ -14,7 +14,7 @@ public enum TipoReciprocidade {
 	private int indice;
 	private String descricao;
 	
-	TipoReciprocidade(int indice, String descricao) {
+	EnunTipoReciprocidade(int indice, String descricao) {
 		this.indice = indice;
 		this.descricao = descricao;
 	}

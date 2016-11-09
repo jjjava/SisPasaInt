@@ -6,7 +6,7 @@ package org.pasa.sispasa.core.enumeration;
 * @version 1.0.0
 */
 
-public enum TipoVinculoEmpregaticio {
+public enum EnunTipoVinculoEmpregaticio {
 	
 	Estagiario(0,"Estagiário"),
 	MenorAprendiz(1,"Menor aprendiz"),
@@ -19,7 +19,7 @@ public enum TipoVinculoEmpregaticio {
 	private int indice;
 	private String descricao;
 	
-	private TipoVinculoEmpregaticio(int indice, String descricao) {
+	private EnunTipoVinculoEmpregaticio(int indice, String descricao) {
 		this.indice = indice;
 		this.descricao = descricao;
 	}

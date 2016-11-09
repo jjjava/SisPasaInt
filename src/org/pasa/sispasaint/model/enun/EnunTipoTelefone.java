@@ -5,16 +5,17 @@ package org.pasa.sispasaint.model.enun;
  * @author Hudson Schumaker
  * @version 1.0.0
  */
-public enum TipoPlano {
+public enum EnunTipoTelefone {
 
-    Medico(0, "Médico"),
-    Odontologico(1, "Odontológico"),
-    Ambos(2, "Médico e Odontológico");
+    Fixo(0, "Fixo"),
+    Celular(1, "Celular"),
+    Comercial(2, "Comercial"),
+    Fax(3, "Fax");
 
     private final int indice;
     private final String descricao;
 
-    private TipoPlano(int indice, String descricao) {
+    private EnunTipoTelefone(int indice, String descricao) {
         this.indice = indice;
         this.descricao = descricao;
     }

@@ -5,17 +5,18 @@ package org.pasa.sispasaint.model.enun;
  * @author Hudson Schumaker
  * @version 1.0.0
  */
-public enum TipoTelefone {
+public enum EnunNivelEscolaridade {
 
-    Fixo(0, "Fixo"),
-    Celular(1, "Celular"),
-    Comercial(2, "Comercial"),
-    Fax(3, "Fax");
+    Sem(0,"Sem Instrução"),
+    Fundamental(1, "Ensio Fundamental"),
+    Medio(2, "Ensino Médio"),
+    Superior(3, "Ensino Superior");
 
+    
     private final int indice;
     private final String descricao;
 
-    private TipoTelefone(int indice, String descricao) {
+    private EnunNivelEscolaridade(int indice, String descricao) {
         this.indice = indice;
         this.descricao = descricao;
     }

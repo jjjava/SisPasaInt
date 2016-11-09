@@ -17,159 +17,159 @@ import javax.persistence.TemporalType;
 @Table(name = "PLANO")
 public class Plano implements Serializable {
 
-	private static final long serialVersionUID = 1L;
+    private static final long serialVersionUID = 1L;
 
-	@Id
-	@Column(name = "ID_PLANO")
-	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	private Long id;
+    @Id
+    @Column(name = "ID_PLANO")
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long id;
 
-	@Column(name = "NOME", length = 30, nullable = false)
-	private String nome;
+    @Column(name = "NOME", length = 30, nullable = false)
+    private String nome;
 
-	@Column(name = "DESCRICAO", length = 60, nullable = false)
-	private String descricao;
+    @Column(name = "DESCRICAO", length = 60, nullable = false)
+    private String descricao;
 
-	@Column(name = "DT_INICIO_VIGENCIA", nullable = false)
-	@Temporal(TemporalType.DATE)
-	private Date dataInicioVigencia;
+    @Column(name = "DT_INICIO_VIGENCIA", nullable = false)
+    @Temporal(TemporalType.DATE)
+    private Date dataInicioVigencia;
 
-	@Column(name = "DT_FIM_VIGENCIA")
-	@Temporal(TemporalType.DATE)
-	private Date dataFimVigencia;
+    @Column(name = "DT_FIM_VIGENCIA")
+    @Temporal(TemporalType.DATE)
+    private Date dataFimVigencia;
 
-	@Column(name = "QTD_DIAS_CARENCIA", nullable = false)
-	private Integer qtdDiasCarencia;
+    @Column(name = "QTD_DIAS_CARENCIA", nullable = false)
+    private Integer qtdDiasCarencia;
 
-	@Column(name = "REGISTRO_ANS", length = 30)
-	private String registroANS;
+    @Column(name = "REGISTRO_ANS", length = 30)
+    private String registroANS;
 
-	@Column(name = "ID_USUARIO", nullable = false)
-	private Long idUsuario;
+    @Column(name = "ID_USUARIO", nullable = false)
+    private Long idUsuario;
 
-	@Column(name = "IND_ATIVO", nullable = false)
-	private Integer indAtivo;
+    @Column(name = "IND_ATIVO", nullable = false)
+    private Integer indAtivo;
 
-	@Column(name = "DT_ULT_ATULZ", nullable = false)
-	@Temporal(TemporalType.DATE)
-	private Date dataUltAtulizacao;
+    @Column(name = "DT_ULT_ATULZ", nullable = false)
+    @Temporal(TemporalType.DATE)
+    private Date dataUltAtulizacao;
 
-	@ManyToOne
-	@JoinColumn(name = "ID_OPERADORA")
-	private Operadora operadora;
-	
-	@ManyToOne
-	@JoinColumn(name = "ID_TP_PLANO")
-	private TipoPlano tipoPlano;
+    @ManyToOne
+    @JoinColumn(name = "ID_OPERADORA")
+    private Operadora operadora;
 
-	@ManyToOne
-	@JoinColumn(name = "ID_PLANO_PAI", referencedColumnName = "ID_PLANO")
-	private Plano planoPai;
+    @ManyToOne
+    @JoinColumn(name = "ID_TP_PLANO")
+    private TipoPlano tipoPlano;
 
-	public Plano() {
-	}
+    @ManyToOne
+    @JoinColumn(name = "ID_PLANO_PAI", referencedColumnName = "ID_PLANO")
+    private Plano planoPai;
 
-	public Long getId() {
-		return id;
-	}
+    public Plano() {
+    }
 
-	public void setId(Long id) {
-		this.id = id;
-	}
+    public Long getId() {
+        return id;
+    }
 
-	public String getNome() {
-		return nome;
-	}
+    public void setId(Long id) {
+        this.id = id;
+    }
 
-	public void setNome(String nome) {
-		this.nome = nome;
-	}
+    public String getNome() {
+        return nome;
+    }
 
-	public String getDescricao() {
-		return descricao;
-	}
+    public void setNome(String nome) {
+        this.nome = nome;
+    }
 
-	public void setDescricao(String descricao) {
-		this.descricao = descricao;
-	}
+    public String getDescricao() {
+        return descricao;
+    }
 
-	public Date getDataInicioVigencia() {
-		return dataInicioVigencia;
-	}
+    public void setDescricao(String descricao) {
+        this.descricao = descricao;
+    }
 
-	public void setDataInicioVigencia(Date dataInicioVigencia) {
-		this.dataInicioVigencia = dataInicioVigencia;
-	}
+    public Date getDataInicioVigencia() {
+        return dataInicioVigencia;
+    }
 
-	public Date getDataFimVigencia() {
-		return dataFimVigencia;
-	}
+    public void setDataInicioVigencia(Date dataInicioVigencia) {
+        this.dataInicioVigencia = dataInicioVigencia;
+    }
 
-	public void setDataFimVigencia(Date dataFimVigencia) {
-		this.dataFimVigencia = dataFimVigencia;
-	}
+    public Date getDataFimVigencia() {
+        return dataFimVigencia;
+    }
 
-	public Integer getQtdDiasCarencia() {
-		return qtdDiasCarencia;
-	}
+    public void setDataFimVigencia(Date dataFimVigencia) {
+        this.dataFimVigencia = dataFimVigencia;
+    }
 
-	public void setQtdDiasCarencia(Integer qtdDiasCarencia) {
-		this.qtdDiasCarencia = qtdDiasCarencia;
-	}
+    public Integer getQtdDiasCarencia() {
+        return qtdDiasCarencia;
+    }
 
-	public String getRegistroANS() {
-		return registroANS;
-	}
+    public void setQtdDiasCarencia(Integer qtdDiasCarencia) {
+        this.qtdDiasCarencia = qtdDiasCarencia;
+    }
 
-	public void setRegistroANS(String registroANS) {
-		this.registroANS = registroANS;
-	}
+    public String getRegistroANS() {
+        return registroANS;
+    }
 
-	public Long getIdUsuario() {
-		return idUsuario;
-	}
+    public void setRegistroANS(String registroANS) {
+        this.registroANS = registroANS;
+    }
 
-	public void setIdUsuario(Long idUsuario) {
-		this.idUsuario = idUsuario;
-	}
+    public Long getIdUsuario() {
+        return idUsuario;
+    }
 
-	public Integer getIndAtivo() {
-		return indAtivo;
-	}
+    public void setIdUsuario(Long idUsuario) {
+        this.idUsuario = idUsuario;
+    }
 
-	public void setIndAtivo(Integer indAtivo) {
-		this.indAtivo = indAtivo;
-	}
+    public Integer getIndAtivo() {
+        return indAtivo;
+    }
 
-	public Date getDataUltAtulizacao() {
-		return dataUltAtulizacao;
-	}
+    public void setIndAtivo(Integer indAtivo) {
+        this.indAtivo = indAtivo;
+    }
 
-	public void setDataUltAtulizacao(Date dataUltAtulizacao) {
-		this.dataUltAtulizacao = dataUltAtulizacao;
-	}
+    public Date getDataUltAtulizacao() {
+        return dataUltAtulizacao;
+    }
 
-	public Operadora getOperadora() {
-		return operadora;
-	}
+    public void setDataUltAtulizacao(Date dataUltAtulizacao) {
+        this.dataUltAtulizacao = dataUltAtulizacao;
+    }
 
-	public void setOperadora(Operadora operadora) {
-		this.operadora = operadora;
-	}
+    public Operadora getOperadora() {
+        return operadora;
+    }
 
-	public TipoPlano getTipoPlano() {
-		return tipoPlano;
-	}
+    public void setOperadora(Operadora operadora) {
+        this.operadora = operadora;
+    }
 
-	public void setTipoPlano(TipoPlano tipoPlano) {
-		this.tipoPlano = tipoPlano;
-	}
+    public TipoPlano getTipoPlano() {
+        return tipoPlano;
+    }
 
-	public Plano getPlanoPai() {
-		return planoPai;
-	}
+    public void setTipoPlano(TipoPlano tipoPlano) {
+        this.tipoPlano = tipoPlano;
+    }
 
-	public void setPlanoPai(Plano planoPai) {
-		this.planoPai = planoPai;
-	}
+    public Plano getPlanoPai() {
+        return planoPai;
+    }
+
+    public void setPlanoPai(Plano planoPai) {
+        this.planoPai = planoPai;
+    }
 }

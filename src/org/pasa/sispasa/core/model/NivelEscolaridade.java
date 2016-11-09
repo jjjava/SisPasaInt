@@ -11,45 +11,45 @@ import javax.persistence.Table;
 
 @Entity
 @Table(name = "NIVEL_ESCOLARIDADE")
-public class NivelEscolaridade  implements Serializable {
+public class NivelEscolaridade implements Serializable {
 
-	private static final long serialVersionUID = 1L;
+    private static final long serialVersionUID = 1L;
 
-	@Id
-	@Column(name = "ID_NIVEL_ESCOL")
-	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	private Long id;
-	
-	@Column(name = "DESCRICAO", length = 30 , nullable = false)
-	private String descricao;
-	
-	@Column(name = "CD_EXTERNO" , length = 10)
-	private String codExterno;
-	
-	public NivelEscolaridade(){
-	}
+    @Id
+    @Column(name = "ID_NIVEL_ESCOL")
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long id;
 
-	public Long getId() {
-		return id;
-	}
+    @Column(name = "DESCRICAO", length = 30, nullable = false)
+    private String descricao;
 
-	public void setId(Long id) {
-		this.id = id;
-	}
+    @Column(name = "CD_EXTERNO", length = 10)
+    private String codExterno;
 
-	public String getDescricao() {
-		return descricao;
-	}
+    public NivelEscolaridade() {
+    }
 
-	public void setDescricao(String descricao) {
-		this.descricao = descricao;
-	}
+    public Long getId() {
+        return id;
+    }
 
-	public String getCodExterno() {
-		return codExterno;
-	}
+    public void setId(Long id) {
+        this.id = id;
+    }
 
-	public void setCodExterno(String codExterno) {
-		this.codExterno = codExterno;
-	}
+    public String getDescricao() {
+        return descricao;
+    }
+
+    public void setDescricao(String descricao) {
+        this.descricao = descricao;
+    }
+
+    public String getCodExterno() {
+        return codExterno;
+    }
+
+    public void setCodExterno(String codExterno) {
+        this.codExterno = codExterno;
+    }
 }

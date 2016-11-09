@@ -13,106 +13,114 @@ import javax.persistence.ManyToOne;
 
 public class PlanoReciprocidade implements Serializable {
 
-	private static final long serialVersionUID = 1L;
+    private static final long serialVersionUID = 1L;
 
-	@Id
-	@Column(name = "ID_PLANO_RCP")
-	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	private Long id;
+    @Id
+    @Column(name = "ID_PLANO_RCP")
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long id;
 
-	@Column(name = "NOME", length = 60, nullable = false)
-	private String nome;
+    @Column(name = "NOME", length = 60, nullable = false)
+    private String nome;
 
-	@Column(name = "DESCRICAO", length = 60, nullable = false)
-	private String descricao;
+    @Column(name = "DESCRICAO", length = 60, nullable = false)
+    private String descricao;
 
-	@Column(name = "CD_PLANO", length = 10, nullable = false)
-	private String codPlano;
+    @Column(name = "CD_PLANO", length = 10, nullable = false)
+    private String codPlano;
 
-	@Column(name = "ID_USUARIO", nullable = false)
-	private Long idUsuario;
+    @Column(name = "ID_USUARIO", nullable = false)
+    private Long idUsuario;
 
-	@Column(name = "IND_ATIVO", nullable = false)
-	private Integer indAtivo;
-	
-	@ManyToOne
-	@JoinColumn(name = "ID_OPERADORA_RCP")
-	private OperadoraReciprocidade OperadoraReciprocidade;
-	
-	@ManyToOne
-	@JoinColumn(name = "ID_TP_PLANO")
-	private TipoPlano tipoPlano;
-	
-	@ManyToMany
-	@JoinTable(name = "CONVENIO_PLANO_RECIPROCIDADE",
-	joinColumns = @JoinColumn(name = "ID_PLANO_RCP"), 
-	inverseJoinColumns = @JoinColumn(name = "ID_CONVENIO"))
-	private List<Contato> contatos;
-	
-	public PlanoReciprocidade(){
-	}
+    @Column(name = "IND_ATIVO", nullable = false)
+    private Integer indAtivo;
 
-	public Long getId() {
-		return id;
-	}
+    @ManyToOne
+    @JoinColumn(name = "ID_OPERADORA_RCP")
+    private OperadoraReciprocidade OperadoraReciprocidade;
 
-	public void setId(Long id) {
-		this.id = id;
-	}
+    @ManyToOne
+    @JoinColumn(name = "ID_TP_PLANO")
+    private TipoPlano tipoPlano;
 
-	public String getNome() {
-		return nome;
-	}
+    @ManyToMany
+    @JoinTable(name = "CONVENIO_PLANO_RECIPROCIDADE",
+            joinColumns = @JoinColumn(name = "ID_PLANO_RCP"),
+            inverseJoinColumns = @JoinColumn(name = "ID_CONVENIO"))
+    private List<Contato> contatos;
 
-	public void setNome(String nome) {
-		this.nome = nome;
-	}
+    public PlanoReciprocidade() {
+    }
 
-	public String getDescricao() {
-		return descricao;
-	}
+    public Long getId() {
+        return id;
+    }
 
-	public void setDescricao(String descricao) {
-		this.descricao = descricao;
-	}
+    public void setId(Long id) {
+        this.id = id;
+    }
 
-	public String getCodPlano() {
-		return codPlano;
-	}
+    public String getNome() {
+        return nome;
+    }
 
-	public void setCodPlano(String codPlano) {
-		this.codPlano = codPlano;
-	}
+    public void setNome(String nome) {
+        this.nome = nome;
+    }
 
-	public Long getIdUsuario() {
-		return idUsuario;
-	}
+    public String getDescricao() {
+        return descricao;
+    }
 
-	public void setIdUsuario(Long idUsuario) {
-		this.idUsuario = idUsuario;
-	}
+    public void setDescricao(String descricao) {
+        this.descricao = descricao;
+    }
 
-	public Integer getIndAtivo() {
-		return indAtivo;
-	}
+    public String getCodPlano() {
+        return codPlano;
+    }
 
-	public void setIndAtivo(Integer indAtivo) {
-		this.indAtivo = indAtivo;
-	}
+    public void setCodPlano(String codPlano) {
+        this.codPlano = codPlano;
+    }
 
-	public OperadoraReciprocidade getOperadoraReciprocidade() {
-		return OperadoraReciprocidade;
-	}
+    public Long getIdUsuario() {
+        return idUsuario;
+    }
 
-	public void setOperadoraReciprocidade(OperadoraReciprocidade operadoraReciprocidade) {
-		OperadoraReciprocidade = operadoraReciprocidade;
-	}
+    public void setIdUsuario(Long idUsuario) {
+        this.idUsuario = idUsuario;
+    }
 
-	public TipoPlano getTipoPlano() {
-		return tipoPlano;
-	}
+    public Integer getIndAtivo() {
+        return indAtivo;
+    }
 
-	public void setTipoPlano(TipoPlano tipoPlano) {
-		this.tipoPlano = tipoPlano;
-	}
+    public void setIndAtivo(Integer indAtivo) {
+        this.indAtivo = indAtivo;
+    }
+
+    public OperadoraReciprocidade getOperadoraReciprocidade() {
+        return OperadoraReciprocidade;
+    }
+
+    public void setOperadoraReciprocidade(OperadoraReciprocidade operadoraReciprocidade) {
+        OperadoraReciprocidade = operadoraReciprocidade;
+    }
+
+    public TipoPlano getTipoPlano() {
+        return tipoPlano;
+    }
+
+    public void setTipoPlano(TipoPlano tipoPlano) {
+        this.tipoPlano = tipoPlano;
+    }
+
+    public List<Contato> getContatos() {
+        return contatos;
+    }
+
+    public void setContatos(List<Contato> contatos) {
+        this.contatos = contatos;
+    }
 }

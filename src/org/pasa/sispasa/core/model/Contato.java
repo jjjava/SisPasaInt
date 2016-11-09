@@ -1,6 +1,7 @@
 package org.pasa.sispasa.core.model;
 
 import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 import javax.persistence.Column;
@@ -20,113 +21,133 @@ import javax.persistence.TemporalType;
  * @author Hudson Schumaker
  * @version 1.0.0
  */
-
 @Entity
 @Table(name = "CONTATO")
 public class Contato implements Serializable {
 
-	private static final long serialVersionUID = 1L;
+    private static final long serialVersionUID = 1L;
 
-	@Id
-	@Column(name = "ID_CONTATO")
-	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	private Long id;
+    @Id
+    @Column(name = "ID_CONTATO")
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long id;
 
-	@Column(name = "NOME", length = 60, nullable = false)
-	private String nome;
+    @Column(name = "NOME", length = 60, nullable = false)
+    private String nome;
 
-	@Column(name = "EMAIL", length = 60)
-	private String email;
+    @Column(name = "EMAIL", length = 60)
+    private String email;
 
-	@Column(name = "SETOR", length = 30)
-	private String setor;
-	
-	@Column(name = "ID_USUARIO", nullable = false)
-	private Long idUsuario;
-	
-	@Column(name = "IND_ATIVO", nullable = false)
-	private Integer indAtivo;
-	
-	@Column(name = "DT_ULT_ATULZ", nullable = false)
-	@Temporal(TemporalType.DATE)
-	private Date dataUltAtulizacao;
-	
-	@ManyToMany(mappedBy="contato")
-	private List<Empresa> empresa;
-	
-	@ManyToMany(mappedBy="contatos")
-	private List<OperadoraReciprocidade> operadoraReciprocidades;
-	
-	@ManyToMany
-	@JoinTable(name = "CONTATO_TELEFONE",
-	joinColumns = @JoinColumn(name = "ID_CONTATO"), 
-	inverseJoinColumns = @JoinColumn(name = "ID_TELEFONE"))
-	private List<Telefone> telefones;
+    @Column(name = "SETOR", length = 30)
+    private String setor;
 
-	public Contato() {
-	}
+    @Column(name = "ID_USUARIO", nullable = false)
+    private Long idUsuario;
 
-	public Long getId() {
-		return id;
-	}
+    @Column(name = "IND_ATIVO", nullable = false)
+    private Integer indAtivo;
 
-	public void setId(Long id) {
-		this.id = id;
-	}
+    @Column(name = "DT_ULT_ATULZ", nullable = false)
+    @Temporal(TemporalType.DATE)
+    private Date dataUltAtulizacao;
 
-	public String getSetor() {
-		return setor;
-	}
+    @ManyToMany(mappedBy = "contato")
+    private List<Empresa> empresa;
 
-	public void setSetor(String setor) {
-		this.setor = setor;
-	}
+    @ManyToMany(mappedBy = "contatos")
+    private List<OperadoraReciprocidade> operadoraReciprocidades;
 
-	public String getNome() {
-		return nome;
-	}
+    @ManyToMany
+    @JoinTable(name = "CONTATO_TELEFONE",
+            joinColumns = @JoinColumn(name = "ID_CONTATO"),
+            inverseJoinColumns = @JoinColumn(name = "ID_TELEFONE"))
+    private List<Telefone> telefones;
 
-	public void setNome(String nome) {
-		this.nome = nome;
-	}
+    public Contato() {
+        telefones = new ArrayList<>();
+    }
+    
+    public void addTelefone(Telefone t){
+        telefones.add(t);
+    }
 
-	public String getEmail() {
-		return email;
-	}
+    public Long getId() {
+        return id;
+    }
 
-	public void setEmail(String email) {
-		this.email = email;
-	}
+    public void setId(Long id) {
+        this.id = id;
+    }
 
-	public Long getIdUsuario() {
-		return idUsuario;
-	}
+    public String getNome() {
+        return nome;
+    }
 
-	public void setIdUsuario(Long idUsuario) {
-		this.idUsuario = idUsuario;
-	}
+    public void setNome(String nome) {
+        this.nome = nome;
+    }
 
-	public Integer getIndAtivo() {
-		return indAtivo;
-	}
+    public String getEmail() {
+        return email;
+    }
 
-	public void setIndAtivo(Integer indAtivo) {
-		this.indAtivo = indAtivo;
-	}
+    public void setEmail(String email) {
+        this.email = email;
+    }
 
-	public Date getDataUltAtulizacao() {
-		return dataUltAtulizacao;
-	}
+    public String getSetor() {
+        return setor;
+    }
 
-	public void setDataUltAtulizacao(Date dataUltAtulizacao) {
-		this.dataUltAtulizacao = dataUltAtulizacao;
-	}
+    public void setSetor(String setor) {
+        this.setor = setor;
+    }
 
-	public List<Empresa> getEmpresa() {
-		return empresa;
-	}
+    public Long getIdUsuario() {
+        return idUsuario;
+    }
 
-	public void setEmpresa(List<Empresa> empresa) {
-		this.empresa = empresa;
-	}
+    public void setIdUsuario(Long idUsuario) {
+        this.idUsuario = idUsuario;
+    }
+
+    public Integer getIndAtivo() {
+        return indAtivo;
+    }
+
+    public void setIndAtivo(Integer indAtivo) {
+        this.indAtivo = indAtivo;
+    }
+
+    public Date getDataUltAtulizacao() {
+        return dataUltAtulizacao;
+    }
+
+    public void setDataUltAtulizacao(Date dataUltAtulizacao) {
+        this.dataUltAtulizacao = dataUltAtulizacao;
+    }
+
+    public List<Empresa> getEmpresa() {
+        return empresa;
+    }
+
+    public void setEmpresa(List<Empresa> empresa) {
+        this.empresa = empresa;
+    }
+
+    public List<OperadoraReciprocidade> getOperadoraReciprocidades() {
+        return operadoraReciprocidades;
+    }
+
+    public void setOperadoraReciprocidades(List<OperadoraReciprocidade> operadoraReciprocidades) {
+        this.operadoraReciprocidades = operadoraReciprocidades;
+    }
+
+    public List<Telefone> getTelefones() {
+        return telefones;
+    }
+
+    public void setTelefones(List<Telefone> telefones) {
+        this.telefones = telefones;
+    }
 }

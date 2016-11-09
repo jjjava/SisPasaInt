@@ -6,7 +6,7 @@ package org.pasa.sispasaint.model.enun;
 * @version 1.0.0
 */
 
-public enum TipoEmpresa {
+public enum EnunTipoEmpresa {
 
 	Coligada(0,"Coligada"),
 	Congenere(1,"Congenre"),
@@ -15,7 +15,7 @@ public enum TipoEmpresa {
 	private final int indice;
 	private final String descricao;
 	
-	private TipoEmpresa(int indice, String descricao) {
+	private EnunTipoEmpresa(int indice, String descricao) {
 		this.indice = indice;
 		this.descricao = descricao;
 	}
