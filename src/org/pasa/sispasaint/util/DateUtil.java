@@ -2,6 +2,7 @@ package org.pasa.sispasaint.util;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.util.Calendar;
 import java.util.Date;
 import java.util.Locale;
 
@@ -12,14 +13,14 @@ import java.util.Locale;
 public class DateUtil {
 
     public static final String PATTERN_DATA = "dd.MM.yyyy";
-    public static final String SEGUNDA_FEIRA = "MON"; 
+    public static final String SEGUNDA_FEIRA = "MON";
     public static final String TERCA_FEIRA = "TUE";
     public static final String QUARTA_FEIRA = "WED";
     public static final String QUINTA_FEIRA = "THI";
-    public static final String SEXTA_FEIRA = "FRI";    
+    public static final String SEXTA_FEIRA = "FRI";
     public static final String SABADO = "SAT";
     public static final String DOMINGO = "SUN";
-    
+
     public static final String JANEIRO = "JAN";
     public static final String FEVEREIRO = "FEV";
     public static final String MARCO = "MAR";
@@ -32,7 +33,7 @@ public class DateUtil {
     public static final String OUTUBRO = "OUT";
     public static final String NOVEMBRO = "NOV";
     public static final String DEZEMBRO = "DEC";
-   
+
     public static Date toDate(final String data) {
         Date retorno;
         try {
@@ -43,5 +44,9 @@ public class DateUtil {
             retorno = null;
         }
         return retorno;
+    }
+
+    public static Date obterDataAtual() {
+        return Calendar.getInstance().getTime();
     }
 }

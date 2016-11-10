@@ -20,7 +20,7 @@ public class TipoVinculoEmpregaticio implements Serializable {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
 
-	@Column(name = "DESCRICAO", length = 60, nullable = false)
+	@Column(name = "DESCRICAO", length = 60)
 	private String descricao;
 
 	@Column(name = "CD_EXTERNO", length = 1)

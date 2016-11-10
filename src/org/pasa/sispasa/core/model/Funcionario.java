@@ -18,264 +18,263 @@ import javax.persistence.TemporalType;
  * @author Hudson Schumaker
  * @version 1.0.0
  */
-
 @Entity
 @Table(name = "FUNCIONARIO")
 @PrimaryKeyJoinColumn(name = "ID_PESSOA")
 public class Funcionario extends Pessoa {
 
-	private static final long serialVersionUID = 1L;
+    private static final long serialVersionUID = 1L;
 
-	@Column(name = "ID_FUNCIONARIO")
-	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	private Long id;
+    @Column(name = "ID_FUNCIONARIO")
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long id;
 
-	@Column(name = "MATR_ORIGEM", length = 6, nullable = false)
-	private String matriculaOrigem;
+    @Column(name = "MATR_ORIGEM", length = 6, nullable = false)
+    private String matriculaOrigem;
 
-	@Column(name = "MATR_PASA", length = 2)
-	private String matriculaPasa;
+    @Column(name = "MATR_PASA", length = 2)
+    private String matriculaPasa;
 
-	@Column(name = "EMP_ATULZR")
-	private String empresaAtualizadora;
+    @Column(name = "EMP_ATULZR")
+    private String empresaAtualizadora;
 
-	@Column(name = "MATR_ATULZR")
-	private String matriculaAtualizadora;
+    @Column(name = "MATR_ATULZR")
+    private String matriculaAtualizadora;
 
-	@Column(name = "DIREITO_ABATER_IR", length = 1)
-	private String direitoAbaterIR;
+    @Column(name = "DIREITO_ABATER_IR", length = 1)
+    private String direitoAbaterIR;
 
-	@Column(name = "DT_ADMISSAO")
-	@Temporal(TemporalType.DATE)
-	private Date dataAdimissao;
+    @Column(name = "DT_ADMISSAO")
+    @Temporal(TemporalType.DATE)
+    private Date dataAdimissao;
 
-	@Column(name = "DT_DESLIGAMENTO")
-	@Temporal(TemporalType.DATE)
-	private Date dataDesligamento;
+    @Column(name = "DT_DESLIGAMENTO")
+    @Temporal(TemporalType.DATE)
+    private Date dataDesligamento;
 
-	@Column(name = "EMAIL_CORPORATIVO", length = 60)
-	private String email;
+    @Column(name = "EMAIL_CORPORATIVO", length = 60)
+    private String email;
 
-	@Column(name = "FINANCEIRA", length = 1)
-	private String financeira;
+    @Column(name = "FINANCEIRA", length = 1)
+    private String financeira;
 
-	@Column(name = "CONTRATO_TRABALHO")
-	private String contratoTrabalho;
+    @Column(name = "CONTRATO_TRABALHO")
+    private String contratoTrabalho;
 
-	@Column(name = "CD_DIREITO_PASA")
-	private String codDireitoPasa;
+    @Column(name = "CD_DIREITO_PASA")
+    private String codDireitoPasa;
 
-	@Column(name = "UNIDADE_CONTROLE", length = 3)
-	private String unidadeControle;
+    @Column(name = "UNIDADE_CONTROLE", length = 3)
+    private String unidadeControle;
 
-	@Column(name = "CENTRO_CUSTO", length = 12)
-	private String centroCusto;
+    @Column(name = "CENTRO_CUSTO", length = 12)
+    private String centroCusto;
 
-	@Column(name = "CD_FILIAL_VLI", length = 4)
-	private String codFilialVLI;
-	
-	@Column(name = "ID_USUARIO", nullable = false)
-	private Long idUsuario;
+    @Column(name = "CD_FILIAL_VLI", length = 4)
+    private String codFilialVLI;
 
-	@Column(name = "IND_ATIVO", nullable = false)
-	private Integer indAtivo;
+    @Column(name = "ID_USUARIO", nullable = false)
+    private Long idUsuario;
 
-	@Column(name = "DT_ULT_ATULZ", nullable = false)
-	@Temporal(TemporalType.DATE)
-	private Date dataUltAtulizacao;
-	
-	@ManyToOne
-	@JoinColumn(name = "ID_EMPRESA")
-	private Empresa empresa;
-	
-	@ManyToOne
-	@JoinColumn(name = "ID_TP_VINC_EMPREG")
-	private TipoVinculoEmpregaticio tipoVinculoEmpregaticio;
-	
-	@ManyToOne
-	@JoinColumn(name = "ID_DADOS_BANC")
-	private DadosBancarios dadosBancarios;
-	
-	@ManyToOne
-	@JoinColumn(name = "ID_MOTIVO_DESLIGAMENTO")
-	private MotivoDesligamento motivoDesligamento;
-	
-	public Funcionario() {
-	}
+    @Column(name = "IND_ATIVO", nullable = false)
+    private Integer indAtivo;
 
-	public Long getId() {
-		return id;
-	}
+    @Column(name = "DT_ULT_ATULZ", nullable = false)
+    @Temporal(TemporalType.DATE)
+    private Date dataUltAtulizacao;
 
-	public void setId(Long id) {
-		this.id = id;
-	}
+    @ManyToOne
+    @JoinColumn(name = "ID_EMPRESA")
+    private Empresa empresa;
 
-	public String getMatriculaOrigem() {
-		return matriculaOrigem;
-	}
+    @ManyToOne
+    @JoinColumn(name = "ID_TP_VINC_EMPREG")
+    private TipoVinculoEmpregaticio tipoVinculoEmpregaticio;
 
-	public void setMatriculaOrigem(String matriculaOrigem) {
-		this.matriculaOrigem = matriculaOrigem;
-	}
+    @ManyToOne
+    @JoinColumn(name = "ID_DADOS_BANC")
+    private DadosBancarios dadosBancarios;
 
-	public String getMatriculaPasa() {
-		return matriculaPasa;
-	}
+    @ManyToOne
+    @JoinColumn(name = "ID_MOTIVO_DESLIGAMENTO")
+    private MotivoDesligamento motivoDesligamento;
 
-	public void setMatriculaPasa(String matriculaPasa) {
-		this.matriculaPasa = matriculaPasa;
-	}
+    public Funcionario() {
+    }
 
-	public String getEmpresaAtualizadora() {
-		return empresaAtualizadora;
-	}
+    public Long getId() {
+        return id;
+    }
 
-	public void setEmpresaAtualizadora(String empresaAtualizadora) {
-		this.empresaAtualizadora = empresaAtualizadora;
-	}
+    public void setId(Long id) {
+        this.id = id;
+    }
 
-	public String getMatriculaAtualizadora() {
-		return matriculaAtualizadora;
-	}
+    public String getMatriculaOrigem() {
+        return matriculaOrigem;
+    }
 
-	public void setMatriculaAtualizadora(String matriculaAtualizadora) {
-		this.matriculaAtualizadora = matriculaAtualizadora;
-	}
+    public void setMatriculaOrigem(String matriculaOrigem) {
+        this.matriculaOrigem = matriculaOrigem;
+    }
 
-	public String getDireitoAbaterIR() {
-		return direitoAbaterIR;
-	}
+    public String getMatriculaPasa() {
+        return matriculaPasa;
+    }
 
-	public void setDireitoAbaterIR(String direitoAbaterIR) {
-		this.direitoAbaterIR = direitoAbaterIR;
-	}
+    public void setMatriculaPasa(String matriculaPasa) {
+        this.matriculaPasa = matriculaPasa;
+    }
 
-	public Date getDataAdimissao() {
-		return dataAdimissao;
-	}
+    public String getEmpresaAtualizadora() {
+        return empresaAtualizadora;
+    }
 
-	public void setDataAdimissao(Date dataAdimissao) {
-		this.dataAdimissao = dataAdimissao;
-	}
+    public void setEmpresaAtualizadora(String empresaAtualizadora) {
+        this.empresaAtualizadora = empresaAtualizadora;
+    }
 
-	public Date getDataDesligamento() {
-		return dataDesligamento;
-	}
+    public String getMatriculaAtualizadora() {
+        return matriculaAtualizadora;
+    }
 
-	public void setDataDesligamento(Date dataDesligamento) {
-		this.dataDesligamento = dataDesligamento;
-	}
+    public void setMatriculaAtualizadora(String matriculaAtualizadora) {
+        this.matriculaAtualizadora = matriculaAtualizadora;
+    }
 
-	public String getEmail() {
-		return email;
-	}
+    public String getDireitoAbaterIR() {
+        return direitoAbaterIR;
+    }
 
-	public void setEmail(String email) {
-		this.email = email;
-	}
+    public void setDireitoAbaterIR(String direitoAbaterIR) {
+        this.direitoAbaterIR = direitoAbaterIR;
+    }
 
-	public String getFinanceira() {
-		return financeira;
-	}
+    public Date getDataAdimissao() {
+        return dataAdimissao;
+    }
 
-	public void setFinanceira(String financeira) {
-		this.financeira = financeira;
-	}
+    public void setDataAdimissao(Date dataAdimissao) {
+        this.dataAdimissao = dataAdimissao;
+    }
 
-	public String getContratoTrabalho() {
-		return contratoTrabalho;
-	}
+    public Date getDataDesligamento() {
+        return dataDesligamento;
+    }
 
-	public void setContratoTrabalho(String contratoTrabalho) {
-		this.contratoTrabalho = contratoTrabalho;
-	}
+    public void setDataDesligamento(Date dataDesligamento) {
+        this.dataDesligamento = dataDesligamento;
+    }
 
-	public String getCodDireitoPasa() {
-		return codDireitoPasa;
-	}
+    public String getEmail() {
+        return email;
+    }
 
-	public void setCodDireitoPasa(String codDireitoPasa) {
-		this.codDireitoPasa = codDireitoPasa;
-	}
+    public void setEmail(String email) {
+        this.email = email;
+    }
 
-	public String getUnidadeControle() {
-		return unidadeControle;
-	}
+    public String getFinanceira() {
+        return financeira;
+    }
 
-	public void setUnidadeControle(String unidadeControle) {
-		this.unidadeControle = unidadeControle;
-	}
+    public void setFinanceira(String financeira) {
+        this.financeira = financeira;
+    }
 
-	public String getCentroCusto() {
-		return centroCusto;
-	}
+    public String getContratoTrabalho() {
+        return contratoTrabalho;
+    }
 
-	public void setCentroCusto(String centroCusto) {
-		this.centroCusto = centroCusto;
-	}
+    public void setContratoTrabalho(String contratoTrabalho) {
+        this.contratoTrabalho = contratoTrabalho;
+    }
 
-	public String getCodFilialVLI() {
-		return codFilialVLI;
-	}
+    public String getCodDireitoPasa() {
+        return codDireitoPasa;
+    }
 
-	public void setCodFilialVLI(String codFilialVLI) {
-		this.codFilialVLI = codFilialVLI;
-	}
+    public void setCodDireitoPasa(String codDireitoPasa) {
+        this.codDireitoPasa = codDireitoPasa;
+    }
 
-	public Long getIdUsuario() {
-		return idUsuario;
-	}
+    public String getUnidadeControle() {
+        return unidadeControle;
+    }
 
-	public void setIdUsuario(Long idUsuario) {
-		this.idUsuario = idUsuario;
-	}
+    public void setUnidadeControle(String unidadeControle) {
+        this.unidadeControle = unidadeControle;
+    }
 
-	public Integer getIndAtivo() {
-		return indAtivo;
-	}
+    public String getCentroCusto() {
+        return centroCusto;
+    }
 
-	public void setIndAtivo(Integer indAtivo) {
-		this.indAtivo = indAtivo;
-	}
+    public void setCentroCusto(String centroCusto) {
+        this.centroCusto = centroCusto;
+    }
 
-	public Date getDataUltAtulizacao() {
-		return dataUltAtulizacao;
-	}
+    public String getCodFilialVLI() {
+        return codFilialVLI;
+    }
 
-	public void setDataUltAtulizacao(Date dataUltAtulizacao) {
-		this.dataUltAtulizacao = dataUltAtulizacao;
-	}
+    public void setCodFilialVLI(String codFilialVLI) {
+        this.codFilialVLI = codFilialVLI;
+    }
 
-	public Empresa getEmpresa() {
-		return empresa;
-	}
+    public Long getIdUsuario() {
+        return idUsuario;
+    }
 
-	public void setEmpresa(Empresa empresa) {
-		this.empresa = empresa;
-	}
+    public void setIdUsuario(Long idUsuario) {
+        this.idUsuario = idUsuario;
+    }
 
-	public TipoVinculoEmpregaticio getTipoVinculoEmpregaticio() {
-		return tipoVinculoEmpregaticio;
-	}
+    public Integer getIndAtivo() {
+        return indAtivo;
+    }
 
-	public void setTipoVinculoEmpregaticio(TipoVinculoEmpregaticio tipoVinculoEmpregaticio) {
-		this.tipoVinculoEmpregaticio = tipoVinculoEmpregaticio;
-	}
+    public void setIndAtivo(Integer indAtivo) {
+        this.indAtivo = indAtivo;
+    }
 
-	public DadosBancarios getDadosBancarios() {
-		return dadosBancarios;
-	}
+    public Date getDataUltAtulizacao() {
+        return dataUltAtulizacao;
+    }
 
-	public void setDadosBancarios(DadosBancarios dadosBancarios) {
-		this.dadosBancarios = dadosBancarios;
-	}
+    public void setDataUltAtulizacao(Date dataUltAtulizacao) {
+        this.dataUltAtulizacao = dataUltAtulizacao;
+    }
 
-	public MotivoDesligamento getMotivoDesligamento() {
-		return motivoDesligamento;
-	}
+    public Empresa getEmpresa() {
+        return empresa;
+    }
 
-	public void setMotivoDesligamento(MotivoDesligamento motivoDesligamento) {
-		this.motivoDesligamento = motivoDesligamento;
-	}
+    public void setEmpresa(Empresa empresa) {
+        this.empresa = empresa;
+    }
+
+    public TipoVinculoEmpregaticio getTipoVinculoEmpregaticio() {
+        return tipoVinculoEmpregaticio;
+    }
+
+    public void setTipoVinculoEmpregaticio(TipoVinculoEmpregaticio tipoVinculoEmpregaticio) {
+        this.tipoVinculoEmpregaticio = tipoVinculoEmpregaticio;
+    }
+
+    public DadosBancarios getDadosBancarios() {
+        return dadosBancarios;
+    }
+
+    public void setDadosBancarios(DadosBancarios dadosBancarios) {
+        this.dadosBancarios = dadosBancarios;
+    }
+
+    public MotivoDesligamento getMotivoDesligamento() {
+        return motivoDesligamento;
+    }
+
+    public void setMotivoDesligamento(MotivoDesligamento motivoDesligamento) {
+        this.motivoDesligamento = motivoDesligamento;
+    }
 }

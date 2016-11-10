@@ -23,6 +23,9 @@ public class Plano implements Serializable {
     @Column(name = "ID_PLANO")
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
+    
+    @Column(name = "CD_PLANO", length = 10)
+    private String codPlano;
 
     @Column(name = "NOME", length = 30, nullable = false)
     private String nome;
@@ -55,11 +58,11 @@ public class Plano implements Serializable {
     private Date dataUltAtulizacao;
 
     @ManyToOne
-    @JoinColumn(name = "ID_OPERADORA")
+    @JoinColumn(name = "ID_OPERADORA" )
     private Operadora operadora;
 
     @ManyToOne
-    @JoinColumn(name = "ID_TP_PLANO")
+    @JoinColumn(name = "ID_TP_PLANO", nullable = true)
     private TipoPlano tipoPlano;
 
     @ManyToOne
@@ -171,5 +174,13 @@ public class Plano implements Serializable {
 
     public void setPlanoPai(Plano planoPai) {
         this.planoPai = planoPai;
+    }
+
+    public String getCodPlano() {
+        return codPlano;
+    }
+
+    public void setCodPlano(String codPlano) {
+        this.codPlano = codPlano;
     }
 }
