@@ -125,7 +125,7 @@ public class Pessoa implements Serializable {
     private OrigemInformacoes origemInformacoes;
 
     @ManyToOne
-    @JoinColumn(name = "ID_ESTADO_CIVIL", nullable = false)
+    @JoinColumn(name = "ID_ESTADO_CIVIL")
     private EstadoCivil estadoCivil;
 
     public Pessoa() {
