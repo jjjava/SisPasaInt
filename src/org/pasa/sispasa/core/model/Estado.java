@@ -14,49 +14,48 @@ import javax.persistence.Table;
  * @author Hudson Schumaker
  * @version 1.0.0
  */
-
 @Entity
 @Table(name = "ESTADO")
-public class Estado implements Serializable{
+public class Estado implements Serializable {
 
-	private static final long serialVersionUID = 1L;
+    private static final long serialVersionUID = 1L;
 
-	@Id
-	@Column(name = "ID_ESTADO", length = 2)
-	private String id;
+    @Id
+    @Column(name = "ID_ESTADO", length = 2)
+    private String id;
 
-	@Column(name = "NOME", length = 30, nullable = false)
-	private String nome;
-	
-	@ManyToOne
-	@JoinColumn(name = "ID_PAIS")
-	private Pais pais;
-	
-	public Estado() {
-	}
+    @Column(name = "NOME", length = 30, nullable = true)
+    private String nome;
 
-	public String getId() {
-		return id;
-	}
+    @ManyToOne
+    @JoinColumn(name = "ID_PAIS")
+    private Pais pais;
 
-	public void setId(String id) {
-		this.id = id;
-	}
+    public Estado() {
+    }
 
-	public String getNome() {
-		return nome;
-	}
+    public String getId() {
+        return id;
+    }
 
-	public void setNome(String nome) {
-		this.nome = nome;
-	}
+    public void setId(String id) {
+        this.id = id;
+    }
 
-	//@Basic(fetch = FetchType.LAZY)
-	public Pais getPais() {
-		return pais;
-	}
+    public String getNome() {
+        return nome;
+    }
 
-	public void setPais(Pais pais) {
-		this.pais = pais;
-	}
+    public void setNome(String nome) {
+        this.nome = nome;
+    }
+
+    //@Basic(fetch = FetchType.LAZY)
+    public Pais getPais() {
+        return pais;
+    }
+
+    public void setPais(Pais pais) {
+        this.pais = pais;
+    }
 }

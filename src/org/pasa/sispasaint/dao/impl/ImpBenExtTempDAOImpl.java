@@ -19,7 +19,7 @@ public class ImpBenExtTempDAOImpl extends DaoGenerico<ModeloBenExt> implements I
     @Override
     public void resetarIdentity() {
         getEntityManager().getTransaction().begin();
-        Query q1 = getEntityManager().createNativeQuery("DBCC CHECKIDENT ('[sispasaint].[dbo].[TEMP_BEN_EXT]', RESEED, 0)");
+        Query q1 = getEntityManager().createNativeQuery("DBCC CHECKIDENT ('[sispasa].[dbo].[TEMP_BEN_EXT]', RESEED, 0)");
         q1.executeUpdate();
         getEntityManager().getTransaction().commit();
     }

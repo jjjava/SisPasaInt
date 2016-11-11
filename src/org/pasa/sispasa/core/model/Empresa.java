@@ -61,6 +61,9 @@ public class Empresa implements Serializable {
 
     @Column(name = "IND_ATIVO", nullable = false)
     private Integer indAtivo;
+    
+    @Column(name = "ID_USUARIO", nullable = false)
+    private Long idUsuario;
 
     @Column(name = "DT_ULT_ATULZ", nullable = false)
     @Temporal(TemporalType.DATE)
@@ -206,4 +209,12 @@ public class Empresa implements Serializable {
     public void setContatos(List<Contato> contatos) {
         this.contatos = contatos;
     }
+
+    public Long getIdUsuario() {
+        return idUsuario;
+    }
+
+    public void setIdUsuario(Long idUsuario) {
+        this.idUsuario = idUsuario;
+    }    
 }

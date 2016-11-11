@@ -51,7 +51,7 @@ public class Contato implements Serializable {
     @Temporal(TemporalType.DATE)
     private Date dataUltAtulizacao;
 
-    @ManyToMany(mappedBy = "contato")
+    @ManyToMany(mappedBy = "contatos")
     private List<Empresa> empresa;
 
     @ManyToMany(mappedBy = "contatos")

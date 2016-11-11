@@ -20,7 +20,7 @@ public class EmpresaDAOImpl extends DaoGenerico<Empresa> implements EmpresaDAO{
     @Override
     public Empresa existe(String codigo) {
         Query q1 = getEntityManager().
-        createQuery("select e from Empresa e where e.codEmpresa = :cod");
+        createQuery("select e from Empresa e where e.codEmpresaVale = :cod");
         q1.setParameter("cod", codigo);
         q1.setMaxResults(1);
         List<Empresa> empresa = null;

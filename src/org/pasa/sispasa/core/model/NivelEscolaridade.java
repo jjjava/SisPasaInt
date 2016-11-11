@@ -1,7 +1,6 @@
 package org.pasa.sispasa.core.model;
 
 import java.io.Serializable;
-
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -20,7 +19,7 @@ public class NivelEscolaridade implements Serializable {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @Column(name = "DESCRICAO", length = 30, nullable = false)
+    @Column(name = "DESCRICAO", length = 30)
     private String descricao;
 
     @Column(name = "CD_EXTERNO", length = 10)

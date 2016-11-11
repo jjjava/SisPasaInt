@@ -50,7 +50,8 @@ public class Pessoa implements Serializable {
     @Temporal(TemporalType.DATE)
     private Date dataObito;
 
-    @Column(name = "DT_INCLUSAO_SISTEMA", nullable = false, updatable = false)
+    @Column(name = "DT_INCLUSAO_SISTEMA")
+    //@Column(name = "DT_INCLUSAO_SISTEMA", nullable = false, updatable = false)
     @Temporal(TemporalType.DATE)
     private Date dataInclusaoSistema;
 
@@ -67,7 +68,7 @@ public class Pessoa implements Serializable {
     @Column(name = "NM_MAE", length = 60, nullable = false)
     private String nomeMae;
 
-    @Column(name = "NM_PAI", length = 60, nullable = false)
+    @Column(name = "NM_PAI", length = 60)
     private String nomePai;
 
     @Column(name = "EMAIL", length = 60)
@@ -104,15 +105,15 @@ public class Pessoa implements Serializable {
     private List<Documento> documentos;
     
     @ManyToOne
-    @JoinColumn(name = "ID_PAIS", nullable = false)
+    @JoinColumn(name = "ID_PAIS")
     private Pais pais;
 
     @ManyToOne
-    @JoinColumn(name = "ID_ESTADO", nullable = false)
+    @JoinColumn(name = "ID_ESTADO")
     private Estado estado;
 
     @ManyToOne
-    @JoinColumn(name = "ID_MUNICIPIO", nullable = false)
+    @JoinColumn(name = "ID_MUNICIPIO")
     private Municipio municipio;
 
     @ManyToOne
