@@ -161,6 +161,8 @@ public class CargaVLIBeanImpl implements CargaVLIBean {
                         pis.setNumero(modeloBenVLI.getPis());
                     }
                 }
+                cpf.setDataUltimaAtulizacao(new Date());
+                pis.setDataUltimaAtulizacao(new Date());
                 funcionario.addDocumento(cpf);
                 funcionario.addDocumento(pis);
             }
