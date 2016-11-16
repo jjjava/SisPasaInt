@@ -27,7 +27,7 @@ public class Documento implements Serializable {
 	@Column(name = "NUMERO", length = 20, nullable = false)
 	private String numero;
 
-	@Column(name = "ORGAO_EMISSOR", length = 30, nullable = false)
+	@Column(name = "ORGAO_EMISSOR", length = 30)
 	private String orgaoEmissor;
 	
 	@Column(name = "DATA_EMISSAO")

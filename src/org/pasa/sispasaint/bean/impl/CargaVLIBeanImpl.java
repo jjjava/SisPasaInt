@@ -148,8 +148,6 @@ public class CargaVLIBeanImpl implements CargaVLIBean {
                 TipoDocumento tpPIS = new TipoDocumento();
                 tpPIS.setDescricao(EnunTipoDocumento.PIS.getDescricao());
                 pis.setTipoDocumento(tpPIS);
-                funcionario.addDocumento(cpf);
-                funcionario.addDocumento(pis);
             } else {
                 for (Documento d : listaDocs) {
                     if (d.getTipoDocumento().getDescricao().equalsIgnoreCase(EnunTipoDocumento.CPF.getDescricao())) {
@@ -161,11 +159,11 @@ public class CargaVLIBeanImpl implements CargaVLIBean {
                         pis.setNumero(modeloBenVLI.getPis());
                     }
                 }
-                cpf.setDataUltimaAtulizacao(new Date());
-                pis.setDataUltimaAtulizacao(new Date());
-                funcionario.addDocumento(cpf);
-                funcionario.addDocumento(pis);
             }
+            cpf.setDataUltimaAtulizacao(new Date());
+            pis.setDataUltimaAtulizacao(new Date());
+            funcionario.addDocumento(cpf);
+            funcionario.addDocumento(pis);
             //Endereco
             Estado estado = new EstadoBeanImpl().obter(modeloEndVLI.getUf());
             if (estado == null) {
@@ -189,6 +187,8 @@ public class CargaVLIBeanImpl implements CargaVLIBean {
                 endereco.setCep(modeloEndVLI.getCep());
                 endereco.setEstado(estado);
                 endereco.setMunicipio(municipio);
+                endereco.setNumero("");
+                endereco.setDataAtulizacao(new Date());
                 funcionario.addEndereco(endereco);
             } else {
                 enderecos.get(0).setLogradouro(modeloEndVLI.getEndereco());
@@ -196,6 +196,8 @@ public class CargaVLIBeanImpl implements CargaVLIBean {
                 enderecos.get(0).setCep(modeloEndVLI.getCep());
                 enderecos.get(0).setEstado(estado);
                 enderecos.get(0).setMunicipio(municipio);
+                enderecos.get(0).setNumero("");
+                enderecos.get(0).setDataAtulizacao(new Date());
 
                 funcionario.addEndereco(enderecos.get(0));
             }
@@ -235,12 +237,12 @@ public class CargaVLIBeanImpl implements CargaVLIBean {
             funcionario.setCentroCusto(modeloBenVLI.getCentroDeCusto());
             //  funcionario.setBranco(modeloBenVLI.getBranco());
             //  funcionario.setCodigoFilialVLI(modeloBenVLI.getCodigoFilialVLI());
-            
+
             OrigemInformacoes origemInformacoes = funcionario.getOrigemInformacoes();
             if (origemInformacoes == null) {
                 origemInformacoes = new OrigemInformacoes();
             }
-            
+
             origemInformacoes.setDescricao("CARGA");
             funcionario.setOrigemInformacoes(origemInformacoes);
 
@@ -298,7 +300,7 @@ public class CargaVLIBeanImpl implements CargaVLIBean {
 
             origemInformacoes.setDescricao("CARGA");
             beneficiario.setOrigemInformacoes(origemInformacoes);
-           
+
             beneficiario.setIdUsuario(1L);
             beneficiario.setIndAtivo(SisPasaIntCommon.ATIVO);
             // beneficiario.setSituacao(SisPasaIntCommon.ATUALIZADO);

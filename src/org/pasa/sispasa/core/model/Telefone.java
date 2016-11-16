@@ -28,13 +28,13 @@ public class Telefone implements Serializable {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
 
-	@Column(name = "DDD", length = 2, nullable = false)
+	@Column(name = "DDD", length = 2)
 	private String ddd;
 
 	@Column(name = "NUMERO", length = 10, nullable = false)
 	private String numeroTelefone;
 
-	@Column(name = "RAMAL", length = 5, nullable = false)
+	@Column(name = "RAMAL", length = 5)
 	private String ramal;
 
 	@Column(name = "IND_ATIVO", nullable = false)
