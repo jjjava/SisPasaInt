@@ -36,11 +36,20 @@ public class DateUtil {
 
     public static Date toDate(final String data) {
         Date retorno;
+        
+        if(data == null){
+            return null;
+        }
+        String trim = data.trim();
+        System.out.println(trim);
+        if (trim.equalsIgnoreCase("")){
+            return toDate("01.01.1900");
+        }
         try {
             final SimpleDateFormat simpleDateFormat = new SimpleDateFormat(PATTERN_DATA, Locale.getDefault());
-            retorno = simpleDateFormat.parse(data);
+            retorno = simpleDateFormat.parse(trim);
         } catch (ParseException e) {
-            System.err.println(e);
+            System.err.println("aqui"+e);
             retorno = null;
         }
         return retorno;

@@ -50,7 +50,6 @@ public class CargaVLIBeanImpl implements CargaVLIBean {
             ModeloBenVLI modeloBenVLI = new ImpBenVLITempBeanImpl().obter(k);
             ModeloEndVLI modeloEndVLI = new ImpEndVLITempBeanImpl().obterPorMatricula(modeloBenVLI);
             if (modeloBenVLI.getId() != null) {
-                System.err.println(modeloBenVLI.getTipoBeneficiario());
                 if (modeloBenVLI.getTipoBeneficiario().equalsIgnoreCase(SisPasaIntCommon.FUNCIONARIO)) {
                     handlerFuncionario(modeloBenVLI, modeloEndVLI);
                 } else {
@@ -75,7 +74,6 @@ public class CargaVLIBeanImpl implements CargaVLIBean {
     }
 
     private void handlerFuncionario(ModeloBenVLI modeloBenVLI, ModeloEndVLI modeloEndVLI) {
-        System.out.println(modeloBenVLI.getNomeBeneficiario());
         try {
             Funcionario funcionario = new FuncionarioBeanImpl().obter(modeloBenVLI.getEmpresa(), modeloBenVLI.getMatricula());
             if (funcionario == null) {
@@ -96,13 +94,11 @@ public class CargaVLIBeanImpl implements CargaVLIBean {
 
             NivelEscolaridade nivelEscolaridade = funcionario.getNivelEscolaridade();
             if (nivelEscolaridade == null) {
-                System.err.println("nivel1");
                 nivelEscolaridade = new NivelEscolaridade();
             }
 
             nivelEscolaridade.setCodExterno(modeloBenVLI.getGrauEscolaridade());
             funcionario.setNivelEscolaridade(nivelEscolaridade);
-            System.err.println("nivel2");
             funcionario.setIndConclusaoEscolaridade(StringUtil.parserIndicadorConclusao(modeloBenVLI.getIndicadorConclusao()));
 
             DadosBancarios dadosBancarios = funcionario.getDadosBancarios();
@@ -126,9 +122,20 @@ public class CargaVLIBeanImpl implements CargaVLIBean {
                 tel2 = new Telefone();
                 tel1.setNumeroTelefone(modeloEndVLI.getTelefone1());
                 tel2.setNumeroTelefone(modeloEndVLI.getTelefone2());
+                tel1.setIndAtivo(SisPasaIntCommon.ATIVO);
+                tel2.setIndAtivo(SisPasaIntCommon.ATIVO);
                 funcionario.addTelefone(tel1);
                 funcionario.addTelefone(tel2);
             } else {
+                tel1 = new Telefone();
+                tel2 = new Telefone();
+                tel1.setNumeroTelefone(modeloEndVLI.getTelefone1());
+                tel2.setNumeroTelefone(modeloEndVLI.getTelefone2());
+                tel1.setIndAtivo(SisPasaIntCommon.ATIVO);
+                tel2.setIndAtivo(SisPasaIntCommon.ATIVO);
+                listaTelefones.clear();
+                funcionario.addTelefone(tel1);
+                funcionario.addTelefone(tel2);
                 funcionario.setTelefones(listaTelefones);
             }
 
@@ -160,8 +167,8 @@ public class CargaVLIBeanImpl implements CargaVLIBean {
                     }
                 }
             }
-            cpf.setDataUltimaAtulizacao(new Date());
-            pis.setDataUltimaAtulizacao(new Date());
+            cpf.setDataUltimaAtulizacao(DateUtil.obterDataAtual());
+            pis.setDataUltimaAtulizacao(DateUtil.obterDataAtual());
             funcionario.addDocumento(cpf);
             funcionario.addDocumento(pis);
             //Endereco
@@ -188,7 +195,7 @@ public class CargaVLIBeanImpl implements CargaVLIBean {
                 endereco.setEstado(estado);
                 endereco.setMunicipio(municipio);
                 endereco.setNumero("");
-                endereco.setDataAtulizacao(new Date());
+                endereco.setDataAtulizacao(DateUtil.obterDataAtual());
                 funcionario.addEndereco(endereco);
             } else {
                 enderecos.get(0).setLogradouro(modeloEndVLI.getEndereco());
@@ -197,7 +204,7 @@ public class CargaVLIBeanImpl implements CargaVLIBean {
                 enderecos.get(0).setEstado(estado);
                 enderecos.get(0).setMunicipio(municipio);
                 enderecos.get(0).setNumero("");
-                enderecos.get(0).setDataAtulizacao(new Date());
+                enderecos.get(0).setDataAtulizacao(DateUtil.obterDataAtual());
 
                 funcionario.addEndereco(enderecos.get(0));
             }
@@ -305,10 +312,10 @@ public class CargaVLIBeanImpl implements CargaVLIBean {
             beneficiario.setIndAtivo(SisPasaIntCommon.ATIVO);
             // beneficiario.setSituacao(SisPasaIntCommon.ATUALIZADO);
             beneficiario.setDataUltAtulizacao(DateUtil.obterDataAtual());
-            System.err.println("---------");
             new BeneficiarioBeanImpl().atualizar(beneficiario);
         } catch (Exception e) {
             System.err.println(e);
+            System.err.println(e.getMessage());
         }
     }
 
