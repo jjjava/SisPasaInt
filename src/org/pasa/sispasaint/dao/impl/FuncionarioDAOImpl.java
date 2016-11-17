@@ -26,7 +26,6 @@ public class FuncionarioDAOImpl extends DaoGenerico<Funcionario> implements Func
         List<Funcionario> funcionarios = null;
         try {
             funcionarios = q1.getResultList();
-            System.err.println(funcionarios.size());
         } catch (NoResultException e) {
             System.err.println(e);
             return null;

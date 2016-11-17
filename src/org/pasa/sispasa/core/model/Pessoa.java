@@ -117,7 +117,7 @@ public class Pessoa implements Serializable {
     private Municipio municipio;
 
     @ManyToOne
-    @JoinColumn(name = "ID_NIVEL_ESCOL", nullable = false)
+    @JoinColumn(name = "ID_NIVEL_ESCOL")
     private NivelEscolaridade nivelEscolaridade;
 
     @ManyToOne

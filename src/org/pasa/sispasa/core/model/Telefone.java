@@ -16,103 +16,102 @@ import javax.persistence.Table;
  * @author Hudson Schumaker
  * @version 1.0.0
  */
-
 @Entity
 @Table(name = "TELEFONE")
 public class Telefone implements Serializable {
 
-	private static final long serialVersionUID = 1L;
+    private static final long serialVersionUID = 1L;
 
-	@Id
-	@Column(name = "ID_TELEFONE")
-	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	private Long id;
+    @Id
+    @Column(name = "ID_TELEFONE")
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long id;
 
-	@Column(name = "DDD", length = 2)
-	private String ddd;
+    @Column(name = "DDD", length = 2)
+    private String ddd;
 
-	@Column(name = "NUMERO", length = 10, nullable = false)
-	private String numeroTelefone;
+    @Column(name = "NUMERO", length = 12, nullable = false)
+    private String numeroTelefone;
 
-	@Column(name = "RAMAL", length = 5)
-	private String ramal;
+    @Column(name = "RAMAL", length = 5)
+    private String ramal;
 
-	@Column(name = "IND_ATIVO", nullable = false)
-	private Integer indAtivo;
+    @Column(name = "IND_ATIVO", nullable = false)
+    private Integer indAtivo;
 
-	@OneToOne
-	private TipoTelefone tipoTelefone;
+    @OneToOne
+    private TipoTelefone tipoTelefone;
 
-	@ManyToMany(mappedBy = "telefones")
-	private List<Contato> contatos;
+    @ManyToMany(mappedBy = "telefones")
+    private List<Contato> contatos;
 
-	@ManyToMany(mappedBy = "telefones")
-	private List<Pessoa> pessoa;
+    @ManyToMany(mappedBy = "telefones")
+    private List<Pessoa> pessoa;
 
-	public Telefone() {
-	}
+    public Telefone() {
+    }
 
-	public Long getId() {
-		return id;
-	}
+    public Long getId() {
+        return id;
+    }
 
-	public void setId(Long id) {
-		this.id = id;
-	}
+    public void setId(Long id) {
+        this.id = id;
+    }
 
-	public String getDdd() {
-		return ddd;
-	}
+    public String getDdd() {
+        return ddd;
+    }
 
-	public void setDdd(String ddd) {
-		this.ddd = ddd;
-	}
+    public void setDdd(String ddd) {
+        this.ddd = ddd;
+    }
 
-	public String getNumeroTelefone() {
-		return numeroTelefone;
-	}
+    public String getNumeroTelefone() {
+        return numeroTelefone;
+    }
 
-	public void setNumeroTelefone(String numeroTelefone) {
-		this.numeroTelefone = numeroTelefone;
-	}
+    public void setNumeroTelefone(String numeroTelefone) {
+        this.numeroTelefone = numeroTelefone;
+    }
 
-	public String getRamal() {
-		return ramal;
-	}
+    public String getRamal() {
+        return ramal;
+    }
 
-	public void setRamal(String ramal) {
-		this.ramal = ramal;
-	}
+    public void setRamal(String ramal) {
+        this.ramal = ramal;
+    }
 
-	public Integer getIndAtivo() {
-		return indAtivo;
-	}
+    public Integer getIndAtivo() {
+        return indAtivo;
+    }
 
-	public void setIndAtivo(Integer indAtivo) {
-		this.indAtivo = indAtivo;
-	}
+    public void setIndAtivo(Integer indAtivo) {
+        this.indAtivo = indAtivo;
+    }
 
-	public TipoTelefone getTipoTelefone() {
-		return tipoTelefone;
-	}
+    public TipoTelefone getTipoTelefone() {
+        return tipoTelefone;
+    }
 
-	public void setTipoTelefone(TipoTelefone tipoTelefone) {
-		this.tipoTelefone = tipoTelefone;
-	}
+    public void setTipoTelefone(TipoTelefone tipoTelefone) {
+        this.tipoTelefone = tipoTelefone;
+    }
 
-	public List<Contato> getContatos() {
-		return contatos;
-	}
+    public List<Contato> getContatos() {
+        return contatos;
+    }
 
-	public void setContatos(List<Contato> contatos) {
-		this.contatos = contatos;
-	}
+    public void setContatos(List<Contato> contatos) {
+        this.contatos = contatos;
+    }
 
-	public List<Pessoa> getPessoa() {
-		return pessoa;
-	}
+    public List<Pessoa> getPessoa() {
+        return pessoa;
+    }
 
-	public void setPessoa(List<Pessoa> pessoa) {
-		this.pessoa = pessoa;
-	}
+    public void setPessoa(List<Pessoa> pessoa) {
+        this.pessoa = pessoa;
+    }
 }
