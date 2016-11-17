@@ -77,6 +77,8 @@ public class CargaVLIBeanImpl implements CargaVLIBean {
             if (funcionario == null) {
                 funcionario = new Funcionario();
             }
+            
+            funcionario.setMatriculaPasa(modeloBenVLI.getMatricula());
 
             Beneficiario beneficiario = new BeneficiarioBeanImpl().obter(modeloBenVLI.getEmpresa(), modeloBenVLI.getMatricula(), modeloBenVLI.getCodBeneficiario());
             if (beneficiario == null) {

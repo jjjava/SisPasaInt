@@ -30,7 +30,7 @@ public class Telefone implements Serializable {
     @Column(name = "DDD", length = 2)
     private String ddd;
 
-    @Column(name = "NUMERO", length = 12, nullable = false)
+    @Column(name = "NUMERO", length = 18, nullable = false)
     private String numeroTelefone;
 
     @Column(name = "RAMAL", length = 5)
