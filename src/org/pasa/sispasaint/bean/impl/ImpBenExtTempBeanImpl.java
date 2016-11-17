@@ -44,7 +44,6 @@ public class ImpBenExtTempBeanImpl implements ImpBenExtTempBean {
 
     @Override
     public void salvarTbTemp(List<ModeloBenExt> listaModeloBenExt) {
-
     }
 
     @Override
