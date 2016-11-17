@@ -6,10 +6,10 @@ package org.pasa.sispasaint.model.enun;
  */
 public enum EnunTipoDocumento {
     RG(0, "Identidade"),
-    CPF(1, "Ensino Médio"),
-    PIS(2, "Ensino Superior"),
+    CPF(1, "CPF"),
+    PIS(2, "PIS"),
     CNH(3, "Carnteira Nacional de Habilitação"),
-    CarteiraTrabalho(4, "Pós Graduação"),
+    CarteiraTrabalho(4, "Carteira de Trabalho"),
     Passaporte(5, "Passaporte");
     
     private final int indice;

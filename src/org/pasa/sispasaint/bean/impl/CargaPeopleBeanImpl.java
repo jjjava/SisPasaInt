@@ -9,7 +9,11 @@ import org.pasa.sispasaint.bean.CargaPeopleBean;
 public class CargaPeopleBeanImpl implements CargaPeopleBean {
 
     public CargaPeopleBeanImpl() {
-        System.out.println("carga");
+        System.out.println("########################################################################carga");
+        System.out.println("########################################################################carga");
+        System.out.println("########################################################################carga");
+        System.out.println("########################################################################carga");
+        System.out.println("########################################################################carga");
     }
 
     @Override

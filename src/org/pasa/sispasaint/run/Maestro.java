@@ -4,8 +4,12 @@ import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import org.pasa.sispasaint.bean.impl.AgendaBeanImpl;
+import org.pasa.sispasaint.jobs.ExtJob;
 import org.pasa.sispasaint.jobs.MasterJob;
+import org.pasa.sispasaint.jobs.PeopleJob;
+import org.pasa.sispasaint.jobs.VliJob;
 import org.pasa.sispasaint.model.intg.Agenda;
+import org.pasa.sispasaint.util.SisPasaIntCommon;
 import org.quartz.CronScheduleBuilder;
 import org.quartz.JobBuilder;
 import org.quartz.JobDetail;
@@ -41,19 +45,47 @@ public class Maestro {
         for (Agenda a : listAgenda) {
             System.out.println(parseSchedule(a));
             try {
-                JobDetail job = JobBuilder.newJob(MasterJob.class)
-                        .withIdentity(a.getDescricao(), a.getGrupo())
-                        .usingJobData("tipo", a.getDescricao())
-                        .build();
+                if (SisPasaIntCommon.CARGA_VLI.equalsIgnoreCase(a.getDescricao())) {
+                    JobDetail job = JobBuilder.newJob(VliJob.class)
+                            .withIdentity(a.getDescricao(), a.getGrupo())
+                            .usingJobData("tipo", a.getDescricao())
+                            .build();
 
-                Trigger trigger = TriggerBuilder
-                        .newTrigger()
-                        .withIdentity(a.getDescricao(), a.getGrupo())
-                        .withSchedule(CronScheduleBuilder.cronSchedule(parseSchedule(a)))
-                        .build();
-                sched.scheduleJob(job, trigger);
+                    Trigger trigger = TriggerBuilder
+                            .newTrigger()
+                            .withIdentity(a.getDescricao(), a.getGrupo())
+                            .withSchedule(CronScheduleBuilder.cronSchedule(parseSchedule(a)))
+                            .build();
+                    sched.scheduleJob(job, trigger);
+                }
+                if (SisPasaIntCommon.CARGA_PEOPLE.equalsIgnoreCase(a.getDescricao())) {
+                    JobDetail job = JobBuilder.newJob(PeopleJob.class)
+                            .withIdentity(a.getDescricao(), a.getGrupo())
+                            .usingJobData("tipo", a.getDescricao())
+                            .build();
+
+                    Trigger trigger = TriggerBuilder
+                            .newTrigger()
+                            .withIdentity(a.getDescricao(), a.getGrupo())
+                            .withSchedule(CronScheduleBuilder.cronSchedule(parseSchedule(a)))
+                            .build();
+                    sched.scheduleJob(job, trigger);
+                }
+                if (SisPasaIntCommon.CARGA_EXT.equalsIgnoreCase(a.getDescricao())) {
+                    JobDetail job = JobBuilder.newJob(ExtJob.class)
+                            .withIdentity(a.getDescricao(), a.getGrupo())
+                            .usingJobData("tipo", a.getDescricao())
+                            .build();
+
+                    Trigger trigger = TriggerBuilder
+                            .newTrigger()
+                            .withIdentity(a.getDescricao(), a.getGrupo())
+                            .withSchedule(CronScheduleBuilder.cronSchedule(parseSchedule(a)))
+                            .build();
+                    sched.scheduleJob(job, trigger);
+                }
             } catch (SchedulerException e) {
-                System.out.println("erro");
+                System.out.println("erro: "+e);
             }
         }
     }
