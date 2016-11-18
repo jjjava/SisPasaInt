@@ -20,8 +20,8 @@ import org.pasa.sispasa.core.model.TipoVinculoEmpregaticio;
 import org.pasa.sispasaint.bean.CargaExtBean;
 import org.pasa.sispasaint.model.enun.EnunTipoBeneficiario;
 import org.pasa.sispasaint.model.enun.EnunTipoDocumento;
-import org.pasa.sispasaint.model.intg.ModeloBenVLI;
-import org.pasa.sispasaint.model.intg.ModeloEndVLI;
+import org.pasa.sispasaint.model.intg.ModeloBenExt;
+import org.pasa.sispasaint.model.intg.ModeloEndExt;
 import org.pasa.sispasaint.util.DateUtil;
 import org.pasa.sispasaint.util.SisPasaIntCommon;
 import org.pasa.sispasaint.util.StringUtil;
@@ -43,25 +43,19 @@ public class CargaExtBeanImpl implements CargaExtBean {
 
     @Override
     public void mapearEntidades() {
-        
-        Long t = new ImpBenVLITempBeanImpl().contar();
+
+        Long t = new ImpBenExtTempBeanImpl().contar();
         for (Long k = 1L; k < t; k++) {
-            ModeloBenVLI modeloBenVLI = new ImpBenVLITempBeanImpl().obter(k);
-            ModeloEndVLI modeloEndVLI = new ImpEndVLITempBeanImpl().obterPorMatricula(modeloBenVLI);
-            if (modeloBenVLI.getId() != null) {
-                if (modeloBenVLI.getTipoBeneficiario().equalsIgnoreCase(SisPasaIntCommon.FUNCIONARIO)) {
-                    handlerFuncionario(modeloBenVLI, modeloEndVLI);
+            ModeloBenExt modeloBenExt = new ImpBenExtTempBeanImpl().obter(k);
+            ModeloEndExt modeloEndExt = new ImpEndExtTempBeanImpl().obterPorMatricula(modeloBenExt);
+            if (modeloBenExt.getId() != null) {
+                if (modeloBenExt.getTipoBeneficiario().equalsIgnoreCase(SisPasaIntCommon.FUNCIONARIO)) {
+                    handlerFuncionario(modeloBenExt, modeloEndExt);
                 } else {
-                    handlerBeneficiario(modeloBenVLI, modeloEndVLI);
+                    handlerBeneficiario(modeloBenExt, modeloEndExt);
                 }
             }
         }
-    
-         System.out.println("!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!carga ext");
-         System.out.println("!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!carga ext");
-         System.out.println("!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!carga ext");
-         System.out.println("!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!carga ext");
-
     }
 
     private void cargaArquivosBenTemp() {
@@ -77,42 +71,42 @@ public class CargaExtBeanImpl implements CargaExtBean {
         impEndExtTempBeanImpl.resetarIdentity();
         impEndExtTempBeanImpl.carregarArquivo();
     }
-    
-    private void handlerFuncionario(ModeloBenVLI modeloBenVLI, ModeloEndVLI modeloEndVLI) {
+
+    private void handlerFuncionario(ModeloBenExt modeloBenExt, ModeloEndExt modeloEndExt) {
         try {
-            Funcionario funcionario = new FuncionarioBeanImpl().obter(modeloBenVLI.getEmpresa(), modeloBenVLI.getMatricula());
+            Funcionario funcionario = new FuncionarioBeanImpl().obter(modeloBenExt.getEmpresa(), modeloBenExt.getMatricula());
             if (funcionario == null) {
                 funcionario = new Funcionario();
             }
 
-            Beneficiario beneficiario = new BeneficiarioBeanImpl().obter(modeloBenVLI.getEmpresa(), modeloBenVLI.getMatricula(), modeloBenVLI.getCodBeneficiario());
+            Beneficiario beneficiario = new BeneficiarioBeanImpl().obter(modeloBenExt.getEmpresa(), modeloBenExt.getMatricula(), modeloBenExt.getCodBeneficiario());
             if (beneficiario == null) {
                 beneficiario = new Beneficiario();
             }
 
-            funcionario.setNome(modeloBenVLI.getNomeBeneficiario());
-            funcionario.setNomeAbreviado(modeloBenVLI.getNomeBeneficiarioAbreviado());
-            funcionario.setNomeMae(modeloBenVLI.getNomeDaMae());
-            funcionario.setDataNascimento(DateUtil.toDate(modeloBenVLI.getDataNascimento()));
-            funcionario.setDataObito(DateUtil.toDate(modeloBenVLI.getDataFalecimento()));
-            funcionario.setSexo(modeloBenVLI.getSexo());
+            funcionario.setNome(modeloBenExt.getNomeBeneficiario());
+            funcionario.setNomeAbreviado(modeloBenExt.getNomeBeneficiarioAbreviado());
+            funcionario.setNomeMae(modeloBenExt.getNomeDaMae());
+            funcionario.setDataNascimento(DateUtil.toDate(modeloBenExt.getDataNascimento()));
+            funcionario.setDataObito(DateUtil.toDate(modeloBenExt.getDataFalecimento()));
+            funcionario.setSexo(modeloBenExt.getSexo());
 
             NivelEscolaridade nivelEscolaridade = funcionario.getNivelEscolaridade();
             if (nivelEscolaridade == null) {
                 nivelEscolaridade = new NivelEscolaridade();
             }
 
-            nivelEscolaridade.setCodExterno(modeloBenVLI.getGrauEscolaridade());
+            nivelEscolaridade.setCodExterno(modeloBenExt.getGrauEscolaridade());
             funcionario.setNivelEscolaridade(nivelEscolaridade);
-            funcionario.setIndConclusaoEscolaridade(StringUtil.parserIndicadorConclusao(modeloBenVLI.getIndicadorConclusao()));
+            funcionario.setIndConclusaoEscolaridade(StringUtil.parserIndicadorConclusao(modeloBenExt.getIndicadorConclusao()));
 
             DadosBancarios dadosBancarios = funcionario.getDadosBancarios();
             if (dadosBancarios == null) {
                 dadosBancarios = new DadosBancarios();
             }
-            dadosBancarios.setCodBanco(modeloBenVLI.getBanco());
-            dadosBancarios.setAgencia(modeloBenVLI.getAgenciaBancaria());
-            dadosBancarios.setConta(modeloBenVLI.getContaCorrente());
+            dadosBancarios.setCodBanco(modeloBenExt.getBanco());
+            dadosBancarios.setAgencia(modeloBenExt.getAgenciaBancaria());
+            dadosBancarios.setConta(modeloBenExt.getContaCorrente());
             dadosBancarios.setTipoConta(SisPasaIntCommon.CONTACORRENTE);
             dadosBancarios.setIndAtivo(SisPasaIntCommon.ATIVO);
             dadosBancarios.setDataAtulizacao(new Date());
@@ -125,8 +119,8 @@ public class CargaExtBeanImpl implements CargaExtBean {
             if (listaTelefones.isEmpty()) {
                 tel1 = new Telefone();
                 tel2 = new Telefone();
-                tel1.setNumeroTelefone(modeloEndVLI.getTelefone1());
-                tel2.setNumeroTelefone(modeloEndVLI.getTelefone2());
+                tel1.setNumeroTelefone(modeloEndExt.getTelefone1());
+                tel2.setNumeroTelefone(modeloEndExt.getTelefone2());
                 tel1.setIndAtivo(SisPasaIntCommon.ATIVO);
                 tel2.setIndAtivo(SisPasaIntCommon.ATIVO);
                 funcionario.addTelefone(tel1);
@@ -134,8 +128,8 @@ public class CargaExtBeanImpl implements CargaExtBean {
             } else {
                 tel1 = new Telefone();
                 tel2 = new Telefone();
-                tel1.setNumeroTelefone(modeloEndVLI.getTelefone1());
-                tel2.setNumeroTelefone(modeloEndVLI.getTelefone2());
+                tel1.setNumeroTelefone(modeloEndExt.getTelefone1());
+                tel2.setNumeroTelefone(modeloEndExt.getTelefone2());
                 tel1.setIndAtivo(SisPasaIntCommon.ATIVO);
                 tel2.setIndAtivo(SisPasaIntCommon.ATIVO);
                 listaTelefones.clear();
@@ -145,13 +139,13 @@ public class CargaExtBeanImpl implements CargaExtBean {
             }
 
             //Docs
-            funcionario.setCpf(modeloBenVLI.getCpf());
+            funcionario.setCpf(modeloBenExt.getCpf());
 
             Documento pis = null;
             List<Documento> listaDocs = funcionario.getDocumentos();
             if (listaDocs.isEmpty()) {
                 pis = new Documento();
-                pis.setNumero(modeloBenVLI.getPis());
+                pis.setNumero(modeloBenExt.getPis());
                 TipoDocumento tpPIS = new TipoDocumento();
                 tpPIS.setDescricao(EnunTipoDocumento.PIS.getDescricao());
                 pis.setTipoDocumento(tpPIS);
@@ -159,42 +153,42 @@ public class CargaExtBeanImpl implements CargaExtBean {
                 for (Documento d : listaDocs) {
                     if (d.getTipoDocumento().getDescricao().equalsIgnoreCase(EnunTipoDocumento.PIS.getDescricao())) {
                         pis = new Documento();
-                        pis.setNumero(modeloBenVLI.getPis());
+                        pis.setNumero(modeloBenExt.getPis());
                     }
                 }
             }
             pis.setDataUltimaAtulizacao(DateUtil.obterDataAtual());
             funcionario.addDocumento(pis);
             //Endereco
-            Estado estado = new EstadoBeanImpl().obter(modeloEndVLI.getUf());
+            Estado estado = new EstadoBeanImpl().obter(modeloEndExt.getUf());
             if (estado == null) {
                 estado = new Estado();
             }
-            estado.setId(modeloEndVLI.getUf());
+            estado.setId(modeloEndExt.getUf());
 
-            Municipio municipio = new MunicipioBeanImpl().existe(modeloEndVLI.getCidade());
+            Municipio municipio = new MunicipioBeanImpl().existe(modeloEndExt.getCidade());
             if (municipio == null) {
                 municipio = new Municipio();
             }
-            municipio.setNome(modeloEndVLI.getCidade());
+            municipio.setNome(modeloEndExt.getCidade());
             municipio.setEstado(estado);
 
             Endereco endereco = null;
             List<Endereco> enderecos = funcionario.getEnderecos();
             if (enderecos.isEmpty()) {
                 endereco = new Endereco();
-                endereco.setLogradouro(modeloEndVLI.getEndereco());
-                endereco.setBairro(modeloEndVLI.getBairro());
-                endereco.setCep(modeloEndVLI.getCep());
+                endereco.setLogradouro(modeloEndExt.getEndereco());
+                endereco.setBairro(modeloEndExt.getBairro());
+                endereco.setCep(modeloEndExt.getCep());
                 endereco.setEstado(estado);
                 endereco.setMunicipio(municipio);
                 endereco.setNumero("");
                 endereco.setDataAtulizacao(DateUtil.obterDataAtual());
                 funcionario.addEndereco(endereco);
             } else {
-                enderecos.get(0).setLogradouro(modeloEndVLI.getEndereco());
-                enderecos.get(0).setBairro(modeloEndVLI.getBairro());
-                enderecos.get(0).setCep(modeloEndVLI.getCep());
+                enderecos.get(0).setLogradouro(modeloEndExt.getEndereco());
+                enderecos.get(0).setBairro(modeloEndExt.getBairro());
+                enderecos.get(0).setCep(modeloEndExt.getCep());
                 enderecos.get(0).setEstado(estado);
                 enderecos.get(0).setMunicipio(municipio);
                 enderecos.get(0).setNumero("");
@@ -204,40 +198,40 @@ public class CargaExtBeanImpl implements CargaExtBean {
             }
 
             //Funcionario
-            Empresa empresa = new EmpresaBeanImpl().existe(modeloBenVLI.getEmpresa());
+            Empresa empresa = new EmpresaBeanImpl().existe(modeloBenExt.getEmpresa());
             if (empresa == null) {
                 empresa = new Empresa();
             }
-            empresa.setCodEmpresaVale(modeloBenVLI.getEmpresa());
+            empresa.setCodEmpresaVale(modeloBenExt.getEmpresa());
             empresa.setIndAtivo(SisPasaIntCommon.ATIVO);
             empresa.setDataAtulizacao(new Date());
             empresa.setIdUsuario(1L);
             funcionario.setEmpresa(empresa);
-            funcionario.setMatriculaOrigem(modeloBenVLI.getMatricula());
+            funcionario.setMatriculaOrigem(modeloBenExt.getMatricula());
 
             TipoVinculoEmpregaticio tipoVinculoEmpregaticio = funcionario.getTipoVinculoEmpregaticio();
             if (tipoVinculoEmpregaticio == null) {
                 tipoVinculoEmpregaticio = new TipoVinculoEmpregaticio();
             }
-            tipoVinculoEmpregaticio.setCodExterno(modeloBenVLI.getVinculo());
+            tipoVinculoEmpregaticio.setCodExterno(modeloBenExt.getVinculo());
             funcionario.setTipoVinculoEmpregaticio(tipoVinculoEmpregaticio);
 
-            funcionario.setDireitoAbaterIR(modeloBenVLI.getDireitoAbaterIR());
-            funcionario.setDataAdimissao(DateUtil.toDate(modeloBenVLI.getDataAdmissao()));
-            funcionario.setFinanceira(modeloBenVLI.getFinanceira());
-            funcionario.setContratoTrabalho(modeloBenVLI.getContratoTrabalho());
-            funcionario.setEmpresaAtualizadora(modeloBenVLI.getEmpresaAtualizador());
-            funcionario.setMatriculaAtualizadora(modeloBenVLI.getMatriculaAtulizador());
-            funcionario.setCodDireitoPasa(modeloBenVLI.getCodigoDireitoPasa());
-            funcionario.setMatriculaPasa(modeloBenVLI.getMatriculaPasa());
+            funcionario.setDireitoAbaterIR(modeloBenExt.getDireitoAbaterIR());
+            funcionario.setDataAdimissao(DateUtil.toDate(modeloBenExt.getDataAdmissao()));
+            funcionario.setFinanceira(modeloBenExt.getFinanceira());
+            funcionario.setContratoTrabalho(modeloBenExt.getContratoTrabalho());
+            funcionario.setEmpresaAtualizadora(modeloBenExt.getEmpresaAtualizador());
+            funcionario.setMatriculaAtualizadora(modeloBenExt.getMatriculaAtulizador());
+            funcionario.setCodDireitoPasa(modeloBenExt.getCodigoDireitoPasa());
+            funcionario.setMatriculaPasa(modeloBenExt.getMatriculaPasa());
 
-            funcionario.setMatriculaOrigem(modeloBenVLI.getMatriculaOrigem());
-            //   funcionario.setEmpresaPeople(modeloBenVLI.getEmpresaPeople());
-            //    funcionario.setMatriculaPeople(modeloBenVLI.getMatriculaPeople());
-            funcionario.setUnidadeControle(modeloBenVLI.getUnidadeDeControle());
-            funcionario.setCentroCusto(modeloBenVLI.getCentroDeCusto());
-            //  funcionario.setBranco(modeloBenVLI.getBranco());
-            //  funcionario.setCodigoFilialVLI(modeloBenVLI.getCodigoFilialVLI());
+            funcionario.setMatriculaOrigem(modeloBenExt.getMatriculaOrigem());
+            //   funcionario.setEmpresaPeople(modeloBenExt.getEmpresaPeople());
+            //    funcionario.setMatriculaPeople(modeloBenExt.getMatriculaPeople());
+            funcionario.setUnidadeControle(modeloBenExt.getUnidadeDeControle());
+            funcionario.setCentroCusto(modeloBenExt.getCentroDeCusto());
+            //  funcionario.setBranco(modeloBenExt.getBranco());
+            //  funcionario.setCodigoFilialVLI(modeloBenExt.getCodigoFilialVLI());
 
             OrigemInformacoes origemInformacoes = funcionario.getOrigemInformacoes();
             if (origemInformacoes == null) {
@@ -254,39 +248,39 @@ public class CargaExtBeanImpl implements CargaExtBean {
             new FuncionarioBeanImpl().atualizar(funcionario);
 
 //------------------------------------------------------------------------------
-            Funcionario funcBeneficiario = new FuncionarioBeanImpl().obter(modeloBenVLI.getEmpresa(), modeloBenVLI.getMatricula());
-            beneficiario.setMatriculaAMS(modeloBenVLI.getMatricula());
-            beneficiario.setCodBeneficiario(modeloBenVLI.getCodBeneficiario());
+            Funcionario funcBeneficiario = new FuncionarioBeanImpl().obter(modeloBenExt.getEmpresa(), modeloBenExt.getMatricula());
+            beneficiario.setMatriculaAMS(modeloBenExt.getMatricula());
+            beneficiario.setCodBeneficiario(modeloBenExt.getCodBeneficiario());
 
-            beneficiario.setNome(modeloBenVLI.getNomeBeneficiario());
-            beneficiario.setNomeAbreviado(modeloBenVLI.getNomeBeneficiarioAbreviado());
-            beneficiario.setNomeMae(modeloBenVLI.getNomeDaMae());
-            beneficiario.setDataNascimento(DateUtil.toDate(modeloBenVLI.getDataNascimento()));
-            beneficiario.setDataObito(DateUtil.toDate(modeloBenVLI.getDataFalecimento()));
-            beneficiario.setSexo(modeloBenVLI.getSexo());
+            beneficiario.setNome(modeloBenExt.getNomeBeneficiario());
+            beneficiario.setNomeAbreviado(modeloBenExt.getNomeBeneficiarioAbreviado());
+            beneficiario.setNomeMae(modeloBenExt.getNomeDaMae());
+            beneficiario.setDataNascimento(DateUtil.toDate(modeloBenExt.getDataNascimento()));
+            beneficiario.setDataObito(DateUtil.toDate(modeloBenExt.getDataFalecimento()));
+            beneficiario.setSexo(modeloBenExt.getSexo());
             beneficiario.setNivelEscolaridade(funcBeneficiario.getNivelEscolaridade());
-            beneficiario.setIndConclusaoEscolaridade(StringUtil.parserIndicadorConclusao(modeloBenVLI.getIndicadorConclusao()));
-            beneficiario.setDireitoAMSReenbolso(modeloBenVLI.getDireitoAMSCredenciamento());
-            beneficiario.setDataValidadeCredenciado(DateUtil.toDate(modeloBenVLI.getDataValidadeCredenciado()));
-            beneficiario.setDireitoAMSReenbolso(modeloBenVLI.getDireitoAmsReembolso());
-            beneficiario.setDataValidadeReembolso(DateUtil.toDate(modeloBenVLI.getDataValidadeReembolso()));
-            beneficiario.setDataAtulizacao(DateUtil.toDate(modeloBenVLI.getDataDeAtualizacao()));
-            beneficiario.setCodCR(modeloBenVLI.getCodigoCR());
-            beneficiario.setOrgaoPessoal(modeloBenVLI.getOrgaoPessoal());
-            beneficiario.setFaixaNivel(modeloBenVLI.getFaixaNivel());
-            beneficiario.setNucleoAMS(modeloBenVLI.getNucleoDaAms());
+            beneficiario.setIndConclusaoEscolaridade(StringUtil.parserIndicadorConclusao(modeloBenExt.getIndicadorConclusao()));
+            beneficiario.setDireitoAMSReenbolso(modeloBenExt.getDireitoAMSCredenciamento());
+            beneficiario.setDataValidadeCredenciado(DateUtil.toDate(modeloBenExt.getDataValidadeCredenciado()));
+            beneficiario.setDireitoAMSReenbolso(modeloBenExt.getDireitoAmsReembolso());
+            beneficiario.setDataValidadeReembolso(DateUtil.toDate(modeloBenExt.getDataValidadeReembolso()));
+            beneficiario.setDataAtulizacao(DateUtil.toDate(modeloBenExt.getDataDeAtualizacao()));
+            beneficiario.setCodCR(modeloBenExt.getCodigoCR());
+            beneficiario.setOrgaoPessoal(modeloBenExt.getOrgaoPessoal());
+            beneficiario.setFaixaNivel(modeloBenExt.getFaixaNivel());
+            beneficiario.setNucleoAMS(modeloBenExt.getNucleoDaAms());
             beneficiario.setTipoBenneficiario(EnunTipoBeneficiario.Titular.getDescricao());
-            beneficiario.setMatriculaParticipante(modeloBenVLI.getMatriculaParticipante());
-            beneficiario.setMatriculaRepresentanteLegal(modeloBenVLI.getMatriculaRepresentanteLegal());
-            beneficiario.setPlanoReciprocidadeCassi(modeloBenVLI.getPlanoDeReciprocidadeCassi());
-            beneficiario.setCns(modeloBenVLI.getCodigoNacionalDeSaude());
-            beneficiario.setDeclNascidoVivo(modeloBenVLI.getDeclaracaoNascidoVivo());
-            beneficiario.setDataFimPlanoCassi(DateUtil.toDate(modeloBenVLI.getCassiData()));
+            beneficiario.setMatriculaParticipante(modeloBenExt.getMatriculaParticipante());
+            beneficiario.setMatriculaRepresentanteLegal(modeloBenExt.getMatriculaRepresentanteLegal());
+            beneficiario.setPlanoReciprocidadeCassi(modeloBenExt.getPlanoDeReciprocidadeCassi());
+            beneficiario.setCns(modeloBenExt.getCodigoNacionalDeSaude());
+            beneficiario.setDeclNascidoVivo(modeloBenExt.getDeclaracaoNascidoVivo());
+            beneficiario.setDataFimPlanoCassi(DateUtil.toDate(modeloBenExt.getCassiData()));
 
             beneficiario.setEndereco(funcBeneficiario.getEnderecos());
             beneficiario.setDocumentos(funcBeneficiario.getDocumentos());
 
-            Plano plano = new PlanoBeanImpl().existe(modeloBenVLI.getPlano());
+            Plano plano = new PlanoBeanImpl().existe(modeloBenExt.getPlano());
             Operadora operadora = null;
             if (plano == null) {
                 plano = new Plano();
@@ -295,7 +289,7 @@ public class CargaExtBeanImpl implements CargaExtBean {
                 operadora.setDataUltAtulizacao(DateUtil.obterDataAtual());
                 operadora.setNome("AMS");
             }
-            plano.setCodPlano(modeloBenVLI.getPlano());
+            plano.setCodPlano(modeloBenExt.getPlano());
             plano.setOperadora(operadora);
             beneficiario.setPlano(plano);
 
@@ -313,48 +307,48 @@ public class CargaExtBeanImpl implements CargaExtBean {
         }
     }
 
-    private void handlerBeneficiario(ModeloBenVLI modeloBenVLI, ModeloEndVLI modeloEndVLI) {
-//        Beneficiario beneficiario = new BeneficiarioBeanImpl().obter(modeloBenVLI.getEmpresa(), modeloBenVLI.getMatricula(), modeloBenVLI.getCodBeneficiario());
+    private void handlerBeneficiario(ModeloBenExt modeloBenExt, ModeloEndExt modeloEndExt) {
+//        Beneficiario beneficiario = new BeneficiarioBeanImpl().obter(modeloBenExt.getEmpresa(), modeloBenExt.getMatricula(), modeloBenExt.getCodBeneficiario());
 //        if (beneficiario == null) {
 //            beneficiario = new Beneficiario();
 //        }
 //
-//        beneficiario.setMatricula(modeloBenVLI.getMatricula());
-//        beneficiario.setCodBeneficiario(modeloBenVLI.getCodBeneficiario());
-//        beneficiario.setNome(modeloBenVLI.getNomeBeneficiario());
-//        beneficiario.setNomeAbreviado(modeloBenVLI.getNomeBeneficiarioAbreviado());
-//        beneficiario.setNomeMae(modeloBenVLI.getNomeDaMae());
-//        beneficiario.setDataNascimento(DateUtil.toDate(modeloBenVLI.getDataNascimento()));
-//        beneficiario.setDataObito(DateUtil.toDate(modeloBenVLI.getDataFalecimento()));
-//        beneficiario.setSexo(StringUtil.parseSexo(modeloBenVLI.getSexo()));
-//        beneficiario.setNivelEscolaridade(StringUtil.parseEscolocaridade(modeloBenVLI.getGrauEscolaridade()));
-//        beneficiario.setIndicadorConclusao(StringUtil.parserIndicadorConclusao(modeloBenVLI.getIndicadorConclusao()));
-//        beneficiario.setCodBeneficiario(modeloBenVLI.getCodBeneficiario());
-//        beneficiario.setDireitoAMSCredenciamento(StringUtil.parseBoolean(modeloBenVLI.getDireitoAMSCredenciamento()));
-//        beneficiario.setDataValidadeCredenciado(DateUtil.toDate(modeloBenVLI.getDataValidadeCredenciado()));
-//        beneficiario.setDireitoAmsReembolso(StringUtil.parseBoolean(modeloBenVLI.getDireitoAmsReembolso()));
-//        beneficiario.setDataValidadeReembolso(DateUtil.toDate(modeloBenVLI.getDataValidadeReembolso()));
-//        beneficiario.setDataDeAtualizacao(DateUtil.toDate(modeloBenVLI.getDataDeAtualizacao()));
-//        beneficiario.setCodigoCR(modeloBenVLI.getCodigoCR());
-//        beneficiario.setOrgaoPessoal(modeloBenVLI.getOrgaoPessoal());
-//        beneficiario.setFaixaNivel(modeloBenVLI.getFaixaNivel());
-//        beneficiario.setNucleoDaAms(modeloBenVLI.getNucleoDaAms());
+//        beneficiario.setMatricula(modeloBenExt.getMatricula());
+//        beneficiario.setCodBeneficiario(modeloBenExt.getCodBeneficiario());
+//        beneficiario.setNome(modeloBenExt.getNomeBeneficiario());
+//        beneficiario.setNomeAbreviado(modeloBenExt.getNomeBeneficiarioAbreviado());
+//        beneficiario.setNomeMae(modeloBenExt.getNomeDaMae());
+//        beneficiario.setDataNascimento(DateUtil.toDate(modeloBenExt.getDataNascimento()));
+//        beneficiario.setDataObito(DateUtil.toDate(modeloBenExt.getDataFalecimento()));
+//        beneficiario.setSexo(StringUtil.parseSexo(modeloBenExt.getSexo()));
+//        beneficiario.setNivelEscolaridade(StringUtil.parseEscolocaridade(modeloBenExt.getGrauEscolaridade()));
+//        beneficiario.setIndicadorConclusao(StringUtil.parserIndicadorConclusao(modeloBenExt.getIndicadorConclusao()));
+//        beneficiario.setCodBeneficiario(modeloBenExt.getCodBeneficiario());
+//        beneficiario.setDireitoAMSCredenciamento(StringUtil.parseBoolean(modeloBenExt.getDireitoAMSCredenciamento()));
+//        beneficiario.setDataValidadeCredenciado(DateUtil.toDate(modeloBenExt.getDataValidadeCredenciado()));
+//        beneficiario.setDireitoAmsReembolso(StringUtil.parseBoolean(modeloBenExt.getDireitoAmsReembolso()));
+//        beneficiario.setDataValidadeReembolso(DateUtil.toDate(modeloBenExt.getDataValidadeReembolso()));
+//        beneficiario.setDataDeAtualizacao(DateUtil.toDate(modeloBenExt.getDataDeAtualizacao()));
+//        beneficiario.setCodigoCR(modeloBenExt.getCodigoCR());
+//        beneficiario.setOrgaoPessoal(modeloBenExt.getOrgaoPessoal());
+//        beneficiario.setFaixaNivel(modeloBenExt.getFaixaNivel());
+//        beneficiario.setNucleoDaAms(modeloBenExt.getNucleoDaAms());
 //        beneficiario.setTipoBeneficiario(EnunTipoBeneficiario.Dependente);
-//        beneficiario.setMatriculaParticipante(modeloBenVLI.getMatriculaParticipante());
-//        beneficiario.setMatriculaRepresentanteLegal(modeloBenVLI.getMatriculaRepresentanteLegal());
-//        beneficiario.setPlanoDeReciprocidadeCassi(StringUtil.parseBoolean(modeloBenVLI.getPlanoDeReciprocidadeCassi()));
-//        beneficiario.setCodigoNacionalDeSaude(modeloBenVLI.getCodigoNacionalDeSaude());
-//        beneficiario.setDeclaracaoNascidoVivo(modeloBenVLI.getDeclaracaoNascidoVivo());
-//        beneficiario.setCassiData(modeloBenVLI.getCassiData());
+//        beneficiario.setMatriculaParticipante(modeloBenExt.getMatriculaParticipante());
+//        beneficiario.setMatriculaRepresentanteLegal(modeloBenExt.getMatriculaRepresentanteLegal());
+//        beneficiario.setPlanoDeReciprocidadeCassi(StringUtil.parseBoolean(modeloBenExt.getPlanoDeReciprocidadeCassi()));
+//        beneficiario.setCodigoNacionalDeSaude(modeloBenExt.getCodigoNacionalDeSaude());
+//        beneficiario.setDeclaracaoNascidoVivo(modeloBenExt.getDeclaracaoNascidoVivo());
+//        beneficiario.setCassiData(modeloBenExt.getCassiData());
 //
 //        //Docs
 //        DadosBancarios dadosBancarios = beneficiario.getDadosBancarios();
 //        if (dadosBancarios == null) {
 //            dadosBancarios = new DadosBancarios();
 //        }
-//        dadosBancarios.setCodigoBanco(modeloBenVLI.getBanco());
-//        dadosBancarios.setNumeroAgencia(modeloBenVLI.getAgenciaBancaria());
-//        dadosBancarios.setNumeroConta(modeloBenVLI.getContaCorrente());
+//        dadosBancarios.setCodigoBanco(modeloBenExt.getBanco());
+//        dadosBancarios.setNumeroAgencia(modeloBenExt.getAgenciaBancaria());
+//        dadosBancarios.setNumeroConta(modeloBenExt.getContaCorrente());
 //
 //        Telefone tel1 = null;
 //        Telefone tel2 = null;
@@ -362,15 +356,15 @@ public class CargaExtBeanImpl implements CargaExtBean {
 //        if (listaTelefones.isEmpty()) {
 //            tel1 = new Telefone();
 //            tel2 = new Telefone();
-//            tel1.setNumeroTelefone(modeloEndVLI.getTelefone1());
-//            tel2.setNumeroTelefone(modeloEndVLI.getTelefone2());
+//            tel1.setNumeroTelefone(modeloEndExt.getTelefone1());
+//            tel2.setNumeroTelefone(modeloEndExt.getTelefone2());
 //            beneficiario.addTelefone(tel1);
 //            beneficiario.addTelefone(tel2);
 //        } else {
 //            tel1 = listaTelefones.get(0);
 //            tel2 = listaTelefones.get(1);
-//            tel1.setNumeroTelefone(modeloEndVLI.getTelefone1());
-//            tel2.setNumeroTelefone(modeloEndVLI.getTelefone2());
+//            tel1.setNumeroTelefone(modeloEndExt.getTelefone1());
+//            tel2.setNumeroTelefone(modeloEndExt.getTelefone2());
 //        }
 //
 //        Documento cpf = null;
@@ -378,10 +372,10 @@ public class CargaExtBeanImpl implements CargaExtBean {
 //        List<Documento> listaDocs = beneficiario.getListaDocumentos();
 //        if (listaDocs.isEmpty()) {
 //            cpf = new Documento();
-//            cpf.setNumeroDocumento(modeloBenVLI.getCpf());
+//            cpf.setNumeroDocumento(modeloBenExt.getCpf());
 //            cpf.setTipoDocumento(EnunTipoDocumento.CPF);
 //            pis = new Documento();
-//            pis.setNumeroDocumento(modeloBenVLI.getPis());
+//            pis.setNumeroDocumento(modeloBenExt.getPis());
 //            pis.setTipoDocumento(EnunTipoDocumento.PIS);
 //            beneficiario.addDocumento(cpf);
 //            beneficiario.addDocumento(pis);
@@ -389,11 +383,11 @@ public class CargaExtBeanImpl implements CargaExtBean {
 //            for (Documento d : listaDocs) {
 //                if (d.getTipoDocumento() == EnunTipoDocumento.CPF) {
 //                    cpf = new Documento();
-//                    cpf.setNumeroDocumento(modeloBenVLI.getCpf());
+//                    cpf.setNumeroDocumento(modeloBenExt.getCpf());
 //                }
 //                if (d.getTipoDocumento() == EnunTipoDocumento.PIS) {
 //                    pis = new Documento();
-//                    pis.setNumeroDocumento(modeloBenVLI.getPis());
+//                    pis.setNumeroDocumento(modeloBenExt.getPis());
 //                }
 //            }
 //            beneficiario.addDocumento(cpf);
@@ -401,43 +395,43 @@ public class CargaExtBeanImpl implements CargaExtBean {
 //        }
 //
 //        //Endereco
-//        Estado estado = new EstadoBeanImpl().obter(modeloEndVLI.getUf());
+//        Estado estado = new EstadoBeanImpl().obter(modeloEndExt.getUf());
 //        if (estado == null) {
 //            estado = new Estado();
 //        }
-//        estado.setUf(modeloEndVLI.getUf());
+//        estado.setUf(modeloEndExt.getUf());
 //
-//        Municipio municipio = new MunicipioBeanImpl().existe(modeloEndVLI.getCidade());
+//        Municipio municipio = new MunicipioBeanImpl().existe(modeloEndExt.getCidade());
 //        if (municipio == null) {
 //            municipio = new Municipio();
 //        }
-//        municipio.setNome(modeloEndVLI.getCidade());
+//        municipio.setNome(modeloEndExt.getCidade());
 //        municipio.setEstado(estado);
 //
 //        Endereco endereco = beneficiario.getEndereco();
 //        if (endereco == null) {
 //            endereco = new Endereco();
 //        }
-//        endereco.setLogradouro(modeloEndVLI.getEndereco());
-//        endereco.setBairro(modeloEndVLI.getBairro());
-//        endereco.setCep(modeloEndVLI.getCep());
+//        endereco.setLogradouro(modeloEndExt.getEndereco());
+//        endereco.setBairro(modeloEndExt.getBairro());
+//        endereco.setCep(modeloEndExt.getCep());
 //        endereco.setEstado(estado);
 //        endereco.setMunicipio(municipio);
 //        beneficiario.setEndereco(endereco);
 //
-//        GrauParentesco grauParentesco = new GrauParentescoBeanImpl().existe(modeloBenVLI.getGrauParentesco());
+//        GrauParentesco grauParentesco = new GrauParentescoBeanImpl().existe(modeloBenExt.getGrauParentesco());
 //        if (grauParentesco == null) {
 //            grauParentesco = new GrauParentesco();
 //        }
-//        grauParentesco.setGrauParentesco(modeloBenVLI.getGrauParentesco());
+//        grauParentesco.setGrauParentesco(modeloBenExt.getGrauParentesco());
 //        grauParentesco.setDescricao(StringUtil.parseParentesco(grauParentesco.getGrauParentesco()));
 //        beneficiario.setGrauParentesco(grauParentesco);
 //
-//        Plano plano = new PlanoBeanImpl().existe(modeloBenVLI.getPlano());
+//        Plano plano = new PlanoBeanImpl().existe(modeloBenExt.getPlano());
 //        if (plano == null) {
 //            plano = new Plano();
 //        }
-//        plano.setCodPlano(modeloBenVLI.getPlano());
+//        plano.setCodPlano(modeloBenExt.getPlano());
 //        beneficiario.setPlano(plano);
 //
 //        beneficiario.setStatus(SisPasaIntCommon.ATIVO);
