@@ -30,7 +30,7 @@ public class BeneficiarioDAOImpl extends DaoGenerico<Beneficiario> implements Be
             beneficiario = q1.getResultList();
             System.err.println(beneficiario.size());
         } catch (NoResultException e) {
-            System.err.println(e);
+            System.err.println("Ben:"+e);
             return null;
         }
         if (beneficiario.size() > 0) {
