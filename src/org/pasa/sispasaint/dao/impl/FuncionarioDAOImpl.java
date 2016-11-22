@@ -18,8 +18,10 @@ public class FuncionarioDAOImpl extends DaoGenerico<Funcionario> implements Func
 
     @Override
     public Funcionario obter(String empresa, String matricula) {
+        
+        System.err.println("Emnpresa "+empresa+" "+matricula);
         Query q1 = getEntityManager().
-                createQuery("select f from Funcionario f where f.empresa.codEmpresaVale = :emp AND f.matriculaOrigem = :mat");
+                createQuery("select f from Funcionario f where f.empresa.codEmpresaVale = :emp AND f.matriculaPasa = :mat");
         q1.setParameter("emp", empresa);
         q1.setParameter("mat", matricula);
         q1.setMaxResults(1);

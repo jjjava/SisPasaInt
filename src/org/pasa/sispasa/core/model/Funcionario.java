@@ -32,7 +32,7 @@ public class Funcionario extends Pessoa {
     @Column(name = "MATR_ORIGEM", length = 6, nullable = false)
     private String matriculaOrigem;
 
-    @Column(name = "MATR_PASA", length = 2)
+    @Column(name = "MATR_PASA", length = 6)
     private String matriculaPasa;
 
     @Column(name = "EMP_ATULZR")

@@ -227,6 +227,7 @@ public class CargaVLIBeanImpl implements CargaVLIBean {
             funcionario.setMatriculaPasa(modeloBenVLI.getMatriculaPasa());
 
             funcionario.setMatriculaOrigem(modeloBenVLI.getMatriculaOrigem());
+            funcionario.setMatriculaPasa(modeloBenVLI.getMatricula());
             //   funcionario.setEmpresaPeople(modeloBenVLI.getEmpresaPeople());
             //    funcionario.setMatriculaPeople(modeloBenVLI.getMatriculaPeople());
             funcionario.setUnidadeControle(modeloBenVLI.getUnidadeDeControle());

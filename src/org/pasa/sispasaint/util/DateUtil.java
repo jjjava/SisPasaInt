@@ -43,7 +43,7 @@ public class DateUtil {
         String trim = data.trim();
         System.out.println(trim);
         if (trim.equalsIgnoreCase("")){
-            return toDate("01.01.1900");
+            return null;
         }
         try {
             final SimpleDateFormat simpleDateFormat = new SimpleDateFormat(PATTERN_DATA, Locale.getDefault());
