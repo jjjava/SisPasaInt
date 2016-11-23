@@ -13,32 +13,32 @@ import javax.persistence.Table;
 @Table(name = "ORIGEM_INFORMACOES")
 public class OrigemInformacoes implements Serializable {
 
-	private static final long serialVersionUID = 1L;
+    private static final long serialVersionUID = 1L;
 
-	@Id
-	@Column(name = "ID_ORIGEM_INFO")
-	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	private Long id;
+    @Id
+    @Column(name = "ID_ORIGEM_INFO")
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long id;
 
-	@Column(name = "DESCRICAO", length = 30, nullable = false)
-	private String descricao;
-	
-	public OrigemInformacoes(){
-	}
+    @Column(name = "DESCRICAO", length = 30, nullable = false)
+    private String descricao;
 
-	public Long getId() {
-		return id;
-	}
+    public OrigemInformacoes() {
+    }
 
-	public void setId(Long id) {
-		this.id = id;
-	}
+    public Long getId() {
+        return id;
+    }
 
-	public String getDescricao() {
-		return descricao;
-	}
+    public void setId(Long id) {
+        this.id = id;
+    }
 
-	public void setDescricao(String descricao) {
-		this.descricao = descricao;
-	}
+    public String getDescricao() {
+        return descricao;
+    }
+
+    public void setDescricao(String descricao) {
+        this.descricao = descricao;
+    }
 }

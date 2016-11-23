@@ -101,10 +101,12 @@ public class Funcionario extends Pessoa {
     public Funcionario() {
     }
 
+    @Override
     public Long getId() {
         return id;
     }
 
+    @Override
     public void setId(Long id) {
         this.id = id;
     }
@@ -163,14 +165,6 @@ public class Funcionario extends Pessoa {
 
     public void setDataDesligamento(Date dataDesligamento) {
         this.dataDesligamento = dataDesligamento;
-    }
-
-    public String getEmail() {
-        return email;
-    }
-
-    public void setEmail(String email) {
-        this.email = email;
     }
 
     public String getFinanceira() {

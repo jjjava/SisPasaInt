@@ -37,8 +37,8 @@ public class CargaVLIBeanImpl implements CargaVLIBean {
 
     @Override
     public void cargaArquivosTemp() {
-        cargaArquivosBenTemp();
-        cargaArquivosEndTemp();
+       // cargaArquivosBenTemp();
+       // cargaArquivosEndTemp();
     }
 
     @Override
@@ -77,7 +77,7 @@ public class CargaVLIBeanImpl implements CargaVLIBean {
             if (funcionario == null) {
                 funcionario = new Funcionario();
             }
-            
+
             funcionario.setMatriculaPasa(modeloBenVLI.getMatricula());
 
             Beneficiario beneficiario = new BeneficiarioBeanImpl().obter(modeloBenVLI.getEmpresa(), modeloBenVLI.getMatricula(), modeloBenVLI.getCodBeneficiario());
@@ -229,7 +229,7 @@ public class CargaVLIBeanImpl implements CargaVLIBean {
             funcionario.setMatriculaOrigem(modeloBenVLI.getMatriculaOrigem());
             funcionario.setMatriculaPasa(modeloBenVLI.getMatricula());
             //   funcionario.setEmpresaPeople(modeloBenVLI.getEmpresaPeople());
-            //    funcionario.setMatriculaPeople(modeloBenVLI.getMatriculaPeople());
+            //   funcionario.setMatriculaPeople(modeloBenVLI.getMatriculaPeople());
             funcionario.setUnidadeControle(modeloBenVLI.getUnidadeDeControle());
             funcionario.setCentroCusto(modeloBenVLI.getCentroDeCusto());
             //  funcionario.setBranco(modeloBenVLI.getBranco());
@@ -279,7 +279,17 @@ public class CargaVLIBeanImpl implements CargaVLIBean {
             beneficiario.setDeclNascidoVivo(modeloBenVLI.getDeclaracaoNascidoVivo());
             beneficiario.setDataFimPlanoCassi(DateUtil.toDate(modeloBenVLI.getCassiData()));
 
-            beneficiario.setEndereco(funcBeneficiario.getEnderecos());
+            Endereco enderecoBen = new Endereco();
+
+            enderecoBen.setLogradouro(modeloEndVLI.getEndereco());
+            enderecoBen.setBairro(modeloEndVLI.getBairro());
+            enderecoBen.setCep(modeloEndVLI.getCep());
+            enderecoBen.setEstado(estado);
+            enderecoBen.setMunicipio(municipio);
+            enderecoBen.setNumero("");
+            enderecoBen.setDataAtulizacao(DateUtil.obterDataAtual());
+
+            beneficiario.addEndereco(enderecoBen);
             beneficiario.setDocumentos(funcBeneficiario.getDocumentos());
 
             Plano plano = new PlanoBeanImpl().existe(modeloBenVLI.getPlano());
@@ -293,6 +303,7 @@ public class CargaVLIBeanImpl implements CargaVLIBean {
             }
             plano.setCodPlano(modeloBenVLI.getPlano());
             plano.setOperadora(operadora);
+            plano.setDataUltAtulizacao(DateUtil.obterDataAtual());
             beneficiario.setPlano(plano);
 
             origemInformacoes.setDescricao("CARGA");

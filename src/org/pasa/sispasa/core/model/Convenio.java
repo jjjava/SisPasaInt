@@ -18,71 +18,197 @@ import javax.persistence.TemporalType;
  * @author Hudson Schumaker
  * @version 1.0.0
  */
-
 @Entity
 @Table(name = "CONVENIO")
 public class Convenio implements Serializable {
 
-	private static final long serialVersionUID = 1L;
+    private static final long serialVersionUID = 1L;
 
-	@Id
-	@Column(name = "ID_CONVENIO")
-	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	private Long id;
+    @Id
+    @Column(name = "ID_CONVENIO")
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long id;
 
-	@Column(name = "DT_INICIO_VIGENCIA", nullable = false)
-	@Temporal(TemporalType.DATE)
-	private Date dataInicio;
+    @Column(name = "DT_INICIO_VIGENCIA", nullable = false)
+    @Temporal(TemporalType.DATE)
+    private Date dataInicio;
 
-	@Column(name = "DT_FIM")
-	@Temporal(TemporalType.DATE)
-	private Date dataFim;
+    @Column(name = "DT_FIM")
+    @Temporal(TemporalType.DATE)
+    private Date dataFim;
 
-	@Column(name = "QTD_DIAS_ASSOC")
-	private Integer qtdDiasAssociacao;
+    @Column(name = "QTD_DIAS_ASSOC")
+    private Integer qtdDiasAssociacao;
 
-	@Column(name = "QTD_DIAS_ADESAO")
-	private Integer qtdDiasAdesao;
+    @Column(name = "QTD_DIAS_ADESAO")
+    private Integer qtdDiasAdesao;
 
-	@Column(name = "IND_PARTICIP_TAXA_ASSOC", nullable = false)
-	private Integer indParticipacaoTaxaAssociado;
+    @Column(name = "IND_PARTICIP_TAXA_ASSOC", nullable = false)
+    private Integer indParticipacaoTaxaAssociado;
 
-	@Column(name = "IND_CONTRIB_ASSOC", nullable = false)
-	private Integer indContribuicaoAssociado;
+    @Column(name = "IND_CONTRIB_ASSOC", nullable = false)
+    private Integer indContribuicaoAssociado;
 
-	@Column(name = "IND_CONTRIB_AGREG", nullable = false)
-	private Integer indContribuicaoAgregado;
+    @Column(name = "IND_CONTRIB_AGREG", nullable = false)
+    private Integer indContribuicaoAgregado;
 
-	@Column(name = "IND_CONTRIB_DEPEN", nullable = false)
-	private Integer indContribDependente;
+    @Column(name = "IND_CONTRIB_DEPEN", nullable = false)
+    private Integer indContribDependente;
 
-	@Column(name = "ID_USUARIO", nullable = false)
-	private Long idUsuario;
+    @Column(name = "ID_USUARIO", nullable = false)
+    private Long idUsuario;
 
-	@Column(name = "IND_ATIVO", nullable = false)
-	private Integer indAtivo;
-	
-	@Column(name = "DT_ULT_ATULZ", nullable= false)
-	@Temporal(TemporalType.DATE)
-	private Date dataUltAtulizacao;
-	
-	@ManyToOne
-	@JoinColumn(name = "ID_TP_PAGAMENTO")
-	private TipoPagamento tipoPagamento;
-	
-	@ManyToOne
-	@JoinColumn(name = "ID_TP_PARTICIP")
-	private TipoParticipacao tipoParticipacao;
-	
-	@ManyToOne
-	@JoinColumn(name = "ID_EMPRESA")
-	private Empresa empresa;
-	
-	@ManyToOne
-	@JoinColumn(name = "ID_CONTRATO")
-	private Contrato contrato;
+    @Column(name = "IND_ATIVO", nullable = false)
+    private Integer indAtivo;
 
-	public Convenio() {
-	}
+    @Column(name = "DT_ULT_ATULZ", nullable = false)
+    @Temporal(TemporalType.DATE)
+    private Date dataUltAtulizacao;
 
+    @ManyToOne
+    @JoinColumn(name = "ID_TP_PAGAMENTO")
+    private TipoPagamento tipoPagamento;
+
+    @ManyToOne
+    @JoinColumn(name = "ID_TP_PARTICIP")
+    private TipoParticipacao tipoParticipacao;
+
+    @ManyToOne
+    @JoinColumn(name = "ID_EMPRESA")
+    private Empresa empresa;
+
+    @ManyToOne
+    @JoinColumn(name = "ID_CONTRATO")
+    private Contrato contrato;
+
+    public Convenio() {
+    }
+
+    public Long getId() {
+        return id;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
+    }
+
+    public Date getDataInicio() {
+        return dataInicio;
+    }
+
+    public void setDataInicio(Date dataInicio) {
+        this.dataInicio = dataInicio;
+    }
+
+    public Date getDataFim() {
+        return dataFim;
+    }
+
+    public void setDataFim(Date dataFim) {
+        this.dataFim = dataFim;
+    }
+
+    public Integer getQtdDiasAssociacao() {
+        return qtdDiasAssociacao;
+    }
+
+    public void setQtdDiasAssociacao(Integer qtdDiasAssociacao) {
+        this.qtdDiasAssociacao = qtdDiasAssociacao;
+    }
+
+    public Integer getQtdDiasAdesao() {
+        return qtdDiasAdesao;
+    }
+
+    public void setQtdDiasAdesao(Integer qtdDiasAdesao) {
+        this.qtdDiasAdesao = qtdDiasAdesao;
+    }
+
+    public Integer getIndParticipacaoTaxaAssociado() {
+        return indParticipacaoTaxaAssociado;
+    }
+
+    public void setIndParticipacaoTaxaAssociado(Integer indParticipacaoTaxaAssociado) {
+        this.indParticipacaoTaxaAssociado = indParticipacaoTaxaAssociado;
+    }
+
+    public Integer getIndContribuicaoAssociado() {
+        return indContribuicaoAssociado;
+    }
+
+    public void setIndContribuicaoAssociado(Integer indContribuicaoAssociado) {
+        this.indContribuicaoAssociado = indContribuicaoAssociado;
+    }
+
+    public Integer getIndContribuicaoAgregado() {
+        return indContribuicaoAgregado;
+    }
+
+    public void setIndContribuicaoAgregado(Integer indContribuicaoAgregado) {
+        this.indContribuicaoAgregado = indContribuicaoAgregado;
+    }
+
+    public Integer getIndContribDependente() {
+        return indContribDependente;
+    }
+
+    public void setIndContribDependente(Integer indContribDependente) {
+        this.indContribDependente = indContribDependente;
+    }
+
+    public Long getIdUsuario() {
+        return idUsuario;
+    }
+
+    public void setIdUsuario(Long idUsuario) {
+        this.idUsuario = idUsuario;
+    }
+
+    public Integer getIndAtivo() {
+        return indAtivo;
+    }
+
+    public void setIndAtivo(Integer indAtivo) {
+        this.indAtivo = indAtivo;
+    }
+
+    public Date getDataUltAtulizacao() {
+        return dataUltAtulizacao;
+    }
+
+    public void setDataUltAtulizacao(Date dataUltAtulizacao) {
+        this.dataUltAtulizacao = dataUltAtulizacao;
+    }
+
+    public TipoPagamento getTipoPagamento() {
+        return tipoPagamento;
+    }
+
+    public void setTipoPagamento(TipoPagamento tipoPagamento) {
+        this.tipoPagamento = tipoPagamento;
+    }
+
+    public TipoParticipacao getTipoParticipacao() {
+        return tipoParticipacao;
+    }
+
+    public void setTipoParticipacao(TipoParticipacao tipoParticipacao) {
+        this.tipoParticipacao = tipoParticipacao;
+    }
+
+    public Empresa getEmpresa() {
+        return empresa;
+    }
+
+    public void setEmpresa(Empresa empresa) {
+        this.empresa = empresa;
+    }
+
+    public Contrato getContrato() {
+        return contrato;
+    }
+
+    public void setContrato(Contrato contrato) {
+        this.contrato = contrato;
+    }
 }

@@ -10,34 +10,34 @@ import javax.persistence.Table;
 
 @Entity
 @Table(name = "TIPO_CONTRATO")
-public class TipoContrato implements Serializable{
-	
-	private static final long serialVersionUID = 1L;
+public class TipoContrato implements Serializable {
 
-	@Id
-	@Column(name = "ID_TP_CONTRATO")
-	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	private Long id;
-	
-	@Column(name = "DESCRICAO", length=30, nullable =false)
-	private String descricao;
-	
-	public TipoContrato(){
-	}
+    private static final long serialVersionUID = 1L;
 
-	public Long getId() {
-		return id;
-	}
+    @Id
+    @Column(name = "ID_TP_CONTRATO")
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long id;
 
-	public void setId(Long id) {
-		this.id = id;
-	}
+    @Column(name = "DESCRICAO", length = 30, nullable = false)
+    private String descricao;
 
-	public String getDescricao() {
-		return descricao;
-	}
+    public TipoContrato() {
+    }
 
-	public void setDescricao(String descricao) {
-		this.descricao = descricao;
-	}
+    public Long getId() {
+        return id;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
+    }
+
+    public String getDescricao() {
+        return descricao;
+    }
+
+    public void setDescricao(String descricao) {
+        this.descricao = descricao;
+    }
 }

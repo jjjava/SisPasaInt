@@ -30,7 +30,7 @@ public class Plano implements Serializable {
     @Column(name = "NOME", length = 30, nullable = false)
     private String nome;
 
-    @Column(name = "DESCRICAO", length = 60, nullable = false)
+    @Column(name = "DESCRICAO", length = 60)
     private String descricao;
 
     @Column(name = "DT_INICIO_VIGENCIA")

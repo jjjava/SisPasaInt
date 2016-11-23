@@ -10,34 +10,34 @@ import javax.persistence.Table;
 
 @Entity
 @Table(name = "ESTADO_CIVIL")
-public class EstadoCivil implements Serializable{
-	
-	private static final long serialVersionUID = 1L;
+public class EstadoCivil implements Serializable {
 
-	@Id
-	@Column(name = "ID_EVENTO_ATUALIZACAO")
-	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	private Long id;
-	
-	@Column(name = "DESCRICAO", length =30, nullable = false)
-	private String descricao;
-	
-	public EstadoCivil(){
-	}
+    private static final long serialVersionUID = 1L;
 
-	public Long getId() {
-		return id;
-	}
+    @Id
+    @Column(name = "ID_EVENTO_ATUALIZACAO")
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long id;
 
-	public void setId(Long id) {
-		this.id = id;
-	}
+    @Column(name = "DESCRICAO", length = 30, nullable = false)
+    private String descricao;
 
-	public String getDescricao() {
-		return descricao;
-	}
+    public EstadoCivil() {
+    }
 
-	public void setDescricao(String descricao) {
-		this.descricao = descricao;
-	}
+    public Long getId() {
+        return id;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
+    }
+
+    public String getDescricao() {
+        return descricao;
+    }
+
+    public void setDescricao(String descricao) {
+        this.descricao = descricao;
+    }
 }

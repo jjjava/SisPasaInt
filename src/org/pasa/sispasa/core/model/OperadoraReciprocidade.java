@@ -20,151 +20,151 @@ import javax.persistence.TemporalType;
 @Table(name = "OPERADORA_RECIPROCIDADE")
 public class OperadoraReciprocidade implements Serializable {
 
-	private static final long serialVersionUID = 1L;
+    private static final long serialVersionUID = 1L;
 
-	@Id
-	@Column(name = "ID_OPERADORA_RCP")
-	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	private Long id;
+    @Id
+    @Column(name = "ID_OPERADORA_RCP")
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long id;
 
-	@Column(name = "RZ_SOCIAL", length = 60, nullable = false)
-	private String razaoSocial;
+    @Column(name = "RZ_SOCIAL", length = 60, nullable = false)
+    private String razaoSocial;
 
-	@Column(name = "NM_FANTASIA", length = 60, nullable = false)
-	private String nomeFantasia;
+    @Column(name = "NM_FANTASIA", length = 60, nullable = false)
+    private String nomeFantasia;
 
-	@Column(name = "CNPJ", length = 14, nullable = false)
-	private String cnpj;
+    @Column(name = "CNPJ", length = 14, nullable = false)
+    private String cnpj;
 
-	@Column(name = "DT_INICIO", nullable = false)
-	@Temporal(TemporalType.DATE)
-	private Date dataInicio;
+    @Column(name = "DT_INICIO", nullable = false)
+    @Temporal(TemporalType.DATE)
+    private Date dataInicio;
 
-	@Column(name = "DT_FIM")
-	@Temporal(TemporalType.DATE)
-	private Date dataFim;
+    @Column(name = "DT_FIM")
+    @Temporal(TemporalType.DATE)
+    private Date dataFim;
 
-	@Column(name = "CD_CNAE", length = 7)
-	private String codCNAE;
+    @Column(name = "CD_CNAE", length = 7)
+    private String codCNAE;
 
-	@Column(name = "EMAIL", length = 60)
-	private String email;
+    @Column(name = "EMAIL", length = 60)
+    private String email;
 
-	@Column(name = "SITE", length = 60)
-	private String site;
+    @Column(name = "SITE", length = 60)
+    private String site;
 
-	@Column(name = "ID_USUARIO", nullable = false)
-	private Long idUsuario;
+    @Column(name = "ID_USUARIO", nullable = false)
+    private Long idUsuario;
 
-	@Column(name = "IND_ATIVO", length = 1, nullable = false)
-	private Integer indAtivo;
+    @Column(name = "IND_ATIVO", length = 1, nullable = false)
+    private Integer indAtivo;
 
-	@Column(name = "DT_ULT_ATULZ", nullable = false)
-	@Temporal(TemporalType.DATE)
-	private Date dataUltAtulizacao;
-	
-	@ManyToMany
-	@JoinTable(name = "OPERADORA_RECIPROCIDADE_CONTATO",
-	joinColumns = @JoinColumn(name = "ID_OPERADORA_RCP"), 
-	inverseJoinColumns = @JoinColumn(name = "ID_CONTATO"))
-	private List<Contato> contatos;
-	
-	public OperadoraReciprocidade(){
-	}
+    @Column(name = "DT_ULT_ATULZ", nullable = false)
+    @Temporal(TemporalType.DATE)
+    private Date dataUltAtulizacao;
 
-	public Long getId() {
-		return id;
-	}
+    @ManyToMany
+    @JoinTable(name = "OPERADORA_RECIPROCIDADE_CONTATO",
+            joinColumns = @JoinColumn(name = "ID_OPERADORA_RCP"),
+            inverseJoinColumns = @JoinColumn(name = "ID_CONTATO"))
+    private List<Contato> contatos;
 
-	public void setId(Long id) {
-		this.id = id;
-	}
+    public OperadoraReciprocidade() {
+    }
 
-	public String getRazaoSocial() {
-		return razaoSocial;
-	}
+    public Long getId() {
+        return id;
+    }
 
-	public void setRazaoSocial(String razaoSocial) {
-		this.razaoSocial = razaoSocial;
-	}
+    public void setId(Long id) {
+        this.id = id;
+    }
 
-	public String getNomeFantasia() {
-		return nomeFantasia;
-	}
+    public String getRazaoSocial() {
+        return razaoSocial;
+    }
 
-	public void setNomeFantasia(String nomeFantasia) {
-		this.nomeFantasia = nomeFantasia;
-	}
+    public void setRazaoSocial(String razaoSocial) {
+        this.razaoSocial = razaoSocial;
+    }
 
-	public String getCnpj() {
-		return cnpj;
-	}
+    public String getNomeFantasia() {
+        return nomeFantasia;
+    }
 
-	public void setCnpj(String cnpj) {
-		this.cnpj = cnpj;
-	}
+    public void setNomeFantasia(String nomeFantasia) {
+        this.nomeFantasia = nomeFantasia;
+    }
 
-	public Date getDataInicio() {
-		return dataInicio;
-	}
+    public String getCnpj() {
+        return cnpj;
+    }
 
-	public void setDataInicio(Date dataInicio) {
-		this.dataInicio = dataInicio;
-	}
+    public void setCnpj(String cnpj) {
+        this.cnpj = cnpj;
+    }
 
-	public Date getDataFim() {
-		return dataFim;
-	}
+    public Date getDataInicio() {
+        return dataInicio;
+    }
 
-	public void setDataFim(Date dataFim) {
-		this.dataFim = dataFim;
-	}
+    public void setDataInicio(Date dataInicio) {
+        this.dataInicio = dataInicio;
+    }
 
-	public String getCodCNAE() {
-		return codCNAE;
-	}
+    public Date getDataFim() {
+        return dataFim;
+    }
 
-	public void setCodCNAE(String codCNAE) {
-		this.codCNAE = codCNAE;
-	}
+    public void setDataFim(Date dataFim) {
+        this.dataFim = dataFim;
+    }
 
-	public String getEmail() {
-		return email;
-	}
+    public String getCodCNAE() {
+        return codCNAE;
+    }
 
-	public void setEmail(String email) {
-		this.email = email;
-	}
+    public void setCodCNAE(String codCNAE) {
+        this.codCNAE = codCNAE;
+    }
 
-	public String getSite() {
-		return site;
-	}
+    public String getEmail() {
+        return email;
+    }
 
-	public void setSite(String site) {
-		this.site = site;
-	}
+    public void setEmail(String email) {
+        this.email = email;
+    }
 
-	public Long getIdUsuario() {
-		return idUsuario;
-	}
+    public String getSite() {
+        return site;
+    }
 
-	public void setIdUsuario(Long idUsuario) {
-		this.idUsuario = idUsuario;
-	}
+    public void setSite(String site) {
+        this.site = site;
+    }
 
-	public Integer getIndAtivo() {
-		return indAtivo;
-	}
+    public Long getIdUsuario() {
+        return idUsuario;
+    }
 
-	public void setIndAtivo(Integer indAtivo) {
-		this.indAtivo = indAtivo;
-	}
+    public void setIdUsuario(Long idUsuario) {
+        this.idUsuario = idUsuario;
+    }
 
-	public Date getDataUltAtulizacao() {
-		return dataUltAtulizacao;
-	}
+    public Integer getIndAtivo() {
+        return indAtivo;
+    }
 
-	public void setDataUltAtulizacao(Date dataUltAtulizacao) {
-		this.dataUltAtulizacao = dataUltAtulizacao;
-	}
+    public void setIndAtivo(Integer indAtivo) {
+        this.indAtivo = indAtivo;
+    }
+
+    public Date getDataUltAtulizacao() {
+        return dataUltAtulizacao;
+    }
+
+    public void setDataUltAtulizacao(Date dataUltAtulizacao) {
+        this.dataUltAtulizacao = dataUltAtulizacao;
+    }
 }

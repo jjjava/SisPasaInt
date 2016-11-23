@@ -11,34 +11,34 @@ import javax.persistence.Table;
 
 @Entity
 @Table(name = "PAIS")
-public class Pais implements Serializable{
-	
-	private static final long serialVersionUID = 1L;
+public class Pais implements Serializable {
 
-	@Id
-	@Column(name = "ID_ESTADO")
-	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	private Long id;
+    private static final long serialVersionUID = 1L;
 
-	@Column(name = "NOME", length = 30, nullable = false)
-	private String nome;
-	
-	public Pais(){
-	}
+    @Id
+    @Column(name = "ID_ESTADO")
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long id;
 
-	public Long getId() {
-		return id;
-	}
+    @Column(name = "NOME", length = 30, nullable = false)
+    private String nome;
 
-	public void setId(Long id) {
-		this.id = id;
-	}
+    public Pais() {
+    }
 
-	public String getNome() {
-		return nome;
-	}
+    public Long getId() {
+        return id;
+    }
 
-	public void setNome(String nome) {
-		this.nome = nome;
-	}
+    public void setId(Long id) {
+        this.id = id;
+    }
+
+    public String getNome() {
+        return nome;
+    }
+
+    public void setNome(String nome) {
+        this.nome = nome;
+    }
 }
