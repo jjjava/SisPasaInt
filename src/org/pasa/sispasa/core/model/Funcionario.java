@@ -37,7 +37,7 @@ public class Funcionario extends Pessoa {
     @Column(name = "EMP_ATULZR")
     private String empresaAtualizadora;
 
-    @Column(name = "MATR_ATULZR")
+    @Column(name = "MATR_ATULZR", length = 15)
     private String matriculaAtualizadora;
 
     @Column(name = "DIREITO_ABATER_IR", length = 1)
@@ -52,7 +52,7 @@ public class Funcionario extends Pessoa {
     private Date dataDesligamento;
 
     @Column(name = "EMAIL_CORPORATIVO", length = 60)
-    private String email;
+    private String emailCorp;
 
     @Column(name = "FINANCEIRA", length = 1)
     private String financeira;
@@ -269,5 +269,13 @@ public class Funcionario extends Pessoa {
 
     public void setMotivoDesligamento(MotivoDesligamento motivoDesligamento) {
         this.motivoDesligamento = motivoDesligamento;
+    }
+
+    public String getEmailCorp() {
+        return emailCorp;
+    }
+
+    public void setEmailCorp(String emailCorp) {
+        this.emailCorp = emailCorp;
     }
 }
