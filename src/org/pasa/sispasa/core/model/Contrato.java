@@ -17,6 +17,11 @@ import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 import org.pasa.sispasa.core.constants.ConstantesBanco;
 
+/**
+*
+* @author Hudson Schumaker
+* @version 1.0.0
+*/
 @Entity
 @Table(name = "CONTRATO")
 public class Contrato implements Serializable {
@@ -28,31 +33,31 @@ public class Contrato implements Serializable {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @Column(name = "NR_CONTRATO")
+    @Column(name = "NR_CONTRATO", columnDefinition = ConstantesBanco.BIGINT)
     private Long numeroContrato;
 
-    @Column(name = "OBSERVACAO", length = 245)
+    @Column(name = "OBSERVACAO", length=245)
     private String observacao;
 
-    @Column(name = "DT_INICIO_VIGENCIA", nullable = false)
+    @Column(name = "DT_INICIO_VIGENCIA", nullable = false, columnDefinition = ConstantesBanco.DATE)
     @Temporal(TemporalType.DATE)
     private Date dataInicioVigencia;
 
-    @Column(name = "DT_FIM_VIGENCIA")
+    @Column(name = "DT_FIM_VIGENCIA", columnDefinition = ConstantesBanco.DATE)
     @Temporal(TemporalType.DATE)
     private Date dataFimVigencia;
 
-    @Column(name = "IDADE_COM_ESTUDO", nullable = false)
+    @Column(name = "IDADE_COM_ESTUDO", nullable = false, columnDefinition = ConstantesBanco.SMALLINT)
     private Integer idadeComEstudo;
 
-    @Column(name = "IDADE_SEM_ESTUDO", nullable = false)
+    @Column(name = "IDADE_SEM_ESTUDO", nullable = false, columnDefinition = ConstantesBanco.SMALLINT)
     private Integer idadeSemEstudo;
 
-    @Column(name = "ID_USUARIO", nullable = false)
+    @Column(name = "ID_USUARIO", nullable = false, columnDefinition = ConstantesBanco.BIGINT)
     private Long idUsuario;
 
-    @Column(name = "DT_ULT_ATULZ", nullable = false)
-    @Temporal(TemporalType.DATE)
+    @Column(name = "DT_ULT_ATULZ", nullable = false) 
+    @Temporal(TemporalType.TIMESTAMP)
     private Date dataUltAtualizacao;
 
     @ManyToOne

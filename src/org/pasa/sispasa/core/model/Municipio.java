@@ -29,14 +29,16 @@ public class Municipio implements Serializable {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @Column(name = "NOME", length = 30, nullable = false)
+    @Column(name = "NOME", nullable = false, length=30)
     private String nome;
 
     @ManyToOne
     @JoinColumn(name = "ID_ESTADO")
     private Estado estado;
+    
+    public Municipio(){
+    }
 
-    //GETTERS E SETTERS
     public Long getId() {
         return id;
     }

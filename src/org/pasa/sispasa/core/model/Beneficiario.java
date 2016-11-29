@@ -32,10 +32,10 @@ public class Beneficiario extends Pessoa {
     @Column(name = "CD_BENEF", nullable = false, columnDefinition = ConstantesBanco.CHAR_2)
     private String codBeneficiario;
 
-    @Column(name = "MATRICULA_AMS", columnDefinition = ConstantesBanco.CHAR_7)
+    @Column(name = "MATRICULA_AMS", length=15)
     private String matriculaAMS;
 
-    @Column(name = "CARTEIRINHA", nullable = false, columnDefinition = ConstantesBanco.CHAR_10)
+    @Column(name = "CARTEIRINHA", nullable = false, length=10)
     private String carteirinha;
 
     @Column(name = "DIREITO_AMS_CREDENC", nullable = false, columnDefinition = ConstantesBanco.CHAR_1)
@@ -56,25 +56,25 @@ public class Beneficiario extends Pessoa {
     @Temporal(TemporalType.DATE)
     private Date dataAtulizacao;
 
-    @Column(name = "CD_CR", columnDefinition = ConstantesBanco.CHAR_8)
+    @Column(name = "CD_CR", length=8)
     private String codCR;
 
     @Column(name = "ORGAO_PESSOAL", columnDefinition = ConstantesBanco.CHAR_1)
     private String orgaoPessoal;
 
-    @Column(name = "FAIXA_NIVEL", columnDefinition = ConstantesBanco.CHAR_2)
+    @Column(name = "FAIXA_NIVEL", length=2)
     private String faixaNivel;
 
-    @Column(name = "NUCLEO_AMS", columnDefinition = ConstantesBanco.CHAR_2)
+    @Column(name = "NUCLEO_AMS", length=2)
     private String nucleoAMS;
 
-    @Column(name = "TP_BENEF", columnDefinition = ConstantesBanco.CHAR_2)
+    @Column(name = "TP_BENEF", columnDefinition = ConstantesBanco.CHAR_1, nullable= false)
     private String tipoBenneficiario;
 
-    @Column(name = "MATR_PARTICIP", columnDefinition = ConstantesBanco.CHAR_3)
+    @Column(name = "MATR_PARTICIP", length=15)
     private String matriculaParticipante;
 
-    @Column(name = "MATR_REPR_LEGAL", columnDefinition = ConstantesBanco.CHAR_6)
+    @Column(name = "MATR_REPR_LEGAL", length=15)
     private String matriculaRepresentanteLegal;
 
     @Column(name = "PLANO_RCP_CASSI", columnDefinition = ConstantesBanco.CHAR_1)
@@ -84,10 +84,10 @@ public class Beneficiario extends Pessoa {
     @Temporal(TemporalType.DATE)
     private Date dataFimPlanoCassi;
 
-    @Column(name = "CD_NACIONAL_SAUDE", columnDefinition = ConstantesBanco.CHAR_15)
+    @Column(name = "CD_NACIONAL_SAUDE", length=15)
     private String cns;
 
-    @Column(name = "DECL_NASCIDO_VIVO", columnDefinition = ConstantesBanco.CHAR_11)
+    @Column(name = "DECL_NASCIDO_VIVO", length=11)
     private String declNascidoVivo;
 
     @Column(name = "ID_USUARIO", nullable = false, columnDefinition = ConstantesBanco.BIGINT)
@@ -96,8 +96,8 @@ public class Beneficiario extends Pessoa {
     @Column(name = "IND_ATIVO", nullable = false, columnDefinition = ConstantesBanco.SMALLINT)
     private Integer indAtivo;
 
-    @Column(name = "DT_ULT_ATULZ", nullable = false, columnDefinition = ConstantesBanco.DATE)
-    @Temporal(TemporalType.DATE)
+    @Column(name = "DT_ULT_ATULZ", nullable = false)
+    @Temporal(TemporalType.TIMESTAMP)
     private Date dataUltAtulizacao;
 
     @ManyToOne

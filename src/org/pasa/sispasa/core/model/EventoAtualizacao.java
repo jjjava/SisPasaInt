@@ -12,6 +12,11 @@ import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 import org.pasa.sispasa.core.constants.ConstantesBanco;
 
+/**
+ *
+ * @author Hudson Schumaker
+ * @version 1.0.0
+ */
 @Entity
 @Table(name = "EVENTO_ATUALIZACAO")
 public class EventoAtualizacao implements Serializable {
@@ -23,10 +28,10 @@ public class EventoAtualizacao implements Serializable {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
 
-	@Column(name = "EMPRESA_ATUALIZADORA")
+	@Column(name = "EMPRESA_ATUALIZADORA", columnDefinition = ConstantesBanco.CHAR_2)
 	private String empresaAtualizadora;
 
-	@Column(name = "MATRICULA_ATUALIZADOR")
+	@Column(name = "MATRICULA_ATUALIZADOR", columnDefinition = ConstantesBanco.CHAR_10)
 	private String matriculaAtualizador;
 
 	@Column(name = "DT_ATUALIZACAO")

@@ -14,107 +14,112 @@ import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 import org.pasa.sispasa.core.constants.ConstantesBanco;
 
+/**
+ *
+ * @author Hudson Schumaker
+ * @version 1.0.0
+ */
 @Entity
 @Table(name = "DOCUMENTO")
 public class Documento implements Serializable {
 
-    private static final long serialVersionUID = 1L;
+	private static final long serialVersionUID = 1L;
 
-    @Id
-    @Column(name = "ID_DOCUMENTO",columnDefinition = ConstantesBanco.BIGINT)
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
+	@Id
+	@Column(name = "ID_DOCUMENTO", columnDefinition = ConstantesBanco.BIGINT)
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	private Long id;
 
-    @Column(name = "NUMERO", length = 20, nullable = false)
-    private String numero;
+	@Column(name = "NUMERO", nullable = false, length=20)
+	private String numero;
 
-    @Column(name = "ORGAO_EMISSOR", length = 30)
-    private String orgaoEmissor;
+	@Column(name = "ORGAO_EMISSOR", length=30)
+	private String orgaoEmissor;
 
-    @Column(name = "DATA_EMISSAO")
-    @Temporal(TemporalType.DATE)
-    private Date dataEmissao;
+	@Column(name = "DATA_EMISSAO", columnDefinition = ConstantesBanco.DATE)
+	@Temporal(TemporalType.DATE)
+	private Date dataEmissao;
 
-    @Column(name = "DATA_VALIDADE")
-    @Temporal(TemporalType.DATE)
-    private Date dataValidade;
+	@Column(name = "DATA_VALIDADE", columnDefinition = ConstantesBanco.DATE)
+	@Temporal(TemporalType.DATE)
+	private Date dataValidade;
 
-    @Column(name = "DT_ULT_ATULZ", nullable = false)
-    @Temporal(TemporalType.DATE)
-    private Date dataUltimaAtulizacao;
+	@Column(name = "DT_ULT_ATULZ", nullable = false)
+	@Temporal(TemporalType.TIMESTAMP)
+	private Date dataUltimaAtulizacao;
 
-    @ManyToOne
-    @JoinColumn(name = "ID_ESTADO")
-    private Estado estado;
+	@ManyToOne
+	@JoinColumn(name = "ID_ESTADO")
+	private Estado estado;
 
-    @ManyToOne
-    @JoinColumn(name = "ID_TP_DOCUMENTO")
-    private TipoDocumento tipoDocumento;
+	@ManyToOne
+	@JoinColumn(name = "ID_TP_DOCUMENTO")
+	private TipoDocumento tipoDocumento;
 
-    public Documento() {
-    }
+	public Documento() {
+	}
 
-    public Long getId() {
-        return id;
-    }
+	public Long getId() {
+		return id;
+	}
 
-    public void setId(Long id) {
-        this.id = id;
-    }
+	public void setId(Long id) {
+		this.id = id;
+	}
 
-    public String getNumero() {
-        return numero;
-    }
+	public String getNumero() {
+		return numero;
+	}
 
-    public void setNumero(String numero) {
-        this.numero = numero;
-    }
+	public void setNumero(String numero) {
+		this.numero = numero;
+	}
 
-    public String getOrgaoEmissor() {
-        return orgaoEmissor;
-    }
+	public String getOrgaoEmissor() {
+		return orgaoEmissor;
+	}
 
-    public void setOrgaoEmissor(String orgaoEmissor) {
-        this.orgaoEmissor = orgaoEmissor;
-    }
+	public void setOrgaoEmissor(String orgaoEmissor) {
+		this.orgaoEmissor = orgaoEmissor;
+	}
 
-    public Date getDataEmissao() {
-        return dataEmissao;
-    }
+	public Date getDataEmissao() {
+		return dataEmissao;
+	}
 
-    public void setDataEmissao(Date dataEmissao) {
-        this.dataEmissao = dataEmissao;
-    }
+	public void setDataEmissao(Date dataEmissao) {
+		this.dataEmissao = dataEmissao;
+	}
 
-    public Date getDataValidade() {
-        return dataValidade;
-    }
+	public Date getDataValidade() {
+		return dataValidade;
+	}
 
-    public void setDataValidade(Date dataValidade) {
-        this.dataValidade = dataValidade;
-    }
+	public void setDataValidade(Date dataValidade) {
+		this.dataValidade = dataValidade;
+	}
 
-    public Date getDataUltimaAtulizacao() {
-        return dataUltimaAtulizacao;
-    }
+	public Date getDataUltimaAtulizacao() {
+		return dataUltimaAtulizacao;
+	}
 
-    public void setDataUltimaAtulizacao(Date dataUltimaAtulizacao) {
-        this.dataUltimaAtulizacao = dataUltimaAtulizacao;
-    }
+	public void setDataUltimaAtulizacao(Date dataUltimaAtulizacao) {
+		this.dataUltimaAtulizacao = dataUltimaAtulizacao;
+	}
 
-    public Estado getEstado() {
-        return estado;
-    }
+	public Estado getEstado() {
+		return estado;
+	}
 
-    public void setEstado(Estado estado) {
-        this.estado = estado;
-    }
+	public void setEstado(Estado estado) {
+		this.estado = estado;
+	}
 
-    public TipoDocumento getTipoDocumento() {
-        return tipoDocumento;
-    }
+	public TipoDocumento getTipoDocumento() {
+		return tipoDocumento;
+	}
 
-    public void setTipoDocumento(TipoDocumento tipoDocumento) {
-        this.tipoDocumento = tipoDocumento;
-    }
+	public void setTipoDocumento(TipoDocumento tipoDocumento) {
+		this.tipoDocumento = tipoDocumento;
+	}
 }

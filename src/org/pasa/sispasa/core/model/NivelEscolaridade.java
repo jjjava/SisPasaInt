@@ -13,7 +13,7 @@ import org.pasa.sispasa.core.constants.ConstantesBanco;
 
 /**
 *
-* @author Hudson Schumaker / André Gomes
+* @author Hudson Schumaker / Andrï¿½ Gomes
 * @version 1.0.0
 */
 @Entity
@@ -27,14 +27,14 @@ public class NivelEscolaridade implements Serializable {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @Column(name = "DESCRICAO", length = 30)
+    @Column(name = "DESCRICAO", length=30)
     private String descricao;
 
-    @Column(name = "CD_EXTERNO", length = 10)
+    @Column(name = "CD_EXTERNO", length=10)
     private String codExterno;
-
-
-    //GETTERS AND SETTERS
+    
+    public NivelEscolaridade(){
+    }
     
     public Long getId() {
         return id;

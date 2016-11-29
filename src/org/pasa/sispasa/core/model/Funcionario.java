@@ -12,12 +12,14 @@ import javax.persistence.PrimaryKeyJoinColumn;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
+import javax.persistence.Transient;
 
 import org.pasa.sispasa.core.constants.ConstantesBanco;
+import org.pasa.sispasa.core.enumeration.EnumStatus;
 
 /**
  *
- * @author Hudson Schumaker / Andr� Gomes
+ * @author Hudson Schumaker / Andre Gomes
  * @version 1.0.0
  */
 @Entity
@@ -78,10 +80,13 @@ public class Funcionario extends Pessoa {
     @Column(name = "ID_USUARIO", nullable = false, columnDefinition = ConstantesBanco.BIGINT)
     private Long idUsuario;
 
-    @Column(name = "IND_ATIVO", nullable = false, columnDefinition = ConstantesBanco.SMALLINT)
+    @Column(name = "IND_ATIVO", nullable = false,  columnDefinition = ConstantesBanco.SMALLINT)
     private Integer indAtivo;
+    
+    @Transient
+    private EnumStatus status;
 
-    @Column(name = "DT_ULT_ATULZ", nullable = false, columnDefinition = ConstantesBanco.DATE)
+    @Column(name = "DT_ULT_ATULZ", nullable = false,  columnDefinition = ConstantesBanco.DATE)
     @Temporal(TemporalType.DATE)
     private Date dataUltAtulizacao;
 
@@ -101,13 +106,21 @@ public class Funcionario extends Pessoa {
     @JoinColumn(name = "ID_MOTIVO_DESLIGAMENTO")
     private MotivoDesligamento motivoDesligamento;
 
+
     //GETTERS AND SETTERS
-    @Override
+    
+    public EnumStatus getStatus(){
+    	return status;
+    }
+    
+	public void setStatus(EnumStatus status) {
+		this.status = status;
+	}
+	
     public Long getId() {
         return id;
     }
 
-    @Override
     public void setId(Long id) {
         this.id = id;
     }
@@ -272,11 +285,19 @@ public class Funcionario extends Pessoa {
         this.motivoDesligamento = motivoDesligamento;
     }
 
-    public String getEmailCorporativo() {
-        return emailCorporativo;
-    }
+	/**
+	 * @return the emailCorporativo
+	 */
+	public String getEmailCorporativo() {
+		return emailCorporativo;
+	}
 
-    public void setEmailCorporativo(String emailCorporativo) {
-        this.emailCorporativo = emailCorporativo;
-    }
+	/**
+	 * @param emailCorporativo the emailCorporativo to set
+	 */
+	public void setEmailCorporativo(String emailCorporativo) {
+		this.emailCorporativo = emailCorporativo;
+	}
+
+
 }

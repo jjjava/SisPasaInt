@@ -24,7 +24,7 @@ import org.pasa.sispasa.core.constants.ConstantesBanco;
 
 /**
  *
- * @author Hudson Schumaker / Andr� Gomes
+ * @author Hudson Schumaker / Andre Gomes
  * @version 1.0.0
  */
 @Entity
@@ -109,15 +109,15 @@ public class Pessoa extends BaseEntity implements Serializable {
     
     @ManyToOne
     @JoinColumn(name = "ID_PAIS")
-    private Pais pais;
+    private Pais nacionalidade;
 
     @ManyToOne
     @JoinColumn(name = "ID_ESTADO")
-    private Estado estado;
+    private Estado naturalidade;
 
     @ManyToOne
     @JoinColumn(name = "ID_MUNICIPIO")
-    private Municipio municipio;
+    private Municipio cidadeOrigem;
 
     @ManyToOne
     @JoinColumn(name = "ID_NIVEL_ESCOL")
@@ -281,30 +281,6 @@ public class Pessoa extends BaseEntity implements Serializable {
         this.telefones = telefones;
     }
 
-    public Pais getPais() {
-        return pais;
-    }
-
-    public void setPais(Pais pais) {
-        this.pais = pais;
-    }
-
-    public Estado getEstado() {
-        return estado;
-    }
-
-    public void setEstado(Estado estado) {
-        this.estado = estado;
-    }
-
-    public Municipio getMunicipio() {
-        return municipio;
-    }
-
-    public void setMunicipio(Municipio municipio) {
-        this.municipio = municipio;
-    }
-
     public NivelEscolaridade getNivelEscolaridade() {
         return nivelEscolaridade;
     }
@@ -328,4 +304,108 @@ public class Pessoa extends BaseEntity implements Serializable {
     public void setEstadoCivil(EstadoCivil estadoCivil) {
         this.estadoCivil = estadoCivil;
     }
+
+
+	/**
+	 * @return the nacionalidade
+	 */
+	public Pais getNacionalidade() {
+		return nacionalidade;
+	}
+
+
+	/**
+	 * @param nacionalidade the nacionalidade to set
+	 */
+	public void setNacionalidade(Pais nacionalidade) {
+		this.nacionalidade = nacionalidade;
+	}
+
+
+	/**
+	 * @return the idUsuario
+	 */
+	public Long getIdUsuario() {
+		return idUsuario;
+	}
+
+
+	/**
+	 * @param idUsuario the idUsuario to set
+	 */
+	public void setIdUsuario(Long idUsuario) {
+		this.idUsuario = idUsuario;
+	}
+
+
+	/**
+	 * @return the indAtivo
+	 */
+	public Integer getIndAtivo() {
+		return indAtivo;
+	}
+
+
+	/**
+	 * @param indAtivo the indAtivo to set
+	 */
+	public void setIndAtivo(Integer indAtivo) {
+		this.indAtivo = indAtivo;
+	}
+
+
+	/**
+	 * @return the dataAtulizacao
+	 */
+	public Date getDataAtulizacao() {
+		return dataAtulizacao;
+	}
+
+
+	/**
+	 * @param dataAtulizacao the dataAtulizacao to set
+	 */
+	public void setDataAtulizacao(Date dataAtulizacao) {
+		this.dataAtulizacao = dataAtulizacao;
+	}
+
+
+	/**
+	 * @return the naturalidade
+	 */
+	public Estado getNaturalidade() {
+		return naturalidade;
+	}
+
+
+	/**
+	 * @param naturalidade the naturalidade to set
+	 */
+	public void setNaturalidade(Estado naturalidade) {
+		this.naturalidade = naturalidade;
+	}
+
+
+	/**
+	 * @return the cidadeOrigem
+	 */
+	public Municipio getCidadeOrigem() {
+		return cidadeOrigem;
+	}
+
+
+	/**
+	 * @param cidadeOrigem the cidadeOrigem to set
+	 */
+	public void setCidadeOrigem(Municipio cidadeOrigem) {
+		this.cidadeOrigem = cidadeOrigem;
+	}
+
+
+	/**
+	 * @param enderecos the enderecos to set
+	 */
+	public void setEnderecos(List<Endereco> enderecos) {
+		this.enderecos = enderecos;
+	}
 }

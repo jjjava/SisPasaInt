@@ -33,23 +33,23 @@ public class Contato implements Serializable {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @Column(name = "NOME", length = 60, nullable = false)
+    @Column(name = "NOME", nullable = false, columnDefinition = ConstantesBanco.CHAR_60)
     private String nome;
 
-    @Column(name = "EMAIL", length = 60)
+    @Column(name = "EMAIL",length =60)
     private String email;
 
-    @Column(name = "SETOR", length = 30)
+    @Column(name = "SETOR", length =30)
     private String setor;
 
-    @Column(name = "ID_USUARIO", nullable = false)
+    @Column(name = "ID_USUARIO", columnDefinition = ConstantesBanco.BIGINT)
     private Long idUsuario;
 
-    @Column(name = "IND_ATIVO", nullable = false)
+    @Column(name = "IND_ATIVO", columnDefinition = ConstantesBanco.SMALLINT)
     private Integer indAtivo;
 
     @Column(name = "DT_ULT_ATULZ", nullable = false)
-    @Temporal(TemporalType.DATE)
+    @Temporal(TemporalType.TIMESTAMP)
     private Date dataUltAtulizacao;
 
     @ManyToMany(mappedBy = "contatos")

@@ -13,6 +13,13 @@ import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 
+import org.pasa.sispasa.core.constants.ConstantesBanco;
+
+/**
+*
+* @author Hudson Schumaker
+* @version 1.0.0
+*/
 @Entity
 @Table(name = "PLANO")
 public class Plano implements Serializable {
@@ -20,41 +27,41 @@ public class Plano implements Serializable {
     private static final long serialVersionUID = 1L;
 
     @Id
-    @Column(name = "ID_PLANO")
+    @Column(name = "ID_PLANO", columnDefinition = ConstantesBanco.BIGINT)
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     
-    @Column(name = "CD_PLANO", length = 10)
+    @Column(name = "CD_PLANO",  length=10)
     private String codPlano;
 
-    @Column(name = "NOME", length = 30, nullable = false)
+    @Column(name = "NOME", length=30, nullable = false)
     private String nome;
 
-    @Column(name = "DESCRICAO", length = 60, nullable = false)
+    @Column(name = "DESCRICAO", length=60, nullable = false)
     private String descricao;
 
-    @Column(name = "DT_INICIO_VIGENCIA", nullable = false)
+    @Column(name = "DT_INICIO_VIGENCIA",columnDefinition = ConstantesBanco.DATE, nullable = false)
     @Temporal(TemporalType.DATE)
     private Date dataInicioVigencia;
 
-    @Column(name = "DT_FIM_VIGENCIA")
+    @Column(name = "DT_FIM_VIGENCIA", columnDefinition = ConstantesBanco.DATE)
     @Temporal(TemporalType.DATE)
     private Date dataFimVigencia;
 
-    @Column(name = "QTD_DIAS_CARENCIA", nullable = false)
+    @Column(name = "QTD_DIAS_CARENCIA", nullable = false, columnDefinition = ConstantesBanco.SMALLINT)
     private Integer qtdDiasCarencia;
 
-    @Column(name = "REGISTRO_ANS", length = 30)
+    @Column(name = "REGISTRO_ANS", length=30)
     private String registroANS;
 
-    @Column(name = "ID_USUARIO", nullable = false)
+    @Column(name = "ID_USUARIO", nullable = false, columnDefinition = ConstantesBanco.BIGINT)
     private Long idUsuario;
 
-    @Column(name = "IND_ATIVO", nullable = false)
+    @Column(name = "IND_ATIVO", nullable = false, columnDefinition = ConstantesBanco.SMALLINT)
     private Integer indAtivo;
 
     @Column(name = "DT_ULT_ATULZ", nullable = false)
-    @Temporal(TemporalType.DATE)
+    @Temporal(TemporalType.TIMESTAMP)
     private Date dataUltAtulizacao;
 
     @ManyToOne

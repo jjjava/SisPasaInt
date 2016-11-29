@@ -17,6 +17,11 @@ import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 import org.pasa.sispasa.core.constants.ConstantesBanco;
 
+/**
+*
+* @author Hudson Schumaker
+* @version 1.0.0
+*/
 @Entity
 @Table(name = "OPERADORA_RECIPROCIDADE")
 public class OperadoraReciprocidade implements Serializable {
@@ -28,40 +33,40 @@ public class OperadoraReciprocidade implements Serializable {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @Column(name = "RZ_SOCIAL", length = 60, nullable = false)
+    @Column(name = "RZ_SOCIAL", nullable = false, length=60)
     private String razaoSocial;
 
-    @Column(name = "NM_FANTASIA", length = 60, nullable = false)
+    @Column(name = "NM_FANTASIA", nullable = false, length=60)
     private String nomeFantasia;
 
-    @Column(name = "CNPJ", length = 14, nullable = false)
+    @Column(name = "CNPJ", nullable = false, columnDefinition = ConstantesBanco.CHAR_14)
     private String cnpj;
 
-    @Column(name = "DT_INICIO", nullable = false)
+    @Column(name = "DT_INICIO", nullable = false, columnDefinition = ConstantesBanco.DATE)
     @Temporal(TemporalType.DATE)
     private Date dataInicio;
 
-    @Column(name = "DT_FIM")
+    @Column(name = "DT_FIM", columnDefinition = ConstantesBanco.DATE)
     @Temporal(TemporalType.DATE)
     private Date dataFim;
 
-    @Column(name = "CD_CNAE", length = 7)
+    @Column(name = "CD_CNAE", columnDefinition = ConstantesBanco.CHAR_7)
     private String codCNAE;
 
-    @Column(name = "EMAIL", length = 60)
+    @Column(name = "EMAIL", length=60)
     private String email;
 
-    @Column(name = "SITE", length = 60)
+    @Column(name = "SITE", length=60)
     private String site;
 
-    @Column(name = "ID_USUARIO", nullable = false)
+    @Column(name = "ID_USUARIO", nullable = false, columnDefinition = ConstantesBanco.BIGINT)
     private Long idUsuario;
 
-    @Column(name = "IND_ATIVO", length = 1, nullable = false)
+    @Column(name = "IND_ATIVO", nullable = false, columnDefinition = ConstantesBanco.SMALLINT)
     private Integer indAtivo;
 
     @Column(name = "DT_ULT_ATULZ", nullable = false)
-    @Temporal(TemporalType.DATE)
+    @Temporal(TemporalType.TIMESTAMP)
     private Date dataUltAtulizacao;
 
     @ManyToMany

@@ -15,7 +15,7 @@ import org.pasa.sispasa.core.constants.ConstantesBanco;
 
 /**
  *
- * @author Hudson Schumaker / André Gomes
+ * @author Hudson Schumaker / Andrï¿½ Gomes
  * @version 1.0.0
  */
 @Entity
@@ -29,13 +29,13 @@ public class DadosBancarios implements Serializable {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @Column(name = "CD_BANCO", length = 5)
+    @Column(name = "CD_BANCO", length=5)
     private String codBanco;
 
-    @Column(name = "AGENCIA", length = 5, nullable = false)
+    @Column(name = "AGENCIA", nullable = false,length=5)
     private String agencia;
     
-    @Column(name = "CONTA", length = 10, nullable = false)
+    @Column(name = "CONTA", nullable = false, length=10)
     private String conta;
     
     @Column(name = "TP_CONTA", nullable =  false, columnDefinition = ConstantesBanco.CHAR_1)

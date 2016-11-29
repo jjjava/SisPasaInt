@@ -30,40 +30,40 @@ public class Convenio implements Serializable {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @Column(name = "DT_INICIO_VIGENCIA", nullable = false)
+    @Column(name = "DT_INICIO_VIGENCIA", nullable = false, columnDefinition = ConstantesBanco.DATE)
     @Temporal(TemporalType.DATE)
     private Date dataInicio;
 
-    @Column(name = "DT_FIM")
+    @Column(name = "DT_FIM", columnDefinition = ConstantesBanco.DATE)
     @Temporal(TemporalType.DATE)
     private Date dataFim;
 
-    @Column(name = "QTD_DIAS_ASSOC")
+    @Column(name = "QTD_DIAS_ASSOC", columnDefinition = ConstantesBanco.SMALLINT)
     private Integer qtdDiasAssociacao;
 
-    @Column(name = "QTD_DIAS_ADESAO")
+    @Column(name = "QTD_DIAS_ADESAO", columnDefinition = ConstantesBanco.SMALLINT)
     private Integer qtdDiasAdesao;
 
-    @Column(name = "IND_PARTICIP_TAXA_ASSOC", nullable = false)
+    @Column(name = "IND_PARTICIP_TAXA_ASSOC", nullable = false, columnDefinition = ConstantesBanco.SMALLINT)
     private Integer indParticipacaoTaxaAssociado;
 
-    @Column(name = "IND_CONTRIB_ASSOC", nullable = false)
+    @Column(name = "IND_CONTRIB_ASSOC", nullable = false, columnDefinition = ConstantesBanco.SMALLINT)
     private Integer indContribuicaoAssociado;
 
-    @Column(name = "IND_CONTRIB_AGREG", nullable = false)
+    @Column(name = "IND_CONTRIB_AGREG", nullable = false, columnDefinition = ConstantesBanco.SMALLINT)
     private Integer indContribuicaoAgregado;
 
-    @Column(name = "IND_CONTRIB_DEPEN", nullable = false)
+    @Column(name = "IND_CONTRIB_DEPEN", nullable = false, columnDefinition = ConstantesBanco.SMALLINT)
     private Integer indContribDependente;
 
-    @Column(name = "ID_USUARIO", nullable = false)
+    @Column(name = "ID_USUARIO", nullable = false, columnDefinition = ConstantesBanco.BIGINT)
     private Long idUsuario;
 
-    @Column(name = "IND_ATIVO", nullable = false)
+    @Column(name = "IND_ATIVO", nullable = false, columnDefinition = ConstantesBanco.SMALLINT)
     private Integer indAtivo;
 
     @Column(name = "DT_ULT_ATULZ", nullable = false)
-    @Temporal(TemporalType.DATE)
+    @Temporal(TemporalType.TIMESTAMP)
     private Date dataUltAtulizacao;
 
     @ManyToOne

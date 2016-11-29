@@ -8,6 +8,14 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
 
+import org.pasa.sispasa.core.constants.ConstantesBanco;
+
+/**
+*
+* @author Hudson Schumaker
+* @version 1.0.0
+*/
+
 @Entity
 @Table(name = "TIPO_PARTICIPACAO")
 public class TipoParticipacao implements Serializable {
@@ -15,11 +23,11 @@ public class TipoParticipacao implements Serializable {
 	private static final long serialVersionUID = 1L;
 
 	@Id
-	@Column(name = "ID_PARTICIPACAO")
+	@Column(name = "ID_PARTICIPACAO",columnDefinition = ConstantesBanco.BIGINT)
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
 
-	@Column(name = "DESCRICAO", length = 30, nullable = false)
+	@Column(name = "DESCRICAO", length=30, nullable = false)
 	private String descricao;
 	
 	public TipoParticipacao(){

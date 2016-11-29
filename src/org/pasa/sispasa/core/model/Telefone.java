@@ -11,6 +11,8 @@ import javax.persistence.ManyToMany;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
+import org.pasa.sispasa.core.constants.ConstantesBanco;
+
 /**
  *
  * @author Hudson Schumaker
@@ -23,20 +25,20 @@ public class Telefone implements Serializable {
     private static final long serialVersionUID = 1L;
 
     @Id
-    @Column(name = "ID_TELEFONE")
+    @Column(name = "ID_TELEFONE",columnDefinition = ConstantesBanco.BIGINT)
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @Column(name = "DDD", length = 2)
+    @Column(name = "DDD", columnDefinition = ConstantesBanco.CHAR_2)
     private String ddd;
 
-    @Column(name = "NUMERO", length = 18, nullable = false)
+    @Column(name = "NUMERO", length=10, nullable = false)
     private String numeroTelefone;
 
-    @Column(name = "RAMAL", length = 5)
+    @Column(name = "RAMAL", length=5)
     private String ramal;
 
-    @Column(name = "IND_ATIVO", nullable = false)
+    @Column(name = "IND_ATIVO", nullable = false, columnDefinition = ConstantesBanco.SMALLINT)
     private Integer indAtivo;
 
     @OneToOne

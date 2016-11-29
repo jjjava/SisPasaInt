@@ -33,23 +33,23 @@ public class Endereco implements Serializable {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @Column(name = "LOGRADOURO", length = 100, nullable = false)
+    @Column(name = "LOGRADOURO",nullable = false, length=60)
     private String logradouro;
 
-    @Column(name = "NUMERO", length = 20, nullable = false)
+    @Column(name = "NUMERO", nullable = false, length=20)
     private String numero;
 
-    @Column(name = "COMPLEMENTO", length = 45)
+    @Column(name = "COMPLEMENTO", length=45)
     private String complemento;
 
-    @Column(name = "BAIRRO", length = 45, nullable = false)
+    @Column(name = "BAIRRO", nullable = false, length=45)
     private String bairro;
 
-    @Column(name = "CEP", length = 8, nullable = false)
+    @Column(name = "CEP", nullable = false, columnDefinition =ConstantesBanco.CHAR_8)
     private String cep;
 
-    @Column(name = "IND_ATIVO", nullable = false)
-    private int indAtivo;
+    @Column(name = "IND_ATIVO", nullable = false, columnDefinition = ConstantesBanco.SMALLINT)
+    private Integer indAtivo;
 
     @Column(name = "DT_ULT_ATULZ", nullable = false)
     @Temporal(TemporalType.TIMESTAMP)

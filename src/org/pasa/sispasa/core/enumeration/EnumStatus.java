@@ -20,6 +20,27 @@ public enum EnumStatus {
 		this.descricao = descricao;
 	}
 	
+	
+	public static EnumStatus getStatusByValue(int value){
+		
+		switch (value) {
+			
+			case 0:
+				return EnumStatus.INATIVO;
+				
+			case 1:
+				return EnumStatus.ATIVO;
+			
+			case 2:
+				return EnumStatus.TODOS;
+
+			default:
+				break;
+		}
+		
+		return null;
+	}
+	
 	public static EnumSet<EnumStatus> getAllStatus() {
         return EnumSet.of(ATIVO, INATIVO, TODOS);
     }

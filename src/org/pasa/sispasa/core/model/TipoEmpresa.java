@@ -12,7 +12,7 @@ import org.pasa.sispasa.core.constants.ConstantesBanco;
 
 /**
 *
-* @author Hudson Schumaker / André Gomes
+* @author Hudson Schumaker / Andrï¿½ Gomes
 * @version 1.0.0
 */
 @Entity
@@ -30,7 +30,8 @@ public class TipoEmpresa implements Serializable {
 	private String descricao;
 	
 	
-	//GETTERS E SETTERS
+	public TipoEmpresa(){
+	}
 	
 	public Long getId() {
 		return id;

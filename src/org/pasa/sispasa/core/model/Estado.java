@@ -13,51 +13,50 @@ import org.pasa.sispasa.core.constants.ConstantesBanco;
 
 /**
  *
- * @author Hudson Schumaker / André Gomes
+ * @author Hudson Schumaker / Andrï¿½ Gomes
  * @version 1.0.0
  */
 @Entity
 @Table(name = "ESTADO")
 public class Estado implements Serializable {
 
-    private static final long serialVersionUID = 1L;
+	private static final long serialVersionUID = 1L;
 
-    @Id
-    @Column(name = "ID_ESTADO", columnDefinition = ConstantesBanco.CHAR_2)
-    private String id;
+	@Id
+	@Column(name = "ID_ESTADO", columnDefinition = ConstantesBanco.CHAR_2)
+	private String id;
 
-    @Column(name = "NOME", length = 30)
-    private String nome;
+	@Column(name = "NOME", length = 30)
+	private String nome;
 
-    @ManyToOne
-    @JoinColumn(name = "ID_PAIS")
-    private Pais pais;
+	@ManyToOne
+	@JoinColumn(name = "ID_PAIS")
+	private Pais pais;
 
-    
-    //GETTERS E SETTERS
-    
-    public String getId() {
-        return id;
-    }
+	public Estado() {
+	}
 
-    public void setId(String id) {
-        this.id = id;
-    }
+	public String getId() {
+		return id;
+	}
 
-    public String getNome() {
-        return nome;
-    }
+	public void setId(String id) {
+		this.id = id;
+	}
 
-    public void setNome(String nome) {
-        this.nome = nome;
-    }
+	public String getNome() {
+		return nome;
+	}
 
-    //@Basic(fetch = FetchType.LAZY)
-    public Pais getPais() {
-        return pais;
-    }
+	public void setNome(String nome) {
+		this.nome = nome;
+	}
 
-    public void setPais(Pais pais) {
-        this.pais = pais;
-    }
+	public Pais getPais() {
+		return pais;
+	}
+
+	public void setPais(Pais pais) {
+		this.pais = pais;
+	}
 }

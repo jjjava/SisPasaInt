@@ -21,205 +21,200 @@ import org.pasa.sispasa.core.constants.ConstantesBanco;
 
 /**
  *
- * @author Hudson Schumaker / André Gomes
+ * @author Hudson Schumaker / Andrï¿½ Gomes
  * @version 1.0.0
  */
 @Entity
 @Table(name = "EMPRESA")
 public class Empresa implements Serializable {
 
-    private static final long serialVersionUID = 1L;
+	private static final long serialVersionUID = 1L;
 
-    @Id
-    @Column(name = "ID_EMPRESA", columnDefinition = ConstantesBanco.BIGINT)
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
+	@Id
+	@Column(name = "ID_EMPRESA", columnDefinition = ConstantesBanco.BIGINT)
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	private Long id;
 
-    @Column(name = "RZ_SOCIAL", length = 60)
-    private String razaoSocial;
+	@Column(name = "RZ_SOCIAL", length = 60)
+	private String razaoSocial;
 
-    @Column(name = "NM_FANTASIA", length = 60)
-    private String nomeFantasia;
+	@Column(name = "NM_FANTASIA", length = 60)
+	private String nomeFantasia;
 
-    @Column(name = "CNPJ", columnDefinition = ConstantesBanco.CHAR_14)
-    private String cnpj;
+	@Column(name = "CNPJ", columnDefinition = ConstantesBanco.CHAR_14)
+	private String cnpj;
 
-    @Column(name = "DT_INICIO", columnDefinition = ConstantesBanco.DATE)
-    @Temporal(TemporalType.DATE)
-    private Date dataInicio;
+	@Column(name = "DT_INICIO", nullable = false, columnDefinition = ConstantesBanco.DATE)
+	@Temporal(TemporalType.DATE)
+	private Date dataInicio;
 
-    @Column(name = "DT_FIM", columnDefinition = ConstantesBanco.DATE)
-    @Temporal(TemporalType.DATE)
-    private Date dataFim;
+	@Column(name = "DT_FIM", columnDefinition = ConstantesBanco.DATE)
+	@Temporal(TemporalType.DATE)
+	private Date dataFim;
 
-    @Column(name = "CD_CNAE",  columnDefinition = ConstantesBanco.CHAR_7)
-    private String codCNAE;
+	@Column(name = "CD_CNAE", columnDefinition = ConstantesBanco.CHAR_7)
+	private String codCNAE;
 
-    @Column(name = "EMAIL", length = 60)
-    private String email;
+	@Column(name = "EMAIL", length = 60)
+	private String email;
 
-    @Column(name = "CD_EMPRESA_VALE", length = 3)
-    private String codEmpresaVale;
+	@Column(name = "CD_EMPRESA_VALE", length = 3)
+	private String codEmpresaVale;
 
-    @Column(name = "IND_ATIVO", nullable = false, columnDefinition = ConstantesBanco.SMALLINT)
-    private Integer indAtivo;
-    
-    @Column(name = "ID_USUARIO", columnDefinition = ConstantesBanco.BIGINT)
-    private Long idUsuario;
+	@Column(name = "IND_ATIVO", nullable = false, columnDefinition = ConstantesBanco.SMALLINT)
+	private Integer indAtivo;
 
-    @Column(name = "DT_ULT_ATULZ", nullable = false, columnDefinition = ConstantesBanco.DATE)
-    @Temporal(TemporalType.DATE)
-    private Date dataAtulizacao;
+	@Column(name = "ID_USUARIO", columnDefinition = ConstantesBanco.BIGINT)
+	private Long idUsuario;
 
-    @ManyToOne
-    @JoinColumn(name = "ID_TP_EMPRESA")
-    private TipoEmpresa tipoEmpresa;
+	@Column(name = "DT_ULT_ATULZ", nullable = false)
+	@Temporal(TemporalType.TIMESTAMP)
+	private Date dataAtulizacao;
 
-    @ManyToMany
-    @JoinTable(name = "ENDERECO_EMPRESA",
-            joinColumns = @JoinColumn(name = "ID_EMPRESA"),
-            inverseJoinColumns = @JoinColumn(name = "ID_ENDERECO"))
-    private List<Endereco> enderecos;
+	@ManyToOne
+	@JoinColumn(name = "ID_TP_EMPRESA")
+	private TipoEmpresa tipoEmpresa;
 
-    @ManyToMany
-    @JoinTable(name = "CONTATO_EMPRESA",
-            joinColumns = @JoinColumn(name = "ID_EMPRESA"),
-            inverseJoinColumns = @JoinColumn(name = "ID_CONTATO"))
-    private List<Contato> contatos;
+	@ManyToMany
+	@JoinTable(name = "ENDERECO_EMPRESA", joinColumns = @JoinColumn(name = "ID_EMPRESA"), inverseJoinColumns = @JoinColumn(name = "ID_ENDERECO"))
+	private List<Endereco> enderecos;
 
-    public Empresa() {
-        enderecos = new ArrayList<>();
-        contatos = new ArrayList<>();
-    }
+	@ManyToMany
+	@JoinTable(name = "CONTATO_EMPRESA", joinColumns = @JoinColumn(name = "ID_EMPRESA"), inverseJoinColumns = @JoinColumn(name = "ID_CONTATO"))
+	private List<Contato> contatos;
 
-    public void addEndereco(Endereco e) {
-        enderecos.add(e);
-    }
+	public Empresa() {
+		enderecos = new ArrayList<>();
+		contatos = new ArrayList<>();
+	}
 
-    public void addContato(Contato c) {
-        contatos.add(c);
-    }
+	public void addEndereco(Endereco e) {
+		enderecos.add(e);
+	}
 
-    
-    //GETTERS E SETTERS
-    
-    public Long getId() {
-        return id;
-    }
+	public void addContato(Contato c) {
+		contatos.add(c);
+	}
 
-    public void setId(Long id) {
-        this.id = id;
-    }
+	// GETTERS E SETTERS
 
-    public String getRazaoSocial() {
-        return razaoSocial;
-    }
+	public Long getId() {
+		return id;
+	}
 
-    public void setRazaoSocial(String razaoSocial) {
-        this.razaoSocial = razaoSocial;
-    }
+	public void setId(Long id) {
+		this.id = id;
+	}
 
-    public String getNomeFantasia() {
-        return nomeFantasia;
-    }
+	public String getRazaoSocial() {
+		return razaoSocial;
+	}
 
-    public void setNomeFantasia(String nomeFantasia) {
-        this.nomeFantasia = nomeFantasia;
-    }
+	public void setRazaoSocial(String razaoSocial) {
+		this.razaoSocial = razaoSocial;
+	}
 
-    public String getCnpj() {
-        return cnpj;
-    }
+	public String getNomeFantasia() {
+		return nomeFantasia;
+	}
 
-    public void setCnpj(String cnpj) {
-        this.cnpj = cnpj;
-    }
+	public void setNomeFantasia(String nomeFantasia) {
+		this.nomeFantasia = nomeFantasia;
+	}
 
-    public Date getDataInicio() {
-        return dataInicio;
-    }
+	public String getCnpj() {
+		return cnpj;
+	}
 
-    public void setDataInicio(Date dataInicio) {
-        this.dataInicio = dataInicio;
-    }
+	public void setCnpj(String cnpj) {
+		this.cnpj = cnpj;
+	}
 
-    public Date getDataFim() {
-        return dataFim;
-    }
+	public Date getDataInicio() {
+		return dataInicio;
+	}
 
-    public void setDataFim(Date dataFim) {
-        this.dataFim = dataFim;
-    }
+	public void setDataInicio(Date dataInicio) {
+		this.dataInicio = dataInicio;
+	}
 
-    public String getCodCNAE() {
-        return codCNAE;
-    }
+	public Date getDataFim() {
+		return dataFim;
+	}
 
-    public void setCodCNAE(String codCNAE) {
-        this.codCNAE = codCNAE;
-    }
+	public void setDataFim(Date dataFim) {
+		this.dataFim = dataFim;
+	}
 
-    public String getEmail() {
-        return email;
-    }
+	public String getCodCNAE() {
+		return codCNAE;
+	}
 
-    public void setEmail(String email) {
-        this.email = email;
-    }
+	public void setCodCNAE(String codCNAE) {
+		this.codCNAE = codCNAE;
+	}
 
-    public String getCodEmpresaVale() {
-        return codEmpresaVale;
-    }
+	public String getEmail() {
+		return email;
+	}
 
-    public void setCodEmpresaVale(String codEmpresaVale) {
-        this.codEmpresaVale = codEmpresaVale;
-    }
+	public void setEmail(String email) {
+		this.email = email;
+	}
 
-    public Integer getIndAtivo() {
-        return indAtivo;
-    }
+	public String getCodEmpresaVale() {
+		return codEmpresaVale;
+	}
 
-    public void setIndAtivo(Integer indAtivo) {
-        this.indAtivo = indAtivo;
-    }
+	public void setCodEmpresaVale(String codEmpresaVale) {
+		this.codEmpresaVale = codEmpresaVale;
+	}
 
-    public Date getDataAtulizacao() {
-        return dataAtulizacao;
-    }
+	public Integer getIndAtivo() {
+		return indAtivo;
+	}
 
-    public void setDataAtulizacao(Date dataAtulizacao) {
-        this.dataAtulizacao = dataAtulizacao;
-    }
+	public void setIndAtivo(Integer indAtivo) {
+		this.indAtivo = indAtivo;
+	}
 
-    public TipoEmpresa getTipoEmpresa() {
-        return tipoEmpresa;
-    }
+	public Date getDataAtulizacao() {
+		return dataAtulizacao;
+	}
 
-    public void setTipoEmpresa(TipoEmpresa tipoEmpresa) {
-        this.tipoEmpresa = tipoEmpresa;
-    }
+	public void setDataAtulizacao(Date dataAtulizacao) {
+		this.dataAtulizacao = dataAtulizacao;
+	}
 
-    public List<Endereco> getEnderecos() {
-        return enderecos;
-    }
+	public TipoEmpresa getTipoEmpresa() {
+		return tipoEmpresa;
+	}
 
-    public void setEnderecos(List<Endereco> enderecos) {
-        this.enderecos = enderecos;
-    }
+	public void setTipoEmpresa(TipoEmpresa tipoEmpresa) {
+		this.tipoEmpresa = tipoEmpresa;
+	}
 
-    public List<Contato> getContatos() {
-        return contatos;
-    }
+	public List<Endereco> getEnderecos() {
+		return enderecos;
+	}
 
-    public void setContatos(List<Contato> contatos) {
-        this.contatos = contatos;
-    }
+	public void setEnderecos(List<Endereco> enderecos) {
+		this.enderecos = enderecos;
+	}
 
-    public Long getIdUsuario() {
-        return idUsuario;
-    }
+	public List<Contato> getContatos() {
+		return contatos;
+	}
 
-    public void setIdUsuario(Long idUsuario) {
-        this.idUsuario = idUsuario;
-    }    
+	public void setContatos(List<Contato> contatos) {
+		this.contatos = contatos;
+	}
+
+	public Long getIdUsuario() {
+		return idUsuario;
+	}
+
+	public void setIdUsuario(Long idUsuario) {
+		this.idUsuario = idUsuario;
+	}
 }

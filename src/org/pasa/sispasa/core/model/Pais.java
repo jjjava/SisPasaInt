@@ -13,7 +13,7 @@ import org.pasa.sispasa.core.constants.ConstantesBanco;
 
 /**
  *
- * @author Hudson Schumaker / Andr� Gomes
+ * @author Hudson Schumaker 
  * @version 1.0.0
  */
 @Entity
@@ -27,10 +27,12 @@ public class Pais implements Serializable {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @Column(name = "NOME", length = 30, nullable = false)
+    @Column(name = "NOME", nullable = false, length=30)
     private String nome;
 
-    //GETTERS AND SETTERS
+    public Pais(){
+    }
+    
     public Long getId() {
         return id;
     }

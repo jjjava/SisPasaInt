@@ -27,10 +27,12 @@ public class MotivoDesligamento implements Serializable {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @Column(name = "DESCRICAO", length = 60)
+    @Column(name = "DESCRICAO", length=60)
     private String descricao;
+    
+    public MotivoDesligamento(){
+    }
 
-    //GETTERS E SETTERS
     public Long getId() {
         return id;
     }

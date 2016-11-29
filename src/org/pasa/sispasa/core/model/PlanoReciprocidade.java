@@ -3,6 +3,7 @@ package org.pasa.sispasa.core.model;
 import java.io.Serializable;
 import java.util.List;
 import javax.persistence.Column;
+import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -10,29 +11,40 @@ import javax.persistence.JoinColumn;
 import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
+import javax.persistence.Table;
 
+import org.pasa.sispasa.core.constants.ConstantesBanco;
+
+/**
+*
+* @author Hudson Schumaker
+* @version 1.0.0
+*/
+
+@Entity
+@Table(name = "PLANO_RECIPROCIDADE")
 public class PlanoReciprocidade implements Serializable {
 
     private static final long serialVersionUID = 1L;
 
     @Id
-    @Column(name = "ID_PLANO_RCP")
+    @Column(name = "ID_PLANO_RCP", columnDefinition = ConstantesBanco.BIGINT)
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @Column(name = "NOME", length = 60, nullable = false)
+    @Column(name = "NOME",length=60, nullable = false)
     private String nome;
 
-    @Column(name = "DESCRICAO", length = 60, nullable = false)
+    @Column(name = "DESCRICAO",length=30, nullable = false)
     private String descricao;
 
-    @Column(name = "CD_PLANO", length = 10, nullable = false)
+    @Column(name = "CD_PLANO", length=10, nullable = false)
     private String codPlano;
 
-    @Column(name = "ID_USUARIO", nullable = false)
+    @Column(name = "ID_USUARIO", nullable = false, columnDefinition = ConstantesBanco.BIGINT)
     private Long idUsuario;
 
-    @Column(name = "IND_ATIVO", nullable = false)
+    @Column(name = "IND_ATIVO", nullable = false, columnDefinition = ConstantesBanco.SMALLINT)
     private Integer indAtivo;
 
     @ManyToOne

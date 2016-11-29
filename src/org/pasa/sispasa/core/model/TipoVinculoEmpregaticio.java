@@ -13,7 +13,7 @@ import org.pasa.sispasa.core.constants.ConstantesBanco;
 
 /**
 *
-* @author Hudson Schumaker / André Gomes
+* @author Hudson Schumaker / Andrï¿½ Gomes
 * @version 1.0.0
 */
 @Entity
@@ -27,11 +27,15 @@ public class TipoVinculoEmpregaticio implements Serializable {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
 
-	@Column(name = "DESCRICAO", length = 60)
+	@Column(name = "DESCRICAO", length=30)
 	private String descricao;
 
 	@Column(name = "CD_EXTERNO", columnDefinition = ConstantesBanco.CHAR_1)
 	private String codExterno;
+	
+	
+	public TipoVinculoEmpregaticio(){
+	}
 	
 	//GETTERS E SETTERS
 	
