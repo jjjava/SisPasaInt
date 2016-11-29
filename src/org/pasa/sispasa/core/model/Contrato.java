@@ -15,6 +15,7 @@ import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
+import org.pasa.sispasa.core.constants.ConstantesBanco;
 
 @Entity
 @Table(name = "CONTRATO")
@@ -23,7 +24,7 @@ public class Contrato implements Serializable {
     private static final long serialVersionUID = 1L;
 
     @Id
-    @Column(name = "ID_CONTRATO")
+    @Column(name = "ID_CONTRATO",columnDefinition = ConstantesBanco.BIGINT)
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 

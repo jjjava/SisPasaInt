@@ -30,10 +30,10 @@ public class Plano implements Serializable {
     @Column(name = "NOME", length = 30, nullable = false)
     private String nome;
 
-    @Column(name = "DESCRICAO", length = 60)
+    @Column(name = "DESCRICAO", length = 60, nullable = false)
     private String descricao;
 
-    @Column(name = "DT_INICIO_VIGENCIA")
+    @Column(name = "DT_INICIO_VIGENCIA", nullable = false)
     @Temporal(TemporalType.DATE)
     private Date dataInicioVigencia;
 
@@ -41,7 +41,7 @@ public class Plano implements Serializable {
     @Temporal(TemporalType.DATE)
     private Date dataFimVigencia;
 
-    @Column(name = "QTD_DIAS_CARENCIA")
+    @Column(name = "QTD_DIAS_CARENCIA", nullable = false)
     private Integer qtdDiasCarencia;
 
     @Column(name = "REGISTRO_ANS", length = 30)

@@ -11,9 +11,11 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
+import org.pasa.sispasa.core.constants.ConstantesBanco;
+
 /**
  *
- * @author Hudson Schumaker
+ * @author Hudson Schumaker / Andr� Gomes
  * @version 1.0.0
  */
 @Entity
@@ -23,7 +25,7 @@ public class Municipio implements Serializable {
     private static final long serialVersionUID = 1L;
 
     @Id
-    @Column(name = "ID_MUNICIPIO")
+    @Column(name = "ID_MUNICIPIO", columnDefinition = ConstantesBanco.BIGINT)
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
@@ -34,9 +36,7 @@ public class Municipio implements Serializable {
     @JoinColumn(name = "ID_ESTADO")
     private Estado estado;
 
-    public Municipio() {
-    }
-
+    //GETTERS E SETTERS
     public Long getId() {
         return id;
     }
@@ -53,7 +53,6 @@ public class Municipio implements Serializable {
         this.nome = nome;
     }
 
-    //@Basic(fetch = FetchType.LAZY)
     public Estado getEstado() {
         return estado;
     }

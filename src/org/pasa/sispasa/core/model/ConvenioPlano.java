@@ -1,6 +1,7 @@
 package org.pasa.sispasa.core.model;
 
 import java.io.Serializable;
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
@@ -10,6 +11,7 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
+import org.pasa.sispasa.core.constants.ConstantesBanco;
 
 @Entity
 @Table(name = "CONVENIO_PLANO")
@@ -18,7 +20,7 @@ public class ConvenioPlano implements Serializable {
     private static final long serialVersionUID = 1L;
 
     @Id
-    @Column(name = "ID_CONVENIO_PLANO")
+    @Column(name = "ID_CONVENIO_PLANO",columnDefinition = ConstantesBanco.BIGINT)
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 

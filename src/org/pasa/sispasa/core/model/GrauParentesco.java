@@ -7,6 +7,7 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
+import org.pasa.sispasa.core.constants.ConstantesBanco;
 
 /**
  *
@@ -20,14 +21,14 @@ public class GrauParentesco implements Serializable {
     private static final long serialVersionUID = 1L;
 
     @Id
-    @Column(name = "ID_GRAU_PARENT")
+    @Column(name = "ID_GRAU_PARENT", columnDefinition = ConstantesBanco.BIGINT)
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
     @Column(name = "DESCRICAO", length = 30, nullable = false)
-    private int descricao;
+    private String descricao;
 
-    @Column(name = "CD_EXTERNO", length = 1)
+    @Column(name = "CD_EXTERNO",  columnDefinition = ConstantesBanco.CHAR_1)
     private String codExterno;
 
     public GrauParentesco() {
@@ -41,11 +42,11 @@ public class GrauParentesco implements Serializable {
         this.id = id;
     }
 
-    public int getDescricao() {
+    public String getDescricao() {
         return descricao;
     }
 
-    public void setDescricao(int descricao) {
+    public void setDescricao(String descricao) {
         this.descricao = descricao;
     }
 

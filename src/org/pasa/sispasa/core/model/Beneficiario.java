@@ -11,6 +11,7 @@ import javax.persistence.PrimaryKeyJoinColumn;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
+import org.pasa.sispasa.core.constants.ConstantesBanco;
 
 /**
  *
@@ -24,78 +25,78 @@ public class Beneficiario extends Pessoa {
 
     private static final long serialVersionUID = 1L;
 
-    @Column(name = "ID_BENEF")
+    @Column(name = "ID_BENEF", columnDefinition = ConstantesBanco.BIGINT)
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @Column(name = "CD_BENEF", length = 2, nullable = false)
+    @Column(name = "CD_BENEF", nullable = false, columnDefinition = ConstantesBanco.CHAR_2)
     private String codBeneficiario;
 
-    @Column(name = "MATRICULA_AMS", length = 6)
+    @Column(name = "MATRICULA_AMS", columnDefinition = ConstantesBanco.CHAR_7)
     private String matriculaAMS;
 
-    @Column(name = "CARTEIRINHA", length = 10, nullable = false)
+    @Column(name = "CARTEIRINHA", nullable = false, columnDefinition = ConstantesBanco.CHAR_10)
     private String carteirinha;
 
-    @Column(name = "DIREITO_AMS_CREDENC", length = 1, nullable = false)
+    @Column(name = "DIREITO_AMS_CREDENC", nullable = false, columnDefinition = ConstantesBanco.CHAR_1)
     private String direitoAmsCredenciar;
 
-    @Column(name = "DT_VALIDADE_CREDENC")
+    @Column(name = "DT_VALIDADE_CREDENC", columnDefinition = ConstantesBanco.DATE)
     @Temporal(TemporalType.DATE)
     private Date dataValidadeCredenciado;
 
-    @Column(name = "DIREITO_AMS_REEMB", length = 1)
+    @Column(name = "DIREITO_AMS_REEMB", columnDefinition = ConstantesBanco.CHAR_1)
     private String direitoAMSReenbolso;
 
-    @Column(name = "DT_VALIDADE_REEMB")
+    @Column(name = "DT_VALIDADE_REEMB", columnDefinition = ConstantesBanco.DATE)
     @Temporal(TemporalType.DATE)
     private Date dataValidadeReembolso;
 
-    @Column(name = "DT_ATULIZACAO")
+    @Column(name = "DT_ATULIZACAO", columnDefinition = ConstantesBanco.DATE)
     @Temporal(TemporalType.DATE)
     private Date dataAtulizacao;
 
-    @Column(name = "CD_CR", length = 8)
+    @Column(name = "CD_CR", columnDefinition = ConstantesBanco.CHAR_8)
     private String codCR;
 
-    @Column(name = "ORGAO_PESSOAL", length = 1)
+    @Column(name = "ORGAO_PESSOAL", columnDefinition = ConstantesBanco.CHAR_1)
     private String orgaoPessoal;
 
-    @Column(name = "FAIXA_NIVEL", length = 2)
+    @Column(name = "FAIXA_NIVEL", columnDefinition = ConstantesBanco.CHAR_2)
     private String faixaNivel;
 
-    @Column(name = "NUCLEO_AMS", length = 2)
+    @Column(name = "NUCLEO_AMS", columnDefinition = ConstantesBanco.CHAR_2)
     private String nucleoAMS;
 
-    @Column(name = "TP_BENEF", length = 2)
+    @Column(name = "TP_BENEF", columnDefinition = ConstantesBanco.CHAR_2)
     private String tipoBenneficiario;
 
-    @Column(name = "MATR_PARTICIP", length = 6)
+    @Column(name = "MATR_PARTICIP", columnDefinition = ConstantesBanco.CHAR_3)
     private String matriculaParticipante;
 
-    @Column(name = "MATR_REPR_LEGAL", length = 6)
+    @Column(name = "MATR_REPR_LEGAL", columnDefinition = ConstantesBanco.CHAR_6)
     private String matriculaRepresentanteLegal;
 
-    @Column(name = "PLANO_RCP_CASSI", length = 1)
+    @Column(name = "PLANO_RCP_CASSI", columnDefinition = ConstantesBanco.CHAR_1)
     private String planoReciprocidadeCassi;
 
-    @Column(name = "DT_FIM_PLANO_CASSI")
+    @Column(name = "DT_FIM_PLANO_CASSI", columnDefinition = ConstantesBanco.DATE)
     @Temporal(TemporalType.DATE)
     private Date dataFimPlanoCassi;
 
-    @Column(name = "CD_NACIONAL_SAUDE", length = 15)
+    @Column(name = "CD_NACIONAL_SAUDE", columnDefinition = ConstantesBanco.CHAR_15)
     private String cns;
 
-    @Column(name = "DECL_NASCIDO_VIVO", length = 11)
+    @Column(name = "DECL_NASCIDO_VIVO", columnDefinition = ConstantesBanco.CHAR_11)
     private String declNascidoVivo;
 
-    @Column(name = "ID_USUARIO", nullable = false)
+    @Column(name = "ID_USUARIO", nullable = false, columnDefinition = ConstantesBanco.BIGINT)
     private Long idUsuario;
 
-    @Column(name = "IND_ATIVO", nullable = false)
+    @Column(name = "IND_ATIVO", nullable = false, columnDefinition = ConstantesBanco.SMALLINT)
     private Integer indAtivo;
 
-    @Column(name = "DT_ULT_ATULZ", nullable = false)
+    @Column(name = "DT_ULT_ATULZ", nullable = false, columnDefinition = ConstantesBanco.DATE)
     @Temporal(TemporalType.DATE)
     private Date dataUltAtulizacao;
 

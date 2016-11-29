@@ -11,9 +11,11 @@ import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 
+import org.pasa.sispasa.core.constants.ConstantesBanco;
+
 /**
  *
- * @author Hudson Schumaker
+ * @author Hudson Schumaker / André Gomes
  * @version 1.0.0
  */
 @Entity
@@ -23,7 +25,7 @@ public class DadosBancarios implements Serializable {
     private static final long serialVersionUID = 1L;
 
     @Id
-    @Column(name = "ID_DADOS_BANC")
+    @Column(name = "ID_DADOS_BANC", columnDefinition = ConstantesBanco.BIGINT)
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
@@ -36,16 +38,16 @@ public class DadosBancarios implements Serializable {
     @Column(name = "CONTA", length = 10, nullable = false)
     private String conta;
     
-    @Column(name = "TP_CONTA", length = 1, nullable =  false)
+    @Column(name = "TP_CONTA", nullable =  false, columnDefinition = ConstantesBanco.CHAR_1)
     private String tipoConta;
     
-    @Column(name = "ID_USUARIO", nullable = false)
+    @Column(name = "ID_USUARIO", columnDefinition = ConstantesBanco.BIGINT)
     private Long idUsuario;
 
-    @Column(name = "IND_ATIVO", nullable = false)
+    @Column(name = "IND_ATIVO", nullable = false, columnDefinition = ConstantesBanco.SMALLINT)
     private Integer indAtivo;
 
-    @Column(name = "DT_ULT_ATULZ", nullable = false)
+    @Column(name = "DT_ULT_ATULZ", nullable = false, columnDefinition = ConstantesBanco.DATE)
     @Temporal(TemporalType.DATE)
     private Date dataAtulizacao;
 

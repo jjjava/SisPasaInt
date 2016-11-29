@@ -9,9 +9,11 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
+import org.pasa.sispasa.core.constants.ConstantesBanco;
+
 /**
  *
- * @author Hudson Schumaker
+ * @author Hudson Schumaker / André Gomes
  * @version 1.0.0
  */
 @Entity
@@ -21,19 +23,19 @@ public class Estado implements Serializable {
     private static final long serialVersionUID = 1L;
 
     @Id
-    @Column(name = "ID_ESTADO", length = 2)
+    @Column(name = "ID_ESTADO", columnDefinition = ConstantesBanco.CHAR_2)
     private String id;
 
-    @Column(name = "NOME", length = 30, nullable = true)
+    @Column(name = "NOME", length = 30)
     private String nome;
 
     @ManyToOne
     @JoinColumn(name = "ID_PAIS")
     private Pais pais;
 
-    public Estado() {
-    }
-
+    
+    //GETTERS E SETTERS
+    
     public String getId() {
         return id;
     }

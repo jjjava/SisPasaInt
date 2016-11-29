@@ -17,9 +17,11 @@ import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 
+import org.pasa.sispasa.core.constants.ConstantesBanco;
+
 /**
  *
- * @author Hudson Schumaker
+ * @author Hudson Schumaker / André Gomes
  * @version 1.0.0
  */
 @Entity
@@ -29,7 +31,7 @@ public class Empresa implements Serializable {
     private static final long serialVersionUID = 1L;
 
     @Id
-    @Column(name = "ID_EMPRESA")
+    @Column(name = "ID_EMPRESA", columnDefinition = ConstantesBanco.BIGINT)
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
@@ -39,33 +41,33 @@ public class Empresa implements Serializable {
     @Column(name = "NM_FANTASIA", length = 60)
     private String nomeFantasia;
 
-    @Column(name = "CNPJ", length = 14)
+    @Column(name = "CNPJ", columnDefinition = ConstantesBanco.CHAR_14)
     private String cnpj;
 
-    @Column(name = "DT_INICIO")
+    @Column(name = "DT_INICIO", columnDefinition = ConstantesBanco.DATE)
     @Temporal(TemporalType.DATE)
     private Date dataInicio;
 
-    @Column(name = "DT_FIM")
+    @Column(name = "DT_FIM", columnDefinition = ConstantesBanco.DATE)
     @Temporal(TemporalType.DATE)
     private Date dataFim;
 
-    @Column(name = "CD_CNAE", length = 7)
+    @Column(name = "CD_CNAE",  columnDefinition = ConstantesBanco.CHAR_7)
     private String codCNAE;
 
     @Column(name = "EMAIL", length = 60)
     private String email;
 
-    @Column(name = "CD_EMPRESA_VALE", length = 30, nullable = false)
+    @Column(name = "CD_EMPRESA_VALE", length = 3)
     private String codEmpresaVale;
 
-    @Column(name = "IND_ATIVO", nullable = false)
+    @Column(name = "IND_ATIVO", nullable = false, columnDefinition = ConstantesBanco.SMALLINT)
     private Integer indAtivo;
     
-    @Column(name = "ID_USUARIO", nullable = false)
+    @Column(name = "ID_USUARIO", columnDefinition = ConstantesBanco.BIGINT)
     private Long idUsuario;
 
-    @Column(name = "DT_ULT_ATULZ", nullable = false)
+    @Column(name = "DT_ULT_ATULZ", nullable = false, columnDefinition = ConstantesBanco.DATE)
     @Temporal(TemporalType.DATE)
     private Date dataAtulizacao;
 
@@ -98,6 +100,9 @@ public class Empresa implements Serializable {
         contatos.add(c);
     }
 
+    
+    //GETTERS E SETTERS
+    
     public Long getId() {
         return id;
     }

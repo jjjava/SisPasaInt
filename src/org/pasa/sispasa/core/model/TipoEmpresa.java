@@ -8,36 +8,43 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
 
+import org.pasa.sispasa.core.constants.ConstantesBanco;
+
+/**
+*
+* @author Hudson Schumaker / André Gomes
+* @version 1.0.0
+*/
 @Entity
-@Table(name = "TIPO_EMRPESA")
+@Table(name = "TIPO_EMPRESA")
 public class TipoEmpresa implements Serializable {
+	
+	private static final long serialVersionUID = 1L;
 
-    private static final long serialVersionUID = 1L;
+	@Id
+	@Column(name = "ID_TP_EMPRESA", columnDefinition = ConstantesBanco.BIGINT)
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	private Long id;
+	
+	@Column(name = "DESCRICAO", length = 30, nullable = false)
+	private String descricao;
+	
+	
+	//GETTERS E SETTERS
+	
+	public Long getId() {
+		return id;
+	}
 
-    @Id
-    @Column(name = "ID_TP_EMPRESA")
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
+	public void setId(Long id) {
+		this.id = id;
+	}
 
-    @Column(name = "DESCRICAO", length = 30, nullable = false)
-    private String descricao;
+	public String getDescricao() {
+		return descricao;
+	}
 
-    public TipoEmpresa() {
-    }
-
-    public Long getId() {
-        return id;
-    }
-
-    public void setId(Long id) {
-        this.id = id;
-    }
-
-    public String getDescricao() {
-        return descricao;
-    }
-
-    public void setDescricao(String descricao) {
-        this.descricao = descricao;
-    }
+	public void setDescricao(String descricao) {
+		this.descricao = descricao;
+	}
 }

@@ -8,6 +8,14 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
 
+import org.pasa.sispasa.core.constants.ConstantesBanco;
+
+
+/**
+*
+* @author Hudson Schumaker / André Gomes
+* @version 1.0.0
+*/
 @Entity
 @Table(name = "NIVEL_ESCOLARIDADE")
 public class NivelEscolaridade implements Serializable {
@@ -15,7 +23,7 @@ public class NivelEscolaridade implements Serializable {
     private static final long serialVersionUID = 1L;
 
     @Id
-    @Column(name = "ID_NIVEL_ESCOL")
+    @Column(name = "ID_NIVEL_ESCOL", columnDefinition = ConstantesBanco.BIGINT)
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
@@ -25,9 +33,9 @@ public class NivelEscolaridade implements Serializable {
     @Column(name = "CD_EXTERNO", length = 10)
     private String codExterno;
 
-    public NivelEscolaridade() {
-    }
 
+    //GETTERS AND SETTERS
+    
     public Long getId() {
         return id;
     }

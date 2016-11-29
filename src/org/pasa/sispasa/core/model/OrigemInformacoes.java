@@ -9,6 +9,13 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
 
+import org.pasa.sispasa.core.constants.ConstantesBanco;
+
+/**
+ *
+ * @author Hudson Schumaker / Andr� Gomes
+ * @version 1.0.0
+ */
 @Entity
 @Table(name = "ORIGEM_INFORMACOES")
 public class OrigemInformacoes implements Serializable {
@@ -16,16 +23,14 @@ public class OrigemInformacoes implements Serializable {
     private static final long serialVersionUID = 1L;
 
     @Id
-    @Column(name = "ID_ORIGEM_INFO")
+    @Column(name = "ID_ORIGEM_INFO", columnDefinition = ConstantesBanco.BIGINT)
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
     @Column(name = "DESCRICAO", length = 30, nullable = false)
     private String descricao;
 
-    public OrigemInformacoes() {
-    }
-
+    //GETTERS E SETTERS
     public Long getId() {
         return id;
     }

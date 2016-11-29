@@ -8,6 +8,7 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
+import org.pasa.sispasa.core.constants.ConstantesBanco;
 
 /**
  *
@@ -21,7 +22,7 @@ public class ConvenioReciprocidade implements Serializable {
     private static final long serialVersionUID = 1L;
 
     @Id
-    @Column(name = "ID_CONVENIO_RECIPROCIDAE")
+    @Column(name = "ID_CONVENIO_RECIPROCIDAE",columnDefinition = ConstantesBanco.BIGINT)
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 

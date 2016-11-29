@@ -4,6 +4,7 @@ import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -19,22 +20,27 @@ import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 
+import org.pasa.sispasa.core.constants.ConstantesBanco;
+
 /**
  *
- * @author Hudson Schumaker
+ * @author Hudson Schumaker / Andr� Gomes
  * @version 1.0.0
  */
 @Entity
 @Table(name = "PESSOA")
 @Inheritance(strategy = InheritanceType.JOINED)
-public class Pessoa implements Serializable {
+public class Pessoa extends BaseEntity implements Serializable {
 
     private static final long serialVersionUID = 1L;
-
+    
     @Id
-    @Column(name = "ID_PESSOA")
+    @Column(name = "ID_PESSOA", columnDefinition = ConstantesBanco.BIGINT)
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
+    
+    @Column(name = "CPF", columnDefinition = ConstantesBanco.CHAR_11)
+    private String cpf;
 
     @Column(name = "NOME", length = 60, nullable = false)
     private String nome;
@@ -42,27 +48,23 @@ public class Pessoa implements Serializable {
     @Column(name = "NM_ABREVIADO", length = 60, nullable = false)
     private String nomeAbreviado;
 
-    @Column(name = "DT_NASCIMENTO", nullable = false)
+    @Column(name = "DT_NASCIMENTO", nullable = false, columnDefinition = ConstantesBanco.DATE)
     @Temporal(TemporalType.DATE)
     private Date dataNascimento;
 
-    @Column(name = "DT_OBITO")
+    @Column(name = "DT_OBITO", columnDefinition = ConstantesBanco.DATE)
     @Temporal(TemporalType.DATE)
     private Date dataObito;
 
-    @Column(name = "DT_INCLUSAO_SISTEMA")
-    //@Column(name = "DT_INCLUSAO_SISTEMA", nullable = false, updatable = false)
+    @Column(name = "DT_INCLUSAO_SISTEMA", columnDefinition = ConstantesBanco.DATE)
     @Temporal(TemporalType.DATE)
     private Date dataInclusaoSistema;
 
-    @Column(name = "DT_INATIVACAO")
+    @Column(name = "DT_INATIVACAO", columnDefinition = ConstantesBanco.DATE)
     @Temporal(TemporalType.DATE)
     private Date dataIn;
 
-    @Column(name = "CPF", length = 11)
-    private String cpf;
-
-    @Column(name = "TP_SEXO", length = 1, nullable = false)
+    @Column(name = "TP_SEXO", columnDefinition = ConstantesBanco.CHAR_1, nullable = false)
     private String sexo;
 
     @Column(name = "NM_MAE", length = 60, nullable = false)
@@ -74,18 +76,19 @@ public class Pessoa implements Serializable {
     @Column(name = "EMAIL", length = 60)
     private String email;
 
-    @Column(name = "ID_CONCL_ESCOL", nullable = false)
+    @Column(name = "ID_CONCL_ESCOL", nullable = false, columnDefinition = ConstantesBanco.SMALLINT)
     private Integer indConclusaoEscolaridade;
 
-//    @Column(name = "ID_USUARIO", nullable = false)
-//    private Long idUsuario;
-//
-//    @Column(name = "IND_ATIVO", nullable = false)
-//    private Integer indAtivo;
-//
-//    @Column(name = "DT_ULT_ATULZ", nullable = false)
-//    @Temporal(TemporalType.DATE)
-//    private Date dataAtulizacao;
+    @Column(name = "ID_USUARIO", columnDefinition = ConstantesBanco.BIGINT)
+    private Long idUsuario;
+
+    @Column(name = "IND_ATIVO", nullable = false,  columnDefinition = ConstantesBanco.SMALLINT)
+    private Integer indAtivo;
+
+    @Column(name = "DT_ULT_ATULZ", columnDefinition = ConstantesBanco.DATE, nullable = false)
+    @Temporal(TemporalType.DATE)
+    private Date dataAtulizacao;
+
     @ManyToMany
     @JoinTable(name = "PESSOA_ENDERECO",
             joinColumns = @JoinColumn(name = "ID_PESSOA"),
@@ -134,6 +137,9 @@ public class Pessoa implements Serializable {
         documentos = new ArrayList<>();
     }
 
+    
+    //GETTERS E SETTERS
+    
     public void addTelefone(Telefone t){
         telefones.add(t);
     }
@@ -146,6 +152,7 @@ public class Pessoa implements Serializable {
         documentos.add(d);
     }
     
+    @Override
     public Long getId() {
         return id;
     }

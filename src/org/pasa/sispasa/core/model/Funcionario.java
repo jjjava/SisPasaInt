@@ -1,6 +1,7 @@
 package org.pasa.sispasa.core.model;
 
 import java.util.Date;
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -12,9 +13,11 @@ import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 
+import org.pasa.sispasa.core.constants.ConstantesBanco;
+
 /**
  *
- * @author Hudson Schumaker
+ * @author Hudson Schumaker / Andr� Gomes
  * @version 1.0.0
  */
 @Entity
@@ -24,61 +27,61 @@ public class Funcionario extends Pessoa {
 
     private static final long serialVersionUID = 1L;
 
-    @Column(name = "ID_FUNCIONARIO")
+    @Column(name = "ID_FUNCIONARIO", columnDefinition = ConstantesBanco.BIGINT)
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @Column(name = "MATR_ORIGEM", length = 6, nullable = false)
+    @Column(name = "MATR_ORIGEM", length = 15, nullable = false)
     private String matriculaOrigem;
 
-    @Column(name = "MATR_PASA", length = 6)
+    @Column(name = "MATR_PASA", length = 15)
     private String matriculaPasa;
 
-    @Column(name = "EMP_ATULZR")
+    @Column(name = "EMP_ATULZR", length = 2)
     private String empresaAtualizadora;
 
     @Column(name = "MATR_ATULZR", length = 15)
     private String matriculaAtualizadora;
 
-    @Column(name = "DIREITO_ABATER_IR", length = 1)
+    @Column(name = "DIREITO_ABATER_IR", columnDefinition = ConstantesBanco.CHAR_1)
     private String direitoAbaterIR;
 
-    @Column(name = "DT_ADMISSAO")
+    @Column(name = "DT_ADMISSAO", columnDefinition = ConstantesBanco.DATE)
     @Temporal(TemporalType.DATE)
     private Date dataAdimissao;
 
-    @Column(name = "DT_DESLIGAMENTO")
+    @Column(name = "DT_DESLIGAMENTO", columnDefinition = ConstantesBanco.DATE)
     @Temporal(TemporalType.DATE)
     private Date dataDesligamento;
 
     @Column(name = "EMAIL_CORPORATIVO", length = 60)
-    private String emailCorp;
+    private String emailCorporativo;
 
-    @Column(name = "FINANCEIRA", length = 1)
+    @Column(name = "FINANCEIRA", columnDefinition = ConstantesBanco.CHAR_1)
     private String financeira;
 
-    @Column(name = "CONTRATO_TRABALHO")
+    @Column(name = "CONTRATO_TRABALHO", columnDefinition = ConstantesBanco.CHAR_1)
     private String contratoTrabalho;
 
-    @Column(name = "CD_DIREITO_PASA")
+    @Column(name = "CD_DIREITO_PASA", columnDefinition = ConstantesBanco.CHAR_1)
     private String codDireitoPasa;
 
     @Column(name = "UNIDADE_CONTROLE", length = 3)
     private String unidadeControle;
 
-    @Column(name = "CENTRO_CUSTO", length = 12)
+    @Column(name = "CENTRO_CUSTO", columnDefinition = ConstantesBanco.CHAR_12)
     private String centroCusto;
 
     @Column(name = "CD_FILIAL_VLI", length = 4)
     private String codFilialVLI;
 
-    @Column(name = "ID_USUARIO", nullable = false)
+    @Column(name = "ID_USUARIO", nullable = false, columnDefinition = ConstantesBanco.BIGINT)
     private Long idUsuario;
 
-    @Column(name = "IND_ATIVO", nullable = false)
+    @Column(name = "IND_ATIVO", nullable = false, columnDefinition = ConstantesBanco.SMALLINT)
     private Integer indAtivo;
 
-    @Column(name = "DT_ULT_ATULZ", nullable = false)
+    @Column(name = "DT_ULT_ATULZ", nullable = false, columnDefinition = ConstantesBanco.DATE)
     @Temporal(TemporalType.DATE)
     private Date dataUltAtulizacao;
 
@@ -98,9 +101,7 @@ public class Funcionario extends Pessoa {
     @JoinColumn(name = "ID_MOTIVO_DESLIGAMENTO")
     private MotivoDesligamento motivoDesligamento;
 
-    public Funcionario() {
-    }
-
+    //GETTERS AND SETTERS
     @Override
     public Long getId() {
         return id;
@@ -271,11 +272,11 @@ public class Funcionario extends Pessoa {
         this.motivoDesligamento = motivoDesligamento;
     }
 
-    public String getEmailCorp() {
-        return emailCorp;
+    public String getEmailCorporativo() {
+        return emailCorporativo;
     }
 
-    public void setEmailCorp(String emailCorp) {
-        this.emailCorp = emailCorp;
+    public void setEmailCorporativo(String emailCorporativo) {
+        this.emailCorporativo = emailCorporativo;
     }
 }
