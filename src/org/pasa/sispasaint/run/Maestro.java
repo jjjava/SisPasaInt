@@ -47,7 +47,7 @@ public class Maestro {
                 if (SisPasaIntCommon.CARGA_VLI.equalsIgnoreCase(a.getDescricao())) {
                     JobDetail job = JobBuilder.newJob(VliJob.class)
                             .withIdentity(a.getDescricao(), a.getGrupo())
-                            .usingJobData(SisPasaIntCommon.TIPO_JOB, a.getDescricao())
+                            .usingJobData(SisPasaIntCommon.TIPO_JOB, a.getIdLista())
                             .build();
 
                     Trigger trigger = TriggerBuilder
@@ -60,7 +60,7 @@ public class Maestro {
                 if (SisPasaIntCommon.CARGA_PEOPLE.equalsIgnoreCase(a.getDescricao())) {
                     JobDetail job = JobBuilder.newJob(PeopleJob.class)
                             .withIdentity(a.getDescricao(), a.getGrupo())
-                            .usingJobData(SisPasaIntCommon.TIPO_JOB, a.getDescricao())
+                            .usingJobData(SisPasaIntCommon.TIPO_JOB, a.getIdLista())
                             .build();
 
                     Trigger trigger = TriggerBuilder
@@ -73,7 +73,7 @@ public class Maestro {
                 if (SisPasaIntCommon.CARGA_EXT.equalsIgnoreCase(a.getDescricao())) {
                     JobDetail job = JobBuilder.newJob(ExtJob.class)
                             .withIdentity(a.getDescricao(), a.getGrupo())
-                            .usingJobData(SisPasaIntCommon.TIPO_JOB, a.getDescricao())
+                            .usingJobData(SisPasaIntCommon.TIPO_JOB, a.getIdLista())
                             .build();
 
                     Trigger trigger = TriggerBuilder

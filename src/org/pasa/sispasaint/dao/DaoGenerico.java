@@ -20,7 +20,7 @@ public abstract class DaoGenerico<T> {
     @PersistenceContext
     private final EntityManager em;
     private final EntityManagerFactory emf;
-    private final Class<T> entityClass;
+    public final Class<T> entityClass;
 
     public DaoGenerico(Class<T> entityClass) {
         emf = Persistence.createEntityManagerFactory("SisPasaIntPU");
