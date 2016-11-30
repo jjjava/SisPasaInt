@@ -5,7 +5,6 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 import org.pasa.sispasaint.bean.impl.AgendaBeanImpl;
 import org.pasa.sispasaint.jobs.ExtJob;
-import org.pasa.sispasaint.jobs.MasterJob;
 import org.pasa.sispasaint.jobs.PeopleJob;
 import org.pasa.sispasaint.jobs.VliJob;
 import org.pasa.sispasaint.model.intg.Agenda;
@@ -48,7 +47,7 @@ public class Maestro {
                 if (SisPasaIntCommon.CARGA_VLI.equalsIgnoreCase(a.getDescricao())) {
                     JobDetail job = JobBuilder.newJob(VliJob.class)
                             .withIdentity(a.getDescricao(), a.getGrupo())
-                            .usingJobData("tipo", a.getDescricao())
+                            .usingJobData(SisPasaIntCommon.TIPO_JOB, a.getDescricao())
                             .build();
 
                     Trigger trigger = TriggerBuilder
@@ -61,7 +60,7 @@ public class Maestro {
                 if (SisPasaIntCommon.CARGA_PEOPLE.equalsIgnoreCase(a.getDescricao())) {
                     JobDetail job = JobBuilder.newJob(PeopleJob.class)
                             .withIdentity(a.getDescricao(), a.getGrupo())
-                            .usingJobData("tipo", a.getDescricao())
+                            .usingJobData(SisPasaIntCommon.TIPO_JOB, a.getDescricao())
                             .build();
 
                     Trigger trigger = TriggerBuilder
@@ -74,7 +73,7 @@ public class Maestro {
                 if (SisPasaIntCommon.CARGA_EXT.equalsIgnoreCase(a.getDescricao())) {
                     JobDetail job = JobBuilder.newJob(ExtJob.class)
                             .withIdentity(a.getDescricao(), a.getGrupo())
-                            .usingJobData("tipo", a.getDescricao())
+                            .usingJobData(SisPasaIntCommon.TIPO_JOB, a.getDescricao())
                             .build();
 
                     Trigger trigger = TriggerBuilder
