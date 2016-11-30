@@ -2,13 +2,14 @@ package org.pasa.sispasaint.bean.impl;
 
 import java.util.List;
 import org.pasa.sispasaint.bean.ListaDestinatariosBean;
+import org.pasa.sispasaint.dao.impl.ListaDestinatariosDAOImpl;
 import org.pasa.sispasaint.model.intg.ListaDestinatarios;
 
 /**
  *
  * @author 90J00318
  */
-public class ListaDestinatariosBeanImpl implements ListaDestinatariosBean{
+public class ListaDestinatariosBeanImpl implements ListaDestinatariosBean {
 
     @Override
     public ListaDestinatarios obter(Long id) {
@@ -32,7 +33,11 @@ public class ListaDestinatariosBeanImpl implements ListaDestinatariosBean{
 
     @Override
     public List<ListaDestinatarios> listar() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        return new ListaDestinatariosDAOImpl().listar();
     }
-    
+
+    @Override
+    public List<ListaDestinatarios> listar(Long id) {
+        return new ListaDestinatariosDAOImpl().listar(id);
+    }
 }

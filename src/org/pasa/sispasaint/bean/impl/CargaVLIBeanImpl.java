@@ -83,6 +83,7 @@ public class CargaVLIBeanImpl implements CargaVLIBean {
             Funcionario funcionario = new FuncionarioBeanImpl().obter(modeloBenVLI.getEmpresa(), modeloBenVLI.getMatricula());
             if (funcionario == null) {
                 funcionario = new Funcionario();
+                log.addRegistro();
             }
 
             funcionario.setMatriculaPasa(modeloBenVLI.getMatricula());
@@ -343,6 +344,7 @@ public class CargaVLIBeanImpl implements CargaVLIBean {
     private void handlerBeneficiario(ModeloBenVLI modeloBenVLI, ModeloEndVLI modeloEndVLI) {
         Beneficiario beneficiario = new BeneficiarioBeanImpl().obter(modeloBenVLI.getEmpresa(), modeloBenVLI.getMatricula(), modeloBenVLI.getCodBeneficiario());
         if (beneficiario == null) {
+            log.addRegistro();
             beneficiario = new Beneficiario();
         }
 

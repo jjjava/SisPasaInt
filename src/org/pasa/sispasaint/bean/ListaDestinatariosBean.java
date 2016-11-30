@@ -14,4 +14,5 @@ public interface ListaDestinatariosBean {
     void atualizar(ListaDestinatarios ld);
     void apagar(ListaDestinatarios ld);
     List<ListaDestinatarios> listar();
+    List<ListaDestinatarios> listar(Long id);
 }
