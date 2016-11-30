@@ -20,9 +20,6 @@ public class Agenda implements Serializable {
 
     @Column(name = "DES_AGENDA")
     private String descricao;
-    
-    
-    
     private String grupo;
     private String segundo;
     private String minuto;
@@ -31,6 +28,8 @@ public class Agenda implements Serializable {
     private String diaSemana;
     private String mes;
     private String ano;
+    
+    private Long idLista;
 
     public Agenda() {
     }
@@ -141,5 +140,13 @@ public class Agenda implements Serializable {
 
     public void setGrupo(String grupo) {
         this.grupo = grupo;
+    }
+    
+    public Long getIdLista() {
+        return idLista;
+    }
+
+    public void setIdLista(Long idLista) {
+        this.idLista = idLista;
     }
 }
