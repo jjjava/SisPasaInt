@@ -1,6 +1,8 @@
 package org.pasa.sispasaint.config;
 
 import org.pasa.sispasaint.dao.impl.DadosConfigDAOImpl;
+import org.pasa.sispasaint.dao.impl.MailConfigDAOImpl;
+import org.pasa.sispasaint.mail.MailConfig;
 
 /**
  *
@@ -10,6 +12,7 @@ public class Configuracao {
 
     private static Configuracao instance = null;
     private DadosConfig dadosConfig;
+    private MailConfig mailConfig;
 
     private Configuracao() {
         this.setUp();
@@ -17,6 +20,7 @@ public class Configuracao {
 
     private void setUp() {
         dadosConfig = new DadosConfigDAOImpl().obter(1L);
+        mailConfig = new MailConfigDAOImpl().obter(1L);
     }
 
     public static synchronized Configuracao getInstance() {
@@ -24,6 +28,18 @@ public class Configuracao {
             instance = new Configuracao();
         }
         return instance;
+    }
+
+    public String getUsuario() {
+        return mailConfig.getUsuario();
+    }
+
+    public String getSenha() {
+        return mailConfig.getSenha();
+    }
+
+    public String getServidor() {
+        return mailConfig.getServidor();
     }
 
     public String getPathComArquivoBenVLI() {

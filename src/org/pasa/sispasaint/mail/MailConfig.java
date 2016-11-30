@@ -20,13 +20,21 @@ import org.pasa.sispasaint.util.Criptografia;
 @Entity
 @Table(name = "EMAIL_CONFIGURACAO")
 public class MailConfig implements Serializable {
+    
+    private static final long serialVersionUID = 1L;
 
     @Id
-    @Column(name = "ID_CONFIG",columnDefinition = ConstantesBanco.BIGINT)
+    @Column(name = "ID_CONFIG")
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long ID;
+    
+    @Column(name = "USUARIO", length = 30)
     private String usuario;
+    
+    @Column(name = "SENHA", length = 8)
     private String senha;
+    
+    @Column(name = "SERVIDOR", length = 30)
     private String servidor;
     
     public MailConfig() {
@@ -49,20 +57,24 @@ public class MailConfig implements Serializable {
     }
 
     public String getSenha() {
-        try {
-            return Criptografia.decriptografarBase64(senha);
-        } catch (EncoderException ex) {
-            Logger.getLogger(MailConfig.class.getName()).log(Level.SEVERE, null, ex);
-        }
-        return null;
+        
+        return senha;
+//        try {
+//            return Criptografia.decriptografarBase64(senha);
+//        } catch (EncoderException ex) {
+//            Logger.getLogger(MailConfig.class.getName()).log(Level.SEVERE, null, ex);
+//        }
+//        return null;
     }
 
     public void setSenha(String senha) {
-        try {
-            this.senha = Criptografia.criptografarBase64(senha);
-        } catch (EncoderException ex) {
-            Logger.getLogger(MailConfig.class.getName()).log(Level.SEVERE, null, ex);
-        }
+        
+        this.senha = senha;
+//        try {
+//            this.senha = Criptografia.criptografarBase64(senha);
+//        } catch (EncoderException ex) {
+//            Logger.getLogger(MailConfig.class.getName()).log(Level.SEVERE, null, ex);
+//        }
     }
 
     public String getServidor() {

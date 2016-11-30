@@ -80,13 +80,13 @@ public class Funcionario extends Pessoa {
     @Column(name = "ID_USUARIO", nullable = false, columnDefinition = ConstantesBanco.BIGINT)
     private Long idUsuario;
 
-    @Column(name = "IND_ATIVO", nullable = false,  columnDefinition = ConstantesBanco.SMALLINT)
+    @Column(name = "IND_ATIVO", nullable = false, columnDefinition = ConstantesBanco.SMALLINT)
     private Integer indAtivo;
-    
+
     @Transient
     private EnumStatus status;
 
-    @Column(name = "DT_ULT_ATULZ", nullable = false,  columnDefinition = ConstantesBanco.DATE)
+    @Column(name = "DT_ULT_ATULZ", nullable = false, columnDefinition = ConstantesBanco.DATE)
     @Temporal(TemporalType.DATE)
     private Date dataUltAtulizacao;
 
@@ -106,17 +106,15 @@ public class Funcionario extends Pessoa {
     @JoinColumn(name = "ID_MOTIVO_DESLIGAMENTO")
     private MotivoDesligamento motivoDesligamento;
 
-
     //GETTERS AND SETTERS
-    
-    public EnumStatus getStatus(){
-    	return status;
+    public EnumStatus getStatus() {
+        return status;
     }
-    
-	public void setStatus(EnumStatus status) {
-		this.status = status;
-	}
-	
+
+    public void setStatus(EnumStatus status) {
+        this.status = status;
+    }
+
     public Long getId() {
         return id;
     }
@@ -285,19 +283,18 @@ public class Funcionario extends Pessoa {
         this.motivoDesligamento = motivoDesligamento;
     }
 
-	/**
-	 * @return the emailCorporativo
-	 */
-	public String getEmailCorporativo() {
-		return emailCorporativo;
-	}
+    /**
+     * @return the emailCorporativo
+     */
+    public String getEmailCorporativo() {
+        return emailCorporativo;
+    }
 
-	/**
-	 * @param emailCorporativo the emailCorporativo to set
-	 */
-	public void setEmailCorporativo(String emailCorporativo) {
-		this.emailCorporativo = emailCorporativo;
-	}
-
+    /**
+     * @param emailCorporativo the emailCorporativo to set
+     */
+    public void setEmailCorporativo(String emailCorporativo) {
+        this.emailCorporativo = emailCorporativo;
+    }
 
 }
