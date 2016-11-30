@@ -1,4 +1,4 @@
-package org.pasa.sispasaint.bean;
+package org.pasa.sispasaint.dao;
 
 import org.pasa.sispasaint.mail.MailConfig;
 
@@ -6,9 +6,8 @@ import org.pasa.sispasaint.mail.MailConfig;
  *
  * @author 90J00318
  */
-public interface MailConfigBean {
-    
-    MailConfig obter(MailConfig mc);
+public interface MailConfigDAO {
+    MailConfig obter(Long id);
     void cadastrar(MailConfig mc);
     void atualizar(MailConfig mc);
     void apagar(MailConfig mc);
