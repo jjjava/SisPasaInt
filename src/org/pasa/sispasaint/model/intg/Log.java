@@ -1,5 +1,6 @@
 package org.pasa.sispasaint.model.intg;
 
+import java.util.Date;
 import java.io.Serializable;
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -7,10 +8,12 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
+import javax.persistence.Temporal;
+import javax.persistence.TemporalType;
 import org.pasa.sispasa.core.constants.ConstantesBanco;
 
 @Entity
-@Table(name = "LOG")
+@Table(name = "CARG_LOG")
 public class Log implements Serializable {
 
     private static final long serialVersionUID = 1L;
@@ -25,6 +28,14 @@ public class Log implements Serializable {
     private Integer qtdAssocAlterados;
     private Integer qtdErrosAssoc;
     private Integer qtdAssocInativo;
+    
+    @Column(name = "DT_INICIO", nullable = false) 
+    @Temporal(TemporalType.TIMESTAMP)
+    private Date dataInicio;
+    
+    @Column(name = "DT_FIM", nullable = false) 
+    @Temporal(TemporalType.TIMESTAMP)
+    private Date dataFim;
 
     public Log() {
         qtdRegistros = 0;
@@ -100,5 +111,29 @@ public class Log implements Serializable {
 
     public void setQtsAssocInativo(Integer qtdAssocInativo) {
         this.qtdAssocInativo = qtdAssocInativo;
+    }
+
+    public Integer getQtdAssocInativo() {
+        return qtdAssocInativo;
+    }
+
+    public void setQtdAssocInativo(Integer qtdAssocInativo) {
+        this.qtdAssocInativo = qtdAssocInativo;
+    }
+
+    public Date getDataInicio() {
+        return dataInicio;
+    }
+
+    public void setDataInicio(Date dataInicio) {
+        this.dataInicio = dataInicio;
+    }
+
+    public Date getDataFim() {
+        return dataFim;
+    }
+
+    public void setDataFim(Date dataFim) {
+        this.dataFim = dataFim;
     }
 }

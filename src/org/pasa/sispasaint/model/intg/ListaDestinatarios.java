@@ -11,18 +11,22 @@ import org.pasa.sispasa.core.constants.ConstantesBanco;
 
 /**
  *
- * @author 90J00318
+ * @author Hudson Schumaker
  */
+
 @Entity
-@Table(name = "LISTA_DESTINATARIO")
+@Table(name = "CARG_LISTA_DESTINATARIO")
 public class ListaDestinatarios implements Serializable {
 
     private static final long serialVersionUID = 1L;
 
     @Id
-    @Column(name = "ID_LISTA_DESTINATARIO", columnDefinition = ConstantesBanco.BIGINT)
+    @Column(name = "ID", columnDefinition = ConstantesBanco.BIGINT)
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
+    
+    @Column(name = "ID_LISTA", columnDefinition = ConstantesBanco.BIGINT)
+    private Long idLista;
     
     @Column(name = "ID_DESTINATARIO")
     private Long idDestinatario;
@@ -44,5 +48,13 @@ public class ListaDestinatarios implements Serializable {
 
     public void setIdDestinatario(Long idDestinatario) {
         this.idDestinatario = idDestinatario;
+    }
+
+    public Long getIdLista() {
+        return idLista;
+    }
+
+    public void setIdLista(Long idLista) {
+        this.idLista = idLista;
     }
 }

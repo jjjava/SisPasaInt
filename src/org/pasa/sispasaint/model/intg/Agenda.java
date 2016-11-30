@@ -11,7 +11,7 @@ import javax.persistence.Table;
  * @author 90J00318
  */
 @Entity
-@Table(name = "AGENDA")
+@Table(name = "CARG_AGENDA")
 public class Agenda implements Serializable {
 
     @Id

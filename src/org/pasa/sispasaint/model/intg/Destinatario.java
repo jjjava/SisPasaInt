@@ -14,7 +14,7 @@ import org.pasa.sispasa.core.constants.ConstantesBanco;
  * @author 90J00318
  */
 @Entity
-@Table(name = "DESTINATARIO")
+@Table(name = "CARG_DESTINATARIO")
 public class Destinatario implements Serializable{
     
     private static final long serialVersionUID = 1L;

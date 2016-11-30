@@ -20,6 +20,7 @@ import org.pasa.sispasa.core.model.TipoVinculoEmpregaticio;
 import org.pasa.sispasaint.bean.CargaVLIBean;
 import org.pasa.sispasaint.model.enun.EnunTipoBeneficiario;
 import org.pasa.sispasaint.model.enun.EnunTipoDocumento;
+import org.pasa.sispasaint.model.intg.Log;
 import org.pasa.sispasaint.model.intg.ModeloBenVLI;
 import org.pasa.sispasaint.model.intg.ModeloEndVLI;
 import org.pasa.sispasaint.util.DateUtil;
@@ -33,7 +34,12 @@ import org.pasa.sispasaint.util.StringUtil;
  */
 public class CargaVLIBeanImpl implements CargaVLIBean {
 
+    private Log log;
+    private LogBeanImpl logBeanImpl;
+
     public CargaVLIBeanImpl() {
+        log = new Log();
+        logBeanImpl = new LogBeanImpl();
     }
 
     @Override
@@ -80,7 +86,6 @@ public class CargaVLIBeanImpl implements CargaVLIBean {
             }
 
             funcionario.setMatriculaPasa(modeloBenVLI.getMatricula());
-
             funcionario.setNome(modeloBenVLI.getNomeBeneficiario());
             funcionario.setNomeAbreviado(modeloBenVLI.getNomeBeneficiarioAbreviado());
             funcionario.setNomeMae(modeloBenVLI.getNomeDaMae());
