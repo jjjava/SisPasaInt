@@ -57,9 +57,6 @@ public class Empresa implements Serializable {
 
 	@Column(name = "EMAIL", length = 60)
 	private String email;
-	
-	@Column(name = "SITE", length=60)
-	private String site;
 
 	@Column(name = "CD_EMPRESA_VALE", length = 3)
 	private String codEmpresaVale;
