@@ -13,6 +13,8 @@ import javax.persistence.Table;
 @Entity
 @Table(name = "CARGA")
 public class TipoAgenda implements Serializable {
+    
+    private static final long serialVersionUID = 1L;
 
     @Id
     @Column(name = "ID_AGENDA")

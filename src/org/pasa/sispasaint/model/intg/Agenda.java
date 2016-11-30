@@ -13,7 +13,9 @@ import javax.persistence.Table;
 @Entity
 @Table(name = "CARG_AGENDA")
 public class Agenda implements Serializable {
-
+    
+    private static final long serialVersionUID = 1L;
+    
     @Id
     @Column(name = "ID_AGENDA")
     private Long id;

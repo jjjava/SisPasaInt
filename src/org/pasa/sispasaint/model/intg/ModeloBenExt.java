@@ -14,6 +14,8 @@ import javax.persistence.Table;
 @Entity
 @Table(name = "TEMP_BEN_EXT")
 public class ModeloBenExt implements Serializable {
+    
+    private static final long serialVersionUID = 1L;
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
