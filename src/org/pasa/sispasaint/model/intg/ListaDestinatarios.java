@@ -24,7 +24,7 @@ public class ListaDestinatarios implements Serializable {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     
-    @Column(name = "ID_DESTINARATIO")
+    @Column(name = "ID_DESTINATARIO")
     private Long idDestinatario;
     
     public ListaDestinatarios(){

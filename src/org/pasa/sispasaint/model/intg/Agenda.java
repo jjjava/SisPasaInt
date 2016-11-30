@@ -29,6 +29,7 @@ public class Agenda implements Serializable {
     private String mes;
     private String ano;
     
+    @Column(name = "ID_LISTA")
     private Long idLista;
 
     public Agenda() {

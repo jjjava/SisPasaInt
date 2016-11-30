@@ -4,7 +4,6 @@ import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
-
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -33,12 +32,12 @@ import org.pasa.sispasa.core.constants.ConstantesBanco;
 public class Pessoa extends BaseEntity implements Serializable {
 
     private static final long serialVersionUID = 1L;
-    
+
     @Id
     @Column(name = "ID_PESSOA", columnDefinition = ConstantesBanco.BIGINT)
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-    
+
     @Column(name = "CPF", columnDefinition = ConstantesBanco.CHAR_11)
     private String cpf;
 
@@ -82,7 +81,7 @@ public class Pessoa extends BaseEntity implements Serializable {
     @Column(name = "ID_USUARIO", columnDefinition = ConstantesBanco.BIGINT)
     private Long idUsuario;
 
-    @Column(name = "IND_ATIVO", nullable = false,  columnDefinition = ConstantesBanco.SMALLINT)
+    @Column(name = "IND_ATIVO", nullable = false, columnDefinition = ConstantesBanco.SMALLINT)
     private Integer indAtivo;
 
     @Column(name = "DT_ULT_ATULZ", columnDefinition = ConstantesBanco.DATE, nullable = false)
@@ -106,7 +105,7 @@ public class Pessoa extends BaseEntity implements Serializable {
             joinColumns = @JoinColumn(name = "ID_PESSOA"),
             inverseJoinColumns = @JoinColumn(name = "ID_DOCUMENTO"))
     private List<Documento> documentos;
-    
+
     @ManyToOne
     @JoinColumn(name = "ID_PAIS")
     private Pais nacionalidade;
@@ -137,21 +136,19 @@ public class Pessoa extends BaseEntity implements Serializable {
         documentos = new ArrayList<>();
     }
 
-    
     //GETTERS E SETTERS
-    
-    public void addTelefone(Telefone t){
+    public void addTelefone(Telefone t) {
         telefones.add(t);
     }
-    
-    public void addEndereco(Endereco e){
+
+    public void addEndereco(Endereco e) {
         enderecos.add(e);
     }
-    
-    public void addDocumento(Documento d){
+
+    public void addDocumento(Documento d) {
         documentos.add(d);
     }
-    
+
     @Override
     public Long getId() {
         return id;
@@ -276,7 +273,7 @@ public class Pessoa extends BaseEntity implements Serializable {
     public void setDocumentos(List<Documento> documentos) {
         this.documentos = documentos;
     }
-   
+
     public void setTelefones(List<Telefone> telefones) {
         this.telefones = telefones;
     }
@@ -305,107 +302,77 @@ public class Pessoa extends BaseEntity implements Serializable {
         this.estadoCivil = estadoCivil;
     }
 
+    /**
+     * @return the nacionalidade
+     */
+    public Pais getNacionalidade() {
+        return nacionalidade;
+    }
 
-	/**
-	 * @return the nacionalidade
-	 */
-	public Pais getNacionalidade() {
-		return nacionalidade;
-	}
+    /**
+     * @param nacionalidade the nacionalidade to set
+     */
+    public void setNacionalidade(Pais nacionalidade) {
+        this.nacionalidade = nacionalidade;
+    }
 
+    /**
+     * @return the idUsuario
+     */
+    public Long getIdUsuario() {
+        return idUsuario;
+    }
 
-	/**
-	 * @param nacionalidade the nacionalidade to set
-	 */
-	public void setNacionalidade(Pais nacionalidade) {
-		this.nacionalidade = nacionalidade;
-	}
+    
+    public void setIdUsuario(Long idUsuario) {
+        this.idUsuario = idUsuario;
+    }
 
+    public Integer getIndAtivo() {
+        return indAtivo;
+    }
 
-	/**
-	 * @return the idUsuario
-	 */
-	public Long getIdUsuario() {
-		return idUsuario;
-	}
+    public void setIndAtivo(Integer indAtivo) {
+        this.indAtivo = indAtivo;
+    }
 
+    public Date getDataAtulizacao() {
+        return dataAtulizacao;
+    }
 
-	/**
-	 * @param idUsuario the idUsuario to set
-	 */
-	public void setIdUsuario(Long idUsuario) {
-		this.idUsuario = idUsuario;
-	}
+    public void setDataAtulizacao(Date dataAtulizacao) {
+        this.dataAtulizacao = dataAtulizacao;
+    }
 
+    /**
+     * @return the naturalidade
+     */
+    public Estado getNaturalidade() {
+        return naturalidade;
+    }
 
-	/**
-	 * @return the indAtivo
-	 */
-	public Integer getIndAtivo() {
-		return indAtivo;
-	}
+    public void setNaturalidade(Estado naturalidade) {
+        this.naturalidade = naturalidade;
+    }
 
+    /**
+     * @return the cidadeOrigem
+     */
+    public Municipio getCidadeOrigem() {
+        return cidadeOrigem;
+    }
 
-	/**
-	 * @param indAtivo the indAtivo to set
-	 */
-	public void setIndAtivo(Integer indAtivo) {
-		this.indAtivo = indAtivo;
-	}
+    /**
+     * @param cidadeOrigem the cidadeOrigem to set
+     */
+    public void setCidadeOrigem(Municipio cidadeOrigem) {
+        this.cidadeOrigem = cidadeOrigem;
+    }
 
-
-	/**
-	 * @return the dataAtulizacao
-	 */
-	public Date getDataAtulizacao() {
-		return dataAtulizacao;
-	}
-
-
-	/**
-	 * @param dataAtulizacao the dataAtulizacao to set
-	 */
-	public void setDataAtulizacao(Date dataAtulizacao) {
-		this.dataAtulizacao = dataAtulizacao;
-	}
-
-
-	/**
-	 * @return the naturalidade
-	 */
-	public Estado getNaturalidade() {
-		return naturalidade;
-	}
-
-
-	/**
-	 * @param naturalidade the naturalidade to set
-	 */
-	public void setNaturalidade(Estado naturalidade) {
-		this.naturalidade = naturalidade;
-	}
-
-
-	/**
-	 * @return the cidadeOrigem
-	 */
-	public Municipio getCidadeOrigem() {
-		return cidadeOrigem;
-	}
-
-
-	/**
-	 * @param cidadeOrigem the cidadeOrigem to set
-	 */
-	public void setCidadeOrigem(Municipio cidadeOrigem) {
-		this.cidadeOrigem = cidadeOrigem;
-	}
-
-
-	/**
-	 * @param enderecos the enderecos to set
-	 */
-	public void setEnderecos(List<Endereco> enderecos) {
-		this.enderecos = enderecos;
-	}
+    /**
+     * @param enderecos the enderecos to set
+     */
+    public void setEnderecos(List<Endereco> enderecos) {
+        this.enderecos = enderecos;
+    }
 }
