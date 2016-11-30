@@ -7,6 +7,7 @@ import org.pasa.sispasaint.rw.PosicaoCampo;
 /**
  *
  * @author Hudson Schumaker
+ * @version 1.0.0
  */
 public class MapaCamposEndVLI {
 
