@@ -28,6 +28,7 @@ public class Log implements Serializable {
     private Integer qtdAssocAlterados;
     private Integer qtdErrosAssoc;
     private Integer qtdAssocInativo;
+    private String  nomeArquivo;
     
     @Column(name = "DT_INICIO", nullable = false) 
     @Temporal(TemporalType.TIMESTAMP)
@@ -135,5 +136,13 @@ public class Log implements Serializable {
 
     public void setDataFim(Date dataFim) {
         this.dataFim = dataFim;
+    }
+
+    public String getNomeArquivo() {
+        return nomeArquivo;
+    }
+
+    public void setNomeArquivo(String nomeArquivo) {
+        this.nomeArquivo = nomeArquivo;
     }
 }

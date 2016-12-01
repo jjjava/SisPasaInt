@@ -6,7 +6,8 @@ import org.pasa.sispasa.core.model.Beneficiario;
 
 /**
  *
- * @author 90J00318
+ * @author Hudson Schumaker
+ * @version 1.0.0
  */
 public class BeneficiarioBeanImpl implements BeneficiarioBean {
 

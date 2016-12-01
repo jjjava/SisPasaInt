@@ -2,9 +2,11 @@ package org.pasa.sispasaint.bean;
 
 import java.util.List;
 import org.pasa.sispasa.core.model.Empresa;
+
 /**
  *
- * @author 90J00318
+ * @author Hudson Schumaker
+ * @version 1.0.0
  */
 public interface EmpresaBean {
     Empresa obter(Empresa e);

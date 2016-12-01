@@ -1,112 +1,54 @@
 package org.pasa.sispasaint.mail;
 
-import java.util.Properties;
-import javax.mail.Message;
-import javax.mail.MessagingException;
-import javax.mail.Session;
-import javax.mail.Transport;
-import javax.mail.internet.AddressException;
-import javax.mail.internet.InternetAddress;
-import javax.mail.internet.MimeMessage;
+import java.text.SimpleDateFormat;
+import java.util.Date;
+import java.util.List;
+import org.apache.commons.mail.EmailException;
+import org.apache.commons.mail.SimpleEmail;
+import org.pasa.sispasaint.config.Configuracao;
 
 /**
  *
- * @author Hudson Schumaker - HStudio 21/07/2014
+ * @author Hudson Schumaker 
  * @version 1.0.0
- * @since 1.0.0
  */
 public class EnviaEmail {
 
-    private String from;
-    private String to;
+    private String remetente;
     private String subject;
     private String message;
-    private String pass;
+    private String senha;
+    private String host;
+    private List<String> lista;
 
-    public EnviaEmail() {
-        from = "schumakerteam@schumaker.com.br";
-        pass = "P@ssw0rd";
+    public EnviaEmail(List<String> l, String s, String m) {
+        lista = l;
+        subject = s;
+        message = m;
+        remetente = Configuracao.getInstance().getUsuario();
+        senha = Configuracao.getInstance().getSenha();
+        host = Configuracao.getInstance().getServidor();        
     }
 
-    public Boolean sendMessage() {
-        if (getTo().contains(";")) {
-            String auxTo[] = getTo().split(";");
-            boolean res[] = new boolean[auxTo.length];
-            for (int k = 0; k < auxTo.length; k++) {
-                setTo(auxTo[k]);
-                res[k] = send();
-            }
-            return res[0];
-        } else {
-            return send();
-        }
-    }
-
-    private boolean send() {
-        boolean res = false;
+   public void send() {
         try {
-            Properties props = new Properties();
-            props.put("mail.smtp.host", "smtp.schumaker.com.br");
-            props.put("mail.smtp.auth", "true");
-            props.put("mail.smtp.port", "587");
-            props.put("mail.smtp.starttls.enable", "true");
-            Session s = Session.getInstance(props, new Autenticar(getFrom(), getPass()));
-            MimeMessage email = new MimeMessage(s);
-            InternetAddress de = new InternetAddress(getFrom());
-            email.setFrom(de);
-            InternetAddress para = new InternetAddress(getTo());
-            email.addRecipient(Message.RecipientType.TO, para);
-            email.setSubject(getSubject());
-            email.setText(getMessage());
-            Transport.send(email);
-            res = true;
-        } catch (AddressException ex) {
-
-            res = false;
-        } catch (MessagingException ex) {
-
-            res = false;
+            SimpleDateFormat dtString = new SimpleDateFormat("dd/MM/yyyy hh:MM");
+            SimpleEmail email = new SimpleEmail();
+            email.setHostName(host);
+            for (String d: lista) {
+                email.addTo(d);
+            }
+            email.setFrom(remetente);
+            email.setSubject(subject + dtString.format(new Date()));
+            email.setMsg(message);
+            System.out.println("autenticando...");
+            email.setSSL(true);
+            email.setAuthentication(remetente, senha);
+            System.out.println("enviando...");
+            email.send();
+            System.out.println("Email enviado!");
+        } catch (EmailException ex) {
+            System.err.println(ex);
         }
-        return res;
-    }
-
-    public String getFrom() {
-        return from;
-    }
-
-    public void setFrom(String from) {
-        this.from = from;
-    }
-
-    public String getTo() {
-        return to;
-    }
-
-    public void setTo(String to) {
-        this.to = to;
-    }
-
-    public String getSubject() {
-        return subject;
-    }
-
-    public void setSubject(String subject) {
-        this.subject = subject;
-    }
-
-    public String getMessage() {
-        return message;
-    }
-
-    public void setMessage(String message) {
-        this.message = message;
-    }
-
-    public String getPass() {
-        return pass;
-    }
-
-    public void setPass(String pass) {
-        this.pass = pass;
     }
 }

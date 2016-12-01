@@ -37,8 +37,8 @@ public class CargaVLIBeanImpl implements CargaVLIBean {
     private Log log;
     private LogBeanImpl logBeanImpl;
 
-    public CargaVLIBeanImpl() {
-        log = new Log();
+    public CargaVLIBeanImpl(Log log) {
+        this.log = log;
         logBeanImpl = new LogBeanImpl();
     }
 
@@ -141,7 +141,7 @@ public class CargaVLIBeanImpl implements CargaVLIBean {
                 funcionario.setTelefones(listaTelefones);
             }
 
-            //Docs
+            //Documentos 
             funcionario.setCpf(modeloBenVLI.getCpf());
 
             Documento pis = null;
