@@ -102,7 +102,7 @@ public class LerArquivoEndPeople {
             campo = (PosicaoCampo) mapa.get(CamposEndVLI.CEP);
             modelo.setCep(line.substring(campo.getInicioCampo(), campo.getFimCampo()));
             
-            modelo.setNomeArquivo(Configuracao.getInstance().getPathComArquivoEndPeople());
+            modelo.setNomeArquivo(Configuracao.getInstance().getNomeEndPeople());
         } catch (Exception e) {
             System.out.println(e);
         }

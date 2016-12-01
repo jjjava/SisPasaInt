@@ -217,7 +217,7 @@ public class LerArquivoBenExt {
         campo = (PosicaoCampo) mapa.get(CamposBenExt.CODIGO_FILIAL_VLI);
         modelo.setCodigoFilialVLI(line.substring(campo.getInicioCampo(), campo.getFimCampo()));
         
-        modelo.setNomeArquivo(Configuracao.getInstance().getPathComArquivoBenExt());
+        modelo.setNomeArquivo(Configuracao.getInstance().getNomeBenExt());
 
         return modelo;
     }
