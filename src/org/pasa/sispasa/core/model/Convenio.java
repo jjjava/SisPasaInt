@@ -82,9 +82,6 @@ public class Convenio implements Serializable {
     @JoinColumn(name = "ID_CONTRATO")
     private Contrato contrato;
 
-    public Convenio() {
-    }
-
     public Long getId() {
         return id;
     }
