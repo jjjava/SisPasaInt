@@ -2,47 +2,53 @@ package org.pasa.sispasaint.bean.impl;
 
 import java.util.List;
 import org.pasa.sispasaint.bean.ImpBenExtTempBean;
+import org.pasa.sispasaint.dao.impl.ImpBenExtTempDAOImpl;
 import org.pasa.sispasaint.model.intg.ModeloBenExt;
+import org.pasa.sispasaint.rw.LerArquivoBenExt;
 
 /**
  *
  * @author 90J00318
  */
-public class ImpBenExtTempBeanImpl implements ImpBenExtTempBean{
+public class ImpBenExtTempBeanImpl implements ImpBenExtTempBean {
+
+    public ImpBenExtTempBeanImpl() {
+    }
 
     @Override
     public ModeloBenExt obter(Long id) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        ModeloBenExt modelo = new ModeloBenExt();
+        modelo.setId(id);
+        return obter(modelo);
     }
 
     @Override
     public ModeloBenExt obter(ModeloBenExt modelo) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        return new ImpBenExtTempDAOImpl().obter(modelo.getId());
     }
 
     @Override
     public void limparTbTemp() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        new ImpBenExtTempDAOImpl().limpaTB();
     }
 
     @Override
     public void resetarIdentity() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        new ImpBenExtTempDAOImpl().resetarIdentity();
     }
 
     @Override
     public void carregarArquivo() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        salvarTbTemp(new LerArquivoBenExt().lerArquivo());
     }
 
     @Override
     public void salvarTbTemp(List<ModeloBenExt> listaModeloBenExt) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        new ImpBenExtTempDAOImpl().salvarTbTemp(listaModeloBenExt);
     }
 
     @Override
     public Long contar() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        return new ImpBenExtTempDAOImpl().contar();
     }
-    
 }
