@@ -72,6 +72,7 @@ public class ModeloBenVLI implements Serializable {
     private String cassiData;// BRANCO
     private String branco;
     private String codigoFilialVLI;
+    private String nomeArquivo;
 
     public ModeloBenVLI() {
     }
@@ -494,5 +495,13 @@ public class ModeloBenVLI implements Serializable {
 
     public String getChaveMatricula() {
         return empresa + matricula + codBeneficiario;
+    }
+
+    public String getNomeArquivo() {
+        return nomeArquivo;
+    }
+
+    public void setNomeArquivo(String nomeArquivo) {
+        this.nomeArquivo = nomeArquivo;
     }
 }

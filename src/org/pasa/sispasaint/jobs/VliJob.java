@@ -39,7 +39,10 @@ public class VliJob implements Job {
         carga.mapearEntidades();
         
         EnviaEmail enviaEmail = new EnviaEmail(getDestinatariosList(new ListaDestinatariosBeanImpl().listar(tipo))
-                , "#CARGA VLI ", m);
+                , "#CARGA VLI "
+                , setMensagem());
+        
+        enviaEmail.send();
     }
 
     public List<String> getDestinatariosList(List<ListaDestinatarios> lista) {

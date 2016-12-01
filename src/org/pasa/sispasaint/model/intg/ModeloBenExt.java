@@ -71,6 +71,7 @@ public class ModeloBenExt implements Serializable {
     private String cassiData;// BRANCO
     private String branco;
     private String codigoFilialVLI;
+    private String nomeArquivo;
     
     public ModeloBenExt(){
     }
@@ -489,5 +490,13 @@ public class ModeloBenExt implements Serializable {
 
     public void setCodigoFilialVLI(String codigoFilialVLI) {
         this.codigoFilialVLI = codigoFilialVLI;
+    }
+
+    public String getNomeArquivo() {
+        return nomeArquivo;
+    }
+
+    public void setNomeArquivo(String nomeArquivo) {
+        this.nomeArquivo = nomeArquivo;
     }
 }

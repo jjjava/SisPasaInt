@@ -31,6 +31,7 @@ public class ModeloEndVLI implements Serializable {
     private String cidade;
     private String uf;
     private String cep;
+    private String nomeArquivo;
 
     public ModeloEndVLI() {
     }
@@ -129,5 +130,13 @@ public class ModeloEndVLI implements Serializable {
 
     public void setCep(String cep) {
         this.cep = cep;
+    }
+
+    public String getNomeArquivo() {
+        return nomeArquivo;
+    }
+
+    public void setNomeArquivo(String nomeArquivo) {
+        this.nomeArquivo = nomeArquivo;
     }
 }
