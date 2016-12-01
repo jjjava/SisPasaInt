@@ -3,6 +3,7 @@ package org.pasa.sispasaint.config;
 import org.pasa.sispasaint.dao.impl.DadosConfigDAOImpl;
 import org.pasa.sispasaint.dao.impl.MailConfigDAOImpl;
 import org.pasa.sispasaint.mail.MailConfig;
+import org.pasa.sispasaint.util.DateUtil;
 
 /**
  *
@@ -90,27 +91,28 @@ public class Configuracao {
         return dadosConfig.getPathOutEmpExternas();
     }
 
+    //NOMES
     public String getNomeBenVLIarq() {
-        return dadosConfig.getNomeBenVLIarq();
+        return dadosConfig.getNomeBenVLIarq() + "_" + DateUtil.dataParaArquivo() + ".TXT";
     }
 
     public String getNomeEndVLIarq() {
-        return dadosConfig.getNomeEndVLIarq();
+        return dadosConfig.getNomeEndVLIarq() + "_" + DateUtil.dataParaArquivo() + ".TXT";
     }
 
     public String getNomeBenPeople() {
-        return dadosConfig.getNomeBenPeople();
+        return dadosConfig.getNomeBenPeople() + "_" + DateUtil.dataParaArquivo() + ".TXT";
     }
 
     public String getNomeEndPeople() {
-        return dadosConfig.getNomeEndPeople();
+        return dadosConfig.getNomeEndPeople() + "_" + DateUtil.dataParaArquivo() + ".TXT";
     }
 
     public String getNomeBenExt() {
-        return dadosConfig.getNomeBenExt();
+        return dadosConfig.getNomeBenExt() + "_" + DateUtil.dataParaArquivo() + ".TXT";
     }
 
     public String getNomeEndExt() {
-        return dadosConfig.getNomeEndext();
+        return dadosConfig.getNomeEndext() + "_" + DateUtil.dataParaArquivo() + ".TXT";
     }
 }

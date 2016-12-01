@@ -222,6 +222,8 @@ public class LerArquivoBenPeople {
 
         campo = (PosicaoCampo) mapa.get(CamposBenPeople.CODIGO_FILIAL_VLI);
         modelo.setCodigoFilialVLI(line.substring(campo.getInicioCampo(), campo.getFimCampo()));
+        
+        modelo.setNomeArquivo(Configuracao.getInstance().getPathComArquivoBenPeople());
 
         return modelo;
     }

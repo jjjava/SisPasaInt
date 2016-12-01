@@ -9,7 +9,6 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 import org.pasa.sispasaint.config.Configuracao;
-import org.pasa.sispasaint.rw.PosicaoCampo;
 import org.pasa.sispasaint.map.CamposEndVLI;
 import org.pasa.sispasaint.map.MapaCamposEndVLI;
 import org.pasa.sispasaint.model.intg.ModeloEndPeople;
@@ -102,6 +101,8 @@ public class LerArquivoEndPeople {
 
             campo = (PosicaoCampo) mapa.get(CamposEndVLI.CEP);
             modelo.setCep(line.substring(campo.getInicioCampo(), campo.getFimCampo()));
+            
+            modelo.setNomeArquivo(Configuracao.getInstance().getPathComArquivoEndPeople());
         } catch (Exception e) {
             System.out.println(e);
         }

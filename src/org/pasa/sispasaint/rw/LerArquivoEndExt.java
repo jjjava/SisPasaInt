@@ -101,6 +101,8 @@ public class LerArquivoEndExt {
 
             campo = (PosicaoCampo) mapa.get(CamposEndExt.CEP);
             modelo.setCep(line.substring(campo.getInicioCampo(), campo.getFimCampo()));
+            
+            modelo.setNomeArquivo(Configuracao.getInstance().getPathComArquivoEndExt());
         } catch (Exception e) {
             System.out.println(e);
         }

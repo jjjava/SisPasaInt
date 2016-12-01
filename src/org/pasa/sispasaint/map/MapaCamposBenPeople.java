@@ -14,7 +14,7 @@ public class MapaCamposBenPeople {
 
     public MapaCamposBenPeople() {
         mapa = new HashMap<>();
-         mapa.put(CamposBenVLI.EMPRESA, new PosicaoCampo(1, 3));
+        mapa.put(CamposBenVLI.EMPRESA, new PosicaoCampo(1, 3));
         mapa.put(CamposBenVLI.MATRICULA, new PosicaoCampo(3, 9));
         mapa.put(CamposBenVLI.COD_BENEFICIARIO, new PosicaoCampo(9, 11));
         mapa.put(CamposBenVLI.DIREITO_AMS_CREDENCIAMENTO, new PosicaoCampo(11, 12));

@@ -44,8 +44,8 @@ public class CargaVLIBeanImpl implements CargaVLIBean {
 
     @Override
     public void cargaArquivosTemp() {
-        // cargaArquivosBenTemp();
-        // cargaArquivosEndTemp();
+        cargaArquivosBenTemp();
+        cargaArquivosEndTemp();
     }
 
     @Override

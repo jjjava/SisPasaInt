@@ -102,6 +102,8 @@ public class LerArquivoEndVLI {
 
             campo = (PosicaoCampo) mapa.get(CamposEndVLI.CEP);
             modelo.setCep(line.substring(campo.getInicioCampo(), campo.getFimCampo()));
+            
+            modelo.setNomeArquivo(Configuracao.getInstance().getPathComArquivoEndVLI());
         } catch (Exception e) {
             System.out.println(e);
         }
