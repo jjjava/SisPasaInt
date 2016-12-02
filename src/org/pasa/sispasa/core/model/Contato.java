@@ -4,6 +4,8 @@ import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
+
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -52,13 +54,13 @@ public class Contato implements Serializable {
     @Temporal(TemporalType.TIMESTAMP)
     private Date dataUltAtulizacao;
 
-    @ManyToMany(mappedBy = "contatos")
+    @ManyToMany(mappedBy = "contatos", cascade = CascadeType.ALL)
     private List<Empresa> empresa;
 
-    @ManyToMany(mappedBy = "contatos")
+    @ManyToMany(mappedBy = "contatos", cascade = CascadeType.ALL)
     private List<OperadoraReciprocidade> operadoraReciprocidades;
 
-    @ManyToMany
+    @ManyToMany(cascade = CascadeType.ALL)
     @JoinTable(name = "CONTATO_TELEFONE",
             joinColumns = @JoinColumn(name = "ID_CONTATO"),
             inverseJoinColumns = @JoinColumn(name = "ID_TELEFONE"))

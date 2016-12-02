@@ -3,6 +3,8 @@ package org.pasa.sispasa.core.model;
 import java.io.Serializable;
 import java.util.Date;
 import java.util.List;
+
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -60,19 +62,19 @@ public class Contrato implements Serializable {
     @Temporal(TemporalType.TIMESTAMP)
     private Date dataUltAtualizacao;
 
-    @ManyToOne
+    @ManyToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "ID_TP_CONTRATO")
     private TipoContrato tipoContrato;
 
-    @ManyToOne
+    @ManyToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "ID_OPERADORA")
     private Operadora operadora;
 
-    @ManyToOne
+    @ManyToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "ID_EMPRESA")
     private Empresa empresa;
     
-    @ManyToMany
+    @ManyToMany(cascade = CascadeType.ALL)
     @JoinTable(name = "CONTRATO_PLANO",
             joinColumns = @JoinColumn(name = "ID_CONTRATO"),
             inverseJoinColumns = @JoinColumn(name = "ID_PLANO"))

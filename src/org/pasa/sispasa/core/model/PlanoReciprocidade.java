@@ -2,6 +2,8 @@ package org.pasa.sispasa.core.model;
 
 import java.io.Serializable;
 import java.util.List;
+
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -47,15 +49,15 @@ public class PlanoReciprocidade implements Serializable {
     @Column(name = "IND_ATIVO", nullable = false, columnDefinition = ConstantesBanco.SMALLINT)
     private Integer indAtivo;
 
-    @ManyToOne
+    @ManyToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "ID_OPERADORA_RCP")
     private OperadoraReciprocidade OperadoraReciprocidade;
 
-    @ManyToOne
+    @ManyToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "ID_TP_PLANO")
     private TipoPlano tipoPlano;
 
-    @ManyToMany
+    @ManyToMany(cascade = CascadeType.ALL)
     @JoinTable(name = "CONVENIO_PLANO_RECIPROCIDADE",
             joinColumns = @JoinColumn(name = "ID_PLANO_RCP"),
             inverseJoinColumns = @JoinColumn(name = "ID_CONVENIO"))

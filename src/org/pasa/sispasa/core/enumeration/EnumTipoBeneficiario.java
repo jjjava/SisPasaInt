@@ -8,23 +8,40 @@ import java.util.EnumSet;
  */
 public enum EnumTipoBeneficiario {
 	
-	TITULAR(1, "Titular"),
-	DEPENDENTE(2, "Dependente");
+	TITULAR("T", "Titular"),
+	DEPENDENTE("D", "Dependente");
 	
-	private int indice;
+	private String indice;
 	private String descricao;
 	
-	private EnumTipoBeneficiario(int indice, String descricao) {
+	private EnumTipoBeneficiario(String indice, String descricao) {
 		this.indice = indice;
 		this.descricao = descricao;
 	}
 	
+	/**
+	 * 
+	 * @param indice
+	 * @return
+	 */
+	public static EnumTipoBeneficiario getTipoBeneficiarioByIndice(String indice){
+
+		if("t".equals(indice)){
+			return EnumTipoBeneficiario.TITULAR;
+		}
+		return EnumTipoBeneficiario.DEPENDENTE;
+	}
+
+	/**
+	 * 
+	 * @return
+	 */
 	public static EnumSet<EnumTipoBeneficiario> getAllTipoBeneficiario() {
         return EnumSet.of(TITULAR, DEPENDENTE);
     }
 	
 	//getters e setters
-    public int getIndice() {
+    public String getIndice() {
 		return indice;
 	}
 

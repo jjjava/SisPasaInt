@@ -13,6 +13,7 @@ import org.pasa.sispasa.core.model.Municipio;
 import org.pasa.sispasa.core.model.NivelEscolaridade;
 import org.pasa.sispasa.core.model.Operadora;
 import org.pasa.sispasa.core.model.OrigemInformacoes;
+import org.pasa.sispasa.core.model.Pais;
 import org.pasa.sispasa.core.model.Plano;
 import org.pasa.sispasa.core.model.Telefone;
 import org.pasa.sispasa.core.model.TipoDocumento;
@@ -44,8 +45,8 @@ public class CargaVLIBeanImpl implements CargaVLIBean {
 
     @Override
     public void cargaArquivosTemp() {
-        cargaArquivosBenTemp();
-        cargaArquivosEndTemp();
+        // cargaArquivosBenTemp();
+        // cargaArquivosEndTemp();
     }
 
     @Override
@@ -80,6 +81,9 @@ public class CargaVLIBeanImpl implements CargaVLIBean {
 
     private void handlerFuncionario(ModeloBenVLI modeloBenVLI, ModeloEndVLI modeloEndVLI) {
         try {
+
+            Pais pais = new Pais();
+            pais.setNome("Belgica");
             Funcionario funcionario = new FuncionarioBeanImpl().obter(modeloBenVLI.getEmpresa(), modeloBenVLI.getMatricula());
             if (funcionario == null) {
                 funcionario = new Funcionario();
@@ -168,6 +172,7 @@ public class CargaVLIBeanImpl implements CargaVLIBean {
                 estado = new Estado();
             }
             estado.setId(modeloEndVLI.getUf());
+            estado.setPais(pais);
 
             Municipio municipio = new MunicipioBeanImpl().existe(modeloEndVLI.getCidade());
             if (municipio == null) {
@@ -204,6 +209,7 @@ public class CargaVLIBeanImpl implements CargaVLIBean {
             Empresa empresa = new EmpresaBeanImpl().existe(modeloBenVLI.getEmpresa());
             if (empresa == null) {
                 empresa = new Empresa();
+                log.addErrosAssoc();
             }
             empresa.setCodEmpresaVale(modeloBenVLI.getEmpresa());
             empresa.setIndAtivo(SisPasaIntCommon.ATIVO);

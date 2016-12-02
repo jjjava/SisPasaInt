@@ -27,7 +27,7 @@ public class OrigemInformacoes implements Serializable {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @Column(name = "DESCRICAO", nullable = false, columnDefinition = ConstantesBanco.CHAR_30)
+    @Column(name = "DESCRICAO", nullable = false, length=30)
     private String descricao;
 
     public OrigemInformacoes(){

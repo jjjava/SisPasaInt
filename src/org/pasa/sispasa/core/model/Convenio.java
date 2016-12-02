@@ -2,6 +2,8 @@ package org.pasa.sispasa.core.model;
 
 import java.io.Serializable;
 import java.util.Date;
+
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -66,19 +68,19 @@ public class Convenio implements Serializable {
     @Temporal(TemporalType.TIMESTAMP)
     private Date dataUltAtulizacao;
 
-    @ManyToOne
+    @ManyToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "ID_TP_PAGAMENTO")
     private TipoPagamento tipoPagamento;
 
-    @ManyToOne
+    @ManyToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "ID_TP_PARTICIP")
     private TipoParticipacao tipoParticipacao;
 
-    @ManyToOne
+    @ManyToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "ID_EMPRESA")
     private Empresa empresa;
 
-    @ManyToOne
+    @ManyToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "ID_CONTRATO")
     private Contrato contrato;
 

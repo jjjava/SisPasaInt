@@ -3,6 +3,8 @@ package org.pasa.sispasa.core.model;
 import java.io.Serializable;
 import java.util.Date;
 import java.util.List;
+
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -55,19 +57,19 @@ public class Endereco implements Serializable {
     @Temporal(TemporalType.TIMESTAMP)
     private Date dataAtulizacao;
 
-    @OneToOne
+    @OneToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "ID_PESSOA")
     private Pessoa pessoa;
 
-    @ManyToOne
+    @ManyToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "ID_MUNICIPIO")
     private Municipio municipio;
 
-    @ManyToOne
+    @ManyToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "ID_ESTADO")
     private Estado estado;
 
-    @ManyToMany(mappedBy = "enderecos")
+    @ManyToMany(mappedBy = "enderecos", cascade = CascadeType.ALL)
     private List<Empresa> empresa;
 
     public Endereco() {

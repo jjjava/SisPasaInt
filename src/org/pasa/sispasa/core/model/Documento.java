@@ -2,6 +2,8 @@ package org.pasa.sispasa.core.model;
 
 import java.io.Serializable;
 import java.util.Date;
+
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -30,11 +32,14 @@ public class Documento implements Serializable {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
 
-	@Column(name = "NUMERO", nullable = false, length=20)
+	@Column(name = "NUMERO", nullable = false, length = 20)
 	private String numero;
 
-	@Column(name = "ORGAO_EMISSOR", length=30)
+	@Column(name = "ORGAO_EMISSOR", length = 30)
 	private String orgaoEmissor;
+
+	@Column(name = "SERIE", length = 10)
+	private String serie;
 
 	@Column(name = "DATA_EMISSAO", columnDefinition = ConstantesBanco.DATE)
 	@Temporal(TemporalType.DATE)
@@ -48,11 +53,11 @@ public class Documento implements Serializable {
 	@Temporal(TemporalType.TIMESTAMP)
 	private Date dataUltimaAtulizacao;
 
-	@ManyToOne
+	@ManyToOne(cascade = CascadeType.ALL)
 	@JoinColumn(name = "ID_ESTADO")
 	private Estado estado;
 
-	@ManyToOne
+	@ManyToOne(cascade = CascadeType.ALL)
 	@JoinColumn(name = "ID_TP_DOCUMENTO")
 	private TipoDocumento tipoDocumento;
 
@@ -121,5 +126,20 @@ public class Documento implements Serializable {
 
 	public void setTipoDocumento(TipoDocumento tipoDocumento) {
 		this.tipoDocumento = tipoDocumento;
+	}
+
+	/**
+	 * @return the serie
+	 */
+	public String getSerie() {
+		return serie;
+	}
+
+	/**
+	 * @param serie
+	 *            the serie to set
+	 */
+	public void setSerie(String serie) {
+		this.serie = serie;
 	}
 }

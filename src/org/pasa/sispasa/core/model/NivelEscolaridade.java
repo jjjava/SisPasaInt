@@ -10,53 +10,52 @@ import javax.persistence.Table;
 
 import org.pasa.sispasa.core.constants.ConstantesBanco;
 
-
 /**
-*
-* @author Hudson Schumaker / Andr� Gomes
-* @version 1.0.0
-*/
+ *
+ * @author Hudson Schumaker / Andr� Gomes
+ * @version 1.0.0
+ */
 @Entity
 @Table(name = "NIVEL_ESCOLARIDADE")
 public class NivelEscolaridade implements Serializable {
 
-    private static final long serialVersionUID = 1L;
+	private static final long serialVersionUID = 1L;
 
-    @Id
-    @Column(name = "ID_NIVEL_ESCOL", columnDefinition = ConstantesBanco.BIGINT)
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
+	@Id
+	@Column(name = "ID_NIVEL_ESCOL", columnDefinition = ConstantesBanco.BIGINT)
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	private Long id;
 
-    @Column(name = "DESCRICAO", length=30)
-    private String descricao;
+	@Column(name = "DESCRICAO", length = 30)
+	private String descricao;
 
-    @Column(name = "CD_EXTERNO", length=10)
-    private String codExterno;
-    
-    public NivelEscolaridade(){
-    }
-    
-    public Long getId() {
-        return id;
-    }
+	@Column(name = "CD_EXTERNO", length = 10)
+	private String codExterno;
 
-    public void setId(Long id) {
-        this.id = id;
-    }
+	public NivelEscolaridade() {
+	}
 
-    public String getDescricao() {
-        return descricao;
-    }
+	public Long getId() {
+		return id;
+	}
 
-    public void setDescricao(String descricao) {
-        this.descricao = descricao;
-    }
+	public void setId(Long id) {
+		this.id = id;
+	}
 
-    public String getCodExterno() {
-        return codExterno;
-    }
+	public String getDescricao() {
+		return descricao;
+	}
 
-    public void setCodExterno(String codExterno) {
-        this.codExterno = codExterno;
-    }
+	public void setDescricao(String descricao) {
+		this.descricao = descricao;
+	}
+
+	public String getCodExterno() {
+		return codExterno;
+	}
+
+	public void setCodExterno(String codExterno) {
+		this.codExterno = codExterno;
+	}
 }

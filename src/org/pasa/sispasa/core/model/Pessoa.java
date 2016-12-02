@@ -5,6 +5,7 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -19,8 +20,11 @@ import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
+import javax.persistence.Transient;
 
 import org.pasa.sispasa.core.constants.ConstantesBanco;
+import org.pasa.sispasa.core.enumeration.EnumNivelEscolaridade;
+import org.pasa.sispasa.core.enumeration.EnumOrigemInformacoes;
 
 /**
  *
@@ -41,7 +45,10 @@ public class Pessoa extends BaseEntity implements Serializable {
     
     @Column(name = "CPF", columnDefinition = ConstantesBanco.CHAR_11)
     private String cpf;
-
+    
+    @Transient
+    private String cpfFormatado; 
+    
     @Column(name = "NOME", length = 60, nullable = false)
     private String nome;
 
@@ -79,55 +86,51 @@ public class Pessoa extends BaseEntity implements Serializable {
     @Column(name = "ID_CONCL_ESCOL", nullable = false, columnDefinition = ConstantesBanco.SMALLINT)
     private Integer indConclusaoEscolaridade;
 
-    @Column(name = "ID_USUARIO", columnDefinition = ConstantesBanco.BIGINT)
-    private Long idUsuario;
-
-    @Column(name = "IND_ATIVO", nullable = false,  columnDefinition = ConstantesBanco.SMALLINT)
-    private Integer indAtivo;
-
-    @Column(name = "DT_ULT_ATULZ", columnDefinition = ConstantesBanco.DATE, nullable = false)
-    @Temporal(TemporalType.DATE)
-    private Date dataAtulizacao;
-
-    @ManyToMany
+    @ManyToMany(cascade = CascadeType.ALL)
     @JoinTable(name = "PESSOA_ENDERECO",
             joinColumns = @JoinColumn(name = "ID_PESSOA"),
             inverseJoinColumns = @JoinColumn(name = "ID_ENDERECO"))
     private List<Endereco> enderecos;
 
-    @ManyToMany
+    @ManyToMany(cascade = CascadeType.ALL)
     @JoinTable(name = "PESSOA_TELEFONE",
             joinColumns = @JoinColumn(name = "ID_PESSOA"),
             inverseJoinColumns = @JoinColumn(name = "ID_TELEFONE"))
     private List<Telefone> telefones;
 
-    @ManyToMany
+    @ManyToMany(cascade = CascadeType.ALL)
     @JoinTable(name = "DOCUMENTO_PESSOA",
             joinColumns = @JoinColumn(name = "ID_PESSOA"),
             inverseJoinColumns = @JoinColumn(name = "ID_DOCUMENTO"))
     private List<Documento> documentos;
     
-    @ManyToOne
+    @ManyToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "ID_PAIS")
     private Pais nacionalidade;
 
-    @ManyToOne
+    @ManyToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "ID_ESTADO")
     private Estado naturalidade;
 
-    @ManyToOne
+    @ManyToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "ID_MUNICIPIO")
     private Municipio cidadeOrigem;
 
-    @ManyToOne
+    @ManyToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "ID_NIVEL_ESCOL")
     private NivelEscolaridade nivelEscolaridade;
+    
+    @Transient
+    private EnumNivelEscolaridade enumNivelEscolaridade;
 
-    @ManyToOne
+    @ManyToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "ID_ORIGEM_INFO", nullable = false)
     private OrigemInformacoes origemInformacoes;
+    
+    @Transient
+    private EnumOrigemInformacoes enumOrigemInformacoes;
 
-    @ManyToOne
+    @ManyToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "ID_ESTADO_CIVIL")
     private EstadoCivil estadoCivil;
 
@@ -136,10 +139,9 @@ public class Pessoa extends BaseEntity implements Serializable {
         enderecos = new ArrayList<>();
         documentos = new ArrayList<>();
     }
-
     
     //GETTERS E SETTERS
-    
+   
     public void addTelefone(Telefone t){
         telefones.add(t);
     }
@@ -323,54 +325,6 @@ public class Pessoa extends BaseEntity implements Serializable {
 
 
 	/**
-	 * @return the idUsuario
-	 */
-	public Long getIdUsuario() {
-		return idUsuario;
-	}
-
-
-	/**
-	 * @param idUsuario the idUsuario to set
-	 */
-	public void setIdUsuario(Long idUsuario) {
-		this.idUsuario = idUsuario;
-	}
-
-
-	/**
-	 * @return the indAtivo
-	 */
-	public Integer getIndAtivo() {
-		return indAtivo;
-	}
-
-
-	/**
-	 * @param indAtivo the indAtivo to set
-	 */
-	public void setIndAtivo(Integer indAtivo) {
-		this.indAtivo = indAtivo;
-	}
-
-
-	/**
-	 * @return the dataAtulizacao
-	 */
-	public Date getDataAtulizacao() {
-		return dataAtulizacao;
-	}
-
-
-	/**
-	 * @param dataAtulizacao the dataAtulizacao to set
-	 */
-	public void setDataAtulizacao(Date dataAtulizacao) {
-		this.dataAtulizacao = dataAtulizacao;
-	}
-
-
-	/**
 	 * @return the naturalidade
 	 */
 	public Estado getNaturalidade() {
@@ -407,5 +361,53 @@ public class Pessoa extends BaseEntity implements Serializable {
 	 */
 	public void setEnderecos(List<Endereco> enderecos) {
 		this.enderecos = enderecos;
+	}
+
+
+	/**
+	 * @return the cpfFormatado
+	 */
+	public String getCpfFormatado() {
+		return cpfFormatado;
+	}
+
+
+	/**
+	 * @param cpfFormatado the cpfFormatado to set
+	 */
+	public void setCpfFormatado(String cpfFormatado) {
+		this.cpfFormatado = cpfFormatado;
+	}
+
+
+	/**
+	 * @return the enumNivelEscolaridade
+	 */
+	public EnumNivelEscolaridade getEnumNivelEscolaridade() {
+		return enumNivelEscolaridade;
+	}
+
+
+	/**
+	 * @param enumNivelEscolaridade the enumNivelEscolaridade to set
+	 */
+	public void setEnumNivelEscolaridade(EnumNivelEscolaridade enumNivelEscolaridade) {
+		this.enumNivelEscolaridade = enumNivelEscolaridade;
+	}
+
+
+	/**
+	 * @return the enumOrigemInformacoes
+	 */
+	public EnumOrigemInformacoes getEnumOrigemInformacoes() {
+		return enumOrigemInformacoes;
+	}
+
+
+	/**
+	 * @param enumOrigemInformacoes the enumOrigemInformacoes to set
+	 */
+	public void setEnumOrigemInformacoes(EnumOrigemInformacoes enumOrigemInformacoes) {
+		this.enumOrigemInformacoes = enumOrigemInformacoes;
 	}
 }

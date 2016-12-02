@@ -4,6 +4,8 @@ import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
+
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -72,17 +74,17 @@ public class Empresa implements Serializable {
 
 	@Column(name = "DT_ULT_ATULZ", nullable = false)
 	@Temporal(TemporalType.TIMESTAMP)
-	private Date dataAtulizacao;
+	private Date dataUltimaAtulizacao;
 
-	@ManyToOne
+	@ManyToOne(cascade = CascadeType.ALL)
 	@JoinColumn(name = "ID_TP_EMPRESA")
 	private TipoEmpresa tipoEmpresa;
 
-	@ManyToMany
+	@ManyToMany(cascade = CascadeType.ALL)
 	@JoinTable(name = "ENDERECO_EMPRESA", joinColumns = @JoinColumn(name = "ID_EMPRESA"), inverseJoinColumns = @JoinColumn(name = "ID_ENDERECO"))
 	private List<Endereco> enderecos;
 
-	@ManyToMany
+	@ManyToMany(cascade = CascadeType.ALL)
 	@JoinTable(name = "CONTATO_EMPRESA", joinColumns = @JoinColumn(name = "ID_EMPRESA"), inverseJoinColumns = @JoinColumn(name = "ID_CONTATO"))
 	private List<Contato> contatos;
 
@@ -181,14 +183,6 @@ public class Empresa implements Serializable {
 		this.indAtivo = indAtivo;
 	}
 
-	public Date getDataAtulizacao() {
-		return dataAtulizacao;
-	}
-
-	public void setDataAtulizacao(Date dataAtulizacao) {
-		this.dataAtulizacao = dataAtulizacao;
-	}
-
 	public TipoEmpresa getTipoEmpresa() {
 		return tipoEmpresa;
 	}
@@ -219,5 +213,33 @@ public class Empresa implements Serializable {
 
 	public void setIdUsuario(Long idUsuario) {
 		this.idUsuario = idUsuario;
+	}
+
+	/**
+	 * @return the dataUltimaAtulizacao
+	 */
+	public Date getDataUltimaAtulizacao() {
+		return dataUltimaAtulizacao;
+	}
+
+	/**
+	 * @param dataUltimaAtulizacao the dataUltimaAtulizacao to set
+	 */
+	public void setDataUltimaAtulizacao(Date dataUltimaAtulizacao) {
+		this.dataUltimaAtulizacao = dataUltimaAtulizacao;
+	}
+
+	/**
+	 * @return the site
+	 */
+	public String getSite() {
+		return site;
+	}
+
+	/**
+	 * @param site the site to set
+	 */
+	public void setSite(String site) {
+		this.site = site;
 	}
 }

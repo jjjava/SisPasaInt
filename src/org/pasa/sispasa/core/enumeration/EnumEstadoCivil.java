@@ -12,7 +12,7 @@ public enum EnumEstadoCivil {
 	CASADO(2, "Casado"),
 	DIVORCIADO(3,"Divorciado"),
 	DESQUITADO(4,"Desquitado"),
-	VIUVO(5,"ViÃºvo");
+	VIUVO(5,"Viúvo");
 	
 	private int indice;
 	private String descricao;

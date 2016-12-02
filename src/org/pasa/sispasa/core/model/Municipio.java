@@ -2,6 +2,7 @@ package org.pasa.sispasa.core.model;
 
 import java.io.Serializable;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -32,7 +33,7 @@ public class Municipio implements Serializable {
     @Column(name = "NOME", nullable = false, length=30)
     private String nome;
 
-    @ManyToOne
+    @ManyToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "ID_ESTADO")
     private Estado estado;
     

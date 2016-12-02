@@ -6,7 +6,7 @@ import java.util.EnumSet;
  *
  * @author Andre Gomes
  */
-public enum EnumStatus {
+public enum EnumIndAtivo {
 	
 	ATIVO(1, "Ativo"),
 	INATIVO(0, "Inativo"),
@@ -15,24 +15,24 @@ public enum EnumStatus {
 	private int indice;
 	private String descricao;
 	
-	private EnumStatus(int indice, String descricao) {
+	private EnumIndAtivo(int indice, String descricao) {
 		this.indice = indice;
 		this.descricao = descricao;
 	}
 	
 	
-	public static EnumStatus getStatusByValue(int value){
+	public static EnumIndAtivo getIndAtivoByIndice(int indice){
 		
-		switch (value) {
+		switch (indice) {
 			
 			case 0:
-				return EnumStatus.INATIVO;
+				return EnumIndAtivo.INATIVO;
 				
 			case 1:
-				return EnumStatus.ATIVO;
+				return EnumIndAtivo.ATIVO;
 			
 			case 2:
-				return EnumStatus.TODOS;
+				return EnumIndAtivo.TODOS;
 
 			default:
 				break;
@@ -41,7 +41,7 @@ public enum EnumStatus {
 		return null;
 	}
 	
-	public static EnumSet<EnumStatus> getAllStatus() {
+	public static EnumSet<EnumIndAtivo> getAllIndAtivo() {
         return EnumSet.of(ATIVO, INATIVO, TODOS);
     }
 	

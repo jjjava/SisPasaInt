@@ -12,10 +12,10 @@ import javax.persistence.Table;
 import org.pasa.sispasa.core.constants.ConstantesBanco;
 
 /**
-*
-* @author Hudson Schumaker / Andr� Gomes
-* @version 1.0.0
-*/
+ *
+ * @author Hudson Schumaker / Andre Gomes
+ * @version 1.0.0
+ */
 @Entity
 @Table(name = "TIPO_VINCULO_EMPREGATICIO")
 public class TipoVinculoEmpregaticio implements Serializable {
@@ -27,18 +27,15 @@ public class TipoVinculoEmpregaticio implements Serializable {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
 
-	@Column(name = "DESCRICAO", length=30)
+	@Column(name = "DESCRICAO", length = 30)
 	private String descricao;
 
 	@Column(name = "CD_EXTERNO", columnDefinition = ConstantesBanco.CHAR_1)
 	private String codExterno;
-	
-	
-	public TipoVinculoEmpregaticio(){
+
+	public TipoVinculoEmpregaticio() {
 	}
-	
-	//GETTERS E SETTERS
-	
+
 	public Long getId() {
 		return id;
 	}

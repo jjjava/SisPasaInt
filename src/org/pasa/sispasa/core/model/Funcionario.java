@@ -2,6 +2,7 @@ package org.pasa.sispasa.core.model;
 
 import java.util.Date;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -15,7 +16,7 @@ import javax.persistence.TemporalType;
 import javax.persistence.Transient;
 
 import org.pasa.sispasa.core.constants.ConstantesBanco;
-import org.pasa.sispasa.core.enumeration.EnumStatus;
+import org.pasa.sispasa.core.enumeration.EnumIndAtivo;
 
 /**
  *
@@ -50,7 +51,7 @@ public class Funcionario extends Pessoa {
 
     @Column(name = "DT_ADMISSAO", columnDefinition = ConstantesBanco.DATE)
     @Temporal(TemporalType.DATE)
-    private Date dataAdimissao;
+    private Date dataAdmissao;
 
     @Column(name = "DT_DESLIGAMENTO", columnDefinition = ConstantesBanco.DATE)
     @Temporal(TemporalType.DATE)
@@ -84,39 +85,33 @@ public class Funcionario extends Pessoa {
     private Integer indAtivo;
     
     @Transient
-    private EnumStatus status;
+    private EnumIndAtivo enumIndAtivo;
 
-    @Column(name = "DT_ULT_ATULZ", nullable = false,  columnDefinition = ConstantesBanco.DATE)
-    @Temporal(TemporalType.DATE)
-    private Date dataUltAtulizacao;
+    @Column(name = "DT_ULT_ATULZ", nullable = false)
+	@Temporal(TemporalType.TIMESTAMP)
+	private Date dataUltimaAtulizacao;
 
-    @ManyToOne
+    @ManyToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "ID_EMPRESA")
     private Empresa empresa;
 
-    @ManyToOne
+    @ManyToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "ID_TP_VINC_EMPREG")
     private TipoVinculoEmpregaticio tipoVinculoEmpregaticio;
 
-    @ManyToOne
+    @ManyToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "ID_DADOS_BANC")
     private DadosBancarios dadosBancarios;
 
-    @ManyToOne
+    @ManyToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "ID_MOTIVO_DESLIGAMENTO")
     private MotivoDesligamento motivoDesligamento;
 
-
-    //GETTERS AND SETTERS
-    
-    public EnumStatus getStatus(){
-    	return status;
+    public Funcionario(){
     }
     
-	public void setStatus(EnumStatus status) {
-		this.status = status;
-	}
-	
+    //GETTERS AND SETTERS
+    
     public Long getId() {
         return id;
     }
@@ -163,14 +158,6 @@ public class Funcionario extends Pessoa {
 
     public void setDireitoAbaterIR(String direitoAbaterIR) {
         this.direitoAbaterIR = direitoAbaterIR;
-    }
-
-    public Date getDataAdimissao() {
-        return dataAdimissao;
-    }
-
-    public void setDataAdimissao(Date dataAdimissao) {
-        this.dataAdimissao = dataAdimissao;
     }
 
     public Date getDataDesligamento() {
@@ -245,14 +232,6 @@ public class Funcionario extends Pessoa {
         this.indAtivo = indAtivo;
     }
 
-    public Date getDataUltAtulizacao() {
-        return dataUltAtulizacao;
-    }
-
-    public void setDataUltAtulizacao(Date dataUltAtulizacao) {
-        this.dataUltAtulizacao = dataUltAtulizacao;
-    }
-
     public Empresa getEmpresa() {
         return empresa;
     }
@@ -297,6 +276,48 @@ public class Funcionario extends Pessoa {
 	 */
 	public void setEmailCorporativo(String emailCorporativo) {
 		this.emailCorporativo = emailCorporativo;
+	}
+
+	/**
+	 * @return the enumIndAtivo
+	 */
+	public EnumIndAtivo getEnumIndAtivo() {
+		return enumIndAtivo;
+	}
+
+	/**
+	 * @param enumIndAtivo the enumIndAtivo to set
+	 */
+	public void setEnumIndAtivo(EnumIndAtivo enumIndAtivo) {
+		this.enumIndAtivo = enumIndAtivo;
+	}
+
+	/**
+	 * @return the dataUltimaAtulizacao
+	 */
+	public Date getDataUltimaAtulizacao() {
+		return dataUltimaAtulizacao;
+	}
+
+	/**
+	 * @param dataUltimaAtulizacao the dataUltimaAtulizacao to set
+	 */
+	public void setDataUltimaAtulizacao(Date dataUltimaAtulizacao) {
+		this.dataUltimaAtulizacao = dataUltimaAtulizacao;
+	}
+
+	/**
+	 * @return the dataAdmissao
+	 */
+	public Date getDataAdmissao() {
+		return dataAdmissao;
+	}
+
+	/**
+	 * @param dataAdmissao the dataAdmissao to set
+	 */
+	public void setDataAdmissao(Date dataAdmissao) {
+		this.dataAdmissao = dataAdmissao;
 	}
 
 

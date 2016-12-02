@@ -2,6 +2,7 @@ package org.pasa.sispasa.core.model;
 
 import java.io.Serializable;
 import java.util.Date;
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -10,8 +11,10 @@ import javax.persistence.Id;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
+import javax.persistence.Transient;
 
 import org.pasa.sispasa.core.constants.ConstantesBanco;
+import org.pasa.sispasa.core.enumeration.EnumBanco;
 
 /**
  *
@@ -31,6 +34,9 @@ public class DadosBancarios implements Serializable {
 
     @Column(name = "CD_BANCO", length=5)
     private String codBanco;
+    
+    @Transient
+    private EnumBanco enumBanco;
 
     @Column(name = "AGENCIA", nullable = false,length=5)
     private String agencia;
@@ -117,4 +123,18 @@ public class DadosBancarios implements Serializable {
     public void setDataAtulizacao(Date dataAtulizacao) {
         this.dataAtulizacao = dataAtulizacao;
     }
+
+	/**
+	 * @return the enumBanco
+	 */
+	public EnumBanco getEnumBanco() {
+		return enumBanco;
+	}
+
+	/**
+	 * @param enumBanco the enumBanco to set
+	 */
+	public void setEnumBanco(EnumBanco enumBanco) {
+		this.enumBanco = enumBanco;
+	}
 }
