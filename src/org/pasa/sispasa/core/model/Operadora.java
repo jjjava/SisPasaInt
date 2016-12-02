@@ -39,7 +39,7 @@ public class Operadora implements Serializable {
 
 	@Column(name = "DT_ULT_ATULZ")
 	@Temporal(TemporalType.TIMESTAMP)
-	private Date dataUltAtulizacao;
+	private Date dataUltimaAtualizacao;
 
 	public Operadora() {
 	}
@@ -77,10 +77,10 @@ public class Operadora implements Serializable {
 	}
 
 	public Date getDataUltAtulizacao() {
-		return dataUltAtulizacao;
+		return dataUltimaAtualizacao;
 	}
 
-	public void setDataUltAtulizacao(Date dataUltAtulizacao) {
-		this.dataUltAtulizacao = dataUltAtulizacao;
+	public void setDataUltAtulizacao(Date dataUltimaAtualizacao) {
+		this.dataUltimaAtualizacao = dataUltimaAtualizacao;
 	}
 }

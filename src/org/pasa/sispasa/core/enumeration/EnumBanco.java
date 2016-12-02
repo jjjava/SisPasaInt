@@ -8,11 +8,11 @@ import java.util.EnumSet;
  */
 public enum EnumBanco {
 	
-	ITAU("1", "Itaú"),
+	ITAU("1", "Itau"),
 	BRADESCO("2", "Brasdeco"),
 	SANTANDER("3","Santander"),
 	BANCO_DO_BRASIL("4","Banco do Brasil"),
-	CAIXA_ECONOMICA("5","Caixa Econômica Federal");
+	CAIXA_ECONOMICA("5","Caixa Economica Federal");
 	
 	private String indice;
 	private String descricao;

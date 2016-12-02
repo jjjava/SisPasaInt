@@ -205,7 +205,7 @@ public class CargaExtBeanImpl implements CargaExtBean {
             }
             empresa.setCodEmpresaVale(modeloBenExt.getEmpresa());
             empresa.setIndAtivo(SisPasaIntCommon.ATIVO);
-            empresa.setDataAtulizacao(new Date());
+            empresa.setDataUltimaAtulizacao(new Date());
             empresa.setIdUsuario(1L);
             funcionario.setEmpresa(empresa);
             funcionario.setMatriculaOrigem(modeloBenExt.getMatricula());
@@ -218,7 +218,7 @@ public class CargaExtBeanImpl implements CargaExtBean {
             funcionario.setTipoVinculoEmpregaticio(tipoVinculoEmpregaticio);
 
             funcionario.setDireitoAbaterIR(modeloBenExt.getDireitoAbaterIR());
-            funcionario.setDataAdimissao(DateUtil.toDate(modeloBenExt.getDataAdmissao()));
+            funcionario.setDataAdmissao(DateUtil.toDate(modeloBenExt.getDataAdmissao()));
             funcionario.setFinanceira(modeloBenExt.getFinanceira());
             funcionario.setContratoTrabalho(modeloBenExt.getContratoTrabalho());
             funcionario.setEmpresaAtualizadora(modeloBenExt.getEmpresaAtualizador());
@@ -245,7 +245,7 @@ public class CargaExtBeanImpl implements CargaExtBean {
             funcionario.setIdUsuario(1L);
             funcionario.setIndAtivo(SisPasaIntCommon.ATIVO);
             // funcionario.setSituacao(SisPasaIntCommon.ATUALIZADO);
-            funcionario.setDataUltAtulizacao(DateUtil.obterDataAtual());
+            funcionario.setDataUltimaAtulizacao(DateUtil.obterDataAtual());
             new FuncionarioBeanImpl().atualizar(funcionario);
 
 //------------------------------------------------------------------------------
@@ -270,7 +270,7 @@ public class CargaExtBeanImpl implements CargaExtBean {
             beneficiario.setOrgaoPessoal(modeloBenExt.getOrgaoPessoal());
             beneficiario.setFaixaNivel(modeloBenExt.getFaixaNivel());
             beneficiario.setNucleoAMS(modeloBenExt.getNucleoDaAms());
-            beneficiario.setTipoBenneficiario(EnunTipoBeneficiario.Titular.getDescricao());
+            beneficiario.setTipoBeneficiario(EnunTipoBeneficiario.Titular.getDescricao());
             beneficiario.setMatriculaParticipante(modeloBenExt.getMatriculaParticipante());
             beneficiario.setMatriculaRepresentanteLegal(modeloBenExt.getMatriculaRepresentanteLegal());
             beneficiario.setPlanoReciprocidadeCassi(modeloBenExt.getPlanoDeReciprocidadeCassi());
@@ -300,7 +300,7 @@ public class CargaExtBeanImpl implements CargaExtBean {
             beneficiario.setIdUsuario(1L);
             beneficiario.setIndAtivo(SisPasaIntCommon.ATIVO);
             // beneficiario.setSituacao(SisPasaIntCommon.ATUALIZADO);
-            beneficiario.setDataUltAtulizacao(DateUtil.obterDataAtual());
+            beneficiario.setDataUltimaAtulizacao(DateUtil.obterDataAtual());
             new BeneficiarioBeanImpl().atualizar(beneficiario);
         } catch (Exception e) {
             System.err.println(e);

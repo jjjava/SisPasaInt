@@ -27,9 +27,8 @@ public class GrauParentescoDAOImpl extends DaoGenerico<GrauParentesco> implement
         List<GrauParentesco> grauParentesco = null;
         try {
             grauParentesco = q1.getResultList();
-            System.err.println(grauParentesco.size());
         } catch (NoResultException e) {
-            System.err.println(e);
+            System.err.println("GrauParentesco "+e);
             return null;
         }
         if (grauParentesco.size() > 0) {

@@ -66,7 +66,7 @@ public class Convenio implements Serializable {
 
     @Column(name = "DT_ULT_ATULZ", nullable = false)
     @Temporal(TemporalType.TIMESTAMP)
-    private Date dataUltAtulizacao;
+    private Date dataUltimaAtualizacao;
 
     @ManyToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "ID_TP_PAGAMENTO")
@@ -173,11 +173,11 @@ public class Convenio implements Serializable {
     }
 
     public Date getDataUltAtulizacao() {
-        return dataUltAtulizacao;
+        return dataUltimaAtualizacao;
     }
 
-    public void setDataUltAtulizacao(Date dataUltAtulizacao) {
-        this.dataUltAtulizacao = dataUltAtulizacao;
+    public void setDataUltAtulizacao(Date dataUltimaAtualizacao) {
+        this.dataUltimaAtualizacao = dataUltimaAtualizacao;
     }
 
     public TipoPagamento getTipoPagamento() {

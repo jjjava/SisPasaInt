@@ -27,7 +27,7 @@ public class EmpresaDAOImpl extends DaoGenerico<Empresa> implements EmpresaDAO{
         try {
             empresa = q1.getResultList();
         } catch (NoResultException ex) {
-            System.err.println(ex);
+            System.err.println("Empresa "+ex);
             return null;
         }
         if (empresa.size() > 0) {

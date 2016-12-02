@@ -20,32 +20,32 @@ import org.pasa.sispasa.core.constants.ConstantesBanco;
 @Table(name = "MOTIVO_DESLIGAMENTO")
 public class MotivoDesligamento implements Serializable {
 
-    private static final long serialVersionUID = 1L;
+	private static final long serialVersionUID = 1L;
 
-    @Id
-    @Column(name = "ID_MOTIVO_DESLIGAMENTO", columnDefinition = ConstantesBanco.BIGINT)
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
+	@Id
+	@Column(name = "ID_MOTIVO_DESLIGAMENTO", columnDefinition = ConstantesBanco.BIGINT)
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	private Long id;
 
-    @Column(name = "DESCRICAO", length=60)
-    private String descricao;
-    
-    public MotivoDesligamento(){
-    }
+	@Column(name = "DESCRICAO", length = 60)
+	private String descricao;
 
-    public Long getId() {
-        return id;
-    }
+	public MotivoDesligamento() {
+	}
 
-    public void setId(Long id) {
-        this.id = id;
-    }
+	public Long getId() {
+		return id;
+	}
 
-    public String getDescricao() {
-        return descricao;
-    }
+	public void setId(Long id) {
+		this.id = id;
+	}
 
-    public void setDescricao(String descricao) {
-        this.descricao = descricao;
-    }
+	public String getDescricao() {
+		return descricao;
+	}
+
+	public void setDescricao(String descricao) {
+		this.descricao = descricao;
+	}
 }

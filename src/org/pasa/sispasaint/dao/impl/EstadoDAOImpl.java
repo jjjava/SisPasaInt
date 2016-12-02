@@ -26,7 +26,7 @@ public class EstadoDAOImpl extends DaoGenerico<Estado> implements EstadoDAO {
         try {
             estado = q1.getResultList();
         } catch (NoResultException ex) {
-            System.err.println(ex);
+            System.err.println("Estado :"+ex);
             return null;
         }
         if (estado.size() > 0) {

@@ -36,277 +36,270 @@ import org.pasa.sispasa.core.enumeration.EnumOrigemInformacoes;
 @Inheritance(strategy = InheritanceType.JOINED)
 public class Pessoa extends BaseEntity implements Serializable {
 
-    private static final long serialVersionUID = 1L;
-    
-    @Id
-    @Column(name = "ID_PESSOA", columnDefinition = ConstantesBanco.BIGINT)
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
-    
-    @Column(name = "CPF", columnDefinition = ConstantesBanco.CHAR_11)
-    private String cpf;
-    
-    @Transient
-    private String cpfFormatado; 
-    
-    @Column(name = "NOME", length = 60, nullable = false)
-    private String nome;
+	private static final long serialVersionUID = 1L;
 
-    @Column(name = "NM_ABREVIADO", length = 60, nullable = false)
-    private String nomeAbreviado;
+	@Id
+	@Column(name = "ID_PESSOA", columnDefinition = ConstantesBanco.BIGINT)
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	private Long id;
 
-    @Column(name = "DT_NASCIMENTO", nullable = false, columnDefinition = ConstantesBanco.DATE)
-    @Temporal(TemporalType.DATE)
-    private Date dataNascimento;
+	@Column(name = "CPF", columnDefinition = ConstantesBanco.CHAR_11)
+	private String cpf;
 
-    @Column(name = "DT_OBITO", columnDefinition = ConstantesBanco.DATE)
-    @Temporal(TemporalType.DATE)
-    private Date dataObito;
+	@Transient
+	private String cpfFormatado;
 
-    @Column(name = "DT_INCLUSAO_SISTEMA", columnDefinition = ConstantesBanco.DATE)
-    @Temporal(TemporalType.DATE)
-    private Date dataInclusaoSistema;
+	@Column(name = "NOME", length = 60, nullable = false)
+	private String nome;
 
-    @Column(name = "DT_INATIVACAO", columnDefinition = ConstantesBanco.DATE)
-    @Temporal(TemporalType.DATE)
-    private Date dataIn;
+	@Column(name = "NM_ABREVIADO", length = 60, nullable = false)
+	private String nomeAbreviado;
 
-    @Column(name = "TP_SEXO", columnDefinition = ConstantesBanco.CHAR_1, nullable = false)
-    private String sexo;
+	@Column(name = "DT_NASCIMENTO", nullable = false, columnDefinition = ConstantesBanco.DATE)
+	@Temporal(TemporalType.DATE)
+	private Date dataNascimento;
 
-    @Column(name = "NM_MAE", length = 60, nullable = false)
-    private String nomeMae;
+	@Column(name = "DT_OBITO", columnDefinition = ConstantesBanco.DATE)
+	@Temporal(TemporalType.DATE)
+	private Date dataObito;
 
-    @Column(name = "NM_PAI", length = 60)
-    private String nomePai;
+	@Column(name = "DT_INCLUSAO_SISTEMA", columnDefinition = ConstantesBanco.DATE)
+	@Temporal(TemporalType.DATE)
+	private Date dataInclusaoSistema;
 
-    @Column(name = "EMAIL", length = 60)
-    private String email;
+	@Column(name = "DT_INATIVACAO", columnDefinition = ConstantesBanco.DATE)
+	@Temporal(TemporalType.DATE)
+	private Date dataIn;
 
-    @Column(name = "ID_CONCL_ESCOL", nullable = false, columnDefinition = ConstantesBanco.SMALLINT)
-    private Integer indConclusaoEscolaridade;
+	@Column(name = "TP_SEXO", columnDefinition = ConstantesBanco.CHAR_1, nullable = false)
+	private String sexo;
 
-    @ManyToMany(cascade = CascadeType.ALL)
-    @JoinTable(name = "PESSOA_ENDERECO",
-            joinColumns = @JoinColumn(name = "ID_PESSOA"),
-            inverseJoinColumns = @JoinColumn(name = "ID_ENDERECO"))
-    private List<Endereco> enderecos;
+	@Column(name = "NM_MAE", length = 60, nullable = false)
+	private String nomeMae;
 
-    @ManyToMany(cascade = CascadeType.ALL)
-    @JoinTable(name = "PESSOA_TELEFONE",
-            joinColumns = @JoinColumn(name = "ID_PESSOA"),
-            inverseJoinColumns = @JoinColumn(name = "ID_TELEFONE"))
-    private List<Telefone> telefones;
+	@Column(name = "NM_PAI", length = 60)
+	private String nomePai;
 
-    @ManyToMany(cascade = CascadeType.ALL)
-    @JoinTable(name = "DOCUMENTO_PESSOA",
-            joinColumns = @JoinColumn(name = "ID_PESSOA"),
-            inverseJoinColumns = @JoinColumn(name = "ID_DOCUMENTO"))
-    private List<Documento> documentos;
-    
-    @ManyToOne(cascade = CascadeType.ALL)
-    @JoinColumn(name = "ID_PAIS")
-    private Pais nacionalidade;
+	@Column(name = "EMAIL", length = 60)
+	private String email;
 
-    @ManyToOne(cascade = CascadeType.ALL)
-    @JoinColumn(name = "ID_ESTADO")
-    private Estado naturalidade;
+	@Column(name = "ID_CONCL_ESCOL", nullable = false, columnDefinition = ConstantesBanco.SMALLINT)
+	private Integer indConclusaoEscolaridade;
 
-    @ManyToOne(cascade = CascadeType.ALL)
-    @JoinColumn(name = "ID_MUNICIPIO")
-    private Municipio cidadeOrigem;
+	@ManyToMany(cascade = CascadeType.ALL)
+	@JoinTable(name = "PESSOA_ENDERECO", joinColumns = @JoinColumn(name = "ID_PESSOA"), inverseJoinColumns = @JoinColumn(name = "ID_ENDERECO"))
+	private List<Endereco> enderecos;
 
-    @ManyToOne(cascade = CascadeType.ALL)
-    @JoinColumn(name = "ID_NIVEL_ESCOL")
-    private NivelEscolaridade nivelEscolaridade;
-    
-    @Transient
-    private EnumNivelEscolaridade enumNivelEscolaridade;
+	@ManyToMany(cascade = CascadeType.ALL)
+	@JoinTable(name = "PESSOA_TELEFONE", joinColumns = @JoinColumn(name = "ID_PESSOA"), inverseJoinColumns = @JoinColumn(name = "ID_TELEFONE"))
+	private List<Telefone> telefones;
 
-    @ManyToOne(cascade = CascadeType.ALL)
-    @JoinColumn(name = "ID_ORIGEM_INFO", nullable = false)
-    private OrigemInformacoes origemInformacoes;
-    
-    @Transient
-    private EnumOrigemInformacoes enumOrigemInformacoes;
+	@ManyToMany(cascade = CascadeType.ALL)
+	@JoinTable(name = "DOCUMENTO_PESSOA", joinColumns = @JoinColumn(name = "ID_PESSOA"), inverseJoinColumns = @JoinColumn(name = "ID_DOCUMENTO"))
+	private List<Documento> documentos;
 
-    @ManyToOne(cascade = CascadeType.ALL)
-    @JoinColumn(name = "ID_ESTADO_CIVIL")
-    private EstadoCivil estadoCivil;
+	@ManyToOne(cascade = CascadeType.ALL)
+	@JoinColumn(name = "ID_PAIS")
+	private Pais nacionalidade;
 
-    public Pessoa() {
-        telefones = new ArrayList<>();
-        enderecos = new ArrayList<>();
-        documentos = new ArrayList<>();
-    }
-    
-    //GETTERS E SETTERS
-   
-    public void addTelefone(Telefone t){
-        telefones.add(t);
-    }
-    
-    public void addEndereco(Endereco e){
-        enderecos.add(e);
-    }
-    
-    public void addDocumento(Documento d){
-        documentos.add(d);
-    }
-    
-    @Override
-    public Long getId() {
-        return id;
-    }
+	@ManyToOne(cascade = CascadeType.ALL)
+	@JoinColumn(name = "ID_ESTADO")
+	private Estado naturalidade;
 
-    public void setId(Long id) {
-        this.id = id;
-    }
+	@ManyToOne(cascade = CascadeType.ALL)
+	@JoinColumn(name = "ID_MUNICIPIO")
+	private Municipio cidadeOrigem;
 
-    public String getNome() {
-        return nome;
-    }
+	@ManyToOne(cascade = CascadeType.ALL)
+	@JoinColumn(name = "ID_NIVEL_ESCOL")
+	private NivelEscolaridade nivelEscolaridade;
 
-    public void setNome(String nome) {
-        this.nome = nome;
-    }
+	@Transient
+	private EnumNivelEscolaridade enumNivelEscolaridade;
 
-    public String getNomeAbreviado() {
-        return nomeAbreviado;
-    }
+	@ManyToOne(cascade = CascadeType.ALL)
+	@JoinColumn(name = "ID_ORIGEM_INFO", nullable = false)
+	private OrigemInformacoes origemInformacoes;
 
-    public void setNomeAbreviado(String nomeAbreviado) {
-        this.nomeAbreviado = nomeAbreviado;
-    }
+	@Transient
+	private EnumOrigemInformacoes enumOrigemInformacoes;
 
-    public Date getDataNascimento() {
-        return dataNascimento;
-    }
+	@ManyToOne(cascade = CascadeType.ALL)
+	@JoinColumn(name = "ID_ESTADO_CIVIL")
+	private EstadoCivil estadoCivil;
 
-    public void setDataNascimento(Date dataNascimento) {
-        this.dataNascimento = dataNascimento;
-    }
+	public Pessoa() {
+		telefones = new ArrayList<>();
+		enderecos = new ArrayList<>();
+		documentos = new ArrayList<>();
+	}
 
-    public Date getDataObito() {
-        return dataObito;
-    }
+	// GETTERS E SETTERS
 
-    public void setDataObito(Date dataObito) {
-        this.dataObito = dataObito;
-    }
+	public void addTelefone(Telefone t) {
+		telefones.add(t);
+	}
 
-    public Date getDataInclusaoSistema() {
-        return dataInclusaoSistema;
-    }
+	public void addEndereco(Endereco e) {
+		enderecos.add(e);
+	}
 
-    public void setDataInclusaoSistema(Date dataInclusaoSistema) {
-        this.dataInclusaoSistema = dataInclusaoSistema;
-    }
+	public void addDocumento(Documento d) {
+		documentos.add(d);
+	}
 
-    public Date getDataIn() {
-        return dataIn;
-    }
+	@Override
+	public Long getId() {
+		return id;
+	}
 
-    public void setDataIn(Date dataIn) {
-        this.dataIn = dataIn;
-    }
+	public void setId(Long id) {
+		this.id = id;
+	}
 
-    public String getCpf() {
-        return cpf;
-    }
+	public String getNome() {
+		return nome;
+	}
 
-    public void setCpf(String cpf) {
-        this.cpf = cpf;
-    }
+	public void setNome(String nome) {
+		this.nome = nome;
+	}
 
-    public String getSexo() {
-        return sexo;
-    }
+	public String getNomeAbreviado() {
+		return nomeAbreviado;
+	}
 
-    public void setSexo(String sexo) {
-        this.sexo = sexo;
-    }
+	public void setNomeAbreviado(String nomeAbreviado) {
+		this.nomeAbreviado = nomeAbreviado;
+	}
 
-    public String getNomeMae() {
-        return nomeMae;
-    }
+	public Date getDataNascimento() {
+		return dataNascimento;
+	}
 
-    public void setNomeMae(String nomeMae) {
-        this.nomeMae = nomeMae;
-    }
+	public void setDataNascimento(Date dataNascimento) {
+		this.dataNascimento = dataNascimento;
+	}
 
-    public String getNomePai() {
-        return nomePai;
-    }
+	public Date getDataObito() {
+		return dataObito;
+	}
 
-    public void setNomePai(String nomePai) {
-        this.nomePai = nomePai;
-    }
+	public void setDataObito(Date dataObito) {
+		this.dataObito = dataObito;
+	}
 
-    public String getEmail() {
-        return email;
-    }
+	public Date getDataInclusaoSistema() {
+		return dataInclusaoSistema;
+	}
 
-    public void setEmail(String email) {
-        this.email = email;
-    }
+	public void setDataInclusaoSistema(Date dataInclusaoSistema) {
+		this.dataInclusaoSistema = dataInclusaoSistema;
+	}
 
-    public Integer getIndConclusaoEscolaridade() {
-        return indConclusaoEscolaridade;
-    }
+	public Date getDataIn() {
+		return dataIn;
+	}
 
-    public void setIndConclusaoEscolaridade(Integer indConclusaoEscolaridade) {
-        this.indConclusaoEscolaridade = indConclusaoEscolaridade;
-    }
+	public void setDataIn(Date dataIn) {
+		this.dataIn = dataIn;
+	}
 
-    public List<Endereco> getEnderecos() {
-        return enderecos;
-    }
+	public String getCpf() {
+		return cpf;
+	}
 
-    public void setEndereco(List<Endereco> enderecos) {
-        this.enderecos = enderecos;
-    }
+	public void setCpf(String cpf) {
+		this.cpf = cpf;
+	}
 
-    public List<Telefone> getTelefones() {
-        return telefones;
-    }
+	public String getSexo() {
+		return sexo;
+	}
 
-    public List<Documento> getDocumentos() {
-        return documentos;
-    }
+	public void setSexo(String sexo) {
+		this.sexo = sexo;
+	}
 
-    public void setDocumentos(List<Documento> documentos) {
-        this.documentos = documentos;
-    }
-   
-    public void setTelefones(List<Telefone> telefones) {
-        this.telefones = telefones;
-    }
+	public String getNomeMae() {
+		return nomeMae;
+	}
 
-    public NivelEscolaridade getNivelEscolaridade() {
-        return nivelEscolaridade;
-    }
+	public void setNomeMae(String nomeMae) {
+		this.nomeMae = nomeMae;
+	}
 
-    public void setNivelEscolaridade(NivelEscolaridade nivelEscolaridade) {
-        this.nivelEscolaridade = nivelEscolaridade;
-    }
+	public String getNomePai() {
+		return nomePai;
+	}
 
-    public OrigemInformacoes getOrigemInformacoes() {
-        return origemInformacoes;
-    }
+	public void setNomePai(String nomePai) {
+		this.nomePai = nomePai;
+	}
 
-    public void setOrigemInformacoes(OrigemInformacoes origemInformacoes) {
-        this.origemInformacoes = origemInformacoes;
-    }
+	public String getEmail() {
+		return email;
+	}
 
-    public EstadoCivil getEstadoCivil() {
-        return estadoCivil;
-    }
+	public void setEmail(String email) {
+		this.email = email;
+	}
 
-    public void setEstadoCivil(EstadoCivil estadoCivil) {
-        this.estadoCivil = estadoCivil;
-    }
+	public Integer getIndConclusaoEscolaridade() {
+		return indConclusaoEscolaridade;
+	}
 
+	public void setIndConclusaoEscolaridade(Integer indConclusaoEscolaridade) {
+		this.indConclusaoEscolaridade = indConclusaoEscolaridade;
+	}
+
+	public List<Endereco> getEnderecos() {
+		return enderecos;
+	}
+
+	public void setEndereco(List<Endereco> enderecos) {
+		this.enderecos = enderecos;
+	}
+
+	public List<Telefone> getTelefones() {
+		return telefones;
+	}
+
+	public List<Documento> getDocumentos() {
+		return documentos;
+	}
+
+	public void setDocumentos(List<Documento> documentos) {
+		this.documentos = documentos;
+	}
+
+	public void setTelefones(List<Telefone> telefones) {
+		this.telefones = telefones;
+	}
+
+	public NivelEscolaridade getNivelEscolaridade() {
+		return nivelEscolaridade;
+	}
+
+	public void setNivelEscolaridade(NivelEscolaridade nivelEscolaridade) {
+		this.nivelEscolaridade = nivelEscolaridade;
+	}
+
+	public OrigemInformacoes getOrigemInformacoes() {
+		return origemInformacoes;
+	}
+
+	public void setOrigemInformacoes(OrigemInformacoes origemInformacoes) {
+		this.origemInformacoes = origemInformacoes;
+	}
+
+	public EstadoCivil getEstadoCivil() {
+		return estadoCivil;
+	}
+
+	public void setEstadoCivil(EstadoCivil estadoCivil) {
+		this.estadoCivil = estadoCivil;
+	}
 
 	/**
 	 * @return the nacionalidade
@@ -315,14 +308,13 @@ public class Pessoa extends BaseEntity implements Serializable {
 		return nacionalidade;
 	}
 
-
 	/**
-	 * @param nacionalidade the nacionalidade to set
+	 * @param nacionalidade
+	 *            the nacionalidade to set
 	 */
 	public void setNacionalidade(Pais nacionalidade) {
 		this.nacionalidade = nacionalidade;
 	}
-
 
 	/**
 	 * @return the naturalidade
@@ -331,14 +323,13 @@ public class Pessoa extends BaseEntity implements Serializable {
 		return naturalidade;
 	}
 
-
 	/**
-	 * @param naturalidade the naturalidade to set
+	 * @param naturalidade
+	 *            the naturalidade to set
 	 */
 	public void setNaturalidade(Estado naturalidade) {
 		this.naturalidade = naturalidade;
 	}
-
 
 	/**
 	 * @return the cidadeOrigem
@@ -347,22 +338,21 @@ public class Pessoa extends BaseEntity implements Serializable {
 		return cidadeOrigem;
 	}
 
-
 	/**
-	 * @param cidadeOrigem the cidadeOrigem to set
+	 * @param cidadeOrigem
+	 *            the cidadeOrigem to set
 	 */
 	public void setCidadeOrigem(Municipio cidadeOrigem) {
 		this.cidadeOrigem = cidadeOrigem;
 	}
 
-
 	/**
-	 * @param enderecos the enderecos to set
+	 * @param enderecos
+	 *            the enderecos to set
 	 */
 	public void setEnderecos(List<Endereco> enderecos) {
 		this.enderecos = enderecos;
 	}
-
 
 	/**
 	 * @return the cpfFormatado
@@ -371,14 +361,13 @@ public class Pessoa extends BaseEntity implements Serializable {
 		return cpfFormatado;
 	}
 
-
 	/**
-	 * @param cpfFormatado the cpfFormatado to set
+	 * @param cpfFormatado
+	 *            the cpfFormatado to set
 	 */
 	public void setCpfFormatado(String cpfFormatado) {
 		this.cpfFormatado = cpfFormatado;
 	}
-
 
 	/**
 	 * @return the enumNivelEscolaridade
@@ -387,14 +376,13 @@ public class Pessoa extends BaseEntity implements Serializable {
 		return enumNivelEscolaridade;
 	}
 
-
 	/**
-	 * @param enumNivelEscolaridade the enumNivelEscolaridade to set
+	 * @param enumNivelEscolaridade
+	 *            the enumNivelEscolaridade to set
 	 */
 	public void setEnumNivelEscolaridade(EnumNivelEscolaridade enumNivelEscolaridade) {
 		this.enumNivelEscolaridade = enumNivelEscolaridade;
 	}
-
 
 	/**
 	 * @return the enumOrigemInformacoes
@@ -403,9 +391,9 @@ public class Pessoa extends BaseEntity implements Serializable {
 		return enumOrigemInformacoes;
 	}
 
-
 	/**
-	 * @param enumOrigemInformacoes the enumOrigemInformacoes to set
+	 * @param enumOrigemInformacoes
+	 *            the enumOrigemInformacoes to set
 	 */
 	public void setEnumOrigemInformacoes(EnumOrigemInformacoes enumOrigemInformacoes) {
 		this.enumOrigemInformacoes = enumOrigemInformacoes;

@@ -7,32 +7,30 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
-
 import org.pasa.sispasa.core.constants.ConstantesBanco;
 
-
 /**
-*
-* @author Hudson Schumaker / Andr Gomes
-* @version 1.0.0
-*/
+ *
+ * @author Hudson Schumaker / Andre Gomes
+ * @version 1.0.0
+ */
 @Entity
 @Table(name = "ESTADO_CIVIL")
-public class EstadoCivil implements Serializable{
-	
+public class EstadoCivil implements Serializable {
+
 	private static final long serialVersionUID = 1L;
 
 	@Id
 	@Column(name = "ID_ESTADO_CIVIL", columnDefinition = ConstantesBanco.BIGINT)
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
-	
-	@Column(name = "DESCRICAO", nullable = false, length=30)
+
+	@Column(name = "DESCRICAO", nullable = false, length = 30)
 	private String descricao;
-	
-	public EstadoCivil(){
+
+	public EstadoCivil() {
 	}
-	
+
 	public Long getId() {
 		return id;
 	}

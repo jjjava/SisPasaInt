@@ -74,18 +74,22 @@ public class Empresa implements Serializable {
 
 	@Column(name = "DT_ULT_ATULZ", nullable = false)
 	@Temporal(TemporalType.TIMESTAMP)
-	private Date dataUltimaAtulizacao;
+	private Date dataUltimaAtualizacao;
 
 	@ManyToOne(cascade = CascadeType.ALL)
 	@JoinColumn(name = "ID_TP_EMPRESA")
 	private TipoEmpresa tipoEmpresa;
 
 	@ManyToMany(cascade = CascadeType.ALL)
-	@JoinTable(name = "ENDERECO_EMPRESA", joinColumns = @JoinColumn(name = "ID_EMPRESA"), inverseJoinColumns = @JoinColumn(name = "ID_ENDERECO"))
+	@JoinTable(name = "ENDERECO_EMPRESA", 
+	joinColumns = @JoinColumn(name = "ID_EMPRESA"), 
+	inverseJoinColumns = @JoinColumn(name = "ID_ENDERECO"))
 	private List<Endereco> enderecos;
 
 	@ManyToMany(cascade = CascadeType.ALL)
-	@JoinTable(name = "CONTATO_EMPRESA", joinColumns = @JoinColumn(name = "ID_EMPRESA"), inverseJoinColumns = @JoinColumn(name = "ID_CONTATO"))
+	@JoinTable(name = "CONTATO_EMPRESA",
+	joinColumns = @JoinColumn(name = "ID_EMPRESA"),
+	inverseJoinColumns = @JoinColumn(name = "ID_CONTATO"))
 	private List<Contato> contatos;
 
 	public Empresa() {
@@ -219,14 +223,14 @@ public class Empresa implements Serializable {
 	 * @return the dataUltimaAtulizacao
 	 */
 	public Date getDataUltimaAtulizacao() {
-		return dataUltimaAtulizacao;
+		return dataUltimaAtualizacao;
 	}
 
 	/**
 	 * @param dataUltimaAtulizacao the dataUltimaAtulizacao to set
 	 */
-	public void setDataUltimaAtulizacao(Date dataUltimaAtulizacao) {
-		this.dataUltimaAtulizacao = dataUltimaAtulizacao;
+	public void setDataUltimaAtulizacao(Date dataUltimaAtualizacao) {
+		this.dataUltimaAtualizacao = dataUltimaAtualizacao;
 	}
 
 	/**

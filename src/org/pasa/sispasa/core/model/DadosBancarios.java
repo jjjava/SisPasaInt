@@ -55,7 +55,7 @@ public class DadosBancarios implements Serializable {
 
     @Column(name = "DT_ULT_ATULZ", nullable = false, columnDefinition = ConstantesBanco.DATE)
     @Temporal(TemporalType.DATE)
-    private Date dataAtulizacao;
+    private Date dataUltimaAtualizacao;
 
     public DadosBancarios() {
     }
@@ -117,11 +117,11 @@ public class DadosBancarios implements Serializable {
     }
 
     public Date getDataAtulizacao() {
-        return dataAtulizacao;
+        return dataUltimaAtualizacao;
     }
 
-    public void setDataAtulizacao(Date dataAtulizacao) {
-        this.dataAtulizacao = dataAtulizacao;
+    public void setDataAtulizacao(Date dataUltimaAtualizacao) {
+        this.dataUltimaAtualizacao = dataUltimaAtualizacao;
     }
 
 	/**

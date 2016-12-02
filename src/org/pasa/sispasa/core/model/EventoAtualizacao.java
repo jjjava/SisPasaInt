@@ -36,7 +36,7 @@ public class EventoAtualizacao implements Serializable {
 
 	@Column(name = "DT_ATUALIZACAO")
 	@Temporal(TemporalType.TIMESTAMP)
-	private Date dataAtualizacao;
+	private Date dataUltimaAtualizacao;
 
 	public EventoAtualizacao() {
 	}
@@ -66,10 +66,10 @@ public class EventoAtualizacao implements Serializable {
 	}
 
 	public Date getDataAtualizacao() {
-		return dataAtualizacao;
+		return dataUltimaAtualizacao;
 	}
 
-	public void setDataAtualizacao(Date dataAtualizacao) {
-		this.dataAtualizacao = dataAtualizacao;
+	public void setDataAtualizacao(Date dataUltimaAtualizacao) {
+		this.dataUltimaAtualizacao = dataUltimaAtualizacao;
 	}
 }

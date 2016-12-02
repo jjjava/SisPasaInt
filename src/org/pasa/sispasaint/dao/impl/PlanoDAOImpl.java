@@ -28,7 +28,7 @@ public class PlanoDAOImpl extends DaoGenerico<Plano> implements PlanoDAO{
         try {
             plano = q1.getResultList();
         } catch (NoResultException ex) {
-            System.err.println(ex);
+            System.err.println("Plano "+ex);
             return null;
         }
         if (plano.size() > 0) {

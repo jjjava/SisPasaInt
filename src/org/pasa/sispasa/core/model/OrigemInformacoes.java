@@ -13,39 +13,39 @@ import org.pasa.sispasa.core.constants.ConstantesBanco;
 
 /**
  *
- * @author Hudson Schumaker 
+ * @author Hudson Schumaker
  * @version 1.0.0
  */
 @Entity
 @Table(name = "ORIGEM_INFORMACOES")
 public class OrigemInformacoes implements Serializable {
 
-    private static final long serialVersionUID = 1L;
+	private static final long serialVersionUID = 1L;
 
-    @Id
-    @Column(name = "ID_ORIGEM_INFO", columnDefinition = ConstantesBanco.BIGINT)
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
+	@Id
+	@Column(name = "ID_ORIGEM_INFO", columnDefinition = ConstantesBanco.BIGINT)
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	private Long id;
 
-    @Column(name = "DESCRICAO", nullable = false, length=30)
-    private String descricao;
+	@Column(name = "DESCRICAO", nullable = false, length = 30)
+	private String descricao;
 
-    public OrigemInformacoes(){
-    }
-    
-    public Long getId() {
-        return id;
-    }
+	public OrigemInformacoes() {
+	}
 
-    public void setId(Long id) {
-        this.id = id;
-    }
+	public Long getId() {
+		return id;
+	}
 
-    public String getDescricao() {
-        return descricao;
-    }
+	public void setId(Long id) {
+		this.id = id;
+	}
 
-    public void setDescricao(String descricao) {
-        this.descricao = descricao;
-    }
+	public String getDescricao() {
+		return descricao;
+	}
+
+	public void setDescricao(String descricao) {
+		this.descricao = descricao;
+	}
 }

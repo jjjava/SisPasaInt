@@ -45,8 +45,8 @@ public class CargaVLIBeanImpl implements CargaVLIBean {
 
     @Override
     public void cargaArquivosTemp() {
-        // cargaArquivosBenTemp();
-        // cargaArquivosEndTemp();
+         cargaArquivosBenTemp();
+         cargaArquivosEndTemp();
     }
 
     @Override
@@ -213,7 +213,7 @@ public class CargaVLIBeanImpl implements CargaVLIBean {
             }
             empresa.setCodEmpresaVale(modeloBenVLI.getEmpresa());
             empresa.setIndAtivo(SisPasaIntCommon.ATIVO);
-            empresa.setDataAtulizacao(new Date());
+            empresa.setDataUltimaAtulizacao(new Date());
             empresa.setIdUsuario(1L);
             funcionario.setEmpresa(empresa);
             funcionario.setMatriculaOrigem(modeloBenVLI.getMatricula());
@@ -226,7 +226,7 @@ public class CargaVLIBeanImpl implements CargaVLIBean {
             funcionario.setTipoVinculoEmpregaticio(tipoVinculoEmpregaticio);
 
             funcionario.setDireitoAbaterIR(modeloBenVLI.getDireitoAbaterIR());
-            funcionario.setDataAdimissao(DateUtil.toDate(modeloBenVLI.getDataAdmissao()));
+            funcionario.setDataAdmissao(DateUtil.toDate(modeloBenVLI.getDataAdmissao()));
             funcionario.setFinanceira(modeloBenVLI.getFinanceira());
             funcionario.setContratoTrabalho(modeloBenVLI.getContratoTrabalho());
             funcionario.setEmpresaAtualizadora(modeloBenVLI.getEmpresaAtualizador());
@@ -254,7 +254,7 @@ public class CargaVLIBeanImpl implements CargaVLIBean {
             funcionario.setIdUsuario(1L);
             funcionario.setIndAtivo(SisPasaIntCommon.ATIVO);
             // funcionario.setSituacao(SisPasaIntCommon.ATUALIZADO);
-            funcionario.setDataUltAtulizacao(DateUtil.obterDataAtual());
+            funcionario.setDataUltimaAtulizacao(DateUtil.obterDataAtual());
             new FuncionarioBeanImpl().atualizar(funcionario);
 
 //------------------------------------------------------------------------------
@@ -285,7 +285,7 @@ public class CargaVLIBeanImpl implements CargaVLIBean {
             beneficiario.setOrgaoPessoal(modeloBenVLI.getOrgaoPessoal());
             beneficiario.setFaixaNivel(modeloBenVLI.getFaixaNivel());
             beneficiario.setNucleoAMS(modeloBenVLI.getNucleoDaAms());
-            beneficiario.setTipoBenneficiario(EnunTipoBeneficiario.Titular.getDescricao());
+            beneficiario.setTipoBeneficiario(EnunTipoBeneficiario.Titular.getDescricao());
             beneficiario.setMatriculaParticipante(modeloBenVLI.getMatriculaParticipante());
             beneficiario.setMatriculaRepresentanteLegal(modeloBenVLI.getMatriculaRepresentanteLegal());
             beneficiario.setPlanoReciprocidadeCassi(modeloBenVLI.getPlanoDeReciprocidadeCassi());
@@ -339,7 +339,7 @@ public class CargaVLIBeanImpl implements CargaVLIBean {
             beneficiario.setIdUsuario(1L);
             beneficiario.setIndAtivo(SisPasaIntCommon.ATIVO);
             // beneficiario.setSituacao(SisPasaIntCommon.ATUALIZADO);
-            beneficiario.setDataUltAtulizacao(DateUtil.obterDataAtual());
+            beneficiario.setDataUltimaAtulizacao(DateUtil.obterDataAtual());
             new BeneficiarioBeanImpl().atualizar(beneficiario);
         } catch (Exception e) {
             System.err.println(e);
@@ -383,7 +383,7 @@ public class CargaVLIBeanImpl implements CargaVLIBean {
         beneficiario.setOrgaoPessoal(modeloBenVLI.getOrgaoPessoal());
         beneficiario.setFaixaNivel(modeloBenVLI.getFaixaNivel());
         beneficiario.setNucleoAMS(modeloBenVLI.getNucleoDaAms());
-        beneficiario.setTipoBenneficiario(EnunTipoBeneficiario.Titular.getDescricao());
+        beneficiario.setTipoBeneficiario(EnunTipoBeneficiario.Titular.getDescricao());
         beneficiario.setMatriculaParticipante(modeloBenVLI.getMatriculaParticipante());
         beneficiario.setMatriculaRepresentanteLegal(modeloBenVLI.getMatriculaRepresentanteLegal());
         beneficiario.setPlanoReciprocidadeCassi(modeloBenVLI.getPlanoDeReciprocidadeCassi());
@@ -466,7 +466,7 @@ public class CargaVLIBeanImpl implements CargaVLIBean {
         beneficiario.setIdUsuario(1L);
         beneficiario.setIndAtivo(SisPasaIntCommon.ATIVO);
         // beneficiario.setSituacao(SisPasaIntCommon.ATUALIZADO);
-        beneficiario.setDataUltAtulizacao(DateUtil.obterDataAtual());
+        beneficiario.setDataUltimaAtulizacao(DateUtil.obterDataAtual());
         new BeneficiarioBeanImpl().atualizar(beneficiario);
     }
 }

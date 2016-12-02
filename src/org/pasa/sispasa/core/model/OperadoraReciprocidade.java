@@ -68,7 +68,7 @@ public class OperadoraReciprocidade implements Serializable {
 
 	@Column(name = "DT_ULT_ATULZ", nullable = false)
 	@Temporal(TemporalType.TIMESTAMP)
-	private Date dataUltAtulizacao;
+	private Date dataUltimaAtualizacao;
 
 	@ManyToMany(cascade = CascadeType.ALL)
 	@JoinTable(name = "OPERADORA_RECIPROCIDADE_CONTATO",
@@ -168,10 +168,10 @@ public class OperadoraReciprocidade implements Serializable {
 	}
 
 	public Date getDataUltAtulizacao() {
-		return dataUltAtulizacao;
+		return dataUltimaAtualizacao;
 	}
 
-	public void setDataUltAtulizacao(Date dataUltAtulizacao) {
-		this.dataUltAtulizacao = dataUltAtulizacao;
+	public void setDataUltAtulizacao(Date dataUltimaAtualizacao) {
+		this.dataUltimaAtualizacao = dataUltimaAtualizacao;
 	}
 }

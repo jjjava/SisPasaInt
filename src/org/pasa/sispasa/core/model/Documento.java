@@ -51,7 +51,7 @@ public class Documento implements Serializable {
 
 	@Column(name = "DT_ULT_ATULZ", nullable = false)
 	@Temporal(TemporalType.TIMESTAMP)
-	private Date dataUltimaAtulizacao;
+	private Date dataUltimaAtualizacao;
 
 	@ManyToOne(cascade = CascadeType.ALL)
 	@JoinColumn(name = "ID_ESTADO")
@@ -105,11 +105,11 @@ public class Documento implements Serializable {
 	}
 
 	public Date getDataUltimaAtulizacao() {
-		return dataUltimaAtulizacao;
+		return dataUltimaAtualizacao;
 	}
 
-	public void setDataUltimaAtulizacao(Date dataUltimaAtulizacao) {
-		this.dataUltimaAtulizacao = dataUltimaAtulizacao;
+	public void setDataUltimaAtulizacao(Date dataUltimaAtualizacao) {
+		this.dataUltimaAtualizacao = dataUltimaAtualizacao;
 	}
 
 	public Estado getEstado() {

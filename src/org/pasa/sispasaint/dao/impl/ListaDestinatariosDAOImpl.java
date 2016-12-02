@@ -27,7 +27,7 @@ public class ListaDestinatariosDAOImpl extends DaoGenerico<ListaDestinatarios> i
         try {
             listaDestinatarios = q1.getResultList();
         } catch (NoResultException e) {
-            System.err.println(e);
+            System.err.println("Listadestina "+e);
             return null;
         }
         return listaDestinatarios;

@@ -25,7 +25,7 @@ public class GrauParentesco implements Serializable {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @Column(name = "DESCRICAO", nullable = false,length=30)
+    @Column(name = "DESCRICAO", nullable = false, length = 30)
     private String descricao;
 
     @Column(name = "CD_EXTERNO", columnDefinition = ConstantesBanco.CHAR_1)

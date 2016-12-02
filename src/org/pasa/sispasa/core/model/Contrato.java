@@ -60,7 +60,7 @@ public class Contrato implements Serializable {
 
     @Column(name = "DT_ULT_ATULZ", nullable = false) 
     @Temporal(TemporalType.TIMESTAMP)
-    private Date dataUltAtualizacao;
+    private Date dataUltimaAtualizacao;
 
     @ManyToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "ID_TP_CONTRATO")
@@ -148,11 +148,11 @@ public class Contrato implements Serializable {
     }
 
     public Date getDataUltAtualizacao() {
-        return dataUltAtualizacao;
+        return dataUltimaAtualizacao;
     }
 
-    public void setDataUltAtualizacao(Date dataUltAtualizacao) {
-        this.dataUltAtualizacao = dataUltAtualizacao;
+    public void setDataUltAtualizacao(Date dataUltimaAtualizacao) {
+        this.dataUltimaAtualizacao = dataUltimaAtualizacao;
     }
 
     public TipoContrato getTipoContrato() {

@@ -64,7 +64,7 @@ public class Plano implements Serializable {
 
     @Column(name = "DT_ULT_ATULZ", nullable = false)
     @Temporal(TemporalType.TIMESTAMP)
-    private Date dataUltAtulizacao;
+    private Date dataUltimaAtualizacao;
 
     @ManyToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "ID_OPERADORA" )
@@ -154,11 +154,11 @@ public class Plano implements Serializable {
     }
 
     public Date getDataUltAtulizacao() {
-        return dataUltAtulizacao;
+        return dataUltimaAtualizacao;
     }
 
-    public void setDataUltAtulizacao(Date dataUltAtulizacao) {
-        this.dataUltAtulizacao = dataUltAtulizacao;
+    public void setDataUltAtulizacao(Date dataUltimaAtualizacao) {
+        this.dataUltimaAtualizacao = dataUltimaAtualizacao;
     }
 
     public Operadora getOperadora() {

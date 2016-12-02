@@ -109,7 +109,7 @@ public class Beneficiario extends Pessoa {
 
     @Column(name = "DT_ULT_ATULZ", nullable = false)
 	@Temporal(TemporalType.TIMESTAMP)
-	private Date dataUltimaAtulizacao;
+	private Date dataUltimaAtualizacao;
 
     @ManyToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "ID_FUNCIONARIO")
@@ -368,14 +368,13 @@ public class Beneficiario extends Pessoa {
 	 * @return the dataUltimaAtulizacao
 	 */
 	public Date getDataUltimaAtulizacao() {
-		return dataUltimaAtulizacao;
+		return dataUltimaAtualizacao;
 	}
 
 	/**
 	 * @param dataUltimaAtulizacao the dataUltimaAtulizacao to set
 	 */
-	public void setDataUltimaAtulizacao(Date dataUltimaAtulizacao) {
-		this.dataUltimaAtulizacao = dataUltimaAtulizacao;
+	public void setDataUltimaAtulizacao(Date dataUltimaAtualizacao) {
+		this.dataUltimaAtualizacao = dataUltimaAtualizacao;
 	}
-
 }
