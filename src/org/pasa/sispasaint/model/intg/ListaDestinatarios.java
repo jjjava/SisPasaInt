@@ -31,6 +31,9 @@ public class ListaDestinatarios implements Serializable {
     @Column(name = "ID_DESTINATARIO")
     private Long idDestinatario;
     
+    @Column(name = "ID_EMPRESA")
+    private Integer idEmpresa;
+    
     public ListaDestinatarios(){
     }
 
@@ -56,5 +59,13 @@ public class ListaDestinatarios implements Serializable {
 
     public void setIdLista(Long idLista) {
         this.idLista = idLista;
+    }
+
+    public Integer getIdEmpresa() {
+        return idEmpresa;
+    }
+
+    public void setIdEmpresa(Integer idEmpresa) {
+        this.idEmpresa = idEmpresa;
     }
 }
