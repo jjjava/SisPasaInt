@@ -33,6 +33,9 @@ public class Agenda implements Serializable {
     
     @Column(name = "ID_LISTA")
     private Long idLista;
+    
+    @Column(name = "ID_EMPRESA")
+    private Long idEmpresa;
 
     public Agenda() {
     }
@@ -151,5 +154,13 @@ public class Agenda implements Serializable {
 
     public void setIdLista(Long idLista) {
         this.idLista = idLista;
+    }
+
+    public Long getIdEmpresa() {
+        return idEmpresa;
+    }
+
+    public void setIdEmpresa(Long idEmpresa) {
+        this.idEmpresa = idEmpresa;
     }
 }

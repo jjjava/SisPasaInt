@@ -1,6 +1,7 @@
 package org.pasa.sispasaint.config;
 
 import java.io.Serializable;
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -18,20 +19,23 @@ public class DadosConfig implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-    private String pathInEmpPeoples;
-    private String pathInEmpVli;
-    private String pathInEmpExternas;
-    private String pathOutEmpPeoples;
-    private String pathOutEmpVli;
-    private String pathOutEmpExternas;
-    private String nomeBenVLIarq;
-    private String nomeEndVLIarq;
-    private String nomeBenPeople;
-    private String nomeEndPeople;
-    private String nomeBenExt;
-    private String nomeEndext;
+    private String pathIn;
+
+    @Column(name = "ID_EMPRESA")
+    private Long idEmpresa;
+    private String pathOut;
+    private String nomeBen;
+    private String nomeEnd;
 
     public DadosConfig() {
+    }
+
+    public String getBenNomeArqComPath() {
+        return pathIn + "/" + nomeBen;
+    }
+
+    public String getEndNomeArqComPath() {
+        return pathIn + "/" + nomeEnd;
     }
 
     public Long getId() {
@@ -42,99 +46,43 @@ public class DadosConfig implements Serializable {
         this.id = id;
     }
 
-    public String getPathInEmpPeoples() {
-        return pathInEmpPeoples;
+    public String getPathIn() {
+        return pathIn;
     }
 
-    public void setPathInEmpPeoples(String pathInEmpPeoples) {
-        this.pathInEmpPeoples = pathInEmpPeoples;
+    public void setPathIn(String pathIn) {
+        this.pathIn = pathIn;
     }
 
-    public String getPathInEmpVli() {
-        return pathInEmpVli;
+    public Long getIdEmpresa() {
+        return idEmpresa;
     }
 
-    public void setPathInEmpVli(String pathInEmpVli) {
-        this.pathInEmpVli = pathInEmpVli;
+    public void setIdEmpresa(Long idEmpresa) {
+        this.idEmpresa = idEmpresa;
     }
 
-    public String getPathInEmpExternas() {
-        return pathInEmpExternas;
+    public String getPathOut() {
+        return pathOut;
     }
 
-    public void setPathInEmpExternas(String pathInEmpExternas) {
-        this.pathInEmpExternas = pathInEmpExternas;
+    public void setPathOut(String pathOut) {
+        this.pathOut = pathOut;
     }
 
-    public String getPathOutEmpPeoples() {
-        return pathOutEmpPeoples;
+    public String getNomeBen() {
+        return nomeBen;
     }
 
-    public void setPathOutEmpPeoples(String pathOutEmpPeoples) {
-        this.pathOutEmpPeoples = pathOutEmpPeoples;
+    public void setNomeBen(String nomeBen) {
+        this.nomeBen = nomeBen;
     }
 
-    public String getPathOutEmpVli() {
-        return pathOutEmpVli;
+    public String getNomeEnd() {
+        return nomeEnd;
     }
 
-    public void setPathOutEmpVli(String pathOutEmpVli) {
-        this.pathOutEmpVli = pathOutEmpVli;
-    }
-
-    public String getPathOutEmpExternas() {
-        return pathOutEmpExternas;
-    }
-
-    public void setPathOutEmpExternas(String pathOutEmpExternas) {
-        this.pathOutEmpExternas = pathOutEmpExternas;
-    }
-
-    public String getNomeBenVLIarq() {
-        return nomeBenVLIarq;
-    }
-
-    public void setNomeBenVLIarq(String nomeBenVLIarq) {
-        this.nomeBenVLIarq = nomeBenVLIarq;
-    }
-
-    public String getNomeEndVLIarq() {
-        return nomeEndVLIarq;
-    }
-
-    public void setNomeEndVLIarq(String nomeEndVLIarq) {
-        this.nomeEndVLIarq = nomeEndVLIarq;
-    }
-
-    public String getNomeBenPeople() {
-        return nomeBenPeople;
-    }
-
-    public void setNomeBenPeople(String nomeBenPeople) {
-        this.nomeBenPeople = nomeBenPeople;
-    }
-
-    public String getNomeEndPeople() {
-        return nomeEndPeople;
-    }
-
-    public void setNomeEndPeople(String nomeEndPeople) {
-        this.nomeEndPeople = nomeEndPeople;
-    }
-
-    public String getNomeBenExt() {
-        return nomeBenExt;
-    }
-
-    public void setNomeBenExt(String nomeBenExt) {
-        this.nomeBenExt = nomeBenExt;
-    }
-
-    public String getNomeEndext() {
-        return nomeEndext;
-    }
-
-    public void setNomeEndext(String nomeEndext) {
-        this.nomeEndext = nomeEndext;
+    public void setNomeEnd(String nomeEnd) {
+        this.nomeEnd = nomeEnd;
     }
 }

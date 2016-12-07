@@ -13,5 +13,6 @@ public interface DadosConfigDAO {
     void atualizar(DadosConfig  dadosConfig);
     void apagar(DadosConfig  dadosConfig);
     DadosConfig obter(Long id);
+    DadosConfig obterPorEmpresa(Long id);
     List<DadosConfig> listar();
 }
