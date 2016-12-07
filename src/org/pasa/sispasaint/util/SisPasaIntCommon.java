@@ -23,4 +23,5 @@ public class SisPasaIntCommon {
     public static final String CARGA_EXT = "3";
     public static final String CONTACORRENTE ="C";
     public static final String TIPO_JOB = "TIPO";
+    public static final String ID_EMPRESA = "ID";
 }

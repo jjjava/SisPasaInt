@@ -35,10 +35,12 @@ import org.pasa.sispasaint.util.StringUtil;
  */
 public class CargaVLIBeanImpl implements CargaVLIBean {
 
+    private Long id;
     private Log log;
     private LogBeanImpl logBeanImpl;
 
-    public CargaVLIBeanImpl(Log log) {
+    public CargaVLIBeanImpl(Long id, Log log) {
+        this.id = id;
         this.log = log;
         logBeanImpl = new LogBeanImpl();
     }
@@ -69,14 +71,14 @@ public class CargaVLIBeanImpl implements CargaVLIBean {
         ImpBenVLITempBeanImpl impBenVLITempBeanImpl = new ImpBenVLITempBeanImpl();
         impBenVLITempBeanImpl.limparTbTemp();
         impBenVLITempBeanImpl.resetarIdentity();
-        impBenVLITempBeanImpl.carregarArquivo();
+        impBenVLITempBeanImpl.carregarArquivo(id);
     }
 
     private void cargaArquivosEndTemp() {
         ImpEndVLITempBeanImpl impEndVLITempBeanImpl = new ImpEndVLITempBeanImpl();
         impEndVLITempBeanImpl.limparTbTemp();
         impEndVLITempBeanImpl.resetarIdentity();
-        impEndVLITempBeanImpl.carregarArquivo();
+        impEndVLITempBeanImpl.carregarArquivo(id);
     }
 
     private void handlerFuncionario(ModeloBenVLI modeloBenVLI, ModeloEndVLI modeloEndVLI) {

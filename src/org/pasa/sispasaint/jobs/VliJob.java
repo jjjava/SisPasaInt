@@ -31,10 +31,12 @@ public class VliJob implements Job {
 
     @Override
     public void execute(JobExecutionContext jec) throws JobExecutionException {
-        CargaVLIBeanImpl carga = new CargaVLIBeanImpl(log);
+       
         JobDataMap dataMap = jec.getJobDetail().getJobDataMap();
         long tipo = dataMap.getLong(SisPasaIntCommon.TIPO_JOB);
+        long idEmpresa = dataMap.getLong(SisPasaIntCommon.TIPO_JOB);
 
+        CargaVLIBeanImpl carga = new CargaVLIBeanImpl(idEmpresa, log);
         carga.cargaArquivosTemp();
         carga.mapearEntidades();
         

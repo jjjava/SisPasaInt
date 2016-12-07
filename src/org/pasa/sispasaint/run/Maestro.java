@@ -48,6 +48,7 @@ public class Maestro {
                     JobDetail job = JobBuilder.newJob(VliJob.class)
                             .withIdentity(a.getDescricao(), a.getGrupo())
                             .usingJobData(SisPasaIntCommon.TIPO_JOB, a.getIdLista())
+                            .usingJobData(SisPasaIntCommon.ID_EMPRESA, a.getIdEmpresa())
                             .build();
 
                     Trigger trigger = TriggerBuilder
@@ -61,6 +62,7 @@ public class Maestro {
                     JobDetail job = JobBuilder.newJob(PeopleJob.class)
                             .withIdentity(a.getDescricao(), a.getGrupo())
                             .usingJobData(SisPasaIntCommon.TIPO_JOB, a.getIdLista())
+                            .usingJobData(SisPasaIntCommon.ID_EMPRESA, a.getIdEmpresa())
                             .build();
 
                     Trigger trigger = TriggerBuilder
@@ -74,6 +76,7 @@ public class Maestro {
                     JobDetail job = JobBuilder.newJob(ExtJob.class)
                             .withIdentity(a.getDescricao(), a.getGrupo())
                             .usingJobData(SisPasaIntCommon.TIPO_JOB, a.getIdLista())
+                            .usingJobData(SisPasaIntCommon.ID_EMPRESA, a.getIdEmpresa())
                             .build();
 
                     Trigger trigger = TriggerBuilder

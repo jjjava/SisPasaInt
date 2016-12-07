@@ -20,6 +20,7 @@ import org.pasa.sispasa.core.model.TipoVinculoEmpregaticio;
 import org.pasa.sispasaint.bean.CargaExtBean;
 import org.pasa.sispasaint.model.enun.EnunTipoBeneficiario;
 import org.pasa.sispasaint.model.enun.EnunTipoDocumento;
+import org.pasa.sispasaint.model.intg.Log;
 import org.pasa.sispasaint.model.intg.ModeloBenExt;
 import org.pasa.sispasaint.model.intg.ModeloEndExt;
 import org.pasa.sispasaint.util.DateUtil;
@@ -33,7 +34,13 @@ import org.pasa.sispasaint.util.StringUtil;
  */
 public class CargaExtBeanImpl implements CargaExtBean {
 
-    public CargaExtBeanImpl() {
+    private Log log;
+    private Long id;
+    
+    
+    public CargaExtBeanImpl(Long id, Log log) {
+        this.log = log;
+        this.id = id;
     }
 
     @Override
@@ -63,14 +70,14 @@ public class CargaExtBeanImpl implements CargaExtBean {
         ImpBenExtTempBeanImpl impBenExtTempBeanImpl = new ImpBenExtTempBeanImpl();
         impBenExtTempBeanImpl.limparTbTemp();
         impBenExtTempBeanImpl.resetarIdentity();
-        impBenExtTempBeanImpl.carregarArquivo();
+        impBenExtTempBeanImpl.carregarArquivo(id);
     }
 
     private void cargaArquivosEndTemp() {
         ImpEndExtTempBeanImpl impEndExtTempBeanImpl = new ImpEndExtTempBeanImpl();
         impEndExtTempBeanImpl.limparTbTemp();
         impEndExtTempBeanImpl.resetarIdentity();
-        impEndExtTempBeanImpl.carregarArquivo();
+        impEndExtTempBeanImpl.carregarArquivo(id);
     }
 
     private void handlerFuncionario(ModeloBenExt modeloBenExt, ModeloEndExt modeloEndExt) {
