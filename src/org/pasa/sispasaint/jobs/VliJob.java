@@ -34,7 +34,7 @@ public class VliJob implements Job {
        
         JobDataMap dataMap = jec.getJobDetail().getJobDataMap();
         long tipo = dataMap.getLong(SisPasaIntCommon.TIPO_JOB);
-        long idEmpresa = dataMap.getLong(SisPasaIntCommon.TIPO_JOB);
+        long idEmpresa = dataMap.getLong(SisPasaIntCommon.ID_EMPRESA);
 
         CargaVLIBeanImpl carga = new CargaVLIBeanImpl(idEmpresa, log);
         carga.cargaArquivosTemp();

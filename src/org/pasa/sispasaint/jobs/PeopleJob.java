@@ -31,7 +31,7 @@ public class PeopleJob implements Job{
         
         JobDataMap dataMap = jec.getJobDetail().getJobDataMap();
         long tipo = dataMap.getLong(SisPasaIntCommon.TIPO_JOB);
-        long idEmpresa = dataMap.getLong(SisPasaIntCommon.TIPO_JOB);
+        long idEmpresa = dataMap.getLong(SisPasaIntCommon.ID_EMPRESA);
         
         CargaPeopleBeanImpl carga = new CargaPeopleBeanImpl(idEmpresa, log);
         carga.cargaArquivosTemp();

@@ -30,7 +30,7 @@ public class ExtJob implements Job {
     public void execute(JobExecutionContext jec) throws JobExecutionException {
         JobDataMap dataMap = jec.getJobDetail().getJobDataMap();
         long tipo = dataMap.getLong(SisPasaIntCommon.TIPO_JOB);
-        long idEmpresa = dataMap.getLong(SisPasaIntCommon.TIPO_JOB);
+        long idEmpresa = dataMap.getLong(SisPasaIntCommon.ID_EMPRESA);
         CargaExtBeanImpl cargaExtBeanImpl = new CargaExtBeanImpl(idEmpresa, log);
         cargaExtBeanImpl.cargaArquivosTemp();
         cargaExtBeanImpl.mapearEntidades();
