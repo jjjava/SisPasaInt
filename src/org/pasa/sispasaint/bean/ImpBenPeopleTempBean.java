@@ -14,7 +14,7 @@ public interface ImpBenPeopleTempBean {
     ModeloBenPeople obter(ModeloBenPeople modelo);
     void limparTbTemp();
     void resetarIdentity();
-    void carregarArquivo();
+    void carregarArquivo(Long id);
     void salvarTbTemp(List<ModeloBenPeople> listaModeloBenPeople);
     Long contar();
 }

@@ -45,7 +45,15 @@ public class Configuracao {
         return new DadosConfigDAOImpl().obterPorEmpresa(id).getBenNomeArqComPath();
     }
     
-    public String getNomeArqComPath(Long id){
+    public String getEndNomeArqComPath(Long id){
         return new DadosConfigDAOImpl().obterPorEmpresa(id).getEndNomeArqComPath();
+    }
+    
+    public String getNomeArqBen(Long id){
+         return new DadosConfigDAOImpl().obterPorEmpresa(id).getNomeBen();
+    }
+    
+    public String getNomeArqEnd(Long id){
+        return new DadosConfigDAOImpl().obterPorEmpresa(id).getNomeEnd();
     }
 }

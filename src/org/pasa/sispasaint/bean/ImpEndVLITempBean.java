@@ -14,7 +14,7 @@ public interface ImpEndVLITempBean {
     ModeloEndVLI obterPorMatricula(ModeloBenVLI modeloBenVli);
     void limparTbTemp();
     void resetarIdentity();
-    void carregarArquivo();
+    void carregarArquivo(Long id);
     void salvarTbTemp(List<ModeloEndVLI> listaModeloEndVLI);
     Long contar();
 }

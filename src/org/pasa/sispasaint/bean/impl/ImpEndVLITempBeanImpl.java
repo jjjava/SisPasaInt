@@ -37,8 +37,8 @@ public class ImpEndVLITempBeanImpl implements ImpEndVLITempBean {
     }
 
     @Override
-    public void carregarArquivo() {
-        salvarTbTemp(new LerArquivoEndVLI().lerArquivo());
+    public void carregarArquivo(Long id) {
+        salvarTbTemp(new LerArquivoEndVLI().lerArquivo(id));
     }
 
     @Override

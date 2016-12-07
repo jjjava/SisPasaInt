@@ -33,8 +33,8 @@ public class ImpEndPeopleTempBeanImpl implements ImpEndPeopleTempBean {
     }
     
     @Override
-    public void carregarArquivo() {
-        salvarTbTemp(new LerArquivoEndPeople().lerArquivo());
+    public void carregarArquivo(Long id) {
+        salvarTbTemp(new LerArquivoEndPeople().lerArquivo(id));
     }
     
     @Override

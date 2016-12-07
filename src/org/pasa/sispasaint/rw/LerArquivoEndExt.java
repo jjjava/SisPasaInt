@@ -22,15 +22,16 @@ public class LerArquivoEndExt {
     public LerArquivoEndExt() {
     }
 
-    public List<ModeloEndExt> lerArquivo() {
-        return lerArquivo(Configuracao.getInstance().getPathComArquivoEndExt());
+    public List<ModeloEndExt> lerArquivo(Long id) {
+        return lerArquivo(Configuracao.getInstance().getEndNomeArqComPath(id),
+                Configuracao.getInstance().getNomeArqEnd(id));
     }
 
-    public List<ModeloEndExt> lerArquivo(String path) {
-        return lerArquivo(new File(path));
+    public List<ModeloEndExt> lerArquivo(String path, String nomeArq) {
+        return lerArquivo(new File(path), nomeArq);
     }
 
-    public List<ModeloEndExt> lerArquivo(File file) {
+    public List<ModeloEndExt> lerArquivo(File file, String nomeArq) {
         List<ModeloEndExt> listaEndExt = new ArrayList<>();
         BufferedReader br = null;
         try {
@@ -42,7 +43,7 @@ public class LerArquivoEndExt {
                     if (line.length() < 190) {
                         line = acerta190Pos(line);
                     }
-                    listaEndExt.add(parseCampos(line));// vrf se usar trim() ou  ñ
+                    listaEndExt.add(parseCampos(line, nomeArq));// vrf se usar trim() ou  ñ
                 }
             }
         } catch (FileNotFoundException e) {
@@ -61,7 +62,7 @@ public class LerArquivoEndExt {
         return listaEndExt;
     }
 
-    private ModeloEndExt parseCampos(String line) {
+    private ModeloEndExt parseCampos(String line, String nomeArq) {
         //System.out.println(line);
         ModeloEndExt modelo = new ModeloEndExt();
         Map<String, PosicaoCampo> mapa = new MapaCamposEndExt().getMapa();
@@ -102,7 +103,7 @@ public class LerArquivoEndExt {
             campo = (PosicaoCampo) mapa.get(CamposEndExt.CEP);
             modelo.setCep(line.substring(campo.getInicioCampo(), campo.getFimCampo()));
             
-            modelo.setNomeArquivo(Configuracao.getInstance().getNomeEndExt());
+            modelo.setNomeArquivo(nomeArq);
         } catch (Exception e) {
             System.out.println(e);
         }

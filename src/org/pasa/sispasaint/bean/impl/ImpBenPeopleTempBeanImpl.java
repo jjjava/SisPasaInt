@@ -38,8 +38,8 @@ public class ImpBenPeopleTempBeanImpl implements ImpBenPeopleTempBean {
     }
 
     @Override
-    public void carregarArquivo() {
-        salvarTbTemp(new LerArquivoBenPeople().lerArquivo());
+    public void carregarArquivo(Long id) {
+        salvarTbTemp(new LerArquivoBenPeople().lerArquivo(id));
     }
 
     @Override

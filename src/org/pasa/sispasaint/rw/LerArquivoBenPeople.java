@@ -19,18 +19,16 @@ import org.pasa.sispasaint.model.intg.ModeloBenPeople;
  */
 public class LerArquivoBenPeople {
 
-    public LerArquivoBenPeople() {
+    public List<ModeloBenPeople> lerArquivo(Long id){
+         return lerArquivo(Configuracao.getInstance().getBenNomeArqComPath(id),
+                Configuracao.getInstance().getNomeArqBen(id));
+    }
+    
+    public List<ModeloBenPeople> lerArquivo(String path, String nomeArq){
+        return lerArquivo(new File(path), nomeArq);
     }
 
-    public List<ModeloBenPeople> lerArquivo() {
-        return lerArquivo(Configuracao.getInstance().getPathComArquivoBenPeople());
-    }
-
-    public List<ModeloBenPeople> lerArquivo(String path) {
-        return lerArquivo(new File(path));
-    }
-
-    public List<ModeloBenPeople> lerArquivo(File file) {
+    public List<ModeloBenPeople> lerArquivo(File file, String nomeArq) {
         List<ModeloBenPeople> listaBenPeolpe = new ArrayList<>();
         BufferedReader br = null;
         try {
@@ -42,7 +40,7 @@ public class LerArquivoBenPeople {
                     if (line.length() < 400) {
                         line = acerta400Pos(line);
                     }
-                    listaBenPeolpe.add(parseCampos(line));// vrf se usar trim() o nao														// ñ
+                    listaBenPeolpe.add(parseCampos(line, nomeArq));// vrf se usar trim() o nao														// ñ
                 }
             }
         } catch (FileNotFoundException e) {
@@ -61,7 +59,7 @@ public class LerArquivoBenPeople {
         return listaBenPeolpe;
     }
 
-    private ModeloBenPeople parseCampos(String line) {
+    private ModeloBenPeople parseCampos(String line, String nomeArq) {
 
         System.out.println(line);
 
@@ -223,7 +221,7 @@ public class LerArquivoBenPeople {
         campo = (PosicaoCampo) mapa.get(CamposBenPeople.CODIGO_FILIAL_VLI);
         modelo.setCodigoFilialVLI(line.substring(campo.getInicioCampo(), campo.getFimCampo()));
         
-        modelo.setNomeArquivo(Configuracao.getInstance().getNomeBenPeople());
+        modelo.setNomeArquivo(nomeArq);
 
         return modelo;
     }

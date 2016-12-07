@@ -13,7 +13,7 @@ public interface ImpEndPeopleTempBean {
     ModeloEndPeople obterPorMatricula(ModeloEndPeople modeloBenPeolpe);
     void limparTbTemp();
     void resetarIdentity();
-    void carregarArquivo();
+    void carregarArquivo(Long id);
     void salvarTbTemp(List<ModeloEndPeople> listaModeloEndPeolpe);
     Long contar();
 }

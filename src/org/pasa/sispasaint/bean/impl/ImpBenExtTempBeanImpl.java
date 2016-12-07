@@ -38,8 +38,8 @@ public class ImpBenExtTempBeanImpl implements ImpBenExtTempBean {
     }
 
     @Override
-    public void carregarArquivo() {
-        salvarTbTemp(new LerArquivoBenExt().lerArquivo());
+    public void carregarArquivo(Long id) {
+        salvarTbTemp(new LerArquivoBenExt().lerArquivo(id));
     }
 
     @Override

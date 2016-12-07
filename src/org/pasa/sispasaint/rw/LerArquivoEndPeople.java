@@ -22,15 +22,16 @@ public class LerArquivoEndPeople {
     public LerArquivoEndPeople() {
     }
 
-    public List<ModeloEndPeople> lerArquivo() {
-        return lerArquivo(Configuracao.getInstance().getPathComArquivoEndPeople());
+    public List<ModeloEndPeople> lerArquivo(Long id) {
+         return lerArquivo(Configuracao.getInstance().getEndNomeArqComPath(id),
+                Configuracao.getInstance().getNomeArqEnd(id));
     }
 
-    public List<ModeloEndPeople> lerArquivo(String path) {
-        return lerArquivo(new File(path));
+    public List<ModeloEndPeople> lerArquivo(String path, String nomeArq) {
+        return lerArquivo(new File(path), nomeArq);
     }
 
-    public List<ModeloEndPeople> lerArquivo(File file) {
+    public List<ModeloEndPeople> lerArquivo(File file, String nomeArq) {
         List<ModeloEndPeople> listaEndPeople = new ArrayList<>();
         BufferedReader br = null;
         try {
@@ -42,7 +43,7 @@ public class LerArquivoEndPeople {
                     if (line.length() < 190) {
                         line = acerta190Pos(line);
                     }
-                    listaEndPeople.add(parseCampos(line));// vrf se usar trim() ou  ñ
+                    listaEndPeople.add(parseCampos(line, nomeArq));// vrf se usar trim() ou  ñ
                 }
             }
         } catch (FileNotFoundException e) {
@@ -61,7 +62,7 @@ public class LerArquivoEndPeople {
         return listaEndPeople;
     }
 
-    private ModeloEndPeople parseCampos(String line) {
+    private ModeloEndPeople parseCampos(String line, String nomeArq) {
         //System.out.println(line);
         ModeloEndPeople modelo = new ModeloEndPeople();
         Map<String, PosicaoCampo> mapa = new MapaCamposEndVLI().getMapa();
@@ -102,7 +103,7 @@ public class LerArquivoEndPeople {
             campo = (PosicaoCampo) mapa.get(CamposEndVLI.CEP);
             modelo.setCep(line.substring(campo.getInicioCampo(), campo.getFimCampo()));
             
-            modelo.setNomeArquivo(Configuracao.getInstance().getNomeEndPeople());
+            modelo.setNomeArquivo(nomeArq);
         } catch (Exception e) {
             System.out.println(e);
         }

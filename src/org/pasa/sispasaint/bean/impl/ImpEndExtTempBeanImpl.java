@@ -37,8 +37,8 @@ public class ImpEndExtTempBeanImpl implements ImpEndExtTempBean {
     }
 
     @Override
-    public void carregarArquivo() {
-        salvarTbTemp(new LerArquivoEndExt().lerArquivo());
+    public void carregarArquivo(Long id) {
+        salvarTbTemp(new LerArquivoEndExt().lerArquivo(id));
     }
 
     @Override

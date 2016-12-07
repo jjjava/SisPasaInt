@@ -14,7 +14,7 @@ public interface ImpEndExtTempBean {
     ModeloEndExt obterPorMatricula(ModeloBenExt modeloBenExt);
     void limparTbTemp();
     void resetarIdentity();
-    void carregarArquivo();
+    void carregarArquivo(Long id);
     void salvarTbTemp(List<ModeloEndExt> listaModeloEndExt);
     Long contar();
 }

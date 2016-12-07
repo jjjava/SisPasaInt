@@ -38,8 +38,8 @@ public class ImpBenVLITempBeanImpl implements ImpBenVLITempBean {
     }
 
     @Override
-    public void carregarArquivo() {
-        salvarTbTemp(new LerArquivoBenVLI().lerArquivo());
+    public void carregarArquivo(Long id) {
+        salvarTbTemp(new LerArquivoBenVLI().lerArquivo(id));
     }
 
     @Override

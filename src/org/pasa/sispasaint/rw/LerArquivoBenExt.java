@@ -18,15 +18,17 @@ import org.pasa.sispasaint.model.intg.ModeloBenExt;
  * @author hudson schumaker
  */
 public class LerArquivoBenExt {
-    public List<ModeloBenExt> lerArquivo() {
-        return lerArquivo(Configuracao.getInstance().getPathComArquivoBenExt());
+    
+    public List<ModeloBenExt> lerArquivo(Long id){
+         return lerArquivo(Configuracao.getInstance().getBenNomeArqComPath(id),
+                Configuracao.getInstance().getNomeArqBen(id));
     }
-
-    public List<ModeloBenExt> lerArquivo(String path) {
-        return lerArquivo(new File(path));
+    
+    public List<ModeloBenExt> lerArquivo(String path, String nomeArq){
+        return lerArquivo(new File(path), nomeArq);
     }
-
-    public List<ModeloBenExt> lerArquivo(File file) {
+    
+    public List<ModeloBenExt> lerArquivo(File file, String nomeArq) {
         List<ModeloBenExt> listaBenExt = new ArrayList<>();
         BufferedReader br = null;
         try {
@@ -38,7 +40,7 @@ public class LerArquivoBenExt {
                     if (line.length() < 400) {
                         line = acerta400Pos(line);
                     }
-                    listaBenExt.add(parseCampos(line));// vrf se usar trim() o nao														// ñ
+                    listaBenExt.add(parseCampos(line,nomeArq));// vrf se usar trim() o nao														// ñ
                 }
             }
         } catch (FileNotFoundException e) {
@@ -57,7 +59,7 @@ public class LerArquivoBenExt {
         return listaBenExt;
     }
 
-    private ModeloBenExt parseCampos(String line) {
+    private ModeloBenExt parseCampos(String line, String nomeArq) {
         System.out.println(line);
 
         ModeloBenExt modelo = new ModeloBenExt();
@@ -217,7 +219,7 @@ public class LerArquivoBenExt {
         campo = (PosicaoCampo) mapa.get(CamposBenExt.CODIGO_FILIAL_VLI);
         modelo.setCodigoFilialVLI(line.substring(campo.getInicioCampo(), campo.getFimCampo()));
         
-        modelo.setNomeArquivo(Configuracao.getInstance().getNomeBenExt());
+        modelo.setNomeArquivo(nomeArq);
 
         return modelo;
     }

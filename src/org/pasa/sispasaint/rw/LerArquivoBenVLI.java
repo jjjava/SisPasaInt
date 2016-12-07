@@ -11,6 +11,7 @@ import java.util.Map;
 import org.pasa.sispasaint.config.Configuracao;
 import org.pasa.sispasaint.map.CamposBenVLI;
 import org.pasa.sispasaint.map.MapaCamposBenVLI;
+import org.pasa.sispasaint.model.intg.ModeloBenPeople;
 import org.pasa.sispasaint.model.intg.ModeloBenVLI;
 import org.pasa.sispasaint.util.StringUtil;
 
@@ -20,18 +21,16 @@ import org.pasa.sispasaint.util.StringUtil;
  */
 public class LerArquivoBenVLI {
 
-    public LerArquivoBenVLI() {
+     public List<ModeloBenVLI> lerArquivo(Long id){
+         return lerArquivo(Configuracao.getInstance().getBenNomeArqComPath(id),
+                Configuracao.getInstance().getNomeArqBen(id));
+    }
+    
+    public List<ModeloBenVLI> lerArquivo(String path, String nomeArq){
+        return lerArquivo(new File(path), nomeArq);
     }
 
-    public List<ModeloBenVLI> lerArquivo() {
-        return lerArquivo(Configuracao.getInstance().getPathComArquivoBenVLI());
-    }
-
-    public List<ModeloBenVLI> lerArquivo(String path) {
-        return lerArquivo(new File(path));
-    }
-
-    public List<ModeloBenVLI> lerArquivo(File file) {
+    public List<ModeloBenVLI> lerArquivo(File file, String nomeArq) {
         List<ModeloBenVLI> listaBenVLI = new ArrayList<>();
         BufferedReader br = null;
         try {
@@ -43,7 +42,7 @@ public class LerArquivoBenVLI {
                     if (line.length() < 400) {
                         line = acerta400Pos(line);
                     }
-                    listaBenVLI.add(parseCampos(line));// vrf se usar trim() o nao														// ñ
+                    listaBenVLI.add(parseCampos(line, nomeArq));// vrf se usar trim() o nao														// ñ
                 }
             }
         } catch (FileNotFoundException e) {
@@ -62,7 +61,7 @@ public class LerArquivoBenVLI {
         return listaBenVLI;
     }
 
-    private ModeloBenVLI parseCampos(String line) {
+    private ModeloBenVLI parseCampos(String line, String nomeArq) {
         line = StringUtil.removeCharsEspeciais(line);
         System.out.println(line);
 
@@ -224,7 +223,7 @@ public class LerArquivoBenVLI {
         campo = (PosicaoCampo) mapa.get(CamposBenVLI.CODIGO_FILIAL_VLI);
         modelo.setCodigoFilialVLI(line.substring(campo.getInicioCampo(), campo.getFimCampo()));
         
-        modelo.setNomeArquivo(Configuracao.getInstance().getNomeBenVLIarq());
+        modelo.setNomeArquivo(nomeArq);
 
         return modelo;
     }

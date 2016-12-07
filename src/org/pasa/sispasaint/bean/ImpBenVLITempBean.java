@@ -12,7 +12,7 @@ public interface ImpBenVLITempBean {
     ModeloBenVLI obter(ModeloBenVLI modeloBenVli);
     void limparTbTemp();
     void resetarIdentity();
-    void carregarArquivo();
+    void carregarArquivo(Long id);
     void salvarTbTemp(List<ModeloBenVLI> listaModeloBenVLI);
     Long contar();
 }

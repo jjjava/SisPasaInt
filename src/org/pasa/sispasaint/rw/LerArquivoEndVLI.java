@@ -23,15 +23,16 @@ public class LerArquivoEndVLI {
     public LerArquivoEndVLI() {
     }
 
-    public List<ModeloEndVLI> lerArquivo() {
-        return lerArquivo(Configuracao.getInstance().getPathComArquivoEndVLI());
+    public List<ModeloEndVLI> lerArquivo(Long id) {
+        return lerArquivo(Configuracao.getInstance().getEndNomeArqComPath(id),
+                Configuracao.getInstance().getNomeArqEnd(id));
     }
 
-    public List<ModeloEndVLI> lerArquivo(String path) {
-        return lerArquivo(new File(path));
+    public List<ModeloEndVLI> lerArquivo(String path, String nomeArq) {
+        return lerArquivo(new File(path), nomeArq);
     }
 
-    public List<ModeloEndVLI> lerArquivo(File file) {
+    public List<ModeloEndVLI> lerArquivo(File file, String nomeArq) {
         List<ModeloEndVLI> listaEndVLI = new ArrayList<>();
         BufferedReader br = null;
         try {
@@ -43,7 +44,7 @@ public class LerArquivoEndVLI {
                     if (line.length() < 190) {
                         line = acerta190Pos(line);
                     }
-                    listaEndVLI.add(parseCampos(line));// vrf se usar trim() ou  ñ
+                    listaEndVLI.add(parseCampos(line, nomeArq));// vrf se usar trim() ou  ñ
                 }
             }
         } catch (FileNotFoundException e) {
@@ -62,7 +63,7 @@ public class LerArquivoEndVLI {
         return listaEndVLI;
     }
 
-    private ModeloEndVLI parseCampos(String line) {
+    private ModeloEndVLI parseCampos(String line, String nomeArq) {
         line = StringUtil.removeCharsEspeciais(line);
         System.out.println(line);
         ModeloEndVLI modelo = new ModeloEndVLI();
@@ -103,7 +104,7 @@ public class LerArquivoEndVLI {
             campo = (PosicaoCampo) mapa.get(CamposEndVLI.CEP);
             modelo.setCep(line.substring(campo.getInicioCampo(), campo.getFimCampo()));
             
-            modelo.setNomeArquivo(Configuracao.getInstance().getNomeEndVLIarq());
+            modelo.setNomeArquivo(nomeArq);
         } catch (Exception e) {
             System.out.println(e);
         }
