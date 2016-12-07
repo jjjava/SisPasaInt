@@ -1,8 +1,6 @@
 package org.pasa.sispasaint.run;
 
-import org.pasa.sispasa.core.model.Pais;
 import org.pasa.sispasaint.config.Configuracao;
-import org.pasa.sispasaint.dao.impl.PaisDAOImpl;
 
 
 /**

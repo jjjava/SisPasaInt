@@ -55,5 +55,4 @@ public class PeopleJob implements Job{
     public String setMensagem(){
        return "";
     }
-    
 }
