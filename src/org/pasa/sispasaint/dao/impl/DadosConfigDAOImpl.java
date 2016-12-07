@@ -3,7 +3,6 @@ package org.pasa.sispasaint.dao.impl;
 import java.util.List;
 import javax.persistence.NoResultException;
 import javax.persistence.Query;
-import org.pasa.sispasa.core.model.Estado;
 import org.pasa.sispasaint.config.DadosConfig;
 import org.pasa.sispasaint.dao.DadosConfigDAO;
 import org.pasa.sispasaint.dao.DaoGenerico;
