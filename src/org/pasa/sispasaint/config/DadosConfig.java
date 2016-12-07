@@ -7,6 +7,7 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
+import org.pasa.sispasaint.util.DateUtil;
 
 /**
  *
@@ -31,11 +32,11 @@ public class DadosConfig implements Serializable {
     }
 
     public String getBenNomeArqComPath() {
-        return pathIn + "/" + nomeBen;
+        return pathIn + "/" + nomeBen+"_"+DateUtil.dataParaArquivo()+".TXT";
     }
 
     public String getEndNomeArqComPath() {
-        return pathIn + "/" + nomeEnd;
+        return pathIn + "/" + nomeEnd+"_"+DateUtil.dataParaArquivo()+".TXT";
     }
 
     public Long getId() {

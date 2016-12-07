@@ -50,8 +50,6 @@ public class Maestro {
                             .usingJobData(SisPasaIntCommon.TIPO_JOB, a.getIdLista())
                             .usingJobData(SisPasaIntCommon.ID_EMPRESA, a.getIdEmpresa())
                             .build();
-                    
-                     System.out.println(a.getIdEmpresa());
 
                     Trigger trigger = TriggerBuilder
                             .newTrigger()
