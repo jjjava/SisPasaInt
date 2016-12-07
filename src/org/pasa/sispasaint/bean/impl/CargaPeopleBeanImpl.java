@@ -1,6 +1,7 @@
 package org.pasa.sispasaint.bean.impl;
 
 import org.pasa.sispasaint.bean.CargaPeopleBean;
+import org.pasa.sispasaint.model.intg.Log;
 
 /**
  *
@@ -8,12 +9,14 @@ import org.pasa.sispasaint.bean.CargaPeopleBean;
  */
 public class CargaPeopleBeanImpl implements CargaPeopleBean {
 
-    public CargaPeopleBeanImpl() {
-        System.out.println("########################################################################carga");
-        System.out.println("########################################################################carga");
-        System.out.println("########################################################################carga");
-        System.out.println("########################################################################carga");
-        System.out.println("########################################################################carga");
+    private Long id;
+    private Log log;
+    private LogBeanImpl logBeanImpl;
+    
+    public CargaPeopleBeanImpl(Long id, Log log) {
+        this.id = id;
+        this.log = log;
+        logBeanImpl = new LogBeanImpl();
     }
 
     @Override
@@ -30,13 +33,13 @@ public class CargaPeopleBeanImpl implements CargaPeopleBean {
         ImpBenPeopleTempBeanImpl impBenPeopleTempBeanImpl = new ImpBenPeopleTempBeanImpl();
         impBenPeopleTempBeanImpl.limparTbTemp();
         impBenPeopleTempBeanImpl.resetarIdentity();
-        impBenPeopleTempBeanImpl.carregarArquivo();
+        impBenPeopleTempBeanImpl.carregarArquivo(id);
     }
 
     private void cargaArquivosEndTemp() {
         ImpEndPeopleTempBeanImpl impEndPeopleTempBeanImpl = new ImpEndPeopleTempBeanImpl();
         impEndPeopleTempBeanImpl.limparTbTemp();
         impEndPeopleTempBeanImpl.resetarIdentity();
-        impEndPeopleTempBeanImpl.carregarArquivo();
+        impEndPeopleTempBeanImpl.carregarArquivo(id);
     }
 }
