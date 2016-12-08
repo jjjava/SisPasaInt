@@ -19,10 +19,10 @@ import org.pasa.sispasaint.model.intg.ModeloEndExt;
  */
 public class LerArquivoEndExt {
 
-    public LerArquivoEndExt() {
-    }
-
+    private Long id;
+  
     public List<ModeloEndExt> lerArquivo(Long id) {
+        this.id = id;
         return lerArquivo(Configuracao.getInstance().getEndNomeArqComPath(id),
                 Configuracao.getInstance().getNomeArqEnd(id));
     }
@@ -47,16 +47,20 @@ public class LerArquivoEndExt {
                 }
             }
         } catch (FileNotFoundException e) {
-            e.printStackTrace();
+            System.err.println(e);
         } catch (IOException e) {
-            e.printStackTrace();
+            System.err.println(e);
         } finally {
             try {
                 if (br != null) {
                     br.close();
                 }
+                ZipArquivo zipArquivo = new ZipArquivo();
+                zipArquivo.zip(nomeArq,
+                        Configuracao.getInstance().getEndNomeArqComPath(id),
+                        Configuracao.getInstance().getEndNomeProcComPath(id));
             } catch (IOException e) {
-                e.printStackTrace();
+                System.err.println(e);
             }
         }
         return listaEndExt;

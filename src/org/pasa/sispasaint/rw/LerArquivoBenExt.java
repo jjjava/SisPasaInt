@@ -58,7 +58,7 @@ public class LerArquivoBenExt {
                 ZipArquivo zipArquivo = new ZipArquivo();
                 zipArquivo.zip(nomeArq,
                         Configuracao.getInstance().getBenNomeArqComPath(id),
-                        nomeArq);
+                        Configuracao.getInstance().getBenNomeProcComPath(id));
                 
             } catch (IOException e) {
                 System.err.println(e);

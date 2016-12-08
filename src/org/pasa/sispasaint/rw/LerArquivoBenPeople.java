@@ -18,9 +18,12 @@ import org.pasa.sispasaint.model.intg.ModeloBenPeople;
  * @author Hudson Schumaker
  */
 public class LerArquivoBenPeople {
+    
+    private Long id;
 
     public List<ModeloBenPeople> lerArquivo(Long id){
-         return lerArquivo(Configuracao.getInstance().getBenNomeArqComPath(id),
+        this.id = id;
+        return lerArquivo(Configuracao.getInstance().getBenNomeArqComPath(id),
                 Configuracao.getInstance().getNomeArqBen(id));
     }
     
@@ -44,16 +47,20 @@ public class LerArquivoBenPeople {
                 }
             }
         } catch (FileNotFoundException e) {
-            e.printStackTrace();
+            System.err.println(e);
         } catch (IOException e) {
-            e.printStackTrace();
+            System.err.println(e);
         } finally {
             try {
                 if (br != null) {
                     br.close();
                 }
+                ZipArquivo zipArquivo = new ZipArquivo();
+                zipArquivo.zip(nomeArq,
+                        Configuracao.getInstance().getBenNomeArqComPath(id),
+                        Configuracao.getInstance().getBenNomeProcComPath(id));
             } catch (IOException e) {
-                e.printStackTrace();
+                System.err.println(e);
             }
         }
         return listaBenPeolpe;

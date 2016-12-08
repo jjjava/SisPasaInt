@@ -20,10 +20,13 @@ import org.pasa.sispasaint.util.StringUtil;
  */
 public class LerArquivoEndVLI {
 
+    private Long id;
+
     public LerArquivoEndVLI() {
     }
 
     public List<ModeloEndVLI> lerArquivo(Long id) {
+        this.id = id;
         return lerArquivo(Configuracao.getInstance().getEndNomeArqComPath(id),
                 Configuracao.getInstance().getNomeArqEnd(id));
     }
@@ -48,16 +51,20 @@ public class LerArquivoEndVLI {
                 }
             }
         } catch (FileNotFoundException e) {
-            e.printStackTrace();
+            System.err.println(e);
         } catch (IOException e) {
-            e.printStackTrace();
+            System.err.println(e);
         } finally {
             try {
                 if (br != null) {
                     br.close();
                 }
+                ZipArquivo zipArquivo = new ZipArquivo();
+                zipArquivo.zip(nomeArq,
+                        Configuracao.getInstance().getEndNomeArqComPath(id),
+                        Configuracao.getInstance().getEndNomeProcComPath(id));
             } catch (IOException e) {
-                e.printStackTrace();
+                System.err.println(e);
             }
         }
         return listaEndVLI;
@@ -103,7 +110,7 @@ public class LerArquivoEndVLI {
 
             campo = (PosicaoCampo) mapa.get(CamposEndVLI.CEP);
             modelo.setCep(line.substring(campo.getInicioCampo(), campo.getFimCampo()));
-            
+
             modelo.setNomeArquivo(nomeArq);
         } catch (Exception e) {
             System.out.println(e);

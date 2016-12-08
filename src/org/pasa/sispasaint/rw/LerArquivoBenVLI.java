@@ -11,7 +11,6 @@ import java.util.Map;
 import org.pasa.sispasaint.config.Configuracao;
 import org.pasa.sispasaint.map.CamposBenVLI;
 import org.pasa.sispasaint.map.MapaCamposBenVLI;
-import org.pasa.sispasaint.model.intg.ModeloBenPeople;
 import org.pasa.sispasaint.model.intg.ModeloBenVLI;
 import org.pasa.sispasaint.util.StringUtil;
 
@@ -21,12 +20,15 @@ import org.pasa.sispasaint.util.StringUtil;
  */
 public class LerArquivoBenVLI {
 
-     public List<ModeloBenVLI> lerArquivo(Long id){
-         return lerArquivo(Configuracao.getInstance().getBenNomeArqComPath(id),
+    private Long id;
+
+    public List<ModeloBenVLI> lerArquivo(Long id) {
+        this.id = id;
+        return lerArquivo(Configuracao.getInstance().getBenNomeArqComPath(id),
                 Configuracao.getInstance().getNomeArqBen(id));
     }
-    
-    public List<ModeloBenVLI> lerArquivo(String path, String nomeArq){
+
+    public List<ModeloBenVLI> lerArquivo(String path, String nomeArq) {
         return lerArquivo(new File(path), nomeArq);
     }
 
@@ -46,16 +48,20 @@ public class LerArquivoBenVLI {
                 }
             }
         } catch (FileNotFoundException e) {
-            e.printStackTrace();
+            System.err.println(e);
         } catch (IOException e) {
-            e.printStackTrace();
+            System.err.println(e);
         } finally {
             try {
                 if (br != null) {
                     br.close();
                 }
+                ZipArquivo zipArquivo = new ZipArquivo();
+                zipArquivo.zip(nomeArq,
+                        Configuracao.getInstance().getBenNomeArqComPath(id),
+                        Configuracao.getInstance().getBenNomeProcComPath(id));
             } catch (IOException e) {
-                e.printStackTrace();
+                System.err.println(e);
             }
         }
         return listaBenVLI;
@@ -222,7 +228,7 @@ public class LerArquivoBenVLI {
 
         campo = (PosicaoCampo) mapa.get(CamposBenVLI.CODIGO_FILIAL_VLI);
         modelo.setCodigoFilialVLI(line.substring(campo.getInicioCampo(), campo.getFimCampo()));
-        
+
         modelo.setNomeArquivo(nomeArq);
 
         return modelo;
