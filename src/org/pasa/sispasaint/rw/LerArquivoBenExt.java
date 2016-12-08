@@ -19,8 +19,11 @@ import org.pasa.sispasaint.model.intg.ModeloBenExt;
  */
 public class LerArquivoBenExt {
     
+    private Long id;
+    
     public List<ModeloBenExt> lerArquivo(Long id){
-         return lerArquivo(Configuracao.getInstance().getBenNomeArqComPath(id),
+        this.id = id;
+        return lerArquivo(Configuracao.getInstance().getBenNomeArqComPath(id),
                 Configuracao.getInstance().getNomeArqBen(id));
     }
     
@@ -44,16 +47,21 @@ public class LerArquivoBenExt {
                 }
             }
         } catch (FileNotFoundException e) {
-            e.printStackTrace();
+            System.err.println(e);
         } catch (IOException e) {
-            e.printStackTrace();
+            System.err.println(e);
         } finally {
             try {
                 if (br != null) {
                     br.close();
                 }
+                ZipArquivo zipArquivo = new ZipArquivo();
+                zipArquivo.zip(nomeArq,
+                        Configuracao.getInstance().getBenNomeArqComPath(id),
+                        nomeArq);
+                
             } catch (IOException e) {
-                e.printStackTrace();
+                System.err.println(e);
             }
         }
         return listaBenExt;

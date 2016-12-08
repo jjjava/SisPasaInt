@@ -3,7 +3,6 @@ package org.pasa.sispasaint.config;
 import org.pasa.sispasaint.dao.impl.DadosConfigDAOImpl;
 import org.pasa.sispasaint.dao.impl.MailConfigDAOImpl;
 import org.pasa.sispasaint.mail.MailConfig;
-import org.pasa.sispasaint.util.DateUtil;
 
 /**
  *
@@ -55,5 +54,13 @@ public class Configuracao {
     
     public String getNomeArqEnd(Long id){
         return new DadosConfigDAOImpl().obterPorEmpresa(id).getNomeEnd();
+    }
+    
+    public String getBenNomeProcComPath(Long id){
+        return new DadosConfigDAOImpl().obterPorEmpresa(id).getBenNomeProcComPath();
+    }
+    
+    public String getEndNomeProcComPath(Long id){
+        return new DadosConfigDAOImpl().obterPorEmpresa(id).getEndNomeProcComPath();
     }
 }

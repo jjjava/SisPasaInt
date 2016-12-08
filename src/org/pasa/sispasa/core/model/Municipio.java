@@ -23,44 +23,44 @@ import org.pasa.sispasa.core.constants.ConstantesBanco;
 @Table(name = "MUNICIPIO")
 public class Municipio implements Serializable {
 
-	private static final long serialVersionUID = 1L;
+    private static final long serialVersionUID = 1L;
 
-	@Id
-	@Column(name = "ID_MUNICIPIO", columnDefinition = ConstantesBanco.BIGINT)
-	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	private Long id;
+    @Id
+    @Column(name = "ID_MUNICIPIO", columnDefinition = ConstantesBanco.BIGINT)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long id;
 
-	@Column(name = "NOME", nullable = false, length = 30)
-	private String nome;
+    @Column(name = "NOME", nullable = false, length = 30)
+    private String nome;
 
-	@ManyToOne(cascade = CascadeType.ALL)
-	@JoinColumn(name = "ID_ESTADO")
-	private Estado estado;
+    @ManyToOne(cascade = CascadeType.ALL)
+    @JoinColumn(name = "ID_ESTADO")
+    private Estado estado;
 
-	public Municipio() {
-	}
+    public Municipio() {
+    }
 
-	public Long getId() {
-		return id;
-	}
+    public Long getId() {
+        return id;
+    }
 
-	public void setId(Long id) {
-		this.id = id;
-	}
+    public void setId(Long id) {
+        this.id = id;
+    }
 
-	public String getNome() {
-		return nome;
-	}
+    public String getNome() {
+        return nome;
+    }
 
-	public void setNome(String nome) {
-		this.nome = nome;
-	}
+    public void setNome(String nome) {
+        this.nome = nome;
+    }
 
-	public Estado getEstado() {
-		return estado;
-	}
+    public Estado getEstado() {
+        return estado;
+    }
 
-	public void setEstado(Estado estado) {
-		this.estado = estado;
-	}
+    public void setEstado(Estado estado) {
+        this.estado = estado;
+    }
 }

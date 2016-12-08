@@ -20,11 +20,13 @@ public class DadosConfig implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-    private String pathIn;
-
+    
     @Column(name = "ID_EMPRESA")
     private Long idEmpresa;
+    
+    private String pathIn;
     private String pathOut;
+    private String pathProc;
     private String nomeBen;
     private String nomeEnd;
 
@@ -37,6 +39,14 @@ public class DadosConfig implements Serializable {
 
     public String getEndNomeArqComPath() {
         return pathIn + "/" + nomeEnd+"_"+DateUtil.dataParaArquivo()+".TXT";
+    }
+    
+    public String getBenNomeProcComPath(){
+        return pathProc + "/" + nomeBen+"_"+DateUtil.dataParaArquivo()+".zip";
+    }
+    
+    public String getEndNomeProcComPath(){
+        return pathProc + "/" + nomeEnd+"_"+DateUtil.dataParaArquivo()+".zip";
     }
 
     public Long getId() {
@@ -85,5 +95,13 @@ public class DadosConfig implements Serializable {
 
     public void setNomeEnd(String nomeEnd) {
         this.nomeEnd = nomeEnd;
+    }
+
+    public String getPathProc() {
+        return pathProc;
+    }
+
+    public void setPathProc(String pathProc) {
+        this.pathProc = pathProc;
     }
 }
