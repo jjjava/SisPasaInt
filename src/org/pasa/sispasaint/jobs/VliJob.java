@@ -9,7 +9,6 @@ import org.pasa.sispasaint.mail.EnviaEmail;
 import org.pasa.sispasaint.model.intg.ListaDestinatarios;
 import org.pasa.sispasaint.model.intg.Log;
 import org.pasa.sispasaint.util.SisPasaIntCommon;
-import org.quartz.DisallowConcurrentExecution;
 import org.quartz.Job;
 import org.quartz.JobDataMap;
 import org.quartz.JobExecutionContext;
@@ -20,7 +19,7 @@ import org.quartz.JobExecutionException;
  * @author Hudson Schumaker
  * @version 1.0.0
  */
-@DisallowConcurrentExecution
+
 public class VliJob implements Job {
     
     private Log log;

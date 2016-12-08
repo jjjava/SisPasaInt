@@ -49,6 +49,7 @@ public class ImpEndVLITempDAOImpl extends DaoGenerico<ModeloEndVLI> implements I
                 getEntityManager().getTransaction().begin();
                 getEntityManager().persist(model);
                 getEntityManager().getTransaction().commit();
+                System.out.println(model.getCodBeneficiario());
             } catch (Exception e) {
                 System.out.println(e);
                 getEntityManager().getTransaction().rollback();

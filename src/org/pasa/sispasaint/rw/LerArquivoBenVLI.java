@@ -69,7 +69,6 @@ public class LerArquivoBenVLI {
 
     private ModeloBenVLI parseCampos(String line, String nomeArq) {
         line = StringUtil.removeCharsEspeciais(line);
-        System.out.println(line);
 
         ModeloBenVLI modelo = new ModeloBenVLI();
         Map<String, PosicaoCampo> mapa = new MapaCamposBenVLI().getMapa();

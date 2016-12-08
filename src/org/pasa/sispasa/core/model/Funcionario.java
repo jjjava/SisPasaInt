@@ -81,15 +81,15 @@ public class Funcionario extends Pessoa {
     @Column(name = "ID_USUARIO", nullable = false, columnDefinition = ConstantesBanco.BIGINT)
     private Long idUsuario;
 
-    @Column(name = "IND_ATIVO", nullable = false,  columnDefinition = ConstantesBanco.SMALLINT)
+    @Column(name = "IND_ATIVO", nullable = false, columnDefinition = ConstantesBanco.SMALLINT)
     private Integer indAtivo;
-    
+
     @Transient
     private EnumIndAtivo enumIndAtivo;
 
     @Column(name = "DT_ULT_ATULZ", nullable = false)
-	@Temporal(TemporalType.TIMESTAMP)
-	private Date dataUltimaAtualizacao;
+    @Temporal(TemporalType.TIMESTAMP)
+    private Date dataUltimaAtualizacao;
 
     @ManyToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "ID_EMPRESA")
@@ -107,11 +107,10 @@ public class Funcionario extends Pessoa {
     @JoinColumn(name = "ID_MOTIVO_DESLIGAMENTO")
     private MotivoDesligamento motivoDesligamento;
 
-    public Funcionario(){
+    public Funcionario() {
     }
-    
+
     //GETTERS AND SETTERS
-    
     public Long getId() {
         return id;
     }
@@ -264,61 +263,60 @@ public class Funcionario extends Pessoa {
         this.motivoDesligamento = motivoDesligamento;
     }
 
-	/**
-	 * @return the emailCorporativo
-	 */
-	public String getEmailCorporativo() {
-		return emailCorporativo;
-	}
+    /**
+     * @return the emailCorporativo
+     */
+    public String getEmailCorporativo() {
+        return emailCorporativo;
+    }
 
-	/**
-	 * @param emailCorporativo the emailCorporativo to set
-	 */
-	public void setEmailCorporativo(String emailCorporativo) {
-		this.emailCorporativo = emailCorporativo;
-	}
+    /**
+     * @param emailCorporativo the emailCorporativo to set
+     */
+    public void setEmailCorporativo(String emailCorporativo) {
+        this.emailCorporativo = emailCorporativo;
+    }
 
-	/**
-	 * @return the enumIndAtivo
-	 */
-	public EnumIndAtivo getEnumIndAtivo() {
-		return enumIndAtivo;
-	}
+    /**
+     * @return the enumIndAtivo
+     */
+    public EnumIndAtivo getEnumIndAtivo() {
+        return enumIndAtivo;
+    }
 
-	/**
-	 * @param enumIndAtivo the enumIndAtivo to set
-	 */
-	public void setEnumIndAtivo(EnumIndAtivo enumIndAtivo) {
-		this.enumIndAtivo = enumIndAtivo;
-	}
+    /**
+     * @param enumIndAtivo the enumIndAtivo to set
+     */
+    public void setEnumIndAtivo(EnumIndAtivo enumIndAtivo) {
+        this.enumIndAtivo = enumIndAtivo;
+    }
 
-	/**
-	 * @return the dataUltimaAtulizacao
-	 */
-	public Date getDataUltimaAtulizacao() {
-		return dataUltimaAtualizacao;
-	}
+    /**
+     * @return the dataUltimaAtulizacao
+     */
+    public Date getDataUltimaAtulizacao() {
+        return dataUltimaAtualizacao;
+    }
 
-	/**
-	 * @param dataUltimaAtulizacao the dataUltimaAtulizacao to set
-	 */
-	public void setDataUltimaAtulizacao(Date dataUltimaAtualizacao) {
-		this.dataUltimaAtualizacao = dataUltimaAtualizacao;
-	}
+    /**
+     * @param dataUltimaAtulizacao the dataUltimaAtulizacao to set
+     */
+    public void setDataUltimaAtulizacao(Date dataUltimaAtualizacao) {
+        this.dataUltimaAtualizacao = dataUltimaAtualizacao;
+    }
 
-	/**
-	 * @return the dataAdmissao
-	 */
-	public Date getDataAdmissao() {
-		return dataAdmissao;
-	}
+    /**
+     * @return the dataAdmissao
+     */
+    public Date getDataAdmissao() {
+        return dataAdmissao;
+    }
 
-	/**
-	 * @param dataAdmissao the dataAdmissao to set
-	 */
-	public void setDataAdmissao(Date dataAdmissao) {
-		this.dataAdmissao = dataAdmissao;
-	}
-
+    /**
+     * @param dataAdmissao the dataAdmissao to set
+     */
+    public void setDataAdmissao(Date dataAdmissao) {
+        this.dataAdmissao = dataAdmissao;
+    }
 
 }

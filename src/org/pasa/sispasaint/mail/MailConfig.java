@@ -57,7 +57,6 @@ public class MailConfig implements Serializable {
     }
 
     public String getSenha() {
-        
         return senha;
 //        try {
 //            return Criptografia.decriptografarBase64(senha);
@@ -68,7 +67,6 @@ public class MailConfig implements Serializable {
     }
 
     public void setSenha(String senha) {
-        
         this.senha = senha;
 //        try {
 //            this.senha = Criptografia.criptografarBase64(senha);

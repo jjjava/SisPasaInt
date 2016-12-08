@@ -7,6 +7,7 @@ import java.util.List;
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -28,146 +29,146 @@ import org.pasa.sispasa.core.constants.ConstantesBanco;
 @Table(name = "ENDERECO")
 public class Endereco implements Serializable {
 
-	private static final long serialVersionUID = 1L;
+    private static final long serialVersionUID = 1L;
 
-	@Id
-	@Column(name = "ID_ENDERECO", columnDefinition = ConstantesBanco.BIGINT)
-	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	private Long id;
+    @Id
+    @Column(name = "ID_ENDERECO", columnDefinition = ConstantesBanco.BIGINT)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long id;
 
-	@Column(name = "LOGRADOURO", nullable = false, length = 60)
-	private String logradouro;
+    @Column(name = "LOGRADOURO", nullable = false, length = 60)
+    private String logradouro;
 
-	@Column(name = "NUMERO", nullable = false, length = 20)
-	private String numero;
+    @Column(name = "NUMERO", nullable = false, length = 20)
+    private String numero;
 
-	@Column(name = "COMPLEMENTO", length = 45)
-	private String complemento;
+    @Column(name = "COMPLEMENTO", length = 45)
+    private String complemento;
 
-	@Column(name = "BAIRRO", nullable = false, length = 45)
-	private String bairro;
+    @Column(name = "BAIRRO", nullable = false, length = 45)
+    private String bairro;
 
-	@Column(name = "CEP", nullable = false, columnDefinition = ConstantesBanco.CHAR_8)
-	private String cep;
+    @Column(name = "CEP", nullable = false, columnDefinition = ConstantesBanco.CHAR_8)
+    private String cep;
 
-	@Column(name = "IND_ATIVO", nullable = false, columnDefinition = ConstantesBanco.SMALLINT)
-	private Integer indAtivo;
+    @Column(name = "IND_ATIVO", nullable = false, columnDefinition = ConstantesBanco.SMALLINT)
+    private Integer indAtivo;
 
-	@Column(name = "DT_ULT_ATULZ", nullable = false)
-	@Temporal(TemporalType.TIMESTAMP)
-	private Date dataUltimaAtualizacao;
+    @Column(name = "DT_ULT_ATULZ", nullable = false)
+    @Temporal(TemporalType.TIMESTAMP)
+    private Date dataUltimaAtualizacao;
 
-	@OneToOne(cascade = CascadeType.ALL)
-	@JoinColumn(name = "ID_PESSOA")
-	private Pessoa pessoa;
+    @OneToOne()
+    @JoinColumn(name = "ID_PESSOA")
+    private Pessoa pessoa;
 
-	@ManyToOne(cascade = CascadeType.ALL)
-	@JoinColumn(name = "ID_MUNICIPIO")
-	private Municipio municipio;
+    @ManyToOne()
+    @JoinColumn(name = "ID_MUNICIPIO")
+    private Municipio municipio;
 
-	@ManyToOne(cascade = CascadeType.ALL)
-	@JoinColumn(name = "ID_ESTADO")
-	private Estado estado;
+    @ManyToOne()
+    @JoinColumn(name = "ID_ESTADO")
+    private Estado estado;
 
-	@ManyToMany(mappedBy = "enderecos", cascade = CascadeType.ALL)
-	private List<Empresa> empresa;
+    @ManyToMany(mappedBy = "enderecos", cascade = CascadeType.ALL, fetch = FetchType.EAGER)
+    private List<Empresa> empresa;
 
-	public Endereco() {
-	}
+    public Endereco() {
+    }
 
-	public Long getId() {
-		return id;
-	}
+    public Long getId() {
+        return id;
+    }
 
-	public void setId(Long id) {
-		this.id = id;
-	}
+    public void setId(Long id) {
+        this.id = id;
+    }
 
-	public String getLogradouro() {
-		return logradouro;
-	}
+    public String getLogradouro() {
+        return logradouro;
+    }
 
-	public void setLogradouro(String logradouro) {
-		this.logradouro = logradouro;
-	}
+    public void setLogradouro(String logradouro) {
+        this.logradouro = logradouro;
+    }
 
-	public String getNumero() {
-		return numero;
-	}
+    public String getNumero() {
+        return numero;
+    }
 
-	public void setNumero(String numero) {
-		this.numero = numero;
-	}
+    public void setNumero(String numero) {
+        this.numero = numero;
+    }
 
-	public String getComplemento() {
-		return complemento;
-	}
+    public String getComplemento() {
+        return complemento;
+    }
 
-	public void setComplemento(String complemento) {
-		this.complemento = complemento;
-	}
+    public void setComplemento(String complemento) {
+        this.complemento = complemento;
+    }
 
-	public String getBairro() {
-		return bairro;
-	}
+    public String getBairro() {
+        return bairro;
+    }
 
-	public void setBairro(String bairro) {
-		this.bairro = bairro;
-	}
+    public void setBairro(String bairro) {
+        this.bairro = bairro;
+    }
 
-	public String getCep() {
-		return cep;
-	}
+    public String getCep() {
+        return cep;
+    }
 
-	public void setCep(String cep) {
-		this.cep = cep;
-	}
+    public void setCep(String cep) {
+        this.cep = cep;
+    }
 
-	public int getIndAtivo() {
-		return indAtivo;
-	}
+    public int getIndAtivo() {
+        return indAtivo;
+    }
 
-	public void setIndAtivo(int indAtivo) {
-		this.indAtivo = indAtivo;
-	}
+    public void setIndAtivo(int indAtivo) {
+        this.indAtivo = indAtivo;
+    }
 
-	public Date getDataAtulizacao() {
-		return dataUltimaAtualizacao;
-	}
+    public Date getDataAtulizacao() {
+        return dataUltimaAtualizacao;
+    }
 
-	public void setDataAtulizacao(Date dataUltimaAtualizacao) {
-		this.dataUltimaAtualizacao = dataUltimaAtualizacao;
-	}
+    public void setDataAtulizacao(Date dataUltimaAtualizacao) {
+        this.dataUltimaAtualizacao = dataUltimaAtualizacao;
+    }
 
-	public Pessoa getPessoa() {
-		return pessoa;
-	}
+    public Pessoa getPessoa() {
+        return pessoa;
+    }
 
-	public void setPessoa(Pessoa pessoa) {
-		this.pessoa = pessoa;
-	}
+    public void setPessoa(Pessoa pessoa) {
+        this.pessoa = pessoa;
+    }
 
-	public Municipio getMunicipio() {
-		return municipio;
-	}
+    public Municipio getMunicipio() {
+        return municipio;
+    }
 
-	public void setMunicipio(Municipio municipio) {
-		this.municipio = municipio;
-	}
+    public void setMunicipio(Municipio municipio) {
+        this.municipio = municipio;
+    }
 
-	public Estado getEstado() {
-		return estado;
-	}
+    public Estado getEstado() {
+        return estado;
+    }
 
-	public void setEstado(Estado estado) {
-		this.estado = estado;
-	}
+    public void setEstado(Estado estado) {
+        this.estado = estado;
+    }
 
-	public List<Empresa> getEmpresa() {
-		return empresa;
-	}
+    public List<Empresa> getEmpresa() {
+        return empresa;
+    }
 
-	public void setEmpresa(List<Empresa> empresa) {
-		this.empresa = empresa;
-	}
+    public void setEmpresa(List<Empresa> empresa) {
+        this.empresa = empresa;
+    }
 }
