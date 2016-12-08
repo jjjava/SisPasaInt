@@ -1,6 +1,8 @@
-package org.pasa.sispasaint.bean.impl;
+package org.pasa.sispasaint.carga;
 
-import org.pasa.sispasaint.bean.CargaPeopleBean;
+import org.pasa.sispasaint.bean.impl.ImpBenPeopleTempBeanImpl;
+import org.pasa.sispasaint.bean.impl.ImpEndPeopleTempBeanImpl;
+import org.pasa.sispasaint.bean.impl.LogBeanImpl;
 import org.pasa.sispasaint.model.intg.Log;
 
 /**

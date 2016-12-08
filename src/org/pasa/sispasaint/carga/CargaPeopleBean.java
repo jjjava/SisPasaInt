@@ -1,4 +1,4 @@
-package org.pasa.sispasaint.bean;
+package org.pasa.sispasaint.carga;
 
 /**
  *

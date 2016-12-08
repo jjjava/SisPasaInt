@@ -1,4 +1,4 @@
-package org.pasa.sispasaint.bean.impl;
+package org.pasa.sispasaint.carga;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -19,7 +19,15 @@ import org.pasa.sispasa.core.model.Plano;
 import org.pasa.sispasa.core.model.Telefone;
 import org.pasa.sispasa.core.model.TipoDocumento;
 import org.pasa.sispasa.core.model.TipoVinculoEmpregaticio;
-import org.pasa.sispasaint.bean.CargaVLIBean;
+import org.pasa.sispasaint.bean.impl.BeneficiarioBeanImpl;
+import org.pasa.sispasaint.bean.impl.EmpresaBeanImpl;
+import org.pasa.sispasaint.bean.impl.EstadoBeanImpl;
+import org.pasa.sispasaint.bean.impl.FuncionarioBeanImpl;
+import org.pasa.sispasaint.bean.impl.ImpBenVLITempBeanImpl;
+import org.pasa.sispasaint.bean.impl.ImpEndVLITempBeanImpl;
+import org.pasa.sispasaint.bean.impl.LogBeanImpl;
+import org.pasa.sispasaint.bean.impl.MunicipioBeanImpl;
+import org.pasa.sispasaint.bean.impl.PlanoBeanImpl;
 import org.pasa.sispasaint.model.enun.EnunOperadora;
 import org.pasa.sispasaint.model.enun.EnunTipoBeneficiario;
 import org.pasa.sispasaint.model.enun.EnunTipoDocumento;
@@ -62,6 +70,7 @@ public class CargaVLIBeanImpl implements CargaVLIBean {
             ModeloEndVLI modeloEndVLI = new ImpEndVLITempBeanImpl().obterPorMatricula(modeloBenVLI);
             if (modeloBenVLI.getId() != null) {
                 if (modeloBenVLI.getTipoBeneficiario().equalsIgnoreCase(SisPasaIntCommon.FUNCIONARIO)) {
+                    System.out.println("func");
                     handlerFuncionario(modeloBenVLI, modeloEndVLI);
                 } else {
                     handlerBeneficiario(modeloBenVLI, modeloEndVLI);
@@ -131,10 +140,26 @@ public class CargaVLIBeanImpl implements CargaVLIBean {
 
             //ENDERECO
             funcionario.addEndereco(newEndereco(modeloEndVLI));
-            
+
             //DADOS BANCARIOS
             funcionario.setDadosBancarios(newDadosBancarios(modeloBenVLI));
+
+            //ORIGEM INFORMACOES
+            funcionario.setOrigemInformacoes(newOrigemInformacoes());
+            
+            //INSERT
+            funcionario.setIdUsuario(1L);
+            funcionario.setIndAtivo(SisPasaIntCommon.ATIVO);
+            funcionario.setDataUltimaAtulizacao(DateUtil.obterDataAtual());
+            System.out.println("XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX");
+            new FuncionarioBeanImpl().atualizar(funcionario);
         }
+    }
+
+    private OrigemInformacoes newOrigemInformacoes() {
+        OrigemInformacoes origemInformacoes = new OrigemInformacoes();
+        origemInformacoes.setDescricao("CARGA");
+        return origemInformacoes;
     }
 
     private DadosBancarios newDadosBancarios(ModeloBenVLI modeloBenVLI) {

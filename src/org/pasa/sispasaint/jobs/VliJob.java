@@ -2,7 +2,7 @@ package org.pasa.sispasaint.jobs;
 
 import java.util.ArrayList;
 import java.util.List;
-import org.pasa.sispasaint.bean.impl.CargaVLIBeanImpl;
+import org.pasa.sispasaint.carga.CargaVLIBeanImpl;
 import org.pasa.sispasaint.bean.impl.DestinatarioBeanImpl;
 import org.pasa.sispasaint.bean.impl.ListaDestinatariosBeanImpl;
 import org.pasa.sispasaint.mail.EnviaEmail;
@@ -34,6 +34,8 @@ public class VliJob implements Job {
         JobDataMap dataMap = jec.getJobDetail().getJobDataMap();
         long tipo = dataMap.getLong(SisPasaIntCommon.TIPO_JOB);
         long idEmpresa = dataMap.getLong(SisPasaIntCommon.ID_EMPRESA);
+        
+        System.out.println("execute");
 
         CargaVLIBeanImpl carga = new CargaVLIBeanImpl(idEmpresa, log);
         carga.cargaArquivosTemp();

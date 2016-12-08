@@ -1,10 +1,10 @@
-package org.pasa.sispasaint.bean;
+package org.pasa.sispasaint.carga;
 
 /**
  *
  * @author Hudson Schumaker
  */
-public interface CargaVLIBean {
+public interface CargaExtBean {
 
     void cargaArquivosTemp();
     void mapearEntidades();

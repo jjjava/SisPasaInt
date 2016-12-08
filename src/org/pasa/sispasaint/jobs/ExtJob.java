@@ -2,7 +2,7 @@ package org.pasa.sispasaint.jobs;
 
 import java.util.ArrayList;
 import java.util.List;
-import org.pasa.sispasaint.bean.impl.CargaExtBeanImpl;
+import org.pasa.sispasaint.carga.CargaExtBeanImpl;
 import org.pasa.sispasaint.bean.impl.DestinatarioBeanImpl;
 import org.pasa.sispasaint.bean.impl.ListaDestinatariosBeanImpl;
 import org.pasa.sispasaint.mail.EnviaEmail;
