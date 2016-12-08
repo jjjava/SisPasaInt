@@ -2,7 +2,7 @@ package org.pasa.sispasa.core.model;
 
 import java.io.Serializable;
 import java.util.Date;
-import java.util.List;
+import java.util.Set;
 
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
@@ -14,41 +14,41 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
-import javax.persistence.OneToOne;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
+
 import org.pasa.sispasa.core.constants.ConstantesBanco;
 
 /**
  *
- * @author Hudson Schumaker
+ * @author Hudson Schumaker / Andre Gomes
  * @version 1.0.0
  */
 @Entity
 @Table(name = "ENDERECO")
-public class Endereco implements Serializable {
+public class Endereco extends BaseEntity implements Serializable {
 
     private static final long serialVersionUID = 1L;
 
     @Id
-    @Column(name = "ID_ENDERECO", columnDefinition = ConstantesBanco.BIGINT)
+    @Column(name = "ID_ENDERECO",columnDefinition = ConstantesBanco.BIGINT)
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @Column(name = "LOGRADOURO", nullable = false, length = 60)
+    @Column(name = "LOGRADOURO",nullable = false, length=60)
     private String logradouro;
 
-    @Column(name = "NUMERO", nullable = false, length = 20)
+    @Column(name = "NUMERO", nullable = false, length=20)
     private String numero;
 
-    @Column(name = "COMPLEMENTO", length = 45)
+    @Column(name = "COMPLEMENTO", length=45)
     private String complemento;
 
-    @Column(name = "BAIRRO", nullable = false, length = 45)
+    @Column(name = "BAIRRO", nullable = false, length=45)
     private String bairro;
 
-    @Column(name = "CEP", nullable = false, columnDefinition = ConstantesBanco.CHAR_8)
+    @Column(name = "CEP", nullable = false, columnDefinition =ConstantesBanco.CHAR_8)
     private String cep;
 
     @Column(name = "IND_ATIVO", nullable = false, columnDefinition = ConstantesBanco.SMALLINT)
@@ -57,12 +57,11 @@ public class Endereco implements Serializable {
     @Column(name = "DT_ULT_ATULZ", nullable = false)
     @Temporal(TemporalType.TIMESTAMP)
     private Date dataUltimaAtualizacao;
+    
+    @Column(name = "ID_USUARIO", nullable = false, columnDefinition = ConstantesBanco.BIGINT)
+    private Long idUsuario;
 
-    @OneToOne()
-    @JoinColumn(name = "ID_PESSOA")
-    private Pessoa pessoa;
-
-    @ManyToOne()
+    @ManyToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "ID_MUNICIPIO")
     private Municipio municipio;
 
@@ -70,12 +69,16 @@ public class Endereco implements Serializable {
     @JoinColumn(name = "ID_ESTADO")
     private Estado estado;
 
-    @ManyToMany(mappedBy = "enderecos", cascade = CascadeType.ALL, fetch = FetchType.EAGER)
-    private List<Empresa> empresa;
+    
+    @ManyToMany(mappedBy = "enderecos", cascade = CascadeType.ALL, fetch=FetchType.EAGER)
+	private Set<Pessoa> pessoa;
+    
+    @ManyToMany(mappedBy = "enderecos")
+    private Set<Empresa> empresa;
 
-    public Endereco() {
-    }
-
+    
+    //GETTERS E SETTERS
+    
     public Long getId() {
         return id;
     }
@@ -132,22 +135,6 @@ public class Endereco implements Serializable {
         this.indAtivo = indAtivo;
     }
 
-    public Date getDataAtulizacao() {
-        return dataUltimaAtualizacao;
-    }
-
-    public void setDataAtulizacao(Date dataUltimaAtualizacao) {
-        this.dataUltimaAtualizacao = dataUltimaAtualizacao;
-    }
-
-    public Pessoa getPessoa() {
-        return pessoa;
-    }
-
-    public void setPessoa(Pessoa pessoa) {
-        this.pessoa = pessoa;
-    }
-
     public Municipio getMunicipio() {
         return municipio;
     }
@@ -164,11 +151,62 @@ public class Endereco implements Serializable {
         this.estado = estado;
     }
 
-    public List<Empresa> getEmpresa() {
+    public Set<Empresa> getEmpresa() {
         return empresa;
     }
 
-    public void setEmpresa(List<Empresa> empresa) {
+    public void setEmpresa(Set<Empresa> empresa) {
         this.empresa = empresa;
     }
+
+
+
+	/**
+	 * @param indAtivo the indAtivo to set
+	 */
+	public void setIndAtivo(Integer indAtivo) {
+		this.indAtivo = indAtivo;
+	}
+
+	/**
+	 * @return the dataUltimaAtualizacao
+	 */
+	public Date getDataUltimaAtualizacao() {
+		return dataUltimaAtualizacao;
+	}
+
+	/**
+	 * @param dataUltimaAtualizacao the dataUltimaAtualizacao to set
+	 */
+	public void setDataUltimaAtualizacao(Date dataUltimaAtualizacao) {
+		this.dataUltimaAtualizacao = dataUltimaAtualizacao;
+	}
+
+	/**
+	 * @return the idUsuario
+	 */
+	public Long getIdUsuario() {
+		return idUsuario;
+	}
+
+	/**
+	 * @param idUsuario the idUsuario to set
+	 */
+	public void setIdUsuario(Long idUsuario) {
+		this.idUsuario = idUsuario;
+	}
+
+	/**
+	 * @return the pessoa
+	 */
+	public Set<Pessoa> getPessoa() {
+		return pessoa;
+	}
+
+	/**
+	 * @param pessoa the pessoa to set
+	 */
+	public void setPessoa(Set<Pessoa> pessoa) {
+		this.pessoa = pessoa;
+	}
 }

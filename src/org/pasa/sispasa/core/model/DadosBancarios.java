@@ -15,10 +15,11 @@ import javax.persistence.Transient;
 
 import org.pasa.sispasa.core.constants.ConstantesBanco;
 import org.pasa.sispasa.core.enumeration.EnumBanco;
+import org.pasa.sispasa.core.enumeration.EnumTipoConta;
 
 /**
  *
- * @author Hudson Schumaker / Andr� Gomes
+ * @author Hudson Schumaker / Andre Gomes
  * @version 1.0.0
  */
 @Entity
@@ -47,6 +48,9 @@ public class DadosBancarios implements Serializable {
     @Column(name = "TP_CONTA", nullable =  false, columnDefinition = ConstantesBanco.CHAR_1)
     private String tipoConta;
     
+    @Transient
+    private EnumTipoConta enumTipoConta;
+    
     @Column(name = "ID_USUARIO", columnDefinition = ConstantesBanco.BIGINT)
     private Long idUsuario;
 
@@ -57,9 +61,10 @@ public class DadosBancarios implements Serializable {
     @Temporal(TemporalType.DATE)
     private Date dataUltimaAtualizacao;
 
-    public DadosBancarios() {
-    }
 
+    
+    //GETTERS E SETTERS
+    
     public Long getId() {
         return id;
     }
@@ -136,5 +141,33 @@ public class DadosBancarios implements Serializable {
 	 */
 	public void setEnumBanco(EnumBanco enumBanco) {
 		this.enumBanco = enumBanco;
+	}
+
+	/**
+	 * @return the dataUltimaAtualizacao
+	 */
+	public Date getDataUltimaAtualizacao() {
+		return dataUltimaAtualizacao;
+	}
+
+	/**
+	 * @param dataUltimaAtualizacao the dataUltimaAtualizacao to set
+	 */
+	public void setDataUltimaAtualizacao(Date dataUltimaAtualizacao) {
+		this.dataUltimaAtualizacao = dataUltimaAtualizacao;
+	}
+
+	/**
+	 * @return the enumTipoConta
+	 */
+	public EnumTipoConta getEnumTipoConta() {
+		return enumTipoConta;
+	}
+
+	/**
+	 * @param enumTipoConta the enumTipoConta to set
+	 */
+	public void setEnumTipoConta(EnumTipoConta enumTipoConta) {
+		this.enumTipoConta = enumTipoConta;
 	}
 }

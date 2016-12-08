@@ -9,18 +9,18 @@ import java.util.EnumSet;
 
 public enum EnumMotivoDesligamento {
 
-	SEM_JUSTA_CAUSA(1,"Desligado sem justa causa"),
-	COM_JUSTA_CAUSA(2,"Desligado por justa causa"),
-	ABANDONO(3,"Desligado por abandono de emprego"),
-	TERMINO_CONTRATO(4,"Desligado por término de contrato"),
-	APOSENTADORIA(5,"Desligado por aposentadoria"),
-	INVALIDEZ(6,"Desligado por invalidez"),
-	FALECIMENTO(7,"Desligado por falecimento");
+	SEM_JUSTA_CAUSA(1L,"Desligado sem justa causa"),
+	COM_JUSTA_CAUSA(2L,"Desligado por justa causa"),
+	ABANDONO(3L,"Desligado por abandono de emprego"),
+	TERMINO_CONTRATO(4L,"Desligado por término de contrato"),
+	APOSENTADORIA(5L,"Desligado por aposentadoria"),
+	INVALIDEZ(6L,"Desligado por invalidez"),
+	FALECIMENTO(7L,"Desligado por falecimento");
 	
-	private int indice;
+	private Long indice;
 	private String descricao;
 	
-	private EnumMotivoDesligamento(int indice, String descricao) {
+	private EnumMotivoDesligamento(Long indice, String descricao) {
 		this.indice = indice;
 		this.descricao = descricao;
 	}
@@ -34,7 +34,7 @@ public enum EnumMotivoDesligamento {
     }
 	
 	//getters e setters
-    public int getIndice() {
+    public Long getIndice() {
 		return indice;
 	}
 

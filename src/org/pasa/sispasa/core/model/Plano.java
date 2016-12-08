@@ -24,7 +24,7 @@ import org.pasa.sispasa.core.constants.ConstantesBanco;
 */
 @Entity
 @Table(name = "PLANO")
-public class Plano implements Serializable {
+public class Plano extends BaseEntity implements Serializable {
 
     private static final long serialVersionUID = 1L;
 

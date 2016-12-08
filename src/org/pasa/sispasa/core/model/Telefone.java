@@ -1,17 +1,19 @@
 package org.pasa.sispasa.core.model;
 
 import java.io.Serializable;
-import java.util.List;
+import java.util.Set;
 
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.ManyToMany;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
+import javax.persistence.Transient;
 
 import org.pasa.sispasa.core.constants.ConstantesBanco;
 
@@ -27,35 +29,38 @@ public class Telefone implements Serializable {
     private static final long serialVersionUID = 1L;
 
     @Id
-    @Column(name = "ID_TELEFONE", columnDefinition = ConstantesBanco.BIGINT)
+    @Column(name = "ID_TELEFONE",columnDefinition = ConstantesBanco.BIGINT)
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
     @Column(name = "DDD", columnDefinition = ConstantesBanco.CHAR_2)
     private String ddd;
 
-    @Column(name = "NUMERO", length = 10, nullable = false)
+    @Column(name = "NUMERO", length=10, nullable = false)
     private String numeroTelefone;
+    
+    @Transient
+    private String numeroTelefoneComDDD;
 
-    @Column(name = "RAMAL", length = 5)
+    @Column(name = "RAMAL", length=5)
     private String ramal;
 
     @Column(name = "IND_ATIVO", nullable = false, columnDefinition = ConstantesBanco.SMALLINT)
     private Integer indAtivo;
 
-    @OneToOne(cascade = CascadeType.ALL)
-    private TipoTelefone tipoTelefone;
+	@OneToOne(cascade = CascadeType.ALL)
+	private TipoTelefone tipoTelefone;
+	
+	@ManyToMany(mappedBy = "telefones", cascade = CascadeType.ALL, fetch=FetchType.EAGER)
+	private Set<Contato> contatos;
 
-    @ManyToMany(mappedBy = "telefones", cascade = CascadeType.ALL)
-    private List<Contato> contatos;
+	@ManyToMany(mappedBy = "telefones", cascade = CascadeType.ALL, fetch=FetchType.EAGER)
+	private Set<Pessoa> pessoa;
+    
 
-    @ManyToMany(mappedBy = "telefones", cascade = CascadeType.ALL)
-    private List<Pessoa> pessoa;
-
-    public Telefone() {
-    }
-
-    public Long getId() {
+	//GETTERS E SETTERS
+    
+	public Long getId() {
         return id;
     }
 
@@ -102,20 +107,48 @@ public class Telefone implements Serializable {
     public void setTipoTelefone(TipoTelefone tipoTelefone) {
         this.tipoTelefone = tipoTelefone;
     }
+
 
-    public List<Contato> getContatos() {
-        return contatos;
-    }
+	/**
+	 * @return the numeroTelefoneComDDD
+	 */
+	public String getNumeroTelefoneComDDD() {
+		return numeroTelefoneComDDD;
+	}
 
-    public void setContatos(List<Contato> contatos) {
-        this.contatos = contatos;
-    }
+	/**
+	 * @param numeroTelefoneComDDD the numeroTelefoneComDDD to set
+	 */
+	public void setNumeroTelefoneComDDD(String numeroTelefoneComDDD) {
+		this.numeroTelefoneComDDD = numeroTelefoneComDDD;
+	}
 
-    public List<Pessoa> getPessoa() {
-        return pessoa;
-    }
+	/**
+	 * @return the contatos
+	 */
+	public Set<Contato> getContatos() {
+		return contatos;
+	}
 
-    public void setPessoa(List<Pessoa> pessoa) {
-        this.pessoa = pessoa;
-    }
+	/**
+	 * @param contatos the contatos to set
+	 */
+	public void setContatos(Set<Contato> contatos) {
+		this.contatos = contatos;
+	}
+
+	/**
+	 * @return the pessoa
+	 */
+	public Set<Pessoa> getPessoa() {
+		return pessoa;
+	}
+
+	/**
+	 * @param pessoa the pessoa to set
+	 */
+	public void setPessoa(Set<Pessoa> pessoa) {
+		this.pessoa = pessoa;
+	}
+
 }

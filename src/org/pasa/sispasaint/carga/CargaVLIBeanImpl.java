@@ -14,7 +14,6 @@ import org.pasa.sispasa.core.model.Municipio;
 import org.pasa.sispasa.core.model.NivelEscolaridade;
 import org.pasa.sispasa.core.model.Operadora;
 import org.pasa.sispasa.core.model.OrigemInformacoes;
-import org.pasa.sispasa.core.model.Pais;
 import org.pasa.sispasa.core.model.Plano;
 import org.pasa.sispasa.core.model.Telefone;
 import org.pasa.sispasa.core.model.TipoDocumento;
@@ -98,6 +97,7 @@ public class CargaVLIBeanImpl implements CargaVLIBean {
             Funcionario funcionario = new FuncionarioBeanImpl().obter(modeloBenVLI.getEmpresa(), modeloBenVLI.getMatricula());
             if (funcionario == null) {
                 log.addRegistro();
+                System.out.println("handler");
                 newFuncionario(modeloBenVLI, modeloEndVLI);
             } else {
 
@@ -147,20 +147,25 @@ public class CargaVLIBeanImpl implements CargaVLIBean {
             //ORIGEM INFORMACOES
             funcionario.setOrigemInformacoes(newOrigemInformacoes());
             
+            //VINCULO
+            funcionario.setTipoVinculoEmpregaticio(newTipoVinculoEmpregaticio(modeloBenVLI));
+            
             //INSERT
             funcionario.setIdUsuario(1L);
             funcionario.setIndAtivo(SisPasaIntCommon.ATIVO);
             funcionario.setDataUltimaAtulizacao(DateUtil.obterDataAtual());
             System.out.println("XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX");
-            new FuncionarioBeanImpl().atualizar(funcionario);
+            new FuncionarioBeanImpl().cadastar(funcionario);
         }
     }
-
-    private OrigemInformacoes newOrigemInformacoes() {
-        OrigemInformacoes origemInformacoes = new OrigemInformacoes();
-        origemInformacoes.setDescricao("CARGA");
-        return origemInformacoes;
+    
+    private TipoVinculoEmpregaticio newTipoVinculoEmpregaticio(ModeloBenVLI modeloBenVLI){
+        TipoVinculoEmpregaticio tipoVinculoEmpregaticio = new TipoVinculoEmpregaticio();
+        tipoVinculoEmpregaticio.setCodExterno(modeloBenVLI.getVinculo());
+        return tipoVinculoEmpregaticio;
     }
+
+   
 
     private DadosBancarios newDadosBancarios(ModeloBenVLI modeloBenVLI) {
         DadosBancarios dadosBancarios = new DadosBancarios();
@@ -232,6 +237,12 @@ public class CargaVLIBeanImpl implements CargaVLIBean {
         listaTelefones.add(tel2);
 
         return listaTelefones;
+    }
+    
+    private OrigemInformacoes newOrigemInformacoes() {
+        OrigemInformacoes origemInformacoes = new OrigemInformacoes();
+        origemInformacoes.setDescricao("CARGA");
+        return origemInformacoes;
     }
 
     private void handlerBeneficiario(ModeloBenVLI modeloBenVLI, ModeloEndVLI modeloEndVLI) {

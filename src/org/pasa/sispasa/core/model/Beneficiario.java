@@ -43,7 +43,7 @@ public class Beneficiario extends Pessoa {
     @Column(name = "CARTEIRINHA", nullable = false, columnDefinition = ConstantesBanco.CHAR_10)
     private String carteirinha;
 
-    @Column(name = "DIREITO_AMS_CREDENC", nullable = false, columnDefinition = ConstantesBanco.CHAR_1)
+    @Column(name = "DIREITO_AMS_CREDENC", columnDefinition = ConstantesBanco.CHAR_1)
     private String direitoAmsCredenciar;
 
     @Column(name = "DT_VALIDADE_CREDENC", columnDefinition = ConstantesBanco.DATE)
@@ -57,10 +57,6 @@ public class Beneficiario extends Pessoa {
     @Temporal(TemporalType.DATE)
     private Date dataValidadeReembolso;
 
-    @Column(name = "DT_ATULIZACAO", columnDefinition = ConstantesBanco.DATE)
-    @Temporal(TemporalType.DATE)
-    private Date dataAtulizacao;
-
     @Column(name = "CD_CR", columnDefinition = ConstantesBanco.CHAR_8)
     private String codCR;
 
@@ -73,7 +69,7 @@ public class Beneficiario extends Pessoa {
     @Column(name = "NUCLEO_AMS", columnDefinition = ConstantesBanco.CHAR_2)
     private String nucleoAMS;
 
-    @Column(name = "TP_BENEF", columnDefinition = ConstantesBanco.CHAR_1)
+    @Column(name = "TP_BENEF", columnDefinition = ConstantesBanco.CHAR_1, nullable=false)
     private String tipoBeneficiario;
     
     @Transient
@@ -111,7 +107,7 @@ public class Beneficiario extends Pessoa {
 	@Temporal(TemporalType.TIMESTAMP)
 	private Date dataUltimaAtualizacao;
 
-    @ManyToOne(cascade = CascadeType.ALL)
+    @ManyToOne()
     @JoinColumn(name = "ID_FUNCIONARIO")
     private Funcionario funcionario;
 
@@ -119,12 +115,9 @@ public class Beneficiario extends Pessoa {
     @JoinColumn(name = "ID_GRAU_PARENT")
     private GrauParentesco grauParentesco;
 
-    @ManyToOne(cascade = CascadeType.ALL)
+    @ManyToOne()
     @JoinColumn(name = "ID_PLANO")
     private Plano plano;
-    
-    public Beneficiario() {
-	}
     
     //GETTERS E SETTERS
     
@@ -192,14 +185,6 @@ public class Beneficiario extends Pessoa {
 
     public void setDataValidadeReembolso(Date dataValidadeReembolso) {
         this.dataValidadeReembolso = dataValidadeReembolso;
-    }
-
-    public Date getDataAtulizacao() {
-        return dataAtulizacao;
-    }
-
-    public void setDataAtulizacao(Date dataAtulizacao) {
-        this.dataAtulizacao = dataAtulizacao;
     }
 
     public String getCodCR() {

@@ -13,7 +13,7 @@ import org.pasa.sispasa.core.constants.ConstantesBanco;
 
 /**
  *
- * @author Hudson Schumaker
+ * @author Hudson Schumaker / Andre Gomes
  * @version 1.0.0
  */
 @Entity
@@ -31,6 +31,12 @@ public class OrigemInformacoes implements Serializable {
 	private String descricao;
 
 	public OrigemInformacoes() {
+		//Construtor Default
+	}
+	
+	public OrigemInformacoes(Long id, String descricao) {
+		this.id = id;
+		this.descricao = descricao;
 	}
 
 	public Long getId() {

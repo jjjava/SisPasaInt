@@ -9,17 +9,17 @@ import java.util.EnumSet;
 
 public enum EnumNivelEscolaridade {
 
-	FUNDAMENTAL(1,"Ensino Fundamental"),
-	MEDIO(2,"Ensino Medio"),
-	SUPERIOR(3,"Ensino Superior"),
-	POS(4,"Pos Graduacao"),
-	MESTRADO(5,"Mestrado"),
-	DOUTORADO(6,"Doutorado");
+	FUNDAMENTAL(1L,"Ensino Fundamental"),
+	MEDIO(2L,"Ensino Médio"),
+	SUPERIOR(3L,"Ensino Superior"),
+	POS(4L,"Pos Graduação"),
+	MESTRADO(5L,"Mestrado"),
+	DOUTORADO(6L,"Doutorado");
 	
-	private int indice;
+	private Long indice;
 	private String descricao;
 	
-	private EnumNivelEscolaridade(int indice, String descricao) {
+	private EnumNivelEscolaridade(Long indice, String descricao) {
 		this.indice = indice;
 		this.descricao = descricao;
 	}
@@ -68,7 +68,7 @@ public enum EnumNivelEscolaridade {
     }
 	
 	//getters e setters
-    public int getIndice() {
+    public Long getIndice() {
 		return indice;
 	}
 

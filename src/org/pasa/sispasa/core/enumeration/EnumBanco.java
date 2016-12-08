@@ -8,11 +8,9 @@ import java.util.EnumSet;
  */
 public enum EnumBanco {
 	
-	ITAU("1", "Itau"),
-	BRADESCO("2", "Brasdeco"),
-	SANTANDER("3","Santander"),
-	BANCO_DO_BRASIL("4","Banco do Brasil"),
-	CAIXA_ECONOMICA("5","Caixa Economica Federal");
+	ITAU("347", "Itaú"),
+	BRADESCO("237", "Bradesco"),
+	SANTANDER("341","Santander");
 	
 	private String indice;
 	private String descricao;
@@ -29,7 +27,7 @@ public enum EnumBanco {
 	 */
 	public static EnumBanco getBancoByIndice(String indice){
 		for (EnumBanco enumBanco : getAllBanco()) {
-			if(indice.equals(enumBanco.getDescricao())){
+			if(indice.equals(enumBanco.getIndice())){
 				return enumBanco;
 			}
 		}
@@ -41,7 +39,7 @@ public enum EnumBanco {
 	 * @return
 	 */
 	public static EnumSet<EnumBanco> getAllBanco() {
-        return EnumSet.of(ITAU, BRADESCO, SANTANDER, BANCO_DO_BRASIL, CAIXA_ECONOMICA );
+        return EnumSet.of(ITAU, BRADESCO, SANTANDER);
     }
 	
 	//getters e setters

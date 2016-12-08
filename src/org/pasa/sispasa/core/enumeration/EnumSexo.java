@@ -9,15 +9,29 @@ import java.util.EnumSet;
 
 public enum EnumSexo {
 
-	MASCULINO(1,"Masculino"),
-	FEMININO(2,"Feminino");
+	MASCULINO("M","Masculino"),
+	FEMININO("F","Feminino");
 	
-	private int indice;
+	private String indice;
 	private String descricao;
 	
-	private EnumSexo(int indice, String descricao) {
+	private EnumSexo(String indice, String descricao) {
 		this.indice = indice;
 		this.descricao = descricao;
+	}
+	
+	/**
+	 * 
+	 * @param indice
+	 * @return
+	 */
+	public static EnumSexo getSexoByIndice(String indice){
+		if(indice.equals(EnumSexo.FEMININO.getIndice())){
+			return EnumSexo.FEMININO;
+		}
+		else{
+			return EnumSexo.MASCULINO;
+		}
 	}
 	
 	/**
@@ -34,7 +48,7 @@ public enum EnumSexo {
 	/**
 	 * @return the indice
 	 */
-	public int getIndice() {
+	public String getIndice() {
 		return indice;
 	}
 

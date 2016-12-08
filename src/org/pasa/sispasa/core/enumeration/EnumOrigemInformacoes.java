@@ -8,17 +8,41 @@ import java.util.EnumSet;
  */
 public enum EnumOrigemInformacoes {
 	
-	MANUAL(1, "Manual"),
-	CARGA(2, "Carga"),
-	MANUAL_JUDICIAL(3,"Manual Judicial"),
-	CARGA_JUDICIAL(4,"Carga Judicial");
+	MANUAL(1L, "Manual"),
+	CARGA(2L, "Carga"),
+	MANUAL_JUDICIAL(3L,"Manual Judicial"),
+	CARGA_JUDICIAL(4L,"Carga Judicial");
 	
-	private int indice;
+	private Long indice;
 	private String descricao;
 	
-	private EnumOrigemInformacoes(int indice, String descricao) {
+	private EnumOrigemInformacoes(Long indice, String descricao) {
 		this.indice = indice;
 		this.descricao = descricao;
+	}
+	
+	
+	public static EnumOrigemInformacoes getOrigemInformacoesByIndice(int indice){
+		
+		switch (indice) {
+			
+			case 1:
+				return EnumOrigemInformacoes.MANUAL;
+				
+			case 2:
+				return EnumOrigemInformacoes.CARGA;
+			
+			case 3:
+				return EnumOrigemInformacoes.MANUAL_JUDICIAL;
+				
+			case 4:
+				return EnumOrigemInformacoes.CARGA_JUDICIAL;	
+
+			default:
+				break;
+		}
+		
+		return null;
 	}
 	
 	/**
@@ -30,7 +54,7 @@ public enum EnumOrigemInformacoes {
     }
 	
 	//getters e setters
-    public int getIndice() {
+    public Long getIndice() {
 		return indice;
 	}
 

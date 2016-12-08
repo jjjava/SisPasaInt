@@ -9,28 +9,41 @@ import java.util.EnumSet;
  */
 public enum EnumTipoConta {
 
-	CORRENTE(1,"Corrente"),
-	POUPANCA(2,"Poupan√ßa"),
-	SALARIO(3,"Sal√°rio");
+	CORRENTE("C","Corrente"),
+	POUPANCA("P","PoupanÁa"),
+	SALARIO("S","Sal·rio");
 	
-	private int indice;
+	private String indice;
 	private String descricao;
 	
-	
-	private EnumTipoConta() {
-	}
-
-	private EnumTipoConta(int indice, String descricao) {
+	private EnumTipoConta(String indice, String descricao) {
 		this.indice = indice;
 		this.descricao = descricao;
 	}
 
+	
+	/**
+	 * 
+	 * @param indice
+	 * @return
+	 */
+	public static EnumTipoConta getTipoContaByIndice(String indice){
+		for (EnumTipoConta enumTipoConta : getAllTipoConta()) {
+			if(indice.equals(enumTipoConta.getIndice())){
+				return enumTipoConta;
+			}
+		}
+		return null;
+	}
+	
 	public static EnumSet<EnumTipoConta> getAllTipoConta() {
         return EnumSet.of(CORRENTE, POUPANCA, SALARIO);
     }
 	
+
+	
 	//getters e setters
-    public int getIndice() {
+    public String getIndice() {
 		return indice;
 	}
 

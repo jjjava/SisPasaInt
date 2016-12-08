@@ -8,14 +8,14 @@ import java.util.EnumSet;
  */
 public enum EnumGrauParentesco {
 	
-	FILHO(1, "Filho"),
-	CONJUGE(2, "CÃ´njuge"),
-	NETO(3,"Neto");
+	FILHO(1L, "Filho"),
+	CONJUGE(2L, "Cônjuge"),
+	NETO(3L,"Neto");
 	
-	private int indice;
+	private Long indice;
 	private String descricao;
 	
-	private EnumGrauParentesco(int indice, String descricao) {
+	private EnumGrauParentesco(Long indice, String descricao) {
 		this.indice = indice;
 		this.descricao = descricao;
 	}
@@ -25,7 +25,7 @@ public enum EnumGrauParentesco {
     }
 	
 	//getters e setters
-    public int getIndice() {
+    public Long getIndice() {
 		return indice;
 	}
 

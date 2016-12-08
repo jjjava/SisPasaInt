@@ -35,7 +35,7 @@ public class VliJob implements Job {
         long tipo = dataMap.getLong(SisPasaIntCommon.TIPO_JOB);
         long idEmpresa = dataMap.getLong(SisPasaIntCommon.ID_EMPRESA);
         
-        System.out.println("execute");
+        System.out.println("1111execute");
 
         CargaVLIBeanImpl carga = new CargaVLIBeanImpl(idEmpresa, log);
         carga.cargaArquivosTemp();
@@ -48,7 +48,7 @@ public class VliJob implements Job {
         enviaEmail.send();
     }
 
-    public List<String> getDestinatariosList(List<ListaDestinatarios> lista) {
+    private List<String> getDestinatariosList(List<ListaDestinatarios> lista) {
         List<String> slista = new ArrayList<>();
         for (ListaDestinatarios d : lista) {
             slista.add(new DestinatarioBeanImpl().obter(d.getIdDestinatario()).getEmail());
@@ -56,7 +56,7 @@ public class VliJob implements Job {
         return slista;
     }
     
-    public String setMensagem(){
+    private String setMensagem(){
        return "";
     }
 }

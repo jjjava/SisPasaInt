@@ -29,8 +29,18 @@ public class EstadoCivil implements Serializable {
 	private String descricao;
 
 	public EstadoCivil() {
+		//CONSTRUTOR DEFAULT
 	}
-
+	
+	public EstadoCivil(Long id, String descricao) {
+		this.id = id;
+		this.descricao = descricao;
+	}
+	
+	
+	
+	//GETTERS E SETTERS
+	
 	public Long getId() {
 		return id;
 	}
