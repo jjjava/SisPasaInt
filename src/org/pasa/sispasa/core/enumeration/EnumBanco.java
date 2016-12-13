@@ -8,7 +8,7 @@ import java.util.EnumSet;
  */
 public enum EnumBanco {
 	
-	ITAU("347", "Itaú"),
+	ITAU("347", "Ita"),
 	BRADESCO("237", "Bradesco"),
 	SANTANDER("341","Santander");
 	

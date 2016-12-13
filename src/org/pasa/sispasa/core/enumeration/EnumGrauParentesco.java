@@ -9,7 +9,7 @@ import java.util.EnumSet;
 public enum EnumGrauParentesco {
 	
 	FILHO(1L, "Filho"),
-	CONJUGE(2L, "Cônjuge"),
+	CONJUGE(2L, "Conjuge"),
 	NETO(3L,"Neto");
 	
 	private Long indice;

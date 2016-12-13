@@ -10,9 +10,9 @@ import java.util.EnumSet;
 public enum EnumNivelEscolaridade {
 
 	FUNDAMENTAL(1L,"Ensino Fundamental"),
-	MEDIO(2L,"Ensino Médio"),
+	MEDIO(2L,"Ensino Medio"),
 	SUPERIOR(3L,"Ensino Superior"),
-	POS(4L,"Pos Graduação"),
+	POS(4L,"Pos Graduao"),
 	MESTRADO(5L,"Mestrado"),
 	DOUTORADO(6L,"Doutorado");
 	

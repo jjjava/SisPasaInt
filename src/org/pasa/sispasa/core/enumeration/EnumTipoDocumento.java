@@ -12,7 +12,7 @@ public enum EnumTipoDocumento {
 	RG(1L,"Carteira de Identidade"),
 	CTPS(2L,"Carteira de Trabalho"),
 	PIS_PASEP(3L,"PIS/PASEP"),
-	CNH(4L,"Carteira de Habilitação"),
+	CNH(4L,"Carteira de Habilitacao"),
 	PASSAPORTE(5L,"Passaporte");
 	
 	private final Long indice;

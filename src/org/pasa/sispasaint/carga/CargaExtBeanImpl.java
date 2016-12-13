@@ -2,6 +2,7 @@ package org.pasa.sispasaint.carga;
 
 import java.util.Date;
 import java.util.List;
+import java.util.Set;
 import org.pasa.sispasa.core.model.Beneficiario;
 import org.pasa.sispasa.core.model.DadosBancarios;
 import org.pasa.sispasa.core.model.Documento;
@@ -130,7 +131,7 @@ public class CargaExtBeanImpl implements CargaExtBean {
 
             Telefone tel1 = null;
             Telefone tel2 = null;
-            List<Telefone> listaTelefones = funcionario.getTelefones();
+            Set<Telefone> listaTelefones = funcionario.getTelefones();
             if (listaTelefones.isEmpty()) {
                 tel1 = new Telefone();
                 tel2 = new Telefone();
@@ -157,7 +158,7 @@ public class CargaExtBeanImpl implements CargaExtBean {
             funcionario.setCpf(modeloBenExt.getCpf());
 
             Documento pis = null;
-            List<Documento> listaDocs = funcionario.getDocumentos();
+            Set<Documento> listaDocs = funcionario.getDocumentos();
             if (listaDocs.isEmpty()) {
                 pis = new Documento();
                 pis.setNumero(modeloBenExt.getPis());
@@ -172,7 +173,7 @@ public class CargaExtBeanImpl implements CargaExtBean {
                     }
                 }
             }
-            pis.setDataUltimaAtulizacao(DateUtil.obterDataAtual());
+            pis.setDataUltimaAtualizacao(DateUtil.obterDataAtual());
             funcionario.addDocumento(pis);
             //Endereco
             Estado estado = new EstadoBeanImpl().obter(modeloEndExt.getUf());
@@ -189,7 +190,7 @@ public class CargaExtBeanImpl implements CargaExtBean {
             municipio.setEstado(estado);
 
             Endereco endereco = null;
-            List<Endereco> enderecos = funcionario.getEnderecos();
+            Set<Endereco> enderecos = funcionario.getEnderecos();
             if (enderecos.isEmpty()) {
                 endereco = new Endereco();
                 endereco.setLogradouro(modeloEndExt.getEndereco());
