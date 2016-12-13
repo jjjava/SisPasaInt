@@ -1,6 +1,7 @@
 package org.pasa.sispasa.core.model;
 
 import java.io.Serializable;
+import java.util.Date;
 import java.util.Set;
 
 import javax.persistence.CascadeType;
@@ -13,7 +14,8 @@ import javax.persistence.Id;
 import javax.persistence.ManyToMany;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
-import javax.persistence.Transient;
+import javax.persistence.Temporal;
+import javax.persistence.TemporalType;
 
 import org.pasa.sispasa.core.constants.ConstantesBanco;
 
@@ -39,16 +41,20 @@ public class Telefone implements Serializable {
     @Column(name = "NUMERO", length=10, nullable = false)
     private String numeroTelefone;
     
-    @Transient
-    private String numeroTelefoneComDDD;
-
     @Column(name = "RAMAL", length=5)
     private String ramal;
 
     @Column(name = "IND_ATIVO", nullable = false, columnDefinition = ConstantesBanco.SMALLINT)
     private Integer indAtivo;
+    
+    @Column(name = "ID_USUARIO", nullable = false, columnDefinition = ConstantesBanco.BIGINT)
+    private Long idUsuario;
+    
+    @Column(name = "DT_ULT_ATULZ", nullable = false)
+	@Temporal(TemporalType.TIMESTAMP)
+	private Date dataUltimaAtualizacao;
 
-	@OneToOne(cascade = CascadeType.ALL)
+	@OneToOne()
 	private TipoTelefone tipoTelefone;
 	
 	@ManyToMany(mappedBy = "telefones", cascade = CascadeType.ALL, fetch=FetchType.EAGER)
@@ -107,23 +113,7 @@ public class Telefone implements Serializable {
     public void setTipoTelefone(TipoTelefone tipoTelefone) {
         this.tipoTelefone = tipoTelefone;
     }
-
-
-	/**
-	 * @return the numeroTelefoneComDDD
-	 */
-	public String getNumeroTelefoneComDDD() {
-		return numeroTelefoneComDDD;
-	}
-
-	/**
-	 * @param numeroTelefoneComDDD the numeroTelefoneComDDD to set
-	 */
-	public void setNumeroTelefoneComDDD(String numeroTelefoneComDDD) {
-		this.numeroTelefoneComDDD = numeroTelefoneComDDD;
-	}
-
-	/**
+	/**
 	 * @return the contatos
 	 */
 	public Set<Contato> getContatos() {
@@ -149,6 +139,34 @@ public class Telefone implements Serializable {
 	 */
 	public void setPessoa(Set<Pessoa> pessoa) {
 		this.pessoa = pessoa;
+	}
+
+	/**
+	 * @return the idUsuario
+	 */
+	public Long getIdUsuario() {
+		return idUsuario;
+	}
+
+	/**
+	 * @param idUsuario the idUsuario to set
+	 */
+	public void setIdUsuario(Long idUsuario) {
+		this.idUsuario = idUsuario;
+	}
+
+	/**
+	 * @return the dataUltimaAtualizacao
+	 */
+	public Date getDataUltimaAtualizacao() {
+		return dataUltimaAtualizacao;
+	}
+
+	/**
+	 * @param dataUltimaAtualizacao the dataUltimaAtualizacao to set
+	 */
+	public void setDataUltimaAtualizacao(Date dataUltimaAtualizacao) {
+		this.dataUltimaAtualizacao = dataUltimaAtualizacao;
 	}
 
 }

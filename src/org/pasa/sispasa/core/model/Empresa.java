@@ -90,7 +90,11 @@ public class Empresa extends BaseEntity implements Serializable {
 	@JoinTable(name = "CONTATO_EMPRESA",
 	joinColumns = @JoinColumn(name = "ID_EMPRESA"),
 	inverseJoinColumns = @JoinColumn(name = "ID_CONTATO"))
-	private List<Contato> contatos;
+	private	List<Contato> contatos;
+	
+	public Empresa(Long id){
+		this.id = id;
+	}
 
 	public Empresa() {
 		enderecos = new ArrayList<>();

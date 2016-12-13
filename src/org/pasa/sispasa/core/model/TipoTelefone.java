@@ -1,13 +1,12 @@
 package org.pasa.sispasa.core.model;
 
 import java.io.Serializable;
-import javax.persistence.CascadeType;
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
 import org.pasa.sispasa.core.constants.ConstantesBanco;
@@ -31,9 +30,6 @@ public class TipoTelefone implements Serializable {
 
 	@Column(name = "DESCRICAO", length=30, nullable = false)
 	private String descricao;
-
-	@OneToOne(mappedBy = "tipoTelefone", cascade = CascadeType.ALL)
-	private Telefone telefone;
 
 	
 	public TipoTelefone(){

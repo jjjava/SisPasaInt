@@ -1,7 +1,9 @@
 package org.pasa.sispasa.core.model;
 
+import java.io.Serializable;
 import java.util.Date;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -12,10 +14,8 @@ import javax.persistence.PrimaryKeyJoinColumn;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
-import javax.persistence.Transient;
 
 import org.pasa.sispasa.core.constants.ConstantesBanco;
-import org.pasa.sispasa.core.enumeration.EnumIndAtivo;
 
 /**
  *
@@ -25,7 +25,7 @@ import org.pasa.sispasa.core.enumeration.EnumIndAtivo;
 @Entity
 @Table(name = "FUNCIONARIO")
 @PrimaryKeyJoinColumn(name = "ID_PESSOA")
-public class Funcionario extends Pessoa {
+public class Funcionario extends Pessoa implements Serializable {
 
     private static final long serialVersionUID = 1L;
 
@@ -83,9 +83,6 @@ public class Funcionario extends Pessoa {
     @Column(name = "IND_ATIVO", nullable = false,  columnDefinition = ConstantesBanco.SMALLINT)
     private Integer indAtivo;
     
-    @Transient
-    private EnumIndAtivo enumIndAtivo;
-
     @Column(name = "DT_ULT_ATULZ", nullable = false)
 	@Temporal(TemporalType.TIMESTAMP)
 	private Date dataUltimaAtualizacao;
@@ -98,14 +95,14 @@ public class Funcionario extends Pessoa {
     @JoinColumn(name = "ID_TP_VINC_EMPREG")
     private TipoVinculoEmpregaticio tipoVinculoEmpregaticio;
 
-    @ManyToOne()
+    @ManyToOne(cascade=CascadeType.ALL)
     @JoinColumn(name = "ID_DADOS_BANC")
     private DadosBancarios dadosBancarios;
 
     @ManyToOne()
     @JoinColumn(name = "ID_MOTIVO_DESLIGAMENTO")
     private MotivoDesligamento motivoDesligamento;
-
+    
     //GETTERS AND SETTERS
     
     public Long getId() {
@@ -275,20 +272,6 @@ public class Funcionario extends Pessoa {
 	}
 
 	/**
-	 * @return the enumIndAtivo
-	 */
-	public EnumIndAtivo getEnumIndAtivo() {
-		return enumIndAtivo;
-	}
-
-	/**
-	 * @param enumIndAtivo the enumIndAtivo to set
-	 */
-	public void setEnumIndAtivo(EnumIndAtivo enumIndAtivo) {
-		this.enumIndAtivo = enumIndAtivo;
-	}
-
-	/**
 	 * @return the dataAdmissao
 	 */
 	public Date getDataAdmissao() {
@@ -315,6 +298,7 @@ public class Funcionario extends Pessoa {
 	public void setDataUltimaAtualizacao(Date dataUltimaAtualizacao) {
 		this.dataUltimaAtualizacao = dataUltimaAtualizacao;
 	}
+
 
 
 }

@@ -10,8 +10,8 @@ import java.util.EnumSet;
 public enum EnumTipoConta {
 
 	CORRENTE("C","Corrente"),
-	POUPANCA("P","Poupanca"),
-	SALARIO("S","Salrio");
+	POUPANCA("P","Poupança"),
+	SALARIO("S","Salário");
 	
 	private String indice;
 	private String descricao;

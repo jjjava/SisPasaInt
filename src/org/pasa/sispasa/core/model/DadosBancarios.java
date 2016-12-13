@@ -24,7 +24,7 @@ import org.pasa.sispasa.core.enumeration.EnumTipoConta;
  */
 @Entity
 @Table(name = "DADOS_BANCARIOS")
-public class DadosBancarios implements Serializable {
+public class DadosBancarios extends BaseEntity implements Serializable {
 
     private static final long serialVersionUID = 1L;
 
@@ -62,7 +62,6 @@ public class DadosBancarios implements Serializable {
     private Date dataUltimaAtualizacao;
 
 
-    
     //GETTERS E SETTERS
     
     public Long getId() {

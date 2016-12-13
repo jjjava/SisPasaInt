@@ -13,12 +13,12 @@ import org.pasa.sispasa.core.constants.ConstantesBanco;
 
 /**
  *
- * @author Hudson Schumaker / Andr� Gomes
+ * @author Hudson Schumaker / Andre Gomes
  * @version 1.0.0
  */
 @Entity
 @Table(name = "MOTIVO_DESLIGAMENTO")
-public class MotivoDesligamento implements Serializable {
+public class MotivoDesligamento extends BaseEntity implements Serializable {
 
 	private static final long serialVersionUID = 1L;
 
@@ -31,8 +31,17 @@ public class MotivoDesligamento implements Serializable {
 	private String descricao;
 
 	public MotivoDesligamento() {
+		//CONSTRUTOR DEFAULT
+	}
+	
+	public MotivoDesligamento(Long id, String descricao) {
+		this.id = id;
+		this.descricao = descricao;
 	}
 
+	
+	//GETTERS E SETTERS
+	
 	public Long getId() {
 		return id;
 	}

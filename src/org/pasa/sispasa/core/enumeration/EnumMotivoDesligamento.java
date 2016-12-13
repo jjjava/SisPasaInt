@@ -25,6 +25,45 @@ public enum EnumMotivoDesligamento {
 		this.descricao = descricao;
 	}
 	
+	
+	/**
+	 * 
+	 * @param indice
+	 * @return
+	 */
+	public static EnumMotivoDesligamento getNivelMotivoDesligamentoByIndice(int indice){
+		
+		switch (indice) {
+			
+			case 1:
+				return EnumMotivoDesligamento.SEM_JUSTA_CAUSA;
+				
+			case 2:
+				return EnumMotivoDesligamento.COM_JUSTA_CAUSA;
+			
+			case 3:
+				return EnumMotivoDesligamento.ABANDONO;
+				
+			case 4:
+				return EnumMotivoDesligamento.TERMINO_CONTRATO;
+				
+			case 5:
+				return EnumMotivoDesligamento.APOSENTADORIA;
+				
+			case 6:
+				return EnumMotivoDesligamento.INVALIDEZ;
+				
+			case 7:
+				return EnumMotivoDesligamento.FALECIMENTO;	
+
+			default:
+				break;
+		}
+		
+		return null;
+	}
+	
+	
 	/**
 	 * 
 	 * @return
