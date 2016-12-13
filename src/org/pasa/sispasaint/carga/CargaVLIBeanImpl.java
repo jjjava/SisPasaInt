@@ -153,7 +153,7 @@ public class CargaVLIBeanImpl implements CargaVLIBean {
             //INSERT
             funcionario.setIdUsuario(1L);
             funcionario.setIndAtivo(SisPasaIntCommon.ATIVO);
-            funcionario.setDataUltimaAtulizacao(DateUtil.obterDataAtual());
+            funcionario.setDataUltimaAtualizacao(DateUtil.obterDataAtual());
             System.out.println("XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX");
             new FuncionarioBeanImpl().cadastar(funcionario);
         }
@@ -219,7 +219,7 @@ public class CargaVLIBeanImpl implements CargaVLIBean {
         pis.setNumero(modeloBenVLI.getPis());
         tpPIS.setDescricao(EnunTipoDocumento.PIS.getDescricao());
         pis.setTipoDocumento(tpPIS);
-        pis.setDataUltimaAtulizacao(DateUtil.obterDataAtual());
+        pis.setDataUltimaAtualizacao(DateUtil.obterDataAtual());
         return pis;
     }
 
@@ -276,7 +276,7 @@ public class CargaVLIBeanImpl implements CargaVLIBean {
         beneficiario.setDataValidadeCredenciado(DateUtil.toDate(modeloBenVLI.getDataValidadeCredenciado()));
         beneficiario.setDireitoAMSReenbolso(modeloBenVLI.getDireitoAmsReembolso());
         beneficiario.setDataValidadeReembolso(DateUtil.toDate(modeloBenVLI.getDataValidadeReembolso()));
-        beneficiario.setDataAtulizacao(DateUtil.toDate(modeloBenVLI.getDataDeAtualizacao()));
+        beneficiario.setDataUltimaAtulizacao(DateUtil.toDate(modeloBenVLI.getDataDeAtualizacao()));
         beneficiario.setCodCR(modeloBenVLI.getCodigoCR());
         beneficiario.setOrgaoPessoal(modeloBenVLI.getOrgaoPessoal());
         beneficiario.setFaixaNivel(modeloBenVLI.getFaixaNivel());
@@ -313,7 +313,7 @@ public class CargaVLIBeanImpl implements CargaVLIBean {
         enderecoBen.setEstado(estado);
         enderecoBen.setMunicipio(municipio);
         enderecoBen.setNumero("");
-        enderecoBen.setDataAtulizacao(DateUtil.obterDataAtual());
+        enderecoBen.setDataUltimaAtualizacao(DateUtil.obterDataAtual());
 
         beneficiario.addEndereco(enderecoBen);
 
@@ -336,7 +336,7 @@ public class CargaVLIBeanImpl implements CargaVLIBean {
                 }
             }
         }
-        pis.setDataUltimaAtulizacao(DateUtil.obterDataAtual());
+        pis.setDataUltimaAtualizacao(DateUtil.obterDataAtual());
         beneficiario.addDocumento(pis);
 
         Plano plano = new PlanoBeanImpl().existe(modeloBenVLI.getPlano());

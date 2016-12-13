@@ -131,7 +131,7 @@ public class CargaExtBeanImpl implements CargaExtBean {
 
             Telefone tel1 = null;
             Telefone tel2 = null;
-            Set<Telefone> listaTelefones = funcionario.getTelefones();
+            List<Telefone> listaTelefones = funcionario.getTelefones();
             if (listaTelefones.isEmpty()) {
                 tel1 = new Telefone();
                 tel2 = new Telefone();
@@ -158,7 +158,7 @@ public class CargaExtBeanImpl implements CargaExtBean {
             funcionario.setCpf(modeloBenExt.getCpf());
 
             Documento pis = null;
-            Set<Documento> listaDocs = funcionario.getDocumentos();
+            List<Documento> listaDocs = funcionario.getDocumentos();
             if (listaDocs.isEmpty()) {
                 pis = new Documento();
                 pis.setNumero(modeloBenExt.getPis());
@@ -190,7 +190,7 @@ public class CargaExtBeanImpl implements CargaExtBean {
             municipio.setEstado(estado);
 
             Endereco endereco = null;
-            Set<Endereco> enderecos = funcionario.getEnderecos();
+            List<Endereco> enderecos = funcionario.getEnderecos();
             if (enderecos.isEmpty()) {
                 endereco = new Endereco();
                 endereco.setLogradouro(modeloEndExt.getEndereco());
@@ -199,7 +199,7 @@ public class CargaExtBeanImpl implements CargaExtBean {
                 endereco.setEstado(estado);
                 endereco.setMunicipio(municipio);
                 endereco.setNumero("");
-                endereco.setDataAtulizacao(DateUtil.obterDataAtual());
+                endereco.setDataUltimaAtualizacao(DateUtil.obterDataAtual());
                 funcionario.addEndereco(endereco);
             } else {
                 enderecos.get(0).setLogradouro(modeloEndExt.getEndereco());
@@ -208,7 +208,7 @@ public class CargaExtBeanImpl implements CargaExtBean {
                 enderecos.get(0).setEstado(estado);
                 enderecos.get(0).setMunicipio(municipio);
                 enderecos.get(0).setNumero("");
-                enderecos.get(0).setDataAtulizacao(DateUtil.obterDataAtual());
+                enderecos.get(0).setDataUltimaAtualizacao(DateUtil.obterDataAtual());
 
                 funcionario.addEndereco(enderecos.get(0));
             }
@@ -260,7 +260,7 @@ public class CargaExtBeanImpl implements CargaExtBean {
             funcionario.setIdUsuario(1L);
             funcionario.setIndAtivo(SisPasaIntCommon.ATIVO);
             // funcionario.setSituacao(SisPasaIntCommon.ATUALIZADO);
-            funcionario.setDataUltimaAtulizacao(DateUtil.obterDataAtual());
+            funcionario.setDataUltimaAtualizacao(DateUtil.obterDataAtual());
             new FuncionarioBeanImpl().atualizar(funcionario);
 
 //------------------------------------------------------------------------------
@@ -280,7 +280,7 @@ public class CargaExtBeanImpl implements CargaExtBean {
             beneficiario.setDataValidadeCredenciado(DateUtil.toDate(modeloBenExt.getDataValidadeCredenciado()));
             beneficiario.setDireitoAMSReenbolso(modeloBenExt.getDireitoAmsReembolso());
             beneficiario.setDataValidadeReembolso(DateUtil.toDate(modeloBenExt.getDataValidadeReembolso()));
-            beneficiario.setDataAtulizacao(DateUtil.toDate(modeloBenExt.getDataDeAtualizacao()));
+            beneficiario.setDataUltimaAtulizacao(DateUtil.toDate(modeloBenExt.getDataDeAtualizacao()));
             beneficiario.setCodCR(modeloBenExt.getCodigoCR());
             beneficiario.setOrgaoPessoal(modeloBenExt.getOrgaoPessoal());
             beneficiario.setFaixaNivel(modeloBenExt.getFaixaNivel());
@@ -293,7 +293,7 @@ public class CargaExtBeanImpl implements CargaExtBean {
             beneficiario.setDeclNascidoVivo(modeloBenExt.getDeclaracaoNascidoVivo());
             beneficiario.setDataFimPlanoCassi(DateUtil.toDate(modeloBenExt.getCassiData()));
 
-            beneficiario.setEndereco(funcBeneficiario.getEnderecos());
+            beneficiario.setEnderecos(funcBeneficiario.getEnderecos());
             beneficiario.setDocumentos(funcBeneficiario.getDocumentos());
 
             Plano plano = new PlanoBeanImpl().existe(modeloBenExt.getPlano());
