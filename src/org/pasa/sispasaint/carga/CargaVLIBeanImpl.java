@@ -28,6 +28,7 @@ import org.pasa.sispasaint.bean.impl.ImpEndVLITempBeanImpl;
 import org.pasa.sispasaint.bean.impl.LogBeanImpl;
 import org.pasa.sispasaint.bean.impl.MunicipioBeanImpl;
 import org.pasa.sispasaint.bean.impl.PlanoBeanImpl;
+import org.pasa.sispasaint.model.enun.EnunNivelEscolaridade;
 import org.pasa.sispasaint.model.enun.EnunOperadora;
 import org.pasa.sispasaint.model.enun.EnunTipoBeneficiario;
 import org.pasa.sispasaint.model.intg.Log;
@@ -56,9 +57,11 @@ public class CargaVLIBeanImpl implements CargaVLIBean {
 
     @Override
     public void cargaArquivosTemp() {
+         System.out.println("ini temp");
         cargaArquivosBenTemp();
         System.gc();
         cargaArquivosEndTemp();
+        System.out.println("end temp");
     }
 
     @Override
@@ -75,7 +78,7 @@ public class CargaVLIBeanImpl implements CargaVLIBean {
                 if (modeloBenVLI.getTipoBeneficiario().equalsIgnoreCase(SisPasaIntCommon.FUNCIONARIO)) {
                     handlerFuncionario(modeloBenVLI, modeloEndVLI);
                 } else {
-                    handlerBeneficiario(modeloBenVLI, modeloEndVLI);
+//                    handlerBeneficiario(modeloBenVLI, modeloEndVLI);
                 }
             }
         }
@@ -143,6 +146,7 @@ public class CargaVLIBeanImpl implements CargaVLIBean {
             funcionario.setMatriculaPasa(modeloBenVLI.getMatricula());
             funcionario.setUnidadeControle(modeloBenVLI.getUnidadeDeControle());
             funcionario.setCentroCusto(modeloBenVLI.getCentroDeCusto());
+            funcionario.setNivelEscolaridade(newNivelEscolaridade(modeloBenVLI));
             funcionario.setIndConclusaoEscolaridade(StringUtil.parserIndicadorConclusao(modeloBenVLI.getIndicadorConclusao()));
 
             //ENDERECO
@@ -169,7 +173,6 @@ public class CargaVLIBeanImpl implements CargaVLIBean {
             funcionario.setIdUsuario(1L);
             funcionario.setIndAtivo(SisPasaIntCommon.ATIVO);
             funcionario.setDataUltimaAtualizacao(DateUtil.obterDataAtual());
-            System.out.println("XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX");
             new FuncionarioBeanImpl().atualizar(funcionario);
         }
     }
@@ -217,6 +220,13 @@ public class CargaVLIBeanImpl implements CargaVLIBean {
 
         return endereco;
     }
+    
+    private NivelEscolaridade newNivelEscolaridade(ModeloBenVLI modeloBenVLI){
+        NivelEscolaridade nivelEscolaridade = new NivelEscolaridade();
+        nivelEscolaridade.setId(Long.parseLong(modeloBenVLI.getGrauEscolaridade()));
+        return nivelEscolaridade;
+    }
+    
 
     private Plano newPlano(ModeloBenVLI modeloBenVLI) {
         Plano plano = new Plano();
@@ -247,19 +257,14 @@ public class CargaVLIBeanImpl implements CargaVLIBean {
         List<Telefone> listaTelefones = new ArrayList<>();
         Telefone tel1 = new Telefone();
         Telefone tel2 = new Telefone();
-
         tel1.setNumeroTelefone(modeloEndVLI.getTelefone1());
         tel2.setNumeroTelefone(modeloEndVLI.getTelefone2());
-
         tel1.setIndAtivo(SisPasaIntCommon.ATIVO);
         tel1.setIdUsuario(1L);
-
         tel2.setIndAtivo(SisPasaIntCommon.ATIVO);
         tel2.setIdUsuario(1L);
-
         listaTelefones.add(tel1);
         listaTelefones.add(tel2);
-
         return listaTelefones;
     }
 

@@ -7,21 +7,21 @@ package org.pasa.sispasaint.model.enun;
  */
 public enum EnunNivelEscolaridade {
 
-    Sem(0,"Sem Instrução"),
-    Fundamental(1, "Ensio Fundamental"),
-    Medio(2, "Ensino Médio"),
-    Superior(3, "Ensino Superior");
+    Sem(0L,"Sem Instrução"),
+    Fundamental(1L, "Ensio Fundamental"),
+    Medio(2L, "Ensino Médio"),
+    Superior(3L, "Ensino Superior");
 
     
-    private final int indice;
+    private final Long indice;
     private final String descricao;
 
-    private EnunNivelEscolaridade(int indice, String descricao) {
+    private EnunNivelEscolaridade(Long indice, String descricao) {
         this.indice = indice;
         this.descricao = descricao;
     }
 
-    public int getIndice() {
+    public Long getIndice() {
         return indice;
     }
 

@@ -38,7 +38,7 @@ public class StringUtil {
             return EnunNivelEscolaridade.Superior;
         } else if (s.equalsIgnoreCase("2")) {
             return EnunNivelEscolaridade.Medio;
-        } else if (s.equalsIgnoreCase("2")) {
+        } else if (s.equalsIgnoreCase("1")) {
             return EnunNivelEscolaridade.Fundamental;
         } else {
             return EnunNivelEscolaridade.Sem;
