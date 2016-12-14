@@ -69,9 +69,9 @@ public class Beneficiario extends Pessoa {
     @Column(name = "NUCLEO_AMS", columnDefinition = ConstantesBanco.CHAR_2)
     private String nucleoAMS;
 
-    @Column(name = "TP_BENEF", columnDefinition = ConstantesBanco.CHAR_1, nullable=false)
+    @Column(name = "TP_BENEF", columnDefinition = ConstantesBanco.CHAR_1, nullable = false)
     private String tipoBeneficiario;
-    
+
     @Transient
     private EnumTipoBeneficiario enumTipoBeneficiario;
 
@@ -97,15 +97,12 @@ public class Beneficiario extends Pessoa {
     @Column(name = "ID_USUARIO", nullable = false, columnDefinition = ConstantesBanco.BIGINT)
     private Long idUsuario;
 
-    @Column(name = "IND_ATIVO", nullable = false,  columnDefinition = ConstantesBanco.SMALLINT)
+    @Column(name = "IND_ATIVO", nullable = false, columnDefinition = ConstantesBanco.SMALLINT)
     private Integer indAtivo;
-    
-    @Transient
-    private EnumIndAtivo enumIndAtivo;
 
     @Column(name = "DT_ULT_ATULZ", nullable = false)
-	@Temporal(TemporalType.TIMESTAMP)
-	private Date dataUltimaAtualizacao;
+    @Temporal(TemporalType.TIMESTAMP)
+    private Date dataUltimaAtualizacao;
 
     @ManyToOne()
     @JoinColumn(name = "ID_FUNCIONARIO")
@@ -118,9 +115,8 @@ public class Beneficiario extends Pessoa {
     @ManyToOne()
     @JoinColumn(name = "ID_PLANO")
     private Plano plano;
-    
+
     //GETTERS E SETTERS
-    
     @Override
     public Long getId() {
         return id;
@@ -307,59 +303,45 @@ public class Beneficiario extends Pessoa {
         this.plano = plano;
     }
 
-	/**
-	 * @return the tipoBeneficiario
-	 */
-	public String getTipoBeneficiario() {
-		return tipoBeneficiario;
-	}
+    /**
+     * @return the tipoBeneficiario
+     */
+    public String getTipoBeneficiario() {
+        return tipoBeneficiario;
+    }
 
-	/**
-	 * @param tipoBeneficiario the tipoBeneficiario to set
-	 */
-	public void setTipoBeneficiario(String tipoBeneficiario) {
-		this.tipoBeneficiario = tipoBeneficiario;
-	}
+    /**
+     * @param tipoBeneficiario the tipoBeneficiario to set
+     */
+    public void setTipoBeneficiario(String tipoBeneficiario) {
+        this.tipoBeneficiario = tipoBeneficiario;
+    }
 
-	/**
-	 * @return the enumTipoBeneficiario
-	 */
-	public EnumTipoBeneficiario getEnumTipoBeneficiario() {
-		return enumTipoBeneficiario;
-	}
+    /**
+     * @return the enumTipoBeneficiario
+     */
+    public EnumTipoBeneficiario getEnumTipoBeneficiario() {
+        return enumTipoBeneficiario;
+    }
 
-	/**
-	 * @param enumTipoBeneficiario the enumTipoBeneficiario to set
-	 */
-	public void setEnumTipoBeneficiario(EnumTipoBeneficiario enumTipoBeneficiario) {
-		this.enumTipoBeneficiario = enumTipoBeneficiario;
-	}
+    /**
+     * @param enumTipoBeneficiario the enumTipoBeneficiario to set
+     */
+    public void setEnumTipoBeneficiario(EnumTipoBeneficiario enumTipoBeneficiario) {
+        this.enumTipoBeneficiario = enumTipoBeneficiario;
+    }
 
-	/**
-	 * @return the enumIndAtivo
-	 */
-	public EnumIndAtivo getEnumIndAtivo() {
-		return enumIndAtivo;
-	}
+    /**
+     * @return the dataUltimaAtulizacao
+     */
+    public Date getDataUltimaAtulizacao() {
+        return dataUltimaAtualizacao;
+    }
 
-	/**
-	 * @param enumIndAtivo the enumIndAtivo to set
-	 */
-	public void setEnumIndAtivo(EnumIndAtivo enumIndAtivo) {
-		this.enumIndAtivo = enumIndAtivo;
-	}
-
-	/**
-	 * @return the dataUltimaAtulizacao
-	 */
-	public Date getDataUltimaAtulizacao() {
-		return dataUltimaAtualizacao;
-	}
-
-	/**
-	 * @param dataUltimaAtulizacao the dataUltimaAtulizacao to set
-	 */
-	public void setDataUltimaAtulizacao(Date dataUltimaAtualizacao) {
-		this.dataUltimaAtualizacao = dataUltimaAtualizacao;
-	}
+    /**
+     * @param dataUltimaAtulizacao the dataUltimaAtulizacao to set
+     */
+    public void setDataUltimaAtulizacao(Date dataUltimaAtualizacao) {
+        this.dataUltimaAtualizacao = dataUltimaAtualizacao;
+    }
 }
