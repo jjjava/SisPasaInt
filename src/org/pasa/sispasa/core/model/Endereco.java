@@ -2,6 +2,7 @@ package org.pasa.sispasa.core.model;
 
 import java.io.Serializable;
 import java.util.Date;
+import java.util.List;
 import java.util.Set;
 
 import javax.persistence.CascadeType;
@@ -39,7 +40,7 @@ public class Endereco extends BaseEntity implements Serializable {
     @Column(name = "LOGRADOURO",nullable = false, length=60)
     private String logradouro;
 
-    @Column(name = "NUMERO", nullable = false, length=20)
+    @Column(name = "NUMERO", length=20)
     private String numero;
 
     @Column(name = "COMPLEMENTO", length=45)
@@ -61,20 +62,19 @@ public class Endereco extends BaseEntity implements Serializable {
     @Column(name = "ID_USUARIO", nullable = false, columnDefinition = ConstantesBanco.BIGINT)
     private Long idUsuario;
 
-    @ManyToOne(cascade = CascadeType.ALL)
+    @ManyToOne()
     @JoinColumn(name = "ID_MUNICIPIO")
     private Municipio municipio;
 
     @ManyToOne()
     @JoinColumn(name = "ID_ESTADO")
     private Estado estado;
-
     
-    @ManyToMany(mappedBy = "enderecos", cascade = CascadeType.ALL, fetch=FetchType.EAGER)
-	private Set<Pessoa> pessoa;
+    @ManyToMany(mappedBy = "enderecos", cascade = CascadeType.ALL)
+	private List<Pessoa> pessoa;
     
     @ManyToMany(mappedBy = "enderecos")
-    private Set<Empresa> empresa;
+    private List<Empresa> empresa;
 
     
     //GETTERS E SETTERS
@@ -151,15 +151,13 @@ public class Endereco extends BaseEntity implements Serializable {
         this.estado = estado;
     }
 
-    public Set<Empresa> getEmpresa() {
+    public List<Empresa> getEmpresa() {
         return empresa;
     }
 
-    public void setEmpresa(Set<Empresa> empresa) {
+    public void setEmpresa(List<Empresa> empresa) {
         this.empresa = empresa;
     }
-
-
 
 	/**
 	 * @param indAtivo the indAtivo to set
@@ -199,14 +197,14 @@ public class Endereco extends BaseEntity implements Serializable {
 	/**
 	 * @return the pessoa
 	 */
-	public Set<Pessoa> getPessoa() {
+	public List<Pessoa> getPessoa() {
 		return pessoa;
 	}
 
 	/**
 	 * @param pessoa the pessoa to set
 	 */
-	public void setPessoa(Set<Pessoa> pessoa) {
+	public void setPessoa(List<Pessoa> pessoa) {
 		this.pessoa = pessoa;
 	}
 }

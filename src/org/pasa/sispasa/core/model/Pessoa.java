@@ -82,20 +82,20 @@ public class Pessoa extends BaseEntity implements Serializable {
 
     @ManyToMany(cascade=CascadeType.ALL)
     @JoinTable(name = "PESSOA_ENDERECO",
-            joinColumns = @JoinColumn(name = "ID_PESSOA"),
-            inverseJoinColumns = @JoinColumn(name = "ID_ENDERECO"))
+            joinColumns = @JoinColumn(name = "ID_PESSOA",  columnDefinition = ConstantesBanco.BIGINT),
+            inverseJoinColumns = @JoinColumn(name = "ID_ENDERECO",  columnDefinition = ConstantesBanco.BIGINT))
     private List<Endereco> enderecos;
 
     @ManyToMany(cascade=CascadeType.ALL)
     @JoinTable(name = "PESSOA_TELEFONE",
-            joinColumns = @JoinColumn(name = "ID_PESSOA"),
-            inverseJoinColumns = @JoinColumn(name = "ID_TELEFONE"))
+            joinColumns = @JoinColumn(name = "ID_PESSOA",  columnDefinition = ConstantesBanco.BIGINT),
+            inverseJoinColumns = @JoinColumn(name = "ID_TELEFONE",  columnDefinition = ConstantesBanco.BIGINT))
     private List<Telefone> telefones;
 
     @ManyToMany(cascade = CascadeType.ALL)
     @JoinTable(name = "DOCUMENTO_PESSOA",
-            joinColumns = @JoinColumn(name = "ID_PESSOA"),
-            inverseJoinColumns = @JoinColumn(name = "ID_DOCUMENTO"))
+            joinColumns = @JoinColumn(name = "ID_PESSOA",  columnDefinition = ConstantesBanco.BIGINT),
+            inverseJoinColumns = @JoinColumn(name = "ID_DOCUMENTO",  columnDefinition = ConstantesBanco.BIGINT))
     private List<Documento> documentos;
     
     @ManyToOne()

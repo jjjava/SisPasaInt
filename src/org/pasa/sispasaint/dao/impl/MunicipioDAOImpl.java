@@ -31,6 +31,7 @@ public class MunicipioDAOImpl extends DaoGenerico<Municipio> implements Municipi
             return null;
         }
         if (municipio.size() > 0) {
+        	System.out.println(municipio.get(0).getNome());
             return municipio.get(0);
         }
         return null;

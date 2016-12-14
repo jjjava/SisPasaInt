@@ -60,9 +60,6 @@ public class Documento extends BaseEntity implements Serializable {
 	@Temporal(TemporalType.TIMESTAMP)
 	private Date dataUltimaAtualizacao;
 	
-	 @Column(name = "IND_ATIVO", nullable = false, columnDefinition = ConstantesBanco.SMALLINT)
-	 private Integer indAtivo;
-
 	@ManyToOne()
 	@JoinColumn(name = "ID_ESTADO")
 	private Estado estado;
@@ -73,7 +70,6 @@ public class Documento extends BaseEntity implements Serializable {
 	
     @ManyToMany(mappedBy = "documentos", cascade = CascadeType.ALL, fetch=FetchType.EAGER)
 	private Set<Pessoa> pessoa;
-
 
 	
 	//GETTERS E SETTERS
@@ -163,44 +159,18 @@ public class Documento extends BaseEntity implements Serializable {
 		this.idUsuario = idUsuario;
 	}
 
-	/**
-	 * @return the dataUltimaAtualizacao
-	 */
 	public Date getDataUltimaAtualizacao() {
 		return dataUltimaAtualizacao;
 	}
 
-	/**
-	 * @param dataUltimaAtualizacao the dataUltimaAtualizacao to set
-	 */
 	public void setDataUltimaAtualizacao(Date dataUltimaAtualizacao) {
 		this.dataUltimaAtualizacao = dataUltimaAtualizacao;
 	}
 
-	/**
-	 * @return the indAtivo
-	 */
-	public Integer getIndAtivo() {
-		return indAtivo;
-	}
-
-	/**
-	 * @param indAtivo the indAtivo to set
-	 */
-	public void setIndAtivo(Integer indAtivo) {
-		this.indAtivo = indAtivo;
-	}
-
-	/**
-	 * @return the pessoa
-	 */
 	public Set<Pessoa> getPessoa() {
 		return pessoa;
 	}
 
-	/**
-	 * @param pessoa the pessoa to set
-	 */
 	public void setPessoa(Set<Pessoa> pessoa) {
 		this.pessoa = pessoa;
 	}

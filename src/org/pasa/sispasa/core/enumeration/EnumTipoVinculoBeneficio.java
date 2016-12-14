@@ -8,24 +8,23 @@ package org.pasa.sispasa.core.enumeration;
 
 public enum EnumTipoVinculoBeneficio {
 	
-	Titular(0,"Titular"),
-	Dependente(1,"Dependente"),
-	Agregado(2,"Agregado");
+	Titular(1L,"Titular"),
+	Dependente(2L,"Dependente"),
+	Agregado(3L,"Agregado");
 	
-	private int indice;
+	private Long indice;
 	private String descricao;
 	
-	private EnumTipoVinculoBeneficio(int indice, String descricao) {
+	private EnumTipoVinculoBeneficio(Long indice, String descricao) {
 		this.indice = indice;
 		this.descricao = descricao;
 	}
 
-	public int getIndice() {
+	public Long getIndice() {
 		return indice;
 	}
 
 	public String getDescricao() {
 		return descricao;
 	}
-
 }

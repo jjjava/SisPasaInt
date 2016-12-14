@@ -1,7 +1,7 @@
 package org.pasa.sispasaint.util;
 
 import org.pasa.sispasaint.model.enun.EnunNivelEscolaridade;
-import org.pasa.sispasaint.model.enun.Sexo;
+import org.pasa.sispasa.core.enumeration.EnumSexo;
 
 /**
  *
@@ -25,11 +25,11 @@ public class StringUtil {
         }
     }
 
-    public static Sexo parseSexo(String s) {
+    public static EnumSexo parseSexo(String s) {
         if (s.equalsIgnoreCase("M")) {
-            return Sexo.Masculino;
+            return EnumSexo.MASCULINO;
         } else {
-            return Sexo.Feminino;
+            return EnumSexo.FEMININO;
         }
     }
 

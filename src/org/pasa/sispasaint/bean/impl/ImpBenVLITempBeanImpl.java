@@ -13,6 +13,7 @@ import org.pasa.sispasaint.rw.LerArquivoBenVLI;
 public class ImpBenVLITempBeanImpl implements ImpBenVLITempBean {
 
     public ImpBenVLITempBeanImpl() {
+        System.err.println("ttt");
     }
 
     @Override

@@ -2,7 +2,6 @@ package org.pasa.sispasa.core.model;
 
 import java.io.Serializable;
 import java.util.Date;
-
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -11,11 +10,8 @@ import javax.persistence.Id;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
-import javax.persistence.Transient;
-
 import org.pasa.sispasa.core.constants.ConstantesBanco;
-import org.pasa.sispasa.core.enumeration.EnumBanco;
-import org.pasa.sispasa.core.enumeration.EnumTipoConta;
+
 
 /**
  *
@@ -36,9 +32,6 @@ public class DadosBancarios extends BaseEntity implements Serializable {
     @Column(name = "CD_BANCO", length=5)
     private String codBanco;
     
-    @Transient
-    private EnumBanco enumBanco;
-
     @Column(name = "AGENCIA", nullable = false,length=5)
     private String agencia;
     
@@ -47,9 +40,6 @@ public class DadosBancarios extends BaseEntity implements Serializable {
     
     @Column(name = "TP_CONTA", nullable =  false, columnDefinition = ConstantesBanco.CHAR_1)
     private String tipoConta;
-    
-    @Transient
-    private EnumTipoConta enumTipoConta;
     
     @Column(name = "ID_USUARIO", columnDefinition = ConstantesBanco.BIGINT)
     private Long idUsuario;
@@ -60,7 +50,7 @@ public class DadosBancarios extends BaseEntity implements Serializable {
     @Column(name = "DT_ULT_ATULZ", nullable = false, columnDefinition = ConstantesBanco.DATE)
     @Temporal(TemporalType.DATE)
     private Date dataUltimaAtualizacao;
-
+    
 
     //GETTERS E SETTERS
     
@@ -128,23 +118,7 @@ public class DadosBancarios extends BaseEntity implements Serializable {
         this.dataUltimaAtualizacao = dataUltimaAtualizacao;
     }
 
-	/**
-	 * @return the enumBanco
-	 */
-	public EnumBanco getEnumBanco() {
-		return enumBanco;
-	}
 
-	/**
-	 * @param enumBanco the enumBanco to set
-	 */
-	public void setEnumBanco(EnumBanco enumBanco) {
-		this.enumBanco = enumBanco;
-	}
-
-	/**
-	 * @return the dataUltimaAtualizacao
-	 */
 	public Date getDataUltimaAtualizacao() {
 		return dataUltimaAtualizacao;
 	}
@@ -156,17 +130,4 @@ public class DadosBancarios extends BaseEntity implements Serializable {
 		this.dataUltimaAtualizacao = dataUltimaAtualizacao;
 	}
 
-	/**
-	 * @return the enumTipoConta
-	 */
-	public EnumTipoConta getEnumTipoConta() {
-		return enumTipoConta;
-	}
-
-	/**
-	 * @param enumTipoConta the enumTipoConta to set
-	 */
-	public void setEnumTipoConta(EnumTipoConta enumTipoConta) {
-		this.enumTipoConta = enumTipoConta;
-	}
 }

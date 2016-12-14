@@ -38,7 +38,6 @@ public class EstadoCivil implements Serializable {
 	}
 	
 	
-	
 	//GETTERS E SETTERS
 	
 	public Long getId() {

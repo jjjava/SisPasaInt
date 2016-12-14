@@ -3,6 +3,8 @@ package org.pasa.sispasaint.carga;
 import java.util.Date;
 import java.util.List;
 import java.util.Set;
+
+import org.pasa.sispasa.core.enumeration.EnumTipoDocumento;
 import org.pasa.sispasa.core.model.Beneficiario;
 import org.pasa.sispasa.core.model.DadosBancarios;
 import org.pasa.sispasa.core.model.Documento;
@@ -27,7 +29,6 @@ import org.pasa.sispasaint.bean.impl.ImpEndExtTempBeanImpl;
 import org.pasa.sispasaint.bean.impl.MunicipioBeanImpl;
 import org.pasa.sispasaint.bean.impl.PlanoBeanImpl;
 import org.pasa.sispasaint.model.enun.EnunTipoBeneficiario;
-import org.pasa.sispasaint.model.enun.EnunTipoDocumento;
 import org.pasa.sispasaint.model.intg.Log;
 import org.pasa.sispasaint.model.intg.ModeloBenExt;
 import org.pasa.sispasaint.model.intg.ModeloEndExt;
@@ -163,11 +164,11 @@ public class CargaExtBeanImpl implements CargaExtBean {
                 pis = new Documento();
                 pis.setNumero(modeloBenExt.getPis());
                 TipoDocumento tpPIS = new TipoDocumento();
-                tpPIS.setDescricao(EnunTipoDocumento.PIS.getDescricao());
+                tpPIS.setDescricao(EnumTipoDocumento.PIS_PASEP.getDescricao());
                 pis.setTipoDocumento(tpPIS);
             } else {
                 for (Documento d : listaDocs) {
-                    if (d.getTipoDocumento().getDescricao().equalsIgnoreCase(EnunTipoDocumento.PIS.getDescricao())) {
+                    if (d.getTipoDocumento().getDescricao().equalsIgnoreCase(EnumTipoDocumento.PIS_PASEP.getDescricao())) {
                         pis = new Documento();
                         pis.setNumero(modeloBenExt.getPis());
                     }

@@ -1,7 +1,6 @@
 package org.pasa.sispasa.core.model;
 
 import java.io.Serializable;
-import java.util.Date;
 import java.util.Set;
 
 import javax.persistence.CascadeType;
@@ -11,11 +10,10 @@ import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
 import javax.persistence.ManyToMany;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
-import javax.persistence.Temporal;
-import javax.persistence.TemporalType;
 
 import org.pasa.sispasa.core.constants.ConstantesBanco;
 
@@ -49,12 +47,9 @@ public class Telefone implements Serializable {
     
     @Column(name = "ID_USUARIO", nullable = false, columnDefinition = ConstantesBanco.BIGINT)
     private Long idUsuario;
-    
-    @Column(name = "DT_ULT_ATULZ", nullable = false)
-	@Temporal(TemporalType.TIMESTAMP)
-	private Date dataUltimaAtualizacao;
 
-	@OneToOne()
+	@OneToOne
+	@JoinColumn(name = "ID_TP_TELEFONE")
 	private TipoTelefone tipoTelefone;
 	
 	@ManyToMany(mappedBy = "telefones", cascade = CascadeType.ALL, fetch=FetchType.EAGER)
@@ -153,20 +148,6 @@ public class Telefone implements Serializable {
 	 */
 	public void setIdUsuario(Long idUsuario) {
 		this.idUsuario = idUsuario;
-	}
-
-	/**
-	 * @return the dataUltimaAtualizacao
-	 */
-	public Date getDataUltimaAtualizacao() {
-		return dataUltimaAtualizacao;
-	}
-
-	/**
-	 * @param dataUltimaAtualizacao the dataUltimaAtualizacao to set
-	 */
-	public void setDataUltimaAtualizacao(Date dataUltimaAtualizacao) {
-		this.dataUltimaAtualizacao = dataUltimaAtualizacao;
 	}
 
 }
