@@ -59,6 +59,7 @@ public class LerArquivoBenPeople {
                 zipArquivo.zip(nomeArq,
                         Configuracao.getInstance().getBenNomeArqComPath(id),
                         Configuracao.getInstance().getBenNomeProcComPath(id));
+                file.delete();
             } catch (IOException e) {
                 System.err.println(e);
             }

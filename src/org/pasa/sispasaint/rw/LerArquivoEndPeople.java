@@ -62,6 +62,7 @@ public class LerArquivoEndPeople {
                 zipArquivo.zip(nomeArq,
                         Configuracao.getInstance().getEndNomeArqComPath(id),
                         Configuracao.getInstance().getEndNomeProcComPath(id));
+                file.delete();
             } catch (IOException e) {
                 System.err.println(e);
             }
