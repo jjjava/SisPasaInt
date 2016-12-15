@@ -4,8 +4,6 @@ import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import org.pasa.sispasaint.bean.impl.AgendaBeanImpl;
-import org.pasa.sispasaint.jobs.ExtJob;
-import org.pasa.sispasaint.jobs.PeopleJob;
 import org.pasa.sispasaint.jobs.VliJob;
 import org.pasa.sispasaint.model.intg.Agenda;
 import org.pasa.sispasaint.util.SisPasaIntCommon;
@@ -46,34 +44,6 @@ public class Maestro {
             try {
                 if (SisPasaIntCommon.CARGA_VLI.equalsIgnoreCase(a.getDescricao())) {
                     JobDetail job = JobBuilder.newJob(VliJob.class)
-                            .withIdentity(a.getDescricao(), a.getGrupo())
-                            .usingJobData(SisPasaIntCommon.TIPO_JOB, a.getIdLista())
-                            .usingJobData(SisPasaIntCommon.ID_EMPRESA, a.getIdEmpresa())
-                            .build();
-
-                    Trigger trigger = TriggerBuilder
-                            .newTrigger()
-                            .withIdentity(a.getDescricao(), a.getGrupo())
-                            .withSchedule(CronScheduleBuilder.cronSchedule(parseSchedule(a)))
-                            .build();
-                    sched.scheduleJob(job, trigger);
-                }
-                if (SisPasaIntCommon.CARGA_PEOPLE.equalsIgnoreCase(a.getDescricao())) {
-                    JobDetail job = JobBuilder.newJob(PeopleJob.class)
-                            .withIdentity(a.getDescricao(), a.getGrupo())
-                            .usingJobData(SisPasaIntCommon.TIPO_JOB, a.getIdLista())
-                            .usingJobData(SisPasaIntCommon.ID_EMPRESA, a.getIdEmpresa())
-                            .build();
-
-                    Trigger trigger = TriggerBuilder
-                            .newTrigger()
-                            .withIdentity(a.getDescricao(), a.getGrupo())
-                            .withSchedule(CronScheduleBuilder.cronSchedule(parseSchedule(a)))
-                            .build();
-                    sched.scheduleJob(job, trigger);
-                }
-                if (SisPasaIntCommon.CARGA_EXT.equalsIgnoreCase(a.getDescricao())) {
-                    JobDetail job = JobBuilder.newJob(ExtJob.class)
                             .withIdentity(a.getDescricao(), a.getGrupo())
                             .usingJobData(SisPasaIntCommon.TIPO_JOB, a.getIdLista())
                             .usingJobData(SisPasaIntCommon.ID_EMPRESA, a.getIdEmpresa())

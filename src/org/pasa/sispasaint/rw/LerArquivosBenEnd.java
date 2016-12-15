@@ -7,6 +7,7 @@ import java.io.FileReader;
 import java.io.IOException;
 import java.util.Map;
 import org.pasa.sispasaint.config.Configuracao;
+import org.pasa.sispasaint.dao.impl.ModeloBenEndDAOImpl;
 import org.pasa.sispasaint.map.CamposModelo;
 import org.pasa.sispasaint.map.MapaCamposModeloBen;
 import org.pasa.sispasaint.map.MapaCamposModeloEnd;
@@ -50,8 +51,8 @@ public class LerArquivosBenEnd {
                 benLine = acerta400Pos(benLine);
                 endLine = acerta190Pos(endLine);            
                 
-                //Dao?
-                System.out.println(parseCampos(benLine, endLine).getCidade());
+                //DAO
+                new ModeloBenEndDAOImpl().cadastrar(parseCampos(benLine, endLine));
             }
             brBen.close();
             brEnd.close();

@@ -24,7 +24,7 @@ public class ModeloBenEndBeanImpl implements ModeloBenEndBean{
 
     @Override
     public void limparTbTemp() {
-       new ModeloBenEndDAOImpl().limparTbTemp();
+       new ModeloBenEndDAOImpl().limpaTB();
     }
 
     @Override

@@ -1,11 +1,7 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package org.pasa.sispasaint.dao.impl;
 
 import java.util.List;
+import javax.persistence.Query;
 import org.pasa.sispasaint.dao.DaoGenerico;
 import org.pasa.sispasaint.dao.ModeloBenEndDAO;
 import org.pasa.sispasaint.model.intg.ModeloBenEnd;
@@ -21,18 +17,24 @@ public class ModeloBenEndDAOImpl extends DaoGenerico<ModeloBenEnd> implements Mo
     }
 
     @Override
-    public void limparTbTemp() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-    }
-
-    @Override
     public void resetarIdentity() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        getEntityManager().getTransaction().begin();
+        Query q1 = getEntityManager().createNativeQuery("DBCC CHECKIDENT ('[sispasa].[dbo].[TEMP_END_VLI]', RESEED, 0)");
+        q1.executeUpdate();
+        getEntityManager().getTransaction().commit();
     }
 
     @Override
     public void salvarTbTemp(List<ModeloBenEnd> listaModeloBenEnd) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+         for (ModeloBenEnd model : listaModeloBenEnd) {
+            try {
+                getEntityManager().getTransaction().begin();
+                getEntityManager().persist(model);
+                getEntityManager().getTransaction().commit();
+            } catch (Exception ex) {
+                System.err.println(ex);
+                getEntityManager().getTransaction().rollback();
+            }
+        }
     }
-    
 }
