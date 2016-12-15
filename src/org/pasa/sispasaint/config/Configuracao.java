@@ -39,28 +39,36 @@ public class Configuracao {
     public String getServidor() {
         return mailConfig.getServidor();
     }
-    
-    public String getBenNomeArqComPath(Long id){
+
+    public String getBenNomeArqComPath(Long id) {
         return new DadosConfigDAOImpl().obterPorEmpresa(id).getBenNomeArqComPath();
     }
-    
-    public String getEndNomeArqComPath(Long id){
+
+    public String getEndNomeArqComPath(Long id) {
         return new DadosConfigDAOImpl().obterPorEmpresa(id).getEndNomeArqComPath();
     }
-    
-    public String getNomeArqBen(Long id){
-         return new DadosConfigDAOImpl().obterPorEmpresa(id).getNomeBen();
+
+    public String getNomeArqBen(Long id) {
+        return new DadosConfigDAOImpl().obterPorEmpresa(id).getNomeBen();
     }
-    
-    public String getNomeArqEnd(Long id){
+
+    public String getNomeArqEnd(Long id) {
         return new DadosConfigDAOImpl().obterPorEmpresa(id).getNomeEnd();
     }
-    
-    public String getBenNomeProcComPath(Long id){
+
+    public String getBenNomeProcComPath(Long id) {
         return new DadosConfigDAOImpl().obterPorEmpresa(id).getBenNomeProcComPath();
     }
-    
-    public String getEndNomeProcComPath(Long id){
+
+    public String getEndNomeProcComPath(Long id) {
         return new DadosConfigDAOImpl().obterPorEmpresa(id).getEndNomeProcComPath();
+    }
+
+    public String getPathIn(Long id) {
+        return new DadosConfigDAOImpl().obterPorEmpresa(id).getPathIn();
+    }
+
+    public String getPathOut(Long id) {
+        return new DadosConfigDAOImpl().obterPorEmpresa(id).getPathOut();
     }
 }

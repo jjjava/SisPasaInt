@@ -13,10 +13,7 @@ import javax.persistence.PrimaryKeyJoinColumn;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
-import javax.persistence.Transient;
 import org.pasa.sispasa.core.constants.ConstantesBanco;
-import org.pasa.sispasa.core.enumeration.EnumIndAtivo;
-import org.pasa.sispasa.core.enumeration.EnumTipoBeneficiario;
 
 /**
  *
@@ -71,9 +68,6 @@ public class Beneficiario extends Pessoa {
 
     @Column(name = "TP_BENEF", columnDefinition = ConstantesBanco.CHAR_1, nullable = false)
     private String tipoBeneficiario;
-
-    @Transient
-    private EnumTipoBeneficiario enumTipoBeneficiario;
 
     @Column(name = "MATR_PARTICIP", columnDefinition = ConstantesBanco.CHAR_3)
     private String matriculaParticipante;
@@ -315,20 +309,6 @@ public class Beneficiario extends Pessoa {
      */
     public void setTipoBeneficiario(String tipoBeneficiario) {
         this.tipoBeneficiario = tipoBeneficiario;
-    }
-
-    /**
-     * @return the enumTipoBeneficiario
-     */
-    public EnumTipoBeneficiario getEnumTipoBeneficiario() {
-        return enumTipoBeneficiario;
-    }
-
-    /**
-     * @param enumTipoBeneficiario the enumTipoBeneficiario to set
-     */
-    public void setEnumTipoBeneficiario(EnumTipoBeneficiario enumTipoBeneficiario) {
-        this.enumTipoBeneficiario = enumTipoBeneficiario;
     }
 
     /**

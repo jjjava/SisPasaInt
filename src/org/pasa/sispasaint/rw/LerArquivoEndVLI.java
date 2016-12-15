@@ -63,7 +63,7 @@ public class LerArquivoEndVLI {
                 zipArquivo.zip(nomeArq,
                         Configuracao.getInstance().getEndNomeArqComPath(id),
                         Configuracao.getInstance().getEndNomeProcComPath(id));
-                file.delete();
+               // file.delete();
             } catch (IOException e) {
                 System.err.println(e);
             }
@@ -73,11 +73,9 @@ public class LerArquivoEndVLI {
 
     private ModeloEndVLI parseCampos(String line, String nomeArq) {
         line = StringUtil.removeCharsEspeciais(line);
-        System.out.println(line);
         ModeloEndVLI modelo = new ModeloEndVLI();
         Map<String, PosicaoCampo> mapa = new MapaCamposEndVLI().getMapa();
         PosicaoCampo campo;
-
         try {
             campo = (PosicaoCampo) mapa.get(CamposEndVLI.EMPRESA);
             modelo.setEmpresa(line.substring(campo.getInicioCampo(), campo.getFimCampo()));

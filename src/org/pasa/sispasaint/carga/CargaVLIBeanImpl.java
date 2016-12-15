@@ -58,9 +58,9 @@ public class CargaVLIBeanImpl implements CargaVLIBean {
     @Override
     public void cargaArquivosTemp() {
         System.out.println("ini temp");
-        cargaArquivosBenTemp();
+      //  cargaArquivosBenTemp();
         System.gc();
-        cargaArquivosEndTemp();
+       /// cargaArquivosEndTemp();
         System.out.println("end temp");
     }
 
@@ -78,7 +78,7 @@ public class CargaVLIBeanImpl implements CargaVLIBean {
                 if (modeloBenVLI.getTipoBeneficiario().equalsIgnoreCase(SisPasaIntCommon.FUNCIONARIO)) {
                     handlerFuncionario(modeloBenVLI, modeloEndVLI);
                 } else {
-                    handlerBeneficiario(modeloBenVLI, modeloEndVLI);
+                   // handlerBeneficiario(modeloBenVLI, modeloEndVLI);
                 }
             }
         }
@@ -173,6 +173,13 @@ public class CargaVLIBeanImpl implements CargaVLIBean {
             funcionario.setDataUltimaAtualizacao(DateUtil.obterDataAtual());
             new FuncionarioBeanImpl().atualizar(funcionario);
             log.addAssocIncluidos();
+            
+            List<ModeloBenVLI> modeloBenVLIs = new ImpBenVLITempBeanImpl().listar(modeloBenVLI.getEmpresa(),modeloBenVLI.getMatricula());
+            List<ModeloEndVLI> modeloEndVLIs = new ImpEndVLITempBeanImpl().list(modeloBenVLI.getEmpresa(),modeloBenVLI.getMatricula());
+            
+            
+            
+            newBeneficiario(modeloBenVLI, modeloEndVLI);
         }
     }
 
@@ -205,17 +212,14 @@ public class CargaVLIBeanImpl implements CargaVLIBean {
         endereco.setDataUltimaAtualizacao(DateUtil.obterDataAtual());
 
         Estado estado = new EstadoBeanImpl().obter(modeloEndVLI.getUf());
-        System.out.println(estado.getId());
         Municipio municipio = new MunicipioBeanImpl().existe(modeloEndVLI.getCidade());
 
         if (municipio == null) {
             log.addErrosAssoc();
             return null;
         }
-
         endereco.setEstado(estado);
         endereco.setMunicipio(municipio);
-
         return endereco;
     }
 
@@ -337,6 +341,7 @@ public class CargaVLIBeanImpl implements CargaVLIBean {
             beneficiario.setDataFimPlanoCassi(DateUtil.toDate(modeloBenVLI.getCassiData()));
 
             //PLANO
+            System.out.println(modeloBenVLI);
             beneficiario.setPlano(newPlano(modeloBenVLI));
 
             beneficiario.setIdUsuario(1L);

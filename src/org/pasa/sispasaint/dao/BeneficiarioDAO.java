@@ -11,6 +11,7 @@ public interface BeneficiarioDAO {
     void atualizar(Beneficiario b);
     void apagar(Beneficiario b);
     Beneficiario obter(Long id);
-    Beneficiario obter(String empresa, String matricula, String codBeneficiario);
+    Beneficiario obter(String matricula, String codBeneficiario);
     List<Beneficiario> listar();
+    List<Beneficiario> listar(String empresa, String matricula);
 }

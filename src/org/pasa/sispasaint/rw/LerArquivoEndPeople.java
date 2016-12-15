@@ -71,7 +71,6 @@ public class LerArquivoEndPeople {
     }
 
     private ModeloEndPeople parseCampos(String line, String nomeArq) {
-        //System.out.println(line);
         ModeloEndPeople modelo = new ModeloEndPeople();
         Map<String, PosicaoCampo> mapa = new MapaCamposEndVLI().getMapa();
         PosicaoCampo campo;

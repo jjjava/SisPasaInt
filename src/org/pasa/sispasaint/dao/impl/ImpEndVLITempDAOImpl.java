@@ -49,11 +49,26 @@ public class ImpEndVLITempDAOImpl extends DaoGenerico<ModeloEndVLI> implements I
                 getEntityManager().getTransaction().begin();
                 getEntityManager().persist(model);
                 getEntityManager().getTransaction().commit();
-                System.out.println(model.getCodBeneficiario());
             } catch (Exception e) {
                 System.out.println(e);
                 getEntityManager().getTransaction().rollback();
             }
         }
+    }
+
+    @Override
+    public List<ModeloEndVLI> list(String empresa, String matricula) {
+        Query q1 = getEntityManager().
+        createQuery("select m from ModeloEndVLI m where m.matricula and = :mat and m.empresa = :emp and m.codBeneficiario <> '00'");
+        q1.setParameter("emp", empresa); 
+        q1.setParameter("mat", matricula); 
+        List<ModeloEndVLI> ModeloEndVLIs = null;
+        try {
+            ModeloEndVLIs = q1.getResultList();
+        } catch (NoResultException e) {
+            System.err.println(e);
+            return null;
+        }
+        return ModeloEndVLIs;
     }
 }

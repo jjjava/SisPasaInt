@@ -11,4 +11,5 @@ import org.pasa.sispasaint.model.intg.ModeloBenVLI;
 public interface ImpBenVLITempDAO {
     void resetarIdentity(); 
     void salvarTbTemp(List<ModeloBenVLI> listaModeloBenVLI);
+    public List<ModeloBenVLI> listar(String empresa, String matricula);
 }

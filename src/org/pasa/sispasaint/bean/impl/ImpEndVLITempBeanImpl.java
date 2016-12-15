@@ -50,4 +50,9 @@ public class ImpEndVLITempBeanImpl implements ImpEndVLITempBean {
     public Long contar() {
         return new ImpEndVLITempDAOImpl().contar();
     }
+
+    @Override
+    public List<ModeloEndVLI> list(String empresa, String matricula) {
+        return new ImpEndVLITempDAOImpl().list(empresa, matricula);
+    }
 }

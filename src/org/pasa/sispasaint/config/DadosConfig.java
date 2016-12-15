@@ -82,7 +82,7 @@ public class DadosConfig implements Serializable {
     }
 
     public String getNomeBen() {
-        return nomeBen;
+        return nomeBen+"_"+DateUtil.dataParaArquivo()+".TXT";
     }
 
     public void setNomeBen(String nomeBen) {
@@ -90,7 +90,7 @@ public class DadosConfig implements Serializable {
     }
 
     public String getNomeEnd() {
-        return nomeEnd;
+        return nomeEnd+"_"+DateUtil.dataParaArquivo()+".TXT";
     }
 
     public void setNomeEnd(String nomeEnd) {

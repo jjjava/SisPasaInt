@@ -16,5 +16,6 @@ public interface ImpEndVLITempBean {
     void resetarIdentity();
     void carregarArquivo(Long id);
     void salvarTbTemp(List<ModeloEndVLI> listaModeloEndVLI);
+    List<ModeloEndVLI> list(String empresa, String matricula);
     Long contar();
 }

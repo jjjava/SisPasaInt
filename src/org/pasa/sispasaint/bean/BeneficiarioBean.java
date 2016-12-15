@@ -1,5 +1,6 @@
 package org.pasa.sispasaint.bean;
 
+import java.util.List;
 import org.pasa.sispasa.core.model.Beneficiario;
 
 /**
@@ -12,4 +13,6 @@ public interface BeneficiarioBean {
     void cadastar(Beneficiario b);
     void atualizar(Beneficiario b);
     void apagar(Beneficiario b);
+    List<Beneficiario> listar();
+    List<Beneficiario> listar(String empresa, String matricula);
 }

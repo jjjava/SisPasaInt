@@ -22,7 +22,6 @@ public class ImpEndPeopleTempDAOImpl extends DaoGenerico<ModeloEndPeople> implem
         ModeloEndPeople m = new ModeloEndPeople();
         try {
             getEntityManager().getTransaction().begin();            
-            
             Query q1 = getEntityManager().createNativeQuery("select * from TEMP_END_PEOPLE where empresa = '" + empresa
                     + "' and matricula = '" + matricula + "' and codbeneficiario = '" + codBeneficiario + "' ");
             m = (ModeloEndPeople) q1.getSingleResult();
@@ -46,7 +45,6 @@ public class ImpEndPeopleTempDAOImpl extends DaoGenerico<ModeloEndPeople> implem
 
     @Override
     public void salvarTbTemp(List<ModeloEndPeople> listaModeloEndPeople) {
-
         for (ModeloEndPeople model : listaModeloEndPeople) {
             try {
                 getEntityManager().getTransaction().begin();

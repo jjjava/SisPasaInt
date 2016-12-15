@@ -18,10 +18,9 @@ public class BeneficiarioDAOImpl extends DaoGenerico<Beneficiario> implements Be
     }
 
     @Override
-    public Beneficiario obter(String empresa, String matricula, String codBeneficiario) {
-       Query q1 = getEntityManager().
-                createQuery("select b from Beneficiario b where b.matriculaAMS = :mat AND b.codBeneficiario = :cod" );
-      //  q1.setParameter("emp", empresa);
+    public Beneficiario obter(String matricula, String codBeneficiario) {
+        Query q1 = getEntityManager().
+        createQuery("select b from Beneficiario b where b.matriculaAMS = :mat AND b.codBeneficiario = :cod" );
         q1.setParameter("mat", matricula);
         q1.setParameter("cod", codBeneficiario);
         q1.setMaxResults(1);
@@ -37,5 +36,22 @@ public class BeneficiarioDAOImpl extends DaoGenerico<Beneficiario> implements Be
           return  beneficiario.get(0);
         }
         return null;
+    }
+
+    @Override
+    public List<Beneficiario> listar(String empresa, String matricula) {
+        Query q1 = getEntityManager().
+        createQuery("select b from Beneficiario b where b.matriculaAMS = :mat AND b.funcionario.empresa.codEmpresaVale = :emp");
+        q1.setParameter("emp",empresa); 
+        q1.setParameter("mat", matricula); 
+        List<Beneficiario> beneficiarios = null;
+        try {
+            beneficiarios = q1.getResultList();
+        } catch (NoResultException e) {
+            System.err.println(e);
+            return null;
+        }
+       
+        return beneficiarios;
     }
 }

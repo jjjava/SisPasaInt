@@ -1,6 +1,7 @@
 package org.pasa.sispasaint.dao.impl;
 
 import java.util.List;
+import javax.persistence.NoResultException;
 import javax.persistence.Query;
 import org.pasa.sispasaint.dao.DaoGenerico;
 import org.pasa.sispasaint.dao.ImpBenVLITempDAO;
@@ -36,5 +37,21 @@ public class ImpBenVLITempDAOImpl extends DaoGenerico<ModeloBenVLI> implements I
                 getEntityManager().getTransaction().rollback();
             }
         }
+    }
+
+    @Override
+    public List<ModeloBenVLI> listar(String empresa, String matricula) {
+        Query q1 = getEntityManager().
+        createQuery("select m from ModeloBenVLI m where m.matricula = :mat and m.empresa = :emp and m.tipoBeneficiario <> 'T'");
+        q1.setParameter("emp", empresa); 
+        q1.setParameter("mat", matricula); 
+        List<ModeloBenVLI> ModeloBenVLIs = null;
+        try {
+            ModeloBenVLIs = q1.getResultList();
+        } catch (NoResultException e) {
+            System.err.println(e);
+            return null;
+        }
+        return ModeloBenVLIs;
     }
 }

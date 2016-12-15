@@ -51,4 +51,9 @@ public class ImpBenVLITempBeanImpl implements ImpBenVLITempBean {
     public Long contar() {
         return new ImpBenVLITempDAOImpl().contar();
     }
+
+    @Override
+    public List<ModeloBenVLI> listar(String empresa, String matricula) {
+      return new ImpBenVLITempDAOImpl().listar(empresa, matricula);
+    }
 }

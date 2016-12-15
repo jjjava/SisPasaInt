@@ -15,4 +15,5 @@ public interface ImpBenVLITempBean {
     void carregarArquivo(Long id);
     void salvarTbTemp(List<ModeloBenVLI> listaModeloBenVLI);
     Long contar();
+    public List<ModeloBenVLI> listar(String empresa, String matricula);
 }
