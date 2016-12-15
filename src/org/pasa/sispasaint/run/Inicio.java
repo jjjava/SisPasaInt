@@ -17,6 +17,6 @@ public class Inicio {
       
        CargaVLIBeanImpl carga = new CargaVLIBeanImpl(30L, new Log());
         carga.cargaArquivosTemp();
-        carga.mapearEntidades();
+       // carga.mapearEntidades();
     }
 }
