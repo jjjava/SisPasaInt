@@ -15,7 +15,8 @@ import org.pasa.sispasaint.model.intg.ModeloBenEnd;
 
 /**
  *
- * @author 90J00318
+ * @author Hudson Schumaker
+ * @version 1.0.0
  */
 public class LerArquivosBenEnd {
 
@@ -46,13 +47,14 @@ public class LerArquivosBenEnd {
                     read = false;
                     break;
                 }
-                benLine = normalizaLinha(benLine);
-                endLine = normalizaLinha(endLine);
-                benLine = acerta400Pos(benLine);
-                endLine = acerta190Pos(endLine);            
-                
-                //DAO
-                new ModeloBenEndDAOImpl().cadastrar(parseCampos(benLine, endLine));
+                if (benLine.length() > 1) {
+                    benLine = normalizaLinha(benLine);
+                    endLine = normalizaLinha(endLine);
+                    benLine = acerta400Pos(benLine);
+                    endLine = acerta190Pos(endLine);
+                    //DAO
+                    new ModeloBenEndDAOImpl().cadastrar(parseCampos(benLine, endLine));
+                }
             }
             brBen.close();
             brEnd.close();
@@ -61,7 +63,7 @@ public class LerArquivosBenEnd {
         } catch (IOException e) {
             System.err.println(e);
         } finally {
-            
+
         }
     }
 
@@ -70,7 +72,7 @@ public class LerArquivosBenEnd {
         Map<String, PosicaoCampo> mapaBen = new MapaCamposModeloBen().getMapa();
         Map<String, PosicaoCampo> mapaEnd = new MapaCamposModeloEnd().getMapa();
         PosicaoCampo campo;
-        
+
         //BENEFICIARIO
         campo = (PosicaoCampo) mapaBen.get(CamposModelo.EMPRESA);
         modelo.setEmpresa(benLine.substring(campo.getInicioCampo(), campo.getFimCampo()));
@@ -202,7 +204,7 @@ public class LerArquivosBenEnd {
         }
         return line;
     }
-    
+
     private String acerta400Pos(String line) {
         while (line.length() < 400) {
             line = line + " ";

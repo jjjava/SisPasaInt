@@ -4,6 +4,7 @@ import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import org.pasa.sispasaint.bean.impl.AgendaBeanImpl;
+import org.pasa.sispasaint.jobs.ModeloBenEndJob;
 import org.pasa.sispasaint.jobs.VliJob;
 import org.pasa.sispasaint.model.intg.Agenda;
 import org.pasa.sispasaint.util.SisPasaIntCommon;
@@ -19,7 +20,8 @@ import org.quartz.impl.StdSchedulerFactory;
 
 /**
  *
- * @author 90J00318
+ * @author Hudson Schumaker
+ * @version 1.0.0
  */
 public class Maestro {
 
@@ -27,13 +29,16 @@ public class Maestro {
     private Scheduler sched;
 
     public Maestro() {
-        try {
+    }
+    
+    public void iniciar(){
+         try {
             schedFact = new StdSchedulerFactory();
             sched = schedFact.getScheduler();
             sched.start();
-            carregaJobs();
+            this.carregaJobs();
         } catch (SchedulerException ex) {
-            Logger.getLogger(Maestro.class.getName()).log(Level.SEVERE, null, ex);
+             System.err.println(ex);
         }
     }
 
@@ -42,8 +47,8 @@ public class Maestro {
         for (Agenda a : listAgenda) {
             System.out.println(parseSchedule(a));
             try {
-                if (SisPasaIntCommon.CARGA_VLI.equalsIgnoreCase(a.getDescricao())) {
-                    JobDetail job = JobBuilder.newJob(VliJob.class)
+                if (SisPasaIntCommon.CARGA_BENEND.equalsIgnoreCase(a.getDescricao())) {
+                    JobDetail job = JobBuilder.newJob(ModeloBenEndJob.class)
                             .withIdentity(a.getDescricao(), a.getGrupo())
                             .usingJobData(SisPasaIntCommon.TIPO_JOB, a.getIdLista())
                             .usingJobData(SisPasaIntCommon.ID_EMPRESA, a.getIdEmpresa())

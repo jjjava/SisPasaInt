@@ -8,7 +8,8 @@ import org.pasa.sispasaint.model.intg.ModeloBenEnd;
 
 /**
  *
- * @author 90J00318
+ * @author Hudson Schumaker
+ * @version 1.0.0
  */
 public class ModeloBenEndDAOImpl extends DaoGenerico<ModeloBenEnd> implements ModeloBenEndDAO{
 
@@ -19,7 +20,7 @@ public class ModeloBenEndDAOImpl extends DaoGenerico<ModeloBenEnd> implements Mo
     @Override
     public void resetarIdentity() {
         getEntityManager().getTransaction().begin();
-        Query q1 = getEntityManager().createNativeQuery("DBCC CHECKIDENT ('[sispasa].[dbo].[TEMP_END_VLI]', RESEED, 0)");
+        Query q1 = getEntityManager().createNativeQuery("DBCC CHECKIDENT ('[sispasa].[dbo].[MODELO]', RESEED, 0)");
         q1.executeUpdate();
         getEntityManager().getTransaction().commit();
     }
