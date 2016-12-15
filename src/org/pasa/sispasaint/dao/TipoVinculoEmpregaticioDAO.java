@@ -5,7 +5,8 @@ import org.pasa.sispasa.core.model.TipoVinculoEmpregaticio;
 
 /**
  *
- * @author 90J00318
+ * @author Hudson Schumaker
+ * @version 1.0.0
  */
 public interface TipoVinculoEmpregaticioDAO  {
     void cadastrar(TipoVinculoEmpregaticio tve);

@@ -13,7 +13,7 @@ import javax.persistence.Table;
  */
 @Entity
 @Table(name = "MODELO")
-public class Modelo implements Serializable{
+public class ModeloBenEnd implements Serializable{
 
     private static final long serialVersionUID = 1L;
 
@@ -81,9 +81,17 @@ public class Modelo implements Serializable{
     private String cep;
     private String nomeArquivo;
     
-    public Modelo(){
+    public ModeloBenEnd(){
     }
 
+    public Long getId() {
+        return id;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
+    }
+    
     public String getEmpresa() {
         return empresa;
     }

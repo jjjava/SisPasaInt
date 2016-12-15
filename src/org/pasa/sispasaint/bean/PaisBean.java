@@ -6,7 +6,8 @@ import org.pasa.sispasa.core.model.Pais;
 
 /**
  *
- * @author 90J00318
+ * @author Hudson Schumaker
+ * @version 1.0.0
  */
 public interface PaisBean {
     void cadastrar(Pais p);

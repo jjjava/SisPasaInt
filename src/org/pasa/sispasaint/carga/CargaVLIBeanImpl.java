@@ -34,7 +34,7 @@ import org.pasa.sispasaint.model.enun.EnunTipoBeneficiario;
 import org.pasa.sispasaint.model.intg.Log;
 import org.pasa.sispasaint.model.intg.ModeloBenVLI;
 import org.pasa.sispasaint.model.intg.ModeloEndVLI;
-import org.pasa.sispasaint.rw.LerArquivos;
+import org.pasa.sispasaint.rw.LerArquivosBenEnd;
 import org.pasa.sispasaint.util.DateUtil;
 import org.pasa.sispasaint.util.SisPasaIntCommon;
 import org.pasa.sispasaint.util.StringUtil;
@@ -68,7 +68,7 @@ public class CargaVLIBeanImpl implements CargaVLIBean {
     }
     
     public void carga(){
-        LerArquivos l = new LerArquivos();
+        LerArquivosBenEnd l = new LerArquivosBenEnd();
         l.ler(id);
         System.out.println("passou");
     }

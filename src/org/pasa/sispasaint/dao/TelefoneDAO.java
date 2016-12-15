@@ -2,11 +2,12 @@ package org.pasa.sispasaint.dao;
 
 import java.util.List;
 import org.pasa.sispasa.core.model.Telefone;
+
 /**
  *
  * @author Hudson Schumaker
+ * @version 1.0.0
  */
-
 public interface TelefoneDAO {
     void cadastrar(Telefone t);
     void atualizar(Telefone t);

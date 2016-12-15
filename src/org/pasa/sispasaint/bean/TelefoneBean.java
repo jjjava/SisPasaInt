@@ -6,6 +6,7 @@ import org.pasa.sispasa.core.model.Telefone;
 /**
  *
  * @author Hudson Schumaker
+ * @version 1.0.0
  */
 public interface TelefoneBean {
     void cadastrar(Telefone t);

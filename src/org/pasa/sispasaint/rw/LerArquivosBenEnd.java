@@ -10,33 +10,27 @@ import org.pasa.sispasaint.config.Configuracao;
 import org.pasa.sispasaint.map.CamposModelo;
 import org.pasa.sispasaint.map.MapaCamposModeloBen;
 import org.pasa.sispasaint.map.MapaCamposModeloEnd;
-import org.pasa.sispasaint.model.intg.Modelo;
-import org.pasa.sispasaint.util.StringUtil;
+import org.pasa.sispasaint.model.intg.ModeloBenEnd;
 
 /**
  *
  * @author 90J00318
  */
-public class LerArquivos {
+public class LerArquivosBenEnd {
 
-    private Long id;
-    private String benNomeArq, endNomeArq;
     private boolean read;
 
-    public LerArquivos() {
+    public LerArquivosBenEnd() {
         read = true;
     }
 
     public void ler(Long id) {
-        this.id = id;
         ler(Configuracao.getInstance().getPathIn(id),
                 Configuracao.getInstance().getNomeArqBen(id),
                 Configuracao.getInstance().getNomeArqEnd(id));
     }
 
     public void ler(String path, String benNomeArq, String endNomeArq) {
-        this.benNomeArq = benNomeArq;
-        this.endNomeArq = endNomeArq;
         ler(new File(path + "/" + benNomeArq), new File(path + "/" + endNomeArq));
     }
 
@@ -51,24 +45,27 @@ public class LerArquivos {
                     read = false;
                     break;
                 }
-                benLine = setLine(benLine);
-                endLine = setLine(endLine);
-
-                System.out.println(benLine + endLine);
-
+                benLine = normalizaLinha(benLine);
+                endLine = normalizaLinha(endLine);
+                benLine = acerta400Pos(benLine);
+                endLine = acerta190Pos(endLine);            
+                
+                //Dao?
+                System.out.println(parseCampos(benLine, endLine).getCidade());
             }
+            brBen.close();
+            brEnd.close();
         } catch (FileNotFoundException e) {
             System.err.println(e);
         } catch (IOException e) {
             System.err.println(e);
         } finally {
+            
         }
     }
 
-    public Modelo parseCampos(String benLine, String endLine) {
-        benLine = StringUtil.removeCharsEspeciais(benLine);
-        endLine = StringUtil.removeCharsEspeciais(endLine);
-        Modelo modelo = new Modelo();
+    public ModeloBenEnd parseCampos(String benLine, String endLine) {
+        ModeloBenEnd modelo = new ModeloBenEnd();
         Map<String, PosicaoCampo> mapaBen = new MapaCamposModeloBen().getMapa();
         Map<String, PosicaoCampo> mapaEnd = new MapaCamposModeloEnd().getMapa();
         PosicaoCampo campo;
@@ -195,19 +192,18 @@ public class LerArquivos {
         campo = (PosicaoCampo) mapaEnd.get(CamposModelo.CEP);
         modelo.setCep(endLine.substring(campo.getInicioCampo(), campo.getFimCampo()));
 
-        return null;
-    }
-
-    private String setLine(String line) {
-        line = normalizaLinha(line);
-        if (line.length() < 190) {
-            line = acerta190Pos(line);
-        }
-        return line;
+        return modelo;
     }
 
     private String acerta190Pos(String line) {
         while (line.length() < 190) {
+            line = line + " ";
+        }
+        return line;
+    }
+    
+    private String acerta400Pos(String line) {
+        while (line.length() < 400) {
             line = line + " ";
         }
         return line;

@@ -5,10 +5,10 @@ import org.pasa.sispasaint.model.intg.Log;
 
 /**
  *
- * @author 90J00318
+ * @author Hudson Schumaker
+ * @version 1.0.0
  */
 public interface LogBean {
-    
     void cadastrar(Log l);
     void atualizar (Log l);
     void apagar(Log l);

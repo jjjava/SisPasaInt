@@ -5,7 +5,8 @@ import org.pasa.sispasa.core.model.GrauParentesco;
 
 /**
  *
- * @author 90J00318
+ * @author Hudson Schumaker
+ * @version 1.0.0
  */
 public interface GrauParentescoBean {
     GrauParentesco obter(GrauParentesco g);
