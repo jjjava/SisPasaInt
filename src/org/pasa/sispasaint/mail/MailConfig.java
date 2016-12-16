@@ -1,17 +1,12 @@
 package org.pasa.sispasaint.mail;
 
 import java.io.Serializable;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
-import org.apache.commons.codec.EncoderException;
-import org.pasa.sispasa.core.constants.ConstantesBanco;
-import org.pasa.sispasaint.util.Criptografia;
 
 /**
  *

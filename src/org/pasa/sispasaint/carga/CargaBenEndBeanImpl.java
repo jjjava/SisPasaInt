@@ -42,6 +42,7 @@ public class CargaBenEndBeanImpl implements CargaBenEndBean {
         Long qtdRegistros = modeloBean.contar();
         
         for (Long k = 1L; k < qtdRegistros; k++) {
+            System.err.println(k);
             ModeloBenEnd modeloBenEnd = modeloBean.obter(k);
             if (modeloBenEnd.getTipoBeneficiario().equalsIgnoreCase(SisPasaIntCommon.FUNCIONARIO)) {
                 Funcionario funcionario = new FuncionarioBeanImpl().obter(modeloBenEnd.getEmpresa(), modeloBenEnd.getMatricula());

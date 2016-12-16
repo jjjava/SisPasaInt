@@ -14,11 +14,11 @@ public class Inicio {
 
     public static void main(String args[]) {
         Configuracao.getInstance();
-//        Maestro maestro = new Maestro(); 
-//        maestro.iniciar();
+        Maestro maestro = new Maestro(); 
+        maestro.iniciar();
 
-        CargaBenEndBeanImpl carga = new CargaBenEndBeanImpl(30L, new Log());
-        carga.inicar();
+//        CargaBenEndBeanImpl carga = new CargaBenEndBeanImpl(30L, new Log());
+//        carga.inicar();
 
     }
 }

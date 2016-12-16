@@ -7,7 +7,8 @@ import org.pasa.sispasaint.model.intg.Log;
 
 /**
  *
- * @author 90J00318
+ * @author Hudson Schumaker
+ * @version 1.0.0
  */
 public class LogBeanImpl implements LogBean{
 

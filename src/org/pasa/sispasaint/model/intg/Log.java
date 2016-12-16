@@ -4,11 +4,15 @@ import java.util.Date;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
@@ -33,7 +37,10 @@ public class Log implements Serializable {
     private Integer qtdAssocInativo;
     private String nomeArquivoBen;
     private String nomeArquivoEnd;
-    private List<String> matriculasErros;
+
+    @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
+    @JoinColumn(name = "ID_LOG")
+    private List<LogMatriculas> matriculasErros;
 
     @Column(name = "DT_INICIO", nullable = false)
     @Temporal(TemporalType.TIMESTAMP)
@@ -53,15 +60,15 @@ public class Log implements Serializable {
         qtdErrosAssoc = 0;
         qtdAssocInativo = 0;
     }
-    
-    public void addMatriculaErro(String mat){
-        getMatriculasErros().add(mat);
+
+    public void addMatriculaErro(String mat) {
+        getMatriculasErros().add(new LogMatriculas(mat));
     }
-    
-    public void addLinhaArq(){
+
+    public void addLinhaArq() {
         qtdLinhasArquivo++;
     }
-    
+
     public void addRegistro() {
         qtdRegistros++;
     }
@@ -77,8 +84,8 @@ public class Log implements Serializable {
     public void addErrosAssoc() {
         qtdErrosAssoc++;
     }
-    
-    public void addLinhaArqErro(){
+
+    public void addLinhaArqErro() {
         qtdErroLinhaArquivo++;
     }
 
@@ -134,7 +141,7 @@ public class Log implements Serializable {
         this.nomeArquivoEnd = nomeArquivoEnd;
     }
 
-    public List<String> getMatriculasErros() {
+    public List<LogMatriculas> getMatriculasErros() {
         return matriculasErros;
     }
 

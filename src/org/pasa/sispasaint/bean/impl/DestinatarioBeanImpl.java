@@ -2,6 +2,7 @@ package org.pasa.sispasaint.bean.impl;
 
 import java.util.List;
 import org.pasa.sispasaint.bean.DestinatarioBean;
+import org.pasa.sispasaint.dao.impl.DestinatarioDAOImpl;
 import org.pasa.sispasaint.model.intg.Destinatario;
 
 /**
@@ -16,26 +17,26 @@ public class DestinatarioBeanImpl implements DestinatarioBean {
 
     @Override
     public Destinatario obter(Long id) {
-        return new DestinatarioBeanImpl().obter(id);
+        return new DestinatarioDAOImpl().obter(id);
     }
 
     @Override
     public void cadastrar(Destinatario d) {
-        new DestinatarioBeanImpl().cadastrar(d);
+        new DestinatarioDAOImpl().cadastrar(d);
     }
 
     @Override
     public void atualizar(Destinatario d) {
-        new DestinatarioBeanImpl().atualizar(d);
+        new DestinatarioDAOImpl().atualizar(d);
     }
 
     @Override
     public void apagar(Destinatario d) {
-        new DestinatarioBeanImpl().apagar(d);
+        new DestinatarioDAOImpl().apagar(d);
     }
 
     @Override
     public List<Destinatario> listar() {
-        return new DestinatarioBeanImpl().listar();
+        return new DestinatarioDAOImpl().listar();
     }
 }

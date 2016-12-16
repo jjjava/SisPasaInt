@@ -60,6 +60,15 @@ public class ModeloBenEndJob implements Job {
     }
 
     private String setMensagem() {
-        return "";
+        StringBuilder sb = new StringBuilder();
+        sb.append("CARGA ");
+        sb.append("\n");
+        sb.append("Nome Arquivos Beneficiario: ");
+        sb.append(log.getNomeArquivoBen());
+        sb.append("\n");
+        sb.append("Nome Arquivos Endereço: ");
+        sb.append(log.getNomeArquivoEnd());
+        
+        return sb.toString() ;
     }
 }

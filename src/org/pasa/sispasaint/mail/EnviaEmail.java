@@ -22,12 +22,16 @@ public class EnviaEmail {
     private List<String> lista;
 
     public EnviaEmail(List<String> l, String s, String m) {
+         try {
         lista = l;
         subject = s;
         message = m;
         remetente = Configuracao.getInstance().getUsuario();
         senha = Configuracao.getInstance().getSenha();
-        host = Configuracao.getInstance().getServidor();        
+        host = Configuracao.getInstance().getServidor();    
+         }catch(Exception e){
+             System.err.println(e);
+         }
     }
 
    public void send() {

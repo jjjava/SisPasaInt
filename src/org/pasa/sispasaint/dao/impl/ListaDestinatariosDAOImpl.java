@@ -22,7 +22,6 @@ public class ListaDestinatariosDAOImpl extends DaoGenerico<ListaDestinatarios> i
         Query q1 = getEntityManager().
         createQuery("select l from ListaDestinatarios l where l.idLista = :idLista");
         q1.setParameter("idLista", id);
-        q1.setMaxResults(1);
         List<ListaDestinatarios> listaDestinatarios = null;
         try {
             listaDestinatarios = q1.getResultList();
