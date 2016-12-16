@@ -3,6 +3,7 @@ package org.pasa.sispasaint.jobs;
 import java.util.ArrayList;
 import java.util.List;
 import org.pasa.sispasaint.bean.impl.DestinatarioBeanImpl;
+import org.pasa.sispasaint.bean.impl.EmpresaBeanImpl;
 import org.pasa.sispasaint.bean.impl.ListaDestinatariosBeanImpl;
 import org.pasa.sispasaint.bean.impl.LogBeanImpl;
 import org.pasa.sispasaint.carga.CargaBenEndBeanImpl;
@@ -26,6 +27,7 @@ import org.quartz.JobExecutionException;
 public class ModeloBenEndJob implements Job {
 
     private Log log;
+    private Long idEmpresa;
 
     public ModeloBenEndJob() {
         log = new Log();
@@ -37,16 +39,15 @@ public class ModeloBenEndJob implements Job {
 
         JobDataMap dataMap = jec.getJobDetail().getJobDataMap();
         long tipo = dataMap.getLong(SisPasaIntCommon.TIPO_JOB);
-        long idEmpresa = dataMap.getLong(SisPasaIntCommon.ID_EMPRESA);
+        idEmpresa = dataMap.getLong(SisPasaIntCommon.ID_EMPRESA);
 
         CargaBenEndBeanImpl cargaBenEndBeanImpl = new CargaBenEndBeanImpl(idEmpresa, log);
         cargaBenEndBeanImpl.inicar();
 
         EnviaEmail enviaEmail = new EnviaEmail(getDestinatariosList(new ListaDestinatariosBeanImpl().listar(tipo)),
-                "#CARGA ",
+                "#CARGA AMS ",
                 setMensagem());
-        
-        
+
         log.setDataFim(DateUtil.obterDataAtual());
         new LogBeanImpl().cadastrar(log);
     }
@@ -62,12 +63,29 @@ public class ModeloBenEndJob implements Job {
     private String setMensagem() {
         StringBuilder sb = new StringBuilder();
         sb.append("CARGA ");
+        sb.append(new EmpresaBeanImpl().obter(idEmpresa));
         sb.append("\n");
         sb.append("Nome Arquivos Beneficiario: ");
         sb.append(log.getNomeArquivoBen());
         sb.append("\n");
         sb.append("Nome Arquivos Endereço: ");
         sb.append(log.getNomeArquivoEnd());
-        return sb.toString() ;
+        sb.append("\n");
+        sb.append("Qtd. Registros.: ");
+        sb.append(log.getQtdRegistros());
+        sb.append("\n");
+        sb.append("Qtd. Assoc. Incluidos.: ");
+        sb.append(log.getQtdAssocIncluidos());
+        sb.append("\n");
+        sb.append("Qtd. Assoc. Alterados.: ");
+        sb.append(log.getQtdAssocAlterados());
+        sb.append("\n");
+        sb.append("Qtd. Erros Assoc.: ");
+        sb.append(log.getQtdErrosAssoc());
+        sb.append("\n");
+        sb.append("Qtd. Assoc. inativos.: ");
+        sb.append(log.getQtdAssocInativo());
+        sb.append("\n");
+        return sb.toString();
     }
 }

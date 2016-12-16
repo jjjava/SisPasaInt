@@ -15,6 +15,11 @@ public class EmpresaBeanImpl implements EmpresaBean{
     }
 
     @Override
+    public Empresa obter(Long id) {
+        return new EmpresaDAOImpl().obter(id);
+    }
+    
+    @Override
     public Empresa obter(Empresa e) {
         return new EmpresaDAOImpl().obter(e.getId());
     }

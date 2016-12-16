@@ -9,6 +9,7 @@ import org.pasa.sispasa.core.model.Empresa;
  * @version 1.0.0
  */
 public interface EmpresaBean {
+    Empresa obter(Long id);
     Empresa obter(Empresa e);
     void cadastrar(Empresa e);
     void atualizar(Empresa e);
