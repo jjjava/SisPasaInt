@@ -2,6 +2,8 @@ package org.pasa.sispasaint.model.intg;
 
 import java.util.Date;
 import java.io.Serializable;
+import java.util.ArrayList;
+import java.util.List;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -23,46 +25,65 @@ public class Log implements Serializable {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
+    private Integer qtdLinhasArquivo;
     private Integer qtdRegistros;
     private Integer qtdAssocIncluidos;
     private Integer qtdAssocAlterados;
     private Integer qtdErrosAssoc;
+    private Integer qtdErroLinhaArquivo;
     private Integer qtdAssocInativo;
-    private String  nomeArquivo;
-    
-    @Column(name = "DT_INICIO", nullable = false) 
+    private String nomeArquivoBen;
+    private String nomeArquivoEnd;
+    private List<String> matriculasErros;
+
+    @Column(name = "DT_INICIO", nullable = false)
     @Temporal(TemporalType.TIMESTAMP)
     private Date dataInicio;
-    
-    @Column(name = "DT_FIM", nullable = false) 
+
+    @Column(name = "DT_FIM", nullable = false)
     @Temporal(TemporalType.TIMESTAMP)
     private Date dataFim;
 
     public Log() {
+        matriculasErros = new ArrayList<>();
+        qtdLinhasArquivo = 0;
+        qtdErroLinhaArquivo = 0;
         qtdRegistros = 0;
         qtdAssocIncluidos = 0;
         qtdAssocAlterados = 0;
         qtdErrosAssoc = 0;
         qtdAssocInativo = 0;
     }
-
+    
+    public void addMatriculaErro(String mat){
+        getMatriculasErros().add(mat);
+    }
+    
+    public void addLinhaArq(){
+        qtdLinhasArquivo++;
+    }
+    
     public void addRegistro() {
         qtdRegistros++;
     }
-    
-    public void addAssocIncluidos(){
+
+    public void addAssocIncluidos() {
         qtdAssocIncluidos++;
     }
-    
-    public void addAlterados(){
+
+    public void addAlterados() {
         qtdAssocAlterados++;
     }
-    
-    public void addErrosAssoc(){
+
+    public void addErrosAssoc() {
         qtdErrosAssoc++;
     }
     
-    public void addAsocInativo(){
+    public void addLinhaArqErro(){
+        qtdErroLinhaArquivo++;
+    }
+
+    public void addAsocInativo() {
         qtdAssocInativo++;
     }
 
@@ -74,52 +95,48 @@ public class Log implements Serializable {
         this.id = id;
     }
 
-    public Integer getQtdRegistros() {
-        return qtdRegistros;
+    public Integer getQtdLinhasArquivo() {
+        return qtdLinhasArquivo;
     }
 
-    public void setQtdRegistros(Integer qtdRegistros) {
-        this.qtdRegistros = qtdRegistros;
+    public Integer getQtdRegistros() {
+        return qtdRegistros;
     }
 
     public Integer getQtdAssocIncluidos() {
         return qtdAssocIncluidos;
     }
 
-    public void setQtdAssocIncluidos(Integer qtdAssocIncluidos) {
-        this.qtdAssocIncluidos = qtdAssocIncluidos;
-    }
-
     public Integer getQtdAssocAlterados() {
         return qtdAssocAlterados;
-    }
-
-    public void setQtdAssocAlterados(Integer qtdAssocAlterados) {
-        this.qtdAssocAlterados = qtdAssocAlterados;
     }
 
     public Integer getQtdErrosAssoc() {
         return qtdErrosAssoc;
     }
 
-    public void setQtdErrosAssoc(Integer qtdErrosAssoc) {
-        this.qtdErrosAssoc = qtdErrosAssoc;
-    }
-
-    public Integer getQtsAssocInativo() {
-        return qtdAssocInativo;
-    }
-
-    public void setQtsAssocInativo(Integer qtdAssocInativo) {
-        this.qtdAssocInativo = qtdAssocInativo;
-    }
-
     public Integer getQtdAssocInativo() {
         return qtdAssocInativo;
     }
 
-    public void setQtdAssocInativo(Integer qtdAssocInativo) {
-        this.qtdAssocInativo = qtdAssocInativo;
+    public String getNomeArquivoBen() {
+        return nomeArquivoBen;
+    }
+
+    public void setNomeArquivoBen(String nomeArquivoBen) {
+        this.nomeArquivoBen = nomeArquivoBen;
+    }
+
+    public String getNomeArquivoEnd() {
+        return nomeArquivoEnd;
+    }
+
+    public void setNomeArquivoEnd(String nomeArquivoEnd) {
+        this.nomeArquivoEnd = nomeArquivoEnd;
+    }
+
+    public List<String> getMatriculasErros() {
+        return matriculasErros;
     }
 
     public Date getDataInicio() {
@@ -138,11 +155,11 @@ public class Log implements Serializable {
         this.dataFim = dataFim;
     }
 
-    public String getNomeArquivo() {
-        return nomeArquivo;
+    public Integer getQtdErroLinhaArquivo() {
+        return qtdErroLinhaArquivo;
     }
 
-    public void setNomeArquivo(String nomeArquivo) {
-        this.nomeArquivo = nomeArquivo;
+    public void setQtdErroLinhaArquivo(Integer qtdErroLinhaArquivo) {
+        this.qtdErroLinhaArquivo = qtdErroLinhaArquivo;
     }
 }

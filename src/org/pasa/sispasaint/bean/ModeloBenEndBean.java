@@ -1,6 +1,7 @@
 package org.pasa.sispasaint.bean;
 
 import java.util.List;
+import org.pasa.sispasaint.model.intg.Log;
 import org.pasa.sispasaint.model.intg.ModeloBenEnd;
 
 /**
@@ -13,7 +14,7 @@ public interface ModeloBenEndBean {
     ModeloBenEnd obter(ModeloBenEnd modelo);
     void limparTbTemp();
     void resetarIdentity();
-    void carregarArquivo(Long id);
+    void carregarArquivo(Long id,Log log);
     void salvarTbTemp(List<ModeloBenEnd> listaModeloBenEnd);
     void cadastrar(ModeloBenEnd modelo);
     Long contar();

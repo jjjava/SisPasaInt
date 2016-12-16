@@ -13,12 +13,10 @@ public class CargaBenEndBeanImpl implements CargaBenEndBean {
 
     private Long id;
     private Log log;
-    private LogBeanImpl logBeanImpl;
 
     public CargaBenEndBeanImpl(Long id, Log log) {
         this.id = id;
         this.log = log;
-        logBeanImpl = new LogBeanImpl();
     }
     
     @Override
@@ -31,7 +29,7 @@ public class CargaBenEndBeanImpl implements CargaBenEndBean {
         ModeloBenEndBeanImpl modeloBenEndBeanImpl = new ModeloBenEndBeanImpl();
         modeloBenEndBeanImpl.limparTbTemp();
         modeloBenEndBeanImpl.resetarIdentity();
-        modeloBenEndBeanImpl.carregarArquivo(id);
+        modeloBenEndBeanImpl.carregarArquivo(id,log);
     }
 
     @Override

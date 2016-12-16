@@ -3,6 +3,7 @@ package org.pasa.sispasaint.bean.impl;
 import java.util.List;
 import org.pasa.sispasaint.bean.ModeloBenEndBean;
 import org.pasa.sispasaint.dao.impl.ModeloBenEndDAOImpl;
+import org.pasa.sispasaint.model.intg.Log;
 import org.pasa.sispasaint.model.intg.ModeloBenEnd;
 import org.pasa.sispasaint.rw.LerArquivosBenEnd;
 
@@ -33,8 +34,8 @@ public class ModeloBenEndBeanImpl implements ModeloBenEndBean{
     }
 
     @Override
-    public void carregarArquivo(Long id) {
-        LerArquivosBenEnd la = new LerArquivosBenEnd();
+    public void carregarArquivo(Long id,Log log) {
+        LerArquivosBenEnd la = new LerArquivosBenEnd(log);
         la.ler(id);
     }
 

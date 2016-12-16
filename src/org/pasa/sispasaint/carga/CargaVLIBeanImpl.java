@@ -62,16 +62,10 @@ public class CargaVLIBeanImpl implements CargaVLIBean {
       //  cargaArquivosBenTemp();
         System.gc();
        /// cargaArquivosEndTemp();
-       
-       carga();
         System.out.println("end temp");
     }
     
-    public void carga(){
-        LerArquivosBenEnd l = new LerArquivosBenEnd();
-        l.ler(id);
-        System.out.println("passou");
-    }
+
 
     @Override
     public void mapearEntidades() {

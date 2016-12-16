@@ -1,11 +1,8 @@
 package org.pasa.sispasaint.run;
 
 import java.util.List;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import org.pasa.sispasaint.bean.impl.AgendaBeanImpl;
 import org.pasa.sispasaint.jobs.ModeloBenEndJob;
-import org.pasa.sispasaint.jobs.VliJob;
 import org.pasa.sispasaint.model.intg.Agenda;
 import org.pasa.sispasaint.util.SisPasaIntCommon;
 import org.quartz.CronScheduleBuilder;
@@ -30,15 +27,15 @@ public class Maestro {
 
     public Maestro() {
     }
-    
-    public void iniciar(){
-         try {
+
+    public void iniciar() {
+        try {
             schedFact = new StdSchedulerFactory();
             sched = schedFact.getScheduler();
             sched.start();
             this.carregaJobs();
         } catch (SchedulerException ex) {
-             System.err.println(ex);
+            System.err.println(ex);
         }
     }
 
@@ -47,22 +44,19 @@ public class Maestro {
         for (Agenda a : listAgenda) {
             System.out.println(parseSchedule(a));
             try {
-                if (SisPasaIntCommon.CARGA_BENEND.equalsIgnoreCase(a.getDescricao())) {
-                    JobDetail job = JobBuilder.newJob(ModeloBenEndJob.class)
-                            .withIdentity(a.getDescricao(), a.getGrupo())
-                            .usingJobData(SisPasaIntCommon.TIPO_JOB, a.getIdLista())
-                            .usingJobData(SisPasaIntCommon.ID_EMPRESA, a.getIdEmpresa())
-                            .build();
-
-                    Trigger trigger = TriggerBuilder
-                            .newTrigger()
-                            .withIdentity(a.getDescricao(), a.getGrupo())
-                            .withSchedule(CronScheduleBuilder.cronSchedule(parseSchedule(a)))
-                            .build();
-                    sched.scheduleJob(job, trigger);
-                }
+                JobDetail job = JobBuilder.newJob(ModeloBenEndJob.class)
+                        .withIdentity(a.getDescricao(), a.getGrupo())
+                        .usingJobData(SisPasaIntCommon.TIPO_JOB, a.getIdLista())
+                        .usingJobData(SisPasaIntCommon.ID_EMPRESA, a.getIdEmpresa())
+                        .build();
+                Trigger trigger = TriggerBuilder
+                        .newTrigger()
+                        .withIdentity(a.getDescricao(), a.getGrupo())
+                        .withSchedule(CronScheduleBuilder.cronSchedule(parseSchedule(a)))
+                        .build();
+                sched.scheduleJob(job, trigger);
             } catch (SchedulerException e) {
-                System.out.println("erro: "+e);
+                System.out.println("erro: " + e);
             }
         }
     }
