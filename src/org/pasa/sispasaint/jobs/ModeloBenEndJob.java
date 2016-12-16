@@ -42,20 +42,20 @@ public class ModeloBenEndJob implements Job {
         CargaBenEndBeanImpl cargaBenEndBeanImpl = new CargaBenEndBeanImpl(idEmpresa, log);
         cargaBenEndBeanImpl.inicar();
 
-        log.setDataFim(DateUtil.obterDataAtual());
-        new LogBeanImpl().cadastrar(log);
-
         EnviaEmail enviaEmail = new EnviaEmail(getDestinatariosList(new ListaDestinatariosBeanImpl().listar(tipo)),
                 "#CARGA ",
                 setMensagem());
-        enviaEmail.send();
+        
+        
+        log.setDataFim(DateUtil.obterDataAtual());
+        new LogBeanImpl().cadastrar(log);
     }
 
     private List<String> getDestinatariosList(List<ListaDestinatarios> lista) {
         List<String> slista = new ArrayList<>();
-        for (ListaDestinatarios d : lista) {
+        lista.forEach((d) -> {
             slista.add(new DestinatarioBeanImpl().obter(d.getIdDestinatario()).getEmail());
-        }
+        });
         return slista;
     }
 
@@ -68,7 +68,6 @@ public class ModeloBenEndJob implements Job {
         sb.append("\n");
         sb.append("Nome Arquivos Endereço: ");
         sb.append(log.getNomeArquivoEnd());
-        
         return sb.toString() ;
     }
 }

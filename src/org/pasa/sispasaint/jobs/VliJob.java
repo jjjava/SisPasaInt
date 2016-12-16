@@ -44,7 +44,7 @@ public class VliJob implements Job {
                  "#CARGA VLI ",
                  setMensagem());
 
-        enviaEmail.send();
+
     }
 
     private List<String> getDestinatariosList(List<ListaDestinatarios> lista) {

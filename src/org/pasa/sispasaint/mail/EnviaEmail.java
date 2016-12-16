@@ -1,58 +1,47 @@
 package org.pasa.sispasaint.mail;
 
-import java.text.SimpleDateFormat;
-import java.util.Date;
 import java.util.List;
-import org.apache.commons.mail.EmailException;
-import org.apache.commons.mail.SimpleEmail;
+import java.util.Properties;
+import javax.mail.Message;
+import javax.mail.MessagingException;
+import javax.mail.Session;
+import javax.mail.Transport;
+import javax.mail.internet.AddressException;
+import javax.mail.internet.InternetAddress;
+import javax.mail.internet.MimeMessage;
 import org.pasa.sispasaint.config.Configuracao;
+import org.pasa.sispasaint.util.DateUtil;
 
 /**
  *
- * @author Hudson Schumaker 
+ * @author Hudson Schumaker
  * @version 1.0.0
  */
 public class EnviaEmail {
 
-    private String remetente;
-    private String subject;
-    private String message;
-    private String senha;
-    private String host;
-    private List<String> lista;
-
-    public EnviaEmail(List<String> l, String s, String m) {
-         try {
-        lista = l;
-        subject = s;
-        message = m;
-        remetente = Configuracao.getInstance().getUsuario();
-        senha = Configuracao.getInstance().getSenha();
-        host = Configuracao.getInstance().getServidor();    
-         }catch(Exception e){
-             System.err.println(e);
-         }
-    }
-
-   public void send() {
+    public EnviaEmail(List<String> lista, String subject, String menssage) {
         try {
-            SimpleDateFormat dtString = new SimpleDateFormat("dd/MM/yyyy hh:MM");
-            SimpleEmail email = new SimpleEmail();
-            email.setHostName(host);
-            for (String d: lista) {
-                email.addTo(d);
+            Properties props = new Properties();
+            props.put("mail.smtp.host", Configuracao.getInstance().getServidor());
+            props.put("mail.smtp.port", "587");
+            props.put("mail.smtp.auth", "true");
+            props.put("mail.smtp.starttls.enable", "true");
+            Session s = Session.getDefaultInstance(props, new Autenticar(Configuracao.getInstance().getUsuario(), Configuracao.getInstance().getSenha()));
+
+            MimeMessage email = new MimeMessage(s);
+            InternetAddress de = new InternetAddress(Configuracao.getInstance().getUsuario());
+            email.setFrom(de);
+            for (String d : lista) {
+                InternetAddress para = new InternetAddress(d);
+                email.addRecipient(Message.RecipientType.TO, para);
             }
-            email.setFrom(remetente);
-            email.setSubject(subject + dtString.format(new Date()));
-            email.setMsg(message);
-            System.out.println("autenticando...");
-            email.setSSL(true);
-            email.setAuthentication(remetente, senha);
-            System.out.println("enviando...");
-            email.send();
-            System.out.println("Email enviado!");
-        } catch (EmailException ex) {
-            System.err.println(ex);
+            email.setSubject(subject + DateUtil.obterDataAtual());
+            email.setText(menssage);
+            Transport.send(email);
+        } catch (AddressException ex) {
+            System.out.println(ex);
+        } catch (MessagingException ex) {
+            System.out.println(ex);
         }
     }
 }
