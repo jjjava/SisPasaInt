@@ -116,9 +116,9 @@ public class CargaVLIBeanImpl implements CargaVLIBean {
         }
     }
 
-    private void newFuncionario(ModeloBenVLI modeloBenVLI, ModeloEndVLI modeloEndVLI) {
+    private void newFuncionario(ModeloBenVLI modelo, ModeloEndVLI modeloEndVLI) {
         Funcionario funcionario = new Funcionario();
-        Empresa empresa = new EmpresaBeanImpl().existe(modeloBenVLI.getEmpresa());
+        Empresa empresa = new EmpresaBeanImpl().existe(modelo.getEmpresa());
         if (empresa == null) {
             log.addErrosAssoc();
         } else {
@@ -134,41 +134,41 @@ public class CargaVLIBeanImpl implements CargaVLIBean {
                 return;
             }
             //DOCUMENTOS
-            funcionario.setCpf(modeloBenVLI.getCpf());
-            funcionario.addDocumento(newPis(modeloBenVLI));
+            funcionario.setCpf(modelo.getCpf());
+            funcionario.addDocumento(newPis(modelo));
 
             //TELEFONES
             funcionario.setTelefones(newTelefones(modeloEndVLI));
             //ATRIBUTOS 
-            funcionario.setNome(modeloBenVLI.getNomeBeneficiario());
-            funcionario.setNomeAbreviado(modeloBenVLI.getNomeBeneficiarioAbreviado());
-            funcionario.setNomeMae(modeloBenVLI.getNomeDaMae());
-            funcionario.setSexo(modeloBenVLI.getSexo());
-            funcionario.setDataNascimento(DateUtil.toDate(modeloBenVLI.getDataNascimento()));
-            funcionario.setDireitoAbaterIR(modeloBenVLI.getDireitoAbaterIR());
-            funcionario.setDataAdmissao(DateUtil.toDate(modeloBenVLI.getDataAdmissao()));
-            funcionario.setFinanceira(modeloBenVLI.getFinanceira());
-            funcionario.setContratoTrabalho(modeloBenVLI.getContratoTrabalho());
-            funcionario.setEmpresaAtualizadora(modeloBenVLI.getEmpresaAtualizador());
-            funcionario.setMatriculaAtualizadora(modeloBenVLI.getMatriculaAtulizador());
-            funcionario.setCodDireitoPasa(modeloBenVLI.getCodigoDireitoPasa());
-            funcionario.setMatriculaPasa(modeloBenVLI.getMatriculaPasa());
-            funcionario.setMatriculaOrigem(modeloBenVLI.getMatriculaOrigem());
-            funcionario.setMatriculaPasa(modeloBenVLI.getMatricula());
-            funcionario.setUnidadeControle(modeloBenVLI.getUnidadeDeControle());
-            funcionario.setCentroCusto(modeloBenVLI.getCentroDeCusto());
-            funcionario.setNivelEscolaridade(newNivelEscolaridade(modeloBenVLI));
-            funcionario.setIndConclusaoEscolaridade(StringUtil.parserIndicadorConclusao(modeloBenVLI.getIndicadorConclusao()));
+            funcionario.setNome(modelo.getNomeBeneficiario());
+            funcionario.setNomeAbreviado(modelo.getNomeBeneficiarioAbreviado());
+            funcionario.setNomeMae(modelo.getNomeDaMae());
+            funcionario.setSexo(modelo.getSexo());
+            funcionario.setDataNascimento(DateUtil.toDate(modelo.getDataNascimento()));
+            funcionario.setDireitoAbaterIR(modelo.getDireitoAbaterIR());
+            funcionario.setDataAdmissao(DateUtil.toDate(modelo.getDataAdmissao()));
+            funcionario.setFinanceira(modelo.getFinanceira());
+            funcionario.setContratoTrabalho(modelo.getContratoTrabalho());
+            funcionario.setEmpresaAtualizadora(modelo.getEmpresaAtualizador());
+            funcionario.setMatriculaAtualizadora(modelo.getMatriculaAtulizador());
+            funcionario.setCodDireitoPasa(modelo.getCodigoDireitoPasa());
+            funcionario.setMatriculaPasa(modelo.getMatriculaPasa());
+            funcionario.setMatriculaOrigem(modelo.getMatriculaOrigem());
+            funcionario.setMatriculaPasa(modelo.getMatricula());
+            funcionario.setUnidadeControle(modelo.getUnidadeDeControle());
+            funcionario.setCentroCusto(modelo.getCentroDeCusto());
+            funcionario.setNivelEscolaridade(newNivelEscolaridade(modelo));
+            funcionario.setIndConclusaoEscolaridade(StringUtil.parserIndicadorConclusao(modelo.getIndicadorConclusao()));
 
             //DADOS BANCARIOS
             funcionario.setDadosBancarios(new DadosBancarios());
-            funcionario.setDadosBancarios(newDadosBancarios(modeloBenVLI));
+            funcionario.setDadosBancarios(newDadosBancarios(modelo));
 
             //ORIGEM INFORMACOES
             funcionario.setOrigemInformacoes(newOrigemInformacoes());
 
             //VINCULO
-            funcionario.setTipoVinculoEmpregaticio(newTipoVinculoEmpregaticio(modeloBenVLI));
+            funcionario.setTipoVinculoEmpregaticio(newTipoVinculoEmpregaticio(modelo));
 
             //INSERT
             funcionario.setIdUsuario(1L);
@@ -177,12 +177,12 @@ public class CargaVLIBeanImpl implements CargaVLIBean {
             new FuncionarioBeanImpl().atualizar(funcionario);
             log.addAssocIncluidos();
             
-            List<ModeloBenVLI> modeloBenVLIs = new ImpBenVLITempBeanImpl().listar(modeloBenVLI.getEmpresa(),modeloBenVLI.getMatricula());
-            List<ModeloEndVLI> modeloEndVLIs = new ImpEndVLITempBeanImpl().list(modeloBenVLI.getEmpresa(),modeloBenVLI.getMatricula());
+            List<ModeloBenVLI> modeloBenVLIs = new ImpBenVLITempBeanImpl().listar(modelo.getEmpresa(),modelo.getMatricula());
+            List<ModeloEndVLI> modeloEndVLIs = new ImpEndVLITempBeanImpl().list(modelo.getEmpresa(),modelo.getMatricula());
             
             
             
-            newBeneficiario(modeloBenVLI, modeloEndVLI);
+            newBeneficiario(modelo, modeloEndVLI);
         }
     }
 

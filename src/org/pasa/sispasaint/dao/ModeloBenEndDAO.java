@@ -11,9 +11,10 @@ import org.pasa.sispasaint.model.intg.ModeloBenEnd;
  */
 public interface ModeloBenEndDAO {
     ModeloBenEnd obter(Long id);
-    void cadastrar(ModeloBenEnd modelo);
+    boolean cadastrar(ModeloBenEnd modelo);
     void limpaTB();
     void resetarIdentity();
     void salvarTbTemp(List<ModeloBenEnd> listaModeloBenEnd);
     Long contar();
+    List<ModeloBenEnd> listarBeneficiarios(String empresa, String matricula);
 }

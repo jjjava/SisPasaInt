@@ -9,7 +9,7 @@ import org.pasa.sispasaint.config.DadosConfig;
  */
 
 public interface DadosConfigDAO {
-    void cadastrar(DadosConfig  dadosConfig);
+    boolean cadastrar(DadosConfig  dadosConfig);
     void atualizar(DadosConfig  dadosConfig);
     void apagar(DadosConfig  dadosConfig);
     DadosConfig obter(Long id);

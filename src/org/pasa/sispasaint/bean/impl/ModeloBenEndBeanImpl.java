@@ -11,21 +11,24 @@ import org.pasa.sispasaint.rw.LerArquivosBenEnd;
  *
  * @author 90J00318
  */
-public class ModeloBenEndBeanImpl implements ModeloBenEndBean{
+public class ModeloBenEndBeanImpl implements ModeloBenEndBean {
+
+    public ModeloBenEndBeanImpl() {
+    }
 
     @Override
     public ModeloBenEnd obter(Long id) {
-       return new ModeloBenEndDAOImpl().obter(id);
+        return new ModeloBenEndDAOImpl().obter(id);
     }
 
     @Override
     public ModeloBenEnd obter(ModeloBenEnd modelo) {
-         return new ModeloBenEndDAOImpl().obter(modelo.getId());
+        return new ModeloBenEndDAOImpl().obter(modelo.getId());
     }
 
     @Override
     public void limparTbTemp() {
-       new ModeloBenEndDAOImpl().limpaTB();
+        new ModeloBenEndDAOImpl().limpaTB();
     }
 
     @Override
@@ -34,14 +37,14 @@ public class ModeloBenEndBeanImpl implements ModeloBenEndBean{
     }
 
     @Override
-    public void carregarArquivo(Long id,Log log) {
+    public void carregarArquivo(Long id, Log log) {
         LerArquivosBenEnd la = new LerArquivosBenEnd(log);
         la.ler(id);
     }
 
     @Override
     public void salvarTbTemp(List<ModeloBenEnd> listaModeloBenEnd) {
-         new ModeloBenEndDAOImpl().salvarTbTemp(listaModeloBenEnd);
+        new ModeloBenEndDAOImpl().salvarTbTemp(listaModeloBenEnd);
     }
 
     @Override
@@ -51,6 +54,11 @@ public class ModeloBenEndBeanImpl implements ModeloBenEndBean{
 
     @Override
     public Long contar() {
-       return new ModeloBenEndDAOImpl().contar();
+        return new ModeloBenEndDAOImpl().contar();
+    }
+
+    @Override
+    public List<ModeloBenEnd> listarBeneficiarios(ModeloBenEnd modelo) {
+        return new ModeloBenEndDAOImpl().listarBeneficiarios(modelo.getEmpresa(), modelo.getMatricula());
     }
 }

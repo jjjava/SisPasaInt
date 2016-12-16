@@ -1,7 +1,6 @@
 package org.pasa.sispasa.core.model;
 
 import java.util.Date;
-
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -297,31 +296,24 @@ public class Beneficiario extends Pessoa {
         this.plano = plano;
     }
 
-    /**
-     * @return the tipoBeneficiario
-     */
     public String getTipoBeneficiario() {
         return tipoBeneficiario;
     }
 
-    /**
-     * @param tipoBeneficiario the tipoBeneficiario to set
-     */
     public void setTipoBeneficiario(String tipoBeneficiario) {
         this.tipoBeneficiario = tipoBeneficiario;
     }
 
-    /**
-     * @return the dataUltimaAtulizacao
-     */
     public Date getDataUltimaAtulizacao() {
         return dataUltimaAtualizacao;
     }
 
-    /**
-     * @param dataUltimaAtulizacao the dataUltimaAtulizacao to set
-     */
     public void setDataUltimaAtulizacao(Date dataUltimaAtualizacao) {
         this.dataUltimaAtualizacao = dataUltimaAtualizacao;
+    }
+
+    @Override
+    public String toString() {
+        return "Beneficiario{" + "id=" + id + ", codBeneficiario=" + codBeneficiario + ", matriculaAMS=" + matriculaAMS + ", carteirinha=" + carteirinha + ", direitoAmsCredenciar=" + direitoAmsCredenciar + ", dataValidadeCredenciado=" + dataValidadeCredenciado + ", direitoAMSReenbolso=" + direitoAMSReenbolso + ", dataValidadeReembolso=" + dataValidadeReembolso + ", codCR=" + codCR + ", orgaoPessoal=" + orgaoPessoal + ", faixaNivel=" + faixaNivel + ", nucleoAMS=" + nucleoAMS + ", tipoBeneficiario=" + tipoBeneficiario + ", matriculaParticipante=" + matriculaParticipante + ", matriculaRepresentanteLegal=" + matriculaRepresentanteLegal + ", planoReciprocidadeCassi=" + planoReciprocidadeCassi + ", dataFimPlanoCassi=" + dataFimPlanoCassi + ", cns=" + cns + ", declNascidoVivo=" + declNascidoVivo + ", idUsuario=" + idUsuario + ", indAtivo=" + indAtivo + ", dataUltimaAtualizacao=" + dataUltimaAtualizacao + ", funcionario=" + funcionario + ", grauParentesco=" + grauParentesco + ", plano=" + plano + '}';
     }
 }

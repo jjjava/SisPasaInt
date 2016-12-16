@@ -24,6 +24,7 @@ public class LerArquivosBenEnd {
 
     private boolean read;
     private String benNomeArq, endNomeArq;
+    private Long id;
     private Log log;
 
     public LerArquivosBenEnd(Log log) {
@@ -32,6 +33,7 @@ public class LerArquivosBenEnd {
     }
 
     public void ler(Long id) {
+        this.id = id;
         ler(Configuracao.getInstance().getPathIn(id),
                 Configuracao.getInstance().getNomeArqBen(id),
                 Configuracao.getInstance().getNomeArqEnd(id));
@@ -74,13 +76,19 @@ public class LerArquivosBenEnd {
         } catch (IOException e) {
             log.addLinhaArqErro();
         } finally {
+            zipArq(ben, benNomeArq,
+                    Configuracao.getInstance().getBenNomeArqComPath(id),
+                    Configuracao.getInstance().getBenNomeProcComPath(id));
+            zipArq(end, endNomeArq,
+                    Configuracao.getInstance().getEndNomeArqComPath(id),
+                    Configuracao.getInstance().getEndNomeProcComPath(id));
         }
     }
 
     public ModeloBenEnd parseCampos(String benLine, String endLine) {
         benLine = StringUtil.removeCharsEspeciais(benLine);
         endLine = StringUtil.removeCharsEspeciais(endLine);
-        
+
         ModeloBenEnd modelo = new ModeloBenEnd();
         Map<String, PosicaoCampo> mapaBen = new MapaCamposModeloBen().getMapa();
         Map<String, PosicaoCampo> mapaEnd = new MapaCamposModeloEnd().getMapa();
@@ -207,9 +215,9 @@ public class LerArquivosBenEnd {
         modelo.setUf(endLine.substring(campo.getInicioCampo(), campo.getFimCampo()));
         campo = (PosicaoCampo) mapaEnd.get(CamposModelo.CEP);
         modelo.setCep(endLine.substring(campo.getInicioCampo(), campo.getFimCampo()));
-        
+
         //NOME ARQUIVO
-        modelo.setNomeArquivo(benNomeArq+ " | "+endNomeArq);
+        modelo.setNomeArquivo(benNomeArq + " | " + endNomeArq);
 
         return modelo;
     }
@@ -231,5 +239,16 @@ public class LerArquivosBenEnd {
     private String normalizaLinha(String line) {
         line = " " + line;
         return line;
+    }
+
+    private void zipArq(File file, String name, String pathOri, String pathDest) {
+        new Thread(new Runnable() {
+            @Override
+            public void run() {
+                ZipArquivo zipArquivo = new ZipArquivo();
+                zipArquivo.zip(name, pathOri, pathDest);
+                file.delete();
+            }
+        }).start();
     }
 }

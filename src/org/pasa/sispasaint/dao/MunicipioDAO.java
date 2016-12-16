@@ -7,8 +7,7 @@ import org.pasa.sispasa.core.model.Municipio;
  * @author Hudson Schumaker
  */
 public interface MunicipioDAO {
-
-    void cadastrar(Municipio m);
+    boolean cadastrar(Municipio m);
     void atualizar(Municipio m);
     void apagar(Municipio m);
     Municipio obter(Long id);

@@ -8,9 +8,8 @@ import org.pasa.sispasaint.model.intg.Log;
  * @author 90J00318
  */
 public interface LogDAO {
-    
     Log obter(Long id);
-    void cadastrar(Log l);
+    boolean cadastrar(Log l);
     void atualizar (Log l);
     void apagar(Log l);
     List<Log> listar();

@@ -1,6 +1,7 @@
 package org.pasa.sispasaint.dao.impl;
 
 import java.util.List;
+import javax.persistence.NoResultException;
 import javax.persistence.Query;
 import org.pasa.sispasaint.dao.DaoGenerico;
 import org.pasa.sispasaint.dao.ModeloBenEndDAO;
@@ -37,5 +38,21 @@ public class ModeloBenEndDAOImpl extends DaoGenerico<ModeloBenEnd> implements Mo
                 getEntityManager().getTransaction().rollback();
             }
         }
+    }
+
+    @Override
+    public List<ModeloBenEnd> listarBeneficiarios(String empresa, String matricula) {
+        Query q1 = getEntityManager().
+        createQuery("select m from ModeloBenEnd m where m.matricula = :mat and m.empresa = :emp");
+        q1.setParameter("emp", empresa); 
+        q1.setParameter("mat", matricula); 
+        List<ModeloBenEnd> modelos = null;
+        try {
+            modelos = q1.getResultList();
+        } catch (NoResultException e) {
+            System.err.println(e);
+            return null;
+        }
+        return modelos;
     }
 }

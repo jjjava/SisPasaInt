@@ -11,7 +11,7 @@ import org.pasa.sispasa.core.model.Plano;
  */
 public interface PlanoDAO {
     Plano obter(Long id);
-    void cadastrar(Plano p);
+    boolean cadastrar(Plano p);
     void atualizar(Plano p);
     void apagar(Plano p);
     List<Plano> listar();

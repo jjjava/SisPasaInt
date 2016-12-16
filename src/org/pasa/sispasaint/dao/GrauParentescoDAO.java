@@ -9,7 +9,7 @@ import org.pasa.sispasa.core.model.GrauParentesco;
  */
 public interface GrauParentescoDAO {
     GrauParentesco obter(Long id);
-    void cadastrar(GrauParentesco g);
+    boolean cadastrar(GrauParentesco g);
     void atualizar(GrauParentesco g);
     void apagar(GrauParentesco g);
     List<GrauParentesco> listar();

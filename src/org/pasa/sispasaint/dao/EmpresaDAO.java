@@ -10,7 +10,7 @@ import org.pasa.sispasa.core.model.Empresa;
  */
 public interface EmpresaDAO {
     Empresa obter(Long id);
-    void cadastrar(Empresa e);
+    boolean cadastrar(Empresa e);
     void atualizar(Empresa e);
     void apagar(Empresa e);
     List<Empresa> listar();

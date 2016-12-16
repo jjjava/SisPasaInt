@@ -129,7 +129,6 @@ public class Pessoa extends BaseEntity implements Serializable {
         documentos = new ArrayList<>();
     }
 
-    
     //GETTERS E SETTERS
     
     public void addTelefone(Telefone t){

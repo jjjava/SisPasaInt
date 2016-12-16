@@ -18,4 +18,5 @@ public interface ModeloBenEndBean {
     void salvarTbTemp(List<ModeloBenEnd> listaModeloBenEnd);
     void cadastrar(ModeloBenEnd modelo);
     Long contar();
+    List<ModeloBenEnd> listarBeneficiarios(ModeloBenEnd modelo);
 }

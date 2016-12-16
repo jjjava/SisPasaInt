@@ -7,7 +7,7 @@ import org.pasa.sispasa.core.model.Beneficiario;
  * @author 90J00318
  */
 public interface BeneficiarioDAO {
-    void cadastrar(Beneficiario b);
+    boolean cadastrar(Beneficiario b);
     void atualizar(Beneficiario b);
     void apagar(Beneficiario b);
     Beneficiario obter(Long id);

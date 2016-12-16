@@ -24,7 +24,6 @@ public class Log implements Serializable {
     @Column(name = "ID_LOG", columnDefinition = ConstantesBanco.BIGINT)
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-
     private Integer qtdLinhasArquivo;
     private Integer qtdRegistros;
     private Integer qtdAssocIncluidos;

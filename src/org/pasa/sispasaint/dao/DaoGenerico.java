@@ -14,7 +14,6 @@ import javax.persistence.criteria.CriteriaQuery;
  * @author Hudson Schumaker
  * @param <T>
  */
-
 public abstract class DaoGenerico<T> {
 
     @PersistenceContext
@@ -32,10 +31,17 @@ public abstract class DaoGenerico<T> {
         return em;
     }
 
-    public void cadastrar(T entity) {
-        em.getTransaction().begin();
-        em.persist(entity);
-        em.getTransaction().commit();
+    public boolean cadastrar(T entity) {
+        try {
+            em.getTransaction().begin();
+            em.persist(entity);
+            em.getTransaction().commit();
+            return true;
+        } catch (Exception e) {
+            System.err.println(e);
+           // em.getTransaction().rollback();
+            return false;
+        }
     }
 
     public void atualizar(T entity) {

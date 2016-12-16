@@ -7,8 +7,8 @@ package org.pasa.sispasaint.model.enun;
  */
 public enum EnunTipoBeneficiario {
 
-    Titular(0, "Titular"),
-    Dependente(1, "Dependente"),
+    Titular(0, "T"),
+    Dependente(1, "D"),
     Agregado(2, "Agregado");
 
     private final int indice;

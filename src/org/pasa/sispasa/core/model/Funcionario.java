@@ -1,9 +1,9 @@
 package org.pasa.sispasa.core.model;
 
 import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
-
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -16,7 +16,6 @@ import javax.persistence.PrimaryKeyJoinColumn;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
-
 import org.pasa.sispasa.core.constants.ConstantesBanco;
 
 /**
@@ -106,9 +105,16 @@ public class Funcionario extends Pessoa implements Serializable {
     private MotivoDesligamento motivoDesligamento;
 
     @OneToMany(cascade = CascadeType.ALL)
-    @JoinColumn(name = "ID_BENEFICIARIO")
-
+    @JoinColumn(name = "ID_FUNCIONARIO")
     private List<Beneficiario> beneficiarios;
+    
+    public Funcionario(){
+        beneficiarios = new ArrayList<>();
+    }
+    
+    public void addBeneficiario(Beneficiario b){
+        beneficiarios.add(b);
+    }
 
     //GETTERS AND SETTERS
     @Override
@@ -265,44 +271,26 @@ public class Funcionario extends Pessoa implements Serializable {
         this.motivoDesligamento = motivoDesligamento;
     }
 
-    /**
-     * @return the emailCorporativo
-     */
     public String getEmailCorporativo() {
         return emailCorporativo;
     }
 
-    /**
-     * @param emailCorporativo the emailCorporativo to set
-     */
     public void setEmailCorporativo(String emailCorporativo) {
         this.emailCorporativo = emailCorporativo;
     }
 
-    /**
-     * @return the dataAdmissao
-     */
     public Date getDataAdmissao() {
         return dataAdmissao;
     }
 
-    /**
-     * @param dataAdmissao the dataAdmissao to set
-     */
     public void setDataAdmissao(Date dataAdmissao) {
         this.dataAdmissao = dataAdmissao;
     }
 
-    /**
-     * @return the dataUltimaAtualizacao
-     */
     public Date getDataUltimaAtualizacao() {
         return dataUltimaAtualizacao;
     }
 
-    /**
-     * @param dataUltimaAtualizacao the dataUltimaAtualizacao to set
-     */
     public void setDataUltimaAtualizacao(Date dataUltimaAtualizacao) {
         this.dataUltimaAtualizacao = dataUltimaAtualizacao;
     }
