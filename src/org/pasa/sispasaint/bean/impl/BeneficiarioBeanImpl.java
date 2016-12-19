@@ -54,4 +54,9 @@ public class BeneficiarioBeanImpl implements BeneficiarioBean {
     public Integer atulizaStatus(String empresa) {
         return new BeneficiarioDAOImpl().atulizaStatus(empresa);
     }
+
+    @Override
+    public Long getInativos(String empresa) {
+        return new BeneficiarioDAOImpl().getInativos(empresa);
+    }
 }

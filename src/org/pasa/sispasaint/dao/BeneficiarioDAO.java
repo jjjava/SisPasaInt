@@ -15,4 +15,5 @@ public interface BeneficiarioDAO {
     List<Beneficiario> listar();
     List<Beneficiario> listar(String empresa, String matricula);
     Integer atulizaStatus(String empresa);
+    Long getInativos(String empresa);
 }

@@ -168,4 +168,8 @@ public class Log implements Serializable {
     public void setQtdErroLinhaArquivo(Integer qtdErroLinhaArquivo) {
         this.qtdErroLinhaArquivo = qtdErroLinhaArquivo;
     }
+
+    public void setQtdAssocInativo(Integer qtdAssocInativo) {
+        this.qtdAssocInativo = qtdAssocInativo;
+    }
 }
