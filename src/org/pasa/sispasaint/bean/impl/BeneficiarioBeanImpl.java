@@ -49,4 +49,9 @@ public class BeneficiarioBeanImpl implements BeneficiarioBean {
     public List<Beneficiario> listar(String empresa, String matricula) {
         return new BeneficiarioDAOImpl().listar(empresa, matricula);
     }
+
+    @Override
+    public Integer atulizaStatus(String empresa) {
+        return new BeneficiarioDAOImpl().atulizaStatus(empresa);
+    }
 }

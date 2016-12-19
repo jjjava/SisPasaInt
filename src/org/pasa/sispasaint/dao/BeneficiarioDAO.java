@@ -14,4 +14,5 @@ public interface BeneficiarioDAO {
     Beneficiario obter(String matricula, String codBeneficiario);
     List<Beneficiario> listar();
     List<Beneficiario> listar(String empresa, String matricula);
+    Integer atulizaStatus(String empresa);
 }

@@ -148,7 +148,7 @@ public class CargaEntidadeBeneficiario {
         }
     }
     
-     private OrigemInformacoes newOrigemInformacoes() {
+    private OrigemInformacoes newOrigemInformacoes() {
         OrigemInformacoes origemInformacoes = new OrigemInformacoes();
         origemInformacoes.setId(EnumOrigemInformacoes.CARGA.getIndice());
         origemInformacoes.setDescricao(EnumOrigemInformacoes.CARGA.getDescricao());

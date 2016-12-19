@@ -1,6 +1,7 @@
 package org.pasa.sispasaint.carga;
 
 import org.pasa.sispasa.core.model.Funcionario;
+import org.pasa.sispasaint.bean.impl.BeneficiarioBeanImpl;
 import org.pasa.sispasaint.bean.impl.FuncionarioBeanImpl;
 import org.pasa.sispasaint.bean.impl.ModeloBenEndBeanImpl;
 import org.pasa.sispasaint.model.intg.Log;
@@ -13,39 +14,42 @@ import org.pasa.sispasaint.util.SisPasaIntCommon;
  * @version 1.0.0
  */
 public class CargaBenEndBeanImpl implements CargaBenEndBean {
-    
-    private Long id;
+
+    private Long idEmpresa;
     private Log log;
-    
-    public CargaBenEndBeanImpl(Long id, Log log) {
-        this.id = id;
+
+    public CargaBenEndBeanImpl(Long idEmpresa, Log log) {
+        this.idEmpresa = idEmpresa;
         this.log = log;
     }
-    
+
     @Override
     public void inicar() {
-        cargaArquivosTemp();
+        //cargaArquivosTemp();
         mapearEntidades();
     }
-    
+
     @Override
     public void cargaArquivosTemp() {
         ModeloBenEndBeanImpl modeloBenEndBeanImpl = new ModeloBenEndBeanImpl();
         modeloBenEndBeanImpl.limparTbTemp();
         modeloBenEndBeanImpl.resetarIdentity();
-        modeloBenEndBeanImpl.carregarArquivo(id, log);
+        modeloBenEndBeanImpl.carregarArquivo(idEmpresa, log);
     }
-    
+
     @Override
     public void mapearEntidades() {
+
+        FuncionarioBeanImpl funcionarioBeanImpl = new FuncionarioBeanImpl();
         ModeloBenEndBeanImpl modeloBean = new ModeloBenEndBeanImpl();
+
+        this.setStatusEntidades(idEmpresa);
         Long qtdRegistros = modeloBean.contar();
-        
+        Funcionario funcionario = null;
         for (Long k = 1L; k < qtdRegistros; k++) {
-            System.err.println(k);
             ModeloBenEnd modeloBenEnd = modeloBean.obter(k);
             if (modeloBenEnd.getTipoBeneficiario().equalsIgnoreCase(SisPasaIntCommon.FUNCIONARIO)) {
-                Funcionario funcionario = new FuncionarioBeanImpl().obter(modeloBenEnd.getEmpresa(), modeloBenEnd.getMatricula());
+                funcionario = funcionarioBeanImpl.obter(modeloBenEnd.getEmpresa(), modeloBenEnd.getMatricula());
                 if (funcionario == null) {
                     if (new CargaEntidadeFuncionario().newFuncionario(modeloBenEnd)) {
                         log.addAssocIncluidos();
@@ -54,11 +58,19 @@ public class CargaBenEndBeanImpl implements CargaBenEndBean {
                         log.addMatriculaErro(modeloBenEnd.getEmpresa() + modeloBenEnd.getMatricula());
                     }
                 } else {
-                    
+
                 }
             } else {
-                
+
             }
         }
+    }
+
+    private void setStatusEntidades(Long empresa) {
+        FuncionarioBeanImpl funcionarioBeanImpl = new FuncionarioBeanImpl();
+        BeneficiarioBeanImpl beneficiarioBeanImpl = new BeneficiarioBeanImpl();
+
+        System.err.println(funcionarioBeanImpl.atualizaStatus(empresa));
+        System.err.println(beneficiarioBeanImpl.atulizaStatus("" + empresa));
     }
 }

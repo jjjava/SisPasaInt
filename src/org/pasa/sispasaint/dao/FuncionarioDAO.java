@@ -15,4 +15,5 @@ public interface FuncionarioDAO {
     Funcionario obter(Long id);
     Funcionario obter(String empresa, String matricula);
     List<Funcionario> listar();
+    Integer atualizaStatus(Long empresa);
 }

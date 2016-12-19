@@ -15,4 +15,5 @@ public interface BeneficiarioBean {
     void apagar(Beneficiario b);
     List<Beneficiario> listar();
     List<Beneficiario> listar(String empresa, String matricula);
+    Integer atulizaStatus(String empresa);
 }

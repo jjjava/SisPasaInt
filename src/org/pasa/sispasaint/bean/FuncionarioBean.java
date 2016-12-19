@@ -1,5 +1,6 @@
 package org.pasa.sispasaint.bean;
 
+import java.util.List;
 import org.pasa.sispasa.core.model.Funcionario;
 
 /**
@@ -13,4 +14,6 @@ public interface FuncionarioBean {
     void cadastar(Funcionario f);
     void atualizar(Funcionario f);
     void apagar(Funcionario f);
+    List<Funcionario> listar();
+    Integer atualizaStatus(Long empresa);
 }

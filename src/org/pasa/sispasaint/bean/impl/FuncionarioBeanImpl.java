@@ -1,5 +1,6 @@
 package org.pasa.sispasaint.bean.impl;
 
+import java.util.List;
 import org.pasa.sispasa.core.model.Funcionario;
 import org.pasa.sispasaint.bean.FuncionarioBean;
 import org.pasa.sispasaint.dao.impl.FuncionarioDAOImpl;
@@ -38,5 +39,15 @@ public class FuncionarioBeanImpl implements FuncionarioBean {
     @Override
     public void apagar(Funcionario funcionario) {
         new FuncionarioDAOImpl().apagar(funcionario);
+    }
+
+    @Override
+    public List<Funcionario> listar() {
+         return new FuncionarioDAOImpl().listar();
+    }
+
+    @Override
+    public Integer atualizaStatus(Long empresa) {
+        return new FuncionarioDAOImpl().atualizaStatus(empresa);
     }
 }

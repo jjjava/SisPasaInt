@@ -6,12 +6,13 @@ import javax.persistence.Query;
 import org.pasa.sispasa.core.model.Beneficiario;
 import org.pasa.sispasaint.dao.BeneficiarioDAO;
 import org.pasa.sispasaint.dao.DaoGenerico;
+import org.pasa.sispasaint.util.SisPasaIntCommon;
 
 /**
  *
- * @author 90J00318
+ * @author Hudson Schumaker
  */
-public class BeneficiarioDAOImpl extends DaoGenerico<Beneficiario> implements BeneficiarioDAO{
+public class BeneficiarioDAOImpl extends DaoGenerico<Beneficiario> implements BeneficiarioDAO {
 
     public BeneficiarioDAOImpl() {
         super(Beneficiario.class);
@@ -20,20 +21,19 @@ public class BeneficiarioDAOImpl extends DaoGenerico<Beneficiario> implements Be
     @Override
     public Beneficiario obter(String matricula, String codBeneficiario) {
         Query q1 = getEntityManager().
-        createQuery("select b from Beneficiario b where b.matriculaAMS = :mat AND b.codBeneficiario = :cod" );
+                createQuery("select b from Beneficiario b where b.matriculaAMS = :mat AND b.codBeneficiario = :cod");
         q1.setParameter("mat", matricula);
         q1.setParameter("cod", codBeneficiario);
         q1.setMaxResults(1);
         List<Beneficiario> beneficiario = null;
         try {
             beneficiario = q1.getResultList();
-            System.err.println(beneficiario.size());
         } catch (NoResultException e) {
-            System.err.println("Ben:"+e);
+            System.err.println("Ben:" + e);
             return null;
         }
         if (beneficiario.size() > 0) {
-          return  beneficiario.get(0);
+            return beneficiario.get(0);
         }
         return null;
     }
@@ -41,9 +41,9 @@ public class BeneficiarioDAOImpl extends DaoGenerico<Beneficiario> implements Be
     @Override
     public List<Beneficiario> listar(String empresa, String matricula) {
         Query q1 = getEntityManager().
-        createQuery("select b from Beneficiario b where b.matriculaAMS = :mat AND b.funcionario.empresa.codEmpresaVale = :emp");
-        q1.setParameter("emp",empresa); 
-        q1.setParameter("mat", matricula); 
+                createQuery("select b from Beneficiario b where b.matriculaAMS = :mat AND b.funcionario.empresa.codEmpresaVale = :emp");
+        q1.setParameter("emp", empresa);
+        q1.setParameter("mat", matricula);
         List<Beneficiario> beneficiarios = null;
         try {
             beneficiarios = q1.getResultList();
@@ -51,7 +51,28 @@ public class BeneficiarioDAOImpl extends DaoGenerico<Beneficiario> implements Be
             System.err.println(e);
             return null;
         }
-       
+
         return beneficiarios;
     }
+
+    @Override
+    public Integer atulizaStatus(String empresa) {
+        try {
+            getEntityManager().getTransaction().begin();
+            Query q1 = getEntityManager().
+                    createQuery("update Beneficiario b set b.indAtivo = :status where SUBSTRING(b.carteirinha,1,2) = '"+empresa+"'");
+            q1.setParameter("status", SisPasaIntCommon.INATIVO);
+            return q1.executeUpdate();
+        } catch (Exception e) {
+            System.err.println(e);
+        } finally {
+            getEntityManager().getTransaction().commit();
+        }
+        return -1;
+    }
+
+    public Integer getInativos() {
+        return 0;
+    }
+
 }
