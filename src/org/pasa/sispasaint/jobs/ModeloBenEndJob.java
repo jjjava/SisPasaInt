@@ -63,7 +63,7 @@ public class ModeloBenEndJob implements Job {
     private String setMensagem() {
         StringBuilder sb = new StringBuilder();
         sb.append("CARGA ");
-        sb.append(new EmpresaBeanImpl().obter(idEmpresa));
+        sb.append(new EmpresaBeanImpl().obter(idEmpresa).getNomeFantasia());
         sb.append("\n");
         sb.append("Nome Arquivos Beneficiario: ");
         sb.append(log.getNomeArquivoBen());
