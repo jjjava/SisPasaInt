@@ -24,7 +24,8 @@ import org.pasa.sispasaint.util.StringUtil;
 
 /**
  *
- * @author 90J00318
+ * @author Hudson Schumaker
+ * @version 1.0.0
  */
 public class CargaEntidadeBeneficiario {
 

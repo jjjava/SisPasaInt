@@ -12,6 +12,7 @@ import org.pasa.sispasaint.util.DateUtil;
 /**
  *
  * @author Hudson Schumaker
+ * @version 1.0.0
  */
 @Entity
 @Table(name = "DADOS_CONFIGURACAO")

@@ -18,6 +18,12 @@ import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 import org.pasa.sispasa.core.constants.ConstantesBanco;
 
+/**
+ *
+ * @author Hudson Schumaker
+ * @version 1.0.0
+ */
+
 @Entity
 @Table(name = "CARG_LOG")
 public class Log implements Serializable {
