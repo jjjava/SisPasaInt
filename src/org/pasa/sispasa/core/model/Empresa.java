@@ -4,7 +4,6 @@ import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
-
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -23,231 +22,231 @@ import org.pasa.sispasa.core.constants.ConstantesBanco;
 
 /**
  *
- * @author Hudson Schumaker / Andr� Gomes
+ * @author Hudson Schumaker / André Gomes
  * @version 1.0.0
  */
 @Entity
 @Table(name = "EMPRESA")
 public class Empresa extends BaseEntity implements Serializable {
 
-	private static final long serialVersionUID = 1L;
+    private static final long serialVersionUID = 1L;
 
-	@Id
-	@Column(name = "ID_EMPRESA", columnDefinition = ConstantesBanco.BIGINT)
-	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	private Long id;
+    @Id
+    @Column(name = "ID_EMPRESA", columnDefinition = ConstantesBanco.BIGINT)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long id;
 
-	@Column(name = "RZ_SOCIAL", length = 60)
-	private String razaoSocial;
+    @Column(name = "RZ_SOCIAL", length = 60)
+    private String razaoSocial;
 
-	@Column(name = "NM_FANTASIA", length = 60)
-	private String nomeFantasia;
+    @Column(name = "NM_FANTASIA", length = 60)
+    private String nomeFantasia;
 
-	@Column(name = "CNPJ", columnDefinition = ConstantesBanco.CHAR_14)
-	private String cnpj;
+    @Column(name = "CNPJ", columnDefinition = ConstantesBanco.CHAR_14)
+    private String cnpj;
 
-	@Column(name = "DT_INICIO", nullable = false, columnDefinition = ConstantesBanco.DATE)
-	@Temporal(TemporalType.DATE)
-	private Date dataInicio;
+    @Column(name = "DT_INICIO", nullable = false, columnDefinition = ConstantesBanco.DATE)
+    @Temporal(TemporalType.DATE)
+    private Date dataInicio;
 
-	@Column(name = "DT_FIM", columnDefinition = ConstantesBanco.DATE)
-	@Temporal(TemporalType.DATE)
-	private Date dataFim;
+    @Column(name = "DT_FIM", columnDefinition = ConstantesBanco.DATE)
+    @Temporal(TemporalType.DATE)
+    private Date dataFim;
 
-	@Column(name = "CD_CNAE", columnDefinition = ConstantesBanco.CHAR_7)
-	private String codCNAE;
+    @Column(name = "CD_CNAE", columnDefinition = ConstantesBanco.CHAR_7)
+    private String codCNAE;
 
-	@Column(name = "EMAIL", length = 60)
-	private String email;
-	
-	@Column(name = "SITE", length=60)
-	private String site;
+    @Column(name = "EMAIL", length = 60)
+    private String email;
 
-	@Column(name = "CD_EMPRESA_VALE", length = 3)
-	private String codEmpresaVale;
+    @Column(name = "SITE", length = 60)
+    private String site;
 
-	@Column(name = "IND_ATIVO", nullable = false, columnDefinition = ConstantesBanco.SMALLINT)
-	private Integer indAtivo;
+    @Column(name = "CD_EMPRESA_VALE", length = 3)
+    private String codEmpresaVale;
 
-	@Column(name = "ID_USUARIO", columnDefinition = ConstantesBanco.BIGINT)
-	private Long idUsuario;
+    @Column(name = "IND_ATIVO", nullable = false, columnDefinition = ConstantesBanco.SMALLINT)
+    private Integer indAtivo;
 
-	@Column(name = "DT_ULT_ATULZ", nullable = false)
-	@Temporal(TemporalType.TIMESTAMP)
-	private Date dataUltimaAtualizacao;
+    @Column(name = "ID_USUARIO", columnDefinition = ConstantesBanco.BIGINT)
+    private Long idUsuario;
 
-	@ManyToOne(cascade = CascadeType.ALL)
-	@JoinColumn(name = "ID_TP_EMPRESA")
-	private TipoEmpresa tipoEmpresa;
+    @Column(name = "DT_ULT_ATULZ", nullable = false)
+    @Temporal(TemporalType.TIMESTAMP)
+    private Date dataUltimaAtualizacao;
 
-	@ManyToMany(cascade = CascadeType.ALL)
-	@JoinTable(name = "ENDERECO_EMPRESA", 
-	joinColumns = @JoinColumn(name = "ID_EMPRESA"), 
-	inverseJoinColumns = @JoinColumn(name = "ID_ENDERECO"))
-	private List<Endereco> enderecos;
+    @ManyToOne(cascade = CascadeType.ALL)
+    @JoinColumn(name = "ID_TP_EMPRESA")
+    private TipoEmpresa tipoEmpresa;
 
-	@ManyToMany(cascade = CascadeType.ALL)
-	@JoinTable(name = "CONTATO_EMPRESA",
-	joinColumns = @JoinColumn(name = "ID_EMPRESA"),
-	inverseJoinColumns = @JoinColumn(name = "ID_CONTATO"))
-	private	List<Contato> contatos;
-	
-	public Empresa(Long id){
-		this.id = id;
-	}
+    @ManyToMany(cascade = CascadeType.ALL)
+    @JoinTable(name = "ENDERECO_EMPRESA",
+            joinColumns = @JoinColumn(name = "ID_EMPRESA"),
+            inverseJoinColumns = @JoinColumn(name = "ID_ENDERECO"))
+    private List<Endereco> enderecos;
 
-	public Empresa() {
-		enderecos = new ArrayList<>();
-		contatos = new ArrayList<>();
-	}
+    @ManyToMany(cascade = CascadeType.ALL)
+    @JoinTable(name = "CONTATO_EMPRESA",
+            joinColumns = @JoinColumn(name = "ID_EMPRESA"),
+            inverseJoinColumns = @JoinColumn(name = "ID_CONTATO"))
+    private List<Contato> contatos;
 
-	public void addEndereco(Endereco e) {
-		enderecos.add(e);
-	}
+    public Empresa(Long id) {
+        this.id = id;
+    }
 
-	public void addContato(Contato c) {
-		contatos.add(c);
-	}
+    public Empresa() {
+        enderecos = new ArrayList<>();
+        contatos = new ArrayList<>();
+    }
 
-	// GETTERS E SETTERS
+    public void addEndereco(Endereco e) {
+        enderecos.add(e);
+    }
 
-	public Long getId() {
-		return id;
-	}
+    public void addContato(Contato c) {
+        contatos.add(c);
+    }
 
-	public void setId(Long id) {
-		this.id = id;
-	}
+    // GETTERS E SETTERS
+    @Override
+    public Long getId() {
+        return id;
+    }
 
-	public String getRazaoSocial() {
-		return razaoSocial;
-	}
+    public void setId(Long id) {
+        this.id = id;
+    }
 
-	public void setRazaoSocial(String razaoSocial) {
-		this.razaoSocial = razaoSocial;
-	}
+    public String getRazaoSocial() {
+        return razaoSocial;
+    }
 
-	public String getNomeFantasia() {
-		return nomeFantasia;
-	}
+    public void setRazaoSocial(String razaoSocial) {
+        this.razaoSocial = razaoSocial;
+    }
 
-	public void setNomeFantasia(String nomeFantasia) {
-		this.nomeFantasia = nomeFantasia;
-	}
+    public String getNomeFantasia() {
+        return nomeFantasia;
+    }
 
-	public String getCnpj() {
-		return cnpj;
-	}
+    public void setNomeFantasia(String nomeFantasia) {
+        this.nomeFantasia = nomeFantasia;
+    }
 
-	public void setCnpj(String cnpj) {
-		this.cnpj = cnpj;
-	}
+    public String getCnpj() {
+        return cnpj;
+    }
 
-	public Date getDataInicio() {
-		return dataInicio;
-	}
+    public void setCnpj(String cnpj) {
+        this.cnpj = cnpj;
+    }
 
-	public void setDataInicio(Date dataInicio) {
-		this.dataInicio = dataInicio;
-	}
+    public Date getDataInicio() {
+        return dataInicio;
+    }
 
-	public Date getDataFim() {
-		return dataFim;
-	}
+    public void setDataInicio(Date dataInicio) {
+        this.dataInicio = dataInicio;
+    }
 
-	public void setDataFim(Date dataFim) {
-		this.dataFim = dataFim;
-	}
+    public Date getDataFim() {
+        return dataFim;
+    }
 
-	public String getCodCNAE() {
-		return codCNAE;
-	}
+    public void setDataFim(Date dataFim) {
+        this.dataFim = dataFim;
+    }
 
-	public void setCodCNAE(String codCNAE) {
-		this.codCNAE = codCNAE;
-	}
+    public String getCodCNAE() {
+        return codCNAE;
+    }
 
-	public String getEmail() {
-		return email;
-	}
+    public void setCodCNAE(String codCNAE) {
+        this.codCNAE = codCNAE;
+    }
 
-	public void setEmail(String email) {
-		this.email = email;
-	}
+    public String getEmail() {
+        return email;
+    }
 
-	public String getCodEmpresaVale() {
-		return codEmpresaVale;
-	}
+    public void setEmail(String email) {
+        this.email = email;
+    }
 
-	public void setCodEmpresaVale(String codEmpresaVale) {
-		this.codEmpresaVale = codEmpresaVale;
-	}
+    public String getCodEmpresaVale() {
+        return codEmpresaVale;
+    }
 
-	public Integer getIndAtivo() {
-		return indAtivo;
-	}
+    public void setCodEmpresaVale(String codEmpresaVale) {
+        this.codEmpresaVale = codEmpresaVale;
+    }
 
-	public void setIndAtivo(Integer indAtivo) {
-		this.indAtivo = indAtivo;
-	}
+    public Integer getIndAtivo() {
+        return indAtivo;
+    }
 
-	public TipoEmpresa getTipoEmpresa() {
-		return tipoEmpresa;
-	}
+    public void setIndAtivo(Integer indAtivo) {
+        this.indAtivo = indAtivo;
+    }
 
-	public void setTipoEmpresa(TipoEmpresa tipoEmpresa) {
-		this.tipoEmpresa = tipoEmpresa;
-	}
+    public TipoEmpresa getTipoEmpresa() {
+        return tipoEmpresa;
+    }
 
-	public List<Endereco> getEnderecos() {
-		return enderecos;
-	}
+    public void setTipoEmpresa(TipoEmpresa tipoEmpresa) {
+        this.tipoEmpresa = tipoEmpresa;
+    }
 
-	public void setEnderecos(List<Endereco> enderecos) {
-		this.enderecos = enderecos;
-	}
+    public List<Endereco> getEnderecos() {
+        return enderecos;
+    }
 
-	public List<Contato> getContatos() {
-		return contatos;
-	}
+    public void setEnderecos(List<Endereco> enderecos) {
+        this.enderecos = enderecos;
+    }
 
-	public void setContatos(List<Contato> contatos) {
-		this.contatos = contatos;
-	}
+    public List<Contato> getContatos() {
+        return contatos;
+    }
 
-	public Long getIdUsuario() {
-		return idUsuario;
-	}
+    public void setContatos(List<Contato> contatos) {
+        this.contatos = contatos;
+    }
 
-	public void setIdUsuario(Long idUsuario) {
-		this.idUsuario = idUsuario;
-	}
+    public Long getIdUsuario() {
+        return idUsuario;
+    }
 
-	/**
-	 * @return the dataUltimaAtulizacao
-	 */
-	public Date getDataUltimaAtulizacao() {
-		return dataUltimaAtualizacao;
-	}
+    public void setIdUsuario(Long idUsuario) {
+        this.idUsuario = idUsuario;
+    }
 
-	/**
-	 * @param dataUltimaAtulizacao the dataUltimaAtulizacao to set
-	 */
-	public void setDataUltimaAtulizacao(Date dataUltimaAtualizacao) {
-		this.dataUltimaAtualizacao = dataUltimaAtualizacao;
-	}
+    /**
+     * @return the dataUltimaAtulizacao
+     */
+    public Date getDataUltimaAtulizacao() {
+        return dataUltimaAtualizacao;
+    }
 
-	/**
-	 * @return the site
-	 */
-	public String getSite() {
-		return site;
-	}
+    /**
+     * @param dataUltimaAtulizacao the dataUltimaAtulizacao to set
+     */
+    public void setDataUltimaAtulizacao(Date dataUltimaAtualizacao) {
+        this.dataUltimaAtualizacao = dataUltimaAtualizacao;
+    }
 
-	/**
-	 * @param site the site to set
-	 */
-	public void setSite(String site) {
-		this.site = site;
-	}
+    /**
+     * @return the site
+     */
+    public String getSite() {
+        return site;
+    }
+
+    /**
+     * @param site the site to set
+     */
+    public void setSite(String site) {
+        this.site = site;
+    }
 }
