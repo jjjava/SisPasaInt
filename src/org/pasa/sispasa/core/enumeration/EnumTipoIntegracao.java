@@ -7,19 +7,19 @@ package org.pasa.sispasa.core.enumeration;
  */
 public enum EnumTipoIntegracao {
 
-    People(0, "People Software"),
-    Valia(1, "Valia"),
-    Externa(2, "Empresa externa");
+    People(0L, "People Software"),
+    Valia(1L, "Valia"),
+    Externa(2L, "Empresa externa");
 
-    private int indice;
+    private Long indice;
     private String descricao;
 
-    private EnumTipoIntegracao(int indice, String descricao) {
+    private EnumTipoIntegracao(Long indice, String descricao) {
         this.indice = indice;
         this.descricao = descricao;
     }
 
-    public int getIndice() {
+    public Long getIndice() {
         return indice;
     }
 
