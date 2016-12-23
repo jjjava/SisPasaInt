@@ -13,7 +13,7 @@ import org.pasa.sispasa.core.constants.ConstantesBanco;
 
 /**
  *
- * @author 90J00318
+ * @author Hudson Schumaker
  */
 @Entity
 @Table(name = "CARG_LOG_MATRICULAS")
@@ -26,6 +26,8 @@ public class LogMatriculas implements Serializable{
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     private String matricula;
+    private String erro;
+    private String cpf;
     
     @ManyToOne(cascade = CascadeType.ALL)
     private Log log;
@@ -59,5 +61,21 @@ public class LogMatriculas implements Serializable{
 
     public void setLog(Log log) {
         this.log = log;
+    }
+
+    public String getErro() {
+        return erro;
+    }
+
+    public void setErro(String erro) {
+        this.erro = erro;
+    }
+
+    public String getCpf() {
+        return cpf;
+    }
+
+    public void setCpf(String cpf) {
+        this.cpf = cpf;
     }
 }
