@@ -17,4 +17,5 @@ public interface ModeloBenEndDAO {
     void salvarTbTemp(List<ModeloBenEnd> listaModeloBenEnd);
     Long contar();
     List<ModeloBenEnd> listarBeneficiarios(String empresa, String matricula);
+    List<String> listarEmpresasPorAquivo();
 }

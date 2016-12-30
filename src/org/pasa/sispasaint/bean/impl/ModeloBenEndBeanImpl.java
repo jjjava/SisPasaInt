@@ -61,4 +61,9 @@ public class ModeloBenEndBeanImpl implements ModeloBenEndBean {
     public List<ModeloBenEnd> listarBeneficiarios(ModeloBenEnd modelo) {
         return new ModeloBenEndDAOImpl().listarBeneficiarios(modelo.getEmpresa(), modelo.getMatricula());
     }
+    
+    @Override
+    public List<String> listarEmpresasPorAquivo(){
+        return new ModeloBenEndDAOImpl().listarEmpresasPorAquivo();
+    }
 }

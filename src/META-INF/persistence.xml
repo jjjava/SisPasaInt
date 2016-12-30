@@ -53,9 +53,13 @@
     <class>org.pasa.sispasaint.model.intg.ModeloBenEnd</class>
     <class>org.pasa.sispasaint.model.intg.LogMatriculas</class>
     <properties>
-      <property name="javax.persistence.jdbc.url" value="jdbc:jtds:sqlserver://127.0.0.1:1433;instance=PASA;DatabaseName=sispasa"/>
-      <property name="javax.persistence.jdbc.user" value="pasa"/>
-      <property name="javax.persistence.jdbc.password" value="pasa"/>
+        
+    <!-- <property name="javax.persistence.jdbc.url" value="jdbc:jtds:sqlserver://192.168.232.25:1433;DatabaseName=sispasa-dev"/>   --> 
+     <!--   <property name="javax.persistence.jdbc.user" value="usrsispasadev"/> -->
+     <!--   <property name="javax.persistence.jdbc.password" value="sispasadev"/>-->
+     <property name="javax.persistence.jdbc.url" value="jdbc:jtds:sqlserver://127.0.0.1:1433;instance=PASA;DatabaseName=sispasa"/>
+     <property name="javax.persistence.jdbc.user" value="pasa"/> -->
+     <property name="javax.persistence.jdbc.password" value="pasa"/> -->
       <property name="javax.persistence.schema-generation.database.action" value="create"/>
       <property name="javax.persistence.jdbc.driver" value="net.sourceforge.jtds.jdbc.Driver"/>
       <property name="hibernate.show_sql" value="true"/>

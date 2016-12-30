@@ -19,4 +19,5 @@ public interface ModeloBenEndBean {
     void cadastrar(ModeloBenEnd modelo);
     Long contar();
     List<ModeloBenEnd> listarBeneficiarios(ModeloBenEnd modelo);
+    List<String> listarEmpresasPorAquivo();
 }

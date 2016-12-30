@@ -55,4 +55,18 @@ public class ModeloBenEndDAOImpl extends DaoGenerico<ModeloBenEnd> implements Mo
         }
         return modelos;
     }
+    
+    @Override
+    public List<String> listarEmpresasPorAquivo(){
+        Query q1 = getEntityManager().
+        createQuery("select DISTINCT(m.empresa) m from ModeloBenEnd m");
+        List<String> empresas = null;
+        try {
+            empresas = q1.getResultList();
+        } catch (NoResultException e) {
+            System.err.println(e);
+            return null;
+        }
+        return empresas;
+    }
 }
