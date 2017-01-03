@@ -9,7 +9,7 @@ import org.pasa.sispasaint.rw.LerArquivosBenEnd;
 
 /**
  *
- * @author 90J00318
+ * @author Hudson Schumaker
  */
 public class ModeloBenEndBeanImpl implements ModeloBenEndBean {
 
