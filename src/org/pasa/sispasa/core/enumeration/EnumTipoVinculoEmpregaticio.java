@@ -9,7 +9,7 @@ public enum EnumTipoVinculoEmpregaticio {
 
     Estagiario(0L, "Estagiário"),
     MenorAprendiz(1L, "Menor aprendiz"),
-    TrabalahdorTemporario(2L, "Trabalahdor temporario"),
+    TrabalahdorTemporario(2L, "Trabalhador temporario"),
     EmpregadoAtivo(3L, "Empregado ativo"),
     Aposentado(4L, "Aposentado"),
     Pensionista(5L, "Pensionista"),
