@@ -1,12 +1,14 @@
 package org.pasa.sispasa.core.model;
 
 import java.io.Serializable;
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
+
 import org.pasa.sispasa.core.constants.ConstantesBanco;
 
 /**
@@ -29,8 +31,15 @@ public class TipoEmpresa implements Serializable {
 	private String descricao;
 
 	public TipoEmpresa() {
+		//CONSTRUTOR DEFAULT
+	}
+	
+	public TipoEmpresa(Long id) {
+		this.id = id;
 	}
 
+	
+	//GETTERS E SETTERS
 	public Long getId() {
 		return id;
 	}

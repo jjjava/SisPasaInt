@@ -2,6 +2,7 @@ package org.pasa.sispasa.core.model;
 
 import java.io.Serializable;
 import java.util.Date;
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -10,6 +11,9 @@ import javax.persistence.Id;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
+
+import org.hibernate.envers.AuditTable;
+import org.hibernate.envers.Audited;
 import org.pasa.sispasa.core.constants.ConstantesBanco;
 
 /**
@@ -19,6 +23,8 @@ import org.pasa.sispasa.core.constants.ConstantesBanco;
  */
 @Entity
 @Table(name = "OPERADORA")
+@Audited
+@AuditTable(value="HIST_OPERADORA")
 public class Operadora implements Serializable {
 
 	private static final long serialVersionUID = 1L;
@@ -40,10 +46,15 @@ public class Operadora implements Serializable {
 	@Column(name = "DT_ULT_ATULZ")
 	@Temporal(TemporalType.TIMESTAMP)
 	private Date dataUltimaAtualizacao;
-
+	
+	//CONSTRUTORES
+	
 	public Operadora() {
+		//CONSTRUTOR
 	}
 
+	//GETTERS E SETTERS
+	
 	public Long getId() {
 		return id;
 	}
@@ -81,6 +92,14 @@ public class Operadora implements Serializable {
 	}
 
 	public void setDataUltAtulizacao(Date dataUltimaAtualizacao) {
+		this.dataUltimaAtualizacao = dataUltimaAtualizacao;
+	}
+
+	public Date getDataUltimaAtualizacao() {
+		return dataUltimaAtualizacao;
+	}
+
+	public void setDataUltimaAtualizacao(Date dataUltimaAtualizacao) {
 		this.dataUltimaAtualizacao = dataUltimaAtualizacao;
 	}
 }

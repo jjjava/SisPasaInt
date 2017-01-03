@@ -4,7 +4,6 @@ import java.io.Serializable;
 import java.util.Date;
 import java.util.List;
 
-import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -17,6 +16,10 @@ import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
+
+import org.hibernate.envers.AuditTable;
+import org.hibernate.envers.Audited;
+import org.hibernate.envers.NotAudited;
 import org.pasa.sispasa.core.constants.ConstantesBanco;
 
 /**
@@ -26,6 +29,8 @@ import org.pasa.sispasa.core.constants.ConstantesBanco;
 */
 @Entity
 @Table(name = "CONTRATO")
+@Audited
+@AuditTable(value="HIST_CONTRATO")
 public class Contrato implements Serializable {
 
     private static final long serialVersionUID = 1L;
@@ -57,31 +62,46 @@ public class Contrato implements Serializable {
 
     @Column(name = "ID_USUARIO", nullable = false, columnDefinition = ConstantesBanco.BIGINT)
     private Long idUsuario;
+    
+	@Column(name = "IND_ATIVO", nullable = false, columnDefinition = ConstantesBanco.SMALLINT)
+	private Integer indAtivo;
 
     @Column(name = "DT_ULT_ATULZ", nullable = false) 
     @Temporal(TemporalType.TIMESTAMP)
     private Date dataUltimaAtualizacao;
 
-    @ManyToOne(cascade = CascadeType.ALL)
+    //RELACIONAMENTOS
+    
+    @ManyToOne
     @JoinColumn(name = "ID_TP_CONTRATO")
+    @NotAudited
     private TipoContrato tipoContrato;
 
-    @ManyToOne(cascade = CascadeType.ALL)
+    @ManyToOne
     @JoinColumn(name = "ID_OPERADORA")
+    @NotAudited
     private Operadora operadora;
 
-    @ManyToOne(cascade = CascadeType.ALL)
+    @ManyToOne
     @JoinColumn(name = "ID_EMPRESA")
+    @NotAudited
     private Empresa empresa;
     
-    @ManyToMany(cascade = CascadeType.ALL)
+    @ManyToMany
     @JoinTable(name = "CONTRATO_PLANO",
-            joinColumns = @JoinColumn(name = "ID_CONTRATO"),
-            inverseJoinColumns = @JoinColumn(name = "ID_PLANO"))
+               joinColumns = @JoinColumn(name = "ID_CONTRATO"),
+               inverseJoinColumns = @JoinColumn(name = "ID_PLANO"))
+    @NotAudited
     private List<Plano> planos;
 
+    
+    //CONSTRUTORES
+    
     public Contrato() {
+    	//CONSTRUTOR DEFAULT
     }
+    
+    //GETTERS E SETTERS
 
     public Long getId() {
         return id;
@@ -147,14 +167,6 @@ public class Contrato implements Serializable {
         this.idUsuario = idUsuario;
     }
 
-    public Date getDataUltAtualizacao() {
-        return dataUltimaAtualizacao;
-    }
-
-    public void setDataUltAtualizacao(Date dataUltimaAtualizacao) {
-        this.dataUltimaAtualizacao = dataUltimaAtualizacao;
-    }
-
     public TipoContrato getTipoContrato() {
         return tipoContrato;
     }
@@ -194,4 +206,20 @@ public class Contrato implements Serializable {
     public void setPlanos(List<Plano> planos) {
         this.planos = planos;
     }
+
+	public Date getDataUltimaAtualizacao() {
+		return dataUltimaAtualizacao;
+	}
+
+	public void setDataUltimaAtualizacao(Date dataUltimaAtualizacao) {
+		this.dataUltimaAtualizacao = dataUltimaAtualizacao;
+	}
+
+	public Integer getIndAtivo() {
+		return indAtivo;
+	}
+
+	public void setIndAtivo(Integer indAtivo) {
+		this.indAtivo = indAtivo;
+	}
 }

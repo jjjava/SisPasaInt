@@ -1,7 +1,5 @@
 package org.pasa.sispasa.core.enumeration;
 
-import java.util.EnumSet;
-
 /**
 *
 * @author Andre Gomes
@@ -58,14 +56,6 @@ public enum EnumNivelEscolaridade {
 		
 		return null;
 	}
-	
-	/**
-	 * 
-	 * @return
-	 */
-	public static EnumSet<EnumNivelEscolaridade> getAllNivelEscolaridade() {
-        return EnumSet.of(FUNDAMENTAL, MEDIO, SUPERIOR, POS, MESTRADO, DOUTORADO);
-    }
 	
 	//getters e setters
     public Long getIndice() {

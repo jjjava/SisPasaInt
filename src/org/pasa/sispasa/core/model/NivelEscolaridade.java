@@ -1,17 +1,19 @@
 package org.pasa.sispasa.core.model;
 
 import java.io.Serializable;
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
+
 import org.pasa.sispasa.core.constants.ConstantesBanco;
 
 /**
  *
- * @author Hudson Schumaker / Andr� Gomes
+ * @author Hudson Schumaker / Andre Gomes
  * @version 1.0.0
  */
 @Entity
@@ -31,13 +33,14 @@ public class NivelEscolaridade implements Serializable {
 	@Column(name = "CD_EXTERNO", length = 10)
 	private String codExterno;
 
+	//CONSTRUTORES
+	
 	public NivelEscolaridade() {
 		//CONSTRUTOR DEFAULT
 	}
 	
-	public NivelEscolaridade(Long id, String descricao) {
+	public NivelEscolaridade(Long id) {
 		this.id = id;
-		this.descricao = descricao;
 	}
 
 	

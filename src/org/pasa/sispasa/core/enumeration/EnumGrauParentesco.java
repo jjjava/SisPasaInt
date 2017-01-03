@@ -1,7 +1,5 @@
 package org.pasa.sispasa.core.enumeration;
 
-import java.util.EnumSet;
-
 /**
  *
  * @author Andre Gomes
@@ -9,7 +7,7 @@ import java.util.EnumSet;
 public enum EnumGrauParentesco {
 	
 	FILHO(1L, "Filho"),
-	CONJUGE(2L, "Conjuge"),
+	CONJUGE(2L, "Cônjugue"),
 	NETO(3L,"Neto");
 	
 	private Long indice;
@@ -20,9 +18,6 @@ public enum EnumGrauParentesco {
 		this.descricao = descricao;
 	}
 	
-	public static EnumSet<EnumGrauParentesco> getAllGrauParentesco() {
-        return EnumSet.of(FILHO, CONJUGE, NETO);
-    }
 	
 	//getters e setters
     public Long getIndice() {

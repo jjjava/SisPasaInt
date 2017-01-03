@@ -8,6 +8,9 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
+
+import org.hibernate.envers.AuditTable;
+import org.hibernate.envers.Audited;
 import org.pasa.sispasa.core.constants.ConstantesBanco;
 
 /**
@@ -17,6 +20,8 @@ import org.pasa.sispasa.core.constants.ConstantesBanco;
  */
 @Entity
 @Table(name = "PAIS")
+@Audited
+@AuditTable(value="HIST_PAIS")
 public class Pais extends BaseEntity implements Serializable {
 
 	private static final long serialVersionUID = 1L;
@@ -29,6 +34,15 @@ public class Pais extends BaseEntity implements Serializable {
 	@Column(name = "NOME", nullable = false, length = 30)
 	private String nome;
 
+	//CONSTRUTORES
+	
+	public Pais(){
+		//CONSTRUTOR DEFAULT
+	}
+	
+	public Pais(Long id){
+		this.id = id;
+	}
 
 	//GETTERS E SETTERS
 	

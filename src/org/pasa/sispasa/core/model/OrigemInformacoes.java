@@ -8,6 +8,7 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
+
 import org.pasa.sispasa.core.constants.ConstantesBanco;
 
 /**
@@ -29,13 +30,16 @@ public class OrigemInformacoes implements Serializable {
 	@Column(name = "DESCRICAO", nullable = false, length = 30)
 	private String descricao;
 
+	//CONSTRUTORES
+	
 	public OrigemInformacoes() {
-		//Construtor Default
+		//CONSTRUTOR DEFAULT
 	}
 	
-	public OrigemInformacoes(Long id, String descricao) {
+	//GETTERS E SETTERS
+	
+	public OrigemInformacoes(Long id) {
 		this.id = id;
-		this.descricao = descricao;
 	}
 
 	public Long getId() {

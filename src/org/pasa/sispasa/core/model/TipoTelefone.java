@@ -36,9 +36,8 @@ public class TipoTelefone implements Serializable {
 		//CONSTRUTOR DEFAULT
 	}
 	
-	public TipoTelefone(Long id, String descricao){
+	public TipoTelefone(Long id){
 		this.id = id;
-		this.descricao = descricao;
 	}
 	
 	

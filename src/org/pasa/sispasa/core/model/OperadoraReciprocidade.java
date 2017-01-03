@@ -3,6 +3,7 @@ package org.pasa.sispasa.core.model;
 import java.io.Serializable;
 import java.util.Date;
 import java.util.List;
+
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -15,6 +16,10 @@ import javax.persistence.ManyToMany;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
+
+import org.hibernate.envers.AuditTable;
+import org.hibernate.envers.Audited;
+import org.hibernate.envers.NotAudited;
 import org.pasa.sispasa.core.constants.ConstantesBanco;
 
 /**
@@ -24,6 +29,8 @@ import org.pasa.sispasa.core.constants.ConstantesBanco;
  */
 @Entity
 @Table(name = "OPERADORA_RECIPROCIDADE")
+@Audited
+@AuditTable(value="HIST_OPERADORA_RECIPROCIDADE")
 public class OperadoraReciprocidade implements Serializable {
 
 	private static final long serialVersionUID = 1L;
@@ -69,15 +76,24 @@ public class OperadoraReciprocidade implements Serializable {
 	@Temporal(TemporalType.TIMESTAMP)
 	private Date dataUltimaAtualizacao;
 
+	//RELACIONAMENTOS
+	
 	@ManyToMany(cascade = CascadeType.ALL)
 	@JoinTable(name = "OPERADORA_RECIPROCIDADE_CONTATO",
 	joinColumns = @JoinColumn(name = "ID_OPERADORA_RCP"),
 	inverseJoinColumns = @JoinColumn(name = "ID_CONTATO"))
+	@NotAudited
 	private List<Contato> contatos;
 
+	//CONSTRUTORES
+	
 	public OperadoraReciprocidade() {
+		//CONSTRUTOR DEFAULT
 	}
 
+	
+	//GETTERS E SETTERS
+	
 	public Long getId() {
 		return id;
 	}

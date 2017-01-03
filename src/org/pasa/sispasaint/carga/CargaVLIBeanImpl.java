@@ -27,14 +27,11 @@ import org.pasa.sispasaint.bean.impl.ImpBenVLITempBeanImpl;
 import org.pasa.sispasaint.bean.impl.ImpEndVLITempBeanImpl;
 import org.pasa.sispasaint.bean.impl.LogBeanImpl;
 import org.pasa.sispasaint.bean.impl.MunicipioBeanImpl;
-import org.pasa.sispasaint.bean.impl.PlanoBeanImpl;
-import org.pasa.sispasaint.model.enun.EnunNivelEscolaridade;
 import org.pasa.sispasaint.model.enun.EnunOperadora;
 import org.pasa.sispasaint.model.enun.EnunTipoBeneficiario;
 import org.pasa.sispasaint.model.intg.Log;
 import org.pasa.sispasaint.model.intg.ModeloBenVLI;
 import org.pasa.sispasaint.model.intg.ModeloEndVLI;
-import org.pasa.sispasaint.rw.LerArquivosBenEnd;
 import org.pasa.sispasaint.util.DateUtil;
 import org.pasa.sispasaint.util.SisPasaIntCommon;
 import org.pasa.sispasaint.util.StringUtil;
@@ -180,8 +177,6 @@ public class CargaVLIBeanImpl implements CargaVLIBean {
             List<ModeloBenVLI> modeloBenVLIs = new ImpBenVLITempBeanImpl().listar(modelo.getEmpresa(),modelo.getMatricula());
             List<ModeloEndVLI> modeloEndVLIs = new ImpEndVLITempBeanImpl().list(modelo.getEmpresa(),modelo.getMatricula());
             
-            
-            
             newBeneficiario(modelo, modeloEndVLI);
         }
     }
@@ -200,7 +195,7 @@ public class CargaVLIBeanImpl implements CargaVLIBean {
         dadosBancarios.setConta(modeloBenVLI.getContaCorrente());
         dadosBancarios.setTipoConta(SisPasaIntCommon.CONTACORRENTE);
         dadosBancarios.setIndAtivo(SisPasaIntCommon.ATIVO);
-        dadosBancarios.setDataAtulizacao(new Date());
+        dadosBancarios.setDataUltimaAtualizacao(new Date());
         dadosBancarios.setIdUsuario(1L);
         return dadosBancarios;
     }
@@ -241,7 +236,7 @@ public class CargaVLIBeanImpl implements CargaVLIBean {
         plano.setCodPlano(modeloBenVLI.getPlano());
         plano.setOperadora(operadora);
         plano.setIdUsuario(1L);
-        plano.setDataUltAtulizacao(DateUtil.obterDataAtual());
+        plano.setDataUltimaAtualizacao(DateUtil.obterDataAtual());
         return plano;
     }
 

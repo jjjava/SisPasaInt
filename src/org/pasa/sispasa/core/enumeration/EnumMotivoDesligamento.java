@@ -1,7 +1,5 @@
 package org.pasa.sispasa.core.enumeration;
 
-import java.util.EnumSet;
-
 /**
 *
 * @author Andre Gomes
@@ -31,7 +29,7 @@ public enum EnumMotivoDesligamento {
 	 * @param indice
 	 * @return
 	 */
-	public static EnumMotivoDesligamento getNivelMotivoDesligamentoByIndice(int indice){
+	public static EnumMotivoDesligamento getMotivoDesligamentoByIndice(int indice){
 		
 		switch (indice) {
 			
@@ -63,14 +61,6 @@ public enum EnumMotivoDesligamento {
 		return null;
 	}
 	
-	
-	/**
-	 * 
-	 * @return
-	 */
-	public static EnumSet<EnumMotivoDesligamento> getAllMotivoDesligamento() {
-        return EnumSet.of(SEM_JUSTA_CAUSA, COM_JUSTA_CAUSA, ABANDONO, TERMINO_CONTRATO, APOSENTADORIA, INVALIDEZ, FALECIMENTO);
-    }
 	
 	//getters e setters
     public Long getIndice() {

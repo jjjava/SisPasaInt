@@ -2,7 +2,7 @@ package org.pasa.sispasa.core.model;
 
 import java.io.Serializable;
 import java.util.Date;
-import javax.persistence.CascadeType;
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -13,6 +13,10 @@ import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
+
+import org.hibernate.envers.AuditTable;
+import org.hibernate.envers.Audited;
+import org.hibernate.envers.NotAudited;
 import org.pasa.sispasa.core.constants.ConstantesBanco;
 
 /**
@@ -22,6 +26,8 @@ import org.pasa.sispasa.core.constants.ConstantesBanco;
 */
 @Entity
 @Table(name = "PLANO")
+@Audited
+@AuditTable(value="HIST_PLANO")
 public class Plano extends BaseEntity implements Serializable {
 
     private static final long serialVersionUID = 1L;
@@ -64,21 +70,38 @@ public class Plano extends BaseEntity implements Serializable {
     @Temporal(TemporalType.TIMESTAMP)
     private Date dataUltimaAtualizacao;
 
-    @ManyToOne(cascade = CascadeType.ALL)
-    @JoinColumn(name = "ID_OPERADORA" )
+    //RELACIONAMENTOS
+    
+    @ManyToOne
+    @JoinColumn(name = "ID_OPERADORA", nullable = false )
+    @NotAudited
     private Operadora operadora;
 
-    @ManyToOne(cascade = CascadeType.ALL)
-    @JoinColumn(name = "ID_TP_PLANO", nullable = true)
+    @ManyToOne
+    @JoinColumn(name = "ID_TP_PLANO", nullable = false)
+    @NotAudited
     private TipoPlano tipoPlano;
 
-    @ManyToOne(cascade = CascadeType.ALL)
+    @ManyToOne
     @JoinColumn(name = "ID_PLANO_PAI", referencedColumnName = "ID_PLANO")
+    @NotAudited
     private Plano planoPai;
 
+    
+   //CONSTRUTORES
+    
     public Plano() {
+    	//CONSTRUTOR DEFAULT
     }
-
+    
+    public Plano(Long id, String nome) {
+    	this.id = id;
+    	this.nome = nome;
+    }
+    
+    
+    //GETTERS E SETTERS
+    
     public Long getId() {
         return id;
     }
@@ -151,14 +174,6 @@ public class Plano extends BaseEntity implements Serializable {
         this.indAtivo = indAtivo;
     }
 
-    public Date getDataUltAtulizacao() {
-        return dataUltimaAtualizacao;
-    }
-
-    public void setDataUltAtulizacao(Date dataUltimaAtualizacao) {
-        this.dataUltimaAtualizacao = dataUltimaAtualizacao;
-    }
-
     public Operadora getOperadora() {
         return operadora;
     }
@@ -190,4 +205,12 @@ public class Plano extends BaseEntity implements Serializable {
     public void setCodPlano(String codPlano) {
         this.codPlano = codPlano;
     }
+
+	public Date getDataUltimaAtualizacao() {
+		return dataUltimaAtualizacao;
+	}
+
+	public void setDataUltimaAtualizacao(Date dataUltimaAtualizacao) {
+		this.dataUltimaAtualizacao = dataUltimaAtualizacao;
+	}
 }

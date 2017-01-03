@@ -2,6 +2,7 @@ package org.pasa.sispasa.core.model;
 
 import java.io.Serializable;
 import java.util.Date;
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -10,8 +11,10 @@ import javax.persistence.Id;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
-import org.pasa.sispasa.core.constants.ConstantesBanco;
 
+import org.hibernate.envers.AuditTable;
+import org.hibernate.envers.Audited;
+import org.pasa.sispasa.core.constants.ConstantesBanco;
 
 /**
  *
@@ -20,6 +23,8 @@ import org.pasa.sispasa.core.constants.ConstantesBanco;
  */
 @Entity
 @Table(name = "DADOS_BANCARIOS")
+@Audited
+@AuditTable(value="HIST_DADOS_BANCARIOS")
 public class DadosBancarios extends BaseEntity implements Serializable {
 
     private static final long serialVersionUID = 1L;
@@ -50,7 +55,7 @@ public class DadosBancarios extends BaseEntity implements Serializable {
     @Column(name = "DT_ULT_ATULZ", nullable = false, columnDefinition = ConstantesBanco.DATE)
     @Temporal(TemporalType.DATE)
     private Date dataUltimaAtualizacao;
-    
+
 
     //GETTERS E SETTERS
     
@@ -110,15 +115,9 @@ public class DadosBancarios extends BaseEntity implements Serializable {
         this.indAtivo = indAtivo;
     }
 
-    public Date getDataAtulizacao() {
-        return dataUltimaAtualizacao;
-    }
-
-    public void setDataAtulizacao(Date dataUltimaAtualizacao) {
-        this.dataUltimaAtualizacao = dataUltimaAtualizacao;
-    }
-
-
+	/**
+	 * @return the dataUltimaAtualizacao
+	 */
 	public Date getDataUltimaAtualizacao() {
 		return dataUltimaAtualizacao;
 	}
@@ -129,5 +128,4 @@ public class DadosBancarios extends BaseEntity implements Serializable {
 	public void setDataUltimaAtualizacao(Date dataUltimaAtualizacao) {
 		this.dataUltimaAtualizacao = dataUltimaAtualizacao;
 	}
-
 }

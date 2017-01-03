@@ -4,12 +4,14 @@ import java.io.Serializable;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
+
+import org.hibernate.envers.AuditTable;
+import org.hibernate.envers.Audited;
+import org.hibernate.envers.NotAudited;
 import org.pasa.sispasa.core.constants.ConstantesBanco;
 
 /**
@@ -19,22 +21,36 @@ import org.pasa.sispasa.core.constants.ConstantesBanco;
  */
 @Entity
 @Table(name = "MUNICIPIO")
+@Audited
+@AuditTable(value="HIST_MUNICIPIO")
 public class Municipio extends BaseEntity implements Serializable {
 
 	private static final long serialVersionUID = 1L;
 
 	@Id
 	@Column(name = "ID_MUNICIPIO", columnDefinition = ConstantesBanco.BIGINT)
-	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
 
-	@Column(name = "NOME", nullable = false, length = 30)
+	@Column(name = "NOME", nullable = false, length = 50)
 	private String nome;
 
-	@ManyToOne()
+	//RELACIONAMENTOS
+	
+	@ManyToOne
 	@JoinColumn(name = "ID_ESTADO")
+	@NotAudited
 	private Estado estado;
 
+	//CONSTRUTORES
+	
+	public Municipio(){
+		//CONSTRUTOR DEFAULT
+	}
+	
+	public Municipio(Long id){
+		this.id = id;
+	}
+	
 	//GETTERS E SETTERS
 	
 	public Long getId() {

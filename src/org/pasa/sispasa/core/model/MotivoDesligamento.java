@@ -1,3 +1,4 @@
+
 package org.pasa.sispasa.core.model;
 
 import java.io.Serializable;
@@ -8,6 +9,7 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
+
 import org.pasa.sispasa.core.constants.ConstantesBanco;
 
 /**
@@ -29,13 +31,14 @@ public class MotivoDesligamento extends BaseEntity implements Serializable {
 	@Column(name = "DESCRICAO", length = 60)
 	private String descricao;
 
+	//CONSTRUTORES
+	
 	public MotivoDesligamento() {
 		//CONSTRUTOR DEFAULT
 	}
 	
-	public MotivoDesligamento(Long id, String descricao) {
+	public MotivoDesligamento(Long id) {
 		this.id = id;
-		this.descricao = descricao;
 	}
 
 	

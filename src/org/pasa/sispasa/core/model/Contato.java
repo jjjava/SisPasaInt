@@ -17,16 +17,22 @@ import javax.persistence.ManyToMany;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
+
+import org.hibernate.envers.AuditTable;
+import org.hibernate.envers.Audited;
+import org.hibernate.envers.NotAudited;
 import org.pasa.sispasa.core.constants.ConstantesBanco;
 
 /**
  *
- * @author Hudson Schumaker
+ * @author Hudson Schumaker / Andre Gomes
  * @version 1.0.0
  */
 @Entity
 @Table(name = "CONTATO")
-public class Contato implements Serializable {
+@Audited
+@AuditTable(value="HIST_CONTATO")
+public class Contato extends BaseEntity implements Serializable {
 
     private static final long serialVersionUID = 1L;
 
@@ -35,10 +41,10 @@ public class Contato implements Serializable {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @Column(name = "NOME", nullable = false, columnDefinition = ConstantesBanco.CHAR_60)
+    @Column(name = "NOME", nullable = false, length = 60)
     private String nome;
 
-    @Column(name = "EMAIL",length =60)
+    @Column(name = "EMAIL",length = 60)
     private String email;
 
     @Column(name = "SETOR", length =30)
@@ -52,28 +58,31 @@ public class Contato implements Serializable {
 
     @Column(name = "DT_ULT_ATULZ", nullable = false)
     @Temporal(TemporalType.TIMESTAMP)
-    private Date dataUltAtulizacao;
+    private Date dataUltimaAtualizacao;
 
-    @ManyToMany(mappedBy = "contatos", cascade = CascadeType.ALL)
-    private List<Empresa> empresa;
-
-    @ManyToMany(mappedBy = "contatos", cascade = CascadeType.ALL)
-    private List<OperadoraReciprocidade> operadoraReciprocidades;
-
+    //RELACIONAMENTOS
+    
     @ManyToMany(cascade = CascadeType.ALL)
     @JoinTable(name = "CONTATO_TELEFONE",
             joinColumns = @JoinColumn(name = "ID_CONTATO"),
             inverseJoinColumns = @JoinColumn(name = "ID_TELEFONE"))
+    @NotAudited
     private List<Telefone> telefones;
 
+    //CONSTRUTORES
+    
     public Contato() {
         telefones = new ArrayList<>();
     }
+    
+   //METODOS ADD
     
     public void addTelefone(Telefone t){
         telefones.add(t);
     }
 
+    //GETTERS E SETTERS
+    
     public Long getId() {
         return id;
     }
@@ -122,30 +131,6 @@ public class Contato implements Serializable {
         this.indAtivo = indAtivo;
     }
 
-    public Date getDataUltAtulizacao() {
-        return dataUltAtulizacao;
-    }
-
-    public void setDataUltAtulizacao(Date dataUltAtulizacao) {
-        this.dataUltAtulizacao = dataUltAtulizacao;
-    }
-
-    public List<Empresa> getEmpresa() {
-        return empresa;
-    }
-
-    public void setEmpresa(List<Empresa> empresa) {
-        this.empresa = empresa;
-    }
-
-    public List<OperadoraReciprocidade> getOperadoraReciprocidades() {
-        return operadoraReciprocidades;
-    }
-
-    public void setOperadoraReciprocidades(List<OperadoraReciprocidade> operadoraReciprocidades) {
-        this.operadoraReciprocidades = operadoraReciprocidades;
-    }
-
     public List<Telefone> getTelefones() {
         return telefones;
     }
@@ -153,4 +138,12 @@ public class Contato implements Serializable {
     public void setTelefones(List<Telefone> telefones) {
         this.telefones = telefones;
     }
+
+	public Date getDataUltimaAtualizacao() {
+		return dataUltimaAtualizacao;
+	}
+
+	public void setDataUltimaAtualizacao(Date dataUltimaAtualizacao) {
+		this.dataUltimaAtualizacao = dataUltimaAtualizacao;
+	}
 }

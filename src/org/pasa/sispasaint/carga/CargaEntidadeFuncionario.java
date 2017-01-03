@@ -169,7 +169,7 @@ public class CargaEntidadeFuncionario {
         dadosBancarios.setConta(modelo.getContaCorrente());
         dadosBancarios.setTipoConta(SisPasaIntCommon.CONTACORRENTE);
         dadosBancarios.setIndAtivo(SisPasaIntCommon.ATIVO);
-        dadosBancarios.setDataAtulizacao(DateUtil.obterDataAtual());
+        dadosBancarios.setDataUltimaAtualizacao(DateUtil.obterDataAtual());
         dadosBancarios.setIdUsuario(SisPasaIntCommon.USER_CARGA);
         return dadosBancarios;
     }
@@ -187,5 +187,4 @@ public class CargaEntidadeFuncionario {
         origemInformacoes.setDescricao(EnumOrigemInformacoes.CARGA.getDescricao());
         return origemInformacoes;
     }
-    
 }

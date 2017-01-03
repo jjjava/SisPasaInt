@@ -2,6 +2,7 @@ package org.pasa.sispasa.core.model;
 
 import java.io.Serializable;
 import java.util.List;
+
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -13,6 +14,10 @@ import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
+
+import org.hibernate.envers.AuditTable;
+import org.hibernate.envers.Audited;
+import org.hibernate.envers.NotAudited;
 import org.pasa.sispasa.core.constants.ConstantesBanco;
 
 /**
@@ -23,6 +28,8 @@ import org.pasa.sispasa.core.constants.ConstantesBanco;
 
 @Entity
 @Table(name = "PLANO_RECIPROCIDADE")
+@Audited
+@AuditTable(value="HIST_PLANO_RECIPROCIDADE")
 public class PlanoReciprocidade implements Serializable {
 
 	private static final long serialVersionUID = 1L;
@@ -46,23 +53,34 @@ public class PlanoReciprocidade implements Serializable {
 
 	@Column(name = "IND_ATIVO", nullable = false, columnDefinition = ConstantesBanco.SMALLINT)
 	private Integer indAtivo;
+	
+	//RELACIONAMENTOS
 
 	@ManyToOne(cascade = CascadeType.ALL)
 	@JoinColumn(name = "ID_OPERADORA_RCP")
+	@NotAudited
 	private OperadoraReciprocidade OperadoraReciprocidade;
 
 	@ManyToOne(cascade = CascadeType.ALL)
 	@JoinColumn(name = "ID_TP_PLANO")
+	@NotAudited
 	private TipoPlano tipoPlano;
 
 	@ManyToMany(cascade = CascadeType.ALL)
 	@JoinTable(name = "CONVENIO_PLANO_RECIPROCIDADE", 
 	joinColumns = @JoinColumn(name = "ID_PLANO_RCP"), 
 	inverseJoinColumns = @JoinColumn(name = "ID_CONVENIO"))
+	@NotAudited
 	private List<Contato> contatos;
+	
+	//CONSTRUTORES
 
 	public PlanoReciprocidade() {
+		//CONSTRUTOR DEFAULT
 	}
+	
+	
+	//GETTERS E SETTERS
 
 	public Long getId() {
 		return id;

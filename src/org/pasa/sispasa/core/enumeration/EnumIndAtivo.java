@@ -1,7 +1,5 @@
 package org.pasa.sispasa.core.enumeration;
 
-import java.util.EnumSet;
-
 /**
  *
  * @author Andre Gomes
@@ -40,10 +38,6 @@ public enum EnumIndAtivo {
 		
 		return null;
 	}
-	
-	public static EnumSet<EnumIndAtivo> getAllIndAtivo() {
-        return EnumSet.of(ATIVO, INATIVO, TODOS);
-    }
 	
 	//getters e setters
     public int getIndice() {

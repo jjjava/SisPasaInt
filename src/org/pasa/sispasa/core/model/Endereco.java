@@ -2,19 +2,21 @@ package org.pasa.sispasa.core.model;
 
 import java.io.Serializable;
 import java.util.Date;
-import java.util.List;
-import javax.persistence.CascadeType;
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
-import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
+
+import org.hibernate.envers.AuditTable;
+import org.hibernate.envers.Audited;
+import org.hibernate.envers.NotAudited;
 import org.pasa.sispasa.core.constants.ConstantesBanco;
 
 /**
@@ -24,6 +26,8 @@ import org.pasa.sispasa.core.constants.ConstantesBanco;
  */
 @Entity
 @Table(name = "ENDERECO")
+@Audited
+@AuditTable(value="HIST_ENDERECO")
 public class Endereco extends BaseEntity implements Serializable {
 
     private static final long serialVersionUID = 1L;
@@ -49,8 +53,8 @@ public class Endereco extends BaseEntity implements Serializable {
     private String cep;
 
     @Column(name = "IND_ATIVO", nullable = false, columnDefinition = ConstantesBanco.SMALLINT)
-    private Integer indAtivo;
-
+	private Integer indAtivo;
+    
     @Column(name = "DT_ULT_ATULZ", nullable = false)
     @Temporal(TemporalType.TIMESTAMP)
     private Date dataUltimaAtualizacao;
@@ -58,21 +62,18 @@ public class Endereco extends BaseEntity implements Serializable {
     @Column(name = "ID_USUARIO", nullable = false, columnDefinition = ConstantesBanco.BIGINT)
     private Long idUsuario;
 
+    //RELACIONAMENTOS
+    
     @ManyToOne()
     @JoinColumn(name = "ID_MUNICIPIO")
+    @NotAudited
     private Municipio municipio;
 
     @ManyToOne()
     @JoinColumn(name = "ID_ESTADO")
+    @NotAudited
     private Estado estado;
-    
-    @ManyToMany(mappedBy = "enderecos", cascade = CascadeType.ALL)
-	private List<Pessoa> pessoa;
-    
-    @ManyToMany(mappedBy = "enderecos")
-    private List<Empresa> empresa;
 
-    
     //GETTERS E SETTERS
     
     public Long getId() {
@@ -123,14 +124,6 @@ public class Endereco extends BaseEntity implements Serializable {
         this.cep = cep;
     }
 
-    public int getIndAtivo() {
-        return indAtivo;
-    }
-
-    public void setIndAtivo(int indAtivo) {
-        this.indAtivo = indAtivo;
-    }
-
     public Municipio getMunicipio() {
         return municipio;
     }
@@ -146,21 +139,6 @@ public class Endereco extends BaseEntity implements Serializable {
     public void setEstado(Estado estado) {
         this.estado = estado;
     }
-
-    public List<Empresa> getEmpresa() {
-        return empresa;
-    }
-
-    public void setEmpresa(List<Empresa> empresa) {
-        this.empresa = empresa;
-    }
-
-	/**
-	 * @param indAtivo the indAtivo to set
-	 */
-	public void setIndAtivo(Integer indAtivo) {
-		this.indAtivo = indAtivo;
-	}
 
 	/**
 	 * @return the dataUltimaAtualizacao
@@ -191,16 +169,16 @@ public class Endereco extends BaseEntity implements Serializable {
 	}
 
 	/**
-	 * @return the pessoa
+	 * @return the indAtivo
 	 */
-	public List<Pessoa> getPessoa() {
-		return pessoa;
+	public Integer getIndAtivo() {
+		return indAtivo;
 	}
 
 	/**
-	 * @param pessoa the pessoa to set
+	 * @param indAtivo the indAtivo to set
 	 */
-	public void setPessoa(List<Pessoa> pessoa) {
-		this.pessoa = pessoa;
+	public void setIndAtivo(Integer indAtivo) {
+		this.indAtivo = indAtivo;
 	}
 }

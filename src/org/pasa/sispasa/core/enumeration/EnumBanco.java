@@ -1,7 +1,5 @@
 package org.pasa.sispasa.core.enumeration;
 
-import java.util.EnumSet;
-
 /**
  *
  * @author Andre Gomes
@@ -26,7 +24,7 @@ public enum EnumBanco {
 	 * @return
 	 */
 	public static EnumBanco getBancoByIndice(String indice){
-		for (EnumBanco enumBanco : getAllBanco()) {
+		for (EnumBanco enumBanco : EnumBanco.values()) {
 			if(indice.equals(enumBanco.getIndice())){
 				return enumBanco;
 			}
@@ -34,13 +32,6 @@ public enum EnumBanco {
 		return null;
 	}
 	
-	/**
-	 * 
-	 * @return
-	 */
-	public static EnumSet<EnumBanco> getAllBanco() {
-        return EnumSet.of(ITAU, BRADESCO, SANTANDER);
-    }
 	
 	//getters e setters
     public String getIndice() {

@@ -21,7 +21,11 @@ import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 
+import org.hibernate.envers.AuditTable;
+import org.hibernate.envers.Audited;
+import org.hibernate.envers.NotAudited;
 import org.pasa.sispasa.core.constants.ConstantesBanco;
+import org.pasa.sispasa.core.enumeration.EnumTipoTelefone;
 
 /**
  *
@@ -31,6 +35,8 @@ import org.pasa.sispasa.core.constants.ConstantesBanco;
 @Entity
 @Table(name = "PESSOA")
 @Inheritance(strategy = InheritanceType.JOINED)
+@Audited
+@AuditTable(value="HIST_PESSOA")
 public class Pessoa extends BaseEntity implements Serializable {
 
     private static final long serialVersionUID = 1L;
@@ -80,48 +86,62 @@ public class Pessoa extends BaseEntity implements Serializable {
     @Column(name = "ID_CONCL_ESCOL", nullable = false, columnDefinition = ConstantesBanco.SMALLINT)
     private Integer indConclusaoEscolaridade;
 
+    //RELACIONAMENTOS
+    
     @ManyToMany(cascade=CascadeType.ALL)
     @JoinTable(name = "PESSOA_ENDERECO",
-            joinColumns = @JoinColumn(name = "ID_PESSOA",  columnDefinition = ConstantesBanco.BIGINT),
-            inverseJoinColumns = @JoinColumn(name = "ID_ENDERECO",  columnDefinition = ConstantesBanco.BIGINT))
+            joinColumns = @JoinColumn(name = "ID_PESSOA"),
+            inverseJoinColumns = @JoinColumn(name = "ID_ENDERECO"))
+    @NotAudited
     private List<Endereco> enderecos;
 
     @ManyToMany(cascade=CascadeType.ALL)
     @JoinTable(name = "PESSOA_TELEFONE",
-            joinColumns = @JoinColumn(name = "ID_PESSOA",  columnDefinition = ConstantesBanco.BIGINT),
-            inverseJoinColumns = @JoinColumn(name = "ID_TELEFONE",  columnDefinition = ConstantesBanco.BIGINT))
+            joinColumns = @JoinColumn(name = "ID_PESSOA"),
+            inverseJoinColumns = @JoinColumn(name = "ID_TELEFONE"))
+    @NotAudited
     private List<Telefone> telefones;
 
     @ManyToMany(cascade = CascadeType.ALL)
     @JoinTable(name = "DOCUMENTO_PESSOA",
-            joinColumns = @JoinColumn(name = "ID_PESSOA",  columnDefinition = ConstantesBanco.BIGINT),
-            inverseJoinColumns = @JoinColumn(name = "ID_DOCUMENTO",  columnDefinition = ConstantesBanco.BIGINT))
+            joinColumns = @JoinColumn(name = "ID_PESSOA"),
+            inverseJoinColumns = @JoinColumn(name = "ID_DOCUMENTO"))
+    @NotAudited
     private List<Documento> documentos;
     
-    @ManyToOne()
+    @ManyToOne
     @JoinColumn(name = "ID_PAIS")
+    @NotAudited
     private Pais nacionalidade;
 
-    @ManyToOne()
+    @ManyToOne
     @JoinColumn(name = "ID_ESTADO")
+    @NotAudited
     private Estado naturalidade;
 
-    @ManyToOne()
+    @ManyToOne
     @JoinColumn(name = "ID_MUNICIPIO")
+    @NotAudited
     private Municipio cidadeOrigem;
 
-    @ManyToOne()
+    @ManyToOne
     @JoinColumn(name = "ID_NIVEL_ESCOL")
+    @NotAudited
     private NivelEscolaridade nivelEscolaridade;
     
 
-    @ManyToOne()
+    @ManyToOne
     @JoinColumn(name = "ID_ORIGEM_INFO", nullable = false)
+    @NotAudited
     private OrigemInformacoes origemInformacoes;
     
-    @ManyToOne()
+    @ManyToOne
     @JoinColumn(name = "ID_ESTADO_CIVIL")
+    @NotAudited
     private EstadoCivil estadoCivil;
+    
+    
+  //CONSTRUTORES
     
     public Pessoa() {
         telefones = new ArrayList<>();
@@ -129,7 +149,7 @@ public class Pessoa extends BaseEntity implements Serializable {
         documentos = new ArrayList<>();
     }
 
-    //GETTERS E SETTERS
+   //METODOS ADD
     
     public void addTelefone(Telefone t){
         telefones.add(t);
@@ -142,6 +162,35 @@ public class Pessoa extends BaseEntity implements Serializable {
     public void addDocumento(Documento d){
         documentos.add(d);
     }
+        
+    public Telefone getTelefoneResidencial() {    	
+    	for (Telefone tel : telefones) {			
+    		if(tel.getTipoTelefone().getId().equals(EnumTipoTelefone.RESIDENCIAL.getId())) {
+    			return tel;
+    		}
+		}
+    	return null;
+    }
+
+	public Telefone getTelefoneComercial() {
+		for (Telefone tel : telefones) {
+			if (tel.getTipoTelefone().getId().equals(EnumTipoTelefone.COMERCIAL.getId())) {
+				return tel;
+			}
+		}
+		return null;
+	}
+
+	public Telefone getTelefoneCelular() {
+		for (Telefone tel : telefones) {
+			if (tel.getTipoTelefone().getId().equals(EnumTipoTelefone.CELULAR.getId())) {
+				return tel;
+			}
+		}
+		return null;
+	}
+
+   //GETTERS E SETTERS
     
     @Override
     public Long getId() {

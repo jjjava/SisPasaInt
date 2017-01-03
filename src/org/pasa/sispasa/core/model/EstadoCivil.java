@@ -1,12 +1,14 @@
 package org.pasa.sispasa.core.model;
 
 import java.io.Serializable;
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
+
 import org.pasa.sispasa.core.constants.ConstantesBanco;
 
 /**
@@ -28,15 +30,15 @@ public class EstadoCivil implements Serializable {
 	@Column(name = "DESCRICAO", nullable = false, length = 30)
 	private String descricao;
 
+	//CONSTRUTORES
+	
 	public EstadoCivil() {
 		//CONSTRUTOR DEFAULT
 	}
 	
-	public EstadoCivil(Long id, String descricao) {
+	public EstadoCivil(Long id) {
 		this.id = id;
-		this.descricao = descricao;
 	}
-	
 	
 	//GETTERS E SETTERS
 	

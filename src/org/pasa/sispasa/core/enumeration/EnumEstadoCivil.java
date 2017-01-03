@@ -1,7 +1,5 @@
 package org.pasa.sispasa.core.enumeration;
 
-import java.util.EnumSet;
-
 /**
  *
  * @author Andre Gomes
@@ -27,9 +25,9 @@ public enum EnumEstadoCivil {
 	 * @param indice
 	 * @return
 	 */
-	public static EnumEstadoCivil getEstadoCivilByIndice(int indice){
-		
-		switch (indice) {
+	public static EnumEstadoCivil getEstadoCivilByIndice(Long indice){
+
+		switch (indice.intValue()) {
 			
 			case 1:
 				return EnumEstadoCivil.SOLTEIRO;
@@ -49,17 +47,8 @@ public enum EnumEstadoCivil {
 			default:
 				break;
 		}
-		
 		return null;
 	}
-	
-	/**
-	 * 
-	 * @return
-	 */
-	public static EnumSet<EnumEstadoCivil> getAllEstadoCivil() {
-        return EnumSet.of(SOLTEIRO, CASADO, DIVORCIADO, DESQUITADO, VIUVO );
-    }
 	
 	//getters e setters
     public Long getIndice() {

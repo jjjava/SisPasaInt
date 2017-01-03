@@ -1,28 +1,34 @@
 package org.pasa.sispasa.core.model;
 
 import java.io.Serializable;
-import java.util.Set;
-import javax.persistence.CascadeType;
+import java.util.Date;
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
-import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.ManyToMany;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
+import javax.persistence.Temporal;
+import javax.persistence.TemporalType;
+
+import org.hibernate.envers.AuditTable;
+import org.hibernate.envers.Audited;
+import org.hibernate.envers.NotAudited;
 import org.pasa.sispasa.core.constants.ConstantesBanco;
+import org.pasa.sispasa.core.enumeration.EnumIndAtivo;
 
 /**
  *
- * @author Hudson Schumaker
+ * @author Hudson Schumaker / Andre Gomes
  * @version 1.0.0
  */
 @Entity
 @Table(name = "TELEFONE")
-public class Telefone implements Serializable {
+@Audited
+@AuditTable(value="HIST_TELEFONE")
+public class Telefone extends BaseEntity implements Serializable {
 
     private static final long serialVersionUID = 1L;
 
@@ -41,22 +47,22 @@ public class Telefone implements Serializable {
     private String ramal;
 
     @Column(name = "IND_ATIVO", nullable = false, columnDefinition = ConstantesBanco.SMALLINT)
-    private Integer indAtivo;
+    private Integer indAtivo = EnumIndAtivo.ATIVO.getIndice();
     
     @Column(name = "ID_USUARIO", nullable = false, columnDefinition = ConstantesBanco.BIGINT)
     private Long idUsuario;
+    
+    @Column(name = "DT_ULT_ATULZ", nullable = false)
+	@Temporal(TemporalType.TIMESTAMP)
+	private Date dataUltimaAtualizacao;
 
+    
+   //RELACIONAMENTOS
+    
 	@OneToOne
-	@JoinColumn(name = "ID_TP_TELEFONE")
+	@NotAudited
 	private TipoTelefone tipoTelefone;
 	
-	@ManyToMany(mappedBy = "telefones", cascade = CascadeType.ALL, fetch=FetchType.EAGER)
-	private Set<Contato> contatos;
-
-	@ManyToMany(mappedBy = "telefones", cascade = CascadeType.ALL, fetch=FetchType.EAGER)
-	private Set<Pessoa> pessoa;
-    
-
 	//GETTERS E SETTERS
     
 	public Long getId() {
@@ -106,36 +112,7 @@ public class Telefone implements Serializable {
     public void setTipoTelefone(TipoTelefone tipoTelefone) {
         this.tipoTelefone = tipoTelefone;
     }
-
-	/**
-	 * @return the contatos
-	 */
-	public Set<Contato> getContatos() {
-		return contatos;
-	}
-
-	/**
-	 * @param contatos the contatos to set
-	 */
-	public void setContatos(Set<Contato> contatos) {
-		this.contatos = contatos;
-	}
-
-	/**
-	 * @return the pessoa
-	 */
-	public Set<Pessoa> getPessoa() {
-		return pessoa;
-	}
-
-	/**
-	 * @param pessoa the pessoa to set
-	 */
-	public void setPessoa(Set<Pessoa> pessoa) {
-		this.pessoa = pessoa;
-	}
-
-	/**
+	/**
 	 * @return the idUsuario
 	 */
 	public Long getIdUsuario() {
@@ -147,6 +124,20 @@ public class Telefone implements Serializable {
 	 */
 	public void setIdUsuario(Long idUsuario) {
 		this.idUsuario = idUsuario;
+	}
+
+	/**
+	 * @return the dataUltimaAtualizacao
+	 */
+	public Date getDataUltimaAtualizacao() {
+		return dataUltimaAtualizacao;
+	}
+
+	/**
+	 * @param dataUltimaAtualizacao the dataUltimaAtualizacao to set
+	 */
+	public void setDataUltimaAtualizacao(Date dataUltimaAtualizacao) {
+		this.dataUltimaAtualizacao = dataUltimaAtualizacao;
 	}
 
 }

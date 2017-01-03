@@ -2,22 +2,21 @@ package org.pasa.sispasa.core.model;
 
 import java.io.Serializable;
 import java.util.Date;
-import java.util.Set;
 
-import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
-import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
-import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 
+import org.hibernate.envers.AuditTable;
+import org.hibernate.envers.Audited;
+import org.hibernate.envers.NotAudited;
 import org.pasa.sispasa.core.constants.ConstantesBanco;
 
 /**
@@ -27,6 +26,8 @@ import org.pasa.sispasa.core.constants.ConstantesBanco;
  */
 @Entity
 @Table(name = "DOCUMENTO")
+@Audited
+@AuditTable(value="HIST_DOCUMENTO")
 public class Documento extends BaseEntity implements Serializable {
 
 	private static final long serialVersionUID = 1L;
@@ -60,17 +61,21 @@ public class Documento extends BaseEntity implements Serializable {
 	@Temporal(TemporalType.TIMESTAMP)
 	private Date dataUltimaAtualizacao;
 	
+	@Column(name = "IND_ATIVO", nullable = false, columnDefinition = ConstantesBanco.SMALLINT)
+	private Integer indAtivo;
+
+	//RELACIONAMENTOS
+	
 	@ManyToOne()
 	@JoinColumn(name = "ID_ESTADO")
+	@NotAudited
 	private Estado estado;
 
 	@ManyToOne()
 	@JoinColumn(name = "ID_TP_DOCUMENTO")
+	@NotAudited
 	private TipoDocumento tipoDocumento;
 	
-    @ManyToMany(mappedBy = "documentos", cascade = CascadeType.ALL, fetch=FetchType.EAGER)
-	private Set<Pessoa> pessoa;
-
 	
 	//GETTERS E SETTERS
 	
@@ -159,21 +164,32 @@ public class Documento extends BaseEntity implements Serializable {
 		this.idUsuario = idUsuario;
 	}
 
+	/**
+	 * @return the dataUltimaAtualizacao
+	 */
 	public Date getDataUltimaAtualizacao() {
 		return dataUltimaAtualizacao;
 	}
 
+	/**
+	 * @param dataUltimaAtualizacao the dataUltimaAtualizacao to set
+	 */
 	public void setDataUltimaAtualizacao(Date dataUltimaAtualizacao) {
 		this.dataUltimaAtualizacao = dataUltimaAtualizacao;
 	}
 
-	public Set<Pessoa> getPessoa() {
-		return pessoa;
+	/**
+	 * @return the indAtivo
+	 */
+	public Integer getIndAtivo() {
+		return indAtivo;
 	}
 
-	public void setPessoa(Set<Pessoa> pessoa) {
-		this.pessoa = pessoa;
+	/**
+	 * @param indAtivo the indAtivo to set
+	 */
+	public void setIndAtivo(Integer indAtivo) {
+		this.indAtivo = indAtivo;
 	}
-
 
 }

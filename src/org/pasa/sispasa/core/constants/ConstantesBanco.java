@@ -6,7 +6,7 @@ package org.pasa.sispasa.core.constants;
 /**
  * @author Andre Gomes
  * @author Hudson Schumaker
- * @version 1.0.0
+ *
  */
 public final class ConstantesBanco {
 

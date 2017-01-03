@@ -8,6 +8,9 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
+
+import org.hibernate.envers.AuditTable;
+import org.hibernate.envers.Audited;
 import org.pasa.sispasa.core.constants.ConstantesBanco;
 
 /**
@@ -17,6 +20,8 @@ import org.pasa.sispasa.core.constants.ConstantesBanco;
  */
 @Entity
 @Table(name = "CONVENIO_RECIPROCIDADE")
+@Audited
+@AuditTable(value="HIST_CONVENIO_RECIPROCIDADE")
 public class ConvenioReciprocidade implements Serializable {
 
     private static final long serialVersionUID = 1L;
@@ -26,9 +31,14 @@ public class ConvenioReciprocidade implements Serializable {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
+    //CONSTRUTORES
+    
     public ConvenioReciprocidade() {
+    	//CONSTRUTOR DEFAULT
     }
 
+   //GETTERS E SETTERS
+    
     public Long getId() {
         return id;
     }

@@ -3,7 +3,6 @@ package org.pasa.sispasa.core.model;
 import java.io.Serializable;
 import java.util.Date;
 
-import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -14,15 +13,21 @@ import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
+
+import org.hibernate.envers.AuditTable;
+import org.hibernate.envers.Audited;
+import org.hibernate.envers.NotAudited;
 import org.pasa.sispasa.core.constants.ConstantesBanco;
 
 /**
  *
- * @author Hudson Schumaker
+ * @author Hudson Schumaker / Andre Gomes
  * @version 1.0.0
  */
 @Entity
 @Table(name = "CONVENIO")
+@Audited
+@AuditTable(value="HIST_CONVENIO")
 public class Convenio implements Serializable {
 
     private static final long serialVersionUID = 1L;
@@ -45,6 +50,9 @@ public class Convenio implements Serializable {
 
     @Column(name = "QTD_DIAS_ADESAO", columnDefinition = ConstantesBanco.SMALLINT)
     private Integer qtdDiasAdesao;
+    
+    @Column(name = "IND_CONV_PRINCIP", columnDefinition = ConstantesBanco.SMALLINT)
+    private Integer indConvenioPrincipal;
 
     @Column(name = "IND_PARTICIP_TAXA_ASSOC", nullable = false, columnDefinition = ConstantesBanco.SMALLINT)
     private Integer indParticipacaoTaxaAssociado;
@@ -57,7 +65,16 @@ public class Convenio implements Serializable {
 
     @Column(name = "IND_CONTRIB_DEPEN", nullable = false, columnDefinition = ConstantesBanco.SMALLINT)
     private Integer indContribDependente;
+    
+    @Column(name = "IND_COPARTICIP_ASSOC", nullable = false, columnDefinition = ConstantesBanco.SMALLINT)
+    private Integer indCoparticipacaoAssociado;
 
+    @Column(name = "IND_COPARTICIP_AGREG", nullable = false, columnDefinition = ConstantesBanco.SMALLINT)
+    private Integer indCoparticipacaoAgregado;
+
+    @Column(name = "IND_COPARTICIP_DEPEN", nullable = false, columnDefinition = ConstantesBanco.SMALLINT)
+    private Integer indCoparticipacaoDependente;
+    
     @Column(name = "ID_USUARIO", nullable = false, columnDefinition = ConstantesBanco.BIGINT)
     private Long idUsuario;
 
@@ -67,23 +84,32 @@ public class Convenio implements Serializable {
     @Column(name = "DT_ULT_ATULZ", nullable = false)
     @Temporal(TemporalType.TIMESTAMP)
     private Date dataUltimaAtualizacao;
+    
+   //RELACIONAMENTOS
 
-    @ManyToOne(cascade = CascadeType.ALL)
+    @ManyToOne
     @JoinColumn(name = "ID_TP_PAGAMENTO")
+    @NotAudited
     private TipoPagamento tipoPagamento;
 
-    @ManyToOne(cascade = CascadeType.ALL)
+    @ManyToOne
     @JoinColumn(name = "ID_TP_PARTICIP")
+    @NotAudited
     private TipoParticipacao tipoParticipacao;
 
-    @ManyToOne(cascade = CascadeType.ALL)
+    @ManyToOne
     @JoinColumn(name = "ID_EMPRESA")
+    @NotAudited
     private Empresa empresa;
 
-    @ManyToOne(cascade = CascadeType.ALL)
+    @ManyToOne
     @JoinColumn(name = "ID_CONTRATO")
+    @NotAudited
     private Contrato contrato;
 
+    
+    //GETTERS E SETTERS
+    
     public Long getId() {
         return id;
     }
@@ -172,14 +198,6 @@ public class Convenio implements Serializable {
         this.indAtivo = indAtivo;
     }
 
-    public Date getDataUltAtulizacao() {
-        return dataUltimaAtualizacao;
-    }
-
-    public void setDataUltAtulizacao(Date dataUltimaAtualizacao) {
-        this.dataUltimaAtualizacao = dataUltimaAtualizacao;
-    }
-
     public TipoPagamento getTipoPagamento() {
         return tipoPagamento;
     }
@@ -211,4 +229,44 @@ public class Convenio implements Serializable {
     public void setContrato(Contrato contrato) {
         this.contrato = contrato;
     }
+
+	public Integer getIndConvenioPrincipal() {
+		return indConvenioPrincipal;
+	}
+
+	public void setIndConvenioPrincipal(Integer indConvenioPrincipal) {
+		this.indConvenioPrincipal = indConvenioPrincipal;
+	}
+
+	public Integer getIndCoparticipacaoAssociado() {
+		return indCoparticipacaoAssociado;
+	}
+
+	public void setIndCoparticipacaoAssociado(Integer indCoparticipacaoAssociado) {
+		this.indCoparticipacaoAssociado = indCoparticipacaoAssociado;
+	}
+
+	public Integer getIndCoparticipacaoAgregado() {
+		return indCoparticipacaoAgregado;
+	}
+
+	public void setIndCoparticipacaoAgregado(Integer indCoparticipacaoAgregado) {
+		this.indCoparticipacaoAgregado = indCoparticipacaoAgregado;
+	}
+
+	public Integer getIndCoparticipacaoDependente() {
+		return indCoparticipacaoDependente;
+	}
+
+	public void setIndCoparticipacaoDependente(Integer indCoparticipacaoDependente) {
+		this.indCoparticipacaoDependente = indCoparticipacaoDependente;
+	}
+
+	public Date getDataUltimaAtualizacao() {
+		return dataUltimaAtualizacao;
+	}
+
+	public void setDataUltimaAtualizacao(Date dataUltimaAtualizacao) {
+		this.dataUltimaAtualizacao = dataUltimaAtualizacao;
+	}
 }

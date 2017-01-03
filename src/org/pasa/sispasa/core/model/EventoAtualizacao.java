@@ -2,6 +2,7 @@ package org.pasa.sispasa.core.model;
 
 import java.io.Serializable;
 import java.util.Date;
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -10,6 +11,7 @@ import javax.persistence.Id;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
+
 import org.pasa.sispasa.core.constants.ConstantesBanco;
 
 /**
@@ -38,9 +40,14 @@ public class EventoAtualizacao implements Serializable {
 	@Temporal(TemporalType.TIMESTAMP)
 	private Date dataUltimaAtualizacao;
 
+	//CONSTRUTORES
+	
 	public EventoAtualizacao() {
+		//CONSTRUTOR DEFAULT
 	}
 
+	//GETTERS E SETTERS
+	
 	public Long getId() {
 		return id;
 	}

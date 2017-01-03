@@ -1,12 +1,14 @@
 package org.pasa.sispasa.core.model;
 
 import java.io.Serializable;
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
+
 import org.pasa.sispasa.core.constants.ConstantesBanco;
 
 /**
@@ -30,10 +32,16 @@ public class GrauParentesco implements Serializable {
 
     @Column(name = "CD_EXTERNO", columnDefinition = ConstantesBanco.CHAR_1)
     private String codExterno;
-
+    
+    
+   //CONSTRUTORES
+    
     public GrauParentesco() {
+    	//CONSTRUTOR DEFAULT
     }
 
+    //GETTERS E SETTERS
+    
     public Long getId() {
         return id;
     }

@@ -1,7 +1,5 @@
 package org.pasa.sispasa.core.enumeration;
 
-import java.util.EnumSet;
-
 /**
  *
  * @author Andre Gomes
@@ -44,14 +42,6 @@ public enum EnumOrigemInformacoes {
 		
 		return null;
 	}
-	
-	/**
-	 * 
-	 * @return
-	 */
-	public static EnumSet<EnumOrigemInformacoes> getAllOrigemInformacoes() {
-        return EnumSet.of(MANUAL, CARGA, MANUAL_JUDICIAL, CARGA_JUDICIAL);
-    }
 	
 	//getters e setters
     public Long getIndice() {
