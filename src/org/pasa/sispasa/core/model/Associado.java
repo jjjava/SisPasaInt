@@ -117,6 +117,7 @@ public class Associado extends BaseEntity {
     @NotAudited
     private SituacaoAssociado situacaoAssociado;
 
+    @Override
     public Long getId() {
         return id;
     }
