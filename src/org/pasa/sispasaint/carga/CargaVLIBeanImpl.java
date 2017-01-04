@@ -234,7 +234,7 @@ public class CargaVLIBeanImpl implements CargaVLIBean {
         operadora.setDataUltAtulizacao(DateUtil.obterDataAtual());
         operadora.setNome(EnunOperadora.AMS.getDescricao());
         plano.setCodPlano(modeloBenVLI.getPlano());
-        plano.setOperadora(operadora);
+      //  plano.set(operadora);
         plano.setIdUsuario(1L);
         plano.setDataUltimaAtualizacao(DateUtil.obterDataAtual());
         return plano;

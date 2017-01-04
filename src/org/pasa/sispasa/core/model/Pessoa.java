@@ -25,6 +25,7 @@ import org.hibernate.envers.AuditTable;
 import org.hibernate.envers.Audited;
 import org.hibernate.envers.NotAudited;
 import org.pasa.sispasa.core.constants.ConstantesBanco;
+import org.pasa.sispasa.core.enumeration.EnumTipoDocumento;
 import org.pasa.sispasa.core.enumeration.EnumTipoTelefone;
 
 /**
@@ -36,141 +37,160 @@ import org.pasa.sispasa.core.enumeration.EnumTipoTelefone;
 @Table(name = "PESSOA")
 @Inheritance(strategy = InheritanceType.JOINED)
 @Audited
-@AuditTable(value="HIST_PESSOA")
+@AuditTable(value = "HIST_PESSOA")
 public class Pessoa extends BaseEntity implements Serializable {
 
-    private static final long serialVersionUID = 1L;
-    
-    @Id
-    @Column(name = "ID_PESSOA", columnDefinition = ConstantesBanco.BIGINT)
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
-    
-    @Column(name = "CPF", columnDefinition = ConstantesBanco.CHAR_11)
-    private String cpf;
-    
-    @Column(name = "NOME", length = 60, nullable = false)
-    private String nome;
+	private static final long serialVersionUID = 1L;
 
-    @Column(name = "NM_ABREVIADO", length = 60)
-    private String nomeAbreviado;
+	@Id
+	@Column(name = "ID_PESSOA", columnDefinition = ConstantesBanco.BIGINT)
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	private Long id;
 
-    @Column(name = "DT_NASCIMENTO", nullable = false, columnDefinition = ConstantesBanco.DATE)
-    @Temporal(TemporalType.DATE)
-    private Date dataNascimento;
+	@Column(name = "CPF", columnDefinition = ConstantesBanco.CHAR_11)
+	private String cpf;
 
-    @Column(name = "DT_OBITO", columnDefinition = ConstantesBanco.DATE)
-    @Temporal(TemporalType.DATE)
-    private Date dataObito;
+	@Column(name = "NOME", length = 60, nullable = false)
+	private String nome;
 
-    @Column(name = "DT_INCLUSAO_SISTEMA", columnDefinition = ConstantesBanco.DATE, nullable=false)
-    @Temporal(TemporalType.DATE)
-    private Date dataInclusaoSistema;
+	@Column(name = "NM_ABREVIADO", length = 60)
+	private String nomeAbreviado;
 
-    @Column(name = "DT_INATIVACAO", columnDefinition = ConstantesBanco.DATE)
-    @Temporal(TemporalType.DATE)
-    private Date dataIn;
+	@Column(name = "DT_NASCIMENTO", nullable = false, columnDefinition = ConstantesBanco.DATE)
+	@Temporal(TemporalType.DATE)
+	private Date dataNascimento;
 
-    @Column(name = "SEXO", columnDefinition = ConstantesBanco.CHAR_1)
-    private String sexo;
-	
-    @Column(name = "NM_MAE", length = 60, nullable = false)
-    private String nomeMae;
+	@Column(name = "DT_OBITO", columnDefinition = ConstantesBanco.DATE)
+	@Temporal(TemporalType.DATE)
+	private Date dataObito;
 
-    @Column(name = "NM_PAI", length = 60)
-    private String nomePai;
+	@Column(name = "DT_INCLUSAO_SISTEMA", columnDefinition = ConstantesBanco.DATE, nullable = false)
+	@Temporal(TemporalType.DATE)
+	private Date dataInclusaoSistema;
 
-    @Column(name = "EMAIL", length = 60)
-    private String email;
+	@Column(name = "DT_INATIVACAO", columnDefinition = ConstantesBanco.DATE)
+	@Temporal(TemporalType.DATE)
+	private Date dataIn;
 
-    @Column(name = "ID_CONCL_ESCOL", nullable = false, columnDefinition = ConstantesBanco.SMALLINT)
-    private Integer indConclusaoEscolaridade;
+	@Column(name = "SEXO", columnDefinition = ConstantesBanco.CHAR_1)
+	private String sexo;
 
-    //RELACIONAMENTOS
-    
-    @ManyToMany(cascade=CascadeType.ALL)
-    @JoinTable(name = "PESSOA_ENDERECO",
-            joinColumns = @JoinColumn(name = "ID_PESSOA"),
-            inverseJoinColumns = @JoinColumn(name = "ID_ENDERECO"))
-    @NotAudited
-    private List<Endereco> enderecos;
+	@Column(name = "NM_MAE", length = 60, nullable = false)
+	private String nomeMae;
 
-    @ManyToMany(cascade=CascadeType.ALL)
-    @JoinTable(name = "PESSOA_TELEFONE",
-            joinColumns = @JoinColumn(name = "ID_PESSOA"),
-            inverseJoinColumns = @JoinColumn(name = "ID_TELEFONE"))
-    @NotAudited
-    private List<Telefone> telefones;
+	@Column(name = "NM_PAI", length = 60)
+	private String nomePai;
 
-    @ManyToMany(cascade = CascadeType.ALL)
-    @JoinTable(name = "DOCUMENTO_PESSOA",
-            joinColumns = @JoinColumn(name = "ID_PESSOA"),
-            inverseJoinColumns = @JoinColumn(name = "ID_DOCUMENTO"))
-    @NotAudited
-    private List<Documento> documentos;
-    
-    @ManyToOne
-    @JoinColumn(name = "ID_PAIS")
-    @NotAudited
-    private Pais nacionalidade;
+	@Column(name = "EMAIL", length = 60)
+	private String email;
 
-    @ManyToOne
-    @JoinColumn(name = "ID_ESTADO")
-    @NotAudited
-    private Estado naturalidade;
+	@Column(name = "ID_CONCL_ESCOL", nullable = false, columnDefinition = ConstantesBanco.SMALLINT)
+	private Integer indConclusaoEscolaridade;
 
-    @ManyToOne
-    @JoinColumn(name = "ID_MUNICIPIO")
-    @NotAudited
-    private Municipio cidadeOrigem;
+	// RELACIONAMENTOS
 
-    @ManyToOne
-    @JoinColumn(name = "ID_NIVEL_ESCOL")
-    @NotAudited
-    private NivelEscolaridade nivelEscolaridade;
-    
+	@ManyToMany(cascade = CascadeType.ALL)
+	@JoinTable(name = "PESSOA_ENDERECO", joinColumns = @JoinColumn(name = "ID_PESSOA"), inverseJoinColumns = @JoinColumn(name = "ID_ENDERECO"))
+	@NotAudited
+	private List<Endereco> enderecos;
 
-    @ManyToOne
-    @JoinColumn(name = "ID_ORIGEM_INFO", nullable = false)
-    @NotAudited
-    private OrigemInformacoes origemInformacoes;
-    
-    @ManyToOne
-    @JoinColumn(name = "ID_ESTADO_CIVIL")
-    @NotAudited
-    private EstadoCivil estadoCivil;
-    
-    
-  //CONSTRUTORES
-    
-    public Pessoa() {
-        telefones = new ArrayList<>();
-        enderecos = new ArrayList<>();
-        documentos = new ArrayList<>();
-    }
+	@ManyToMany(cascade = CascadeType.ALL)
+	@JoinTable(name = "PESSOA_TELEFONE", joinColumns = @JoinColumn(name = "ID_PESSOA"), inverseJoinColumns = @JoinColumn(name = "ID_TELEFONE"))
+	@NotAudited
+	private List<Telefone> telefones;
 
-   //METODOS ADD
-    
-    public void addTelefone(Telefone t){
-        telefones.add(t);
-    }
-    
-    public void addEndereco(Endereco e){
-        enderecos.add(e);
-    }
-    
-    public void addDocumento(Documento d){
-        documentos.add(d);
-    }
-        
-    public Telefone getTelefoneResidencial() {    	
-    	for (Telefone tel : telefones) {			
-    		if(tel.getTipoTelefone().getId().equals(EnumTipoTelefone.RESIDENCIAL.getId())) {
-    			return tel;
-    		}
+	@ManyToMany(cascade = CascadeType.ALL)
+	@JoinTable(name = "DOCUMENTO_PESSOA", joinColumns = @JoinColumn(name = "ID_PESSOA"), inverseJoinColumns = @JoinColumn(name = "ID_DOCUMENTO"))
+	@NotAudited
+	private List<Documento> documentos;
+
+	@ManyToOne
+	@JoinColumn(name = "ID_PAIS")
+	@NotAudited
+	private Pais nacionalidade;
+
+	@ManyToOne
+	@JoinColumn(name = "ID_ESTADO")
+	@NotAudited
+	private Estado naturalidade;
+
+	@ManyToOne
+	@JoinColumn(name = "ID_MUNICIPIO")
+	@NotAudited
+	private Municipio cidadeOrigem;
+
+	@ManyToOne
+	@JoinColumn(name = "ID_NIVEL_ESCOL")
+	@NotAudited
+	private NivelEscolaridade nivelEscolaridade;
+
+	@ManyToOne
+	@JoinColumn(name = "ID_ORIGEM_INFO", nullable = false)
+	@NotAudited
+	private OrigemInformacoes origemInformacoes;
+
+	@ManyToOne
+	@JoinColumn(name = "ID_ESTADO_CIVIL")
+	@NotAudited
+	private EstadoCivil estadoCivil;
+
+	// CONSTRUTORES
+
+	public Pessoa() {
+		telefones = new ArrayList<>();
+		enderecos = new ArrayList<>();
+		documentos = new ArrayList<>();
+	}
+
+	// METODOS ADD
+
+	public void addTelefone(Telefone t) {
+		telefones.add(t);
+	}
+
+	public void addEndereco(Endereco e) {
+		enderecos.add(e);
+	}
+
+	public void addDocumento(Documento d) {
+		documentos.add(d);
+	}
+
+	public Documento getDocumentoRG() {
+		for (Documento documento : documentos) {
+			if (EnumTipoDocumento.RG.getIndice().equals(documento.getTipoDocumento().getId())) {
+				return documento;
+			}
 		}
-    	return null;
-    }
+		return null;
+	}
+
+	public Documento getDocumentoCTPS() {
+		for (Documento documento : documentos) {
+			if (EnumTipoDocumento.CTPS.getIndice().equals(documento.getTipoDocumento().getId())) {
+				return documento;
+			}
+		}
+		return null;
+	}
+
+	public Documento getDocumentoPIS() {
+		for (Documento documento : documentos) {
+			if (EnumTipoDocumento.PIS_PASEP.getIndice().equals(documento.getTipoDocumento().getId())) {
+				return documento;
+			}
+		}
+		return null;
+	}
+
+	public Telefone getTelefoneResidencial() {
+		for (Telefone tel : telefones) {
+			if (tel.getTipoTelefone().getId().equals(EnumTipoTelefone.RESIDENCIAL.getId())) {
+				return tel;
+			}
+		}
+		return null;
+	}
 
 	public Telefone getTelefoneComercial() {
 		for (Telefone tel : telefones) {
@@ -190,137 +210,136 @@ public class Pessoa extends BaseEntity implements Serializable {
 		return null;
 	}
 
-   //GETTERS E SETTERS
-    
-    @Override
-    public Long getId() {
-        return id;
-    }
+	// GETTERS E SETTERS
 
-    public void setId(Long id) {
-        this.id = id;
-    }
+	@Override
+	public Long getId() {
+		return id;
+	}
 
-    public String getNome() {
-        return nome;
-    }
+	public void setId(Long id) {
+		this.id = id;
+	}
 
-    public void setNome(String nome) {
-        this.nome = nome;
-    }
+	public String getNome() {
+		return nome;
+	}
 
-    public String getNomeAbreviado() {
-        return nomeAbreviado;
-    }
+	public void setNome(String nome) {
+		this.nome = nome;
+	}
 
-    public void setNomeAbreviado(String nomeAbreviado) {
-        this.nomeAbreviado = nomeAbreviado;
-    }
+	public String getNomeAbreviado() {
+		return nomeAbreviado;
+	}
 
-    public Date getDataNascimento() {
-        return dataNascimento;
-    }
+	public void setNomeAbreviado(String nomeAbreviado) {
+		this.nomeAbreviado = nomeAbreviado;
+	}
 
-    public void setDataNascimento(Date dataNascimento) {
-        this.dataNascimento = dataNascimento;
-    }
+	public Date getDataNascimento() {
+		return dataNascimento;
+	}
 
-    public Date getDataObito() {
-        return dataObito;
-    }
+	public void setDataNascimento(Date dataNascimento) {
+		this.dataNascimento = dataNascimento;
+	}
 
-    public void setDataObito(Date dataObito) {
-        this.dataObito = dataObito;
-    }
+	public Date getDataObito() {
+		return dataObito;
+	}
 
-    public Date getDataInclusaoSistema() {
-        return dataInclusaoSistema;
-    }
+	public void setDataObito(Date dataObito) {
+		this.dataObito = dataObito;
+	}
 
-    public void setDataInclusaoSistema(Date dataInclusaoSistema) {
-        this.dataInclusaoSistema = dataInclusaoSistema;
-    }
+	public Date getDataInclusaoSistema() {
+		return dataInclusaoSistema;
+	}
 
-    public Date getDataIn() {
-        return dataIn;
-    }
+	public void setDataInclusaoSistema(Date dataInclusaoSistema) {
+		this.dataInclusaoSistema = dataInclusaoSistema;
+	}
 
-    public void setDataIn(Date dataIn) {
-        this.dataIn = dataIn;
-    }
+	public Date getDataIn() {
+		return dataIn;
+	}
 
-    public String getCpf() {
-        return cpf;
-    }
+	public void setDataIn(Date dataIn) {
+		this.dataIn = dataIn;
+	}
 
-    public void setCpf(String cpf) {
-        this.cpf = cpf;
-    }
+	public String getCpf() {
+		return cpf;
+	}
 
-    public String getSexo() {
-        return sexo;
-    }
+	public void setCpf(String cpf) {
+		this.cpf = cpf;
+	}
 
-    public void setSexo(String sexo) {
-        this.sexo = sexo;
-    }
+	public String getSexo() {
+		return sexo;
+	}
 
-    public String getNomeMae() {
-        return nomeMae;
-    }
+	public void setSexo(String sexo) {
+		this.sexo = sexo;
+	}
 
-    public void setNomeMae(String nomeMae) {
-        this.nomeMae = nomeMae;
-    }
+	public String getNomeMae() {
+		return nomeMae;
+	}
 
-    public String getNomePai() {
-        return nomePai;
-    }
+	public void setNomeMae(String nomeMae) {
+		this.nomeMae = nomeMae;
+	}
 
-    public void setNomePai(String nomePai) {
-        this.nomePai = nomePai;
-    }
+	public String getNomePai() {
+		return nomePai;
+	}
 
-    public String getEmail() {
-        return email;
-    }
+	public void setNomePai(String nomePai) {
+		this.nomePai = nomePai;
+	}
 
-    public void setEmail(String email) {
-        this.email = email;
-    }
+	public String getEmail() {
+		return email;
+	}
 
-    public Integer getIndConclusaoEscolaridade() {
-        return indConclusaoEscolaridade;
-    }
+	public void setEmail(String email) {
+		this.email = email;
+	}
 
-    public void setIndConclusaoEscolaridade(Integer indConclusaoEscolaridade) {
-        this.indConclusaoEscolaridade = indConclusaoEscolaridade;
-    }
+	public Integer getIndConclusaoEscolaridade() {
+		return indConclusaoEscolaridade;
+	}
 
-    public NivelEscolaridade getNivelEscolaridade() {
-        return nivelEscolaridade;
-    }
+	public void setIndConclusaoEscolaridade(Integer indConclusaoEscolaridade) {
+		this.indConclusaoEscolaridade = indConclusaoEscolaridade;
+	}
 
-    public void setNivelEscolaridade(NivelEscolaridade nivelEscolaridade) {
-        this.nivelEscolaridade = nivelEscolaridade;
-    }
+	public NivelEscolaridade getNivelEscolaridade() {
+		return nivelEscolaridade;
+	}
 
-    public OrigemInformacoes getOrigemInformacoes() {
-        return origemInformacoes;
-    }
+	public void setNivelEscolaridade(NivelEscolaridade nivelEscolaridade) {
+		this.nivelEscolaridade = nivelEscolaridade;
+	}
 
-    public void setOrigemInformacoes(OrigemInformacoes origemInformacoes) {
-        this.origemInformacoes = origemInformacoes;
-    }
+	public OrigemInformacoes getOrigemInformacoes() {
+		return origemInformacoes;
+	}
 
-    public EstadoCivil getEstadoCivil() {
-        return estadoCivil;
-    }
+	public void setOrigemInformacoes(OrigemInformacoes origemInformacoes) {
+		this.origemInformacoes = origemInformacoes;
+	}
 
-    public void setEstadoCivil(EstadoCivil estadoCivil) {
-        this.estadoCivil = estadoCivil;
-    }
+	public EstadoCivil getEstadoCivil() {
+		return estadoCivil;
+	}
 
+	public void setEstadoCivil(EstadoCivil estadoCivil) {
+		this.estadoCivil = estadoCivil;
+	}
 
 	/**
 	 * @return the nacionalidade
@@ -329,14 +348,13 @@ public class Pessoa extends BaseEntity implements Serializable {
 		return nacionalidade;
 	}
 
-
 	/**
-	 * @param nacionalidade the nacionalidade to set
+	 * @param nacionalidade
+	 *            the nacionalidade to set
 	 */
 	public void setNacionalidade(Pais nacionalidade) {
 		this.nacionalidade = nacionalidade;
 	}
-
 
 	/**
 	 * @return the naturalidade
@@ -345,14 +363,13 @@ public class Pessoa extends BaseEntity implements Serializable {
 		return naturalidade;
 	}
 
-
 	/**
-	 * @param naturalidade the naturalidade to set
+	 * @param naturalidade
+	 *            the naturalidade to set
 	 */
 	public void setNaturalidade(Estado naturalidade) {
 		this.naturalidade = naturalidade;
 	}
-
 
 	/**
 	 * @return the cidadeOrigem
@@ -361,38 +378,37 @@ public class Pessoa extends BaseEntity implements Serializable {
 		return cidadeOrigem;
 	}
 
-
 	/**
-	 * @param cidadeOrigem the cidadeOrigem to set
+	 * @param cidadeOrigem
+	 *            the cidadeOrigem to set
 	 */
 	public void setCidadeOrigem(Municipio cidadeOrigem) {
 		this.cidadeOrigem = cidadeOrigem;
 	}
 
-
 	/**
-	 * @param enderecos the enderecos to set
+	 * @param enderecos
+	 *            the enderecos to set
 	 */
 	public void setEnderecos(List<Endereco> enderecos) {
 		this.enderecos = enderecos;
 	}
 
-
 	/**
-	 * @param telefones the telefones to set
+	 * @param telefones
+	 *            the telefones to set
 	 */
 	public void setTelefones(List<Telefone> telefones) {
 		this.telefones = telefones;
 	}
 
-
 	/**
-	 * @param documentos the documentos to set
+	 * @param documentos
+	 *            the documentos to set
 	 */
 	public void setDocumentos(List<Documento> documentos) {
 		this.documentos = documentos;
 	}
-
 
 	/**
 	 * @return the enderecos
@@ -401,7 +417,6 @@ public class Pessoa extends BaseEntity implements Serializable {
 		return enderecos;
 	}
 
-
 	/**
 	 * @return the telefones
 	 */
@@ -409,11 +424,13 @@ public class Pessoa extends BaseEntity implements Serializable {
 		return telefones;
 	}
 
-
 	/**
 	 * @return the documentos
 	 */
 	public List<Documento> getDocumentos() {
+		if (null == documentos) {
+			documentos = new ArrayList<>();
+		}
 		return documentos;
 	}
 }

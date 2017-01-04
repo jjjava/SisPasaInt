@@ -25,6 +25,7 @@ import org.hibernate.envers.AuditTable;
 import org.hibernate.envers.Audited;
 import org.hibernate.envers.NotAudited;
 import org.pasa.sispasa.core.enumeration.EnumIndAtivo;
+import org.pasa.sispasa.core.enumeration.EnumTipoDocumento;
 import org.pasa.sispasa.core.enumeration.EnumTipoTelefone;
 
 @Entity
@@ -83,20 +84,20 @@ public class Participante extends BaseEntity implements Serializable {
 	@Column(name = "DT_ULT_ATULZ")
 	@Temporal(TemporalType.TIMESTAMP)
 	private Date dataUltimaAtualizacao;
-
-	@ManyToMany
-	@JoinTable(name = "PARTICIPANTE_ENDERECO", 
-	joinColumns = @JoinColumn(name = "ID_PARTICIPANTE"), 
-	inverseJoinColumns = @JoinColumn(name = "ID_ENDERECO"))
-	@NotAudited
-	private List<Endereco> enderecos;
-
+	
 	@ManyToMany(cascade = CascadeType.ALL)
 	@JoinTable(name = "PARTICIPANTE_TELEFONE", 
-	joinColumns = @JoinColumn(name = "ID_PARTICIPANTE"), 
-	inverseJoinColumns = @JoinColumn(name = "ID_TELEFONE"))
+				joinColumns = @JoinColumn(name = "ID_PARTICIPANTE"), 
+				inverseJoinColumns = @JoinColumn(name = "ID_TELEFONE"))
 	@NotAudited
 	private List<Telefone> telefones;
+	
+	@ManyToMany
+	@JoinTable(name = "DOCUMENTO_PARTICIPANTE",
+				joinColumns = @JoinColumn(name = "ID_PARTICIPANTE"),
+	            inverseJoinColumns = @JoinColumn(name = "ID_DOCUMENTO"))
+	@NotAudited
+	private List<Documento> documentos;
 
 	@ManyToOne
 	@JoinColumn(name = "ID_PAIS")
@@ -126,6 +127,38 @@ public class Participante extends BaseEntity implements Serializable {
 	@OneToOne
 	@PrimaryKeyJoinColumn
 	private Associado associado;
+	
+	@ManyToOne
+	@JoinColumn(name="ID_ENDERECO")
+	@NotAudited
+	private Endereco endereco;
+	
+	public Documento getDocumentoRG() {
+		for (Documento documento : documentos) {
+			if (EnumTipoDocumento.RG.getIndice().equals(documento.getTipoDocumento().getId())) {
+				return documento;
+			}
+		}
+		return null;
+	}
+
+	public Documento getDocumentoCTPS() {
+		for (Documento documento : documentos) {
+			if (EnumTipoDocumento.CTPS.getIndice().equals(documento.getTipoDocumento().getId())) {
+				return documento;
+			}
+		}
+		return null;
+	}
+
+	public Documento getDocumentoPIS() {
+		for (Documento documento : documentos) {
+			if (EnumTipoDocumento.PIS_PASEP.getIndice().equals(documento.getTipoDocumento().getId())) {
+				return documento;
+			}
+		}
+		return null;
+	}
 
 	public Telefone getTelefoneComercial() {
 		for (Telefone telefone : getTelefones()) {
@@ -266,14 +299,6 @@ public class Participante extends BaseEntity implements Serializable {
 		this.dataUltimaAtualizacao = dataUltimaAtualizacao;
 	}
 
-	public List<Endereco> getEnderecos() {
-		return enderecos;
-	}
-
-	public void setEnderecos(List<Endereco> enderecos) {
-		this.enderecos = enderecos;
-	}
-
 	public Pais getNacionalidade() {
 		return nacionalidade;
 	}
@@ -315,7 +340,7 @@ public class Participante extends BaseEntity implements Serializable {
 	}
 
 	public List<Telefone> getTelefones() {
-		if(null == telefones) {
+		if (null == telefones) {
 			telefones = new ArrayList<Telefone>();
 		}
 		return telefones;
@@ -331,6 +356,25 @@ public class Participante extends BaseEntity implements Serializable {
 
 	public void setAssociado(Associado associado) {
 		this.associado = associado;
+	}
+
+	public List<Documento> getDocumentos() {
+		if (null == documentos) {
+			documentos = new ArrayList<>();
+		}
+		return documentos;
+	}
+
+	public void setDocumentos(List<Documento> documentos) {
+		this.documentos = documentos;
+	}
+
+	public Endereco getEndereco() {
+		return endereco;
+	}
+
+	public void setEndereco(Endereco endereco) {
+		this.endereco = endereco;
 	}
 
 }

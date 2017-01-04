@@ -18,6 +18,10 @@ import org.hibernate.envers.AuditTable;
 import org.hibernate.envers.Audited;
 import org.hibernate.envers.NotAudited;
 import org.pasa.sispasa.core.constants.ConstantesBanco;
+import org.pasa.sispasa.core.enumeration.EnumIndAtivo;
+import org.pasa.sispasa.core.enumeration.EnumTipoDocumento;
+import org.pasa.sispasa.core.vo.DocumentoVO;
+import org.pasa.sispasa.core.vo.EstadoVO;
 
 /**
  *
@@ -27,7 +31,7 @@ import org.pasa.sispasa.core.constants.ConstantesBanco;
 @Entity
 @Table(name = "DOCUMENTO")
 @Audited
-@AuditTable(value="HIST_DOCUMENTO")
+@AuditTable(value = "HIST_DOCUMENTO")
 public class Documento extends BaseEntity implements Serializable {
 
 	private static final long serialVersionUID = 1L;
@@ -54,18 +58,18 @@ public class Documento extends BaseEntity implements Serializable {
 	@Temporal(TemporalType.DATE)
 	private Date dataValidade;
 
-    @Column(name = "ID_USUARIO", nullable = false, columnDefinition = ConstantesBanco.BIGINT)
-    private Long idUsuario;
-	
+	@Column(name = "ID_USUARIO", nullable = false, columnDefinition = ConstantesBanco.BIGINT)
+	private Long idUsuario;
+
 	@Column(name = "DT_ULT_ATULZ", nullable = false)
 	@Temporal(TemporalType.TIMESTAMP)
 	private Date dataUltimaAtualizacao;
-	
-	@Column(name = "IND_ATIVO", nullable = false, columnDefinition = ConstantesBanco.SMALLINT)
-	private Integer indAtivo;
 
-	//RELACIONAMENTOS
-	
+	@Column(name = "IND_ATIVO", nullable = false, columnDefinition = ConstantesBanco.SMALLINT)
+	private Integer indAtivo = EnumIndAtivo.ATIVO.getIndice();
+
+	// RELACIONAMENTOS
+
 	@ManyToOne()
 	@JoinColumn(name = "ID_ESTADO")
 	@NotAudited
@@ -75,12 +79,50 @@ public class Documento extends BaseEntity implements Serializable {
 	@JoinColumn(name = "ID_TP_DOCUMENTO")
 	@NotAudited
 	private TipoDocumento tipoDocumento;
+
+	public DocumentoVO getEntityVO() {
+
+		DocumentoVO documentoVO = new DocumentoVO();
+		documentoVO.setId(getId());
+		documentoVO.setIdUsuario(getIdUsuario());
+		documentoVO.setEnumIndAtivo(EnumIndAtivo.getIndAtivoByIndice(getIndAtivo()));
+		documentoVO.setDataUltimaAtualizacao(getDataUltimaAtualizacao());
+		documentoVO.setNumero(getNumero());
+		documentoVO.setDataEmissao(getDataEmissao());
+		documentoVO.setDataValidade(getDataValidade());
+		documentoVO.setSerie(getSerie());
+		documentoVO.setOrgaoEmissor(getOrgaoEmissor());
+		documentoVO.setEnumTipoDocumento(
+				EnumTipoDocumento.getTipoDocumentoByIndice(getTipoDocumento().getId().intValue()));
+
+		if (null != documentoVO.getEstadoEmissor()) {
+			documentoVO.setEstadoEmissor(new EstadoVO(getEstado().getId(), getEstado().getNome()));
+		}
+		return documentoVO;
+	}
+
+	public static Documento getEntity(DocumentoVO documentoVO) {
+
+		Documento documento = new Documento();
+		documento.setId(documentoVO.getId());
+		documento.setIdUsuario(null == documentoVO.getIdUsuario() ? 1L : documentoVO.getIdUsuario());
+		documento.setIndAtivo(null == documentoVO.getEnumIndAtivo() ? EnumIndAtivo.ATIVO.getIndice()
+				: documentoVO.getEnumIndAtivo().getIndice());
+		documento.setDataUltimaAtualizacao(
+				null == documentoVO.getDataUltimaAtualizacao() ? new Date() : documentoVO.getDataUltimaAtualizacao());
+		documento.setNumero(documentoVO.getNumero());
+		documento.setDataEmissao(documentoVO.getDataEmissao());
+		documento.setSerie(documentoVO.getSerie());
+		documento.setOrgaoEmissor(documentoVO.getOrgaoEmissor());
+		documento.setTipoDocumento(new TipoDocumento(documentoVO.getEnumTipoDocumento().getIndice()));
+
+		return documento;
+	}
+
+	// GETTERS E SETTERS
 	
-	
-	//GETTERS E SETTERS
-	
-        @Override
-    public Long getId() {
+	@Override
+	public Long getId() {
 		return id;
 	}
 
@@ -159,7 +201,8 @@ public class Documento extends BaseEntity implements Serializable {
 	}
 
 	/**
-	 * @param idUsuario the idUsuario to set
+	 * @param idUsuario
+	 *            the idUsuario to set
 	 */
 	public void setIdUsuario(Long idUsuario) {
 		this.idUsuario = idUsuario;
@@ -173,7 +216,8 @@ public class Documento extends BaseEntity implements Serializable {
 	}
 
 	/**
-	 * @param dataUltimaAtualizacao the dataUltimaAtualizacao to set
+	 * @param dataUltimaAtualizacao
+	 *            the dataUltimaAtualizacao to set
 	 */
 	public void setDataUltimaAtualizacao(Date dataUltimaAtualizacao) {
 		this.dataUltimaAtualizacao = dataUltimaAtualizacao;
@@ -187,7 +231,8 @@ public class Documento extends BaseEntity implements Serializable {
 	}
 
 	/**
-	 * @param indAtivo the indAtivo to set
+	 * @param indAtivo
+	 *            the indAtivo to set
 	 */
 	public void setIndAtivo(Integer indAtivo) {
 		this.indAtivo = indAtivo;

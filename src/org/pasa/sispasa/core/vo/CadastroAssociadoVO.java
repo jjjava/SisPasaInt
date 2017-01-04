@@ -44,8 +44,8 @@ public class CadastroAssociadoVO extends FuncionarioVO {
 	private Long idParticipante;
 	private Long idAssociado;
 
-	private boolean exibirTabInfoGerais;
-	private boolean bloquearAbas;
+	private boolean exibirTabInfoGerais = false;
+	private boolean bloquearAbas = true;
 
 	public boolean isSituacaoAssociadoPreCadastro() {
 		return null != enumSituacaoAssociado && EnumSituacaoAssociado.PRE_CADASTRO.equals(enumSituacaoAssociado);

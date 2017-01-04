@@ -10,7 +10,6 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
-import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
@@ -72,10 +71,6 @@ public class Plano extends BaseEntity implements Serializable {
     private Date dataUltimaAtualizacao;
 
     //RELACIONAMENTOS
-    @ManyToOne
-    @JoinColumn(name = "ID_OPERADORA", nullable = false)
-    @NotAudited
-    private Operadora operadora;
 
     @ManyToOne
     @JoinColumn(name = "ID_TP_PLANO", nullable = false)
@@ -173,14 +168,6 @@ public class Plano extends BaseEntity implements Serializable {
 
     public void setIndAtivo(Integer indAtivo) {
         this.indAtivo = indAtivo;
-    }
-
-    public Operadora getOperadora() {
-        return operadora;
-    }
-
-    public void setOperadora(Operadora operadora) {
-        this.operadora = operadora;
     }
 
     public TipoPlano getTipoPlano() {

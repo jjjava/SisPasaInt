@@ -10,7 +10,7 @@ import org.pasa.sispasa.core.enumeration.EnumIndAtivo;
 public class AtributosComunsVO {
 	
 	protected Long id;
-	protected EnumIndAtivo enumIndAtivo;
+	protected EnumIndAtivo enumIndAtivo = EnumIndAtivo.ATIVO;
 	protected Date dataUltimaAtualizacao;
 	protected Long idUsuario;
 	

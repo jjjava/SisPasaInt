@@ -18,6 +18,10 @@ import org.hibernate.envers.AuditTable;
 import org.hibernate.envers.Audited;
 import org.hibernate.envers.NotAudited;
 import org.pasa.sispasa.core.constants.ConstantesBanco;
+import org.pasa.sispasa.core.util.Utils;
+import org.pasa.sispasa.core.vo.EnderecoVO;
+import org.pasa.sispasa.core.vo.EstadoVO;
+import org.pasa.sispasa.core.vo.MunicipioVO;
 
 /**
  *
@@ -27,118 +31,152 @@ import org.pasa.sispasa.core.constants.ConstantesBanco;
 @Entity
 @Table(name = "ENDERECO")
 @Audited
-@AuditTable(value="HIST_ENDERECO")
+@AuditTable(value = "HIST_ENDERECO")
 public class Endereco extends BaseEntity implements Serializable {
 
-    private static final long serialVersionUID = 1L;
+	private static final long serialVersionUID = 1L;
 
-    @Id
-    @Column(name = "ID_ENDERECO",columnDefinition = ConstantesBanco.BIGINT)
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
+	@Id
+	@Column(name = "ID_ENDERECO", columnDefinition = ConstantesBanco.BIGINT)
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	private Long id;
 
-    @Column(name = "LOGRADOURO",nullable = false, length=60)
-    private String logradouro;
+	@Column(name = "LOGRADOURO", nullable = false, length = 60)
+	private String logradouro;
 
-    @Column(name = "NUMERO", length=20)
-    private String numero;
+	@Column(name = "NUMERO", length = 20)
+	private String numero;
 
-    @Column(name = "COMPLEMENTO", length=45)
-    private String complemento;
+	@Column(name = "COMPLEMENTO", length = 45)
+	private String complemento;
 
-    @Column(name = "BAIRRO", nullable = false, length=45)
-    private String bairro;
+	@Column(name = "BAIRRO", nullable = false, length = 45)
+	private String bairro;
 
-    @Column(name = "CEP", nullable = false, columnDefinition =ConstantesBanco.CHAR_8)
-    private String cep;
+	@Column(name = "CEP", nullable = false, columnDefinition = ConstantesBanco.CHAR_8)
+	private String cep;
 
-    @Column(name = "IND_ATIVO", nullable = false, columnDefinition = ConstantesBanco.SMALLINT)
+	@Column(name = "IND_ATIVO", nullable = false, columnDefinition = ConstantesBanco.SMALLINT)
 	private Integer indAtivo;
-    
-    @Column(name = "DT_ULT_ATULZ", nullable = false)
-    @Temporal(TemporalType.TIMESTAMP)
-    private Date dataUltimaAtualizacao;
-    
-    @Column(name = "ID_USUARIO", nullable = false, columnDefinition = ConstantesBanco.BIGINT)
-    private Long idUsuario;
 
-    //RELACIONAMENTOS
-    
-    @ManyToOne()
-    @JoinColumn(name = "ID_MUNICIPIO")
-    @NotAudited
-    private Municipio municipio;
+	@Column(name = "DT_ULT_ATULZ", nullable = false)
+	@Temporal(TemporalType.TIMESTAMP)
+	private Date dataUltimaAtualizacao;
 
-    @ManyToOne()
-    @JoinColumn(name = "ID_ESTADO")
-    @NotAudited
-    private Estado estado;
+	@Column(name = "ID_USUARIO", nullable = false, columnDefinition = ConstantesBanco.BIGINT)
+	private Long idUsuario;
 
-    //GETTERS E SETTERS
-    
-    public Long getId() {
-        return id;
-    }
+	// RELACIONAMENTOS
 
-    public void setId(Long id) {
-        this.id = id;
-    }
+	@ManyToOne()
+	@JoinColumn(name = "ID_MUNICIPIO")
+	@NotAudited
+	private Municipio municipio;
 
-    public String getLogradouro() {
-        return logradouro;
-    }
+	@ManyToOne()
+	@JoinColumn(name = "ID_ESTADO")
+	@NotAudited
+	private Estado estado;
 
-    public void setLogradouro(String logradouro) {
-        this.logradouro = logradouro;
-    }
+	public static Endereco getEntity(EnderecoVO enderecoVO) {
 
-    public String getNumero() {
-        return numero;
-    }
+		Endereco endereco = new Endereco();
+		endereco.setId(enderecoVO.getId());
+		endereco.setDataUltimaAtualizacao(new Date());
+		endereco.setIdUsuario(enderecoVO.getIdUsuario());
+		endereco.setIndAtivo(enderecoVO.getEnumIndAtivo().getIndice());		
+		endereco.setCep(Utils.desformataCep(enderecoVO.getCep()));
+		endereco.setLogradouro(enderecoVO.getLogradouro());
+		endereco.setNumero(enderecoVO.getNumero());
+		endereco.setComplemento(enderecoVO.getComplemento());
+		endereco.setBairro(enderecoVO.getBairro());
+		endereco.setMunicipio(new Municipio(enderecoVO.getMunicipio().getId()));
+		endereco.setEstado(new Estado(enderecoVO.getEstado().getIdEstado()));
+		endereco.setIdUsuario(enderecoVO.getIdUsuario());
+		
+		return endereco;
+	}
+	
+	public EnderecoVO getEntityVO() {
 
-    public void setNumero(String numero) {
-        this.numero = numero;
-    }
+		EnderecoVO enderecoVO = new EnderecoVO();
+		enderecoVO.setId(getId());
+		enderecoVO.setCep(getCep());
+		enderecoVO.setBairro(getBairro());
+		enderecoVO.setComplemento(getComplemento());
+		enderecoVO.setEstado(new EstadoVO(estado.getId(), estado.getNome()));
+		enderecoVO.setLogradouro(getLogradouro());
+		enderecoVO.setMunicipio(new MunicipioVO(municipio.getId(), municipio.getNome()));
+		enderecoVO.setNumero(getNumero());
 
-    public String getComplemento() {
-        return complemento;
-    }
+		return enderecoVO;
+	}
 
-    public void setComplemento(String complemento) {
-        this.complemento = complemento;
-    }
+	// GETTERS E SETTERS
 
-    public String getBairro() {
-        return bairro;
-    }
+	public Long getId() {
+		return id;
+	}
 
-    public void setBairro(String bairro) {
-        this.bairro = bairro;
-    }
+	public void setId(Long id) {
+		this.id = id;
+	}
 
-    public String getCep() {
-        return cep;
-    }
+	public String getLogradouro() {
+		return logradouro;
+	}
 
-    public void setCep(String cep) {
-        this.cep = cep;
-    }
+	public void setLogradouro(String logradouro) {
+		this.logradouro = logradouro;
+	}
 
-    public Municipio getMunicipio() {
-        return municipio;
-    }
+	public String getNumero() {
+		return numero;
+	}
 
-    public void setMunicipio(Municipio municipio) {
-        this.municipio = municipio;
-    }
+	public void setNumero(String numero) {
+		this.numero = numero;
+	}
 
-    public Estado getEstado() {
-        return estado;
-    }
+	public String getComplemento() {
+		return complemento;
+	}
 
-    public void setEstado(Estado estado) {
-        this.estado = estado;
-    }
+	public void setComplemento(String complemento) {
+		this.complemento = complemento;
+	}
+
+	public String getBairro() {
+		return bairro;
+	}
+
+	public void setBairro(String bairro) {
+		this.bairro = bairro;
+	}
+
+	public String getCep() {
+		return cep;
+	}
+
+	public void setCep(String cep) {
+		this.cep = cep;
+	}
+
+	public Municipio getMunicipio() {
+		return municipio;
+	}
+
+	public void setMunicipio(Municipio municipio) {
+		this.municipio = municipio;
+	}
+
+	public Estado getEstado() {
+		return estado;
+	}
+
+	public void setEstado(Estado estado) {
+		this.estado = estado;
+	}
 
 	/**
 	 * @return the dataUltimaAtualizacao
@@ -148,7 +186,8 @@ public class Endereco extends BaseEntity implements Serializable {
 	}
 
 	/**
-	 * @param dataUltimaAtualizacao the dataUltimaAtualizacao to set
+	 * @param dataUltimaAtualizacao
+	 *            the dataUltimaAtualizacao to set
 	 */
 	public void setDataUltimaAtualizacao(Date dataUltimaAtualizacao) {
 		this.dataUltimaAtualizacao = dataUltimaAtualizacao;
@@ -162,7 +201,8 @@ public class Endereco extends BaseEntity implements Serializable {
 	}
 
 	/**
-	 * @param idUsuario the idUsuario to set
+	 * @param idUsuario
+	 *            the idUsuario to set
 	 */
 	public void setIdUsuario(Long idUsuario) {
 		this.idUsuario = idUsuario;
@@ -176,7 +216,8 @@ public class Endereco extends BaseEntity implements Serializable {
 	}
 
 	/**
-	 * @param indAtivo the indAtivo to set
+	 * @param indAtivo
+	 *            the indAtivo to set
 	 */
 	public void setIndAtivo(Integer indAtivo) {
 		this.indAtivo = indAtivo;

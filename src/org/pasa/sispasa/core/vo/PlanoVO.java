@@ -18,6 +18,7 @@ public class PlanoVO extends AtributosComunsVO{
     private Integer qtdDiasCarencia;
     private String registroANS;
 
+    private ContratoVO contrato;
     private EnumTipoPlano enumTipoPlano;
     private PlanoVO planoPai;
 
@@ -104,5 +105,13 @@ public class PlanoVO extends AtributosComunsVO{
 
 	public void setEnumTipoPlano(EnumTipoPlano enumTipoPlano) {
 		this.enumTipoPlano = enumTipoPlano;
+	}
+
+	public ContratoVO getContrato() {
+		return contrato;
+	}
+
+	public void setContrato(ContratoVO contrato) {
+		this.contrato = contrato;
 	}
 }
