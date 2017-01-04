@@ -13,6 +13,7 @@ import javax.persistence.JoinColumn;
 import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
@@ -23,27 +24,27 @@ import org.hibernate.envers.NotAudited;
 import org.pasa.sispasa.core.constants.ConstantesBanco;
 
 /**
-*
-* @author Hudson Schumaker
-* @version 1.0.0
-*/
+ *
+ * @author Hudson Schumaker
+ * @version 1.0.0
+ */
 @Entity
 @Table(name = "CONTRATO")
 @Audited
-@AuditTable(value="HIST_CONTRATO")
+@AuditTable(value = "HIST_CONTRATO")
 public class Contrato implements Serializable {
 
     private static final long serialVersionUID = 1L;
 
     @Id
-    @Column(name = "ID_CONTRATO",columnDefinition = ConstantesBanco.BIGINT)
+    @Column(name = "ID_CONTRATO", columnDefinition = ConstantesBanco.BIGINT)
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
     @Column(name = "NR_CONTRATO", columnDefinition = ConstantesBanco.BIGINT)
     private Long numeroContrato;
 
-    @Column(name = "OBSERVACAO", length=245)
+    @Column(name = "OBSERVACAO", length = 245)
     private String observacao;
 
     @Column(name = "DT_INICIO_VIGENCIA", nullable = false, columnDefinition = ConstantesBanco.DATE)
@@ -62,16 +63,15 @@ public class Contrato implements Serializable {
 
     @Column(name = "ID_USUARIO", nullable = false, columnDefinition = ConstantesBanco.BIGINT)
     private Long idUsuario;
-    
-	@Column(name = "IND_ATIVO", nullable = false, columnDefinition = ConstantesBanco.SMALLINT)
-	private Integer indAtivo;
 
-    @Column(name = "DT_ULT_ATULZ", nullable = false) 
+    @Column(name = "IND_ATIVO", nullable = false, columnDefinition = ConstantesBanco.SMALLINT)
+    private Integer indAtivo;
+
+    @Column(name = "DT_ULT_ATULZ", nullable = false)
     @Temporal(TemporalType.TIMESTAMP)
     private Date dataUltimaAtualizacao;
 
     //RELACIONAMENTOS
-    
     @ManyToOne
     @JoinColumn(name = "ID_TP_CONTRATO")
     @NotAudited
@@ -86,23 +86,18 @@ public class Contrato implements Serializable {
     @JoinColumn(name = "ID_EMPRESA")
     @NotAudited
     private Empresa empresa;
-    
-    @ManyToMany
-    @JoinTable(name = "CONTRATO_PLANO",
-               joinColumns = @JoinColumn(name = "ID_CONTRATO"),
-               inverseJoinColumns = @JoinColumn(name = "ID_PLANO"))
+
+    @OneToMany
+    @JoinColumn(name = "ID_CONTRATO")
     @NotAudited
     private List<Plano> planos;
 
-    
     //CONSTRUTORES
-    
     public Contrato() {
-    	//CONSTRUTOR DEFAULT
+        //CONSTRUTOR DEFAULT
     }
-    
-    //GETTERS E SETTERS
 
+    //GETTERS E SETTERS
     public Long getId() {
         return id;
     }
@@ -207,19 +202,19 @@ public class Contrato implements Serializable {
         this.planos = planos;
     }
 
-	public Date getDataUltimaAtualizacao() {
-		return dataUltimaAtualizacao;
-	}
+    public Date getDataUltimaAtualizacao() {
+        return dataUltimaAtualizacao;
+    }
 
-	public void setDataUltimaAtualizacao(Date dataUltimaAtualizacao) {
-		this.dataUltimaAtualizacao = dataUltimaAtualizacao;
-	}
+    public void setDataUltimaAtualizacao(Date dataUltimaAtualizacao) {
+        this.dataUltimaAtualizacao = dataUltimaAtualizacao;
+    }
 
-	public Integer getIndAtivo() {
-		return indAtivo;
-	}
+    public Integer getIndAtivo() {
+        return indAtivo;
+    }
 
-	public void setIndAtivo(Integer indAtivo) {
-		this.indAtivo = indAtivo;
-	}
+    public void setIndAtivo(Integer indAtivo) {
+        this.indAtivo = indAtivo;
+    }
 }

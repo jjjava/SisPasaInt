@@ -10,6 +10,7 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
@@ -20,14 +21,14 @@ import org.hibernate.envers.NotAudited;
 import org.pasa.sispasa.core.constants.ConstantesBanco;
 
 /**
-*
-* @author Hudson Schumaker
-* @version 1.0.0
-*/
+ *
+ * @author Hudson Schumaker
+ * @version 1.0.0
+ */
 @Entity
 @Table(name = "PLANO")
 @Audited
-@AuditTable(value="HIST_PLANO")
+@AuditTable(value = "HIST_PLANO")
 public class Plano extends BaseEntity implements Serializable {
 
     private static final long serialVersionUID = 1L;
@@ -36,17 +37,17 @@ public class Plano extends BaseEntity implements Serializable {
     @Column(name = "ID_PLANO", columnDefinition = ConstantesBanco.BIGINT)
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-    
-    @Column(name = "CD_PLANO",  length=10)
+
+    @Column(name = "CD_PLANO", length = 10)
     private String codPlano;
 
-    @Column(name = "NOME", length=30, nullable = false)
+    @Column(name = "NOME", length = 30, nullable = false)
     private String nome;
 
-    @Column(name = "DESCRICAO", length=60, nullable = false)
+    @Column(name = "DESCRICAO", length = 60, nullable = false)
     private String descricao;
 
-    @Column(name = "DT_INICIO_VIGENCIA",columnDefinition = ConstantesBanco.DATE, nullable = false)
+    @Column(name = "DT_INICIO_VIGENCIA", columnDefinition = ConstantesBanco.DATE, nullable = false)
     @Temporal(TemporalType.DATE)
     private Date dataInicioVigencia;
 
@@ -57,7 +58,7 @@ public class Plano extends BaseEntity implements Serializable {
     @Column(name = "QTD_DIAS_CARENCIA", nullable = false, columnDefinition = ConstantesBanco.SMALLINT)
     private Integer qtdDiasCarencia;
 
-    @Column(name = "REGISTRO_ANS", length=30)
+    @Column(name = "REGISTRO_ANS", length = 30)
     private String registroANS;
 
     @Column(name = "ID_USUARIO", nullable = false, columnDefinition = ConstantesBanco.BIGINT)
@@ -71,9 +72,8 @@ public class Plano extends BaseEntity implements Serializable {
     private Date dataUltimaAtualizacao;
 
     //RELACIONAMENTOS
-    
     @ManyToOne
-    @JoinColumn(name = "ID_OPERADORA", nullable = false )
+    @JoinColumn(name = "ID_OPERADORA", nullable = false)
     @NotAudited
     private Operadora operadora;
 
@@ -87,21 +87,22 @@ public class Plano extends BaseEntity implements Serializable {
     @NotAudited
     private Plano planoPai;
 
-    
-   //CONSTRUTORES
-    
+    @ManyToOne
+    @JoinColumn(name = "ID_CONTRATO")
+    @NotAudited
+    private Contrato contrato;
+
+    //CONSTRUTORES
     public Plano() {
-    	//CONSTRUTOR DEFAULT
     }
-    
+
     public Plano(Long id, String nome) {
-    	this.id = id;
-    	this.nome = nome;
+        this.id = id;
+        this.nome = nome;
     }
-    
-    
+
     //GETTERS E SETTERS
-    
+    @Override
     public Long getId() {
         return id;
     }
@@ -206,11 +207,19 @@ public class Plano extends BaseEntity implements Serializable {
         this.codPlano = codPlano;
     }
 
-	public Date getDataUltimaAtualizacao() {
-		return dataUltimaAtualizacao;
-	}
+    public Date getDataUltimaAtualizacao() {
+        return dataUltimaAtualizacao;
+    }
 
-	public void setDataUltimaAtualizacao(Date dataUltimaAtualizacao) {
-		this.dataUltimaAtualizacao = dataUltimaAtualizacao;
-	}
+    public void setDataUltimaAtualizacao(Date dataUltimaAtualizacao) {
+        this.dataUltimaAtualizacao = dataUltimaAtualizacao;
+    }
+
+    public Contrato getContrato() {
+        return contrato;
+    }
+
+    public void setContrato(Contrato contrato) {
+        this.contrato = contrato;
+    }
 }

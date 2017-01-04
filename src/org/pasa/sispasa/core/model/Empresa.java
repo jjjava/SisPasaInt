@@ -143,6 +143,7 @@ public class Empresa extends BaseEntity implements Serializable {
 
 	// GETTERS E SETTERS
 
+        @Override
 	public Long getId() {
 		return id;
 	}
