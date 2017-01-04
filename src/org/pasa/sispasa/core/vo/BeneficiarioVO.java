@@ -1,7 +1,6 @@
 package org.pasa.sispasa.core.vo;
 
 import java.util.Date;
-
 import org.pasa.sispasa.core.enumeration.EnumTipoBeneficiario;
 
 /**
