@@ -92,8 +92,8 @@ public class Funcionario extends Pessoa implements Serializable {
     private Integer indAtivo;
     
     @Column(name = "DT_ULT_ATULZ", nullable = false)
-	@Temporal(TemporalType.TIMESTAMP)
-	private Date dataUltimaAtualizacao;
+    @Temporal(TemporalType.TIMESTAMP)
+    private Date dataUltimaAtualizacao;
 
     //RELACIONAMENTOS
     

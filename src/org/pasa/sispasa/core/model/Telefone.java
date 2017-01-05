@@ -27,45 +27,43 @@ import org.pasa.sispasa.core.enumeration.EnumIndAtivo;
 @Entity
 @Table(name = "TELEFONE")
 @Audited
-@AuditTable(value="HIST_TELEFONE")
+@AuditTable(value = "HIST_TELEFONE")
 public class Telefone extends BaseEntity implements Serializable {
 
     private static final long serialVersionUID = 1L;
 
     @Id
-    @Column(name = "ID_TELEFONE",columnDefinition = ConstantesBanco.BIGINT)
+    @Column(name = "ID_TELEFONE", columnDefinition = ConstantesBanco.BIGINT)
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
     @Column(name = "DDD", columnDefinition = ConstantesBanco.CHAR_2)
     private String ddd;
 
-    @Column(name = "NUMERO", length=10, nullable = false)
+    @Column(name = "NUMERO", length = 10, nullable = false)
     private String numeroTelefone;
-    
-    @Column(name = "RAMAL", length=5)
+
+    @Column(name = "RAMAL", length = 5)
     private String ramal;
 
     @Column(name = "IND_ATIVO", nullable = false, columnDefinition = ConstantesBanco.SMALLINT)
     private Integer indAtivo = EnumIndAtivo.ATIVO.getIndice();
-    
+
     @Column(name = "ID_USUARIO", nullable = false, columnDefinition = ConstantesBanco.BIGINT)
     private Long idUsuario;
-    
-    @Column(name = "DT_ULT_ATULZ", nullable = false)
-	@Temporal(TemporalType.TIMESTAMP)
-	private Date dataUltimaAtualizacao;
 
-    
-   //RELACIONAMENTOS
-    
-	@OneToOne
-	@NotAudited
-	private TipoTelefone tipoTelefone;
-	
-	//GETTERS E SETTERS
-    
-	public Long getId() {
+    @Column(name = "DT_ULT_ATULZ", nullable = false)
+    @Temporal(TemporalType.TIMESTAMP)
+    private Date dataUltimaAtualizacao;
+
+    //RELACIONAMENTOS
+    @OneToOne
+    @NotAudited
+    private TipoTelefone tipoTelefone;
+
+    //GETTERS E SETTERS
+    @Override
+    public Long getId() {
         return id;
     }
 
@@ -112,32 +110,33 @@ public class Telefone extends BaseEntity implements Serializable {
     public void setTipoTelefone(TipoTelefone tipoTelefone) {
         this.tipoTelefone = tipoTelefone;
     }
-	/**
-	 * @return the idUsuario
-	 */
-	public Long getIdUsuario() {
-		return idUsuario;
-	}
 
-	/**
-	 * @param idUsuario the idUsuario to set
-	 */
-	public void setIdUsuario(Long idUsuario) {
-		this.idUsuario = idUsuario;
-	}
+    /**
+     * @return the idUsuario
+     */
+    public Long getIdUsuario() {
+        return idUsuario;
+    }
 
-	/**
-	 * @return the dataUltimaAtualizacao
-	 */
-	public Date getDataUltimaAtualizacao() {
-		return dataUltimaAtualizacao;
-	}
+    /**
+     * @param idUsuario the idUsuario to set
+     */
+    public void setIdUsuario(Long idUsuario) {
+        this.idUsuario = idUsuario;
+    }
 
-	/**
-	 * @param dataUltimaAtualizacao the dataUltimaAtualizacao to set
-	 */
-	public void setDataUltimaAtualizacao(Date dataUltimaAtualizacao) {
-		this.dataUltimaAtualizacao = dataUltimaAtualizacao;
-	}
+    /**
+     * @return the dataUltimaAtualizacao
+     */
+    public Date getDataUltimaAtualizacao() {
+        return dataUltimaAtualizacao;
+    }
+
+    /**
+     * @param dataUltimaAtualizacao the dataUltimaAtualizacao to set
+     */
+    public void setDataUltimaAtualizacao(Date dataUltimaAtualizacao) {
+        this.dataUltimaAtualizacao = dataUltimaAtualizacao;
+    }
 
 }
