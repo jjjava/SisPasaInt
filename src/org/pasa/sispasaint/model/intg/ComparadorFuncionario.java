@@ -5,16 +5,16 @@ import org.pasa.sispasa.core.model.Funcionario;
 
 /**
  *
- * @author Hudson Schumaker 
+ * @author Hudson Schumaker
  * @version 1.0.0
  */
 public class ComparadorFuncionario {
-    
-    public ComparadorFuncionario(){
+
+    public ComparadorFuncionario() {
     }
-    
-    public int comparar(Funcionario a, Funcionario b){
-        
+
+    public int comparar(Funcionario a, Funcionario b) {
+
         return new CompareToBuilder()
                 .append(a.getTipoVinculoEmpregaticio().getCodExterno(), b.getTipoVinculoEmpregaticio().getCodExterno())
                 //Dados Bancarios
@@ -36,11 +36,7 @@ public class ComparadorFuncionario {
                 .append(a.getEstadoCivil().getId(), a.getEstadoCivil().getId())
                 //Documentos
                 .append(a.getCpf(), a.getCpf())
-                .append(a.getDocumentoPIS(),b.getDocumentoPIS())
-                
-                
-                
+                .append(a.getDocumentoPIS(), b.getDocumentoPIS())
                 .toComparison();
     }
-   
 }

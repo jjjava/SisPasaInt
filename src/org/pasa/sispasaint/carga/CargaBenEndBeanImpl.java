@@ -43,7 +43,7 @@ public class CargaBenEndBeanImpl implements CargaBenEndBean {
     public void mapearEntidades() {
         FuncionarioBeanImpl funcionarioBeanImpl = new FuncionarioBeanImpl();
         ModeloBenEndBeanImpl modeloBean = new ModeloBenEndBeanImpl();
-        
+
         Long qtdRegistros = modeloBean.contar();
         Funcionario funcionario = null;
         for (Long k = 1L; k < qtdRegistros; k++) {
@@ -58,10 +58,8 @@ public class CargaBenEndBeanImpl implements CargaBenEndBean {
                         log.addMatriculaErro(modeloBenEnd.getEmpresa() + modeloBenEnd.getMatricula());
                     }
                 } else {
-
+                    
                 }
-            } else {
-
             }
         }
     }
@@ -70,8 +68,8 @@ public class CargaBenEndBeanImpl implements CargaBenEndBean {
         new FuncionarioBeanImpl().atualizaStatus(idEmpresa);
         new BeneficiarioBeanImpl().atulizaStatus("" + idEmpresa);
     }
-    
-    private void setQtdInativos(){
-        log.setQtdAssocInativo(new BeneficiarioBeanImpl().getInativos(""+idEmpresa).intValue());
+
+    private void setQtdInativos() {
+        log.setQtdAssocInativo(new BeneficiarioBeanImpl().getInativos("" + idEmpresa).intValue());
     }
 }
