@@ -3,6 +3,7 @@ package org.pasa.sispasa.core.model;
 import java.io.Serializable;
 import java.util.Date;
 import java.util.List;
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -14,6 +15,7 @@ import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
+
 import org.hibernate.envers.AuditTable;
 import org.hibernate.envers.Audited;
 import org.hibernate.envers.NotAudited;
@@ -21,7 +23,7 @@ import org.pasa.sispasa.core.constants.ConstantesBanco;
 
 /**
  *
- * @author Hudson Schumaker
+ * @author Hudson Schumaker / Andre Gomes
  * @version 1.0.0
  */
 @Entity
@@ -83,14 +85,16 @@ public class Contrato extends BaseEntity  implements Serializable {
     @NotAudited
     private Empresa empresa;
 
-    @OneToMany
-    @JoinColumn(name = "ID_CONTRATO")
-    @NotAudited
+    @OneToMany(mappedBy="contrato")
     private List<Plano> planos;
-
+    
     //CONSTRUTORES
     public Contrato() {
         //CONSTRUTOR DEFAULT
+    }
+    
+    public Contrato(Long id) {
+        this.id = id;
     }
 
     //GETTERS E SETTERS
@@ -174,22 +178,6 @@ public class Contrato extends BaseEntity  implements Serializable {
         this.operadora = operadora;
     }
 
-    public Empresa getEmrpesa() {
-        return empresa;
-    }
-
-    public void setEmrpesa(Empresa emrpesa) {
-        this.empresa = emrpesa;
-    }
-
-    public Empresa getEmpresa() {
-        return empresa;
-    }
-
-    public void setEmpresa(Empresa empresa) {
-        this.empresa = empresa;
-    }
-
     public List<Plano> getPlanos() {
         return planos;
     }
@@ -213,4 +201,12 @@ public class Contrato extends BaseEntity  implements Serializable {
     public void setIndAtivo(Integer indAtivo) {
         this.indAtivo = indAtivo;
     }
+
+	public Empresa getEmpresa() {
+		return empresa;
+	}
+
+	public void setEmpresa(Empresa empresa) {
+		this.empresa = empresa;
+	}
 }

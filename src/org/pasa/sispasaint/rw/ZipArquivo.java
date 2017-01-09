@@ -8,7 +8,7 @@ import java.util.zip.ZipOutputStream;
 
 /**
  *
- * @author 90J00318
+ * @author Hudson Schumaker
  */
 public class ZipArquivo {
 

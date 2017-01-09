@@ -8,6 +8,7 @@ import org.pasa.sispasa.core.enumeration.EnumTipoTelefone;
  */
 public class TelefoneVO extends AtributosComunsVO {
 
+	private Long id;
 	private String numeroTelefoneComDDD;
 	private String ramal;
 
@@ -16,9 +17,15 @@ public class TelefoneVO extends AtributosComunsVO {
 	public TelefoneVO() {
 	}
 
-	public TelefoneVO(String numeroTelefoneComDDD, String ramal) {
+	public TelefoneVO(String numeroTelefoneComDDD, String ramal, EnumTipoTelefone tipo) {
+		this(null, numeroTelefoneComDDD, ramal, tipo);
+	}
+
+	public TelefoneVO(Long id, String numeroTelefoneComDDD, String ramal, EnumTipoTelefone tipo) {
+		this.id = id;
 		this.numeroTelefoneComDDD = numeroTelefoneComDDD;
 		this.ramal = ramal;
+		this.enumTipoTelefone = tipo;
 	}
 
 	// GETTERS E SETTERS
@@ -59,6 +66,14 @@ public class TelefoneVO extends AtributosComunsVO {
 	 */
 	public void setEnumTipoTelefone(EnumTipoTelefone enumTipoTelefone) {
 		this.enumTipoTelefone = enumTipoTelefone;
+	}
+
+	public Long getId() {
+		return id;
+	}
+
+	public void setId(Long id) {
+		this.id = id;
 	}
 
 }

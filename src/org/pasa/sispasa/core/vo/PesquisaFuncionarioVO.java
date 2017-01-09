@@ -15,9 +15,10 @@ public class PesquisaFuncionarioVO {
 	private EnumFiltroPesquisaFuncionario enumFiltroPesquisaFuncionario = EnumFiltroPesquisaFuncionario.M_ORIGEM;
 	private EnumTipoAssociado enumTipoAssociado = EnumTipoAssociado.A;
 
+	private boolean bloquearFiltroPesquisaFuncionario = false;
 	private EmpresaVO empresaVO;
 	private String nrDocFuncionario;
-	
+
 	private boolean exibirTabInfoGerais = Boolean.FALSE;
 
 	public boolean isTipoAssociadoPensionista() {
@@ -69,6 +70,14 @@ public class PesquisaFuncionarioVO {
 
 	public void setEmpresaVO(EmpresaVO empresaVO) {
 		this.empresaVO = empresaVO;
+	}
+
+	public boolean isBloquearFiltroPesquisaFuncionario() {
+		return bloquearFiltroPesquisaFuncionario;
+	}
+
+	public void setBloquearFiltroPesquisaFuncionario(boolean bloquearFiltroPesquisaFuncionario) {
+		this.bloquearFiltroPesquisaFuncionario = bloquearFiltroPesquisaFuncionario;
 	}
 
 }

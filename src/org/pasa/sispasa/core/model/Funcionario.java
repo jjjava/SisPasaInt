@@ -22,6 +22,7 @@ import org.hibernate.envers.AuditTable;
 import org.hibernate.envers.Audited;
 import org.hibernate.envers.NotAudited;
 import org.pasa.sispasa.core.constants.ConstantesBanco;
+import org.pasa.sispasa.core.enumeration.EnumMotivoDesligamento;
 
 /**
  *
@@ -32,261 +33,256 @@ import org.pasa.sispasa.core.constants.ConstantesBanco;
 @Table(name = "FUNCIONARIO")
 @PrimaryKeyJoinColumn(name = "ID_PESSOA")
 @Audited
-@AuditTable(value="HIST_FUNCIONARIO")
+@AuditTable(value = "HIST_FUNCIONARIO")
 public class Funcionario extends Pessoa implements Serializable {
 
-    private static final long serialVersionUID = 1L;
+	private static final long serialVersionUID = 1L;
 
-    @Column(name = "ID_FUNCIONARIO", columnDefinition = ConstantesBanco.BIGINT)
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
+	@Column(name = "ID_FUNCIONARIO", columnDefinition = ConstantesBanco.BIGINT)
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	private Long id;
 
-    @Column(name = "MATR_ORIGEM", length = 15, nullable = false)
-    private String matriculaOrigem;
+	@Column(name = "MATR_ORIGEM", length = 15, nullable = false)
+	private String matriculaOrigem;
 
-    @Column(name = "MATR_PASA", length = 15)
-    private String matriculaPasa;
+	@Column(name = "MATR_PASA", length = 15)
+	private String matriculaPasa;
 
-    @Column(name = "EMP_ATULZR", length = 2)
-    private String empresaAtualizadora;
+	@Column(name = "EMP_ATULZR", length = 2)
+	private String empresaAtualizadora;
 
-    @Column(name = "MATR_ATULZR", length = 15)
-    private String matriculaAtualizadora;
+	@Column(name = "MATR_ATULZR", length = 15)
+	private String matriculaAtualizadora;
 
-    @Column(name = "DIREITO_ABATER_IR", columnDefinition = ConstantesBanco.CHAR_1)
-    private String direitoAbaterIR;
+	@Column(name = "DIREITO_ABATER_IR", columnDefinition = ConstantesBanco.CHAR_1)
+	private String direitoAbaterIR;
 
-    @Column(name = "DT_ADMISSAO", columnDefinition = ConstantesBanco.DATE)
-    @Temporal(TemporalType.DATE)
-    private Date dataAdmissao;
+	@Column(name = "DT_ADMISSAO", columnDefinition = ConstantesBanco.DATE)
+	@Temporal(TemporalType.DATE)
+	private Date dataAdmissao;
 
-    @Column(name = "DT_DESLIGAMENTO", columnDefinition = ConstantesBanco.DATE)
-    @Temporal(TemporalType.DATE)
-    private Date dataDesligamento;
+	@Column(name = "DT_DESLIGAMENTO", columnDefinition = ConstantesBanco.DATE)
+	@Temporal(TemporalType.DATE)
+	private Date dataDesligamento;
 
-    @Column(name = "EMAIL_CORPORATIVO", length = 60)
-    private String emailCorporativo;
+	@Column(name = "EMAIL_CORPORATIVO", length = 60)
+	private String emailCorporativo;
 
-    @Column(name = "FINANCEIRA", columnDefinition = ConstantesBanco.CHAR_1)
-    private String financeira;
+	@Column(name = "FINANCEIRA", columnDefinition = ConstantesBanco.CHAR_1)
+	private String financeira;
 
-    @Column(name = "CONTRATO_TRABALHO", columnDefinition = ConstantesBanco.CHAR_1)
-    private String contratoTrabalho;
+	@Column(name = "CONTRATO_TRABALHO", columnDefinition = ConstantesBanco.CHAR_1)
+	private String contratoTrabalho;
 
-    @Column(name = "CD_DIREITO_PASA", columnDefinition = ConstantesBanco.CHAR_1)
-    private String codDireitoPasa;
+	@Column(name = "CD_DIREITO_PASA", columnDefinition = ConstantesBanco.CHAR_1)
+	private String codDireitoPasa;
 
-    @Column(name = "UNIDADE_CONTROLE", length = 3)
-    private String unidadeControle;
+	@Column(name = "UNIDADE_CONTROLE", length = 3)
+	private String unidadeControle;
 
-    @Column(name = "CENTRO_CUSTO", columnDefinition = ConstantesBanco.CHAR_12)
-    private String centroCusto;
+	@Column(name = "CENTRO_CUSTO", columnDefinition = ConstantesBanco.CHAR_12)
+	private String centroCusto;
 
-    @Column(name = "CD_FILIAL_VLI", length = 4)
-    private String codFilialVLI;
+	@Column(name = "CD_FILIAL_VLI", length = 4)
+	private String codFilialVLI;
 
-    @Column(name = "ID_USUARIO", nullable = false, columnDefinition = ConstantesBanco.BIGINT)
-    private Long idUsuario;
+	@Column(name = "ID_USUARIO", nullable = false, columnDefinition = ConstantesBanco.BIGINT)
+	private Long idUsuario;
 
-    @Column(name = "IND_ATIVO", nullable = false,  columnDefinition = ConstantesBanco.SMALLINT)
-    private Integer indAtivo;
-    
-    @Column(name = "DT_ULT_ATULZ", nullable = false)
-    @Temporal(TemporalType.TIMESTAMP)
-    private Date dataUltimaAtualizacao;
+	@Column(name = "IND_ATIVO", nullable = false, columnDefinition = ConstantesBanco.SMALLINT)
+	private Integer indAtivo;
 
-    //RELACIONAMENTOS
-    
-    @ManyToOne
-    @JoinColumn(name = "ID_EMPRESA")
-    @NotAudited
-    private Empresa empresa;
+	@Column(name = "DT_ULT_ATULZ", nullable = false)
+	@Temporal(TemporalType.TIMESTAMP)
+	private Date dataUltimaAtualizacao;
 
-    @ManyToOne
-    @JoinColumn(name = "ID_TP_VINC_EMPREG")
-    @NotAudited
-    private TipoVinculoEmpregaticio tipoVinculoEmpregaticio;
+	@ManyToOne
+	@JoinColumn(name = "ID_EMPRESA")
+	@NotAudited
+	private Empresa empresa;
 
-    @ManyToOne(cascade=CascadeType.ALL)
-    @JoinColumn(name = "ID_DADOS_BANC")
-    @NotAudited
-    private DadosBancarios dadosBancarios;
+	@ManyToOne
+	@JoinColumn(name = "ID_TP_VINC_EMPREG")
+	@NotAudited
+	private TipoVinculoEmpregaticio tipoVinculoEmpregaticio;
 
-    @ManyToOne
-    @JoinColumn(name = "ID_MOTIVO_DESLIGAMENTO")
-    @NotAudited
-    private MotivoDesligamento motivoDesligamento;
-    
-    @OneToMany(cascade=CascadeType.ALL)
-    @JoinColumn(name="ID_BENEFICIARIO")
-    @NotAudited
-    private List<Beneficiario> beneficiarios;
-    
-    //CONSTRUTORES
-    
-    public Funcionario(){
-        beneficiarios = new ArrayList<>();
-    }
-    
-    //METODOS ADD
-    
-    public void addBeneficiario(Beneficiario b){
-        beneficiarios.add(b);
-    }
-    
-    //GETTERS E SETTERS
-    
-    public Long getId() {
-        return id;
-    }
+	@ManyToOne(cascade = CascadeType.ALL)
+	@JoinColumn(name = "ID_DADOS_BANC")
+	@NotAudited
+	private DadosBancarios dadosBancarios;
 
-    public void setId(Long id) {
-        this.id = id;
-    }
+	@ManyToOne
+	@JoinColumn(name = "ID_MOTIVO_DESLIGAMENTO")
+	@NotAudited
+	private MotivoDesligamento motivoDesligamento;
 
-    public String getMatriculaOrigem() {
-        return matriculaOrigem;
-    }
+	@OneToMany(cascade = CascadeType.ALL, mappedBy = "funcionario")
+	@NotAudited
+	private List<Beneficiario> beneficiarios;
 
-    public void setMatriculaOrigem(String matriculaOrigem) {
-        this.matriculaOrigem = matriculaOrigem;
-    }
+	public Funcionario() {
+		beneficiarios = new ArrayList<>();
+	}
 
-    public String getMatriculaPasa() {
-        return matriculaPasa;
-    }
+	public EnumMotivoDesligamento getMotivoDesligamentoAsEnum() {
+		return EnumMotivoDesligamento.getMotivoDesligamentoByIndice(motivoDesligamento.getId().intValue());
+	}
 
-    public void setMatriculaPasa(String matriculaPasa) {
-        this.matriculaPasa = matriculaPasa;
-    }
+	public void addBeneficiario(Beneficiario b) {
+		beneficiarios.add(b);
+	}
 
-    public String getEmpresaAtualizadora() {
-        return empresaAtualizadora;
-    }
+	public Long getId() {
+		return id;
+	}
 
-    public void setEmpresaAtualizadora(String empresaAtualizadora) {
-        this.empresaAtualizadora = empresaAtualizadora;
-    }
+	public void setId(Long id) {
+		this.id = id;
+	}
 
-    public String getMatriculaAtualizadora() {
-        return matriculaAtualizadora;
-    }
+	public String getMatriculaOrigem() {
+		return matriculaOrigem;
+	}
 
-    public void setMatriculaAtualizadora(String matriculaAtualizadora) {
-        this.matriculaAtualizadora = matriculaAtualizadora;
-    }
+	public void setMatriculaOrigem(String matriculaOrigem) {
+		this.matriculaOrigem = matriculaOrigem;
+	}
 
-    public String getDireitoAbaterIR() {
-        return direitoAbaterIR;
-    }
+	public String getMatriculaPasa() {
+		return matriculaPasa;
+	}
 
-    public void setDireitoAbaterIR(String direitoAbaterIR) {
-        this.direitoAbaterIR = direitoAbaterIR;
-    }
+	public void setMatriculaPasa(String matriculaPasa) {
+		this.matriculaPasa = matriculaPasa;
+	}
 
-    public Date getDataDesligamento() {
-        return dataDesligamento;
-    }
+	public String getEmpresaAtualizadora() {
+		return empresaAtualizadora;
+	}
 
-    public void setDataDesligamento(Date dataDesligamento) {
-        this.dataDesligamento = dataDesligamento;
-    }
+	public void setEmpresaAtualizadora(String empresaAtualizadora) {
+		this.empresaAtualizadora = empresaAtualizadora;
+	}
 
-    public String getFinanceira() {
-        return financeira;
-    }
+	public String getMatriculaAtualizadora() {
+		return matriculaAtualizadora;
+	}
 
-    public void setFinanceira(String financeira) {
-        this.financeira = financeira;
-    }
+	public void setMatriculaAtualizadora(String matriculaAtualizadora) {
+		this.matriculaAtualizadora = matriculaAtualizadora;
+	}
 
-    public String getContratoTrabalho() {
-        return contratoTrabalho;
-    }
+	public String getDireitoAbaterIR() {
+		return direitoAbaterIR;
+	}
 
-    public void setContratoTrabalho(String contratoTrabalho) {
-        this.contratoTrabalho = contratoTrabalho;
-    }
+	public void setDireitoAbaterIR(String direitoAbaterIR) {
+		this.direitoAbaterIR = direitoAbaterIR;
+	}
 
-    public String getCodDireitoPasa() {
-        return codDireitoPasa;
-    }
+	public Date getDataDesligamento() {
+		return dataDesligamento;
+	}
 
-    public void setCodDireitoPasa(String codDireitoPasa) {
-        this.codDireitoPasa = codDireitoPasa;
-    }
+	public void setDataDesligamento(Date dataDesligamento) {
+		this.dataDesligamento = dataDesligamento;
+	}
 
-    public String getUnidadeControle() {
-        return unidadeControle;
-    }
+	public String getFinanceira() {
+		return financeira;
+	}
 
-    public void setUnidadeControle(String unidadeControle) {
-        this.unidadeControle = unidadeControle;
-    }
+	public void setFinanceira(String financeira) {
+		this.financeira = financeira;
+	}
 
-    public String getCentroCusto() {
-        return centroCusto;
-    }
+	public String getContratoTrabalho() {
+		return contratoTrabalho;
+	}
 
-    public void setCentroCusto(String centroCusto) {
-        this.centroCusto = centroCusto;
-    }
+	public void setContratoTrabalho(String contratoTrabalho) {
+		this.contratoTrabalho = contratoTrabalho;
+	}
 
-    public String getCodFilialVLI() {
-        return codFilialVLI;
-    }
+	public String getCodDireitoPasa() {
+		return codDireitoPasa;
+	}
 
-    public void setCodFilialVLI(String codFilialVLI) {
-        this.codFilialVLI = codFilialVLI;
-    }
+	public void setCodDireitoPasa(String codDireitoPasa) {
+		this.codDireitoPasa = codDireitoPasa;
+	}
 
-    public Long getIdUsuario() {
-        return idUsuario;
-    }
+	public String getUnidadeControle() {
+		return unidadeControle;
+	}
 
-    public void setIdUsuario(Long idUsuario) {
-        this.idUsuario = idUsuario;
-    }
+	public void setUnidadeControle(String unidadeControle) {
+		this.unidadeControle = unidadeControle;
+	}
 
-    public Integer getIndAtivo() {
-        return indAtivo;
-    }
+	public String getCentroCusto() {
+		return centroCusto;
+	}
 
-    public void setIndAtivo(Integer indAtivo) {
-        this.indAtivo = indAtivo;
-    }
+	public void setCentroCusto(String centroCusto) {
+		this.centroCusto = centroCusto;
+	}
 
-    public Empresa getEmpresa() {
-        return empresa;
-    }
+	public String getCodFilialVLI() {
+		return codFilialVLI;
+	}
 
-    public void setEmpresa(Empresa empresa) {
-        this.empresa = empresa;
-    }
+	public void setCodFilialVLI(String codFilialVLI) {
+		this.codFilialVLI = codFilialVLI;
+	}
 
-    public TipoVinculoEmpregaticio getTipoVinculoEmpregaticio() {
-        return tipoVinculoEmpregaticio;
-    }
+	public Long getIdUsuario() {
+		return idUsuario;
+	}
 
-    public void setTipoVinculoEmpregaticio(TipoVinculoEmpregaticio tipoVinculoEmpregaticio) {
-        this.tipoVinculoEmpregaticio = tipoVinculoEmpregaticio;
-    }
+	public void setIdUsuario(Long idUsuario) {
+		this.idUsuario = idUsuario;
+	}
 
-    public DadosBancarios getDadosBancarios() {
-    	return dadosBancarios;
-    }
+	public Integer getIndAtivo() {
+		return indAtivo;
+	}
 
-    public void setDadosBancarios(DadosBancarios dadosBancarios) {
-        this.dadosBancarios = dadosBancarios;
-    }
+	public void setIndAtivo(Integer indAtivo) {
+		this.indAtivo = indAtivo;
+	}
 
-    public MotivoDesligamento getMotivoDesligamento() {
-        return motivoDesligamento;
-    }
+	public Empresa getEmpresa() {
+		return empresa;
+	}
 
-    public void setMotivoDesligamento(MotivoDesligamento motivoDesligamento) {
-        this.motivoDesligamento = motivoDesligamento;
-    }
+	public void setEmpresa(Empresa empresa) {
+		this.empresa = empresa;
+	}
+
+	public TipoVinculoEmpregaticio getTipoVinculoEmpregaticio() {
+		return tipoVinculoEmpregaticio;
+	}
+
+	public void setTipoVinculoEmpregaticio(TipoVinculoEmpregaticio tipoVinculoEmpregaticio) {
+		this.tipoVinculoEmpregaticio = tipoVinculoEmpregaticio;
+	}
+
+	public DadosBancarios getDadosBancarios() {
+		return dadosBancarios;
+	}
+
+	public void setDadosBancarios(DadosBancarios dadosBancarios) {
+		this.dadosBancarios = dadosBancarios;
+	}
+
+	public MotivoDesligamento getMotivoDesligamento() {
+		return motivoDesligamento;
+	}
+
+	public void setMotivoDesligamento(MotivoDesligamento motivoDesligamento) {
+		this.motivoDesligamento = motivoDesligamento;
+	}
 
 	/**
 	 * @return the emailCorporativo
@@ -296,7 +292,8 @@ public class Funcionario extends Pessoa implements Serializable {
 	}
 
 	/**
-	 * @param emailCorporativo the emailCorporativo to set
+	 * @param emailCorporativo
+	 *            the emailCorporativo to set
 	 */
 	public void setEmailCorporativo(String emailCorporativo) {
 		this.emailCorporativo = emailCorporativo;
@@ -310,7 +307,8 @@ public class Funcionario extends Pessoa implements Serializable {
 	}
 
 	/**
-	 * @param dataAdmissao the dataAdmissao to set
+	 * @param dataAdmissao
+	 *            the dataAdmissao to set
 	 */
 	public void setDataAdmissao(Date dataAdmissao) {
 		this.dataAdmissao = dataAdmissao;
@@ -324,7 +322,8 @@ public class Funcionario extends Pessoa implements Serializable {
 	}
 
 	/**
-	 * @param dataUltimaAtualizacao the dataUltimaAtualizacao to set
+	 * @param dataUltimaAtualizacao
+	 *            the dataUltimaAtualizacao to set
 	 */
 	public void setDataUltimaAtualizacao(Date dataUltimaAtualizacao) {
 		this.dataUltimaAtualizacao = dataUltimaAtualizacao;

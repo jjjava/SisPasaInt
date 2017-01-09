@@ -1,12 +1,16 @@
 package org.pasa.sispasa.core.enumeration;
 
 /**
- *
+ * 
  * @author Allan Garcia
+ *
  */
 public enum EnumTipoAposentadoria {
 
-	V("VALIA"), I("INSS");
+	/* Não mudar ordem do enum pois a entidade usa o EnumType ORDINAL. */
+	VALIA("VALIA"), 
+	INSS("INSS"),
+	VALIA_E_INSS("VALIA e INSS");
 
 	private String descricao;
 

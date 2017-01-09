@@ -14,6 +14,7 @@ import org.hibernate.envers.AuditTable;
 import org.hibernate.envers.Audited;
 import org.hibernate.envers.NotAudited;
 import org.pasa.sispasa.core.constants.ConstantesBanco;
+import org.pasa.sispasa.core.vo.EstadoVO;
 
 /**
  *
@@ -23,7 +24,7 @@ import org.pasa.sispasa.core.constants.ConstantesBanco;
 @Entity
 @Table(name = "ESTADO")
 @Audited
-@AuditTable(value="HIST_ESTADO")
+@AuditTable(value = "HIST_ESTADO")
 public class Estado implements Serializable {
 
 	private static final long serialVersionUID = 1L;
@@ -40,18 +41,18 @@ public class Estado implements Serializable {
 	@NotAudited
 	private Pais pais;
 
-	//CONSTRUTORES
-	
-	public Estado(){
-		//CONSTRUTOR DEFAULT
+	public Estado() {
+		// CONSTRUTOR DEFAULT
 	}
-	
-	public Estado(String id){
+
+	public EstadoVO getEntityVO() {
+		return new EstadoVO(id, nome);
+	}
+
+	public Estado(String id) {
 		this.id = id;
 	}
-	
-	//GETTERS E SETTERS
-	
+
 	public String getId() {
 		return id;
 	}

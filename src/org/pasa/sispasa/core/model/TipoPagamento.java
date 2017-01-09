@@ -13,7 +13,7 @@ import org.pasa.sispasa.core.constants.ConstantesBanco;
 
 /**
  *
- * @author Hudson Schumaker
+ * @author Hudson Schumaker / Andre Gomes
  * @version 1.0.0
  */
 
@@ -34,9 +34,17 @@ public class TipoPagamento implements Serializable {
 	@Column(name = "TP_PAGADOR", columnDefinition = ConstantesBanco.CHAR_1, nullable = false)
 	private String tipoPagador;
 
+	//CONSTRUTORES
 	public TipoPagamento() {
+		//CONSTRUTOR DEFAULT
+	}
+	
+	public TipoPagamento(Long id) {
+		this.id = id;
 	}
 
+	
+	//GETTERS E SETTERS
 	public Long getId() {
 		return id;
 	}

@@ -30,19 +30,13 @@ public class MotivoDesligamento extends BaseEntity implements Serializable {
 
 	@Column(name = "DESCRICAO", length = 60)
 	private String descricao;
-
-	//CONSTRUTORES
 	
-	public MotivoDesligamento() {
-		//CONSTRUTOR DEFAULT
+	public MotivoDesligamento() {	
 	}
 	
 	public MotivoDesligamento(Long id) {
 		this.id = id;
 	}
-
-	
-	//GETTERS E SETTERS
 	
 	public Long getId() {
 		return id;

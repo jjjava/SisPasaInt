@@ -13,6 +13,7 @@ import org.hibernate.envers.AuditTable;
 import org.hibernate.envers.Audited;
 import org.hibernate.envers.NotAudited;
 import org.pasa.sispasa.core.constants.ConstantesBanco;
+import org.pasa.sispasa.core.vo.MunicipioVO;
 
 /**
  *
@@ -22,7 +23,7 @@ import org.pasa.sispasa.core.constants.ConstantesBanco;
 @Entity
 @Table(name = "MUNICIPIO")
 @Audited
-@AuditTable(value="HIST_MUNICIPIO")
+@AuditTable(value = "HIST_MUNICIPIO")
 public class Municipio extends BaseEntity implements Serializable {
 
 	private static final long serialVersionUID = 1L;
@@ -34,25 +35,22 @@ public class Municipio extends BaseEntity implements Serializable {
 	@Column(name = "NOME", nullable = false, length = 50)
 	private String nome;
 
-	//RELACIONAMENTOS
-	
 	@ManyToOne
 	@JoinColumn(name = "ID_ESTADO")
 	@NotAudited
 	private Estado estado;
 
-	//CONSTRUTORES
-	
-	public Municipio(){
-		//CONSTRUTOR DEFAULT
+	public Municipio() {
 	}
-	
-	public Municipio(Long id){
+
+	public Municipio(Long id) {
 		this.id = id;
 	}
-	
-	//GETTERS E SETTERS
-	
+
+	public MunicipioVO getEntityVO() {
+		return new MunicipioVO(id, nome);
+	}
+
 	public Long getId() {
 		return id;
 	}

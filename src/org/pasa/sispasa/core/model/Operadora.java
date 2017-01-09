@@ -18,7 +18,7 @@ import org.pasa.sispasa.core.constants.ConstantesBanco;
 
 /**
  *
- * @author Hudson Schumaker
+ * @author Hudson Schumaker / Andre Gomes
  * @version 1.0.0
  */
 @Entity
@@ -50,7 +50,11 @@ public class Operadora implements Serializable {
 	//CONSTRUTORES
 	
 	public Operadora() {
-		//CONSTRUTOR
+		//CONSTRUTOR DEFAULT
+	}
+	
+	public Operadora(Long id) {
+		this.id = id;
 	}
 
 	//GETTERS E SETTERS

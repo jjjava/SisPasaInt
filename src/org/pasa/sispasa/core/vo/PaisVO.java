@@ -4,22 +4,17 @@ package org.pasa.sispasa.core.vo;
  *
  * @author Andre Gomes
  */
-public class PaisVO extends AtributosComunsVO{
+public class PaisVO extends AtributosComunsVO {
 
 	private String nome;
 
-	public PaisVO(){
-		//CONSTRUTOR DEFAULT
+	public PaisVO() {	
 	}
-	
-	public PaisVO(Long id, String nome){
+
+	public PaisVO(Long id, String nome) {
 		super.id = id;
 		this.nome = nome;
 	}
-	
-	
-	//GETTERS E SETTERS
-	
 
 	public String getNome() {
 		return nome;

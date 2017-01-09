@@ -28,7 +28,7 @@ import org.pasa.sispasa.core.constants.ConstantesBanco;
 @Table(name = "CONVENIO")
 @Audited
 @AuditTable(value="HIST_CONVENIO")
-public class Convenio implements Serializable {
+public class Convenio extends BaseEntity implements Serializable {
 
     private static final long serialVersionUID = 1L;
 
@@ -39,11 +39,11 @@ public class Convenio implements Serializable {
 
     @Column(name = "DT_INICIO_VIGENCIA", nullable = false, columnDefinition = ConstantesBanco.DATE)
     @Temporal(TemporalType.DATE)
-    private Date dataInicio;
+    private Date dataInicioVigencia;
 
     @Column(name = "DT_FIM", columnDefinition = ConstantesBanco.DATE)
     @Temporal(TemporalType.DATE)
-    private Date dataFim;
+    private Date dataFimVigencia;
 
     @Column(name = "QTD_DIAS_ASSOC", columnDefinition = ConstantesBanco.SMALLINT)
     private Integer qtdDiasAssociacao;
@@ -64,7 +64,7 @@ public class Convenio implements Serializable {
     private Integer indContribuicaoAgregado;
 
     @Column(name = "IND_CONTRIB_DEPEN", nullable = false, columnDefinition = ConstantesBanco.SMALLINT)
-    private Integer indContribDependente;
+    private Integer indContribuicaoDependente;
     
     @Column(name = "IND_COPARTICIP_ASSOC", nullable = false, columnDefinition = ConstantesBanco.SMALLINT)
     private Integer indCoparticipacaoAssociado;
@@ -118,22 +118,6 @@ public class Convenio implements Serializable {
         this.id = id;
     }
 
-    public Date getDataInicio() {
-        return dataInicio;
-    }
-
-    public void setDataInicio(Date dataInicio) {
-        this.dataInicio = dataInicio;
-    }
-
-    public Date getDataFim() {
-        return dataFim;
-    }
-
-    public void setDataFim(Date dataFim) {
-        this.dataFim = dataFim;
-    }
-
     public Integer getQtdDiasAssociacao() {
         return qtdDiasAssociacao;
     }
@@ -172,14 +156,6 @@ public class Convenio implements Serializable {
 
     public void setIndContribuicaoAgregado(Integer indContribuicaoAgregado) {
         this.indContribuicaoAgregado = indContribuicaoAgregado;
-    }
-
-    public Integer getIndContribDependente() {
-        return indContribDependente;
-    }
-
-    public void setIndContribDependente(Integer indContribDependente) {
-        this.indContribDependente = indContribDependente;
     }
 
     public Long getIdUsuario() {
@@ -268,5 +244,29 @@ public class Convenio implements Serializable {
 
 	public void setDataUltimaAtualizacao(Date dataUltimaAtualizacao) {
 		this.dataUltimaAtualizacao = dataUltimaAtualizacao;
+	}
+
+	public Date getDataInicioVigencia() {
+		return dataInicioVigencia;
+	}
+
+	public void setDataInicioVigencia(Date dataInicioVigencia) {
+		this.dataInicioVigencia = dataInicioVigencia;
+	}
+
+	public Date getDataFimVigencia() {
+		return dataFimVigencia;
+	}
+
+	public void setDataFimVigencia(Date dataFimVigencia) {
+		this.dataFimVigencia = dataFimVigencia;
+	}
+
+	public Integer getIndContribuicaoDependente() {
+		return indContribuicaoDependente;
+	}
+
+	public void setIndContribuicaoDependente(Integer indContribuicaoDependente) {
+		this.indContribuicaoDependente = indContribuicaoDependente;
 	}
 }

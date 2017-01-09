@@ -13,37 +13,30 @@ import org.pasa.sispasa.core.enumeration.EnumTipoParticipacao;
 public class ConvenioVO extends AtributosComunsVO {
 
 
-    private Date dataInicio;
-    private Date dataFim;
+    private Date dataInicioVigencia;
+    private Date dataFimVigencia;
     private Integer qtdDiasAssociacao;
     private Integer qtdDiasAdesao;
-
-    private Integer indParticipacaoTaxaAssociado;
-    private Integer indContribuicaoAssociado;
-    private Integer indContribuicaoAgregado;
-    private Integer indContribDependente;
-    private Integer indCoparticipacaoAssociado;
-    private Integer indCoparticipacaoAgregado;
-    private Integer indCoparticipacaoDependente;
     
     private EnumTipoPagamento enumTipoPagamento;
     private EnumTipoParticipacao enumTipoParticipacao;
 	
+    private ContratoVO contrato;
+    private EmpresaVO empresa;
+    
+    private boolean indParticipacaoTaxaAssociado;
+    
+    private boolean indContribuicaoAssociado;
+    private boolean indContribuicaoAgregado;
+    private boolean indContribuicaoDependente;
+    
+    private boolean indCoparticipacaoAssociado;
+    private boolean indCoparticipacaoAgregado;
+    private boolean indCoparticipacaoDependente;
+    
     
     //GETTERS E SETTERS
     
-    public Date getDataInicio() {
-		return dataInicio;
-	}
-	public void setDataInicio(Date dataInicio) {
-		this.dataInicio = dataInicio;
-	}
-	public Date getDataFim() {
-		return dataFim;
-	}
-	public void setDataFim(Date dataFim) {
-		this.dataFim = dataFim;
-	}
 	public Integer getQtdDiasAssociacao() {
 		return qtdDiasAssociacao;
 	}
@@ -55,48 +48,6 @@ public class ConvenioVO extends AtributosComunsVO {
 	}
 	public void setQtdDiasAdesao(Integer qtdDiasAdesao) {
 		this.qtdDiasAdesao = qtdDiasAdesao;
-	}
-	public Integer getIndParticipacaoTaxaAssociado() {
-		return indParticipacaoTaxaAssociado;
-	}
-	public void setIndParticipacaoTaxaAssociado(Integer indParticipacaoTaxaAssociado) {
-		this.indParticipacaoTaxaAssociado = indParticipacaoTaxaAssociado;
-	}
-	public Integer getIndContribuicaoAssociado() {
-		return indContribuicaoAssociado;
-	}
-	public void setIndContribuicaoAssociado(Integer indContribuicaoAssociado) {
-		this.indContribuicaoAssociado = indContribuicaoAssociado;
-	}
-	public Integer getIndContribuicaoAgregado() {
-		return indContribuicaoAgregado;
-	}
-	public void setIndContribuicaoAgregado(Integer indContribuicaoAgregado) {
-		this.indContribuicaoAgregado = indContribuicaoAgregado;
-	}
-	public Integer getIndContribDependente() {
-		return indContribDependente;
-	}
-	public void setIndContribDependente(Integer indContribDependente) {
-		this.indContribDependente = indContribDependente;
-	}
-	public Integer getIndCoparticipacaoAssociado() {
-		return indCoparticipacaoAssociado;
-	}
-	public void setIndCoparticipacaoAssociado(Integer indCoparticipacaoAssociado) {
-		this.indCoparticipacaoAssociado = indCoparticipacaoAssociado;
-	}
-	public Integer getIndCoparticipacaoAgregado() {
-		return indCoparticipacaoAgregado;
-	}
-	public void setIndCoparticipacaoAgregado(Integer indCoparticipacaoAgregado) {
-		this.indCoparticipacaoAgregado = indCoparticipacaoAgregado;
-	}
-	public Integer getIndCoparticipacaoDependente() {
-		return indCoparticipacaoDependente;
-	}
-	public void setIndCoparticipacaoDependente(Integer indCoparticipacaoDependente) {
-		this.indCoparticipacaoDependente = indCoparticipacaoDependente;
 	}
 	public EnumTipoPagamento getEnumTipoPagamento() {
 		return enumTipoPagamento;
@@ -110,10 +61,70 @@ public class ConvenioVO extends AtributosComunsVO {
 	public void setEnumTipoParticipacao(EnumTipoParticipacao enumTipoParticipacao) {
 		this.enumTipoParticipacao = enumTipoParticipacao;
 	}
-    
-    
-    
-    
-    
-
+	public Date getDataInicioVigencia() {
+		return dataInicioVigencia;
+	}
+	public void setDataInicioVigencia(Date dataInicioVigencia) {
+		this.dataInicioVigencia = dataInicioVigencia;
+	}
+	public Date getDataFimVigencia() {
+		return dataFimVigencia;
+	}
+	public void setDataFimVigencia(Date dataFimVigencia) {
+		this.dataFimVigencia = dataFimVigencia;
+	}
+	public ContratoVO getContrato() {
+		return contrato;
+	}
+	public void setContrato(ContratoVO contrato) {
+		this.contrato = contrato;
+	}
+	public boolean isIndContribuicaoAssociado() {
+		return indContribuicaoAssociado;
+	}
+	public void setIndContribuicaoAssociado(boolean indContribuicaoAssociado) {
+		this.indContribuicaoAssociado = indContribuicaoAssociado;
+	}
+	public boolean isIndContribuicaoAgregado() {
+		return indContribuicaoAgregado;
+	}
+	public void setIndContribuicaoAgregado(boolean indContribuicaoAgregado) {
+		this.indContribuicaoAgregado = indContribuicaoAgregado;
+	}
+	public boolean isIndContribuicaoDependente() {
+		return indContribuicaoDependente;
+	}
+	public void setIndContribuicaoDependente(boolean indContribuicaoDependente) {
+		this.indContribuicaoDependente = indContribuicaoDependente;
+	}
+	public boolean isIndCoparticipacaoAssociado() {
+		return indCoparticipacaoAssociado;
+	}
+	public void setIndCoparticipacaoAssociado(boolean indCoparticipacaoAssociado) {
+		this.indCoparticipacaoAssociado = indCoparticipacaoAssociado;
+	}
+	public boolean isIndCoparticipacaoAgregado() {
+		return indCoparticipacaoAgregado;
+	}
+	public void setIndCoparticipacaoAgregado(boolean indCoparticipacaoAgregado) {
+		this.indCoparticipacaoAgregado = indCoparticipacaoAgregado;
+	}
+	public boolean isIndCoparticipacaoDependente() {
+		return indCoparticipacaoDependente;
+	}
+	public void setIndCoparticipacaoDependente(boolean indCoparticipacaoDependente) {
+		this.indCoparticipacaoDependente = indCoparticipacaoDependente;
+	}
+	public void setIndParticipacaoTaxaAssociado(boolean indParticipacaoTaxaAssociado) {
+		this.indParticipacaoTaxaAssociado = indParticipacaoTaxaAssociado;
+	}
+	public boolean isIndParticipacaoTaxaAssociado() {
+		return indParticipacaoTaxaAssociado;
+	}
+	public EmpresaVO getEmpresa() {
+		return empresa;
+	}
+	public void setEmpresa(EmpresaVO empresa) {
+		this.empresa = empresa;
+	}
 }

@@ -46,6 +46,10 @@ public class PesquisaAssociadoVO {
 		this.enumFiltroPesquisaFuncionario = enumFiltroPesquisaFuncionario;
 	}
 
+	public String getNomeFormatado() {
+		return "%" + nome.trim().toLowerCase() + "%";	
+	}
+
 	public EmpresaVO getEmpresaVO() {
 		if (null == empresaVO) {
 			empresaVO = new EmpresaVO();

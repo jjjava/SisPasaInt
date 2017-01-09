@@ -15,6 +15,10 @@ import javax.persistence.TemporalType;
 import org.hibernate.envers.AuditTable;
 import org.hibernate.envers.Audited;
 import org.pasa.sispasa.core.constants.ConstantesBanco;
+import org.pasa.sispasa.core.enumeration.EnumBanco;
+import org.pasa.sispasa.core.enumeration.EnumIndAtivo;
+import org.pasa.sispasa.core.enumeration.EnumTipoConta;
+import org.pasa.sispasa.core.vo.DadosBancariosVO;
 
 /**
  *
@@ -24,96 +28,126 @@ import org.pasa.sispasa.core.constants.ConstantesBanco;
 @Entity
 @Table(name = "DADOS_BANCARIOS")
 @Audited
-@AuditTable(value="HIST_DADOS_BANCARIOS")
+@AuditTable(value = "HIST_DADOS_BANCARIOS")
 public class DadosBancarios extends BaseEntity implements Serializable {
 
-    private static final long serialVersionUID = 1L;
+	private static final long serialVersionUID = 1L;
 
-    @Id
-    @Column(name = "ID_DADOS_BANC", columnDefinition = ConstantesBanco.BIGINT)
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
+	@Id
+	@Column(name = "ID_DADOS_BANC", columnDefinition = ConstantesBanco.BIGINT)
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	private Long id;
 
-    @Column(name = "CD_BANCO", length=5)
-    private String codBanco;
-    
-    @Column(name = "AGENCIA", nullable = false,length=5)
-    private String agencia;
-    
-    @Column(name = "CONTA", nullable = false, length=10)
-    private String conta;
-    
-    @Column(name = "TP_CONTA", nullable =  false, columnDefinition = ConstantesBanco.CHAR_1)
-    private String tipoConta;
-    
-    @Column(name = "ID_USUARIO", columnDefinition = ConstantesBanco.BIGINT)
-    private Long idUsuario;
+	@Column(name = "CD_BANCO", length = 5)
+	private String codBanco;
 
-    @Column(name = "IND_ATIVO", nullable = false, columnDefinition = ConstantesBanco.SMALLINT)
-    private Integer indAtivo;
+	@Column(name = "AGENCIA", nullable = false, length = 5)
+	private String agencia;
 
-    @Column(name = "DT_ULT_ATULZ", nullable = false, columnDefinition = ConstantesBanco.DATE)
-    @Temporal(TemporalType.DATE)
-    private Date dataUltimaAtualizacao;
+	@Column(name = "CONTA", nullable = false, length = 10)
+	private String conta;
 
+	@Column(name = "TP_CONTA", nullable = false, columnDefinition = ConstantesBanco.CHAR_1)
+	private String tipoConta;
 
-    //GETTERS E SETTERS
-    
-    public Long getId() {
-        return id;
-    }
+	@Column(name = "ID_USUARIO", columnDefinition = ConstantesBanco.BIGINT)
+	private Long idUsuario;
 
-    public void setId(Long id) {
-        this.id = id;
-    }
+	@Column(name = "IND_ATIVO", nullable = false, columnDefinition = ConstantesBanco.SMALLINT)
+	private Integer indAtivo;
 
-    public String getCodBanco() {
-        return codBanco;
-    }
+	@Column(name = "DT_ULT_ATULZ", nullable = false, columnDefinition = ConstantesBanco.DATE)
+	@Temporal(TemporalType.TIMESTAMP)
+	private Date dataUltimaAtualizacao;
 
-    public void setCodBanco(String codBanco) {
-        this.codBanco = codBanco;
-    }
+	public DadosBancariosVO getEntityVO() {
 
-    public String getAgencia() {
-        return agencia;
-    }
+		DadosBancariosVO vo = new DadosBancariosVO();
+		vo.setId(getId());
+		vo.setIdUsuario(getIdUsuario());
+		vo.setEnumIndAtivo(EnumIndAtivo.getIndAtivoByIndice(getIndAtivo()));
+		vo.setDataUltimaAtualizacao(getDataUltimaAtualizacao());
+		vo.setAgencia(getAgencia());
+		vo.setConta(getConta());
+		vo.setEnumBanco(EnumBanco.getBancoByIndice(getCodBanco()));
+		vo.setEnumTipoConta(EnumTipoConta.getTipoContaByIndice(getTipoConta()));
+		return vo;
+	}
 
-    public void setAgencia(String agencia) {
-        this.agencia = agencia;
-    }
+	public static DadosBancarios getEntity(DadosBancariosVO vo) {		
+		return getEntity(new DadosBancarios(), vo);
+	}
 
-    public String getConta() {
-        return conta;
-    }
+	public static DadosBancarios getEntity(DadosBancarios dadosBancarios, DadosBancariosVO vo) {
 
-    public void setConta(String conta) {
-        this.conta = conta;
-    }
+		dadosBancarios.setId(vo.getId());
+		dadosBancarios.setIdUsuario(vo.getIdUsuario());
+		dadosBancarios.setIndAtivo(vo.getEnumIndAtivo().getIndice());
+		dadosBancarios.setDataUltimaAtualizacao(vo.getDataUltimaAtualizacao());
+		dadosBancarios.setCodBanco(vo.getEnumBanco().getIndice());
+		dadosBancarios.setTipoConta(vo.getEnumTipoConta().getIndice());
+		dadosBancarios.setAgencia(vo.getAgencia());
+		dadosBancarios.setConta(vo.getConta());
+		return dadosBancarios;
+	}
 
-    public String getTipoConta() {
-        return tipoConta;
-    }
+	// GETTERS E SETTERS
 
-    public void setTipoConta(String tipoConta) {
-        this.tipoConta = tipoConta;
-    }
+	public Long getId() {
+		return id;
+	}
 
-    public Long getIdUsuario() {
-        return idUsuario;
-    }
+	public void setId(Long id) {
+		this.id = id;
+	}
 
-    public void setIdUsuario(Long idUsuario) {
-        this.idUsuario = idUsuario;
-    }
+	public String getCodBanco() {
+		return codBanco;
+	}
 
-    public Integer getIndAtivo() {
-        return indAtivo;
-    }
+	public void setCodBanco(String codBanco) {
+		this.codBanco = codBanco;
+	}
 
-    public void setIndAtivo(Integer indAtivo) {
-        this.indAtivo = indAtivo;
-    }
+	public String getAgencia() {
+		return agencia;
+	}
+
+	public void setAgencia(String agencia) {
+		this.agencia = agencia;
+	}
+
+	public String getConta() {
+		return conta;
+	}
+
+	public void setConta(String conta) {
+		this.conta = conta;
+	}
+
+	public String getTipoConta() {
+		return tipoConta;
+	}
+
+	public void setTipoConta(String tipoConta) {
+		this.tipoConta = tipoConta;
+	}
+
+	public Long getIdUsuario() {
+		return idUsuario;
+	}
+
+	public void setIdUsuario(Long idUsuario) {
+		this.idUsuario = idUsuario;
+	}
+
+	public Integer getIndAtivo() {
+		return indAtivo;
+	}
+
+	public void setIndAtivo(Integer indAtivo) {
+		this.indAtivo = indAtivo;
+	}
 
 	/**
 	 * @return the dataUltimaAtualizacao
@@ -123,7 +157,8 @@ public class DadosBancarios extends BaseEntity implements Serializable {
 	}
 
 	/**
-	 * @param dataUltimaAtualizacao the dataUltimaAtualizacao to set
+	 * @param dataUltimaAtualizacao
+	 *            the dataUltimaAtualizacao to set
 	 */
 	public void setDataUltimaAtualizacao(Date dataUltimaAtualizacao) {
 		this.dataUltimaAtualizacao = dataUltimaAtualizacao;

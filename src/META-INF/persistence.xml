@@ -1,69 +1,69 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <persistence version="2.1" xmlns="http://xmlns.jcp.org/xml/ns/persistence" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/persistence http://xmlns.jcp.org/xml/ns/persistence/persistence_2_1.xsd">
-    <persistence-unit name="SisPasaIntPU" transaction-type="RESOURCE_LOCAL">
-        <provider>org.eclipse.persistence.jpa.PersistenceProvider</provider>
-        <class>org.pasa.sispasa.core.model.Beneficiario</class>
-        <class>org.pasa.sispasa.core.model.Contato</class>
-        <class>org.pasa.sispasa.core.model.Contrato</class>
-        <class>org.pasa.sispasa.core.model.Convenio</class>
-        <class>org.pasa.sispasa.core.model.ConvenioPlano</class>
-        <class>org.pasa.sispasa.core.model.ConvenioReciprocidade</class>
-        <class>org.pasa.sispasa.core.model.DadosBancarios</class>
-        <class>org.pasa.sispasa.core.model.Dependente</class>
-        <class>org.pasa.sispasa.core.model.Documento</class>
-        <class>org.pasa.sispasa.core.model.Empresa</class>
-        <class>org.pasa.sispasa.core.model.Endereco</class>
-        <class>org.pasa.sispasa.core.model.Estado</class>
-        <class>org.pasa.sispasa.core.model.EstadoCivil</class>
-        <class>org.pasa.sispasa.core.model.EventoAtualizacao</class>
-        <class>org.pasa.sispasa.core.model.Funcionario</class>
-        <class>org.pasa.sispasa.core.model.GrauParentesco</class>
-        <class>org.pasa.sispasa.core.model.MotivoDesligamento</class>
-        <class>org.pasa.sispasa.core.model.Municipio</class>
-        <class>org.pasa.sispasa.core.model.NivelEscolaridade</class>
-        <class>org.pasa.sispasa.core.model.Operadora</class>
-        <class>org.pasa.sispasa.core.model.OperadoraReciprocidade</class>
-        <class>org.pasa.sispasa.core.model.OrigemInformacoes</class>
-        <class>org.pasa.sispasa.core.model.Pais</class>
-        <class>org.pasa.sispasa.core.model.Pessoa</class>
-        <class>org.pasa.sispasa.core.model.Plano</class>
-        <class>org.pasa.sispasa.core.model.Telefone</class>
-        <class>org.pasa.sispasa.core.model.TipoContrato</class>
-        <class>org.pasa.sispasa.core.model.TipoDocumento</class>
-        <class>org.pasa.sispasa.core.model.TipoEmpresa</class>
-        <class>org.pasa.sispasa.core.model.TipoPagamento</class>
-        <class>org.pasa.sispasa.core.model.TipoParticipacao</class>
-        <class>org.pasa.sispasa.core.model.TipoPlano</class>
-        <class>org.pasa.sispasa.core.model.TipoTelefone</class>
-        <class>org.pasa.sispasa.core.model.TipoVinculoEmpregaticio</class>
-        <class>org.pasa.sispasaint.config.DadosConfig</class>
-        <class>org.pasa.sispasaint.mail.MailConfig</class>
-        <class>org.pasa.sispasaint.model.intg.Agenda</class>
-        <class>org.pasa.sispasaint.model.intg.ModeloBenExt</class>
-        <class>org.pasa.sispasaint.model.intg.ModeloBenPeople</class>
-        <class>org.pasa.sispasaint.model.intg.ModeloBenVLI</class>
-        <class>org.pasa.sispasaint.model.intg.ModeloEndExt</class>
-        <class>org.pasa.sispasaint.model.intg.ModeloEndPeople</class>
-        <class>org.pasa.sispasaint.model.intg.ModeloEndVLI</class>
-        <class>org.pasa.sispasaint.model.intg.TipoAgenda</class>
-        <class>org.pasa.sispasa.core.model.PlanoReciprocidade</class>
-        <class>org.pasa.sispasaint.model.intg.Destinatario</class>
-        <class>org.pasa.sispasaint.model.intg.ListaDestinatarios</class>
-        <class>org.pasa.sispasaint.model.intg.Log</class>
-        <class>org.pasa.sispasaint.model.intg.ModeloBenEnd</class>
-        <class>org.pasa.sispasaint.model.intg.LogMatriculas</class>
-        
-        <properties>
-            <!-- <property name="javax.persistence.jdbc.url" value="jdbc:jtds:sqlserver://192.168.232.25:1433;DatabaseName=sispasa-dev"/>   --> 
-            <!-- <property name="javax.persistence.jdbc.user" value="usrsispasadev"/> -->
-            <!-- <property name="javax.persistence.jdbc.password" value="sispasadev"/>-->
-            <property name="javax.persistence.jdbc.url" value="jdbc:jtds:sqlserver://127.0.0.1:1433;instance=PASA;DatabaseName=sispasa"/>
-            <property name="javax.persistence.jdbc.user" value="pasa"/>
-            <property name="javax.persistence.jdbc.password" value="pasa"/>
-            <property name="javax.persistence.schema-generation.database.action" value="create"/>
-            <property name="javax.persistence.jdbc.driver" value="net.sourceforge.jtds.jdbc.Driver"/>
-            <property name="hibernate.show_sql" value="true"/>
-            <property name="hibernate.format_sql" value="true"/>
-        </properties>
-    </persistence-unit>
+  <persistence-unit name="SisPasaIntPU" transaction-type="RESOURCE_LOCAL">
+    <provider>org.eclipse.persistence.jpa.PersistenceProvider</provider>
+    <class>org.pasa.sispasa.core.model.Associado</class>
+    <class>org.pasa.sispasa.core.model.Beneficiario</class>
+    <class>org.pasa.sispasa.core.model.Contato</class>
+    <class>org.pasa.sispasa.core.model.Contrato</class>
+    <class>org.pasa.sispasa.core.model.Convenio</class>
+    <class>org.pasa.sispasa.core.model.ConvenioReciprocidade</class>
+    <class>org.pasa.sispasa.core.model.DadosBancarios</class>
+    <class>org.pasa.sispasa.core.model.Documento</class>
+    <class>org.pasa.sispasa.core.model.Empresa</class>
+    <class>org.pasa.sispasa.core.model.Endereco</class>
+    <class>org.pasa.sispasa.core.model.Estado</class>
+    <class>org.pasa.sispasa.core.model.EstadoCivil</class>
+    <class>org.pasa.sispasa.core.model.EventoAtualizacao</class>
+    <class>org.pasa.sispasa.core.model.Funcionario</class>
+    <class>org.pasa.sispasa.core.model.GrauParentesco</class>
+    <class>org.pasa.sispasa.core.model.MotivoDesligamento</class>
+    <class>org.pasa.sispasa.core.model.Municipio</class>
+    <class>org.pasa.sispasa.core.model.NivelEscolaridade</class>
+    <class>org.pasa.sispasa.core.model.Operadora</class>
+    <class>org.pasa.sispasa.core.model.OperadoraReciprocidade</class>
+    <class>org.pasa.sispasa.core.model.OrigemInformacoes</class>
+    <class>org.pasa.sispasa.core.model.Pais</class>
+    <class>org.pasa.sispasa.core.model.Participante</class>
+    <class>org.pasa.sispasa.core.model.ParticipanteDadosBancarios</class>
+    <class>org.pasa.sispasa.core.model.Pessoa</class>
+    <class>org.pasa.sispasa.core.model.Plano</class>
+    <class>org.pasa.sispasa.core.model.PlanoReciprocidade</class>
+    <class>org.pasa.sispasa.core.model.SituacaoAssociado</class>
+    <class>org.pasa.sispasa.core.model.TaxaAssociado</class>
+    <class>org.pasa.sispasa.core.model.Telefone</class>
+    <class>org.pasa.sispasa.core.model.TipoContrato</class>
+    <class>org.pasa.sispasa.core.model.TipoDocumento</class>
+    <class>org.pasa.sispasa.core.model.TipoEmpresa</class>
+    <class>org.pasa.sispasa.core.model.TipoIntegracao</class>
+    <class>org.pasa.sispasa.core.model.TipoPagamento</class>
+    <class>org.pasa.sispasa.core.model.TipoParticipacao</class>
+    <class>org.pasa.sispasa.core.model.TipoPlano</class>
+    <class>org.pasa.sispasa.core.model.TipoTaxa</class>
+    <class>org.pasa.sispasa.core.model.TipoTelefone</class>
+    <class>org.pasa.sispasa.core.model.TipoVinculoEmpregaticio</class>
+    <class>org.pasa.sispasaint.config.DadosConfig</class>
+    <class>org.pasa.sispasaint.mail.MailConfig</class>
+    <class>org.pasa.sispasaint.model.intg.Agenda</class>
+    <class>org.pasa.sispasaint.model.intg.Destinatario</class>
+    <class>org.pasa.sispasaint.model.intg.ListaDestinatarios</class>
+    <class>org.pasa.sispasaint.model.intg.Log</class>
+    <class>org.pasa.sispasaint.model.intg.LogMatriculas</class>
+    <class>org.pasa.sispasaint.model.intg.ModeloBenEnd</class>
+    <class>org.pasa.sispasaint.model.intg.ModeloBenVLI</class>
+    <class>org.pasa.sispasaint.model.intg.ModeloEndVLI</class>
+    <class>org.pasa.sispasaint.model.intg.TipoAgenda</class>
+    <properties>
+      <property name="javax.persistence.jdbc.url" value="jdbc:jtds:sqlserver://192.168.232.25:1433;DatabaseName=sispasa-dev"/>
+      <property name="javax.persistence.jdbc.user" value="usrsispasadev"/>
+      <property name="javax.persistence.jdbc.password" value="sispasadev"/>
+      <!-- <property name="javax.persistence.jdbc.url" value="jdbc:jtds:sqlserver://127.0.0.1:1433;instance=PASA;DatabaseName=sispasa"/> -->
+      <!-- <property name="javax.persistence.jdbc.user" value="pasa"/> -->
+      <!-- <property name="javax.persistence.jdbc.password" value="pasa"/> -->
+      <property name="javax.persistence.schema-generation.database.action" value="create"/>
+      <property name="javax.persistence.jdbc.driver" value="net.sourceforge.jtds.jdbc.Driver"/>
+      <property name="hibernate.show_sql" value="true"/>
+      <property name="hibernate.format_sql" value="true"/>
+    </properties>
+  </persistence-unit>
 </persistence>

@@ -13,7 +13,7 @@ import org.pasa.sispasa.core.constants.ConstantesBanco;
 
 /**
  *
- * @author Hudson Schumaker
+ * @author Hudson Schumaker / Andre Gomes
  * @version 1.0.0
  */
 
@@ -31,9 +31,20 @@ public class TipoPlano implements Serializable {
 	@Column(name = "DESCRICAO", length = 30, nullable = false)
 	private String descricao;
 
+	
+	//CONSTRUTORES
+	
 	public TipoPlano() {
+		//CONSTRUTOR DEFAULT
 	}
-
+	
+	public TipoPlano(Long id) {
+		this.id = id;
+	}
+	
+	
+	//GETTERS E SETTERS
+	
 	public Long getId() {
 		return id;
 	}

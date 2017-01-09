@@ -19,7 +19,17 @@ import org.pasa.sispasaint.util.DateUtil;
  */
 public class EnviaEmail {
 
-    public EnviaEmail(List<String> lista, String subject, String menssage) {
+    private List<String> lista;
+    private String subject;
+    private String message;
+
+    public EnviaEmail(List<String> lista, String subject, String message) {
+        this.lista = lista;
+        this.subject = subject;
+        this.message = message;
+    }
+
+    public void enviar() {
         try {
             Properties props = new Properties();
             props.put("mail.smtp.host", Configuracao.getInstance().getServidor());
@@ -36,7 +46,7 @@ public class EnviaEmail {
                 email.addRecipient(Message.RecipientType.TO, para);
             }
             email.setSubject(subject + DateUtil.obterDataAtual());
-            email.setText(menssage);
+            email.setText(message);
             Transport.send(email);
         } catch (AddressException ex) {
             System.out.println(ex);

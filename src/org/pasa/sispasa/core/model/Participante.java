@@ -5,7 +5,6 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
-import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -15,6 +14,7 @@ import javax.persistence.JoinColumn;
 import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 import javax.persistence.PrimaryKeyJoinColumn;
 import javax.persistence.Table;
@@ -25,8 +25,8 @@ import org.hibernate.envers.AuditTable;
 import org.hibernate.envers.Audited;
 import org.hibernate.envers.NotAudited;
 import org.pasa.sispasa.core.enumeration.EnumIndAtivo;
-import org.pasa.sispasa.core.enumeration.EnumTipoDocumento;
-import org.pasa.sispasa.core.enumeration.EnumTipoTelefone;
+import org.pasa.sispasa.core.enumeration.EnumNivelEscolaridade;
+import org.pasa.sispasa.core.enumeration.EnumSimNao;
 
 @Entity
 @Table(name = "PARTICIPANTE")
@@ -40,6 +40,9 @@ public class Participante extends BaseEntity implements Serializable {
 	@Column(name = "ID_PARTICIPANTE")
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
+
+	@Column(name = "ID_USUARIO")
+	private Long idUsuario;
 
 	@Column(name = "CPF")
 	private String cpf;
@@ -74,6 +77,9 @@ public class Participante extends BaseEntity implements Serializable {
 
 	@Column(name = "EMAIL")
 	private String email;
+	
+	@Column(name = "EMAIL_COMERCIAL")
+	private String emailComercial;
 
 	@Column(name = "ID_CONCL_ESCOL")
 	private Integer indConclusaoEscolaridade;
@@ -85,19 +91,19 @@ public class Participante extends BaseEntity implements Serializable {
 	@Temporal(TemporalType.TIMESTAMP)
 	private Date dataUltimaAtualizacao;
 	
-	@ManyToMany(cascade = CascadeType.ALL)
-	@JoinTable(name = "PARTICIPANTE_TELEFONE", 
-				joinColumns = @JoinColumn(name = "ID_PARTICIPANTE"), 
-				inverseJoinColumns = @JoinColumn(name = "ID_TELEFONE"))
+	@OneToOne
+	@PrimaryKeyJoinColumn
+	private Associado associado;
+
+	@OneToOne
+	@JoinColumn(name = "ID_ENDERECO")
 	@NotAudited
-	private List<Telefone> telefones;
-	
-	@ManyToMany
-	@JoinTable(name = "DOCUMENTO_PARTICIPANTE",
-				joinColumns = @JoinColumn(name = "ID_PARTICIPANTE"),
-	            inverseJoinColumns = @JoinColumn(name = "ID_DOCUMENTO"))
+	private Endereco endereco;
+
+	@OneToMany
+	@JoinColumn(name = "ID_PARTICIPANTE_DADOS_BANCARIOS")
 	@NotAudited
-	private List<Documento> documentos;
+	private List<ParticipanteDadosBancarios> partDadosBancarios;
 
 	@ManyToOne
 	@JoinColumn(name = "ID_PAIS")
@@ -124,18 +130,41 @@ public class Participante extends BaseEntity implements Serializable {
 	@NotAudited
 	private EstadoCivil estadoCivil;
 	
-	@OneToOne
-	@PrimaryKeyJoinColumn
-	private Associado associado;
-	
-	@ManyToOne
-	@JoinColumn(name="ID_ENDERECO")
+	@ManyToMany
+	@JoinTable(name = "PARTICIPANTE_TELEFONE", 
+				joinColumns = @JoinColumn(name = "ID_PARTICIPANTE"), 
+				inverseJoinColumns = @JoinColumn(name = "ID_TELEFONE"))
 	@NotAudited
-	private Endereco endereco;
-	
+	private List<Telefone> telefones;
+
+	@ManyToMany
+	@JoinTable(name = "PARTICIPANTE_DOCUMENTO", 
+				joinColumns = @JoinColumn(name = "ID_PARTICIPANTE"), 
+				inverseJoinColumns = @JoinColumn(name = "ID_DOCUMENTO"))
+	@NotAudited
+	private List<Documento> documentos;
+
+	public DadosBancarios getDadosBancariosPagamento() {
+		for (ParticipanteDadosBancarios partDadosBancarios : partDadosBancarios) {
+			if (partDadosBancarios.isTipoContaPagamento()) {
+				return partDadosBancarios.getDadosBancarios();
+			}
+		}
+		return null;
+	}
+
+	public DadosBancarios getDadosBancariosReembolso() {
+		for (ParticipanteDadosBancarios partDadosBancarios : partDadosBancarios) {
+			if (partDadosBancarios.isTipoContaReembolso()) {
+				return partDadosBancarios.getDadosBancarios();
+			}
+		}
+		return null;
+	}
+
 	public Documento getDocumentoRG() {
 		for (Documento documento : documentos) {
-			if (EnumTipoDocumento.RG.getIndice().equals(documento.getTipoDocumento().getId())) {
+			if (documento.isTipoDocumentoRG()) {
 				return documento;
 			}
 		}
@@ -144,7 +173,7 @@ public class Participante extends BaseEntity implements Serializable {
 
 	public Documento getDocumentoCTPS() {
 		for (Documento documento : documentos) {
-			if (EnumTipoDocumento.CTPS.getIndice().equals(documento.getTipoDocumento().getId())) {
+			if (documento.isTipoDocumentoCTPS()) {
 				return documento;
 			}
 		}
@@ -153,7 +182,7 @@ public class Participante extends BaseEntity implements Serializable {
 
 	public Documento getDocumentoPIS() {
 		for (Documento documento : documentos) {
-			if (EnumTipoDocumento.PIS_PASEP.getIndice().equals(documento.getTipoDocumento().getId())) {
+			if (documento.isTipoDocumentoPIS()) {
 				return documento;
 			}
 		}
@@ -162,7 +191,7 @@ public class Participante extends BaseEntity implements Serializable {
 
 	public Telefone getTelefoneComercial() {
 		for (Telefone telefone : getTelefones()) {
-			if (telefone.getTipoTelefone().getId().equals(EnumTipoTelefone.COMERCIAL.getId())) {
+			if (telefone.isTipoTelfoneComercial()) {
 				return telefone;
 			}
 		}
@@ -171,7 +200,7 @@ public class Participante extends BaseEntity implements Serializable {
 
 	public Telefone getTelefoneResidencial() {
 		for (Telefone telefone : getTelefones()) {
-			if (telefone.getTipoTelefone().getId().equals(EnumTipoTelefone.RESIDENCIAL.getId())) {
+			if (telefone.isTipoTelfoneResidencial()) {
 				return telefone;
 			}
 		}
@@ -180,11 +209,19 @@ public class Participante extends BaseEntity implements Serializable {
 
 	public Telefone getTelefoneCelular() {
 		for (Telefone telefone : getTelefones()) {
-			if (telefone.getTipoTelefone().getId().equals(EnumTipoTelefone.CELULAR.getId())) {
+			if (telefone.isTipoTelfoneCelular()) {
 				return telefone;
 			}
 		}
 		return null;
+	}
+	
+	public EnumNivelEscolaridade getNivelEscolaridadeAsEnum() {
+		return EnumNivelEscolaridade.getNivelEscolaridadeByIndice(getNivelEscolaridade().getId().intValue());
+	}
+	
+	public EnumSimNao getIndConclusaoEscolaridadeAsEnum() {		
+		return EnumSimNao.convertFromIndice(getIndConclusaoEscolaridade());
 	}
 
 	public Long getId() {
@@ -375,6 +412,22 @@ public class Participante extends BaseEntity implements Serializable {
 
 	public void setEndereco(Endereco endereco) {
 		this.endereco = endereco;
+	}
+
+	public Long getIdUsuario() {
+		return idUsuario;
+	}
+
+	public void setIdUsuario(Long idUsuario) {
+		this.idUsuario = idUsuario;
+	}
+
+	public String getEmailComercial() {
+		return emailComercial;
+	}
+
+	public void setEmailComercial(String emailComercial) {
+		this.emailComercial = emailComercial;
 	}
 
 }

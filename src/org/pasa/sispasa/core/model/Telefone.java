@@ -18,6 +18,9 @@ import org.hibernate.envers.Audited;
 import org.hibernate.envers.NotAudited;
 import org.pasa.sispasa.core.constants.ConstantesBanco;
 import org.pasa.sispasa.core.enumeration.EnumIndAtivo;
+import org.pasa.sispasa.core.enumeration.EnumTipoTelefone;
+import org.pasa.sispasa.core.util.Utils;
+import org.pasa.sispasa.core.vo.TelefoneVO;
 
 /**
  *
@@ -30,113 +33,143 @@ import org.pasa.sispasa.core.enumeration.EnumIndAtivo;
 @AuditTable(value = "HIST_TELEFONE")
 public class Telefone extends BaseEntity implements Serializable {
 
-    private static final long serialVersionUID = 1L;
+	private static final long serialVersionUID = 1L;
 
-    @Id
-    @Column(name = "ID_TELEFONE", columnDefinition = ConstantesBanco.BIGINT)
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
+	@Id
+	@Column(name = "ID_TELEFONE", columnDefinition = ConstantesBanco.BIGINT)
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	private Long id;
 
-    @Column(name = "DDD", columnDefinition = ConstantesBanco.CHAR_2)
-    private String ddd;
+	@Column(name = "DDD", columnDefinition = ConstantesBanco.CHAR_2)
+	private String ddd;
 
-    @Column(name = "NUMERO", length = 10, nullable = false)
-    private String numeroTelefone;
+	@Column(name = "NUMERO", length = 10, nullable = false)
+	private String numeroTelefone;
 
-    @Column(name = "RAMAL", length = 5)
-    private String ramal;
+	@Column(name = "RAMAL", length = 5)
+	private String ramal;
 
-    @Column(name = "IND_ATIVO", nullable = false, columnDefinition = ConstantesBanco.SMALLINT)
-    private Integer indAtivo = EnumIndAtivo.ATIVO.getIndice();
+	@Column(name = "IND_ATIVO", nullable = false, columnDefinition = ConstantesBanco.SMALLINT)
+	private Integer indAtivo = EnumIndAtivo.ATIVO.getIndice();
 
-    @Column(name = "ID_USUARIO", nullable = false, columnDefinition = ConstantesBanco.BIGINT)
-    private Long idUsuario;
+	@Column(name = "ID_USUARIO", nullable = false, columnDefinition = ConstantesBanco.BIGINT)
+	private Long idUsuario;
 
-    @Column(name = "DT_ULT_ATULZ", nullable = false)
-    @Temporal(TemporalType.TIMESTAMP)
-    private Date dataUltimaAtualizacao;
+	@Column(name = "DT_ULT_ATULZ", nullable = false)
+	@Temporal(TemporalType.TIMESTAMP)
+	private Date dataUltimaAtualizacao;
 
-    //RELACIONAMENTOS
-    @OneToOne
-    @NotAudited
-    private TipoTelefone tipoTelefone;
+	@OneToOne
+	@NotAudited
+	private TipoTelefone tipoTelefone;
 
-    //GETTERS E SETTERS
-    @Override
-    public Long getId() {
-        return id;
-    }
+	public static Telefone getEntity(TelefoneVO vo) {
 
-    public void setId(Long id) {
-        this.id = id;
-    }
+		String temp = Utils.desformataTelefone(vo.getNumeroTelefoneComDDD());
 
-    public String getDdd() {
-        return ddd;
-    }
+		Telefone telefone = new Telefone();
+		telefone.setId(vo.getId());
+		telefone.setRamal(vo.getRamal());
+		telefone.setDataUltimaAtualizacao(new Date());
+		telefone.setDdd(Utils.retornaDDDTelefone(temp));
+		telefone.setNumeroTelefone(Utils.retornaNumeroTelefone(temp));
+		telefone.setTipoTelefone(new TipoTelefone(vo.getEnumTipoTelefone().getId()));
+		telefone.setIdUsuario(1L);
+		return telefone;
+	}
 
-    public void setDdd(String ddd) {
-        this.ddd = ddd;
-    }
+	public TelefoneVO getEntityVO() {
+		return new TelefoneVO(id, ddd + numeroTelefone, ramal, tipoTelefone.getAsEnum());
+	}
 
-    public String getNumeroTelefone() {
-        return numeroTelefone;
-    }
+	public boolean isTipoTelfoneComercial() {
+		return EnumTipoTelefone.COMERCIAL.getId().equals(tipoTelefone.getId());
+	}
 
-    public void setNumeroTelefone(String numeroTelefone) {
-        this.numeroTelefone = numeroTelefone;
-    }
+	public boolean isTipoTelfoneCelular() {
+		return EnumTipoTelefone.CELULAR.getId().equals(tipoTelefone.getId());
+	}
 
-    public String getRamal() {
-        return ramal;
-    }
+	public boolean isTipoTelfoneResidencial() {
+		return EnumTipoTelefone.RESIDENCIAL.getId().equals(tipoTelefone.getId());
+	}
 
-    public void setRamal(String ramal) {
-        this.ramal = ramal;
-    }
+	public Long getId() {
+		return id;
+	}
 
-    public Integer getIndAtivo() {
-        return indAtivo;
-    }
+	public void setId(Long id) {
+		this.id = id;
+	}
 
-    public void setIndAtivo(Integer indAtivo) {
-        this.indAtivo = indAtivo;
-    }
+	public String getDdd() {
+		return ddd;
+	}
 
-    public TipoTelefone getTipoTelefone() {
-        return tipoTelefone;
-    }
+	public void setDdd(String ddd) {
+		this.ddd = ddd;
+	}
 
-    public void setTipoTelefone(TipoTelefone tipoTelefone) {
-        this.tipoTelefone = tipoTelefone;
-    }
+	public String getNumeroTelefone() {
+		return numeroTelefone;
+	}
 
-    /**
-     * @return the idUsuario
-     */
-    public Long getIdUsuario() {
-        return idUsuario;
-    }
+	public void setNumeroTelefone(String numeroTelefone) {
+		this.numeroTelefone = numeroTelefone;
+	}
 
-    /**
-     * @param idUsuario the idUsuario to set
-     */
-    public void setIdUsuario(Long idUsuario) {
-        this.idUsuario = idUsuario;
-    }
+	public String getRamal() {
+		return ramal;
+	}
 
-    /**
-     * @return the dataUltimaAtualizacao
-     */
-    public Date getDataUltimaAtualizacao() {
-        return dataUltimaAtualizacao;
-    }
+	public void setRamal(String ramal) {
+		this.ramal = ramal;
+	}
 
-    /**
-     * @param dataUltimaAtualizacao the dataUltimaAtualizacao to set
-     */
-    public void setDataUltimaAtualizacao(Date dataUltimaAtualizacao) {
-        this.dataUltimaAtualizacao = dataUltimaAtualizacao;
-    }
+	public Integer getIndAtivo() {
+		return indAtivo;
+	}
+
+	public void setIndAtivo(Integer indAtivo) {
+		this.indAtivo = indAtivo;
+	}
+
+	public TipoTelefone getTipoTelefone() {
+		return tipoTelefone;
+	}
+
+	public void setTipoTelefone(TipoTelefone tipoTelefone) {
+		this.tipoTelefone = tipoTelefone;
+	}
+
+	/**
+	 * @return the idUsuario
+	 */
+	public Long getIdUsuario() {
+		return idUsuario;
+	}
+
+	/**
+	 * @param idUsuario
+	 *            the idUsuario to set
+	 */
+	public void setIdUsuario(Long idUsuario) {
+		this.idUsuario = idUsuario;
+	}
+
+	/**
+	 * @return the dataUltimaAtualizacao
+	 */
+	public Date getDataUltimaAtualizacao() {
+		return dataUltimaAtualizacao;
+	}
+
+	/**
+	 * @param dataUltimaAtualizacao
+	 *            the dataUltimaAtualizacao to set
+	 */
+	public void setDataUltimaAtualizacao(Date dataUltimaAtualizacao) {
+		this.dataUltimaAtualizacao = dataUltimaAtualizacao;
+	}
 
 }

@@ -31,9 +31,16 @@ public class TipoParticipacao implements Serializable {
 	@Column(name = "DESCRICAO", length = 30, nullable = false)
 	private String descricao;
 
+	//CONSTRUTORES
 	public TipoParticipacao() {
+		//CONSTRUTOR DEFAULT
+	}
+		
+	public TipoParticipacao(Long id) {
+		this.id = id;
 	}
 
+	//GETTERS E SETTERS
 	public Long getId() {
 		return id;
 	}

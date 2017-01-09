@@ -12,6 +12,7 @@ import javax.persistence.Table;
 import org.hibernate.envers.AuditTable;
 import org.hibernate.envers.Audited;
 import org.pasa.sispasa.core.constants.ConstantesBanco;
+import org.pasa.sispasa.core.vo.PaisVO;
 
 /**
  *
@@ -34,17 +35,16 @@ public class Pais extends BaseEntity implements Serializable {
 	@Column(name = "NOME", nullable = false, length = 30)
 	private String nome;
 
-	//CONSTRUTORES
-	
 	public Pais(){
-		//CONSTRUTOR DEFAULT
+	}
+	
+	public PaisVO getEntityVO() {
+		return new PaisVO(id, nome);
 	}
 	
 	public Pais(Long id){
 		this.id = id;
 	}
-
-	//GETTERS E SETTERS
 	
 	public Long getId() {
 		return id;

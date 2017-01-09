@@ -119,9 +119,18 @@ public class Documento extends BaseEntity implements Serializable {
 		return documento;
 	}
 
-	// GETTERS E SETTERS
-	
-	@Override
+	public boolean isTipoDocumentoRG() {
+		return EnumTipoDocumento.RG.getIndice().equals(tipoDocumento.getId());
+	}
+
+	public boolean isTipoDocumentoCTPS() {
+		return EnumTipoDocumento.CTPS.getIndice().equals(tipoDocumento.getId());
+	}
+
+	public boolean isTipoDocumentoPIS() {
+		return EnumTipoDocumento.PIS_PASEP.getIndice().equals(tipoDocumento.getId());
+	}
+
 	public Long getId() {
 		return id;
 	}

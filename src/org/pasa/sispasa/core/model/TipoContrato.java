@@ -13,7 +13,7 @@ import org.pasa.sispasa.core.constants.ConstantesBanco;
 
 /**
  *
- * @author Hudson Schumaker
+ * @author Hudson Schumaker / Andre Gomes
  * @version 1.0.0
  */
 
@@ -34,6 +34,10 @@ public class TipoContrato implements Serializable {
 	//CONSTRUTORES
 	public TipoContrato() {
 		//CONSTRUTOR DEFAULT
+	}
+	
+	public TipoContrato(Long id) {
+		this.id = id;
 	}
 
 	//GETTERS E SETTERS

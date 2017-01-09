@@ -13,6 +13,7 @@ public class AtributosComunsVO {
 	protected EnumIndAtivo enumIndAtivo = EnumIndAtivo.ATIVO;
 	protected Date dataUltimaAtualizacao;
 	protected Long idUsuario;
+	protected String nomeUsuario;
 	
 	
 	//GETTERS AND SETTERS
@@ -64,6 +65,12 @@ public class AtributosComunsVO {
 	 */
 	public void setId(Long id) {
 		this.id = id;
+	}
+	public String getNomeUsuario() {
+		return nomeUsuario;
+	}
+	public void setNomeUsuario(String nomeUsuario) {
+		this.nomeUsuario = nomeUsuario;
 	}
 	
 	

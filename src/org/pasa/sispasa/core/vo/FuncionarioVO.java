@@ -126,10 +126,7 @@ public class FuncionarioVO extends PessoaVO {
 	/**
 	 * @return the empresa
 	 */
-	public EmpresaVO getEmpresa() {
-		if(null == empresa) {
-			empresa = new EmpresaVO();
-		}
+	public EmpresaVO getEmpresa() {		
 		return empresa;
 	}
 
@@ -214,6 +211,9 @@ public class FuncionarioVO extends PessoaVO {
 	 * @return the rg
 	 */
 	public DocumentoVO getRg() {
+		if(null == rg) {
+			rg = new DocumentoVO();
+		}
 		return rg;
 	}
 

@@ -89,6 +89,7 @@ public class Plano extends BaseEntity implements Serializable {
 
     //CONSTRUTORES
     public Plano() {
+    	//CONSTRUTOR DEFAULT
     }
 
     public Plano(Long id, String nome) {

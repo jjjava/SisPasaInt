@@ -47,6 +47,7 @@ public class ModeloBenEndJob implements Job {
         EnviaEmail enviaEmail = new EnviaEmail(getDestinatariosList(new ListaDestinatariosBeanImpl().listar(tipo)),
                 "#CARGA AMS ",
                 setMensagem());
+        enviaEmail.enviar();
 
         log.setDataFim(DateUtil.obterDataAtual());
         new LogBeanImpl().cadastrar(log);

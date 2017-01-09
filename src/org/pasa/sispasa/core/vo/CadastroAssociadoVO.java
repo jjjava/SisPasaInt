@@ -12,6 +12,7 @@ import org.pasa.sispasa.core.enumeration.EnumTipoAposentadoria;
 import org.pasa.sispasa.core.enumeration.EnumTipoAssociado;
 import org.pasa.sispasa.core.enumeration.EnumTipoCobranca;
 import org.pasa.sispasa.core.enumeration.EnumTipoResponsavel;
+import org.pasa.sispasa.core.model.MotivoDesligamento;
 
 public class CadastroAssociadoVO extends FuncionarioVO {
 
@@ -230,6 +231,10 @@ public class CadastroAssociadoVO extends FuncionarioVO {
 
 	public EnumMotivoDesligamento getEnumMotivoDesligamento() {
 		return enumMotivoDesligamento;
+	}
+
+	public MotivoDesligamento getMotivoDesligamento() {
+		return new MotivoDesligamento(getEnumMotivoDesligamento().getIndice());
 	}
 
 	public void setEnumMotivoDesligamento(EnumMotivoDesligamento enumMotivoDesligamento) {
