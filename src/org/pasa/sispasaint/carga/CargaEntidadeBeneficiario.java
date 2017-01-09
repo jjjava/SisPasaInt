@@ -99,6 +99,7 @@ public class CargaEntidadeBeneficiario {
         tel1.setNumeroTelefone(modelo.getTelefone1());
         tel1.setIndAtivo(SisPasaIntCommon.ATIVO);
         tel1.setIdUsuario(SisPasaIntCommon.USER_CARGA);
+        tel1.setDataUltimaAtualizacao(DateUtil.obterDataAtual());
         listaTelefones.add(tel1);
 
         Telefone tel2 = new Telefone();
@@ -106,6 +107,7 @@ public class CargaEntidadeBeneficiario {
         tel2.setNumeroTelefone(modelo.getTelefone2());
         tel2.setIndAtivo(SisPasaIntCommon.ATIVO);
         tel2.setIdUsuario(SisPasaIntCommon.USER_CARGA);
+        tel2.setDataUltimaAtualizacao(DateUtil.obterDataAtual());
         listaTelefones.add(tel2);
         return listaTelefones;
     }
@@ -141,6 +143,7 @@ public class CargaEntidadeBeneficiario {
         beneficiario.setCns(modeloBenEnd.getCodigoNacionalDeSaude());
         beneficiario.setDeclNascidoVivo(modeloBenEnd.getDeclaracaoNascidoVivo());
         beneficiario.setDataFimPlanoCassi(DateUtil.toDate(modeloBenEnd.getCassiData()));
+        beneficiario.setDataInclusaoSistema(DateUtil.obterDataAtual());
 
         if (modeloBenEnd.getTipoBeneficiario().equalsIgnoreCase(EnunTipoBeneficiario.Titular.getDescricao())) {
             beneficiario.setTipoBeneficiario(EnunTipoBeneficiario.Titular.getDescricao());

@@ -25,8 +25,8 @@ public class CargaBenEndBeanImpl implements CargaBenEndBean {
 
     @Override
     public void inicar() {
-        this.cargaArquivosTemp();
-        this.setStatusEntidades();
+        //this.cargaArquivosTemp();
+      //  this.setStatusEntidades();
         this.mapearEntidades();
         this.setQtdInativos();
     }
@@ -46,6 +46,8 @@ public class CargaBenEndBeanImpl implements CargaBenEndBean {
 
         Long qtdRegistros = modeloBean.contar();
         Funcionario funcionario = null;
+        
+        try{
         for (Long k = 1L; k < qtdRegistros; k++) {
             ModeloBenEnd modeloBenEnd = modeloBean.obter(k);
             if (modeloBenEnd.getTipoBeneficiario().equalsIgnoreCase(SisPasaIntCommon.FUNCIONARIO)) {
@@ -61,6 +63,9 @@ public class CargaBenEndBeanImpl implements CargaBenEndBean {
                     
                 }
             }
+        }
+        }catch(Exception e){
+            System.err.println(e);
         }
     }
 

@@ -81,6 +81,7 @@ public class CargaEntidadeFuncionario {
             funcionario.setIdUsuario(SisPasaIntCommon.USER_CARGA);
             funcionario.setIndAtivo(SisPasaIntCommon.ATIVO);
             funcionario.setDataUltimaAtualizacao(DateUtil.obterDataAtual());
+            funcionario.setDataInclusaoSistema(DateUtil.obterDataAtual());
             return new FuncionarioDAOImpl().cadastrar(funcionario);
         }
     }
@@ -122,6 +123,7 @@ public class CargaEntidadeFuncionario {
         tel1.setNumeroTelefone(modelo.getTelefone1());
         tel1.setIndAtivo(SisPasaIntCommon.ATIVO);
         tel1.setIdUsuario(SisPasaIntCommon.USER_CARGA);
+        tel1.setDataUltimaAtualizacao(DateUtil.obterDataAtual());
         listaTelefones.add(tel1);
         
         Telefone tel2 = new Telefone();
@@ -129,6 +131,7 @@ public class CargaEntidadeFuncionario {
         tel2.setNumeroTelefone(modelo.getTelefone2());
         tel2.setIndAtivo(SisPasaIntCommon.ATIVO);
         tel2.setIdUsuario(SisPasaIntCommon.USER_CARGA);
+        tel2.setDataUltimaAtualizacao(DateUtil.obterDataAtual());
         listaTelefones.add(tel2);
         return listaTelefones;
     }
