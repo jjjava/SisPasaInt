@@ -27,8 +27,6 @@ import org.pasa.sispasaint.bean.impl.ImpBenVLITempBeanImpl;
 import org.pasa.sispasaint.bean.impl.ImpEndVLITempBeanImpl;
 import org.pasa.sispasaint.bean.impl.LogBeanImpl;
 import org.pasa.sispasaint.bean.impl.MunicipioBeanImpl;
-import org.pasa.sispasaint.model.enun.EnunOperadora;
-import org.pasa.sispasaint.model.enun.EnunTipoBeneficiario;
 import org.pasa.sispasaint.model.intg.Log;
 import org.pasa.sispasaint.model.intg.ModeloBenVLI;
 import org.pasa.sispasaint.model.intg.ModeloEndVLI;
@@ -232,7 +230,7 @@ public class CargaVLIBeanImpl implements CargaVLIBean {
         Operadora operadora = new Operadora();
         operadora.setIndAtivo(SisPasaIntCommon.ATIVO);
         operadora.setDataUltAtulizacao(DateUtil.obterDataAtual());
-        operadora.setNome(EnunOperadora.AMS.getDescricao());
+        operadora.setNome(EnumOperadora.AMS.getDescricao());
         plano.setCodPlano(modeloBenVLI.getPlano());
       //  plano.set(operadora);
         plano.setIdUsuario(1L);
@@ -325,10 +323,10 @@ public class CargaVLIBeanImpl implements CargaVLIBean {
             beneficiario.setFaixaNivel(modeloBenVLI.getFaixaNivel());
             beneficiario.setNucleoAMS(modeloBenVLI.getNucleoDaAms());
 
-            if (modeloBenVLI.getTipoBeneficiario().equalsIgnoreCase(EnunTipoBeneficiario.Titular.getDescricao())) {
-                beneficiario.setTipoBeneficiario(EnunTipoBeneficiario.Titular.getDescricao());
+            if (modeloBenVLI.getTipoBeneficiario().equalsIgnoreCase(EnumTipoBeneficiario.TITULAR.getDescricao())) {
+                beneficiario.setTipoBeneficiario(EnumTipoBeneficiario.TITULAR.getDescricao());
             } else {
-                beneficiario.setTipoBeneficiario(EnunTipoBeneficiario.Dependente.getDescricao());
+                beneficiario.setTipoBeneficiario(EnumTipoBeneficiario.DEPENDENTE.getDescricao());
             }
 
             beneficiario.setMatriculaParticipante(modeloBenVLI.getMatriculaParticipante());
