@@ -12,51 +12,54 @@ import org.pasa.sispasa.core.model.Beneficiario;
  */
 public class BeneficiarioBeanImpl implements BeneficiarioBean {
 
+    private final BeneficiarioDAOImpl beneficiarioDAO;
+    
     public BeneficiarioBeanImpl() {
+        this.beneficiarioDAO = new BeneficiarioDAOImpl();
     }
 
     @Override
     public Beneficiario obter(Beneficiario b) {
-        return new BeneficiarioDAOImpl().obter(b.getId());
+        return beneficiarioDAO.obter(b.getId());
     }
 
     @Override
     public Beneficiario obter(String empresa, String matricula, String codBeneficiario) {
-        return new BeneficiarioDAOImpl().obter(matricula, codBeneficiario);
+        return beneficiarioDAO.obter(matricula, codBeneficiario);
     }
 
     @Override
     public void cadastar(Beneficiario b) {
-        new BeneficiarioDAOImpl().cadastrar(b);
+        beneficiarioDAO.cadastrar(b);
     }
 
     @Override
     public void atualizar(Beneficiario b) {
-        new BeneficiarioDAOImpl().atualizar(b);
+        beneficiarioDAO.atualizar(b);
     }
 
     @Override
     public void apagar(Beneficiario b) {
-        new BeneficiarioDAOImpl().apagar(b);
+        beneficiarioDAO.apagar(b);
     }
 
     @Override
     public List<Beneficiario> listar() {
-        return new BeneficiarioDAOImpl().listar();
+        return beneficiarioDAO.listar();
     }
 
     @Override
     public List<Beneficiario> listar(String empresa, String matricula) {
-        return new BeneficiarioDAOImpl().listar(empresa, matricula);
+        return beneficiarioDAO.listar(empresa, matricula);
     }
 
     @Override
     public Integer atulizaStatus(String empresa) {
-        return new BeneficiarioDAOImpl().atulizaStatus(empresa);
+        return beneficiarioDAO.atulizaStatus(empresa);
     }
 
     @Override
     public Long getInativos(String empresa) {
-        return new BeneficiarioDAOImpl().getInativos(empresa);
+        return beneficiarioDAO.getInativos(empresa);
     }
 }

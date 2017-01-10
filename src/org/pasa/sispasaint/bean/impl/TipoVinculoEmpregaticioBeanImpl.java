@@ -3,46 +3,53 @@ package org.pasa.sispasaint.bean.impl;
 import java.util.List;
 import org.pasa.sispasa.core.model.TipoVinculoEmpregaticio;
 import org.pasa.sispasaint.bean.TipoVinculoEmpregaticioBean;
+import org.pasa.sispasaint.dao.impl.TipoVinculoEmpregaticioDAOImpl;
 
 /**
  *
- * @author 90J00318
+ * @author Hudson Schumaker
+ * @version 1.0.1
  */
-public class TipoVinculoEmpregaticioBeanImpl implements TipoVinculoEmpregaticioBean{
+public class TipoVinculoEmpregaticioBeanImpl implements TipoVinculoEmpregaticioBean {
+
+    private final TipoVinculoEmpregaticioDAOImpl tipoVinculoEmpregaticioDAO;
+
+    public TipoVinculoEmpregaticioBeanImpl() {
+        this.tipoVinculoEmpregaticioDAO = new TipoVinculoEmpregaticioDAOImpl();
+    }
 
     @Override
     public void cadastrar(TipoVinculoEmpregaticio tve) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        tipoVinculoEmpregaticioDAO.cadastrar(tve);
     }
 
     @Override
     public void atualizar(TipoVinculoEmpregaticio tve) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        tipoVinculoEmpregaticioDAO.atualizar(tve);
     }
 
     @Override
     public void apagar(TipoVinculoEmpregaticio tve) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        tipoVinculoEmpregaticioDAO.apagar(tve);
     }
 
     @Override
     public TipoVinculoEmpregaticio obter(Long id) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        return tipoVinculoEmpregaticioDAO.obter(id);
     }
 
     @Override
     public TipoVinculoEmpregaticio obter(String cdExterno) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        return tipoVinculoEmpregaticioDAO.obter(cdExterno);
     }
 
     @Override
     public List<TipoVinculoEmpregaticio> listar() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        return tipoVinculoEmpregaticioDAO.listar();
     }
 
     @Override
     public TipoVinculoEmpregaticio existe(TipoVinculoEmpregaticio tve) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        return tipoVinculoEmpregaticioDAO.existe(tve);
     }
-    
 }

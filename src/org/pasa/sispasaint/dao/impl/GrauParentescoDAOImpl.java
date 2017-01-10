@@ -10,7 +10,8 @@ import org.pasa.sispasaint.dao.GrauParentescoDAO;
 
 /**
  *
- * @author 90J00318
+ * @author Hudson Schumaker
+ * @version 1.0.0
  */
 public class GrauParentescoDAOImpl extends DaoGenerico<GrauParentesco> implements GrauParentescoDAO {
 

@@ -11,6 +11,7 @@ import org.pasa.sispasaint.util.SisPasaIntCommon;
 /**
  *
  * @author Hudson Schumaker
+ * @version 1.0.0
  */
 public class FuncionarioDAOImpl extends DaoGenerico<Funcionario> implements FuncionarioDAO {
 

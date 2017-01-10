@@ -6,9 +6,11 @@ import javax.persistence.Query;
 import org.pasa.sispasa.core.model.Estado;
 import org.pasa.sispasaint.dao.DaoGenerico;
 import org.pasa.sispasaint.dao.EstadoDAO;
+
 /**
  *
  * @author Hudson Schumaker
+ * @version 1.0.0
  */
 public class EstadoDAOImpl extends DaoGenerico<Estado> implements EstadoDAO {
 

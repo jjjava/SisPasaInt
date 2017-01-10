@@ -4,9 +4,15 @@ import org.pasa.sispasa.core.model.DadosBancarios;
 import org.pasa.sispasaint.dao.DadosBancariosDAO;
 import org.pasa.sispasaint.dao.DaoGenerico;
 
-public class DadosBancariosDAOImpl extends DaoGenerico<DadosBancarios> implements DadosBancariosDAO{
+/**
+ *
+ * @author Hudson Schumaker
+ * @version 1.0.0
+ */
 
-	public DadosBancariosDAOImpl() {
-		super(DadosBancarios.class);
-	}
+public class DadosBancariosDAOImpl extends DaoGenerico<DadosBancarios> implements DadosBancariosDAO {
+
+    public DadosBancariosDAOImpl() {
+        super(DadosBancarios.class);
+    }
 }

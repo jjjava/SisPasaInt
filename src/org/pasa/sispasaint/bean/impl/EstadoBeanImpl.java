@@ -7,44 +7,48 @@ import org.pasa.sispasaint.dao.impl.EstadoDAOImpl;
 /**
  *
  * @author Hudson Schumaker
+ * @version 1.0.1
  */
 public class EstadoBeanImpl implements EstadoBean {
 
+    private final EstadoDAOImpl estadoDAO;
+    
     public EstadoBeanImpl() {
+        this.estadoDAO = new EstadoDAOImpl();
     }
 
     @Override
     public void cadastrar(Estado e) {
-        new EstadoDAOImpl().cadastrar(e);
+        estadoDAO.cadastrar(e);
     }
 
     @Override
     public void atualizar(Estado e) {
-        new EstadoDAOImpl().atualizar(e);
+        estadoDAO.atualizar(e);
     }
 
     @Override
     public void apagar(Estado e) {
-        new EstadoDAOImpl().apagar(e);
+        estadoDAO.apagar(e);
     }
 
     @Override
     public Estado obter(Long id) {
-        return new EstadoDAOImpl().obter(id);
+        return estadoDAO.obter(id);
     }
 
     @Override
     public Estado obter(String uf) {
-        return new EstadoDAOImpl().obter(uf);
+        return estadoDAO.obter(uf);
     }
 
     @Override
     public List<Estado> listar() {
-        return new EstadoDAOImpl().listar();
+        return estadoDAO.listar();
     }
 
     @Override
     public Estado existe(Estado e) {
-        return new EstadoDAOImpl().existe(e);
+        return estadoDAO.existe(e);
     }
 }

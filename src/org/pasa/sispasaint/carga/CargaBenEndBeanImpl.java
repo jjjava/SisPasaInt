@@ -17,15 +17,17 @@ public class CargaBenEndBeanImpl implements CargaBenEndBean {
 
     private Long idEmpresa;
     private Log log;
+    private CargaEntidadeFuncionario cargaEntidadeFuncionario;
 
     public CargaBenEndBeanImpl(Long idEmpresa, Log log) {
         this.idEmpresa = idEmpresa;
         this.log = log;
+        this.cargaEntidadeFuncionario = new CargaEntidadeFuncionario();
     }
 
     @Override
     public void inicar() {
-       // this.cargaArquivosTemp();
+        //this.cargaArquivosTemp();
         this.mapearEntidades();
         this.setQtdInativos();
     }
@@ -42,28 +44,26 @@ public class CargaBenEndBeanImpl implements CargaBenEndBean {
     public void mapearEntidades() {
         FuncionarioBeanImpl funcionarioBeanImpl = new FuncionarioBeanImpl();
         ModeloBenEndBeanImpl modeloBean = new ModeloBenEndBeanImpl();
-
         Long qtdRegistros = modeloBean.contar();
         Funcionario funcionario = null;
-        
-        try{
-        for (Long k = 1L; k < qtdRegistros; k++) {
-            ModeloBenEnd modeloBenEnd = modeloBean.obter(k);
-            if (modeloBenEnd.getTipoBeneficiario().equalsIgnoreCase(SisPasaIntCommon.FUNCIONARIO)) {
-                funcionario = funcionarioBeanImpl.obter(modeloBenEnd.getEmpresa(), modeloBenEnd.getMatricula());
-                if (funcionario == null) {
-                    if (new CargaEntidadeFuncionario().newFuncionario(modeloBenEnd)) {
-                        log.addAssocIncluidos();
+        try {
+            for (Long k = 1L; k < qtdRegistros; k++) {
+                ModeloBenEnd modeloBenEnd = modeloBean.obter(k);
+                if (modeloBenEnd.getTipoBeneficiario().equalsIgnoreCase(SisPasaIntCommon.FUNCIONARIO)) {
+                    funcionario = funcionarioBeanImpl.obter(modeloBenEnd.getEmpresa(), modeloBenEnd.getMatricula());
+                    if (funcionario == null) {
+                        if (cargaEntidadeFuncionario.newFuncionario(modeloBenEnd)) {
+                            log.addAssocIncluidos();
+                        } else {
+                            log.addErrosAssoc();
+                            log.addMatriculaErro(modeloBenEnd.getEmpresa() + modeloBenEnd.getMatricula());
+                        }
                     } else {
-                        log.addErrosAssoc();
-                        log.addMatriculaErro(modeloBenEnd.getEmpresa() + modeloBenEnd.getMatricula());
+
                     }
-                } else {
-                    
                 }
             }
-        }
-        }catch(Exception e){
+        } catch (Exception e) {
             System.err.println(e);
         }
     }

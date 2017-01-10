@@ -8,40 +8,44 @@ import org.pasa.sispasaint.dao.impl.PlanoDAOImpl;
 
 /**
  *
- * @author 90J00318
+ * @author Hudson Schumaker
+ * @version 1.0.1
  */
 public class PlanoBeanImpl implements PlanoBean {
 
+    private final PlanoDAOImpl planoDAO;
+    
     public PlanoBeanImpl() {
+        this.planoDAO = new PlanoDAOImpl();
     }
 
     @Override
     public Plano obter(Plano p) {
-        return new PlanoDAOImpl().obter(p.getId());
+        return planoDAO.obter(p.getId());
     }
 
     @Override
     public void cadastrar(Plano p) {
-        new PlanoDAOImpl().cadastrar(p);
+        planoDAO.cadastrar(p);
     }
 
     @Override
     public void atualizar(Plano p) {
-        new PlanoDAOImpl().atualizar(p);
+        planoDAO.atualizar(p);
     }
 
     @Override
     public void apagar(Plano p) {
-        new PlanoDAOImpl().apagar(p);
+        planoDAO.apagar(p);
     }
 
     @Override
     public List<Plano> listar() {
-        return new PlanoDAOImpl().listar();
+        return planoDAO.listar();
     }
 
     @Override
     public Plano existe(String codigo) {
-        return new PlanoDAOImpl().existe(codigo);
+        return planoDAO.existe(codigo);
     }
 }

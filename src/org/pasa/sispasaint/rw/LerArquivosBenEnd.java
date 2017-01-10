@@ -50,8 +50,8 @@ public class LerArquivosBenEnd {
     }
 
     public void ler(File ben, File end) {
-        log.setNomeArquivoBen(benNomeArq);
-        log.setNomeArquivoEnd(endNomeArq);
+       log.setNomeArquivoBen(benNomeArq);
+       log.setNomeArquivoEnd(endNomeArq);
        ModeloBenEndDAOImpl modeleDAO = new ModeloBenEndDAOImpl();
         try {
             BufferedReader brBen = new BufferedReader(new FileReader(ben));

@@ -11,6 +11,7 @@ import org.pasa.sispasaint.dao.PlanoDAO;
 /**
  *
  * @author Hudson Schumaker
+ * @version 1.0.0
  */
 public class PlanoDAOImpl extends DaoGenerico<Plano> implements PlanoDAO{
     

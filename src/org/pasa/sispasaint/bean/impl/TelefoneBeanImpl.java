@@ -8,34 +8,38 @@ import org.pasa.sispasaint.dao.impl.TelefoneDAOImpl;
 /**
  *
  * @author Hudson Schumaker
+ * @version 1.0.1
  */
 public class TelefoneBeanImpl implements TelefoneBean {
 
+    private final TelefoneDAOImpl telefoneDAO;
+    
     public TelefoneBeanImpl() {
+        this.telefoneDAO = new TelefoneDAOImpl();
     }
 
     @Override
     public void cadastrar(Telefone t) {
-        new TelefoneDAOImpl().cadastrar(t);
+        telefoneDAO.cadastrar(t);
     }
 
     @Override
     public void atualizar(Telefone t) {
-        new TelefoneDAOImpl().atualizar(t);
+        telefoneDAO.atualizar(t);
     }
 
     @Override
     public void apagar(Telefone t) {
-        new TelefoneDAOImpl().apagar(t);
+        telefoneDAO.apagar(t);
     }
 
     @Override
     public Telefone obter(Telefone t) {
-        return new TelefoneDAOImpl().obter(t.getId());
+        return telefoneDAO.obter(t.getId());
     }
 
     @Override
     public List<Telefone> listar() {
-        return new TelefoneDAOImpl().listar();
+        return telefoneDAO.listar();
     }
 }

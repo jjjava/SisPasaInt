@@ -5,7 +5,8 @@ import org.pasa.sispasaint.dao.DaoGenerico;
 
 /**
  *
- * @author 90J00318
+ * @author Hudson Schumaker
+ * @version 1.0.0
  */
 public class PaisDAOImpl extends DaoGenerico<Pais>{
     

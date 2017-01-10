@@ -7,6 +7,7 @@ import org.pasa.sispasaint.dao.EnderecoDAO;
 /**
  *
  * @author Hudson Schumaker
+ * @version 1.0.0
  */
 public class EnderecoDAOImpl extends DaoGenerico<Endereco> implements EnderecoDAO {
 

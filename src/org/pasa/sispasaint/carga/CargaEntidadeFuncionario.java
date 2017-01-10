@@ -34,11 +34,23 @@ import org.pasa.sispasaint.util.StringUtil;
  * @version 1.0.0
  */
 public class CargaEntidadeFuncionario {
-    
+
     private Funcionario funcionario;
+    private final CargaEntidadeBeneficiario cargaEntidadeBeneficiario;
+    private final EmpresaBeanImpl empresaBean;
+    private final ModeloBenEndBeanImpl modeloBenEndBean;
+    private final FuncionarioDAOImpl funcionarioDAO;
     
+
+    public CargaEntidadeFuncionario() {
+        this.funcionarioDAO = new FuncionarioDAOImpl();
+        this.cargaEntidadeBeneficiario = new CargaEntidadeBeneficiario();
+        this.empresaBean = new EmpresaBeanImpl();
+        this.modeloBenEndBean = new ModeloBenEndBeanImpl();
+    }
+
     public boolean newFuncionario(ModeloBenEnd modeloBenEnd) {
-        Empresa empresa = new EmpresaBeanImpl().existe(modeloBenEnd.getEmpresa());
+        Empresa empresa = empresaBean.existe(modeloBenEnd.getEmpresa());
         if (empresa == null) {
             return false;
         } else {
@@ -65,31 +77,31 @@ public class CargaEntidadeFuncionario {
             //VINCULO
             funcionario.setTipoVinculoEmpregaticio(newTipoVinculoEmpregaticio(modeloBenEnd));
             //BENEFICIARIOS
-            List<ModeloBenEnd> benef = new ModeloBenEndBeanImpl().listarBeneficiarios(modeloBenEnd);
-            
+            List<ModeloBenEnd> benef = modeloBenEndBean.listarBeneficiarios(modeloBenEnd);
+
             for (ModeloBenEnd f : benef) {
-                Beneficiario b = new CargaEntidadeBeneficiario().newBeneficiario(f);
+                Beneficiario b = cargaEntidadeBeneficiario.newBeneficiario(f);
                 if (b == null) {
                     return false;
                 } else {
                     funcionario.addBeneficiario(b);
                 }
             }
-            
+
             //MATRICULAS
             funcionario.setMatriculaOrigem(modeloBenEnd.getMatriculaPeople());//IMPORTANTE
             funcionario.setMatriculaAtualizadora(modeloBenEnd.getMatriculaAtulizador());
             funcionario.setMatriculaPasa(modeloBenEnd.getMatriculaPasa());
-            
+
             //INSERT
             funcionario.setIdUsuario(SisPasaIntCommon.USER_CARGA);
             funcionario.setIndAtivo(SisPasaIntCommon.ATIVO);
             funcionario.setDataUltimaAtualizacao(DateUtil.obterDataAtual());
             funcionario.setDataInclusaoSistema(DateUtil.obterDataAtual());
-            return new FuncionarioDAOImpl().cadastrar(funcionario);
+            return funcionarioDAO.cadastrar(funcionario);
         }
     }
-    
+
     private Endereco newEndereco(ModeloBenEnd modelo) {
         Estado estado = new EstadoBeanImpl().obter(modelo.getUf());
         Municipio municipio = new MunicipioBeanImpl().existe(modelo.getCidade());
@@ -107,7 +119,7 @@ public class CargaEntidadeFuncionario {
         endereco.setMunicipio(municipio);
         return endereco;
     }
-    
+
     private Documento newPis(ModeloBenEnd modelo) {
         Documento pis = new Documento();
         TipoDocumento tpPIS = new TipoDocumento();
@@ -120,7 +132,7 @@ public class CargaEntidadeFuncionario {
         pis.setDataUltimaAtualizacao(DateUtil.obterDataAtual());
         return pis;
     }
-    
+
     private List<Telefone> newTelefones(ModeloBenEnd modelo) {
         List<Telefone> listaTelefones = new ArrayList<>();
         Telefone tel1 = new Telefone();
@@ -129,7 +141,7 @@ public class CargaEntidadeFuncionario {
         tel1.setIdUsuario(SisPasaIntCommon.USER_CARGA);
         tel1.setDataUltimaAtualizacao(DateUtil.obterDataAtual());
         listaTelefones.add(tel1);
-        
+
         Telefone tel2 = new Telefone();
         tel1.setNumeroTelefone(modelo.getTelefone1());
         tel2.setNumeroTelefone(modelo.getTelefone2());
@@ -139,7 +151,7 @@ public class CargaEntidadeFuncionario {
         listaTelefones.add(tel2);
         return listaTelefones;
     }
-    
+
     private void setAtributos(ModeloBenEnd modelo) {
         //ATRIBUTOS 
         funcionario.setNome(modelo.getNomeBeneficiario());
@@ -162,13 +174,13 @@ public class CargaEntidadeFuncionario {
         funcionario.setNivelEscolaridade(newNivelEscolaridade(modelo));
         funcionario.setIndConclusaoEscolaridade(StringUtil.parserIndicadorConclusao(modelo.getIndicadorConclusao()));
     }
-    
+
     private NivelEscolaridade newNivelEscolaridade(ModeloBenEnd modelo) {
         NivelEscolaridade nivelEscolaridade = new NivelEscolaridade();
         nivelEscolaridade.setId(Long.parseLong(modelo.getGrauEscolaridade()));
         return nivelEscolaridade;
     }
-    
+
     private DadosBancarios newDadosBancarios(ModeloBenEnd modelo) {
         DadosBancarios dadosBancarios = new DadosBancarios();
         dadosBancarios.setCodBanco(modelo.getBanco());
@@ -180,14 +192,14 @@ public class CargaEntidadeFuncionario {
         dadosBancarios.setIdUsuario(SisPasaIntCommon.USER_CARGA);
         return dadosBancarios;
     }
-    
+
     private TipoVinculoEmpregaticio newTipoVinculoEmpregaticio(ModeloBenEnd modelo) {
         TipoVinculoEmpregaticio tipoVinculoEmpregaticio = new TipoVinculoEmpregaticio();
         tipoVinculoEmpregaticio.setId(EnumTipoVinculoEmpregaticio.EmpregadoAtivo.getIndice());
         tipoVinculoEmpregaticio.setCodExterno(modelo.getVinculo());
         return tipoVinculoEmpregaticio;
     }
-    
+
     private OrigemInformacoes newOrigemInformacoes() {
         OrigemInformacoes origemInformacoes = new OrigemInformacoes();
         origemInformacoes.setId(EnumOrigemInformacoes.CARGA.getIndice());

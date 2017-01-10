@@ -10,6 +10,7 @@ import org.pasa.sispasaint.dao.DaoGenerico;
 /**
  *
  * @author Hudson Schumaker
+ * @version 1.0.0
  */
 public class DadosConfigDAOImpl extends DaoGenerico<DadosConfig> implements DadosConfigDAO {
 
@@ -20,14 +21,14 @@ public class DadosConfigDAOImpl extends DaoGenerico<DadosConfig> implements Dado
     @Override
     public DadosConfig obterPorEmpresa(Long id) {
         Query q1 = getEntityManager().
-        createQuery("select e from DadosConfig e where e.idEmpresa = :id");
+                createQuery("select e from DadosConfig e where e.idEmpresa = :id");
         q1.setParameter("id", id);
         q1.setMaxResults(1);
         List<DadosConfig> dados = null;
         try {
             dados = q1.getResultList();
         } catch (NoResultException ex) {
-            System.err.println("dadosconfig: "+ex);
+            System.err.println("dadosconfig: " + ex);
             return null;
         }
         if (dados.size() > 0) {

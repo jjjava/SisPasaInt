@@ -8,34 +8,37 @@ import org.pasa.sispasaint.dao.impl.EnderecoDAOImpl;
 /**
  *
  * @author Hudson Schumaker
+ * @version 1.0.1
  */
 public class EnderecoBeanImpl implements EnderecoBean {
 
+    private EnderecoDAOImpl enderecoDAO;
     public EnderecoBeanImpl() {
+        this.enderecoDAO = new EnderecoDAOImpl();
     }
 
     @Override
     public void cadastrar(Endereco e) {
-        new EnderecoDAOImpl().cadastrar(e);
+        enderecoDAO.cadastrar(e);
     }
 
     @Override
     public void atualizar(Endereco e) {
-        new EnderecoDAOImpl().atualizar(e);
+        enderecoDAO.atualizar(e);
     }
 
     @Override
     public void apagar(Endereco e) {
-        new EnderecoDAOImpl().apagar(e);
+        enderecoDAO.apagar(e);
     }
 
     @Override
     public Endereco obter(Long id) {
-        return new EnderecoDAOImpl().obter(id);
+        return enderecoDAO.obter(id);
     }
 
     @Override
     public List<Endereco> listar() {
-        return new EnderecoDAOImpl().listar();
+        return enderecoDAO.listar();
     }
 }
