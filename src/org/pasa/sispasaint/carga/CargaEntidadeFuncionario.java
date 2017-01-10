@@ -41,7 +41,6 @@ public class CargaEntidadeFuncionario {
     private final ModeloBenEndBeanImpl modeloBenEndBean;
     private final FuncionarioDAOImpl funcionarioDAO;
     
-
     public CargaEntidadeFuncionario() {
         this.funcionarioDAO = new FuncionarioDAOImpl();
         this.cargaEntidadeBeneficiario = new CargaEntidadeBeneficiario();

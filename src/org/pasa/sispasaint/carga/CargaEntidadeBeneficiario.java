@@ -30,8 +30,14 @@ import org.pasa.sispasaint.util.StringUtil;
 public class CargaEntidadeBeneficiario {
 
     private Beneficiario beneficiario;
+    private final PlanoBeanImpl planoBean;
+    private final EstadoBeanImpl estadoBean;
+    private final MunicipioBeanImpl municipioBean;
 
     public CargaEntidadeBeneficiario() {
+        this.planoBean = new PlanoBeanImpl();
+        this.estadoBean = new EstadoBeanImpl();
+        this.municipioBean = new MunicipioBeanImpl();
     }
 
     public Beneficiario newBeneficiario(ModeloBenEnd modeloBenEnd) {
@@ -63,8 +69,8 @@ public class CargaEntidadeBeneficiario {
     }
 
     private Endereco newEndereco(ModeloBenEnd modelo) {
-        Estado estado = new EstadoBeanImpl().obter(modelo.getUf());
-        Municipio municipio = new MunicipioBeanImpl().existe(modelo.getCidade());
+        Estado estado = estadoBean.obter(modelo.getUf());
+        Municipio municipio = municipioBean.existe(modelo.getCidade());
         if (municipio == null) {
             return null;
         }
@@ -112,7 +118,7 @@ public class CargaEntidadeBeneficiario {
     }
 
     private Plano newPlano(ModeloBenEnd modelo) {
-        return new PlanoBeanImpl().existe(modelo.getPlano());
+        return planoBean.existe(modelo.getPlano());
     }
 
     private void setAtributos(ModeloBenEnd modeloBenEnd) {

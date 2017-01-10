@@ -26,8 +26,9 @@ public class LerArquivosBenEnd {
     private String benNomeArq, endNomeArq;
     private Long id;
     private Log log;
-    private Map<String, PosicaoCampo> mapaBen;
-    private Map<String, PosicaoCampo> mapaEnd;
+    private final Map<String, PosicaoCampo> mapaBen;
+    private final Map<String, PosicaoCampo> mapaEnd;
+    private PosicaoCampo campo;
 
     public LerArquivosBenEnd(Log log) {
         this.log = log;
@@ -96,8 +97,7 @@ public class LerArquivosBenEnd {
         endLine = StringUtil.removeCharsEspeciais(endLine);
 
         ModeloBenEnd modelo = new ModeloBenEnd();
-        PosicaoCampo campo;
-
+        
         //BENEFICIARIO - FUNCIONARIO
         campo = (PosicaoCampo) mapaBen.get(CamposModelo.EMPRESA);
         modelo.setEmpresa(benLine.substring(campo.getInicioCampo(), campo.getFimCampo()));
@@ -250,7 +250,7 @@ public class LerArquivosBenEnd {
             public void run() {
                 ZipArquivo zipArquivo = new ZipArquivo();
                 zipArquivo.zip(name, pathOri, pathDest);
-                file.delete();
+              //  file.delete();
             }
         }).start();
     }
