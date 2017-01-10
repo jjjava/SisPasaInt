@@ -322,4 +322,9 @@ public class Beneficiario extends Pessoa {
     public void setDataUltimaAtulizacao(Date dataUltimaAtualizacao) {
         this.dataUltimaAtualizacao = dataUltimaAtualizacao;
     }
+
+    @Override
+    public String toString() {
+        return "Beneficiario{" + "id=" + id + ", codBeneficiario=" + codBeneficiario + ", matriculaAMS=" + matriculaAMS + ", carteirinha=" + carteirinha + ", direitoAmsCredenciar=" + direitoAmsCredenciar + ", dataValidadeCredenciado=" + dataValidadeCredenciado + ", direitoAMSReenbolso=" + direitoAMSReenbolso + ", dataValidadeReembolso=" + dataValidadeReembolso + ", codCR=" + codCR + ", orgaoPessoal=" + orgaoPessoal + ", faixaNivel=" + faixaNivel + ", nucleoAMS=" + nucleoAMS + ", tipoBeneficiario=" + tipoBeneficiario + ", matriculaParticipante=" + matriculaParticipante + ", matriculaRepresentanteLegal=" + matriculaRepresentanteLegal + ", planoReciprocidadeCassi=" + planoReciprocidadeCassi + ", dataFimPlanoCassi=" + dataFimPlanoCassi + ", cns=" + cns + ", declNascidoVivo=" + declNascidoVivo + ", idUsuario=" + idUsuario + ", indAtivo=" + indAtivo + ", dataUltimaAtualizacao=" + dataUltimaAtualizacao + ", funcionario=" + funcionario + ", grauParentesco=" + grauParentesco + ", plano=" + plano + '}';
+    }
 }

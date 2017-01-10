@@ -76,6 +76,7 @@ public class CargaEntidadeFuncionario {
                 }
             }
             
+            System.err.println(funcionario.getBeneficiarios().get(0));
             
             //MATRICULAS
             funcionario.setMatriculaOrigem(modeloBenEnd.getMatriculaPeople());//IMPORTANTE

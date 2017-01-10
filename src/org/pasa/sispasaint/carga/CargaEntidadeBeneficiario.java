@@ -103,7 +103,6 @@ public class CargaEntidadeBeneficiario {
         listaTelefones.add(tel1);
 
         Telefone tel2 = new Telefone();
-        tel1.setNumeroTelefone(modelo.getTelefone1());
         tel2.setNumeroTelefone(modelo.getTelefone2());
         tel2.setIndAtivo(SisPasaIntCommon.ATIVO);
         tel2.setIdUsuario(SisPasaIntCommon.USER_CARGA);
@@ -117,7 +116,7 @@ public class CargaEntidadeBeneficiario {
     }
 
     private void setAtributos(ModeloBenEnd modeloBenEnd) {
-        //ATIBUTOS
+        //ATRIBUTOS
         beneficiario.setCarteirinha(modeloBenEnd.getEmpresa()+modeloBenEnd.getMatricula()+modeloBenEnd.getCodBeneficiario());
         beneficiario.setMatriculaAMS(modeloBenEnd.getMatricula());
         beneficiario.setCodBeneficiario(modeloBenEnd.getCodBeneficiario());

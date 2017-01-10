@@ -7,40 +7,42 @@ import javax.persistence.MappedSuperclass;
 
 /**
  * Base Entity
- * 
+ *
  * @author rodrigo cordovil.
  */
 @MappedSuperclass
 public abstract class BaseEntity implements Serializable {
 
-	private static final long serialVersionUID = 1L;
-	
-	protected abstract Long getId();
+    private static final long serialVersionUID = 1L;
 
-	@Override
-	public int hashCode() {
-		int hash = 0;
-		hash += (this.getId() != null ? this.getId().hashCode() : 0);
+    protected abstract Long getId();
 
-		return hash;
-	}
+    @Override
+    public int hashCode() {
+        int hash = 0;
+        hash += (this.getId() != null ? this.getId().hashCode() : 0);
 
-	@Override
-	public boolean equals(Object object) {
-		if (this == object)
-			return true;
-		if (object == null)
-			return false;
-		if (getClass() != object.getClass())
-			return false;
+        return hash;
+    }
 
-		BaseEntity other = (BaseEntity) object;
+    @Override
+    public boolean equals(Object object) {
+        if (this == object) {
+            return true;
+        }
+        if (object == null) {
+            return false;
+        }
+        if (getClass() != object.getClass()) {
+            return false;
+        }
+
+        BaseEntity other = (BaseEntity) object;
         return !(!Objects.equals(this.getId(), other.getId()) && (this.getId() == null || !this.getId().equals(other.getId())));
-	}
+    }
 
-	@Override
-	public String toString() {
-		return this.getClass().getName() + " [ID=" + this.getId() + "]";
-	}	
-
+    @Override
+    public String toString() {
+        return this.getClass().getName() + " [ID=" + this.getId() + "]";
+    }
 }

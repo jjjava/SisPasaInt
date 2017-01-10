@@ -100,7 +100,7 @@ public class Funcionario extends Pessoa implements Serializable {
     @NotAudited
     private Empresa empresa;
 
-    @ManyToOne()
+    @ManyToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "ID_TP_VINC_EMPREG")
     @NotAudited
     private TipoVinculoEmpregaticio tipoVinculoEmpregaticio;
@@ -308,5 +308,13 @@ public class Funcionario extends Pessoa implements Serializable {
 
     public void setDataUltimaAtualizacao(Date dataUltimaAtualizacao) {
         this.dataUltimaAtualizacao = dataUltimaAtualizacao;
+    }
+    
+    public List<Beneficiario> getBeneficiarios() {
+        return beneficiarios;
+    }
+
+    public void setBeneficiarios(List<Beneficiario> beneficiarios) {
+        this.beneficiarios = beneficiarios;
     }
 }
