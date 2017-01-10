@@ -70,6 +70,7 @@ public class BeneficiarioDAOImpl extends DaoGenerico<Beneficiario> implements Be
         return -1;
     }
 
+    @Override
     public Long getInativos(String empresa) {
         Query q1 = getEntityManager().
         createQuery("select count(b) from Beneficiario b where b.indAtivo = :status and SUBSTRING(b.carteirinha,1,2) = '" + empresa + "'");

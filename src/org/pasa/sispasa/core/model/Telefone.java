@@ -94,6 +94,7 @@ public class Telefone extends BaseEntity implements Serializable {
         return EnumTipoTelefone.RESIDENCIAL.getId().equals(tipoTelefone.getId());
     }
 
+    @Override
     public Long getId() {
         return id;
     }

@@ -10,7 +10,7 @@ import org.pasa.sispasaint.dao.PlanoDAO;
 
 /**
  *
- * @author 90J00318
+ * @author Hudson Schumaker
  */
 public class PlanoDAOImpl extends DaoGenerico<Plano> implements PlanoDAO{
     
@@ -21,7 +21,9 @@ public class PlanoDAOImpl extends DaoGenerico<Plano> implements PlanoDAO{
     @Override
     public Plano existe(String codigo) {
         Query q1 = getEntityManager().
-        createQuery("select p from Plano p where p.codPlano = :cod");
+        //createQuery("select p from Plano p where p.codPlano = :cod AND ");
+        createQuery("select p from Plano p where p.codPlano = :cod AND ");
+        
         q1.setParameter("cod", codigo);
         q1.setMaxResults(1);
         List<Plano> plano = null;
