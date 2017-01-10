@@ -2,7 +2,8 @@ package org.pasa.sispasaint.map;
 
 /**
  *
- * @author 90J00318
+ * @author Hudson Schumaker
+ * @version 1.0.0
  */
 public class CamposModelo {
     public static final String EMPRESA = "empresa";
@@ -56,7 +57,7 @@ public class CamposModelo {
     public static final String CASSI_DATA = "cassiData";// BRANCO fim direito ao plano
     public static final String BRANCO = "branco";
     public static final String CODIGO_FILIAL_VLI = "codigoFilialVLI";
-    
+    //ENDEREÇO
     public static final String TELEFONE1 = "telefone1";
     public static final String TELEFONE2 = "telefone2";
     public static final String ENDERECO = "endereco";

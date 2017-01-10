@@ -74,6 +74,7 @@ public class LerArquivosBenEnd {
             System.err.println(e);
             log.addLinhaArqErro();
         } catch (IOException e) {
+            System.err.println(e);
             log.addLinhaArqErro();
         } finally {
             zipArq(ben, benNomeArq,
@@ -198,7 +199,7 @@ public class LerArquivosBenEnd {
         campo = (PosicaoCampo) mapaBen.get(CamposModelo.CODIGO_FILIAL_VLI);
         modelo.setCodigoFilialVLI(benLine.substring(campo.getInicioCampo(), campo.getFimCampo()));
 
-        //ENDERECO
+        //ENDEREÇO
         campo = (PosicaoCampo) mapaEnd.get(CamposModelo.TELEFONE1);
         modelo.setTelefone1(endLine.substring(campo.getInicioCampo(), campo.getFimCampo()));
         campo = (PosicaoCampo) mapaEnd.get(CamposModelo.TELEFONE2);

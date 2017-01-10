@@ -24,7 +24,8 @@ import org.pasa.sispasa.core.enumeration.EnumMotivoDesligamento;
 
 /**
  *
- * @author Hudson Schumaker / Andre Gomes
+ * @author Hudson Schumaker 
+ * @author Andre Gomes
  * @version 1.0.0
  */
 @Entity
@@ -130,10 +131,12 @@ public class Funcionario extends Pessoa implements Serializable {
         beneficiarios.add(b);
     }
 
+    @Override
     public Long getId() {
         return id;
     }
 
+    @Override
     public void setId(Long id) {
         this.id = id;
     }
@@ -282,44 +285,27 @@ public class Funcionario extends Pessoa implements Serializable {
         this.motivoDesligamento = motivoDesligamento;
     }
 
-    /**
-     * @return the emailCorporativo
-     */
     public String getEmailCorporativo() {
         return emailCorporativo;
     }
 
-    /**
-     * @param emailCorporativo the emailCorporativo to set
-     */
     public void setEmailCorporativo(String emailCorporativo) {
         this.emailCorporativo = emailCorporativo;
     }
 
-    /**
-     * @return the dataAdmissao
-     */
+
     public Date getDataAdmissao() {
         return dataAdmissao;
     }
 
-    /**
-     * @param dataAdmissao the dataAdmissao to set
-     */
     public void setDataAdmissao(Date dataAdmissao) {
         this.dataAdmissao = dataAdmissao;
     }
 
-    /**
-     * @return the dataUltimaAtualizacao
-     */
     public Date getDataUltimaAtualizacao() {
         return dataUltimaAtualizacao;
     }
 
-    /**
-     * @param dataUltimaAtualizacao the dataUltimaAtualizacao to set
-     */
     public void setDataUltimaAtualizacao(Date dataUltimaAtualizacao) {
         this.dataUltimaAtualizacao = dataUltimaAtualizacao;
     }
