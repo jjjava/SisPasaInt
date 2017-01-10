@@ -100,7 +100,7 @@ public class Funcionario extends Pessoa implements Serializable {
     @NotAudited
     private Empresa empresa;
 
-    @ManyToOne(cascade = CascadeType.ALL)
+    @ManyToOne()
     @JoinColumn(name = "ID_TP_VINC_EMPREG")
     @NotAudited
     private TipoVinculoEmpregaticio tipoVinculoEmpregaticio;
@@ -110,7 +110,7 @@ public class Funcionario extends Pessoa implements Serializable {
     @NotAudited
     private DadosBancarios dadosBancarios;
 
-    @ManyToOne(cascade = CascadeType.ALL)
+    @ManyToOne()
     @JoinColumn(name = "ID_MOTIVO_DESLIGAMENTO")
     @NotAudited
     private MotivoDesligamento motivoDesligamento;

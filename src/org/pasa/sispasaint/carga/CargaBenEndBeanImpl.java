@@ -25,7 +25,7 @@ public class CargaBenEndBeanImpl implements CargaBenEndBean {
 
     @Override
     public void inicar() {
-        this.cargaArquivosTemp();
+       // this.cargaArquivosTemp();
         this.mapearEntidades();
         this.setQtdInativos();
     }

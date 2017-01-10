@@ -98,7 +98,7 @@ public class LerArquivosBenEnd {
         ModeloBenEnd modelo = new ModeloBenEnd();
         PosicaoCampo campo;
 
-        //BENEFICIARIO
+        //BENEFICIARIO - FUNCIONARIO
         campo = (PosicaoCampo) mapaBen.get(CamposModelo.EMPRESA);
         modelo.setEmpresa(benLine.substring(campo.getInicioCampo(), campo.getFimCampo()));
         campo = (PosicaoCampo) mapaBen.get(CamposModelo.MATRICULA);
