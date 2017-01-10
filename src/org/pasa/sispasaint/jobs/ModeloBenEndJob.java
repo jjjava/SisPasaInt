@@ -42,7 +42,7 @@ public class ModeloBenEndJob implements Job {
         idEmpresa = dataMap.getLong(SisPasaIntCommon.ID_EMPRESA);
 
         CargaBenEndBeanImpl cargaBenEndBeanImpl = new CargaBenEndBeanImpl(idEmpresa, log);
-        cargaBenEndBeanImpl.inicar();
+        cargaBenEndBeanImpl.start();
 
 //        EnviaEmail enviaEmail = new EnviaEmail(getDestinatariosList(new ListaDestinatariosBeanImpl().listar(tipo)),
 //                "#CARGA AMS ",

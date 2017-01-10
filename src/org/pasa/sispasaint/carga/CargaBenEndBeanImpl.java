@@ -13,9 +13,9 @@ import org.pasa.sispasaint.util.SisPasaIntCommon;
  * @author Hudson Schumaker
  * @version 1.0.0
  */
-public class CargaBenEndBeanImpl implements CargaBenEndBean {
+public class CargaBenEndBeanImpl implements CargaBenEndBean, Runnable {
 
-    private Long idEmpresa;
+    private final Long idEmpresa;
     private Log log;
     private CargaEntidadeFuncionario cargaEntidadeFuncionario;
 
@@ -25,9 +25,15 @@ public class CargaBenEndBeanImpl implements CargaBenEndBean {
         this.cargaEntidadeFuncionario = new CargaEntidadeFuncionario();
     }
 
+    public void start() {
+        Thread t = new Thread(this);
+        t.setPriority(Thread.MAX_PRIORITY);
+        t.start();
+    }
+
     @Override
     public void inicar() {
-        this.cargaArquivosTemp();
+        //this.cargaArquivosTemp();
         this.mapearEntidades();
         this.setQtdInativos();
     }
@@ -76,5 +82,10 @@ public class CargaBenEndBeanImpl implements CargaBenEndBean {
 
     private void setQtdInativos() {
         log.setQtdAssocInativo(new BeneficiarioBeanImpl().getInativos("" + idEmpresa).intValue());
+    }
+
+    @Override
+    public void run() {
+        inicar();
     }
 }
