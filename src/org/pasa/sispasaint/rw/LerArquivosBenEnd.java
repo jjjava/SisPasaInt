@@ -26,9 +26,13 @@ public class LerArquivosBenEnd {
     private String benNomeArq, endNomeArq;
     private Long id;
     private Log log;
+    private Map<String, PosicaoCampo> mapaBen;
+    private Map<String, PosicaoCampo> mapaEnd;
 
     public LerArquivosBenEnd(Log log) {
         this.log = log;
+        mapaBen = new MapaCamposModeloBen().getMapa();
+        mapaEnd = new MapaCamposModeloEnd().getMapa();
         read = true;
     }
 
@@ -48,6 +52,7 @@ public class LerArquivosBenEnd {
     public void ler(File ben, File end) {
         log.setNomeArquivoBen(benNomeArq);
         log.setNomeArquivoEnd(endNomeArq);
+       ModeloBenEndDAOImpl modeleDAO = new ModeloBenEndDAOImpl();
         try {
             BufferedReader brBen = new BufferedReader(new FileReader(ben));
             BufferedReader brEnd = new BufferedReader(new FileReader(end));
@@ -58,13 +63,13 @@ public class LerArquivosBenEnd {
                     read = false;
                     break;
                 }
-                if (benLine.length() > 1) {
+                if (benLine.length() > 100) {
                     benLine = normalizaLinha(benLine);
                     endLine = normalizaLinha(endLine);
                     benLine = acerta400Pos(benLine);
                     endLine = acerta190Pos(endLine);
                     //DAO
-                    new ModeloBenEndDAOImpl().cadastrar(parseCampos(benLine, endLine));
+                    modeleDAO.cadastrar(parseCampos(benLine, endLine));
                     log.addLinhaArq();
                 }
             }
@@ -91,8 +96,6 @@ public class LerArquivosBenEnd {
         endLine = StringUtil.removeCharsEspeciais(endLine);
 
         ModeloBenEnd modelo = new ModeloBenEnd();
-        Map<String, PosicaoCampo> mapaBen = new MapaCamposModeloBen().getMapa();
-        Map<String, PosicaoCampo> mapaEnd = new MapaCamposModeloEnd().getMapa();
         PosicaoCampo campo;
 
         //BENEFICIARIO

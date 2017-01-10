@@ -17,24 +17,24 @@ public class ComparadorFuncionario {
 
         return new CompareToBuilder()
                 .append(a.getTipoVinculoEmpregaticio().getCodExterno(), b.getTipoVinculoEmpregaticio().getCodExterno())
-                //Dados Bancarios
+                //DADOS BANCARIOS
                 .append(a.getDadosBancarios().getCodBanco(), b.getDadosBancarios().getCodBanco())
                 .append(a.getDadosBancarios().getAgencia(), b.getDadosBancarios().getAgencia())
                 .append(a.getDadosBancarios().getConta(), b.getDadosBancarios().getConta())
-                //Endereço
+                //ENDEREÇO
                 .append(a.getEnderecos().get(0).getCep(), b.getEnderecos().get(0).getCep())
                 .append(a.getEnderecos().get(0).getBairro().toLowerCase(), b.getEnderecos().get(0).getBairro().toLowerCase())
                 .append(a.getEnderecos().get(0).getLogradouro().toLowerCase(), b.getEnderecos().get(0).getLogradouro().toLowerCase())
                 .append(a.getEnderecos().get(0).getNumero(), b.getEnderecos().get(0).getNumero())
                 .append(a.getEnderecos().get(0).getMunicipio().getNome().toLowerCase(), b.getEnderecos().get(0).getMunicipio().getNome().toLowerCase())
                 .append(a.getEnderecos().get(0).getEstado().getId().toLowerCase(), b.getEnderecos().get(0).getEstado().getId().toLowerCase())
-                //Telefone
+                //TELEFONE
                 .append(a.getTelefones().get(0).getNumeroTelefone(), b.getTelefones().get(0).getNumeroTelefone())
-                //Escolaridade
+                //ESCOLARIDADE
                 .append(a.getIndConclusaoEscolaridade(), a.getIndConclusaoEscolaridade())
-                //Estado Civil
+                //ESTADO CIVIL
                 .append(a.getEstadoCivil().getId(), a.getEstadoCivil().getId())
-                //Documentos
+                //DOCUMENTOS
                 .append(a.getCpf(), a.getCpf())
                 .append(a.getDocumentoPIS(), b.getDocumentoPIS())
                 .toComparison();

@@ -1,9 +1,6 @@
 package org.pasa.sispasaint.run;
 
-import org.pasa.sispasaint.carga.CargaBenEndBeanImpl;
-import org.pasa.sispasaint.carga.CargaVLIBeanImpl;
 import org.pasa.sispasaint.config.Configuracao;
-import org.pasa.sispasaint.model.intg.Log;
 
 /**
  *
@@ -16,9 +13,5 @@ public class Inicio {
         Configuracao.getInstance();
         Maestro maestro = new Maestro(); 
         maestro.iniciar();
-
-//        CargaBenEndBeanImpl carga = new CargaBenEndBeanImpl(30L, new Log());
-//        carga.inicar();
-
     }
 }

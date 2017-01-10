@@ -87,46 +87,52 @@ public class Pessoa extends BaseEntity implements Serializable {
 
     // RELACIONAMENTOS
     @ManyToMany(cascade = CascadeType.ALL)
-    @JoinTable(name = "PESSOA_ENDERECO", joinColumns = @JoinColumn(name = "ID_PESSOA"), inverseJoinColumns = @JoinColumn(name = "ID_ENDERECO"))
+    @JoinTable(name = "PESSOA_ENDERECO",
+            joinColumns = @JoinColumn(name = "ID_PESSOA"), 
+            inverseJoinColumns = @JoinColumn(name = "ID_ENDERECO"))
     @NotAudited
     private List<Endereco> enderecos;
 
     @ManyToMany(cascade = CascadeType.ALL)
-    @JoinTable(name = "PESSOA_TELEFONE", joinColumns = @JoinColumn(name = "ID_PESSOA"), inverseJoinColumns = @JoinColumn(name = "ID_TELEFONE"))
+    @JoinTable(name = "PESSOA_TELEFONE",
+            joinColumns = @JoinColumn(name = "ID_PESSOA"),
+            inverseJoinColumns = @JoinColumn(name = "ID_TELEFONE"))
     @NotAudited
     private List<Telefone> telefones;
 
     @ManyToMany(cascade = CascadeType.ALL)
-    @JoinTable(name = "DOCUMENTO_PESSOA", joinColumns = @JoinColumn(name = "ID_PESSOA"), inverseJoinColumns = @JoinColumn(name = "ID_DOCUMENTO"))
+    @JoinTable(name = "DOCUMENTO_PESSOA",
+            joinColumns = @JoinColumn(name = "ID_PESSOA"),
+            inverseJoinColumns = @JoinColumn(name = "ID_DOCUMENTO"))
     @NotAudited
     private List<Documento> documentos;
 
-    @ManyToOne(cascade = CascadeType.ALL)
+    @ManyToOne()
     @JoinColumn(name = "ID_PAIS")
     @NotAudited
     private Pais nacionalidade;
 
-    @ManyToOne(cascade = CascadeType.ALL)
+    @ManyToOne()
     @JoinColumn(name = "ID_ESTADO")
     @NotAudited
     private Estado naturalidade;
 
-    @ManyToOne(cascade = CascadeType.ALL)
+    @ManyToOne()
     @JoinColumn(name = "ID_MUNICIPIO")
     @NotAudited
     private Municipio cidadeOrigem;
 
-    @ManyToOne(cascade = CascadeType.ALL)
+    @ManyToOne()
     @JoinColumn(name = "ID_NIVEL_ESCOL")
     @NotAudited
     private NivelEscolaridade nivelEscolaridade;
 
-    @ManyToOne(cascade = CascadeType.ALL)
+    @ManyToOne()
     @JoinColumn(name = "ID_ORIGEM_INFO", nullable = false)
     @NotAudited
     private OrigemInformacoes origemInformacoes;
 
-    @ManyToOne(cascade = CascadeType.ALL)
+    @ManyToOne()
     @JoinColumn(name = "ID_ESTADO_CIVIL")
     @NotAudited
     private EstadoCivil estadoCivil;

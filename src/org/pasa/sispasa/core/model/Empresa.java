@@ -18,7 +18,6 @@ import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
-
 import org.hibernate.envers.AuditTable;
 import org.hibernate.envers.Audited;
 import org.hibernate.envers.NotAudited;
@@ -83,7 +82,6 @@ public class Empresa extends BaseEntity implements Serializable {
 	private Date dataUltimaAtualizacao;
 
 	// RELACIONAMENTOS
-
 	@ManyToOne
 	@JoinColumn(name = "ID_TP_EMPRESA")
 	@NotAudited
@@ -96,15 +94,15 @@ public class Empresa extends BaseEntity implements Serializable {
 
 	@ManyToMany(cascade = CascadeType.ALL)
 	@JoinTable(name = "ENDERECO_EMPRESA", 
-				joinColumns = @JoinColumn(name = "ID_EMPRESA"), 
-				inverseJoinColumns = @JoinColumn(name = "ID_ENDERECO"))
+	joinColumns = @JoinColumn(name = "ID_EMPRESA"), 
+        inverseJoinColumns = @JoinColumn(name = "ID_ENDERECO"))
 	@NotAudited
 	private List<Endereco> enderecos;
 
 	@ManyToMany(cascade = CascadeType.ALL)
 	@JoinTable(name = "CONTATO_EMPRESA", 
-				joinColumns = @JoinColumn(name = "ID_EMPRESA"), 
-				inverseJoinColumns = @JoinColumn(name = "ID_CONTATO"))
+        joinColumns = @JoinColumn(name = "ID_EMPRESA"), 
+	inverseJoinColumns = @JoinColumn(name = "ID_CONTATO"))
 	@NotAudited
 	private List<Contato> contatos;
 
@@ -117,37 +115,34 @@ public class Empresa extends BaseEntity implements Serializable {
 	private List<Convenio> convenios;
 
 	// CONSTRUTORES
-
 	public Empresa(Long id) {
-		this.id = id;
+            this.id = id;
 	}
 
 	public Empresa(Long id, String nomeFantasia) {
-		this.id = id;
-		this.nomeFantasia = nomeFantasia;
+            this.id = id;
+            this.nomeFantasia = nomeFantasia;
 	}
 
 	public Empresa() {
-		enderecos = new ArrayList<>();
-		contatos = new ArrayList<>();
+            enderecos = new ArrayList<>();
+            contatos = new ArrayList<>();
 	}
 
 	public EmpresaVO getEntityVO() {
-		return new EmpresaVO(id, nomeFantasia, razaoSocial);
+            return new EmpresaVO(id, nomeFantasia, razaoSocial);
 	}
 
 	// MÉTODOS ADD
-
 	public void addEndereco(Endereco e) {
-		enderecos.add(e);
+            enderecos.add(e);
 	}
 
 	public void addContato(Contato c) {
-		contatos.add(c);
+            contatos.add(c);
 	}
 
 	// GETTERS E SETTERS
-
 	@Override
 	public Long getId() {
 		return id;
@@ -276,17 +271,10 @@ public class Empresa extends BaseEntity implements Serializable {
 		return site;
 	}
 
-	/**
-	 * @param site
-	 *            the site to set
-	 */
 	public void setSite(String site) {
 		this.site = site;
 	}
 
-	/**
-	 * @return the tipoIntegracao
-	 */
 	public TipoIntegracao getTipoIntegracao() {
 		return tipoIntegracao;
 	}
