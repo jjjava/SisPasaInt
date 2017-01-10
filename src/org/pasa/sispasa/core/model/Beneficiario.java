@@ -1,7 +1,6 @@
 package org.pasa.sispasa.core.model;
 
 import java.util.Date;
-
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -13,7 +12,6 @@ import javax.persistence.PrimaryKeyJoinColumn;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
-
 import org.hibernate.envers.AuditTable;
 import org.hibernate.envers.Audited;
 import org.hibernate.envers.NotAudited;
@@ -21,7 +19,8 @@ import org.pasa.sispasa.core.constants.ConstantesBanco;
 
 /**
  *
- * @author Hudson Schumaker / Andre Gomes
+ * @author Hudson Schumaker 
+ * @author Andre Gomes
  * @version 1.0.0
  */
 @Entity
@@ -105,20 +104,21 @@ public class Beneficiario extends Pessoa {
     private Date dataUltimaAtualizacao;
 
     //RELACIONAMENTOS
-    @ManyToOne()
+    @ManyToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "ID_FUNCIONARIO")
-    @NotAudited
     private Funcionario funcionario;
 
-    @ManyToOne(cascade = CascadeType.ALL)
+    @ManyToOne()
     @JoinColumn(name = "ID_GRAU_PARENT")
     @NotAudited
     private GrauParentesco grauParentesco;
 
     @ManyToOne()
     @JoinColumn(name = "ID_PLANO")
-    @NotAudited
     private Plano plano;
+    
+    public Beneficiario(){
+    }
 
     //GETTERS E SETTERS
     @Override

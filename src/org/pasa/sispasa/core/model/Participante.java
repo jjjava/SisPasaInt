@@ -221,7 +221,7 @@ public class Participante extends BaseEntity implements Serializable {
 	}
 	
 	public EnumSimNao getIndConclusaoEscolaridadeAsEnum() {		
-		return EnumSimNao.convertFromIndice(getIndConclusaoEscolaridade());
+		return EnumSimNao.valueFromIndice(getIndConclusaoEscolaridade());
 	}
 
 	public Long getId() {

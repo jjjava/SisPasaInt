@@ -2,21 +2,22 @@ package org.pasa.sispasaint.model.enun;
 
 /**
  *
- * @author 90J00318
+ * @author Hudson Schumaker
+ * @version 1.0.0
  */
 public enum  EnunOperadora {
-    AMS(0,"AMS"),
-    PASA(1, "PASA");
+    AMS(0L,"AMS"),
+    PASA(1L, "PASA");
     
-    private final int indice;
+    private final Long indice;
     private final String descricao;
 
-    private EnunOperadora(int indice, String descricao) {
+    private EnunOperadora(Long indice, String descricao) {
         this.indice = indice;
         this.descricao = descricao;
     }
 
-    public int getIndice() {
+    public Long getIndice() {
         return indice;
     }
 

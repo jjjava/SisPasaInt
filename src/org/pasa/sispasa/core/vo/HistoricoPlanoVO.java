@@ -1,5 +1,7 @@
 package org.pasa.sispasa.core.vo;
 
+import java.util.Date;
+
 /**
  * Classe resposnsavel por conter os dados para apresentação na grid de histórico
  * de planos por empresa na tela de beneficiarios. 
@@ -7,34 +9,31 @@ package org.pasa.sispasa.core.vo;
  */
 public class HistoricoPlanoVO {
 
-	EmpresaVO empresa;
-	PlanoVO plano;
+	private String nomeEmpresa;
+	private String nomePlano;
+	private Date dataInicioVigenciaPlano;
+	
 	
 	
 	//GETTERS E SETTERS
-	/**
-	 * @param empresa the empresa to set
-	 */
-	public void setEmpresa(EmpresaVO empresa) {
-		this.empresa = empresa;
+
+	public String getNomeEmpresa() {
+		return nomeEmpresa;
 	}
-	/**
-	 * @param plano the plano to set
-	 */
-	public void setPlano(PlanoVO plano) {
-		this.plano = plano;
+	public void setNomeEmpresa(String nomeEmpresa) {
+		this.nomeEmpresa = nomeEmpresa;
 	}
-	/**
-	 * @return the empresa
-	 */
-	public EmpresaVO getEmpresa() {
-		return empresa;
+	public String getNomePlano() {
+		return nomePlano;
 	}
-	/**
-	 * @return the plano
-	 */
-	public PlanoVO getPlano() {
-		return plano;
+	public void setNomePlano(String nomePlano) {
+		this.nomePlano = nomePlano;
+	}
+	public Date getDataInicioVigenciaPlano() {
+		return dataInicioVigenciaPlano;
+	}
+	public void setDataInicioVigenciaPlano(Date dataInicioVigenciaPlano) {
+		this.dataInicioVigenciaPlano = dataInicioVigenciaPlano;
 	}
 	
 	

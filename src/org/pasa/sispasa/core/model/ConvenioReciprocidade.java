@@ -1,14 +1,12 @@
 package org.pasa.sispasa.core.model;
 
 import java.io.Serializable;
-
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
-
 import org.hibernate.envers.AuditTable;
 import org.hibernate.envers.Audited;
 import org.pasa.sispasa.core.constants.ConstantesBanco;
@@ -32,13 +30,10 @@ public class ConvenioReciprocidade implements Serializable {
     private Long id;
 
     //CONSTRUTORES
-    
     public ConvenioReciprocidade() {
-    	//CONSTRUTOR DEFAULT
     }
 
    //GETTERS E SETTERS
-    
     public Long getId() {
         return id;
     }

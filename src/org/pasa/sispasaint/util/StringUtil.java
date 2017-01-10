@@ -1,11 +1,12 @@
 package org.pasa.sispasaint.util;
 
-import org.pasa.sispasaint.model.enun.EnunNivelEscolaridade;
+import org.pasa.sispasa.core.enumeration.EnumNivelEscolaridade;
 import org.pasa.sispasa.core.enumeration.EnumSexo;
 
 /**
  *
- * @author 90J00318
+ * @author Hudson Schumaker
+ * @version 1.0.0
  */
 public class StringUtil {
 
@@ -33,15 +34,15 @@ public class StringUtil {
         }
     }
 
-    public static EnunNivelEscolaridade parseEscolocaridade(String s) {
+    public static EnumNivelEscolaridade parseEscolocaridade(String s) {
         if (s.equalsIgnoreCase("3")) {
-            return EnunNivelEscolaridade.Superior;
+            return EnumNivelEscolaridade.SUPERIOR;
         } else if (s.equalsIgnoreCase("2")) {
-            return EnunNivelEscolaridade.Medio;
+            return EnumNivelEscolaridade.MEDIO;
         } else if (s.equalsIgnoreCase("1")) {
-            return EnunNivelEscolaridade.Fundamental;
+            return EnumNivelEscolaridade.SUPERIOR;
         } else {
-            return EnunNivelEscolaridade.Sem;
+            return EnumNivelEscolaridade.SEM;
         }
     }
 

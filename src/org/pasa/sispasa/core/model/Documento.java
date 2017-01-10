@@ -3,7 +3,6 @@ package org.pasa.sispasa.core.model;
 import java.io.Serializable;
 import java.util.Date;
 import javax.persistence.CascadeType;
-
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -14,7 +13,6 @@ import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
-
 import org.hibernate.envers.AuditTable;
 import org.hibernate.envers.Audited;
 import org.hibernate.envers.NotAudited;
@@ -92,8 +90,7 @@ public class Documento extends BaseEntity implements Serializable {
         documentoVO.setDataValidade(getDataValidade());
         documentoVO.setSerie(getSerie());
         documentoVO.setOrgaoEmissor(getOrgaoEmissor());
-        documentoVO.setEnumTipoDocumento(
-                EnumTipoDocumento.getTipoDocumentoByIndice(getTipoDocumento().getId().intValue()));
+        documentoVO.setEnumTipoDocumento(EnumTipoDocumento.getTipoDocumentoByIndice(getTipoDocumento().getId().intValue()));
 
         if (null != documentoVO.getEstadoEmissor()) {
             documentoVO.setEstadoEmissor(new EstadoVO(getEstado().getId(), getEstado().getNome()));
@@ -102,14 +99,11 @@ public class Documento extends BaseEntity implements Serializable {
     }
 
     public static Documento getEntity(DocumentoVO documentoVO) {
-
         Documento documento = new Documento();
         documento.setId(documentoVO.getId());
         documento.setIdUsuario(null == documentoVO.getIdUsuario() ? 1L : documentoVO.getIdUsuario());
-        documento.setIndAtivo(null == documentoVO.getEnumIndAtivo() ? EnumIndAtivo.ATIVO.getIndice()
-                : documentoVO.getEnumIndAtivo().getIndice());
-        documento.setDataUltimaAtualizacao(
-                null == documentoVO.getDataUltimaAtualizacao() ? new Date() : documentoVO.getDataUltimaAtualizacao());
+        documento.setIndAtivo(null == documentoVO.getEnumIndAtivo() ? EnumIndAtivo.ATIVO.getIndice(): documentoVO.getEnumIndAtivo().getIndice());
+        documento.setDataUltimaAtualizacao(null == documentoVO.getDataUltimaAtualizacao() ? new Date() : documentoVO.getDataUltimaAtualizacao());
         documento.setNumero(documentoVO.getNumero());
         documento.setDataEmissao(documentoVO.getDataEmissao());
         documento.setSerie(documentoVO.getSerie());
@@ -131,6 +125,7 @@ public class Documento extends BaseEntity implements Serializable {
         return EnumTipoDocumento.PIS_PASEP.getIndice().equals(tipoDocumento.getId());
     }
 
+    @Override
     public Long getId() {
         return id;
     }

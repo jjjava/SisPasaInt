@@ -18,7 +18,7 @@ public enum EnumSimNao {
 		this.descricao = descricao;
 	}
 
-	public static EnumSimNao convertFromIndice(int indice) {
+	public static EnumSimNao valueFromIndice(int indice) {
 		for (EnumSimNao enumSimNao : EnumSimNao.values()) {
 			if (enumSimNao.indice == indice) {
 				return enumSimNao;

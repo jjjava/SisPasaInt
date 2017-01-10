@@ -3,7 +3,6 @@ package org.pasa.sispasa.core.model;
 import java.io.Serializable;
 import java.util.Date;
 import java.util.List;
-
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -15,7 +14,6 @@ import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
-
 import org.hibernate.envers.AuditTable;
 import org.hibernate.envers.Audited;
 import org.hibernate.envers.NotAudited;
@@ -90,7 +88,6 @@ public class Contrato extends BaseEntity  implements Serializable {
     
     //CONSTRUTORES
     public Contrato() {
-        //CONSTRUTOR DEFAULT
     }
     
     public Contrato(Long id) {
@@ -98,6 +95,7 @@ public class Contrato extends BaseEntity  implements Serializable {
     }
 
     //GETTERS E SETTERS
+    @Override
     public Long getId() {
         return id;
     }

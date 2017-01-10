@@ -18,11 +18,11 @@ public enum EnunTipoAssociacao {
         this.descricao = descricao;
     }
 
-    public int getIndice() {
+    public int getIndic() {
         return indice;
     }
 
-    public String getDescricao() {
+    public String getDescrica() {
         return descricao;
     }
 }

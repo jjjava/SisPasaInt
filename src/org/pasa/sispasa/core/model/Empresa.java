@@ -4,7 +4,6 @@ import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
-
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -28,8 +27,8 @@ import org.pasa.sispasa.core.vo.EmpresaVO;
 
 /**
  *
- * @author Hudson Schumaker / Andre Gomes
- * 
+ * @author Hudson Schumaker 
+ * @author Andre Gomes
  */
 @Entity
 @Table(name = "EMPRESA")

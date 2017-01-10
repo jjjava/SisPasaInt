@@ -8,7 +8,6 @@ import org.pasa.sispasa.core.enumeration.EnumGrauParentesco;
 import org.pasa.sispasa.core.enumeration.EnumMotivoDesligamento;
 import org.pasa.sispasa.core.enumeration.EnumSimNao;
 import org.pasa.sispasa.core.enumeration.EnumSituacaoAssociado;
-import org.pasa.sispasa.core.enumeration.EnumTipoAposentadoria;
 import org.pasa.sispasa.core.enumeration.EnumTipoAssociado;
 import org.pasa.sispasa.core.enumeration.EnumTipoCobranca;
 import org.pasa.sispasa.core.enumeration.EnumTipoResponsavel;
@@ -16,7 +15,7 @@ import org.pasa.sispasa.core.model.MotivoDesligamento;
 
 public class CadastroAssociadoVO extends FuncionarioVO {
 
-	private List<EnumTipoAposentadoria> listEnumTipoAposentadoria;
+	private List<String> listEnumTipoAposentadoria;
 	private List<UsuarioAssociadoVO> listUsuariosAssociadoVO;
 	private List<ConvenioVO> listConvenioVO;
 
@@ -82,17 +81,6 @@ public class CadastroAssociadoVO extends FuncionarioVO {
 
 	public void setDataAposentadoria(Date dataAposentadoria) {
 		this.dataAposentadoria = dataAposentadoria;
-	}
-
-	public List<EnumTipoAposentadoria> getListEnumTipoAposentadoria() {
-		if (null == listEnumTipoAposentadoria) {
-			listEnumTipoAposentadoria = new ArrayList<EnumTipoAposentadoria>();
-		}
-		return listEnumTipoAposentadoria;
-	}
-
-	public void setListEnumTipoAposentadoria(List<EnumTipoAposentadoria> listEnumTipoAposentadoria) {
-		this.listEnumTipoAposentadoria = listEnumTipoAposentadoria;
 	}
 
 	public DadosBancariosVO getDadosBancariosReembolso() {
@@ -298,6 +286,17 @@ public class CadastroAssociadoVO extends FuncionarioVO {
 
 	public void setEnumTipoAssociado(EnumTipoAssociado enumTipoAssociado) {
 		this.enumTipoAssociado = enumTipoAssociado;
+	}
+
+	public List<String> getListEnumTipoAposentadoria() {
+			if(null == listEnumTipoAposentadoria) {
+				listEnumTipoAposentadoria = new ArrayList<>();
+			}
+		return listEnumTipoAposentadoria;
+	}
+
+	public void setListEnumTipoAposentadoria(List<String> listEnumTipoAposentadoria) {
+		this.listEnumTipoAposentadoria = listEnumTipoAposentadoria;
 	}
 
 }

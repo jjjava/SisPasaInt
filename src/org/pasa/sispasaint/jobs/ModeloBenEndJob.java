@@ -44,10 +44,10 @@ public class ModeloBenEndJob implements Job {
         CargaBenEndBeanImpl cargaBenEndBeanImpl = new CargaBenEndBeanImpl(idEmpresa, log);
         cargaBenEndBeanImpl.inicar();
 
-        EnviaEmail enviaEmail = new EnviaEmail(getDestinatariosList(new ListaDestinatariosBeanImpl().listar(tipo)),
-                "#CARGA AMS ",
-                setMensagem());
-        enviaEmail.enviar();
+//        EnviaEmail enviaEmail = new EnviaEmail(getDestinatariosList(new ListaDestinatariosBeanImpl().listar(tipo)),
+//                "#CARGA AMS ",
+//                setMensagem());
+//        enviaEmail.enviar();
 
         log.setDataFim(DateUtil.obterDataAtual());
         new LogBeanImpl().cadastrar(log);

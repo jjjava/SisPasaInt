@@ -7,6 +7,7 @@ package org.pasa.sispasa.core.enumeration;
 
 public enum EnumNivelEscolaridade {
 
+        SEM(0L,"Sem instrução"),
 	FUNDAMENTAL(1L,"Ensino Fundamental"),
 	MEDIO(2L,"Ensino Médio"),
 	SUPERIOR(3L,"Ensino Superior"),

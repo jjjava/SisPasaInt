@@ -2,7 +2,6 @@ package org.pasa.sispasa.core.model;
 
 import java.io.Serializable;
 import java.util.Date;
-
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -12,7 +11,6 @@ import javax.persistence.OneToOne;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
-
 import org.hibernate.envers.AuditTable;
 import org.hibernate.envers.Audited;
 import org.hibernate.envers.NotAudited;
@@ -24,7 +22,8 @@ import org.pasa.sispasa.core.vo.TelefoneVO;
 
 /**
  *
- * @author Hudson Schumaker / Andre Gomes
+ * @author Hudson Schumaker 
+ * @author Andre Gomes
  * @version 1.0.0
  */
 @Entity
@@ -64,9 +63,7 @@ public class Telefone extends BaseEntity implements Serializable {
     private TipoTelefone tipoTelefone;
 
     public static Telefone getEntity(TelefoneVO vo) {
-
         String temp = Utils.desformataTelefone(vo.getNumeroTelefoneComDDD());
-
         Telefone telefone = new Telefone();
         telefone.setId(vo.getId());
         telefone.setRamal(vo.getRamal());
@@ -143,32 +140,19 @@ public class Telefone extends BaseEntity implements Serializable {
         this.tipoTelefone = tipoTelefone;
     }
 
-    /**
-     * @return the idUsuario
-     */
     public Long getIdUsuario() {
         return idUsuario;
     }
 
-    /**
-     * @param idUsuario the idUsuario to set
-     */
     public void setIdUsuario(Long idUsuario) {
         this.idUsuario = idUsuario;
     }
 
-    /**
-     * @return the dataUltimaAtualizacao
-     */
     public Date getDataUltimaAtualizacao() {
         return dataUltimaAtualizacao;
     }
 
-    /**
-     * @param dataUltimaAtualizacao the dataUltimaAtualizacao to set
-     */
     public void setDataUltimaAtualizacao(Date dataUltimaAtualizacao) {
         this.dataUltimaAtualizacao = dataUltimaAtualizacao;
     }
-
 }

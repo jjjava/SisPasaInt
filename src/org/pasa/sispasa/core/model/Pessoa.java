@@ -28,7 +28,8 @@ import org.pasa.sispasa.core.enumeration.EnumNivelEscolaridade;
 
 /**
  *
- * @author Hudson Schumaker / Andre Gomes
+ * @author Hudson Schumaker 
+ * @author Andre Gomes
  * @version 1.0.0
  */
 @Entity
@@ -338,86 +339,50 @@ public class Pessoa extends BaseEntity implements Serializable {
         this.estadoCivil = estadoCivil;
     }
 
-    /**
-     * @return the nacionalidade
-     */
     public Pais getNacionalidade() {
         return nacionalidade;
     }
 
-    /**
-     * @param nacionalidade the nacionalidade to set
-     */
     public void setNacionalidade(Pais nacionalidade) {
         this.nacionalidade = nacionalidade;
     }
 
-    /**
-     * @return the naturalidade
-     */
     public Estado getNaturalidade() {
         return naturalidade;
     }
 
-    /**
-     * @param naturalidade the naturalidade to set
-     */
     public void setNaturalidade(Estado naturalidade) {
         this.naturalidade = naturalidade;
     }
 
-    /**
-     * @return the cidadeOrigem
-     */
     public Municipio getCidadeOrigem() {
         return cidadeOrigem;
     }
 
-    /**
-     * @param cidadeOrigem the cidadeOrigem to set
-     */
     public void setCidadeOrigem(Municipio cidadeOrigem) {
         this.cidadeOrigem = cidadeOrigem;
     }
 
-    /**
-     * @param enderecos the enderecos to set
-     */
     public void setEnderecos(List<Endereco> enderecos) {
         this.enderecos = enderecos;
     }
 
-    /**
-     * @param telefones the telefones to set
-     */
     public void setTelefones(List<Telefone> telefones) {
         this.telefones = telefones;
     }
 
-    /**
-     * @param documentos the documentos to set
-     */
     public void setDocumentos(List<Documento> documentos) {
         this.documentos = documentos;
     }
 
-    /**
-     * @return the enderecos
-     */
     public List<Endereco> getEnderecos() {
         return enderecos;
     }
 
-    /**
-     * @return the telefones
-     */
     public List<Telefone> getTelefones() {
         return telefones;
     }
 
-    /**
-     * @return the documentos
-     */
     public List<Documento> getDocumentos() {
         if (null == documentos) {
             documentos = new ArrayList<>();

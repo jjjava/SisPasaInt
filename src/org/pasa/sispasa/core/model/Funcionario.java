@@ -4,7 +4,6 @@ import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
-
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -17,7 +16,6 @@ import javax.persistence.PrimaryKeyJoinColumn;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
-
 import org.hibernate.envers.AuditTable;
 import org.hibernate.envers.Audited;
 import org.hibernate.envers.NotAudited;
@@ -96,12 +94,12 @@ public class Funcionario extends Pessoa implements Serializable {
     @Temporal(TemporalType.TIMESTAMP)
     private Date dataUltimaAtualizacao;
 
-    @ManyToOne(cascade = CascadeType.ALL)
+    @ManyToOne()
     @JoinColumn(name = "ID_EMPRESA")
     @NotAudited
     private Empresa empresa;
 
-    @ManyToOne(cascade = CascadeType.ALL)
+    @ManyToOne()
     @JoinColumn(name = "ID_TP_VINC_EMPREG")
     @NotAudited
     private TipoVinculoEmpregaticio tipoVinculoEmpregaticio;

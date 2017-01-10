@@ -1,8 +1,6 @@
 package org.pasa.sispasa.core.model;
 
 import java.io.Serializable;
-import java.util.Date;
-
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.EnumType;
@@ -11,9 +9,6 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
-import javax.persistence.Temporal;
-import javax.persistence.TemporalType;
-
 import org.hibernate.envers.AuditTable;
 import org.hibernate.envers.Audited;
 import org.pasa.sispasa.core.enumeration.EnumSimNao;
@@ -23,67 +18,42 @@ import org.pasa.sispasa.core.enumeration.EnumSimNao;
 @Audited
 @AuditTable(value = "HIST_TIPO_TAXA")
 public class TipoTaxa implements Serializable {
-		
-	private static final long serialVersionUID = 1L;
 
-	@Id
-	@Column(name = "ID_TIPO_TAXA")
-	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	private Long id;
-	
-	@Column(name = "DESCRICAO")
-	private String descricao;
-	
-	@Enumerated(EnumType.STRING)
-	@Column(name = "IND_ATIVO")
-	private EnumSimNao indAtivo;
-	
-	@Temporal(TemporalType.DATE)
-	@Column(name = "DT_INCLUSAO_SISTEMA")
-	private Date dataInclusaoSistema;
+    private static final long serialVersionUID = 1L;
 
-	@Temporal(TemporalType.DATE)
-	@Column(name = "DT_ULT_ATULZ")
-	private Date dataUltimaAlteracao;
+    @Id
+    @Column(name = "ID_TIPO_TAXA")
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long id;
 
-	public Long getId() {
-		return id;
-	}
+    @Column(name = "DESCRICAO")
+    private String descricao;
 
-	public void setId(Long id) {
-		this.id = id;
-	}
+    @Enumerated(EnumType.ORDINAL)
+    @Column(name = "IND_ATIVO")
+    private EnumSimNao indAtivo;
 
-	public String getDescricao() {
-		return descricao;
-	}
+    public Long getId() {
+        return id;
+    }
 
-	public void setDescricao(String descricao) {
-		this.descricao = descricao;
-	}
+    public void setId(Long id) {
+        this.id = id;
+    }
 
-	public EnumSimNao getIndAtivo() {
-		return indAtivo;
-	}
+    public String getDescricao() {
+        return descricao;
+    }
 
-	public void setIndAtivo(EnumSimNao indAtivo) {
-		this.indAtivo = indAtivo;
-	}
+    public void setDescricao(String descricao) {
+        this.descricao = descricao;
+    }
 
-	public Date getDataInclusaoSistema() {
-		return dataInclusaoSistema;
-	}
+    public EnumSimNao getIndAtivo() {
+        return indAtivo;
+    }
 
-	public void setDataInclusaoSistema(Date dataInclusaoSistema) {
-		this.dataInclusaoSistema = dataInclusaoSistema;
-	}
-
-	public Date getDataUltimaAlteracao() {
-		return dataUltimaAlteracao;
-	}
-
-	public void setDataUltimaAlteracao(Date dataUltimaAlteracao) {
-		this.dataUltimaAlteracao = dataUltimaAlteracao;
-	}
-
+    public void setIndAtivo(EnumSimNao indAtivo) {
+        this.indAtivo = indAtivo;
+    }
 }

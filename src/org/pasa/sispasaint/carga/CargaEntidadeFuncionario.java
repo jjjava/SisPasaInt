@@ -73,11 +73,11 @@ public class CargaEntidadeFuncionario {
                     return false;
                 } else {
                     funcionario.addBeneficiario(b);
-                    //System.out.println(b.toString());
                 }
             }
             
             //INSERT
+            funcionario.setMatriculaOrigem(modeloBenEnd.getMatricula());
             funcionario.setIdUsuario(SisPasaIntCommon.USER_CARGA);
             funcionario.setIndAtivo(SisPasaIntCommon.ATIVO);
             funcionario.setDataUltimaAtualizacao(DateUtil.obterDataAtual());

@@ -4,7 +4,6 @@ import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
-
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -17,7 +16,6 @@ import javax.persistence.ManyToMany;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
-
 import org.hibernate.envers.AuditTable;
 import org.hibernate.envers.Audited;
 import org.hibernate.envers.NotAudited;
@@ -31,7 +29,7 @@ import org.pasa.sispasa.core.constants.ConstantesBanco;
 @Entity
 @Table(name = "CONTATO")
 @Audited
-@AuditTable(value="HIST_CONTATO")
+@AuditTable(value = "HIST_CONTATO")
 public class Contato extends BaseEntity implements Serializable {
 
     private static final long serialVersionUID = 1L;
@@ -44,10 +42,10 @@ public class Contato extends BaseEntity implements Serializable {
     @Column(name = "NOME", nullable = false, length = 60)
     private String nome;
 
-    @Column(name = "EMAIL",length = 60)
+    @Column(name = "EMAIL", length = 60)
     private String email;
 
-    @Column(name = "SETOR", length =30)
+    @Column(name = "SETOR", length = 30)
     private String setor;
 
     @Column(name = "ID_USUARIO", columnDefinition = ConstantesBanco.BIGINT)
@@ -61,7 +59,6 @@ public class Contato extends BaseEntity implements Serializable {
     private Date dataUltimaAtualizacao;
 
     //RELACIONAMENTOS
-    
     @ManyToMany(cascade = CascadeType.ALL)
     @JoinTable(name = "CONTATO_TELEFONE",
             joinColumns = @JoinColumn(name = "ID_CONTATO"),
@@ -70,19 +67,17 @@ public class Contato extends BaseEntity implements Serializable {
     private List<Telefone> telefones;
 
     //CONSTRUTORES
-    
     public Contato() {
         telefones = new ArrayList<>();
     }
-    
-   //METODOS ADD
-    
-    public void addTelefone(Telefone t){
+
+    //METODOS ADD
+    public void addTelefone(Telefone t) {
         telefones.add(t);
     }
 
     //GETTERS E SETTERS
-    
+    @Override
     public Long getId() {
         return id;
     }
@@ -139,11 +134,11 @@ public class Contato extends BaseEntity implements Serializable {
         this.telefones = telefones;
     }
 
-	public Date getDataUltimaAtualizacao() {
-		return dataUltimaAtualizacao;
-	}
+    public Date getDataUltimaAtualizacao() {
+        return dataUltimaAtualizacao;
+    }
 
-	public void setDataUltimaAtualizacao(Date dataUltimaAtualizacao) {
-		this.dataUltimaAtualizacao = dataUltimaAtualizacao;
-	}
+    public void setDataUltimaAtualizacao(Date dataUltimaAtualizacao) {
+        this.dataUltimaAtualizacao = dataUltimaAtualizacao;
+    }
 }
