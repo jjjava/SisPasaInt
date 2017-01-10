@@ -144,10 +144,10 @@ public class CargaEntidadeBeneficiario {
         beneficiario.setDataFimPlanoCassi(DateUtil.toDate(modeloBenEnd.getCassiData()));
         beneficiario.setDataInclusaoSistema(DateUtil.obterDataAtual());
 
-        if (modeloBenEnd.getTipoBeneficiario().equalsIgnoreCase(EnumTipoBeneficiario.TITULAR.getDescricao())) {
-            beneficiario.setTipoBeneficiario(EnumTipoBeneficiario.TITULAR.getDescricao());
+        if (modeloBenEnd.getTipoBeneficiario().equalsIgnoreCase(EnumTipoBeneficiario.TITULAR.getIndice())) {
+            beneficiario.setTipoBeneficiario(EnumTipoBeneficiario.TITULAR.getIndice());
         } else {
-            beneficiario.setTipoBeneficiario(EnumTipoBeneficiario.DEPENDENTE.getDescricao());
+            beneficiario.setTipoBeneficiario(EnumTipoBeneficiario.DEPENDENTE.getIndice());
         }
     }
     
