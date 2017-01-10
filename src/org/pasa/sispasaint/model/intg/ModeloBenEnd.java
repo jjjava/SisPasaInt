@@ -10,6 +10,7 @@ import javax.persistence.Table;
 /**
  *
  * @author hudson schumaker
+ * @version 1.0.0
  */
 @Entity
 @Table(name = "MODELO")
@@ -23,6 +24,12 @@ public class ModeloBenEnd implements Serializable{
     private String empresa;
     private String matricula;
     private String codBeneficiario;
+    private String matriculaAtulizador;
+    private String matriculaOrigem;
+    private String matriculaPeople;    
+    private String matriculaPasa;
+    private String matriculaParticipante;
+    private String matriculaRepresentanteLegal;
     private String direitoAMSCredenciamento;
     private String dataValidadeCredenciado;
     private String direitoAmsReembolso;
@@ -46,24 +53,18 @@ public class ModeloBenEnd implements Serializable{
     private String contratoTrabalho;
     private String sexo;
     private String empresaAtualizador;
-    private String matriculaAtulizador;
     private String tipoBeneficiario;
     private String codigoDireitoPasa;
     private String grauEscolaridade;
     private String indicadorConclusao;
     private String dataFalecimento;
-    private String matriculaPasa;
     private String nomeDaMae;
     private String pis;
     private String cpf;
     private String empresaOrigem;
-    private String matriculaOrigem;
     private String empresaPeople;
-    private String matriculaPeople;
     private String unidadeDeControle;
     private String centroDeCusto;
-    private String matriculaParticipante;
-    private String matriculaRepresentanteLegal;
     private String nomeBeneficiario;
     private String planoDeReciprocidadeCassi;
     private String codigoNacionalDeSaude;

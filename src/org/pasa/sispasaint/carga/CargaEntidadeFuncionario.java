@@ -76,8 +76,13 @@ public class CargaEntidadeFuncionario {
                 }
             }
             
+            
+            //MATRICULAS
+            funcionario.setMatriculaOrigem(modeloBenEnd.getMatriculaPeople());//IMPORTANTE
+            funcionario.setMatriculaAtualizadora(modeloBenEnd.getMatriculaAtulizador());
+            funcionario.setMatriculaPasa(modeloBenEnd.getMatriculaPasa());
+            
             //INSERT
-            funcionario.setMatriculaOrigem(modeloBenEnd.getMatricula());
             funcionario.setIdUsuario(SisPasaIntCommon.USER_CARGA);
             funcionario.setIndAtivo(SisPasaIntCommon.ATIVO);
             funcionario.setDataUltimaAtualizacao(DateUtil.obterDataAtual());
