@@ -31,9 +31,8 @@ public class EstadoCivil implements Serializable {
 	private String descricao;
 
 	//CONSTRUTORES
-	
 	public EstadoCivil() {
-		//CONSTRUTOR DEFAULT
+            //CONSTRUTOR DEFAULT
 	}
 	
 	public EstadoCivil(Long id) {
@@ -41,7 +40,6 @@ public class EstadoCivil implements Serializable {
 	}
 	
 	//GETTERS E SETTERS
-	
 	public Long getId() {
 		return id;
 	}

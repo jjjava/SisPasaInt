@@ -104,7 +104,7 @@ public class Beneficiario extends Pessoa {
     private Date dataUltimaAtualizacao;
 
     //RELACIONAMENTOS
-    @ManyToOne(cascade = CascadeType.ALL)
+    @ManyToOne()
     @JoinColumn(name = "ID_FUNCIONARIO")
     private Funcionario funcionario;
 
