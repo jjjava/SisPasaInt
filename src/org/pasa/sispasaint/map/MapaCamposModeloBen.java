@@ -32,7 +32,7 @@ public class MapaCamposModeloBen {
         mapa.put(CamposModelo.DIREITO_ABATER_IR, new PosicaoCampo(90, 91));
         mapa.put(CamposModelo.NUCLEO_DA_AMS, new PosicaoCampo(91, 92));
         mapa.put(CamposModelo.AGENCIA_BANCARIA, new PosicaoCampo(93, 97));
-        mapa.put(CamposModelo.BANCO, new PosicaoCampo(98, 100));
+        mapa.put(CamposModelo.BANCO, new PosicaoCampo(98, 101));
         mapa.put(CamposModelo.CONTA_CORRENTE, new PosicaoCampo(101, 111));
         mapa.put(CamposModelo.DATA_ADMISSAO, new PosicaoCampo(112, 122));
         mapa.put(CamposModelo.GRAU_PARENTESCO, new PosicaoCampo(122, 123));
