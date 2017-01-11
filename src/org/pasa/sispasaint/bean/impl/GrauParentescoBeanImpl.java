@@ -8,40 +8,44 @@ import org.pasa.sispasaint.dao.impl.GrauParentescoDAOImpl;
 
 /**
  *
- * @author 90J00318
+ * @author Hudson Schumaker
+ * @vresion 1.0.0
  */
 public class GrauParentescoBeanImpl implements GrauParentescoBean {
 
+    private final GrauParentescoDAOImpl grauParentescoDAO;
+    
     public GrauParentescoBeanImpl() {
+        this.grauParentescoDAO = new GrauParentescoDAOImpl();
     }
 
     @Override
     public GrauParentesco obter(GrauParentesco g) {
-        return new GrauParentescoDAOImpl().obter(g.getId());
+        return grauParentescoDAO.obter(g.getId());
     }
 
     @Override
     public void cadastrar(GrauParentesco g) {
-        new GrauParentescoDAOImpl().cadastrar(g);
+        grauParentescoDAO.cadastrar(g);
     }
 
     @Override
     public void atualizar(GrauParentesco g) {
-        new GrauParentescoDAOImpl().atualizar(g);
+        grauParentescoDAO.atualizar(g);
     }
 
     @Override
     public void apagar(GrauParentesco g) {
-        new GrauParentescoDAOImpl().apagar(g);
+        grauParentescoDAO.apagar(g);
     }
 
     @Override
     public List<GrauParentesco> listar() {
-        return new GrauParentescoDAOImpl().listar();
+        return grauParentescoDAO.listar();
     }
 
     @Override
     public GrauParentesco existe(String codigo) {
-       return new GrauParentescoDAOImpl().existe(codigo);
+       return grauParentescoDAO.existe(codigo);
     }
 }

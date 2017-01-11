@@ -5,7 +5,6 @@ import org.pasa.sispasa.core.model.Funcionario;
 import org.pasa.sispasaint.bean.FuncionarioBean;
 import org.pasa.sispasaint.dao.impl.FuncionarioDAOImpl;
 
-
 /**
  *
  * @author Hudson Schumaker

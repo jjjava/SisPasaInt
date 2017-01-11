@@ -2,7 +2,6 @@ package org.pasa.sispasa.core.model;
 
 import java.io.Serializable;
 import java.util.Date;
-import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -68,12 +67,12 @@ public class Documento extends BaseEntity implements Serializable {
     private Integer indAtivo = EnumIndAtivo.ATIVO.getIndice();
 
     // RELACIONAMENTOS
-    @ManyToOne(cascade = CascadeType.ALL)
+    @ManyToOne()
     @JoinColumn(name = "ID_ESTADO")
     @NotAudited
     private Estado estado;
 
-    @ManyToOne(cascade = CascadeType.ALL)
+    @ManyToOne()
     @JoinColumn(name = "ID_TP_DOCUMENTO")
     @NotAudited
     private TipoDocumento tipoDocumento;
@@ -182,60 +181,35 @@ public class Documento extends BaseEntity implements Serializable {
         this.tipoDocumento = tipoDocumento;
     }
 
-    /**
-     * @return the serie
-     */
     public String getSerie() {
         return serie;
     }
 
-    /**
-     * @param serie the serie to set
-     */
     public void setSerie(String serie) {
         this.serie = serie;
     }
 
-    /**
-     * @return the idUsuario
-     */
     public Long getIdUsuario() {
         return idUsuario;
     }
 
-    /**
-     * @param idUsuario the idUsuario to set
-     */
     public void setIdUsuario(Long idUsuario) {
         this.idUsuario = idUsuario;
     }
 
-    /**
-     * @return the dataUltimaAtualizacao
-     */
     public Date getDataUltimaAtualizacao() {
         return dataUltimaAtualizacao;
     }
 
-    /**
-     * @param dataUltimaAtualizacao the dataUltimaAtualizacao to set
-     */
     public void setDataUltimaAtualizacao(Date dataUltimaAtualizacao) {
         this.dataUltimaAtualizacao = dataUltimaAtualizacao;
     }
 
-    /**
-     * @return the indAtivo
-     */
     public Integer getIndAtivo() {
         return indAtivo;
     }
 
-    /**
-     * @param indAtivo the indAtivo to set
-     */
     public void setIndAtivo(Integer indAtivo) {
         this.indAtivo = indAtivo;
     }
-
 }
