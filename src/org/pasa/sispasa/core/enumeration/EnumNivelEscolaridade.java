@@ -11,7 +11,7 @@ public enum EnumNivelEscolaridade {
 	FUNDAMENTAL(1L,"Ensino Fundamental"),
 	MEDIO(2L,"Ensino Médio"),
 	SUPERIOR(3L,"Ensino Superior"),
-	POS(4L,"Pós Graduação"),
+	POS(4L,"Pos Graduação"),
 	MESTRADO(5L,"Mestrado"),
 	DOUTORADO(6L,"Doutorado");
 	

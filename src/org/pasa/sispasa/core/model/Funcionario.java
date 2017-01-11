@@ -95,12 +95,12 @@ public class Funcionario extends Pessoa implements Serializable {
     @Temporal(TemporalType.TIMESTAMP)
     private Date dataUltimaAtualizacao;
 
-    @ManyToOne()
+    @ManyToOne
     @JoinColumn(name = "ID_EMPRESA")
     @NotAudited
     private Empresa empresa;
 
-    @ManyToOne()
+    @ManyToOne
     @JoinColumn(name = "ID_TP_VINC_EMPREG")
     @NotAudited
     private TipoVinculoEmpregaticio tipoVinculoEmpregaticio;
@@ -110,7 +110,7 @@ public class Funcionario extends Pessoa implements Serializable {
     @NotAudited
     private DadosBancarios dadosBancarios;
 
-    @ManyToOne()
+    @ManyToOne
     @JoinColumn(name = "ID_MOTIVO_DESLIGAMENTO")
     @NotAudited
     private MotivoDesligamento motivoDesligamento;

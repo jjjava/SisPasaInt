@@ -85,7 +85,7 @@ public class Pessoa extends BaseEntity implements Serializable {
     @Column(name = "ID_CONCL_ESCOL", nullable = false, columnDefinition = ConstantesBanco.SMALLINT)
     private Integer indConclusaoEscolaridade;
 
-    // RELACIONAMENTOS
+    //RELACIONAMENTOS
     @ManyToMany(cascade = CascadeType.ALL)
     @JoinTable(name = "PESSOA_ENDERECO",
             joinColumns = @JoinColumn(name = "ID_PESSOA"), 
@@ -107,32 +107,32 @@ public class Pessoa extends BaseEntity implements Serializable {
     @NotAudited
     private List<Documento> documentos;
 
-    @ManyToOne()
+    @ManyToOne
     @JoinColumn(name = "ID_PAIS")
     @NotAudited
     private Pais nacionalidade;
 
-    @ManyToOne()
+    @ManyToOne
     @JoinColumn(name = "ID_ESTADO")
     @NotAudited
     private Estado naturalidade;
 
-    @ManyToOne()
+    @ManyToOne
     @JoinColumn(name = "ID_MUNICIPIO")
     @NotAudited
     private Municipio cidadeOrigem;
 
-    @ManyToOne()
+    @ManyToOne
     @JoinColumn(name = "ID_NIVEL_ESCOL")
     @NotAudited
     private NivelEscolaridade nivelEscolaridade;
 
-    @ManyToOne()
+    @ManyToOne
     @JoinColumn(name = "ID_ORIGEM_INFO", nullable = false)
     @NotAudited
     private OrigemInformacoes origemInformacoes;
 
-    @ManyToOne()
+    @ManyToOne
     @JoinColumn(name = "ID_ESTADO_CIVIL")
     @NotAudited
     private EstadoCivil estadoCivil;

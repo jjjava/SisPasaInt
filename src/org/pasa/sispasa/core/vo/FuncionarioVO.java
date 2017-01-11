@@ -25,6 +25,8 @@ public class FuncionarioVO extends PessoaVO {
 	private TelefoneVO telefoneResidencial;
 	private TelefoneVO telefoneCelular;
 	private TelefoneVO telefoneComercial;
+	private String telefonePrimarioCarga;
+	private String telefoneSecundarioCarga;
 	private DocumentoVO rg;
 	private DocumentoVO ctps;
 	private DocumentoVO pisPasep;
@@ -268,5 +270,21 @@ public class FuncionarioVO extends PessoaVO {
 	 */
 	public void setBeneficiarios(List<BeneficiarioVO> beneficiarios) {
 		this.beneficiarios = beneficiarios;
+	}
+
+	public String getTelefonePrimarioCarga() {
+		return telefonePrimarioCarga;
+	}
+
+	public void setTelefonePrimarioCarga(String telefonePrimarioCarga) {
+		this.telefonePrimarioCarga = telefonePrimarioCarga;
+	}
+
+	public String getTelefoneSecundarioCarga() {
+		return telefoneSecundarioCarga;
+	}
+
+	public void setTelefoneSecundarioCarga(String telefoneSecundarioCarga) {
+		this.telefoneSecundarioCarga = telefoneSecundarioCarga;
 	}
 }

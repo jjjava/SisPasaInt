@@ -36,7 +36,7 @@ public class Estado implements Serializable {
 	@Column(name = "NOME", length = 30)
 	private String nome;
 
-	@ManyToOne(cascade = CascadeType.ALL)
+	@ManyToOne
 	@JoinColumn(name = "ID_PAIS")
 	@NotAudited
 	private Pais pais;

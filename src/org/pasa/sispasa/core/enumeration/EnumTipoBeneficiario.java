@@ -20,7 +20,7 @@ public enum EnumTipoBeneficiario {
 
     public static EnumTipoBeneficiario getTipoBeneficiarioByIndice(String indice) {
 
-        if ("t".equals(indice)) {
+        if ("T".equals(indice)) {
             return EnumTipoBeneficiario.TITULAR;
         }
         return EnumTipoBeneficiario.DEPENDENTE;
