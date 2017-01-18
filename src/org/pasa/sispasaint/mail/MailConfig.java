@@ -10,7 +10,7 @@ import javax.persistence.Table;
 
 /**
  *
- * @author 90J00318
+ * @author Hudson Schumaker
  */
 @Entity
 @Table(name = "EMAIL_CONFIGURACAO")

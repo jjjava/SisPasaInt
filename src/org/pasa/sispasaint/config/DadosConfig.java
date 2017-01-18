@@ -15,7 +15,7 @@ import org.pasa.sispasaint.util.DateUtil;
  * @version 1.0.0
  */
 @Entity
-@Table(name = "DADOS_CONFIGURACAO")
+@Table(name = "CARG_DADOS_CONFIGURACAO")
 public class DadosConfig implements Serializable {
 
     @Id
