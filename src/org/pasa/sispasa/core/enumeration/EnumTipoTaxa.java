@@ -6,7 +6,7 @@ package org.pasa.sispasa.core.enumeration;
  */
 public enum EnumTipoTaxa {
 
-	PASA(1, "PASA"), 
+	PASA(1, "Padrão"), 
 	LEGADO(0, "Legado");
 
 	private Integer indAtivo;

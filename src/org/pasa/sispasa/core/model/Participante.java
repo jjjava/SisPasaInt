@@ -24,6 +24,8 @@ import javax.persistence.TemporalType;
 import org.hibernate.envers.AuditTable;
 import org.hibernate.envers.Audited;
 import org.hibernate.envers.NotAudited;
+import org.pasa.sispasa.core.constants.ConstantesBanco;
+import org.pasa.sispasa.core.enumeration.EnumEstadoCivil;
 import org.pasa.sispasa.core.enumeration.EnumIndAtivo;
 import org.pasa.sispasa.core.enumeration.EnumNivelEscolaridade;
 import org.pasa.sispasa.core.enumeration.EnumSimNao;
@@ -37,7 +39,7 @@ public class Participante extends BaseEntity implements Serializable {
 	private static final long serialVersionUID = 1L;
 
 	@Id
-	@Column(name = "ID_PARTICIPANTE")
+	@Column(name = "ID_PARTICIPANTE", columnDefinition = ConstantesBanco.BIGINT)
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
 
@@ -77,7 +79,7 @@ public class Participante extends BaseEntity implements Serializable {
 
 	@Column(name = "EMAIL")
 	private String email;
-	
+
 	@Column(name = "EMAIL_COMERCIAL")
 	private String emailComercial;
 
@@ -90,7 +92,7 @@ public class Participante extends BaseEntity implements Serializable {
 	@Column(name = "DT_ULT_ATULZ")
 	@Temporal(TemporalType.TIMESTAMP)
 	private Date dataUltimaAtualizacao;
-	
+
 	@OneToOne
 	@PrimaryKeyJoinColumn
 	private Associado associado;
@@ -99,9 +101,8 @@ public class Participante extends BaseEntity implements Serializable {
 	@JoinColumn(name = "ID_ENDERECO")
 	@NotAudited
 	private Endereco endereco;
-
-	@OneToMany
-	@JoinColumn(name = "ID_PARTICIPANTE_DADOS_BANCARIOS")
+	
+	@OneToMany(mappedBy = "participante")
 	@NotAudited
 	private List<ParticipanteDadosBancarios> partDadosBancarios;
 
@@ -129,16 +130,16 @@ public class Participante extends BaseEntity implements Serializable {
 	@JoinColumn(name = "ID_ESTADO_CIVIL")
 	@NotAudited
 	private EstadoCivil estadoCivil;
-	
+
 	@ManyToMany
-	@JoinTable(name = "PARTICIPANTE_TELEFONE", 
+	@JoinTable(	name = "PARTICIPANTE_TELEFONE", 
 				joinColumns = @JoinColumn(name = "ID_PARTICIPANTE"), 
 				inverseJoinColumns = @JoinColumn(name = "ID_TELEFONE"))
 	@NotAudited
 	private List<Telefone> telefones;
 
 	@ManyToMany
-	@JoinTable(name = "PARTICIPANTE_DOCUMENTO", 
+	@JoinTable(	name = "PARTICIPANTE_DOCUMENTO", 
 				joinColumns = @JoinColumn(name = "ID_PARTICIPANTE"), 
 				inverseJoinColumns = @JoinColumn(name = "ID_DOCUMENTO"))
 	@NotAudited
@@ -215,13 +216,17 @@ public class Participante extends BaseEntity implements Serializable {
 		}
 		return null;
 	}
-	
+
 	public EnumNivelEscolaridade getNivelEscolaridadeAsEnum() {
 		return EnumNivelEscolaridade.getNivelEscolaridadeByIndice(getNivelEscolaridade().getId().intValue());
 	}
-	
-	public EnumSimNao getIndConclusaoEscolaridadeAsEnum() {		
+
+	public EnumSimNao getIndConclusaoEscolaridadeAsEnum() {
 		return EnumSimNao.valueFromIndice(getIndConclusaoEscolaridade());
+	}
+
+	public EnumEstadoCivil getEstadoCivilAsEnum() {
+		return EnumEstadoCivil.getEstadoCivilByIndice(estadoCivil.getId());
 	}
 
 	public Long getId() {

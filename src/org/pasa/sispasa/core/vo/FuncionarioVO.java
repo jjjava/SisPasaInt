@@ -198,6 +198,9 @@ public class FuncionarioVO extends PessoaVO {
 	 * @return the telefoneComercial
 	 */
 	public TelefoneVO getTelefoneComercial() {
+		if(null == telefoneComercial) {
+			telefoneComercial = new TelefoneVO();
+		}
 		return telefoneComercial;
 	}
 
@@ -231,6 +234,9 @@ public class FuncionarioVO extends PessoaVO {
 	 * @return the ctps
 	 */
 	public DocumentoVO getCtps() {
+		if(null == ctps) {
+			ctps = new DocumentoVO();
+		}
 		return ctps;
 	}
 
@@ -246,6 +252,9 @@ public class FuncionarioVO extends PessoaVO {
 	 * @return the pisPasep
 	 */
 	public DocumentoVO getPisPasep() {
+		if(null == pisPasep) {
+			pisPasep = new DocumentoVO();
+		}
 		return pisPasep;
 	}
 

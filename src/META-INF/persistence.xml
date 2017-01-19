@@ -60,7 +60,7 @@
       <!-- <property name="javax.persistence.jdbc.url" value="jdbc:jtds:sqlserver://127.0.0.1:1433;instance=PASA;DatabaseName=sispasa"/> -->
       <!-- <property name="javax.persistence.jdbc.user" value="pasa"/> -->
       <!-- <property name="javax.persistence.jdbc.password" value="pasa"/> -->
-      <property name="javax.persistence.schema-generation.database.action" value="drop-and-create"/>
+      <property name="javax.persistence.schema-generation.database.action" value="create"/>
       <!--  <property name="javax.persistence.schema-generation.scripts.action" value="drop"/> -->
       <!-- <property name="javax.persistence.schema-generation.scripts.create-target" value="file:C:/Temp/create.sql"/> -->
       <!-- <property name="javax.persistence.schema-generation.scripts.drop-target" value="file:C:/Temp/drop.sql"/> -->

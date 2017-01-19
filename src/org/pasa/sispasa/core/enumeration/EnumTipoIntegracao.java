@@ -8,8 +8,8 @@ package org.pasa.sispasa.core.enumeration;
 
 public enum EnumTipoIntegracao {
 
-	PEOPLE_SOFT_VALE(1L,"People Soft Vale"),
-	PEOPLE_SOFT_VLI(2L,"People Soft VLI"),
+	PEOPLE_SOFT_VALE_FPW(1L,"People Soft Vale/FPW"),
+	PEOPLE_SOFT_VLI_FPW(2L,"People Soft VLI/FPW"),
 	EXTERNA(3L,"Empresa externa");
 	
 	
@@ -30,10 +30,10 @@ public enum EnumTipoIntegracao {
 		switch (indice) {
 			
 			case 1:
-				return EnumTipoIntegracao.PEOPLE_SOFT_VALE;
+				return EnumTipoIntegracao.PEOPLE_SOFT_VALE_FPW;
 				
 			case 2:
-				return EnumTipoIntegracao.PEOPLE_SOFT_VLI;
+				return EnumTipoIntegracao.PEOPLE_SOFT_VLI_FPW;
 				
 			case 3:
 				return EnumTipoIntegracao.EXTERNA;

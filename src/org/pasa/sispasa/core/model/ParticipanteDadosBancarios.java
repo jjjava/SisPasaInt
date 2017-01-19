@@ -19,6 +19,7 @@ import javax.persistence.TemporalType;
 import org.hibernate.envers.AuditTable;
 import org.hibernate.envers.Audited;
 import org.hibernate.envers.NotAudited;
+import org.pasa.sispasa.core.constants.ConstantesBanco;
 import org.pasa.sispasa.core.enumeration.EnumTipoContaAssociado;
 
 @Entity
@@ -30,7 +31,7 @@ public class ParticipanteDadosBancarios extends BaseEntity implements Serializab
 	private static final long serialVersionUID = 1L;
 
 	@Id
-	@Column(name = "ID_PARTICIPANTE_DADOS_BANCARIOS")
+	@Column(name = "ID_PARTICIPANTE_DADOS_BANCARIOS", columnDefinition = ConstantesBanco.BIGINT)
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
 

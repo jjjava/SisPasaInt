@@ -2,6 +2,7 @@ package org.pasa.sispasa.core.model;
 
 import java.io.Serializable;
 import java.util.Date;
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -12,6 +13,7 @@ import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
+
 import org.hibernate.envers.AuditTable;
 import org.hibernate.envers.Audited;
 import org.hibernate.envers.NotAudited;
@@ -32,184 +34,194 @@ import org.pasa.sispasa.core.vo.EstadoVO;
 @AuditTable(value = "HIST_DOCUMENTO")
 public class Documento extends BaseEntity implements Serializable {
 
-    private static final long serialVersionUID = 1L;
+	private static final long serialVersionUID = 1L;
 
-    @Id
-    @Column(name = "ID_DOCUMENTO", columnDefinition = ConstantesBanco.BIGINT)
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
+	@Id
+	@Column(name = "ID_DOCUMENTO", columnDefinition = ConstantesBanco.BIGINT)
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	private Long id;
 
-    @Column(name = "NUMERO", nullable = false, length = 20)
-    private String numero;
+	@Column(name = "NUMERO", nullable = false, length = 20)
+	private String numero;
 
-    @Column(name = "ORGAO_EMISSOR", length = 30)
-    private String orgaoEmissor;
+	@Column(name = "ORGAO_EMISSOR", length = 30)
+	private String orgaoEmissor;
 
-    @Column(name = "SERIE", length = 10)
-    private String serie;
+	@Column(name = "SERIE", length = 10)
+	private String serie;
 
-    @Column(name = "DATA_EMISSAO", columnDefinition = ConstantesBanco.DATE)
-    @Temporal(TemporalType.DATE)
-    private Date dataEmissao;
+	@Column(name = "DATA_EMISSAO", columnDefinition = ConstantesBanco.DATE)
+	@Temporal(TemporalType.DATE)
+	private Date dataEmissao;
 
-    @Column(name = "DATA_VALIDADE", columnDefinition = ConstantesBanco.DATE)
-    @Temporal(TemporalType.DATE)
-    private Date dataValidade;
+	@Column(name = "DATA_VALIDADE", columnDefinition = ConstantesBanco.DATE)
+	@Temporal(TemporalType.DATE)
+	private Date dataValidade;
 
-    @Column(name = "ID_USUARIO", nullable = false, columnDefinition = ConstantesBanco.BIGINT)
-    private Long idUsuario;
+	@Column(name = "ID_USUARIO", nullable = false, columnDefinition = ConstantesBanco.BIGINT)
+	private Long idUsuario;
 
-    @Column(name = "DT_ULT_ATULZ", nullable = false)
-    @Temporal(TemporalType.TIMESTAMP)
-    private Date dataUltimaAtualizacao;
+	@Column(name = "DT_ULT_ATULZ", nullable = false)
+	@Temporal(TemporalType.TIMESTAMP)
+	private Date dataUltimaAtualizacao;
 
-    @Column(name = "IND_ATIVO", nullable = false, columnDefinition = ConstantesBanco.SMALLINT)
-    private Integer indAtivo = EnumIndAtivo.ATIVO.getIndice();
+	@Column(name = "IND_ATIVO", nullable = false, columnDefinition = ConstantesBanco.SMALLINT)
+	private Integer indAtivo = EnumIndAtivo.ATIVO.getIndice();
 
-    // RELACIONAMENTOS
-    @ManyToOne()
-    @JoinColumn(name = "ID_ESTADO")
-    @NotAudited
-    private Estado estado;
+	// RELACIONAMENTOS
+	@ManyToOne()
+	@JoinColumn(name = "ID_ESTADO")
+	@NotAudited
+	private Estado estado;
 
-    @ManyToOne()
-    @JoinColumn(name = "ID_TP_DOCUMENTO")
-    @NotAudited
-    private TipoDocumento tipoDocumento;
+	@ManyToOne()
+	@JoinColumn(name = "ID_TP_DOCUMENTO")
+	@NotAudited
+	private TipoDocumento tipoDocumento;
 
-    public DocumentoVO getEntityVO() {
+	public Documento() {
+	}
 
-        DocumentoVO documentoVO = new DocumentoVO();
-        documentoVO.setId(getId());
-        documentoVO.setIdUsuario(getIdUsuario());
-        documentoVO.setEnumIndAtivo(EnumIndAtivo.getIndAtivoByIndice(getIndAtivo()));
-        documentoVO.setDataUltimaAtualizacao(getDataUltimaAtualizacao());
-        documentoVO.setNumero(getNumero());
-        documentoVO.setDataEmissao(getDataEmissao());
-        documentoVO.setDataValidade(getDataValidade());
-        documentoVO.setSerie(getSerie());
-        documentoVO.setOrgaoEmissor(getOrgaoEmissor());
-        documentoVO.setEnumTipoDocumento(EnumTipoDocumento.getTipoDocumentoByIndice(getTipoDocumento().getId().intValue()));
+	public Documento(TipoDocumento tipoDocumento) {
+		this.tipoDocumento = tipoDocumento;
+	}
 
-        if (null != documentoVO.getEstadoEmissor()) {
-            documentoVO.setEstadoEmissor(new EstadoVO(getEstado().getId(), getEstado().getNome()));
-        }
-        return documentoVO;
-    }
+	public DocumentoVO getEntityVO() {
 
-    public static Documento getEntity(DocumentoVO documentoVO) {
-        Documento documento = new Documento();
-        documento.setId(documentoVO.getId());
-        documento.setIdUsuario(null == documentoVO.getIdUsuario() ? 1L : documentoVO.getIdUsuario());
-        documento.setIndAtivo(null == documentoVO.getEnumIndAtivo() ? EnumIndAtivo.ATIVO.getIndice(): documentoVO.getEnumIndAtivo().getIndice());
-        documento.setDataUltimaAtualizacao(null == documentoVO.getDataUltimaAtualizacao() ? new Date() : documentoVO.getDataUltimaAtualizacao());
-        documento.setNumero(documentoVO.getNumero());
-        documento.setDataEmissao(documentoVO.getDataEmissao());
-        documento.setSerie(documentoVO.getSerie());
-        documento.setOrgaoEmissor(documentoVO.getOrgaoEmissor());
-        documento.setTipoDocumento(new TipoDocumento(documentoVO.getEnumTipoDocumento().getIndice()));
+		DocumentoVO documentoVO = new DocumentoVO();
+		documentoVO.setId(getId());
+		documentoVO.setIdUsuario(getIdUsuario());
+		documentoVO.setEnumIndAtivo(EnumIndAtivo.getIndAtivoByIndice(getIndAtivo()));
+		documentoVO.setDataUltimaAtualizacao(getDataUltimaAtualizacao());
+		documentoVO.setNumero(getNumero());
+		documentoVO.setDataEmissao(getDataEmissao());
+		documentoVO.setDataValidade(getDataValidade());
+		documentoVO.setSerie(getSerie());
+		documentoVO.setOrgaoEmissor(getOrgaoEmissor());
+		documentoVO.setEnumTipoDocumento(
+				EnumTipoDocumento.getTipoDocumentoByIndice(getTipoDocumento().getId().intValue()));
 
-        return documento;
-    }
+		if (null != documentoVO.getEstadoEmissor()) {
+			documentoVO.setEstadoEmissor(new EstadoVO(getEstado().getId(), getEstado().getNome()));
+		}
+		return documentoVO;
+	}
 
-    public boolean isTipoDocumentoRG() {
-        return EnumTipoDocumento.RG.getIndice().equals(tipoDocumento.getId());
-    }
+	public static Documento getEntity(DocumentoVO documentoVO) {
+		Documento documento = new Documento();
+		documento.setId(documentoVO.getId());
+		documento.setIdUsuario(null == documentoVO.getIdUsuario() ? 1L : documentoVO.getIdUsuario());
+		documento.setIndAtivo(null == documentoVO.getEnumIndAtivo() ? EnumIndAtivo.ATIVO.getIndice()
+				: documentoVO.getEnumIndAtivo().getIndice());
+		documento.setDataUltimaAtualizacao(
+				null == documentoVO.getDataUltimaAtualizacao() ? new Date() : documentoVO.getDataUltimaAtualizacao());
+		documento.setNumero(documentoVO.getNumero());
+		documento.setDataEmissao(documentoVO.getDataEmissao());
+		documento.setSerie(documentoVO.getSerie());
+		documento.setOrgaoEmissor(documentoVO.getOrgaoEmissor());
+		documento.setTipoDocumento(new TipoDocumento(documentoVO.getEnumTipoDocumento().getIndice()));
 
-    public boolean isTipoDocumentoCTPS() {
-        return EnumTipoDocumento.CTPS.getIndice().equals(tipoDocumento.getId());
-    }
+		return documento;
+	}
 
-    public boolean isTipoDocumentoPIS() {
-        return EnumTipoDocumento.PIS_PASEP.getIndice().equals(tipoDocumento.getId());
-    }
+	public boolean isTipoDocumentoRG() {
+		return EnumTipoDocumento.RG.getIndice().equals(tipoDocumento.getId());
+	}
 
-    @Override
-    public Long getId() {
-        return id;
-    }
+	public boolean isTipoDocumentoCTPS() {
+		return EnumTipoDocumento.CTPS.getIndice().equals(tipoDocumento.getId());
+	}
 
-    public void setId(Long id) {
-        this.id = id;
-    }
+	public boolean isTipoDocumentoPIS() {
+		return EnumTipoDocumento.PIS_PASEP.getIndice().equals(tipoDocumento.getId());
+	}
 
-    public String getNumero() {
-        return numero;
-    }
+	@Override
+	public Long getId() {
+		return id;
+	}
 
-    public void setNumero(String numero) {
-        this.numero = numero;
-    }
+	public void setId(Long id) {
+		this.id = id;
+	}
 
-    public String getOrgaoEmissor() {
-        return orgaoEmissor;
-    }
+	public String getNumero() {
+		return numero;
+	}
 
-    public void setOrgaoEmissor(String orgaoEmissor) {
-        this.orgaoEmissor = orgaoEmissor;
-    }
+	public void setNumero(String numero) {
+		this.numero = numero;
+	}
 
-    public Date getDataEmissao() {
-        return dataEmissao;
-    }
+	public String getOrgaoEmissor() {
+		return orgaoEmissor;
+	}
 
-    public void setDataEmissao(Date dataEmissao) {
-        this.dataEmissao = dataEmissao;
-    }
+	public void setOrgaoEmissor(String orgaoEmissor) {
+		this.orgaoEmissor = orgaoEmissor;
+	}
 
-    public Date getDataValidade() {
-        return dataValidade;
-    }
+	public Date getDataEmissao() {
+		return dataEmissao;
+	}
 
-    public void setDataValidade(Date dataValidade) {
-        this.dataValidade = dataValidade;
-    }
+	public void setDataEmissao(Date dataEmissao) {
+		this.dataEmissao = dataEmissao;
+	}
 
-    public Estado getEstado() {
-        return estado;
-    }
+	public Date getDataValidade() {
+		return dataValidade;
+	}
 
-    public void setEstado(Estado estado) {
-        this.estado = estado;
-    }
+	public void setDataValidade(Date dataValidade) {
+		this.dataValidade = dataValidade;
+	}
 
-    public TipoDocumento getTipoDocumento() {
-        return tipoDocumento;
-    }
+	public Estado getEstado() {
+		return estado;
+	}
 
-    public void setTipoDocumento(TipoDocumento tipoDocumento) {
-        this.tipoDocumento = tipoDocumento;
-    }
+	public void setEstado(Estado estado) {
+		this.estado = estado;
+	}
 
-    public String getSerie() {
-        return serie;
-    }
+	public TipoDocumento getTipoDocumento() {
+		return tipoDocumento;
+	}
 
-    public void setSerie(String serie) {
-        this.serie = serie;
-    }
+	public void setTipoDocumento(TipoDocumento tipoDocumento) {
+		this.tipoDocumento = tipoDocumento;
+	}
 
-    public Long getIdUsuario() {
-        return idUsuario;
-    }
+	public String getSerie() {
+		return serie;
+	}
 
-    public void setIdUsuario(Long idUsuario) {
-        this.idUsuario = idUsuario;
-    }
+	public void setSerie(String serie) {
+		this.serie = serie;
+	}
 
-    public Date getDataUltimaAtualizacao() {
-        return dataUltimaAtualizacao;
-    }
+	public Long getIdUsuario() {
+		return idUsuario;
+	}
 
-    public void setDataUltimaAtualizacao(Date dataUltimaAtualizacao) {
-        this.dataUltimaAtualizacao = dataUltimaAtualizacao;
-    }
+	public void setIdUsuario(Long idUsuario) {
+		this.idUsuario = idUsuario;
+	}
 
-    public Integer getIndAtivo() {
-        return indAtivo;
-    }
+	public Date getDataUltimaAtualizacao() {
+		return dataUltimaAtualizacao;
+	}
 
-    public void setIndAtivo(Integer indAtivo) {
-        this.indAtivo = indAtivo;
-    }
+	public void setDataUltimaAtualizacao(Date dataUltimaAtualizacao) {
+		this.dataUltimaAtualizacao = dataUltimaAtualizacao;
+	}
+
+	public Integer getIndAtivo() {
+		return indAtivo;
+	}
+
+	public void setIndAtivo(Integer indAtivo) {
+		this.indAtivo = indAtivo;
+	}
 }
