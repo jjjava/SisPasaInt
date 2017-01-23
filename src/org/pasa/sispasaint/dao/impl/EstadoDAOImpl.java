@@ -3,6 +3,7 @@ package org.pasa.sispasaint.dao.impl;
 import java.util.List;
 import javax.persistence.NoResultException;
 import javax.persistence.Query;
+import org.apache.log4j.Logger;
 import org.pasa.sispasa.core.model.Estado;
 import org.pasa.sispasaint.dao.DaoGenerico;
 import org.pasa.sispasaint.dao.EstadoDAO;
@@ -28,6 +29,7 @@ public class EstadoDAOImpl extends DaoGenerico<Estado> implements EstadoDAO {
         try {
             estado = q1.getResultList();
         } catch (NoResultException ex) {
+            Logger.getLogger(EstadoDAOImpl.class).error(ex);
             System.err.println("Estado :"+ex);
             return null;
         }
@@ -47,6 +49,7 @@ public class EstadoDAOImpl extends DaoGenerico<Estado> implements EstadoDAO {
 //        try {
 //            estado = q1.getResultList();
 //        } catch (NoResultException ex) {
+//               Logger.getLogger(EstadoDAOImpl.class).error(ex);
 //            System.err.println(ex);
 //            return null;
 //        }

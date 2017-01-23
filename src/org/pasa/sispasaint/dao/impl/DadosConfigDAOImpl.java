@@ -3,6 +3,7 @@ package org.pasa.sispasaint.dao.impl;
 import java.util.List;
 import javax.persistence.NoResultException;
 import javax.persistence.Query;
+import org.apache.log4j.Logger;
 import org.pasa.sispasaint.config.DadosConfig;
 import org.pasa.sispasaint.dao.DadosConfigDAO;
 import org.pasa.sispasaint.dao.DaoGenerico;
@@ -29,6 +30,7 @@ public class DadosConfigDAOImpl extends DaoGenerico<DadosConfig> implements Dado
             dados = q1.getResultList();
         } catch (NoResultException ex) {
             System.err.println("dadosconfig: " + ex);
+            Logger.getLogger(DadosBancariosDAOImpl.class).error(ex);
             return null;
         }
         if (dados.size() > 0) {

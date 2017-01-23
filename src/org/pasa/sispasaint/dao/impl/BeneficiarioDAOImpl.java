@@ -3,6 +3,7 @@ package org.pasa.sispasaint.dao.impl;
 import java.util.List;
 import javax.persistence.NoResultException;
 import javax.persistence.Query;
+import org.apache.log4j.Logger;
 import org.pasa.sispasa.core.model.Beneficiario;
 import org.pasa.sispasaint.dao.BeneficiarioDAO;
 import org.pasa.sispasaint.dao.DaoGenerico;
@@ -31,6 +32,7 @@ public class BeneficiarioDAOImpl extends DaoGenerico<Beneficiario> implements Be
             beneficiario = q1.getResultList();
         } catch (NoResultException e) {
             System.err.println("Ben:" + e);
+            Logger.getLogger(BeneficiarioDAOImpl.class).error(e);
             return null;
         }
         if (beneficiario.size() > 0) {
@@ -50,6 +52,7 @@ public class BeneficiarioDAOImpl extends DaoGenerico<Beneficiario> implements Be
             beneficiarios = q1.getResultList();
         } catch (NoResultException e) {
             System.err.println(e);
+            Logger.getLogger(BeneficiarioDAOImpl.class).error(e);
             return null;
         }
         return beneficiarios;
@@ -64,6 +67,7 @@ public class BeneficiarioDAOImpl extends DaoGenerico<Beneficiario> implements Be
             q1.setParameter("status", SisPasaIntCommon.INATIVO);
             return q1.executeUpdate();
         } catch (Exception e) {
+            Logger.getLogger(BeneficiarioDAOImpl.class).error(e);
             System.err.println(e);
         } finally {
             getEntityManager().getTransaction().commit();
@@ -80,6 +84,7 @@ public class BeneficiarioDAOImpl extends DaoGenerico<Beneficiario> implements Be
         try {
             count = (Long) q1.getSingleResult();
         } catch (NoResultException e) {
+            Logger.getLogger(BeneficiarioDAOImpl.class).error(e);
             System.err.println(e);
         }
         return count;

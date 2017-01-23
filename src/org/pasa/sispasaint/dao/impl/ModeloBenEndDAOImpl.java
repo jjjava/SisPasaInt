@@ -3,6 +3,7 @@ package org.pasa.sispasaint.dao.impl;
 import java.util.List;
 import javax.persistence.NoResultException;
 import javax.persistence.Query;
+import org.apache.log4j.Logger;
 import org.pasa.sispasaint.dao.DaoGenerico;
 import org.pasa.sispasaint.dao.ModeloBenEndDAO;
 import org.pasa.sispasaint.model.intg.ModeloBenEnd;
@@ -34,6 +35,7 @@ public class ModeloBenEndDAOImpl extends DaoGenerico<ModeloBenEnd> implements Mo
                 getEntityManager().persist(model);
                 getEntityManager().getTransaction().commit();
             } catch (Exception ex) {
+                Logger.getLogger(ModeloBenEndDAOImpl.class).error(ex);
                 System.err.println(ex);
                 getEntityManager().getTransaction().rollback();
             }
@@ -50,6 +52,7 @@ public class ModeloBenEndDAOImpl extends DaoGenerico<ModeloBenEnd> implements Mo
         try {
             modelos = q1.getResultList();
         } catch (NoResultException e) {
+            Logger.getLogger(ModeloBenEndDAOImpl.class).error(e);
             System.err.println(e);
             return null;
         }
@@ -64,6 +67,7 @@ public class ModeloBenEndDAOImpl extends DaoGenerico<ModeloBenEnd> implements Mo
         try {
             empresas = q1.getResultList();
         } catch (NoResultException e) {
+            Logger.getLogger(ModeloBenEndDAOImpl.class).error(e);
             System.err.println(e);
             return null;
         }

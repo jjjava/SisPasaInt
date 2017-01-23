@@ -3,6 +3,7 @@ package org.pasa.sispasaint.dao.impl;
 import java.util.List;
 import javax.persistence.NoResultException;
 import javax.persistence.Query;
+import org.apache.log4j.Logger;
 import org.pasa.sispasa.core.model.Plano;
 import org.pasa.sispasaint.dao.DaoGenerico;
 import org.pasa.sispasaint.dao.PlanoDAO;
@@ -31,6 +32,7 @@ public class PlanoDAOImpl extends DaoGenerico<Plano> implements PlanoDAO{
         try {
             plano = q1.getResultList();
         } catch (NoResultException ex) {
+            Logger.getLogger(PlanoDAOImpl.class).error(ex);
             System.err.println("Plano "+ex);
             return null;
         }

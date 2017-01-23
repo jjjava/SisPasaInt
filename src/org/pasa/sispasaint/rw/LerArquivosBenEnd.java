@@ -6,6 +6,7 @@ import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.IOException;
 import java.util.Map;
+import org.apache.log4j.Logger;
 import org.pasa.sispasaint.config.Configuracao;
 import org.pasa.sispasaint.dao.impl.ModeloBenEndDAOImpl;
 import org.pasa.sispasaint.map.CamposModelo;
@@ -78,6 +79,7 @@ public class LerArquivosBenEnd {
             brEnd.close();
         } catch (FileNotFoundException e) {
             System.err.println(e);
+            Logger.getLogger(LerArquivosBenEnd.class).error(e);
             log.addLinhaArqErro();
         } catch (IOException e) {
             System.err.println(e);
@@ -135,8 +137,11 @@ public class LerArquivosBenEnd {
         modelo.setNucleoDaAms(benLine.substring(campo.getInicioCampo(), campo.getFimCampo()));
         campo = (PosicaoCampo) mapaBen.get(CamposModelo.AGENCIA_BANCARIA);
         modelo.setAgenciaBancaria(benLine.substring(campo.getInicioCampo(), campo.getFimCampo()));
-        campo = (PosicaoCampo) mapaBen.get(CamposModelo.BANCO);
-        modelo.setBanco(benLine.substring(campo.getInicioCampo(), campo.getFimCampo()));
+        
+        //Normaliza codigo bancario.
+        campo = (PosicaoCampo) mapaBen.get(CamposModelo.BANCO); 
+        modelo.setBanco(normalizaBanco(benLine.substring(campo.getInicioCampo(), campo.getFimCampo())));
+      
         campo = (PosicaoCampo) mapaBen.get(CamposModelo.CONTA_CORRENTE);
         modelo.setContaCorrente(benLine.substring(campo.getInicioCampo(), campo.getFimCampo()));
         campo = (PosicaoCampo) mapaBen.get(CamposModelo.DATA_ADMISSAO);
@@ -242,6 +247,11 @@ public class LerArquivosBenEnd {
     private String normalizaLinha(String line) {
         line = " " + line;
         return line;
+    }
+    
+    private String normalizaBanco(String s){
+        s = s.replaceFirst("^0+(?!$)", "");
+        return s.toUpperCase();
     }
 
     private void zipArq(File file, String name, String pathOri, String pathDest) {

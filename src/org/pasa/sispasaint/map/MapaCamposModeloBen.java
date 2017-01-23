@@ -53,7 +53,7 @@ public class MapaCamposModeloBen {
         mapa.put(CamposModelo.EMPRESA_ORIGEM, new PosicaoCampo(246, 247));
         mapa.put(CamposModelo.MATRICULA_ORIGEM, new PosicaoCampo(248, 253));
         mapa.put(CamposModelo.EMPRESA_PEOPLE, new PosicaoCampo(254, 256));
-        mapa.put(CamposModelo.MATRICULA_PEOPLE, new PosicaoCampo(257, 263));
+        mapa.put(CamposModelo.MATRICULA_PEOPLE, new PosicaoCampo(257, 264));
         mapa.put(CamposModelo.UNIDADE_DE_CONTROLE, new PosicaoCampo(264, 266));
         mapa.put(CamposModelo.CENTRO_DE_CUSTO, new PosicaoCampo(267, 278));
         mapa.put(CamposModelo.MATRICULA_PARTICIPANTE, new PosicaoCampo(279, 284));

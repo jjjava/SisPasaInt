@@ -3,6 +3,7 @@ package org.pasa.sispasaint.dao.impl;
 import java.util.List;
 import javax.persistence.NoResultException;
 import javax.persistence.Query;
+import org.apache.log4j.Logger;
 import org.pasa.sispasa.core.model.Empresa;
 import org.pasa.sispasaint.dao.DaoGenerico;
 import org.pasa.sispasaint.dao.EmpresaDAO;
@@ -28,6 +29,7 @@ public class EmpresaDAOImpl extends DaoGenerico<Empresa> implements EmpresaDAO{
         try {
             empresa = q1.getResultList();
         } catch (NoResultException ex) {
+            Logger.getLogger(EmpresaDAOImpl.class).error(ex);
             System.err.println("Empresa "+ex);
             return null;
         }
@@ -36,5 +38,4 @@ public class EmpresaDAOImpl extends DaoGenerico<Empresa> implements EmpresaDAO{
         }
         return null;
     }
-    
 }

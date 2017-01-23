@@ -3,6 +3,7 @@ package org.pasa.sispasaint.dao.impl;
 import java.util.List;
 import javax.persistence.NoResultException;
 import javax.persistence.Query;
+import org.apache.log4j.Logger;
 import org.pasa.sispasa.core.model.GrauParentesco;
 import org.pasa.sispasaint.dao.DaoGenerico;
 import org.pasa.sispasaint.dao.GrauParentescoDAO;
@@ -29,6 +30,7 @@ public class GrauParentescoDAOImpl extends DaoGenerico<GrauParentesco> implement
         try {
             grauParentesco = q1.getResultList();
         } catch (NoResultException e) {
+            Logger.getLogger(GrauParentescoDAOImpl.class).error(e);
             System.err.println("GrauParentesco "+e);
             return null;
         }
