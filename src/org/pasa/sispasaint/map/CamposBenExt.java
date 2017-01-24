@@ -2,7 +2,8 @@ package org.pasa.sispasaint.map;
 
 /**
  *
- * @author hudson schumaker
+ * @author Hudson Schumaker
+ * @version 1.0.0
  */
 public class CamposBenExt {
     public static final String EMPRESA = "empresa";

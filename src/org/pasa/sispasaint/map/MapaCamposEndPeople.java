@@ -6,7 +6,8 @@ import org.pasa.sispasaint.rw.PosicaoCampo;
 
 /**
  *
- * @author hudson
+ * @author Hudson Schumaker
+ * @version 1.0.0
  */
 public class MapaCamposEndPeople {
     

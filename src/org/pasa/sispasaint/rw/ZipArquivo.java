@@ -9,6 +9,7 @@ import java.util.zip.ZipOutputStream;
 /**
  *
  * @author Hudson Schumaker
+ * @version 1.0.0
  */
 public class ZipArquivo {
 

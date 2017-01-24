@@ -35,6 +35,18 @@ public abstract class Utils {
     }
 
     /**
+     * Retorna uma data formatada (String) de acordo com o parâmetro desejado.
+     *
+     * @param data
+     * @param formato
+     * @return data formatada
+     */
+    public static String formatarData(Date data, String formato) {
+        SimpleDateFormat sdf = new SimpleDateFormat(formato);
+        return sdf.format(data);
+    }
+
+    /**
      * @author André Gomes
      * @param formatado
      * @return
@@ -254,5 +266,4 @@ public abstract class Utils {
     public static boolean isBlank(String valor) {
         return StringUtils.isBlank(valor);
     }
-
 }

@@ -6,7 +6,8 @@ import org.pasa.sispasaint.rw.PosicaoCampo;
 
 /**
  *
- * @author 90J00318
+ * @author Hudson Schumker
+ * @version 1.0.0
  */
 public class MapaCamposModeloBen {
 
@@ -52,7 +53,7 @@ public class MapaCamposModeloBen {
         mapa.put(CamposModelo.CPF, new PosicaoCampo(235, 246));
         mapa.put(CamposModelo.EMPRESA_ORIGEM, new PosicaoCampo(246, 247));
         mapa.put(CamposModelo.MATRICULA_ORIGEM, new PosicaoCampo(248, 253));
-        mapa.put(CamposModelo.EMPRESA_PEOPLE, new PosicaoCampo(254, 256));
+        mapa.put(CamposModelo.EMPRESA_PEOPLE, new PosicaoCampo(254, 257));
         mapa.put(CamposModelo.MATRICULA_PEOPLE, new PosicaoCampo(257, 264));
         mapa.put(CamposModelo.UNIDADE_DE_CONTROLE, new PosicaoCampo(264, 266));
         mapa.put(CamposModelo.CENTRO_DE_CUSTO, new PosicaoCampo(267, 278));

@@ -4,6 +4,7 @@ import java.util.Date;
 import java.util.List;
 
 import org.pasa.sispasa.core.enumeration.EnumMotivoDesligamento;
+import org.pasa.sispasa.core.util.Utils;
 
 /**
  * Classe responsável por representar os dados de Funcionario, espelhados na
@@ -33,7 +34,14 @@ public class FuncionarioVO extends PessoaVO {
 	private List<BeneficiarioVO> beneficiarios;
 	private EnumMotivoDesligamento enumMotivoDesligamento;
 
-	// GETTERS AND SETTERS
+	public String getTelefoneResidencialFormatado() {
+		return null == telefoneResidencial ? null
+				: Utils.formataTelefone(telefoneResidencial.getNumeroTelefoneComDDD());
+	}
+
+	public String getTelefoneCelularFormatado() {
+		return null == telefoneCelular ? null : Utils.formataTelefone(telefoneCelular.getNumeroTelefoneComDDD());
+	}
 
 	/**
 	 * @return the matriculaOrigem
@@ -128,7 +136,7 @@ public class FuncionarioVO extends PessoaVO {
 	/**
 	 * @return the empresa
 	 */
-	public EmpresaVO getEmpresa() {		
+	public EmpresaVO getEmpresa() {
 		return empresa;
 	}
 
@@ -162,7 +170,7 @@ public class FuncionarioVO extends PessoaVO {
 	 * @return the telefoneResidencial
 	 */
 	public TelefoneVO getTelefoneResidencial() {
-		if(null == telefoneResidencial) {
+		if (null == telefoneResidencial) {
 			telefoneResidencial = new TelefoneVO();
 		}
 		return telefoneResidencial;
@@ -180,7 +188,7 @@ public class FuncionarioVO extends PessoaVO {
 	 * @return the telefoneCelular
 	 */
 	public TelefoneVO getTelefoneCelular() {
-		if(null == telefoneCelular) {
+		if (null == telefoneCelular) {
 			telefoneCelular = new TelefoneVO();
 		}
 		return telefoneCelular;
@@ -198,7 +206,7 @@ public class FuncionarioVO extends PessoaVO {
 	 * @return the telefoneComercial
 	 */
 	public TelefoneVO getTelefoneComercial() {
-		if(null == telefoneComercial) {
+		if (null == telefoneComercial) {
 			telefoneComercial = new TelefoneVO();
 		}
 		return telefoneComercial;
@@ -216,7 +224,7 @@ public class FuncionarioVO extends PessoaVO {
 	 * @return the rg
 	 */
 	public DocumentoVO getRg() {
-		if(null == rg) {
+		if (null == rg) {
 			rg = new DocumentoVO();
 		}
 		return rg;
@@ -234,7 +242,7 @@ public class FuncionarioVO extends PessoaVO {
 	 * @return the ctps
 	 */
 	public DocumentoVO getCtps() {
-		if(null == ctps) {
+		if (null == ctps) {
 			ctps = new DocumentoVO();
 		}
 		return ctps;
@@ -252,7 +260,7 @@ public class FuncionarioVO extends PessoaVO {
 	 * @return the pisPasep
 	 */
 	public DocumentoVO getPisPasep() {
-		if(null == pisPasep) {
+		if (null == pisPasep) {
 			pisPasep = new DocumentoVO();
 		}
 		return pisPasep;

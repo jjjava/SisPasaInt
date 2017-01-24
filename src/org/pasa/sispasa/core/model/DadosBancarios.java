@@ -80,9 +80,9 @@ public class DadosBancarios extends BaseEntity implements Serializable {
 
     public static DadosBancarios getEntity(DadosBancarios dadosBancarios, DadosBancariosVO vo) {
         dadosBancarios.setId(vo.getId());
-        dadosBancarios.setIdUsuario(vo.getIdUsuario());
+        dadosBancarios.setIdUsuario(1L);
         dadosBancarios.setIndAtivo(vo.getEnumIndAtivo().getIndice());
-        dadosBancarios.setDataUltimaAtualizacao(vo.getDataUltimaAtualizacao());
+        dadosBancarios.setDataUltimaAtualizacao(new Date());
         dadosBancarios.setCodBanco(vo.getEnumBanco().getIndice());
         dadosBancarios.setTipoConta(vo.getEnumTipoConta().getIndice());
         dadosBancarios.setAgencia(vo.getAgencia());

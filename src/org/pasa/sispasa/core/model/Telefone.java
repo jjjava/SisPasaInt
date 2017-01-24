@@ -22,7 +22,7 @@ import org.pasa.sispasa.core.vo.TelefoneVO;
 
 /**
  *
- * @author Hudson Schumaker 
+ * @author Hudson Schumaker
  * @author Andre Gomes
  * @version 1.0.0
  */
@@ -57,6 +57,13 @@ public class Telefone extends BaseEntity implements Serializable {
     @Column(name = "DT_ULT_ATULZ", nullable = false)
     @Temporal(TemporalType.TIMESTAMP)
     private Date dataUltimaAtualizacao;
+
+    public Telefone() {
+    }
+
+    public Telefone(Long id) {
+        this.id = id;
+    }
 
     @OneToOne
     @NotAudited

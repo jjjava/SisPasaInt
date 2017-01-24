@@ -6,6 +6,7 @@ import org.pasa.sispasa.core.enumeration.EnumEstadoCivil;
 import org.pasa.sispasa.core.enumeration.EnumNivelEscolaridade;
 import org.pasa.sispasa.core.enumeration.EnumOrigemInformacoes;
 import org.pasa.sispasa.core.enumeration.EnumSexo;
+import org.pasa.sispasa.core.util.Utils;
 
 /**
  * @author andre
@@ -32,7 +33,9 @@ public class PessoaVO extends AtributosComunsVO {
 	private EnumOrigemInformacoes enumOrigemInformacoes;
 	private EnumEstadoCivil enumEstadoCivil;
 
-	// GETTERS E SETTERS
+	public String getDataNascimentoFormatada() {
+		return Utils.formatarData(dataNascimento, "dd/MM/yyyy");
+	}
 
 	/**
 	 * @return the dataUltimaAtualizacao

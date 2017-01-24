@@ -78,6 +78,7 @@ public class ConfiguracaoPagamento extends BaseEntity {
         return null == tipoPagamento ? null : EnumTipoPagamento.getTipoPagamentoByIndice(tipoPagamento.getId());
     }
 
+    @Override
     public Long getId() {
         return id;
     }

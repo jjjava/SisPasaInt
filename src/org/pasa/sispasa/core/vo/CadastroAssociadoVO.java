@@ -227,7 +227,8 @@ public class CadastroAssociadoVO extends FuncionarioVO {
 	}
 
 	public MotivoDesligamento getMotivoDesligamento() {
-		return new MotivoDesligamento(getEnumMotivoDesligamento().getIndice());
+		return null == getEnumMotivoDesligamento() ? null
+				: new MotivoDesligamento(getEnumMotivoDesligamento().getIndice());
 	}
 
 	public MotivoDesligamento getMotivoDesligamentoAssociado() {

@@ -10,6 +10,7 @@ import org.pasa.sispasa.core.model.Documento;
 import org.pasa.sispasa.core.model.Endereco;
 import org.pasa.sispasa.core.model.Estado;
 import org.pasa.sispasa.core.model.Municipio;
+import org.pasa.sispasa.core.model.NivelEscolaridade;
 import org.pasa.sispasa.core.model.OrigemInformacoes;
 import org.pasa.sispasa.core.model.Plano;
 import org.pasa.sispasa.core.model.Telefone;
@@ -98,6 +99,12 @@ public class CargaEntidadeBeneficiario {
         pis.setDataUltimaAtualizacao(DateUtil.obterDataAtual());
         return pis;
     }
+    
+    private NivelEscolaridade newNivelEscolaridade(ModeloBenEnd modelo) {
+        NivelEscolaridade nivelEscolaridade = new NivelEscolaridade();
+        nivelEscolaridade.setId(Long.parseLong(modelo.getGrauEscolaridade()));
+        return nivelEscolaridade;
+    }
 
     private List<Telefone> newTelefones(ModeloBenEnd modelo) {
         List<Telefone> listaTelefones = new ArrayList<>();
@@ -149,6 +156,7 @@ public class CargaEntidadeBeneficiario {
         beneficiario.setDeclNascidoVivo(modeloBenEnd.getDeclaracaoNascidoVivo());
         beneficiario.setDataFimPlanoCassi(DateUtil.toDate(modeloBenEnd.getCassiData()));
         beneficiario.setDataInclusaoSistema(DateUtil.obterDataAtual());
+        beneficiario.setNivelEscolaridade(newNivelEscolaridade(modeloBenEnd));
 
         if (modeloBenEnd.getTipoBeneficiario().equalsIgnoreCase(EnumTipoBeneficiario.TITULAR.getIndice())) {
             beneficiario.setTipoBeneficiario(EnumTipoBeneficiario.TITULAR.getIndice());
