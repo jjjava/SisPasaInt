@@ -21,7 +21,7 @@ public class TipoVinculoEmpregaticioDAOImpl extends DaoGenerico<TipoVinculoEmpre
 
     @Override
     public TipoVinculoEmpregaticio obter(String cdExterno) {
-         Query q1 = getEntityManager().
+        Query q1 = getEntityManager().
         createQuery("select t from TipoVinculoEmpregaticio t where t.codExterno  = :cd");
         q1.setParameter("cd", cdExterno);
         q1.setMaxResults(1);

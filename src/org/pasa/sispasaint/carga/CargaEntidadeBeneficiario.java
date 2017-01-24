@@ -102,7 +102,8 @@ public class CargaEntidadeBeneficiario {
     
     private NivelEscolaridade newNivelEscolaridade(ModeloBenEnd modelo) {
         NivelEscolaridade nivelEscolaridade = new NivelEscolaridade();
-        nivelEscolaridade.setId(Long.parseLong(modelo.getGrauEscolaridade()));
+        nivelEscolaridade.setId(Long.parseLong(modelo.getGrauEscolaridade()+1));//melhorar
+        nivelEscolaridade.setCodExterno(modelo.getGrauEscolaridade());
         return nivelEscolaridade;
     }
 

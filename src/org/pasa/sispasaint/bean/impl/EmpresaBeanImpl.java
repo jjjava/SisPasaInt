@@ -12,7 +12,7 @@ import org.pasa.sispasaint.dao.impl.EmpresaDAOImpl;
  */
 public class EmpresaBeanImpl implements EmpresaBean {
 
-    private EmpresaDAOImpl empresaDAO;
+    private final EmpresaDAOImpl empresaDAO;
 
     public EmpresaBeanImpl() {
         this.empresaDAO = new EmpresaDAOImpl();

@@ -40,7 +40,7 @@ public class CargaEntidadeFuncionario {
     private final EmpresaBeanImpl empresaBean;
     private final ModeloBenEndBeanImpl modeloBenEndBean;
     private final FuncionarioDAOImpl funcionarioDAO;
-    
+
     public CargaEntidadeFuncionario() {
         this.funcionarioDAO = new FuncionarioDAOImpl();
         this.cargaEntidadeBeneficiario = new CargaEntidadeBeneficiario();
@@ -176,7 +176,8 @@ public class CargaEntidadeFuncionario {
 
     private NivelEscolaridade newNivelEscolaridade(ModeloBenEnd modelo) {
         NivelEscolaridade nivelEscolaridade = new NivelEscolaridade();
-        nivelEscolaridade.setId(Long.parseLong(modelo.getGrauEscolaridade()));
+        nivelEscolaridade.setId(Long.parseLong(modelo.getGrauEscolaridade()+1));//melhorar
+        nivelEscolaridade.setCodExterno(modelo.getGrauEscolaridade());
         return nivelEscolaridade;
     }
 

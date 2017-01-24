@@ -34,7 +34,8 @@ public class StringUtil {
         }
     }
 
-    public static EnumNivelEscolaridade parseEscolocaridade(String s) {
+    public static EnumNivelEscolaridade parseEscolocaridad(String s) {
+        
         if (s.equalsIgnoreCase("3")) {
             return EnumNivelEscolaridade.SUPERIOR;
         } else if (s.equalsIgnoreCase("2")) {

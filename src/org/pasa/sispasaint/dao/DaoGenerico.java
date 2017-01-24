@@ -8,6 +8,7 @@ import javax.persistence.PersistenceContext;
 import javax.persistence.criteria.CriteriaBuilder;
 import javax.persistence.criteria.CriteriaDelete;
 import javax.persistence.criteria.CriteriaQuery;
+import org.apache.log4j.Logger;
 
 /**
  *
@@ -39,15 +40,21 @@ public abstract class DaoGenerico<T> {
             return true;
         } catch (Exception e) {
             System.err.println(e);
-           // em.getTransaction().rollback();
+            Logger.getLogger(DaoGenerico.class).error(e);
+            // em.getTransaction().rollback();
             return false;
         }
     }
 
     public void atualizar(T entity) {
-        em.getTransaction().begin();
-        em.merge(entity);
-        em.getTransaction().commit();
+        try {
+            em.getTransaction().begin();
+            em.merge(entity);
+            em.getTransaction().commit();
+        } catch (Exception e) {
+            System.err.println(e);
+            Logger.getLogger(DaoGenerico.class).error(e);
+        }
     }
 
     public void apagar(T entity) {

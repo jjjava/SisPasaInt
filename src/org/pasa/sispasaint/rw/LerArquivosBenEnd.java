@@ -228,6 +228,8 @@ public class LerArquivosBenEnd {
 
         //NOME ARQUIVO
         modelo.setNomeArquivo(benNomeArq + " | " + endNomeArq);
+        
+        System.out.println(modelo.toString());
         return modelo;
     }
 

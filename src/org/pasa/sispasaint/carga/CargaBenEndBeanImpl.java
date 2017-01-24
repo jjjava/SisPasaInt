@@ -1,5 +1,6 @@
 package org.pasa.sispasaint.carga;
 
+import org.apache.log4j.Logger;
 import org.pasa.sispasa.core.model.Funcionario;
 import org.pasa.sispasaint.bean.impl.BeneficiarioBeanImpl;
 import org.pasa.sispasaint.bean.impl.FuncionarioBeanImpl;
@@ -72,6 +73,7 @@ public class CargaBenEndBeanImpl implements CargaBenEndBean, Runnable {
             }
         } catch (Exception e) {
             System.err.println(e);
+            Logger.getLogger(CargaBenEndBeanImpl.class).error(e);
         }
     }
 

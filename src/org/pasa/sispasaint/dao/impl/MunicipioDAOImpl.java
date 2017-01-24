@@ -11,6 +11,7 @@ import org.pasa.sispasaint.dao.MunicipioDAO;
 /**
  *
  * @author Hudson Schumaker
+ * @version 1.0.0
  */
 public class MunicipioDAOImpl extends DaoGenerico<Municipio> implements MunicipioDAO {
 
