@@ -53,9 +53,9 @@ public class LerArquivosBenEnd {
     }
 
     public void ler(File ben, File end) {
-       log.setNomeArquivoBen(benNomeArq);
-       log.setNomeArquivoEnd(endNomeArq);
-       ModeloBenEndDAOImpl modeleDAO = new ModeloBenEndDAOImpl();
+        log.setNomeArquivoBen(benNomeArq);
+        log.setNomeArquivoEnd(endNomeArq);
+        ModeloBenEndDAOImpl modeleDAO = new ModeloBenEndDAOImpl();
         try {
             BufferedReader brBen = new BufferedReader(new FileReader(ben));
             BufferedReader brEnd = new BufferedReader(new FileReader(end));
@@ -100,7 +100,7 @@ public class LerArquivosBenEnd {
         endLine = StringUtil.removeCharsEspeciais(endLine);
 
         ModeloBenEnd modelo = new ModeloBenEnd();
-        
+
         //BENEFICIARIO - FUNCIONARIO
         campo = (PosicaoCampo) mapaBen.get(CamposModelo.EMPRESA);
         modelo.setEmpresa(benLine.substring(campo.getInicioCampo(), campo.getFimCampo()));
@@ -138,11 +138,11 @@ public class LerArquivosBenEnd {
         modelo.setNucleoDaAms(benLine.substring(campo.getInicioCampo(), campo.getFimCampo()));
         campo = (PosicaoCampo) mapaBen.get(CamposModelo.AGENCIA_BANCARIA);
         modelo.setAgenciaBancaria(benLine.substring(campo.getInicioCampo(), campo.getFimCampo()));
-        
+
         //Normaliza codigo bancario.
-        campo = (PosicaoCampo) mapaBen.get(CamposModelo.BANCO); 
+        campo = (PosicaoCampo) mapaBen.get(CamposModelo.BANCO);
         modelo.setBanco(normalizaBanco(benLine.substring(campo.getInicioCampo(), campo.getFimCampo())));
-      
+
         campo = (PosicaoCampo) mapaBen.get(CamposModelo.CONTA_CORRENTE);
         modelo.setContaCorrente(benLine.substring(campo.getInicioCampo(), campo.getFimCampo()));
         campo = (PosicaoCampo) mapaBen.get(CamposModelo.DATA_ADMISSAO);
@@ -249,11 +249,16 @@ public class LerArquivosBenEnd {
         line = " " + line;
         return line;
     }
-    
-    private String normalizaBanco(String s){
+
+    private String normalizaBanco(String s) {
         s = s.replaceFirst("^0+(?!$)", "");
         s = s.trim();//A pediddo do Allan
-        return s.toUpperCase();
+        s = s.toUpperCase();
+        if (EnumBanco.existe(s)) {
+            return s;
+        } else {
+            return "";
+        }
     }
 
     private void zipArq(File file, String name, String pathOri, String pathDest) {
@@ -262,7 +267,7 @@ public class LerArquivosBenEnd {
             public void run() {
                 ZipArquivo zipArquivo = new ZipArquivo();
                 zipArquivo.zip(name, pathOri, pathDest);
-              //  file.delete();
+                //  file.delete();
             }
         }).start();
     }
