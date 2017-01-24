@@ -7,6 +7,7 @@ import java.io.FileReader;
 import java.io.IOException;
 import java.util.Map;
 import org.apache.log4j.Logger;
+import org.pasa.sispasa.core.enumeration.EnumBanco;
 import org.pasa.sispasaint.config.Configuracao;
 import org.pasa.sispasaint.dao.impl.ModeloBenEndDAOImpl;
 import org.pasa.sispasaint.map.CamposModelo;
@@ -251,6 +252,7 @@ public class LerArquivosBenEnd {
     
     private String normalizaBanco(String s){
         s = s.replaceFirst("^0+(?!$)", "");
+        s = s.trim();//A pediddo do Allan
         return s.toUpperCase();
     }
 
