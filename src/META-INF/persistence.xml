@@ -50,26 +50,24 @@
     <class>org.pasa.sispasaint.model.intg.Log</class>
     <class>org.pasa.sispasaint.model.intg.LogMatriculas</class>
     <class>org.pasa.sispasaint.model.intg.ModeloBenEnd</class>
-    <class>org.pasa.sispasaint.model.intg.ModeloBenVLI</class>
-    <class>org.pasa.sispasaint.model.intg.ModeloEndVLI</class>
     <class>org.pasa.sispasaint.model.intg.TipoAgenda</class>
+    <class>org.pasa.sispasaint.model.intg.ModeloBenPeople</class>
+    <class>org.pasa.sispasaint.model.intg.ModeloEndPeople</class>
     <properties>
-    <!--  <property name="javax.persistence.jdbc.url" value="jdbc:jtds:sqlserver://192.168.232.25:1433;DatabaseName=sispasa-dev"/> -->
-    <!--  <property name="javax.persistence.jdbc.user" value="usrsispasadev"/> -->
-    <!--  <property name="javax.persistence.jdbc.password" value="sispasadev"/> -->
-      <property name="javax.persistence.jdbc.url" value="jdbc:jtds:sqlserver://127.0.0.1:1433;instance=PASA;DatabaseName=sispasa"/> 
-      <property name="javax.persistence.jdbc.user" value="pasa"/> 
-      <property name="javax.persistence.jdbc.password" value="pasa"/> 
-      <property name="javax.persistence.schema-generation.database.action" value="drop-and-create"/>
-      <!-- <property name="javax.persistence.schema-generation.scripts.action" value="drop"/> -->
-      <!-- <property name="javax.persistence.schema-generation.scripts.create-target" value="file:C:/Temp/create.sql"/> -->
-      <!-- <property name="javax.persistence.schema-generation.scripts.drop-target" value="file:C:/Temp/drop.sql"/> -->
-      
+      <!--  <property name="javax.persistence.jdbc.url" value="jdbc:jtds:sqlserver://192.168.232.25:1433;DatabaseName=sispasa-dev"/> -->
+      <!--  <property name="javax.persistence.jdbc.user" value="usrsispasadev"/> -->
+      <!--  <property name="javax.persistence.jdbc.password" value="sispasadev"/> -->
       <property name="eclipselink.target-database" value="SQLServer"/>
-     
       <property name="javax.persistence.jdbc.driver" value="net.sourceforge.jtds.jdbc.Driver"/>
+      <property name="javax.persistence.jdbc.url" value="jdbc:jtds:sqlserver://127.0.0.1:1433;instance=PASA;DatabaseName=sispasa"/>
+      <property name="javax.persistence.jdbc.user" value="pasa"/>
+      <property name="javax.persistence.jdbc.password" value="pasa"/>
       <property name="hibernate.show_sql" value="true"/>
       <property name="hibernate.format_sql" value="true"/>
+      <property name="javax.persistence.schema-generation.database.action" value="drop-and-create"/>
+      <!-- <property name="javax.persistence.schema-generation.scripts.action" value="drop"/> -->
+      <property name="javax.persistence.schema-generation.scripts.create-target" value="file:C:/Temp/create.sql"/>
+      <!-- <property name="javax.persistence.schema-generation.scripts.drop-target" value="file:C:/Temp/drop.sql"/> -->
     </properties>
   </persistence-unit>
 </persistence>

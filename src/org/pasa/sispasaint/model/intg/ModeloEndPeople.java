@@ -13,7 +13,7 @@ import javax.persistence.Table;
  */
 @Entity
 @Table(name = "TEMP_END_VLI")
-public class ModeloEndVLI implements Serializable {
+public class ModeloEndPeople implements Serializable {
     
     private static final long serialVersionUID = 1L;
 
@@ -33,7 +33,7 @@ public class ModeloEndVLI implements Serializable {
     private String cep;
     private String nomeArquivo;
 
-    public ModeloEndVLI() {
+    public ModeloEndPeople() {
     }
 
     public Long getId() {

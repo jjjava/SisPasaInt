@@ -3,8 +3,8 @@ package org.pasa.sispasaint.bean.impl;
 import java.util.List;
 import org.pasa.sispasaint.bean.ImpBenVLITempBean;
 import org.pasa.sispasaint.dao.impl.ImpBenVLITempDAOImpl;
-import org.pasa.sispasaint.model.intg.ModeloBenVLI;
-import org.pasa.sispasaint.rw.LerArquivoBenVLI;
+import org.pasa.sispasaint.model.intg.ModeloBenPeople;
+import org.pasa.sispasaint.rw.LerArquivoBenPeople;
 
 /**
  *
@@ -16,14 +16,14 @@ public class ImpBenVLITempBeanImpl implements ImpBenVLITempBean {
     }
 
     @Override
-    public ModeloBenVLI obter(Long id) {
-        ModeloBenVLI modeloBenVLI = new ModeloBenVLI();
+    public ModeloBenPeople obter(Long id) {
+        ModeloBenPeople modeloBenVLI = new ModeloBenPeople();
         modeloBenVLI.setId(id);
         return obter(modeloBenVLI);
     }
 
     @Override
-    public ModeloBenVLI obter(ModeloBenVLI modeloBenVLI) {
+    public ModeloBenPeople obter(ModeloBenPeople modeloBenVLI) {
         return new ImpBenVLITempDAOImpl().obter(modeloBenVLI.getId());
     }
 
@@ -39,11 +39,11 @@ public class ImpBenVLITempBeanImpl implements ImpBenVLITempBean {
 
     @Override
     public void carregarArquivo(Long id) {
-        salvarTbTemp(new LerArquivoBenVLI().lerArquivo(id));
+        salvarTbTemp(new LerArquivoBenPeople().lerArquivo(id));
     }
 
     @Override
-    public void salvarTbTemp(List<ModeloBenVLI> listaModeloBenVLI) {
+    public void salvarTbTemp(List<ModeloBenPeople> listaModeloBenVLI) {
         new ImpBenVLITempDAOImpl().salvarTbTemp(listaModeloBenVLI);
     }
 
@@ -53,7 +53,7 @@ public class ImpBenVLITempBeanImpl implements ImpBenVLITempBean {
     }
 
     @Override
-    public List<ModeloBenVLI> listar(String empresa, String matricula) {
+    public List<ModeloBenPeople> listar(String empresa, String matricula) {
       return new ImpBenVLITempDAOImpl().listar(empresa, matricula);
     }
 }

@@ -14,7 +14,7 @@ import javax.persistence.Table;
  */
 @Entity
 @Table(name = "TEMP_BEN_VLI")
-public class ModeloBenVLI implements Serializable {
+public class ModeloBenPeople implements Serializable {
     
     private static final long serialVersionUID = 1L;
 
@@ -74,7 +74,7 @@ public class ModeloBenVLI implements Serializable {
     private String codigoFilialVLI;
     private String nomeArquivo;
 
-    public ModeloBenVLI() {
+    public ModeloBenPeople() {
     }
 
     public Long getId() {

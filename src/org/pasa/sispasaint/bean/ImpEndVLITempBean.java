@@ -1,8 +1,8 @@
 package org.pasa.sispasaint.bean;
 
 import java.util.List;
-import org.pasa.sispasaint.model.intg.ModeloBenVLI;
-import org.pasa.sispasaint.model.intg.ModeloEndVLI;
+import org.pasa.sispasaint.model.intg.ModeloBenPeople;
+import org.pasa.sispasaint.model.intg.ModeloEndPeople;
 
 /**
  *
@@ -10,12 +10,12 @@ import org.pasa.sispasaint.model.intg.ModeloEndVLI;
  */
 public interface ImpEndVLITempBean {
 
-    ModeloEndVLI obter(ModeloEndVLI modeloEndVli);
-    ModeloEndVLI obterPorMatricula(ModeloBenVLI modeloBenVli);
+    ModeloEndPeople obter(ModeloEndPeople modeloEndVli);
+    ModeloEndPeople obterPorMatricula(ModeloBenPeople modeloBenVli);
     void limparTbTemp();
     void resetarIdentity();
     void carregarArquivo(Long id);
-    void salvarTbTemp(List<ModeloEndVLI> listaModeloEndVLI);
-    List<ModeloEndVLI> list(String empresa, String matricula);
+    void salvarTbTemp(List<ModeloEndPeople> listaModeloEndVLI);
+    List<ModeloEndPeople> list(String empresa, String matricula);
     Long contar();
 }

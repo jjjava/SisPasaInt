@@ -3,9 +3,9 @@ package org.pasa.sispasaint.bean.impl;
 import java.util.List;
 import org.pasa.sispasaint.bean.ImpEndVLITempBean;
 import org.pasa.sispasaint.dao.impl.ImpEndVLITempDAOImpl;
-import org.pasa.sispasaint.model.intg.ModeloBenVLI;
-import org.pasa.sispasaint.model.intg.ModeloEndVLI;
-import org.pasa.sispasaint.rw.LerArquivoEndVLI;
+import org.pasa.sispasaint.model.intg.ModeloBenPeople;
+import org.pasa.sispasaint.model.intg.ModeloEndPeople;
+import org.pasa.sispasaint.rw.LerArquivoEndPeople;
 
 /**
  *
@@ -17,12 +17,12 @@ public class ImpEndVLITempBeanImpl implements ImpEndVLITempBean {
     }
 
     @Override
-    public ModeloEndVLI obter(ModeloEndVLI modeloEndVli) {
+    public ModeloEndPeople obter(ModeloEndPeople modeloEndVli) {
         return new ImpEndVLITempDAOImpl().obter(modeloEndVli.getId());
     }
 
     @Override
-    public ModeloEndVLI obterPorMatricula(ModeloBenVLI modeloBenVli) {
+    public ModeloEndPeople obterPorMatricula(ModeloBenPeople modeloBenVli) {
         return new ImpEndVLITempDAOImpl().obterPorMatricula(modeloBenVli.getEmpresa(), modeloBenVli.getMatricula(), modeloBenVli.getCodBeneficiario());
     }
 
@@ -38,11 +38,11 @@ public class ImpEndVLITempBeanImpl implements ImpEndVLITempBean {
 
     @Override
     public void carregarArquivo(Long id) {
-        salvarTbTemp(new LerArquivoEndVLI().lerArquivo(id));
+        salvarTbTemp(new LerArquivoEndPeople().lerArquivo(id));
     }
 
     @Override
-    public void salvarTbTemp(List<ModeloEndVLI> listaModeloEndVLI) {
+    public void salvarTbTemp(List<ModeloEndPeople> listaModeloEndVLI) {
         new ImpEndVLITempDAOImpl().salvarTbTemp(listaModeloEndVLI);
     }
 
@@ -52,7 +52,7 @@ public class ImpEndVLITempBeanImpl implements ImpEndVLITempBean {
     }
 
     @Override
-    public List<ModeloEndVLI> list(String empresa, String matricula) {
+    public List<ModeloEndPeople> list(String empresa, String matricula) {
         return new ImpEndVLITempDAOImpl().list(empresa, matricula);
     }
 }

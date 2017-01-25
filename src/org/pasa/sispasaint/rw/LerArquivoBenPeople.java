@@ -11,29 +11,29 @@ import java.util.Map;
 import org.pasa.sispasaint.config.Configuracao;
 import org.pasa.sispasaint.map.CamposBenVLI;
 import org.pasa.sispasaint.map.MapaCamposBenVLI;
-import org.pasa.sispasaint.model.intg.ModeloBenVLI;
+import org.pasa.sispasaint.model.intg.ModeloBenPeople;
 import org.pasa.sispasaint.util.StringUtil;
 
 /**
  *
  * @author Hudson Schumaker
  */
-public class LerArquivoBenVLI {
+public class LerArquivoBenPeople {
 
     private Long id;
 
-    public List<ModeloBenVLI> lerArquivo(Long id) {
+    public List<ModeloBenPeople> lerArquivo(Long id) {
         this.id = id;
         return lerArquivo(Configuracao.getInstance().getBenNomeArqComPath(id),
                 Configuracao.getInstance().getNomeArqBen(id));
     }
 
-    public List<ModeloBenVLI> lerArquivo(String path, String nomeArq) {
+    public List<ModeloBenPeople> lerArquivo(String path, String nomeArq) {
         return lerArquivo(new File(path), nomeArq);
     }
 
-    public List<ModeloBenVLI> lerArquivo(File file, String nomeArq) {
-        List<ModeloBenVLI> listaBenVLI = new ArrayList<>();
+    public List<ModeloBenPeople> lerArquivo(File file, String nomeArq) {
+        List<ModeloBenPeople> listaBenVLI = new ArrayList<>();
         BufferedReader br = null;
         try {
             br = new BufferedReader(new FileReader(file));
@@ -68,10 +68,10 @@ public class LerArquivoBenVLI {
         return listaBenVLI;
     }
 
-    private ModeloBenVLI parseCampos(String line, String nomeArq) {
+    private ModeloBenPeople parseCampos(String line, String nomeArq) {
         line = StringUtil.removeCharsEspeciais(line);
 
-        ModeloBenVLI modelo = new ModeloBenVLI();
+        ModeloBenPeople modelo = new ModeloBenPeople();
         Map<String, PosicaoCampo> mapa = new MapaCamposBenVLI().getMapa();
         PosicaoCampo campo;
 

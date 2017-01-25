@@ -11,32 +11,32 @@ import java.util.Map;
 import org.pasa.sispasaint.config.Configuracao;
 import org.pasa.sispasaint.map.CamposEndVLI;
 import org.pasa.sispasaint.map.MapaCamposEndVLI;
-import org.pasa.sispasaint.model.intg.ModeloEndVLI;
+import org.pasa.sispasaint.model.intg.ModeloEndPeople;
 import org.pasa.sispasaint.util.StringUtil;
 
 /**
  *
  * @author Hudson Schumaker
  */
-public class LerArquivoEndVLI {
+public class LerArquivoEndPeople {
 
     private Long id;
 
-    public LerArquivoEndVLI() {
+    public LerArquivoEndPeople() {
     }
 
-    public List<ModeloEndVLI> lerArquivo(Long id) {
+    public List<ModeloEndPeople> lerArquivo(Long id) {
         this.id = id;
         return lerArquivo(Configuracao.getInstance().getEndNomeArqComPath(id),
                 Configuracao.getInstance().getNomeArqEnd(id));
     }
 
-    public List<ModeloEndVLI> lerArquivo(String path, String nomeArq) {
+    public List<ModeloEndPeople> lerArquivo(String path, String nomeArq) {
         return lerArquivo(new File(path), nomeArq);
     }
 
-    public List<ModeloEndVLI> lerArquivo(File file, String nomeArq) {
-        List<ModeloEndVLI> listaEndVLI = new ArrayList<>();
+    public List<ModeloEndPeople> lerArquivo(File file, String nomeArq) {
+        List<ModeloEndPeople> listaEndVLI = new ArrayList<>();
         BufferedReader br = null;
         try {
             br = new BufferedReader(new FileReader(file));
@@ -71,9 +71,9 @@ public class LerArquivoEndVLI {
         return listaEndVLI;
     }
 
-    private ModeloEndVLI parseCampos(String line, String nomeArq) {
+    private ModeloEndPeople parseCampos(String line, String nomeArq) {
         line = StringUtil.removeCharsEspeciais(line);
-        ModeloEndVLI modelo = new ModeloEndVLI();
+        ModeloEndPeople modelo = new ModeloEndPeople();
         Map<String, PosicaoCampo> mapa = new MapaCamposEndVLI().getMapa();
         PosicaoCampo campo;
         try {

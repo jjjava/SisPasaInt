@@ -5,28 +5,28 @@ import javax.persistence.NoResultException;
 import javax.persistence.Query;
 import org.pasa.sispasaint.dao.DaoGenerico;
 import org.pasa.sispasaint.dao.ImpEndVLITempDAO;
-import org.pasa.sispasaint.model.intg.ModeloEndVLI;
+import org.pasa.sispasaint.model.intg.ModeloEndPeople;
 
 /**
  *
  * @author Hudson Schumaker
  */
-public class ImpEndVLITempDAOImpl extends DaoGenerico<ModeloEndVLI> implements ImpEndVLITempDAO {
+public class ImpEndVLITempDAOImpl extends DaoGenerico<ModeloEndPeople> implements ImpEndVLITempDAO {
 
     public ImpEndVLITempDAOImpl() {
-        super(ModeloEndVLI.class);
+        super(ModeloEndPeople.class);
     }
 
     @Override
-    public ModeloEndVLI obterPorMatricula(String empresa, String matricula, String codBeneficiario) {
-        ModeloEndVLI m = new ModeloEndVLI();
+    public ModeloEndPeople obterPorMatricula(String empresa, String matricula, String codBeneficiario) {
+        ModeloEndPeople m = new ModeloEndPeople();
         try {
             Query q1 = getEntityManager().
             createQuery("select e from ModeloEndVLI e WHERE e.empresa = :empresa AND e.matricula = :matricula AND e.codBeneficiario =:cod");
             q1.setParameter("empresa", empresa);
             q1.setParameter("matricula", matricula);
             q1.setParameter("cod", codBeneficiario);
-            m = (ModeloEndVLI) q1.getSingleResult();
+            m = (ModeloEndPeople) q1.getSingleResult();
         } catch (NoResultException e) {
             System.err.println(e);
             return m;
@@ -43,8 +43,8 @@ public class ImpEndVLITempDAOImpl extends DaoGenerico<ModeloEndVLI> implements I
     }
 
     @Override
-    public void salvarTbTemp(List<ModeloEndVLI> listaModeloEndVLI) {
-        for (ModeloEndVLI model : listaModeloEndVLI) {
+    public void salvarTbTemp(List<ModeloEndPeople> listaModeloEndVLI) {
+        for (ModeloEndPeople model : listaModeloEndVLI) {
             try {
                 getEntityManager().getTransaction().begin();
                 getEntityManager().persist(model);
@@ -57,12 +57,12 @@ public class ImpEndVLITempDAOImpl extends DaoGenerico<ModeloEndVLI> implements I
     }
 
     @Override
-    public List<ModeloEndVLI> list(String empresa, String matricula) {
+    public List<ModeloEndPeople> list(String empresa, String matricula) {
         Query q1 = getEntityManager().
         createQuery("select m from ModeloEndVLI m where m.matricula and = :mat and m.empresa = :emp and m.codBeneficiario <> '00'");
         q1.setParameter("emp", empresa); 
         q1.setParameter("mat", matricula); 
-        List<ModeloEndVLI> ModeloEndVLIs = null;
+        List<ModeloEndPeople> ModeloEndVLIs = null;
         try {
             ModeloEndVLIs = q1.getResultList();
         } catch (NoResultException e) {

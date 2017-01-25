@@ -5,16 +5,16 @@ import javax.persistence.NoResultException;
 import javax.persistence.Query;
 import org.pasa.sispasaint.dao.DaoGenerico;
 import org.pasa.sispasaint.dao.ImpBenVLITempDAO;
-import org.pasa.sispasaint.model.intg.ModeloBenVLI;
+import org.pasa.sispasaint.model.intg.ModeloBenPeople;
 
 /**
  *
  * @author Hudson Schumaker
  */
-public class ImpBenVLITempDAOImpl extends DaoGenerico<ModeloBenVLI> implements ImpBenVLITempDAO {
+public class ImpBenVLITempDAOImpl extends DaoGenerico<ModeloBenPeople> implements ImpBenVLITempDAO {
 
     public ImpBenVLITempDAOImpl() {
-        super(ModeloBenVLI.class);
+        super(ModeloBenPeople.class);
     }
 
     @Override
@@ -26,8 +26,8 @@ public class ImpBenVLITempDAOImpl extends DaoGenerico<ModeloBenVLI> implements I
     }
 
     @Override
-    public void salvarTbTemp(List<ModeloBenVLI> listaModeloBenVLI) {
-        for (ModeloBenVLI model : listaModeloBenVLI) {
+    public void salvarTbTemp(List<ModeloBenPeople> listaModeloBenVLI) {
+        for (ModeloBenPeople model : listaModeloBenVLI) {
             try {
                 getEntityManager().getTransaction().begin();
                 getEntityManager().persist(model);
@@ -40,12 +40,12 @@ public class ImpBenVLITempDAOImpl extends DaoGenerico<ModeloBenVLI> implements I
     }
 
     @Override
-    public List<ModeloBenVLI> listar(String empresa, String matricula) {
+    public List<ModeloBenPeople> listar(String empresa, String matricula) {
         Query q1 = getEntityManager().
         createQuery("select m from ModeloBenVLI m where m.matricula = :mat and m.empresa = :emp and m.tipoBeneficiario <> 'T'");
         q1.setParameter("emp", empresa); 
         q1.setParameter("mat", matricula); 
-        List<ModeloBenVLI> ModeloBenVLIs = null;
+        List<ModeloBenPeople> ModeloBenVLIs = null;
         try {
             ModeloBenVLIs = q1.getResultList();
         } catch (NoResultException e) {

@@ -1,19 +1,19 @@
 package org.pasa.sispasaint.bean;
 
 import java.util.List;
-import org.pasa.sispasaint.model.intg.ModeloBenVLI;
+import org.pasa.sispasaint.model.intg.ModeloBenPeople;
 
 /**
  *
  * @author Hudson Schumaker
  */
 public interface ImpBenVLITempBean {
-    ModeloBenVLI obter(Long id);
-    ModeloBenVLI obter(ModeloBenVLI modeloBenVli);
+    ModeloBenPeople obter(Long id);
+    ModeloBenPeople obter(ModeloBenPeople modeloBenVli);
     void limparTbTemp();
     void resetarIdentity();
     void carregarArquivo(Long id);
-    void salvarTbTemp(List<ModeloBenVLI> listaModeloBenVLI);
+    void salvarTbTemp(List<ModeloBenPeople> listaModeloBenVLI);
     Long contar();
-    public List<ModeloBenVLI> listar(String empresa, String matricula);
+    public List<ModeloBenPeople> listar(String empresa, String matricula);
 }
