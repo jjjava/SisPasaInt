@@ -4,16 +4,17 @@ import java.util.List;
 import javax.persistence.NoResultException;
 import javax.persistence.Query;
 import org.pasa.sispasaint.dao.DaoGenerico;
-import org.pasa.sispasaint.dao.ImpEndVLITempDAO;
 import org.pasa.sispasaint.model.intg.ModeloEndPeople;
+import org.pasa.sispasaint.dao.ImpEndPeopleTempDAO;
 
 /**
  *
  * @author Hudson Schumaker
+ * @version 1.0.0
  */
-public class ImpEndVLITempDAOImpl extends DaoGenerico<ModeloEndPeople> implements ImpEndVLITempDAO {
+public class ImpEndPeopleTempDAOImpl extends DaoGenerico<ModeloEndPeople> implements ImpEndPeopleTempDAO {
 
-    public ImpEndVLITempDAOImpl() {
+    public ImpEndPeopleTempDAOImpl() {
         super(ModeloEndPeople.class);
     }
 

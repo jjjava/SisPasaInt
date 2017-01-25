@@ -2,7 +2,7 @@ package org.pasa.sispasaint.bean.impl;
 
 import java.util.List;
 import org.pasa.sispasaint.bean.ImpBenVLITempBean;
-import org.pasa.sispasaint.dao.impl.ImpBenVLITempDAOImpl;
+import org.pasa.sispasaint.dao.impl.ImpBenPeopleTempDAOImpl;
 import org.pasa.sispasaint.model.intg.ModeloBenPeople;
 import org.pasa.sispasaint.rw.LerArquivoBenPeople;
 
@@ -10,9 +10,9 @@ import org.pasa.sispasaint.rw.LerArquivoBenPeople;
  *
  * @author Hudson Schumaker
  */
-public class ImpBenVLITempBeanImpl implements ImpBenVLITempBean {
+public class ImpBenPeopleTempBeanImpl implements ImpBenVLITempBean {
 
-    public ImpBenVLITempBeanImpl() {
+    public ImpBenPeopleTempBeanImpl() {
     }
 
     @Override
@@ -24,17 +24,17 @@ public class ImpBenVLITempBeanImpl implements ImpBenVLITempBean {
 
     @Override
     public ModeloBenPeople obter(ModeloBenPeople modeloBenVLI) {
-        return new ImpBenVLITempDAOImpl().obter(modeloBenVLI.getId());
+        return new ImpBenPeopleTempDAOImpl().obter(modeloBenVLI.getId());
     }
 
     @Override
     public void limparTbTemp() {
-        new ImpBenVLITempDAOImpl().limpaTB();
+        new ImpBenPeopleTempDAOImpl().limpaTB();
     }
 
     @Override
     public void resetarIdentity() {
-        new ImpBenVLITempDAOImpl().resetarIdentity();
+        new ImpBenPeopleTempDAOImpl().resetarIdentity();
     }
 
     @Override
@@ -44,16 +44,11 @@ public class ImpBenVLITempBeanImpl implements ImpBenVLITempBean {
 
     @Override
     public void salvarTbTemp(List<ModeloBenPeople> listaModeloBenVLI) {
-        new ImpBenVLITempDAOImpl().salvarTbTemp(listaModeloBenVLI);
+        new ImpBenPeopleTempDAOImpl().salvarTbTemp(listaModeloBenVLI);
     }
 
     @Override
     public Long contar() {
-        return new ImpBenVLITempDAOImpl().contar();
-    }
-
-    @Override
-    public List<ModeloBenPeople> listar(String empresa, String matricula) {
-      return new ImpBenVLITempDAOImpl().listar(empresa, matricula);
+        return new ImpBenPeopleTempDAOImpl().contar();
     }
 }

@@ -8,8 +8,11 @@ import org.pasa.sispasaint.model.intg.ModeloBenPeople;
  * @author Hudson Schumaker
  */
 
-public interface ImpBenVLITempDAO {
+public interface ImpBenPeopleTempDAO {
+    ModeloBenPeople obter(Long id);
+    boolean cadastrar(ModeloBenPeople modelo);
+    Long contar();
+    void limpaTB();
     void resetarIdentity(); 
     void salvarTbTemp(List<ModeloBenPeople> listaModeloBenVLI);
-    public List<ModeloBenPeople> listar(String empresa, String matricula);
 }

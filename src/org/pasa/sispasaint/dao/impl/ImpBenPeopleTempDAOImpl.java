@@ -1,19 +1,18 @@
 package org.pasa.sispasaint.dao.impl;
 
 import java.util.List;
-import javax.persistence.NoResultException;
 import javax.persistence.Query;
 import org.pasa.sispasaint.dao.DaoGenerico;
-import org.pasa.sispasaint.dao.ImpBenVLITempDAO;
 import org.pasa.sispasaint.model.intg.ModeloBenPeople;
+import org.pasa.sispasaint.dao.ImpBenPeopleTempDAO;
 
 /**
  *
  * @author Hudson Schumaker
  */
-public class ImpBenVLITempDAOImpl extends DaoGenerico<ModeloBenPeople> implements ImpBenVLITempDAO {
+public class ImpBenPeopleTempDAOImpl extends DaoGenerico<ModeloBenPeople> implements ImpBenPeopleTempDAO {
 
-    public ImpBenVLITempDAOImpl() {
+    public ImpBenPeopleTempDAOImpl() {
         super(ModeloBenPeople.class);
     }
 
@@ -37,21 +36,5 @@ public class ImpBenVLITempDAOImpl extends DaoGenerico<ModeloBenPeople> implement
                 getEntityManager().getTransaction().rollback();
             }
         }
-    }
-
-    @Override
-    public List<ModeloBenPeople> listar(String empresa, String matricula) {
-        Query q1 = getEntityManager().
-        createQuery("select m from ModeloBenVLI m where m.matricula = :mat and m.empresa = :emp and m.tipoBeneficiario <> 'T'");
-        q1.setParameter("emp", empresa); 
-        q1.setParameter("mat", matricula); 
-        List<ModeloBenPeople> ModeloBenVLIs = null;
-        try {
-            ModeloBenVLIs = q1.getResultList();
-        } catch (NoResultException e) {
-            System.err.println(e);
-            return null;
-        }
-        return ModeloBenVLIs;
     }
 }

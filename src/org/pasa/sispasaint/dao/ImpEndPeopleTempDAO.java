@@ -8,7 +8,7 @@ import org.pasa.sispasaint.model.intg.ModeloEndPeople;
  * @author Hudson Schumaker
  */
 
-public interface ImpEndVLITempDAO {
+public interface ImpEndPeopleTempDAO {
     ModeloEndPeople obter(Long id);
     ModeloEndPeople obterPorMatricula(String empresa, String matricula, String codBeneficiario);
     List<ModeloEndPeople> list(String empresa, String matricula);

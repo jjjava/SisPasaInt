@@ -10,9 +10,10 @@ import javax.persistence.Table;
 /**
  *
  * @author Hudson Schumaker
+ * @version 1.0.1
  */
 @Entity
-@Table(name = "TEMP_END_VLI")
+@Table(name = "CARG_END_PEOPLE")
 public class ModeloEndPeople implements Serializable {
     
     private static final long serialVersionUID = 1L;

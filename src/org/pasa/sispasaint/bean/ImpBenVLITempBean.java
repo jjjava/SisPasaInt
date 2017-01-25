@@ -9,11 +9,10 @@ import org.pasa.sispasaint.model.intg.ModeloBenPeople;
  */
 public interface ImpBenVLITempBean {
     ModeloBenPeople obter(Long id);
-    ModeloBenPeople obter(ModeloBenPeople modeloBenVli);
+    ModeloBenPeople obter(ModeloBenPeople modeloBenPeople);
     void limparTbTemp();
     void resetarIdentity();
     void carregarArquivo(Long id);
-    void salvarTbTemp(List<ModeloBenPeople> listaModeloBenVLI);
+    void salvarTbTemp(List<ModeloBenPeople> listaModeloBenPeople);
     Long contar();
-    public List<ModeloBenPeople> listar(String empresa, String matricula);
 }
