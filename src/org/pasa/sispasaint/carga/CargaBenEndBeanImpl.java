@@ -16,13 +16,13 @@ import org.pasa.sispasaint.util.SisPasaIntCommon;
  */
 public class CargaBenEndBeanImpl implements CargaBenEndBean, Runnable {
 
-    private final Long idEmpresa;
     private Log log;
-    private CargaEntidadeFuncionario cargaEntidadeFuncionario;
+    private final Long idEmpresa;
+    private final CargaEntidadeFuncionario cargaEntidadeFuncionario;
 
     public CargaBenEndBeanImpl(Long idEmpresa, Log log) {
-        this.idEmpresa = idEmpresa;
         this.log = log;
+        this.idEmpresa = idEmpresa;
         this.cargaEntidadeFuncionario = new CargaEntidadeFuncionario();
     }
 

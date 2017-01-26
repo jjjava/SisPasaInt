@@ -15,4 +15,5 @@ public interface ImpBenPeopleTempDAO {
     void limpaTB();
     void resetarIdentity(); 
     void salvarTbTemp(List<ModeloBenPeople> listaModeloBenVLI);
+    List<ModeloBenPeople> listarBeneficiarios(String empresa, String matricula);
 }

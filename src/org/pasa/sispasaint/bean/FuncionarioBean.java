@@ -11,7 +11,7 @@ import org.pasa.sispasa.core.model.Funcionario;
 public interface FuncionarioBean {
     Funcionario obter(Funcionario f);
     Funcionario obter(String empresa, String matricula);
-    void cadastar(Funcionario f);
+    boolean cadastrar(Funcionario f);
     void atualizar(Funcionario f);
     void apagar(Funcionario f);
     List<Funcionario> listar();

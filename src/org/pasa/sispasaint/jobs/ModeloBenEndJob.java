@@ -7,6 +7,7 @@ import org.pasa.sispasaint.bean.impl.EmpresaBeanImpl;
 import org.pasa.sispasaint.bean.impl.ListaDestinatariosBeanImpl;
 import org.pasa.sispasaint.bean.impl.LogBeanImpl;
 import org.pasa.sispasaint.carga.CargaBenEndBeanImpl;
+import org.pasa.sispasaint.carga.CargaPeopleBeanImpl;
 import org.pasa.sispasaint.mail.EnviaEmail;
 import org.pasa.sispasaint.model.intg.ListaDestinatarios;
 import org.pasa.sispasaint.model.intg.Log;
@@ -36,14 +37,16 @@ public class ModeloBenEndJob implements Job {
     @Override
     public void execute(JobExecutionContext jec) throws JobExecutionException {
         log.setDataInicio(DateUtil.obterDataAtual());
-
         JobDataMap dataMap = jec.getJobDetail().getJobDataMap();
         long tipo = dataMap.getLong(SisPasaIntCommon.TIPO_JOB);
         idEmpresa = dataMap.getLong(SisPasaIntCommon.ID_EMPRESA);
-
-        CargaBenEndBeanImpl cargaBenEndBeanImpl = new CargaBenEndBeanImpl(idEmpresa, log);
-        cargaBenEndBeanImpl.start();
-
+        if (idEmpresa == 1) {
+            CargaPeopleBeanImpl cargaPeopleBeanImpl = new CargaPeopleBeanImpl(idEmpresa, log);
+            cargaPeopleBeanImpl.start();
+        } else {
+            CargaBenEndBeanImpl cargaBenEndBeanImpl = new CargaBenEndBeanImpl(idEmpresa, log);
+            cargaBenEndBeanImpl.start();
+        }
 //        EnviaEmail enviaEmail = new EnviaEmail(getDestinatariosList(new ListaDestinatariosBeanImpl().listar(tipo)),
 //                "#CARGA AMS ",
 //                setMensagem());

@@ -55,7 +55,7 @@ public class LerArquivosBenEnd {
     public void ler(File ben, File end) {
         log.setNomeArquivoBen(benNomeArq);
         log.setNomeArquivoEnd(endNomeArq);
-        ModeloBenEndDAOImpl modeleDAO = new ModeloBenEndDAOImpl();
+        ModeloBenEndDAOImpl modeloDAO = new ModeloBenEndDAOImpl();
         try {
             BufferedReader brBen = new BufferedReader(new FileReader(ben));
             BufferedReader brEnd = new BufferedReader(new FileReader(end));
@@ -72,7 +72,7 @@ public class LerArquivosBenEnd {
                     benLine = acerta400Pos(benLine);
                     endLine = acerta190Pos(endLine);
                     //DAO
-                    modeleDAO.cadastrar(parseCampos(benLine, endLine));
+                    modeloDAO.cadastrar(parseCampos(benLine, endLine));
                     log.addLinhaArq();
                 }
             }

@@ -29,8 +29,8 @@ public class FuncionarioBeanImpl implements FuncionarioBean {
     }
 
     @Override
-    public void cadastar(Funcionario funcionario) {
-        funcionarioDAO.cadastrar(funcionario);
+    public boolean cadastrar(Funcionario funcionario) {
+        return funcionarioDAO.cadastrar(funcionario);
     }
 
     @Override

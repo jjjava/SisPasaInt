@@ -5,38 +5,47 @@ import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.IOException;
-import java.util.ArrayList;
-import java.util.List;
 import java.util.Map;
 import org.pasa.sispasaint.config.Configuracao;
-import org.pasa.sispasaint.map.CamposEndVLI;
-import org.pasa.sispasaint.map.MapaCamposEndVLI;
+import org.pasa.sispasaint.dao.impl.ImpEndPeopleTempDAOImpl;
+import org.pasa.sispasaint.map.CamposModelo;
+import org.pasa.sispasaint.map.MapaCamposModeloEnd;
+import org.pasa.sispasaint.model.intg.Log;
 import org.pasa.sispasaint.model.intg.ModeloEndPeople;
 import org.pasa.sispasaint.util.StringUtil;
 
 /**
  *
  * @author Hudson Schumaker
+ * @version 1.0.0
  */
 public class LerArquivoEndPeople {
 
+    private Log log;
     private Long id;
+    private String endNomeArq;
+    private PosicaoCampo campo;
+    private final Map<String, PosicaoCampo> mapa;
+    private final ImpEndPeopleTempDAOImpl modeloDAO;
 
-    public LerArquivoEndPeople() {
+    public LerArquivoEndPeople(Log log) {
+        this.log = log;
+        mapa = new MapaCamposModeloEnd().getMapa();
+        modeloDAO = new ImpEndPeopleTempDAOImpl();
     }
 
-    public List<ModeloEndPeople> lerArquivo(Long id) {
+    public void lerArquivo(Long id) {
         this.id = id;
-        return lerArquivo(Configuracao.getInstance().getEndNomeArqComPath(id),
+        lerArquivo(Configuracao.getInstance().getEndNomeArqComPath(id),
                 Configuracao.getInstance().getNomeArqEnd(id));
     }
 
-    public List<ModeloEndPeople> lerArquivo(String path, String nomeArq) {
-        return lerArquivo(new File(path), nomeArq);
+    public void lerArquivo(String path, String nomeArq) {
+        this.endNomeArq = nomeArq;
+        lerArquivo(new File(path), nomeArq);
     }
 
-    public List<ModeloEndPeople> lerArquivo(File file, String nomeArq) {
-        List<ModeloEndPeople> listaEndVLI = new ArrayList<>();
+    public void lerArquivo(File file, String nomeArq) {
         BufferedReader br = null;
         try {
             br = new BufferedReader(new FileReader(file));
@@ -47,7 +56,7 @@ public class LerArquivoEndPeople {
                     if (line.length() < 190) {
                         line = acerta190Pos(line);
                     }
-                    listaEndVLI.add(parseCampos(line, nomeArq));// vrf se usar trim() ou  ñ
+                    modeloDAO.cadastrar(parseCampos(line, nomeArq));// vrf se usar trim() ou  ñ
                 }
             }
         } catch (FileNotFoundException e) {
@@ -59,55 +68,35 @@ public class LerArquivoEndPeople {
                 if (br != null) {
                     br.close();
                 }
-                ZipArquivo zipArquivo = new ZipArquivo();
-                zipArquivo.zip(nomeArq,
-                        Configuracao.getInstance().getEndNomeArqComPath(id),
-                        Configuracao.getInstance().getEndNomeProcComPath(id));
-               // file.delete();
+                zipArq(file, endNomeArq,
+                        Configuracao.getInstance().getBenNomeArqComPath(id),
+                        Configuracao.getInstance().getBenNomeProcComPath(id));
             } catch (IOException e) {
                 System.err.println(e);
             }
         }
-        return listaEndVLI;
     }
 
     private ModeloEndPeople parseCampos(String line, String nomeArq) {
         line = StringUtil.removeCharsEspeciais(line);
         ModeloEndPeople modelo = new ModeloEndPeople();
-        Map<String, PosicaoCampo> mapa = new MapaCamposEndVLI().getMapa();
-        PosicaoCampo campo;
         try {
-            campo = (PosicaoCampo) mapa.get(CamposEndVLI.EMPRESA);
-            modelo.setEmpresa(line.substring(campo.getInicioCampo(), campo.getFimCampo()));
-
-            campo = (PosicaoCampo) mapa.get(CamposEndVLI.MATRICULA);
-            modelo.setMatricula(line.substring(campo.getInicioCampo(), campo.getFimCampo()));
-
-            campo = (PosicaoCampo) mapa.get(CamposEndVLI.COD_BENEFICIARIO);
-            modelo.setCodBeneficiario(line.substring(campo.getInicioCampo(), campo.getFimCampo()));
-
-            campo = (PosicaoCampo) mapa.get(CamposEndVLI.TELEFONE1);
+            //ENDEREÇO
+            campo = (PosicaoCampo) mapa.get(CamposModelo.TELEFONE1);
             modelo.setTelefone1(line.substring(campo.getInicioCampo(), campo.getFimCampo()));
-
-            campo = (PosicaoCampo) mapa.get(CamposEndVLI.TELEFONE2);
+            campo = (PosicaoCampo) mapa.get(CamposModelo.TELEFONE2);
             modelo.setTelefone2(line.substring(campo.getInicioCampo(), campo.getFimCampo()));
-
-            campo = (PosicaoCampo) mapa.get(CamposEndVLI.BRANCO);
+            campo = (PosicaoCampo) mapa.get(CamposModelo.BRANCO);
             modelo.setBrancos(line.substring(campo.getInicioCampo(), campo.getFimCampo()));
-
-            campo = (PosicaoCampo) mapa.get(CamposEndVLI.ENDERECO);
+            campo = (PosicaoCampo) mapa.get(CamposModelo.ENDERECO);
             modelo.setEndereco(line.substring(campo.getInicioCampo(), campo.getFimCampo()));
-
-            campo = (PosicaoCampo) mapa.get(CamposEndVLI.BAIRRO);
+            campo = (PosicaoCampo) mapa.get(CamposModelo.BAIRRO);
             modelo.setBairro(line.substring(campo.getInicioCampo(), campo.getFimCampo()));
-
-            campo = (PosicaoCampo) mapa.get(CamposEndVLI.CIDADE);
+            campo = (PosicaoCampo) mapa.get(CamposModelo.CIDADE);
             modelo.setCidade(line.substring(campo.getInicioCampo(), campo.getFimCampo()));
-
-            campo = (PosicaoCampo) mapa.get(CamposEndVLI.UF);
+            campo = (PosicaoCampo) mapa.get(CamposModelo.UF);
             modelo.setUf(line.substring(campo.getInicioCampo(), campo.getFimCampo()));
-
-            campo = (PosicaoCampo) mapa.get(CamposEndVLI.CEP);
+            campo = (PosicaoCampo) mapa.get(CamposModelo.CEP);
             modelo.setCep(line.substring(campo.getInicioCampo(), campo.getFimCampo()));
 
             modelo.setNomeArquivo(nomeArq);
@@ -127,5 +116,13 @@ public class LerArquivoEndPeople {
     private String normalizaLinha(String line) {
         line = " " + line;
         return line;
+    }
+
+    private void zipArq(File file, String name, String pathOri, String pathDest) {
+        new Thread(() -> {
+            ZipArquivo zipArquivo = new ZipArquivo();
+            zipArquivo.zip(name, pathOri, pathDest);
+            //  file.delete();
+        }).start();
     }
 }
