@@ -82,6 +82,12 @@ public class LerArquivoEndPeople {
         ModeloEndPeople modelo = new ModeloEndPeople();
         try {
             //ENDEREÇO
+            campo = (PosicaoCampo) mapa.get(CamposModelo.EMPRESA);
+            modelo.setEmpresa(line.substring(campo.getInicioCampo(), campo.getFimCampo()));
+            campo = (PosicaoCampo) mapa.get(CamposModelo.MATRICULA);
+            modelo.setMatricula(line.substring(campo.getInicioCampo(), campo.getFimCampo()));
+            campo = (PosicaoCampo) mapa.get(CamposModelo.COD_BENEFICIARIO);
+            modelo.setCodBeneficiario(line.substring(campo.getInicioCampo(), campo.getFimCampo()));
             campo = (PosicaoCampo) mapa.get(CamposModelo.TELEFONE1);
             modelo.setTelefone1(line.substring(campo.getInicioCampo(), campo.getFimCampo()));
             campo = (PosicaoCampo) mapa.get(CamposModelo.TELEFONE2);

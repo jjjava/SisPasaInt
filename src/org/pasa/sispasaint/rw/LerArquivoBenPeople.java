@@ -5,8 +5,6 @@ import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.IOException;
-import java.util.ArrayList;
-import java.util.List;
 import java.util.Map;
 import org.pasa.sispasa.core.enumeration.EnumBanco;
 import org.pasa.sispasaint.config.Configuracao;
@@ -24,6 +22,7 @@ import org.pasa.sispasaint.util.StringUtil;
  */
 public class LerArquivoBenPeople {
 
+    private boolean read;
     private Log log;
     private Long id;
     private String benNomeArq;
@@ -35,6 +34,7 @@ public class LerArquivoBenPeople {
         this.log = log;
         modeloDAO = new ImpBenPeopleTempDAOImpl();
         mapa = new MapaCamposModeloBen().getMapa();
+        read = true;
     }
 
     public void lerArquivo(Long id) {
@@ -53,12 +53,15 @@ public class LerArquivoBenPeople {
         try {
             br = new BufferedReader(new FileReader(file));
             String line = null;
-            while ((line = br.readLine()) != null) {
-                if (line.length() > 100) {
+            while (read) {
+                line = br.readLine();
+                if(line == null){
+                    read = false;
+                    break;
+                }
+                if (line.length() > 2) {
                     line = normalizaLinha(line);
-                    if (line.length() < 400) {
-                        line = acerta400Pos(line);
-                    }
+                    line = acerta400Pos(line);
                     modeloDAO.cadastrar(parseCampos(line, nomeArq));// vrf se usar trim() o nao														// ñ
                 }
             }
@@ -72,8 +75,8 @@ public class LerArquivoBenPeople {
                     br.close();
                 }
                 zipArq(file, benNomeArq,
-                    Configuracao.getInstance().getBenNomeArqComPath(id),
-                    Configuracao.getInstance().getBenNomeProcComPath(id));
+                        Configuracao.getInstance().getBenNomeArqComPath(id),
+                        Configuracao.getInstance().getBenNomeProcComPath(id));
             } catch (IOException e) {
                 System.err.println(e);
             }
@@ -81,9 +84,9 @@ public class LerArquivoBenPeople {
     }
 
     private ModeloBenPeople parseCampos(String line, String nomeArq) {
-        line = StringUtil.removeCharsEspeciais(line);
-        ModeloBenPeople modelo = new ModeloBenPeople();
+        // line = StringUtil.removeCharsEspeciais(line);
 
+        ModeloBenPeople modelo = new ModeloBenPeople();
         //BENEFICIARIO - FUNCIONARIO
         campo = (PosicaoCampo) mapa.get(CamposModelo.EMPRESA);
         modelo.setEmpresa(line.substring(campo.getInicioCampo(), campo.getFimCampo()));
@@ -125,7 +128,6 @@ public class LerArquivoBenPeople {
         //Normaliza codigo bancario.
         campo = (PosicaoCampo) mapa.get(CamposModelo.BANCO);
         modelo.setBanco(normalizaBanco(line.substring(campo.getInicioCampo(), campo.getFimCampo())));
-
         campo = (PosicaoCampo) mapa.get(CamposModelo.CONTA_CORRENTE);
         modelo.setContaCorrente(line.substring(campo.getInicioCampo(), campo.getFimCampo()));
         campo = (PosicaoCampo) mapa.get(CamposModelo.DATA_ADMISSAO);

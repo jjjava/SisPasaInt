@@ -28,6 +28,7 @@ import org.pasa.sispasa.core.model.OrigemInformacoes;
 import org.pasa.sispasa.core.model.Telefone;
 import org.pasa.sispasa.core.model.TipoDocumento;
 import org.pasa.sispasa.core.model.TipoVinculoEmpregaticio;
+import org.pasa.sispasaint.bean.impl.NivelEscolaridadeBeanImpl;
 import org.pasa.sispasaint.util.StringUtil;
 
 /**
@@ -45,6 +46,7 @@ public class CargaEntidadePeopleFuncionario {
     private final FuncionarioBeanImpl funcionarioBean;
     private final EstadoBeanImpl estadoBeanImpl;
     private final MunicipioBeanImpl municipioBeanImpl;
+    private final NivelEscolaridadeBeanImpl nivelEscolaridadeBean;
 
     public CargaEntidadePeopleFuncionario() {
         cargaEntidadePeopleBeneficiario = new CargaEntidadePeopleBeneficiario();
@@ -54,6 +56,7 @@ public class CargaEntidadePeopleFuncionario {
         impEndPeopleTempBeanImpl = new ImpEndPeopleTempBeanImpl();
         estadoBeanImpl = new EstadoBeanImpl();
         municipioBeanImpl = new MunicipioBeanImpl();
+        nivelEscolaridadeBean = new NivelEscolaridadeBeanImpl();
     }
 
     public boolean newFuncionario(ModeloBenPeople modelo) {
@@ -82,10 +85,8 @@ public class CargaEntidadePeopleFuncionario {
             funcionario.setOrigemInformacoes(newOrigemInformacoes());
             //VINCULO
             funcionario.setTipoVinculoEmpregaticio(newTipoVinculoEmpregaticio(modelo));
-            
             //BENEFICIARIOS
             List<ModeloBenPeople> benef = impBenPeopleTempBeanImpl.listarBeneficiarios(modelo);
-
             for (ModeloBenPeople f : benef) {
                 Beneficiario b = cargaEntidadePeopleBeneficiario.newBeneficiario(f);
                 if (b == null) {
@@ -106,7 +107,6 @@ public class CargaEntidadePeopleFuncionario {
             funcionario.setDataUltimaAtualizacao(DateUtil.obterDataAtual());
             funcionario.setDataInclusaoSistema(DateUtil.obterDataAtual());
             return funcionarioBean.cadastrar(funcionario);
-
         }
     }
 
@@ -186,9 +186,7 @@ public class CargaEntidadePeopleFuncionario {
     }
 
     private NivelEscolaridade newNivelEscolaridade(ModeloBenPeople modelo) {
-        NivelEscolaridade nivelEscolaridade = new NivelEscolaridade();
-        nivelEscolaridade.setId(Long.parseLong(modelo.getGrauEscolaridade() + 1));//melhorar
-        nivelEscolaridade.setCodExterno(modelo.getGrauEscolaridade());
+        NivelEscolaridade nivelEscolaridade = nivelEscolaridadeBean.obter(modelo.getGrauEscolaridade());
         return nivelEscolaridade;
     }
 

@@ -17,7 +17,7 @@ import org.apache.log4j.Logger;
  */
 public abstract class DaoGenerico<T> {
 
-  //  @PersistenceContext
+    @PersistenceContext
     private final EntityManager em;
     private final EntityManagerFactory emf;
     public final Class<T> entityClass;

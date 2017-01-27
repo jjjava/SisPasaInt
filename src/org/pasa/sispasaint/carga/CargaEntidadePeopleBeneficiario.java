@@ -18,6 +18,7 @@ import org.pasa.sispasa.core.model.TipoDocumento;
 import org.pasa.sispasaint.bean.impl.EstadoBeanImpl;
 import org.pasa.sispasaint.bean.impl.ImpEndPeopleTempBeanImpl;
 import org.pasa.sispasaint.bean.impl.MunicipioBeanImpl;
+import org.pasa.sispasaint.bean.impl.NivelEscolaridadeBeanImpl;
 import org.pasa.sispasaint.bean.impl.PlanoBeanImpl;
 import org.pasa.sispasaint.model.intg.ModeloBenPeople;
 import org.pasa.sispasaint.model.intg.ModeloEndPeople;
@@ -37,12 +38,14 @@ public class CargaEntidadePeopleBeneficiario {
     private final EstadoBeanImpl estadoBean;
     private final MunicipioBeanImpl municipioBean;
     private final ImpEndPeopleTempBeanImpl impEndPeopleTempBeanImpl;
+    private final NivelEscolaridadeBeanImpl nivelEscolaridadeBean;
 
     public CargaEntidadePeopleBeneficiario() {
         this.planoBean = new PlanoBeanImpl();
         this.estadoBean = new EstadoBeanImpl();
         this.municipioBean = new MunicipioBeanImpl();
         this.impEndPeopleTempBeanImpl = new ImpEndPeopleTempBeanImpl();
+        this.nivelEscolaridadeBean = new NivelEscolaridadeBeanImpl();
     }
 
     public Beneficiario newBeneficiario(ModeloBenPeople modelo) {
@@ -72,8 +75,8 @@ public class CargaEntidadePeopleBeneficiario {
 
         return beneficiario;
     }
-    
-     private Endereco newEndereco(ModeloBenPeople mBen) {
+
+    private Endereco newEndereco(ModeloBenPeople mBen) {
         ModeloEndPeople modeloEndPeople = impEndPeopleTempBeanImpl.obterPorMatricula(mBen);
         Estado estado = estadoBean.obter(modeloEndPeople.getUf());
         Municipio municipio = municipioBean.existe(modeloEndPeople.getCidade());
@@ -91,8 +94,8 @@ public class CargaEntidadePeopleBeneficiario {
         endereco.setMunicipio(municipio);
         return endereco;
     }
-     
-     private Documento newPis(ModeloBenPeople modelo) {
+
+    private Documento newPis(ModeloBenPeople modelo) {
         Documento pis = new Documento();
         TipoDocumento tpPIS = new TipoDocumento();
         pis.setNumero(modelo.getPis());
@@ -104,18 +107,16 @@ public class CargaEntidadePeopleBeneficiario {
         pis.setDataUltimaAtualizacao(DateUtil.obterDataAtual());
         return pis;
     }
-    
+
     private NivelEscolaridade newNivelEscolaridade(ModeloBenPeople modelo) {
-        NivelEscolaridade nivelEscolaridade = new NivelEscolaridade();
-        nivelEscolaridade.setId(Long.parseLong(modelo.getGrauEscolaridade()+1));//melhorar
-        nivelEscolaridade.setCodExterno(modelo.getGrauEscolaridade());
+        NivelEscolaridade nivelEscolaridade = nivelEscolaridadeBean.obter(modelo.getGrauEscolaridade());
         return nivelEscolaridade;
     }
 
     private List<Telefone> newTelefones(ModeloBenPeople mBen) {
         ModeloEndPeople modeloEndPeople = impEndPeopleTempBeanImpl.obterPorMatricula(mBen);
         List<Telefone> listaTelefones = new ArrayList<>();
-        
+
         Telefone tel1 = new Telefone();
         tel1.setNumeroTelefone(modeloEndPeople.getTelefone1());
         tel1.setIndAtivo(SisPasaIntCommon.ATIVO);
@@ -138,7 +139,7 @@ public class CargaEntidadePeopleBeneficiario {
 
     private void setAtributos(ModeloBenPeople modeloBenEnd) {
         //ATRIBUTOS
-        beneficiario.setCarteirinha(modeloBenEnd.getEmpresa()+modeloBenEnd.getMatricula()+modeloBenEnd.getCodBeneficiario());
+        beneficiario.setCarteirinha(modeloBenEnd.getEmpresa() + modeloBenEnd.getMatricula() + modeloBenEnd.getCodBeneficiario());
         beneficiario.setMatriculaAMS(modeloBenEnd.getMatricula());
         beneficiario.setCodBeneficiario(modeloBenEnd.getCodBeneficiario());
         beneficiario.setNome(modeloBenEnd.getNomeBeneficiario());
@@ -172,7 +173,7 @@ public class CargaEntidadePeopleBeneficiario {
             beneficiario.setTipoBeneficiario(EnumTipoBeneficiario.DEPENDENTE.getIndice());
         }
     }
-    
+
     private OrigemInformacoes newOrigemInformacoes() {
         OrigemInformacoes origemInformacoes = new OrigemInformacoes();
         origemInformacoes.setId(EnumOrigemInformacoes.CARGA.getIndice());

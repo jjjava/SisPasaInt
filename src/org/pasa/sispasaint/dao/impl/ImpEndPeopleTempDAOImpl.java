@@ -23,10 +23,10 @@ public class ImpEndPeopleTempDAOImpl extends DaoGenerico<ModeloEndPeople> implem
         ModeloEndPeople m = new ModeloEndPeople();
         try {
             Query q1 = getEntityManager().
-            createQuery("select e from ModeloEndPeople e WHERE e.empresa = :empresa AND e.matricula = :matricula AND e.codBeneficiario =:cod");
+            createQuery("select e from ModeloEndPeople e WHERE e.empresa = :empresa AND e.matricula = :matricula");
             q1.setParameter("empresa", empresa);
             q1.setParameter("matricula", matricula);
-            q1.setParameter("cod", codBeneficiario);
+           //q1.setParameter("cod", codBeneficiario);
             m = (ModeloEndPeople) q1.getSingleResult();
         } catch (NoResultException e) {
             System.err.println(e);
@@ -38,7 +38,7 @@ public class ImpEndPeopleTempDAOImpl extends DaoGenerico<ModeloEndPeople> implem
     @Override
     public void resetarIdentity() {
         getEntityManager().getTransaction().begin();
-        Query q1 = getEntityManager().createNativeQuery("DBCC CHECKIDENT ('[sispasa].[dbo].[CARG_END_PEOPLE]', RESEED, 0)");
+        Query q1 = getEntityManager().createNativeQuery("DBCC CHECKIDENT ('[sispasa-dev].[dbo].[CARG_END_PEOPLE]', RESEED, 0)");
         q1.executeUpdate();
         getEntityManager().getTransaction().commit();
     }

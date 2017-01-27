@@ -22,7 +22,7 @@ public class CargaPeopleBeanImpl implements CargaPeopleBean, Runnable {
     private final LogBeanImpl logBeanImpl;
     private final FuncionarioBeanImpl funcionarioBeanImpl;
     private final ImpBenPeopleTempBeanImpl modeloBenBean;
-    private final ImpEndPeopleTempBeanImpl modeloEndBean;
+   // private final ImpEndPeopleTempBeanImpl modeloEndBean;
     private final CargaEntidadePeopleFuncionario cargaEntidadePeopleFuncionario;
 
     public CargaPeopleBeanImpl(Long id, Log log) {
@@ -30,7 +30,7 @@ public class CargaPeopleBeanImpl implements CargaPeopleBean, Runnable {
         this.log = log;
         logBeanImpl = new LogBeanImpl();
         modeloBenBean = new ImpBenPeopleTempBeanImpl();
-        modeloEndBean = new ImpEndPeopleTempBeanImpl();
+       // modeloEndBean = new ImpEndPeopleTempBeanImpl();
         funcionarioBeanImpl = new FuncionarioBeanImpl();
         cargaEntidadePeopleFuncionario = new CargaEntidadePeopleFuncionario();
     }
@@ -43,16 +43,21 @@ public class CargaPeopleBeanImpl implements CargaPeopleBean, Runnable {
     
     @Override
     public void inicar() {
-        this.cargaArquivosTemp();
+        //this.cargaArquivosTemp();
         this.mapearEntidades();
     }
 
     @Override
     public void cargaArquivosTemp() {
-        ImpBenPeopleTempBeanImpl bean = new ImpBenPeopleTempBeanImpl();
-        bean.limparTbTemp();
-        bean.resetarIdentity();
-        bean.carregarArquivo(id, log);
+//        ImpBenPeopleTempBeanImpl beanBen = new ImpBenPeopleTempBeanImpl();
+//        beanBen.limparTbTemp();
+//        beanBen.resetarIdentity();
+//        beanBen.carregarArquivo(id, log);
+        
+//        ImpEndPeopleTempBeanImpl beanEnd = new ImpEndPeopleTempBeanImpl();
+//        beanEnd.limparTbTemp();
+//        beanEnd.resetarIdentity();
+//        beanEnd.carregarArquivo(id, log);
     }
     
     @Override
@@ -73,7 +78,6 @@ public class CargaPeopleBeanImpl implements CargaPeopleBean, Runnable {
                             //log.addMatriculaErro(modeloBenEnd.getEmpresa() + modeloBenEnd.getMatricula());
                         }
                     }else{
-                        
                     }
                 }
             }

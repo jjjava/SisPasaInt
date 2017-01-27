@@ -22,6 +22,7 @@ import org.pasa.sispasaint.bean.impl.EmpresaBeanImpl;
 import org.pasa.sispasaint.bean.impl.EstadoBeanImpl;
 import org.pasa.sispasaint.bean.impl.ModeloBenEndBeanImpl;
 import org.pasa.sispasaint.bean.impl.MunicipioBeanImpl;
+import org.pasa.sispasaint.bean.impl.NivelEscolaridadeBeanImpl;
 import org.pasa.sispasaint.dao.impl.FuncionarioDAOImpl;
 import org.pasa.sispasaint.model.intg.ModeloBenEnd;
 import org.pasa.sispasaint.util.DateUtil;
@@ -40,12 +41,14 @@ public class CargaEntidadeFuncionario {
     private final EmpresaBeanImpl empresaBean;
     private final ModeloBenEndBeanImpl modeloBenEndBean;
     private final FuncionarioDAOImpl funcionarioDAO;
+    private final NivelEscolaridadeBeanImpl nivelEscolaridadeBean;
 
     public CargaEntidadeFuncionario() {
         this.funcionarioDAO = new FuncionarioDAOImpl();
         this.cargaEntidadeBeneficiario = new CargaEntidadeBeneficiario();
         this.empresaBean = new EmpresaBeanImpl();
         this.modeloBenEndBean = new ModeloBenEndBeanImpl();
+        this.nivelEscolaridadeBean = new NivelEscolaridadeBeanImpl();
     }
 
     public boolean newFuncionario(ModeloBenEnd modeloBenEnd) {
@@ -175,9 +178,7 @@ public class CargaEntidadeFuncionario {
     }
 
     private NivelEscolaridade newNivelEscolaridade(ModeloBenEnd modelo) {
-        NivelEscolaridade nivelEscolaridade = new NivelEscolaridade();
-        nivelEscolaridade.setId(Long.parseLong(modelo.getGrauEscolaridade()+1));//melhorar
-        nivelEscolaridade.setCodExterno(modelo.getGrauEscolaridade());
+        NivelEscolaridade nivelEscolaridade = nivelEscolaridadeBean.obter(modelo.getGrauEscolaridade());
         return nivelEscolaridade;
     }
 
