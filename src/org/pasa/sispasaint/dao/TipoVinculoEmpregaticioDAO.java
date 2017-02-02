@@ -10,7 +10,7 @@ import org.pasa.sispasa.core.model.TipoVinculoEmpregaticio;
  */
 public interface TipoVinculoEmpregaticioDAO  {
     boolean cadastrar(TipoVinculoEmpregaticio tve);
-    void atualizar(TipoVinculoEmpregaticio tve);
+    boolean atualizar(TipoVinculoEmpregaticio tve);
     void apagar(TipoVinculoEmpregaticio tve);
     TipoVinculoEmpregaticio obter(Long id);
     TipoVinculoEmpregaticio obter(String cdExterno);

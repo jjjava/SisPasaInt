@@ -10,7 +10,7 @@ import org.pasa.sispasa.core.model.Telefone;
  */
 public interface TelefoneDAO {
     boolean cadastrar(Telefone t);
-    void atualizar(Telefone t);
+    boolean atualizar(Telefone t);
     void apagar(Telefone t);
     Telefone obter(Long id);
     List<Telefone> listar();

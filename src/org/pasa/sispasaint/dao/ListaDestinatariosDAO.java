@@ -10,7 +10,7 @@ import org.pasa.sispasaint.model.intg.ListaDestinatarios;
 public interface ListaDestinatariosDAO {
     ListaDestinatarios obter(Long id);
     boolean cadastrar(ListaDestinatarios ld);
-    void atualizar(ListaDestinatarios ld);
+    boolean atualizar(ListaDestinatarios ld);
     void apagar(ListaDestinatarios ld);
     List<ListaDestinatarios> listar();
     List<ListaDestinatarios> listar(Long id);

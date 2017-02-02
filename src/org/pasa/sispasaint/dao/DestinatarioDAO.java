@@ -10,7 +10,7 @@ import org.pasa.sispasaint.model.intg.Destinatario;
 public interface DestinatarioDAO {
     Destinatario obter(Long id);
     boolean cadastrar(Destinatario d);
-    void atualizar(Destinatario d);
+    boolean atualizar(Destinatario d);
     void apagar(Destinatario d);
     List<Destinatario> listar();
 }

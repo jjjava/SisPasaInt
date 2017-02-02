@@ -11,7 +11,7 @@ import org.pasa.sispasa.core.model.Empresa;
 public interface EmpresaDAO {
     Empresa obter(Long id);
     boolean cadastrar(Empresa e);
-    void atualizar(Empresa e);
+    boolean atualizar(Empresa e);
     void apagar(Empresa e);
     List<Empresa> listar();
     Empresa existe(String codigo);

@@ -86,15 +86,7 @@ public class CargaEntidadePeopleFuncionario {
             //VINCULO
             funcionario.setTipoVinculoEmpregaticio(newTipoVinculoEmpregaticio(modelo));
             //BENEFICIARIOS
-            List<ModeloBenPeople> benef = impBenPeopleTempBeanImpl.listarBeneficiarios(modelo);
-            for (ModeloBenPeople f : benef) {
-                Beneficiario b = cargaEntidadePeopleBeneficiario.newBeneficiario(f);
-                if (b == null) {
-                    return false;
-                } else {
-                    funcionario.addBeneficiario(b);
-                }
-            }
+            
             
             //MATRICULAS
             funcionario.setMatriculaOrigem(modelo.getMatriculaPeople());//IMPORTANTE
@@ -106,7 +98,19 @@ public class CargaEntidadePeopleFuncionario {
             funcionario.setIndAtivo(SisPasaIntCommon.ATIVO);
             funcionario.setDataUltimaAtualizacao(DateUtil.obterDataAtual());
             funcionario.setDataInclusaoSistema(DateUtil.obterDataAtual());
-            return funcionarioBean.cadastrar(funcionario);
+            
+            funcionarioBean.cadastrar(funcionario);
+            
+            List<ModeloBenPeople> benef = impBenPeopleTempBeanImpl.listarBeneficiarios(modelo);
+            for (ModeloBenPeople f : benef) {
+                Beneficiario b = cargaEntidadePeopleBeneficiario.newBeneficiario(f);
+                if (b == null) {
+                    return false;
+                } else {
+                    funcionario.addBeneficiario(b);
+                }
+            }
+            return funcionarioBean.atualizar(funcionario);
         }
     }
 

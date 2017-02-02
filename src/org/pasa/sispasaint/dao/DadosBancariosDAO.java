@@ -5,7 +5,7 @@ import org.pasa.sispasa.core.model.DadosBancarios;
 
 public interface DadosBancariosDAO {
     boolean cadastrar( DadosBancarios db);
-    void atualizar(DadosBancarios db);
+    boolean atualizar(DadosBancarios db);
     void apagar(DadosBancarios db);
     DadosBancarios obter(Long id);
     List<DadosBancarios> listar();

@@ -43,21 +43,21 @@ public class CargaPeopleBeanImpl implements CargaPeopleBean, Runnable {
     
     @Override
     public void inicar() {
-        //this.cargaArquivosTemp();
+        this.cargaArquivosTemp();
         this.mapearEntidades();
     }
 
     @Override
     public void cargaArquivosTemp() {
-//        ImpBenPeopleTempBeanImpl beanBen = new ImpBenPeopleTempBeanImpl();
-//        beanBen.limparTbTemp();
-//        beanBen.resetarIdentity();
-//        beanBen.carregarArquivo(id, log);
+        ImpBenPeopleTempBeanImpl beanBen = new ImpBenPeopleTempBeanImpl();
+        beanBen.limparTbTemp();
+        beanBen.resetarIdentity();
+        beanBen.carregarArquivo(id, log);
         
-//        ImpEndPeopleTempBeanImpl beanEnd = new ImpEndPeopleTempBeanImpl();
-//        beanEnd.limparTbTemp();
-//        beanEnd.resetarIdentity();
-//        beanEnd.carregarArquivo(id, log);
+        ImpEndPeopleTempBeanImpl beanEnd = new ImpEndPeopleTempBeanImpl();
+        beanEnd.limparTbTemp();
+        beanEnd.resetarIdentity();
+        beanEnd.carregarArquivo(id, log);
     }
     
     @Override

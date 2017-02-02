@@ -8,7 +8,7 @@ import org.pasa.sispasa.core.model.Beneficiario;
  */
 public interface BeneficiarioDAO {
     boolean cadastrar(Beneficiario b);
-    void atualizar(Beneficiario b);
+    boolean atualizar(Beneficiario b);
     void apagar(Beneficiario b);
     Beneficiario obter(Long id);
     Beneficiario obter(String matricula, String codBeneficiario);

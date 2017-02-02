@@ -46,14 +46,16 @@ public abstract class DaoGenerico<T> {
         }
     }
 
-    public void atualizar(T entity) {
+    public boolean atualizar(T entity) {
         try {
             em.getTransaction().begin();
             em.merge(entity);
             em.getTransaction().commit();
+            return true;
         } catch (Exception e) {
             System.err.println(e);
             Logger.getLogger(DaoGenerico.class).error(e);
+            return false;
         }
     }
 

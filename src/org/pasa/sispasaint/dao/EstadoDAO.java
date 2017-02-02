@@ -9,7 +9,7 @@ import org.pasa.sispasa.core.model.Estado;
  */
 public interface EstadoDAO {
     boolean cadastrar(Estado e);
-    void atualizar(Estado e);
+    boolean atualizar(Estado e);
     void apagar(Estado e);
     Estado obter(Long id);
     Estado obter(String uf);

@@ -10,7 +10,7 @@ import org.pasa.sispasaint.model.intg.Agenda;
 public interface AgendaDAO {
     Agenda obter(Long id);
     boolean cadastrar(Agenda a);
-    void atualizar(Agenda a);
+    boolean atualizar(Agenda a);
     void apagar(Agenda a);
     List<Agenda> listar();
     Agenda existe(String codigo);

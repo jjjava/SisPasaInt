@@ -9,6 +9,6 @@ import org.pasa.sispasaint.mail.MailConfig;
 public interface MailConfigDAO {
     MailConfig obter(Long id);
     boolean cadastrar(MailConfig mc);
-    void atualizar(MailConfig mc);
+    boolean atualizar(MailConfig mc);
     void apagar(MailConfig mc);
 }

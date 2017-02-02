@@ -9,7 +9,7 @@ import org.pasa.sispasa.core.model.Endereco;
  */
 public interface EnderecoDAO {
     boolean cadastrar(Endereco e);
-    void atualizar(Endereco e);
+    boolean atualizar(Endereco e);
     void apagar(Endereco e);
     Endereco obter(Long id);
     List<Endereco> listar();

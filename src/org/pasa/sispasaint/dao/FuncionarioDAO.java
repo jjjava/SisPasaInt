@@ -10,7 +10,7 @@ import org.pasa.sispasa.core.model.Funcionario;
 
 public interface FuncionarioDAO {
     boolean cadastrar(Funcionario funcionario);
-    void atualizar(Funcionario funcionario);
+    boolean atualizar(Funcionario funcionario);
     void apagar(Funcionario funcionario);
     Funcionario obter(Long id);
     Funcionario obter(String empresa, String matricula);

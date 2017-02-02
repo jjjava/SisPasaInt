@@ -12,7 +12,7 @@ public interface FuncionarioBean {
     Funcionario obter(Funcionario f);
     Funcionario obter(String empresa, String matricula);
     boolean cadastrar(Funcionario f);
-    void atualizar(Funcionario f);
+    boolean atualizar(Funcionario f);
     void apagar(Funcionario f);
     List<Funcionario> listar();
     Integer atualizaStatus(Long empresa);

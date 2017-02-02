@@ -34,8 +34,8 @@ public class FuncionarioBeanImpl implements FuncionarioBean {
     }
 
     @Override
-    public void atualizar(Funcionario funcionario) {
-        funcionarioDAO.atualizar(funcionario);
+    public boolean atualizar(Funcionario funcionario) {
+      return  funcionarioDAO.atualizar(funcionario);
     }
 
     @Override
