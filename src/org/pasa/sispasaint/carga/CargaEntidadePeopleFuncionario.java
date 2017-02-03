@@ -107,6 +107,10 @@ public class CargaEntidadePeopleFuncionario {
                 if (b == null) {
                     return false;
                 } else {
+                    b.setFuncionario(funcionario);
+                    if(f.getCodBeneficiario().equals("00")){
+                        b.setId(funcionario.getId());
+                    }
                     funcionario.addBeneficiario(b);
                 }
             }
