@@ -8,8 +8,8 @@ package org.pasa.sispasa.core.enumeration;
  */
 public enum EnumOperadora {
 
-    PASA(1L, "PASA"),
-    AMS(2L, "AMS");
+    PASA(1L, "AMS"),
+    AMS(2L, "PASA");
 
     private Long indice;
     private String descricao;
@@ -21,13 +21,10 @@ public enum EnumOperadora {
 
     public static EnumOperadora getOperadoraByIndice(Long indice) {
         switch (indice.intValue()) {
-
             case 1:
                 return EnumOperadora.PASA;
-
             case 2:
                 return EnumOperadora.AMS;
-
             default:
                 break;
         }

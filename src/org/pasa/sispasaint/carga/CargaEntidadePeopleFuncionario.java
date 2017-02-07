@@ -85,8 +85,6 @@ public class CargaEntidadePeopleFuncionario {
             funcionario.setOrigemInformacoes(newOrigemInformacoes());
             //VINCULO
             funcionario.setTipoVinculoEmpregaticio(newTipoVinculoEmpregaticio(modelo));
-            //BENEFICIARIOS
-            
             
             //MATRICULAS
             funcionario.setMatriculaOrigem(modelo.getMatriculaPeople());//IMPORTANTE
@@ -99,8 +97,9 @@ public class CargaEntidadePeopleFuncionario {
             funcionario.setDataUltimaAtualizacao(DateUtil.obterDataAtual());
             funcionario.setDataInclusaoSistema(DateUtil.obterDataAtual());
             
-            funcionarioBean.cadastrar(funcionario);
+            funcionarioBean.cadastrar(funcionario);//gerar ID
             
+            //BENEFICIARIOS
             List<ModeloBenPeople> benef = impBenPeopleTempBeanImpl.listarBeneficiarios(modelo);
             for (ModeloBenPeople f : benef) {
                 Beneficiario b = cargaEntidadePeopleBeneficiario.newBeneficiario(f);

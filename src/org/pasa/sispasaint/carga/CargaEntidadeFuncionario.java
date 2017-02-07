@@ -20,6 +20,7 @@ import org.pasa.sispasa.core.model.TipoDocumento;
 import org.pasa.sispasa.core.model.TipoVinculoEmpregaticio;
 import org.pasa.sispasaint.bean.impl.EmpresaBeanImpl;
 import org.pasa.sispasaint.bean.impl.EstadoBeanImpl;
+import org.pasa.sispasaint.bean.impl.FuncionarioBeanImpl;
 import org.pasa.sispasaint.bean.impl.ModeloBenEndBeanImpl;
 import org.pasa.sispasaint.bean.impl.MunicipioBeanImpl;
 import org.pasa.sispasaint.bean.impl.NivelEscolaridadeBeanImpl;
@@ -40,11 +41,11 @@ public class CargaEntidadeFuncionario {
     private final CargaEntidadeBeneficiario cargaEntidadeBeneficiario;
     private final EmpresaBeanImpl empresaBean;
     private final ModeloBenEndBeanImpl modeloBenEndBean;
-    private final FuncionarioDAOImpl funcionarioDAO;
+    private final FuncionarioBeanImpl funcionarioBean;
     private final NivelEscolaridadeBeanImpl nivelEscolaridadeBean;
 
     public CargaEntidadeFuncionario() {
-        this.funcionarioDAO = new FuncionarioDAOImpl();
+        funcionarioBean = new FuncionarioBeanImpl();
         this.cargaEntidadeBeneficiario = new CargaEntidadeBeneficiario();
         this.empresaBean = new EmpresaBeanImpl();
         this.modeloBenEndBean = new ModeloBenEndBeanImpl();
@@ -78,17 +79,7 @@ public class CargaEntidadeFuncionario {
             funcionario.setOrigemInformacoes(newOrigemInformacoes());
             //VINCULO
             funcionario.setTipoVinculoEmpregaticio(newTipoVinculoEmpregaticio(modeloBenEnd));
-            //BENEFICIARIOS
-            List<ModeloBenEnd> benef = modeloBenEndBean.listarBeneficiarios(modeloBenEnd);
-
-            for (ModeloBenEnd f : benef) {
-                Beneficiario b = cargaEntidadeBeneficiario.newBeneficiario(f);
-                if (b == null) {
-                    return false;
-                } else {
-                    funcionario.addBeneficiario(b);
-                }
-            }
+           
 
             //MATRICULAS
             funcionario.setMatriculaOrigem(modeloBenEnd.getMatriculaPeople());//IMPORTANTE
@@ -100,7 +91,24 @@ public class CargaEntidadeFuncionario {
             funcionario.setIndAtivo(SisPasaIntCommon.ATIVO);
             funcionario.setDataUltimaAtualizacao(DateUtil.obterDataAtual());
             funcionario.setDataInclusaoSistema(DateUtil.obterDataAtual());
-            return funcionarioDAO.cadastrar(funcionario);
+            
+            funcionarioBean.cadastrar(funcionario);//gerar ID
+            
+             //BENEFICIARIOS
+            List<ModeloBenEnd> benef = modeloBenEndBean.listarBeneficiarios(modeloBenEnd);
+            for (ModeloBenEnd f : benef) {
+                Beneficiario b = cargaEntidadeBeneficiario.newBeneficiario(f);
+                if (b == null) {
+                    return false;
+                } else {
+                    b.setFuncionario(funcionario);
+                    if(f.getCodBeneficiario().equals("00")){
+                        b.setId(funcionario.getId());
+                    }
+                    funcionario.addBeneficiario(b);
+                }
+            }
+            return funcionarioBean.atualizar(funcionario);
         }
     }
 
