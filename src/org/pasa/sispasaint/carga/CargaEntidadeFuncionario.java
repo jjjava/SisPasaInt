@@ -64,19 +64,19 @@ public class CargaEntidadeFuncionario {
             if (newEndereco(modeloBenEnd) == null) {
                 return false;
             } else {
-                funcionario.addEndereco(newEndereco(modeloBenEnd));
+                funcionario.getPessoa().addEndereco(newEndereco(modeloBenEnd));
             }
             //DOCUMENTOS
-            funcionario.setCpf(modeloBenEnd.getCpf());
-            funcionario.addDocumento(newPis(modeloBenEnd));
+            funcionario.getPessoa().setCpf(modeloBenEnd.getCpf());
+            funcionario.getPessoa().addDocumento(newPis(modeloBenEnd));
             //TELEFONES
-            funcionario.setTelefones(newTelefones(modeloBenEnd));
+            funcionario.getPessoa().setTelefones(newTelefones(modeloBenEnd));
             //ATRIBUTOS 
             setAtributos(modeloBenEnd);
             //DADOS BANCARIOS
             funcionario.setDadosBancarios(newDadosBancarios(modeloBenEnd));
             //ORIGEM INFORMACOES
-            funcionario.setOrigemInformacoes(newOrigemInformacoes());
+            funcionario.getPessoa().setOrigemInformacoes(newOrigemInformacoes());
             //VINCULO
             funcionario.setTipoVinculoEmpregaticio(newTipoVinculoEmpregaticio(modeloBenEnd));
            
@@ -90,7 +90,7 @@ public class CargaEntidadeFuncionario {
             funcionario.setIdUsuario(SisPasaIntCommon.USER_CARGA);
             funcionario.setIndAtivo(SisPasaIntCommon.ATIVO);
             funcionario.setDataUltimaAtualizacao(DateUtil.obterDataAtual());
-            funcionario.setDataInclusaoSistema(DateUtil.obterDataAtual());
+            funcionario.getPessoa().setDataInclusaoSistema(DateUtil.obterDataAtual());
             
             funcionarioBean.cadastrar(funcionario);//gerar ID
             
@@ -164,11 +164,11 @@ public class CargaEntidadeFuncionario {
 
     private void setAtributos(ModeloBenEnd modelo) {
         //ATRIBUTOS 
-        funcionario.setNome(modelo.getNomeBeneficiario());
-        funcionario.setNomeAbreviado(modelo.getNomeBeneficiarioAbreviado());
-        funcionario.setNomeMae(modelo.getNomeDaMae());
-        funcionario.setSexo(modelo.getSexo());
-        funcionario.setDataNascimento(DateUtil.toDate(modelo.getDataNascimento()));
+        funcionario.getPessoa().setNome(modelo.getNomeBeneficiario());
+        funcionario.getPessoa().setNomeAbreviado(modelo.getNomeBeneficiarioAbreviado());
+        funcionario.getPessoa().setNomeMae(modelo.getNomeDaMae());
+        funcionario.getPessoa().setSexo(modelo.getSexo());
+        funcionario.getPessoa().setDataNascimento(DateUtil.toDate(modelo.getDataNascimento()));
         funcionario.setDireitoAbaterIR(modelo.getDireitoAbaterIR());
         funcionario.setDataAdmissao(DateUtil.toDate(modelo.getDataAdmissao()));
         funcionario.setFinanceira(modelo.getFinanceira());
@@ -181,8 +181,8 @@ public class CargaEntidadeFuncionario {
         funcionario.setMatriculaPasa(modelo.getMatricula());
         funcionario.setUnidadeControle(modelo.getUnidadeDeControle());
         funcionario.setCentroCusto(modelo.getCentroDeCusto());
-        funcionario.setNivelEscolaridade(newNivelEscolaridade(modelo));
-        funcionario.setIndConclusaoEscolaridade(StringUtil.parserIndicadorConclusao(modelo.getIndicadorConclusao()));
+        funcionario.getPessoa().setNivelEscolaridade(newNivelEscolaridade(modelo));
+        funcionario.getPessoa().setIndConclusaoEscolaridade(StringUtil.parserIndicadorConclusao(modelo.getIndicadorConclusao()));
     }
 
     private NivelEscolaridade newNivelEscolaridade(ModeloBenEnd modelo) {

@@ -26,52 +26,52 @@ import org.pasa.sispasa.core.vo.MunicipioVO;
 @AuditTable(value = "HIST_MUNICIPIO")
 public class Municipio extends BaseEntity implements Serializable {
 
-	private static final long serialVersionUID = 1L;
+    private static final long serialVersionUID = 1L;
 
-	@Id
-	@Column(name = "ID_MUNICIPIO", columnDefinition = ConstantesBanco.BIGINT)
-	private Long id;
+    @Id
+    @Column(name = "ID_MUNICIPIO", columnDefinition = ConstantesBanco.BIGINT)
+    private Long id;
 
-	@Column(name = "NOME", nullable = false, length = 50)
-	private String nome;
+    @Column(name = "NOME", nullable = false, length = 50)
+    private String nome;
 
-	@ManyToOne
-	@JoinColumn(name = "ID_ESTADO")
-	@NotAudited
-	private Estado estado;
+    @ManyToOne
+    @JoinColumn(name = "ID_ESTADO")
+    @NotAudited
+    private Estado estado;
 
-	public Municipio() {
-	}
+    public Municipio() {
+    }
 
-	public Municipio(Long id) {
-		this.id = id;
-	}
+    public Municipio(Long id) {
+        this.id = id;
+    }
 
-	public MunicipioVO getEntityVO() {
-		return new MunicipioVO(id, nome);
-	}
+    public MunicipioVO getEntityVO() {
+        return new MunicipioVO(id, nome);
+    }
 
-	public Long getId() {
-		return id;
-	}
+    public Long getId() {
+        return id;
+    }
 
-	public void setId(Long id) {
-		this.id = id;
-	}
+    public void setId(Long id) {
+        this.id = id;
+    }
 
-	public String getNome() {
-		return nome;
-	}
+    public String getNome() {
+        return nome;
+    }
 
-	public void setNome(String nome) {
-		this.nome = nome;
-	}
+    public void setNome(String nome) {
+        this.nome = nome;
+    }
 
-	public Estado getEstado() {
-		return estado;
-	}
+    public Estado getEstado() {
+        return estado;
+    }
 
-	public void setEstado(Estado estado) {
-		this.estado = estado;
-	}
+    public void setEstado(Estado estado) {
+        this.estado = estado;
+    }
 }

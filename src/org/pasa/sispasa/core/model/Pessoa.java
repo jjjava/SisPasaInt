@@ -33,7 +33,7 @@ import org.pasa.sispasa.core.enumeration.EnumNivelEscolaridade;
  */
 @Entity
 @Table(name = "PESSOA")
-@Inheritance(strategy = InheritanceType.JOINED)
+//@Inheritance(strategy = InheritanceType.JOINED)
 @Audited
 @AuditTable(value = "HIST_PESSOA")
 public class Pessoa extends BaseEntity implements Serializable {

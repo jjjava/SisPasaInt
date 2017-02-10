@@ -47,20 +47,20 @@ public class CargaEntidadeBeneficiario {
         if (newEndereco(modeloBenEnd) == null) {
             return null;
         } else {
-            beneficiario.addEndereco(newEndereco(modeloBenEnd));
+            beneficiario.getPessoa().addEndereco(newEndereco(modeloBenEnd));
         }
         //DOCUMENTOS
-        beneficiario.setCpf(modeloBenEnd.getCpf());
-        beneficiario.addDocumento(newPis(modeloBenEnd));
+        beneficiario.getPessoa().setCpf(modeloBenEnd.getCpf());
+        beneficiario.getPessoa().addDocumento(newPis(modeloBenEnd));
         //TELEFONES
-        beneficiario.setTelefones(newTelefones(modeloBenEnd));
+        beneficiario.getPessoa().setTelefones(newTelefones(modeloBenEnd));
         //ATRIBUTOS 
         setAtributos(modeloBenEnd);
         //PLANO
         if (newPlano(modeloBenEnd) == null) {
             return null;
         }
-        beneficiario.setOrigemInformacoes(newOrigemInformacoes());
+        beneficiario.getPessoa().setOrigemInformacoes(newOrigemInformacoes());
         beneficiario.setPlano(newPlano(modeloBenEnd));
         beneficiario.setDataUltimaAtulizacao(DateUtil.obterDataAtual());
         beneficiario.setIdUsuario(SisPasaIntCommon.USER_CARGA);
@@ -134,13 +134,13 @@ public class CargaEntidadeBeneficiario {
         beneficiario.setCarteirinha(modeloBenEnd.getEmpresa()+modeloBenEnd.getMatricula()+modeloBenEnd.getCodBeneficiario());
         beneficiario.setMatriculaAMS(modeloBenEnd.getMatricula());
         beneficiario.setCodBeneficiario(modeloBenEnd.getCodBeneficiario());
-        beneficiario.setNome(modeloBenEnd.getNomeBeneficiario());
-        beneficiario.setNomeAbreviado(modeloBenEnd.getNomeBeneficiarioAbreviado());
-        beneficiario.setNomeMae(modeloBenEnd.getNomeDaMae());
-        beneficiario.setDataNascimento(DateUtil.toDate(modeloBenEnd.getDataNascimento()));
-        beneficiario.setDataObito(DateUtil.toDate(modeloBenEnd.getDataFalecimento()));
-        beneficiario.setSexo(modeloBenEnd.getSexo());
-        beneficiario.setIndConclusaoEscolaridade(StringUtil.parserIndicadorConclusao(modeloBenEnd.getIndicadorConclusao()));
+        beneficiario.getPessoa().setNome(modeloBenEnd.getNomeBeneficiario());
+        beneficiario.getPessoa().setNomeAbreviado(modeloBenEnd.getNomeBeneficiarioAbreviado());
+        beneficiario.getPessoa().setNomeMae(modeloBenEnd.getNomeDaMae());
+        beneficiario.getPessoa().setDataNascimento(DateUtil.toDate(modeloBenEnd.getDataNascimento()));
+        beneficiario.getPessoa().setDataObito(DateUtil.toDate(modeloBenEnd.getDataFalecimento()));
+        beneficiario.getPessoa().setSexo(modeloBenEnd.getSexo());
+        beneficiario.getPessoa().setIndConclusaoEscolaridade(StringUtil.parserIndicadorConclusao(modeloBenEnd.getIndicadorConclusao()));
         beneficiario.setDireitoAMSReenbolso(modeloBenEnd.getDireitoAMSCredenciamento());
         beneficiario.setDataValidadeCredenciado(DateUtil.toDate(modeloBenEnd.getDataValidadeCredenciado()));
         beneficiario.setDireitoAMSReenbolso(modeloBenEnd.getDireitoAmsReembolso());
@@ -156,8 +156,8 @@ public class CargaEntidadeBeneficiario {
         beneficiario.setCns(modeloBenEnd.getCodigoNacionalDeSaude());
         beneficiario.setDeclNascidoVivo(modeloBenEnd.getDeclaracaoNascidoVivo());
         beneficiario.setDataFimPlanoCassi(DateUtil.toDate(modeloBenEnd.getCassiData()));
-        beneficiario.setDataInclusaoSistema(DateUtil.obterDataAtual());
-        beneficiario.setNivelEscolaridade(newNivelEscolaridade(modeloBenEnd));
+        beneficiario.getPessoa().setDataInclusaoSistema(DateUtil.obterDataAtual());
+        beneficiario.getPessoa().setNivelEscolaridade(newNivelEscolaridade(modeloBenEnd));
 
         if (modeloBenEnd.getTipoBeneficiario().equalsIgnoreCase(EnumTipoBeneficiario.TITULAR.getIndice())) {
             beneficiario.setTipoBeneficiario(EnumTipoBeneficiario.TITULAR.getIndice());

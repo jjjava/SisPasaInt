@@ -22,43 +22,43 @@ import org.pasa.sispasa.core.vo.PaisVO;
 @Entity
 @Table(name = "PAIS")
 @Audited
-@AuditTable(value="HIST_PAIS")
+@AuditTable(value = "HIST_PAIS")
 public class Pais extends BaseEntity implements Serializable {
 
-	private static final long serialVersionUID = 1L;
+    private static final long serialVersionUID = 1L;
 
-	@Id
-	@Column(name = "ID_PAIS", columnDefinition = ConstantesBanco.BIGINT)
-	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	private Long id;
+    @Id
+    @Column(name = "ID_PAIS", columnDefinition = ConstantesBanco.BIGINT)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long id;
 
-	@Column(name = "NOME", nullable = false, length = 30)
-	private String nome;
+    @Column(name = "NOME", nullable = false, length = 30)
+    private String nome;
 
-	public Pais(){
-	}
-	
-	public PaisVO getEntityVO() {
-		return new PaisVO(id, nome);
-	}
-	
-	public Pais(Long id){
-		this.id = id;
-	}
-	
-	public Long getId() {
-		return id;
-	}
+    public Pais() {
+    }
 
-	public void setId(Long id) {
-		this.id = id;
-	}
+    public PaisVO getEntityVO() {
+        return new PaisVO(id, nome);
+    }
 
-	public String getNome() {
-		return nome;
-	}
+    public Pais(Long id) {
+        this.id = id;
+    }
 
-	public void setNome(String nome) {
-		this.nome = nome;
-	}
+    public Long getId() {
+        return id;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
+    }
+
+    public String getNome() {
+        return nome;
+    }
+
+    public void setNome(String nome) {
+        this.nome = nome;
+    }
 }

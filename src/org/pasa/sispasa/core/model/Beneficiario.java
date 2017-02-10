@@ -1,12 +1,16 @@
 package org.pasa.sispasa.core.model;
 
+import java.io.Serializable;
 import java.util.Date;
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
+import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
+import javax.persistence.OneToOne;
 import javax.persistence.PrimaryKeyJoinColumn;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
@@ -24,13 +28,14 @@ import org.pasa.sispasa.core.constants.ConstantesBanco;
  */
 @Entity
 @Table(name = "BENEFICIARIO")
-@PrimaryKeyJoinColumn(name = "ID_PESSOA")
+//@PrimaryKeyJoinColumn(name = "ID_PESSOA")
 @Audited
 @AuditTable(value = "HIST_BENEFICIARIO")
-public class Beneficiario extends Pessoa {
+public class Beneficiario extends BaseEntity implements Serializable{
 
     private static final long serialVersionUID = 1L;
 
+    @Id
     @Column(name = "ID_BENEF", columnDefinition = ConstantesBanco.BIGINT)
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
@@ -116,6 +121,9 @@ public class Beneficiario extends Pessoa {
     @JoinColumn(name = "ID_PLANO")
     private Plano plano;
     
+    @OneToOne(cascade = CascadeType.ALL)
+    private Pessoa pessoa;
+    
     public Beneficiario(){
     }
 
@@ -125,7 +133,7 @@ public class Beneficiario extends Pessoa {
         return id;
     }
 
-    @Override
+    //@Override
     public void setId(Long id) {
         this.id = id;
     }
@@ -320,6 +328,14 @@ public class Beneficiario extends Pessoa {
 
     public void setDataUltimaAtulizacao(Date dataUltimaAtualizacao) {
         this.dataUltimaAtualizacao = dataUltimaAtualizacao;
+    }
+    
+     public Pessoa getPessoa() {
+        return pessoa;
+    }
+
+    public void setPessoa(Pessoa pessoa) {
+        this.pessoa = pessoa;
     }
 
     @Override

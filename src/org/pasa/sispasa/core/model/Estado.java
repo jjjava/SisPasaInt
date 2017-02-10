@@ -25,53 +25,53 @@ import org.pasa.sispasa.core.vo.EstadoVO;
 @AuditTable(value = "HIST_ESTADO")
 public class Estado implements Serializable {
 
-	private static final long serialVersionUID = 1L;
+    private static final long serialVersionUID = 1L;
 
-	@Id
-	@Column(name = "ID_ESTADO", columnDefinition = ConstantesBanco.CHAR_2)
-	private String id;
+    @Id
+    @Column(name = "ID_ESTADO", columnDefinition = ConstantesBanco.CHAR_2)
+    private String id;
 
-	@Column(name = "NOME", length = 30)
-	private String nome;
+    @Column(name = "NOME", length = 30)
+    private String nome;
 
-	@ManyToOne
-	@JoinColumn(name = "ID_PAIS")
-	@NotAudited
-	private Pais pais;
+    @ManyToOne
+    @JoinColumn(name = "ID_PAIS")
+    @NotAudited
+    private Pais pais;
 
-	public Estado() {
-		// CONSTRUTOR DEFAULT
-	}
+    public Estado() {
+        // CONSTRUTOR DEFAULT
+    }
 
-	public EstadoVO getEntityVO() {
-		return new EstadoVO(id, nome);
-	}
+    public EstadoVO getEntityVO() {
+        return new EstadoVO(id, nome);
+    }
 
-	public Estado(String id) {
-		this.id = id;
-	}
+    public Estado(String id) {
+        this.id = id;
+    }
 
-	public String getId() {
-		return id;
-	}
+    public String getId() {
+        return id;
+    }
 
-	public void setId(String id) {
-		this.id = id;
-	}
+    public void setId(String id) {
+        this.id = id;
+    }
 
-	public String getNome() {
-		return nome;
-	}
+    public String getNome() {
+        return nome;
+    }
 
-	public void setNome(String nome) {
-		this.nome = nome;
-	}
+    public void setNome(String nome) {
+        this.nome = nome;
+    }
 
-	public Pais getPais() {
-		return pais;
-	}
+    public Pais getPais() {
+        return pais;
+    }
 
-	public void setPais(Pais pais) {
-		this.pais = pais;
-	}
+    public void setPais(Pais pais) {
+        this.pais = pais;
+    }
 }
