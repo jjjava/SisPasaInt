@@ -122,6 +122,7 @@ public class Beneficiario extends BaseEntity implements Serializable{
     private Plano plano;
     
     @OneToOne(cascade = CascadeType.ALL)
+    @JoinColumn(name = "ID_PESSOA")
     private Pessoa pessoa;
     
     public Beneficiario(){

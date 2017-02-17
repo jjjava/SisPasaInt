@@ -5,6 +5,8 @@ import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.IOException;
+import java.time.Duration;
+import java.time.Instant;
 import java.util.Map;
 import org.pasa.sispasa.core.enumeration.EnumBanco;
 import org.pasa.sispasaint.config.Configuracao;
@@ -13,6 +15,7 @@ import org.pasa.sispasaint.map.CamposModelo;
 import org.pasa.sispasaint.map.MapaCamposModeloBen;
 import org.pasa.sispasaint.model.intg.Log;
 import org.pasa.sispasaint.model.intg.ModeloBenPeople;
+import org.pasa.sispasaint.util.DateUtil;
 import org.pasa.sispasaint.util.StringUtil;
 
 /**
@@ -29,6 +32,8 @@ public class LerArquivoBenPeople {
     private PosicaoCampo campo;
     private final Map<String, PosicaoCampo> mapa;
     private final ImpBenPeopleTempDAOImpl modeloDAO;
+    
+    private Long timeLinhaParse;
 
     public LerArquivoBenPeople(Log log) {
         this.log = log;
@@ -54,6 +59,7 @@ public class LerArquivoBenPeople {
             br = new BufferedReader(new FileReader(file));
             String line = null;
             while (read) {
+                Instant iniFor = Instant.now();
                 line = br.readLine();
                 if(line == null){
                     read = false;
@@ -64,6 +70,10 @@ public class LerArquivoBenPeople {
                     line = acerta400Pos(line);
                     modeloDAO.cadastrar(parseCampos(line, nomeArq));// vrf se usar trim() o nao														// ñ
                 }
+                
+                Duration duracao = Duration.between(iniFor, Instant.now());
+  
+        System.err.println("duracao FOR(); :"+ (duracao.toMillis()));
             }
         } catch (FileNotFoundException e) {
             System.err.println(e);
@@ -86,6 +96,7 @@ public class LerArquivoBenPeople {
     private ModeloBenPeople parseCampos(String line, String nomeArq) {
         // line = StringUtil.removeCharsEspeciais(line);
 
+        Instant timeLinhaParse = Instant.now();
         ModeloBenPeople modelo = new ModeloBenPeople();
         //BENEFICIARIO - FUNCIONARIO
         campo = (PosicaoCampo) mapa.get(CamposModelo.EMPRESA);
@@ -194,6 +205,11 @@ public class LerArquivoBenPeople {
         modelo.setCodigoFilialVLI(line.substring(campo.getInicioCampo(), campo.getFimCampo()));
 
         modelo.setNomeArquivo(nomeArq);
+        
+        
+        Duration duracao = Duration.between(timeLinhaParse, Instant.now());
+  
+        System.err.println("duracao parse :"+ duracao.toMillis());
         return modelo;
     }
 

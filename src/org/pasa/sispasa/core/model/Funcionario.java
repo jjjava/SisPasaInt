@@ -123,6 +123,7 @@ public class Funcionario extends BaseEntity implements Serializable {
     private List<Beneficiario> beneficiarios;
     
     @OneToOne(cascade = CascadeType.ALL)
+    @JoinColumn(name = "ID_PESSOA")
     private Pessoa pessoa;
 
     public Funcionario() {

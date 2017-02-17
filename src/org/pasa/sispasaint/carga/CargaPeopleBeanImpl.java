@@ -30,7 +30,7 @@ public class CargaPeopleBeanImpl implements CargaPeopleBean, Runnable {
         this.log = log;
         logBeanImpl = new LogBeanImpl();
         modeloBenBean = new ImpBenPeopleTempBeanImpl();
-       // modeloEndBean = new ImpEndPeopleTempBeanImpl();
+        //modeloEndBean = new ImpEndPeopleTempBeanImpl();
         funcionarioBeanImpl = new FuncionarioBeanImpl();
         cargaEntidadePeopleFuncionario = new CargaEntidadePeopleFuncionario();
     }
@@ -43,7 +43,7 @@ public class CargaPeopleBeanImpl implements CargaPeopleBean, Runnable {
     
     @Override
     public void inicar() {
-      //  this.cargaArquivosTemp();
+        this.cargaArquivosTemp();
         this.mapearEntidades();
     }
 

@@ -8,8 +8,8 @@ package org.pasa.sispasa.core.enumeration;
  */
 public enum EnumOperadora {
 
-    PASA(1L, "AMS"),
-    AMS(2L, "PASA");
+    AMS(1L, "AMS"),
+    PASA(2L, "PASA");
 
     private Long indice;
     private String descricao;

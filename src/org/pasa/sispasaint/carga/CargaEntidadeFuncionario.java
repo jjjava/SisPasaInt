@@ -15,6 +15,7 @@ import org.pasa.sispasa.core.model.Funcionario;
 import org.pasa.sispasa.core.model.Municipio;
 import org.pasa.sispasa.core.model.NivelEscolaridade;
 import org.pasa.sispasa.core.model.OrigemInformacoes;
+import org.pasa.sispasa.core.model.Pessoa;
 import org.pasa.sispasa.core.model.Telefone;
 import org.pasa.sispasa.core.model.TipoDocumento;
 import org.pasa.sispasa.core.model.TipoVinculoEmpregaticio;
@@ -57,8 +58,9 @@ public class CargaEntidadeFuncionario {
         if (empresa == null) {
             return false;
         } else {
-            //EMPRESA
             funcionario = new Funcionario();
+            funcionario.setPessoa(new Pessoa());
+            //EMPRESA
             funcionario.setEmpresa(empresa);
             //ENDERECO
             if (newEndereco(modeloBenEnd) == null) {
@@ -80,7 +82,6 @@ public class CargaEntidadeFuncionario {
             //VINCULO
             funcionario.setTipoVinculoEmpregaticio(newTipoVinculoEmpregaticio(modeloBenEnd));
            
-
             //MATRICULAS
             funcionario.setMatriculaOrigem(modeloBenEnd.getMatriculaPeople());//IMPORTANTE
             funcionario.setMatriculaAtualizadora(modeloBenEnd.getMatriculaAtulizador());
@@ -103,7 +104,7 @@ public class CargaEntidadeFuncionario {
                 } else {
                     b.setFuncionario(funcionario);
                     if(f.getCodBeneficiario().equals("00")){
-                        b.setId(funcionario.getId());
+                        b.setPessoa(funcionario.getPessoa());
                     }
                     funcionario.addBeneficiario(b);
                 }

@@ -25,6 +25,7 @@ import org.pasa.sispasa.core.model.DadosBancarios;
 import org.pasa.sispasa.core.model.Documento;
 import org.pasa.sispasa.core.model.NivelEscolaridade;
 import org.pasa.sispasa.core.model.OrigemInformacoes;
+import org.pasa.sispasa.core.model.Pessoa;
 import org.pasa.sispasa.core.model.Telefone;
 import org.pasa.sispasa.core.model.TipoDocumento;
 import org.pasa.sispasa.core.model.TipoVinculoEmpregaticio;
@@ -65,6 +66,7 @@ public class CargaEntidadePeopleFuncionario {
             return false;
         } else {
             funcionario = new Funcionario();
+            funcionario.setPessoa(new Pessoa());
             funcionario.setEmpresa(empresa);
             //ENDERECO
             if (newEndereco(modelo) == null) {

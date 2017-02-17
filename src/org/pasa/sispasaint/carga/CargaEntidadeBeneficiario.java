@@ -12,6 +12,7 @@ import org.pasa.sispasa.core.model.Estado;
 import org.pasa.sispasa.core.model.Municipio;
 import org.pasa.sispasa.core.model.NivelEscolaridade;
 import org.pasa.sispasa.core.model.OrigemInformacoes;
+import org.pasa.sispasa.core.model.Pessoa;
 import org.pasa.sispasa.core.model.Plano;
 import org.pasa.sispasa.core.model.Telefone;
 import org.pasa.sispasa.core.model.TipoDocumento;
@@ -29,20 +30,21 @@ import org.pasa.sispasaint.util.StringUtil;
  * @version 1.0.0
  */
 public class CargaEntidadeBeneficiario {
-
+    
     private Beneficiario beneficiario;
     private final PlanoBeanImpl planoBean;
     private final EstadoBeanImpl estadoBean;
     private final MunicipioBeanImpl municipioBean;
-
+    
     public CargaEntidadeBeneficiario() {
         this.planoBean = new PlanoBeanImpl();
         this.estadoBean = new EstadoBeanImpl();
         this.municipioBean = new MunicipioBeanImpl();
     }
-
+    
     public Beneficiario newBeneficiario(ModeloBenEnd modeloBenEnd) {
         beneficiario = new Beneficiario();
+        beneficiario.setPessoa(new Pessoa());
         //ENDERECO
         if (newEndereco(modeloBenEnd) == null) {
             return null;
@@ -65,10 +67,10 @@ public class CargaEntidadeBeneficiario {
         beneficiario.setDataUltimaAtulizacao(DateUtil.obterDataAtual());
         beneficiario.setIdUsuario(SisPasaIntCommon.USER_CARGA);
         beneficiario.setIndAtivo(SisPasaIntCommon.ATIVO);
-
+        
         return beneficiario;
     }
-
+    
     private Endereco newEndereco(ModeloBenEnd modelo) {
         Estado estado = estadoBean.obter(modelo.getUf());
         Municipio municipio = municipioBean.existe(modelo.getCidade());
@@ -86,7 +88,7 @@ public class CargaEntidadeBeneficiario {
         endereco.setMunicipio(municipio);
         return endereco;
     }
-
+    
     private Documento newPis(ModeloBenEnd modelo) {
         Documento pis = new Documento();
         TipoDocumento tpPIS = new TipoDocumento();
@@ -102,11 +104,11 @@ public class CargaEntidadeBeneficiario {
     
     private NivelEscolaridade newNivelEscolaridade(ModeloBenEnd modelo) {
         NivelEscolaridade nivelEscolaridade = new NivelEscolaridade();
-        nivelEscolaridade.setId(Long.parseLong(modelo.getGrauEscolaridade()+1));//melhorar
+        nivelEscolaridade.setId(Long.parseLong(modelo.getGrauEscolaridade() + 1));//melhorar
         nivelEscolaridade.setCodExterno(modelo.getGrauEscolaridade());
         return nivelEscolaridade;
     }
-
+    
     private List<Telefone> newTelefones(ModeloBenEnd modelo) {
         List<Telefone> listaTelefones = new ArrayList<>();
         Telefone tel1 = new Telefone();
@@ -115,7 +117,7 @@ public class CargaEntidadeBeneficiario {
         tel1.setIdUsuario(SisPasaIntCommon.USER_CARGA);
         tel1.setDataUltimaAtualizacao(DateUtil.obterDataAtual());
         listaTelefones.add(tel1);
-
+        
         Telefone tel2 = new Telefone();
         tel2.setNumeroTelefone(modelo.getTelefone2());
         tel2.setIndAtivo(SisPasaIntCommon.ATIVO);
@@ -124,14 +126,14 @@ public class CargaEntidadeBeneficiario {
         listaTelefones.add(tel2);
         return listaTelefones;
     }
-
+    
     private Plano newPlano(ModeloBenEnd modelo) {
         return planoBean.existe(modelo.getPlano());
     }
-
+    
     private void setAtributos(ModeloBenEnd modeloBenEnd) {
         //ATRIBUTOS
-        beneficiario.setCarteirinha(modeloBenEnd.getEmpresa()+modeloBenEnd.getMatricula()+modeloBenEnd.getCodBeneficiario());
+        beneficiario.setCarteirinha(modeloBenEnd.getEmpresa() + modeloBenEnd.getMatricula() + modeloBenEnd.getCodBeneficiario());
         beneficiario.setMatriculaAMS(modeloBenEnd.getMatricula());
         beneficiario.setCodBeneficiario(modeloBenEnd.getCodBeneficiario());
         beneficiario.getPessoa().setNome(modeloBenEnd.getNomeBeneficiario());
@@ -158,7 +160,7 @@ public class CargaEntidadeBeneficiario {
         beneficiario.setDataFimPlanoCassi(DateUtil.toDate(modeloBenEnd.getCassiData()));
         beneficiario.getPessoa().setDataInclusaoSistema(DateUtil.obterDataAtual());
         beneficiario.getPessoa().setNivelEscolaridade(newNivelEscolaridade(modeloBenEnd));
-
+        
         if (modeloBenEnd.getTipoBeneficiario().equalsIgnoreCase(EnumTipoBeneficiario.TITULAR.getIndice())) {
             beneficiario.setTipoBeneficiario(EnumTipoBeneficiario.TITULAR.getIndice());
         } else {

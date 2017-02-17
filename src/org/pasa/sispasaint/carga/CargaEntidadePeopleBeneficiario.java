@@ -12,6 +12,7 @@ import org.pasa.sispasa.core.model.Estado;
 import org.pasa.sispasa.core.model.Municipio;
 import org.pasa.sispasa.core.model.NivelEscolaridade;
 import org.pasa.sispasa.core.model.OrigemInformacoes;
+import org.pasa.sispasa.core.model.Pessoa;
 import org.pasa.sispasa.core.model.Plano;
 import org.pasa.sispasa.core.model.Telefone;
 import org.pasa.sispasa.core.model.TipoDocumento;
@@ -50,6 +51,7 @@ public class CargaEntidadePeopleBeneficiario {
 
     public Beneficiario newBeneficiario(ModeloBenPeople modelo) {
         beneficiario = new Beneficiario();
+        beneficiario.setPessoa(new Pessoa());
         //ENDERECO
         if (newEndereco(modelo) == null) {
             return null;

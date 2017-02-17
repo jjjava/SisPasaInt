@@ -1,5 +1,7 @@
 package org.pasa.sispasaint.dao;
 
+import java.time.Duration;
+import java.time.Instant;
 import java.util.List;
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
@@ -34,9 +36,12 @@ public abstract class DaoGenerico<T> {
 
     public boolean cadastrar(T entity) {
         try {
+            Instant ini = Instant.now();
             em.getTransaction().begin();
             em.persist(entity);
             em.getTransaction().commit();
+            Duration duracao = Duration.between(ini, Instant.now());
+            System.err.println("duracao persist :" + duracao.toMillis());
             return true;
         } catch (Exception e) {
             System.err.println(e);
