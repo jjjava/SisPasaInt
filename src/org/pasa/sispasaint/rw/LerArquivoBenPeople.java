@@ -5,7 +5,6 @@ import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.IOException;
-import java.time.Duration;
 import java.time.Instant;
 import java.util.Map;
 import org.pasa.sispasa.core.enumeration.EnumBanco;
@@ -15,7 +14,6 @@ import org.pasa.sispasaint.map.CamposModelo;
 import org.pasa.sispasaint.map.MapaCamposModeloBen;
 import org.pasa.sispasaint.model.intg.Log;
 import org.pasa.sispasaint.model.intg.ModeloBenPeople;
-import org.pasa.sispasaint.util.DateUtil;
 import org.pasa.sispasaint.util.StringUtil;
 
 /**
@@ -23,7 +21,7 @@ import org.pasa.sispasaint.util.StringUtil;
  * @author Hudson Schumaker
  * @version 1.0.0
  */
-public class LerArquivoBenPeople {
+public class LerArquivoBenPeople implements Runnable {
 
     private boolean read;
     private Log log;
@@ -32,8 +30,6 @@ public class LerArquivoBenPeople {
     private PosicaoCampo campo;
     private final Map<String, PosicaoCampo> mapa;
     private final ImpBenPeopleTempDAOImpl modeloDAO;
-    
-    private Long timeLinhaParse;
 
     public LerArquivoBenPeople(Log log) {
         this.log = log;
@@ -59,9 +55,8 @@ public class LerArquivoBenPeople {
             br = new BufferedReader(new FileReader(file));
             String line = null;
             while (read) {
-                Instant iniFor = Instant.now();
                 line = br.readLine();
-                if(line == null){
+                if (line == null) {
                     read = false;
                     break;
                 }
@@ -70,10 +65,7 @@ public class LerArquivoBenPeople {
                     line = acerta400Pos(line);
                     modeloDAO.cadastrar(parseCampos(line, nomeArq));// vrf se usar trim() o nao														// ñ
                 }
-                
-                Duration duracao = Duration.between(iniFor, Instant.now());
-  
-        System.err.println("duracao FOR(); :"+ (duracao.toMillis()));
+
             }
         } catch (FileNotFoundException e) {
             System.err.println(e);
@@ -94,9 +86,7 @@ public class LerArquivoBenPeople {
     }
 
     private ModeloBenPeople parseCampos(String line, String nomeArq) {
-        // line = StringUtil.removeCharsEspeciais(line);
-
-        Instant timeLinhaParse = Instant.now();
+        line = StringUtil.removeCharsEspeciais(line);
         ModeloBenPeople modelo = new ModeloBenPeople();
         //BENEFICIARIO - FUNCIONARIO
         campo = (PosicaoCampo) mapa.get(CamposModelo.EMPRESA);
@@ -205,11 +195,6 @@ public class LerArquivoBenPeople {
         modelo.setCodigoFilialVLI(line.substring(campo.getInicioCampo(), campo.getFimCampo()));
 
         modelo.setNomeArquivo(nomeArq);
-        
-        
-        Duration duracao = Duration.between(timeLinhaParse, Instant.now());
-  
-        System.err.println("duracao parse :"+ duracao.toMillis());
         return modelo;
     }
 
@@ -242,5 +227,16 @@ public class LerArquivoBenPeople {
             zipArquivo.zip(name, pathOri, pathDest);
             //  file.delete();
         }).start();
+    }
+
+    public void start() {
+        Thread t = new Thread(this);
+        t.setPriority(Thread.MAX_PRIORITY);
+        t.start();
+    }
+
+    @Override
+    public void run() {
+
     }
 }

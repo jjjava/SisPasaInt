@@ -22,7 +22,6 @@ public class CargaPeopleBeanImpl implements CargaPeopleBean, Runnable {
     private final LogBeanImpl logBeanImpl;
     private final FuncionarioBeanImpl funcionarioBeanImpl;
     private final ImpBenPeopleTempBeanImpl modeloBenBean;
-   // private final ImpEndPeopleTempBeanImpl modeloEndBean;
     private final CargaEntidadePeopleFuncionario cargaEntidadePeopleFuncionario;
 
     public CargaPeopleBeanImpl(Long id, Log log) {
@@ -30,16 +29,10 @@ public class CargaPeopleBeanImpl implements CargaPeopleBean, Runnable {
         this.log = log;
         logBeanImpl = new LogBeanImpl();
         modeloBenBean = new ImpBenPeopleTempBeanImpl();
-        //modeloEndBean = new ImpEndPeopleTempBeanImpl();
         funcionarioBeanImpl = new FuncionarioBeanImpl();
         cargaEntidadePeopleFuncionario = new CargaEntidadePeopleFuncionario();
     }
-    
-    public void start() {
-        Thread t = new Thread(this);
-        t.setPriority(Thread.MAX_PRIORITY);
-        t.start();
-    }
+   
     
     @Override
     public void inicar() {
