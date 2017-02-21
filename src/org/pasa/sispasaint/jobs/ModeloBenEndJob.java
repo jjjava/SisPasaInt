@@ -6,8 +6,8 @@ import org.pasa.sispasaint.bean.impl.DestinatarioBeanImpl;
 import org.pasa.sispasaint.bean.impl.EmpresaBeanImpl;
 import org.pasa.sispasaint.bean.impl.ListaDestinatariosBeanImpl;
 import org.pasa.sispasaint.bean.impl.LogBeanImpl;
-import org.pasa.sispasaint.carga.CargaBenEndBeanImpl;
-import org.pasa.sispasaint.carga.CargaPeopleBeanImpl;
+import org.pasa.sispasaint.carga.impl.CargaBenEndBeanImpl;
+import org.pasa.sispasaint.carga.impl.CargaPeopleBeanImpl;
 import org.pasa.sispasaint.mail.EnviaEmail;
 import org.pasa.sispasaint.model.intg.ListaDestinatarios;
 import org.pasa.sispasaint.model.intg.Log;
@@ -42,7 +42,7 @@ public class ModeloBenEndJob implements Job {
         idEmpresa = dataMap.getLong(SisPasaIntCommon.ID_EMPRESA);
         if (idEmpresa == 1) {
             CargaPeopleBeanImpl cargaPeopleBeanImpl = new CargaPeopleBeanImpl(idEmpresa, log);
-            cargaPeopleBeanImpl.start();
+            cargaPeopleBeanImpl.inicar();
         } else {
             CargaBenEndBeanImpl cargaBenEndBeanImpl = new CargaBenEndBeanImpl(idEmpresa, log);
             cargaBenEndBeanImpl.start();

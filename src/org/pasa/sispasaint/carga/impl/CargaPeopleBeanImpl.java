@@ -1,4 +1,4 @@
-package org.pasa.sispasaint.carga;
+package org.pasa.sispasaint.carga.impl;
 
 import org.apache.log4j.Logger;
 import org.pasa.sispasa.core.model.Funcionario;
@@ -6,6 +6,7 @@ import org.pasa.sispasaint.bean.impl.FuncionarioBeanImpl;
 import org.pasa.sispasaint.bean.impl.ImpBenPeopleTempBeanImpl;
 import org.pasa.sispasaint.bean.impl.ImpEndPeopleTempBeanImpl;
 import org.pasa.sispasaint.bean.impl.LogBeanImpl;
+import org.pasa.sispasaint.carga.CargaPeopleBean;
 import org.pasa.sispasaint.model.intg.Log;
 import org.pasa.sispasaint.model.intg.ModeloBenPeople;
 import org.pasa.sispasaint.util.SisPasaIntCommon;
@@ -15,7 +16,7 @@ import org.pasa.sispasaint.util.SisPasaIntCommon;
  * @author Hudson Schumaker
  * @version 1.0.0
  */
-public class CargaPeopleBeanImpl implements CargaPeopleBean, Runnable {
+public class CargaPeopleBeanImpl implements CargaPeopleBean {
 
     private Long id;
     private Log log;
@@ -37,15 +38,15 @@ public class CargaPeopleBeanImpl implements CargaPeopleBean, Runnable {
     @Override
     public void inicar() {
         this.cargaArquivosTemp();
-        this.mapearEntidades();
+        //this.mapearEntidades();
     }
 
     @Override
     public void cargaArquivosTemp() {
-        ImpBenPeopleTempBeanImpl beanBen = new ImpBenPeopleTempBeanImpl();
-        beanBen.limparTbTemp();
-        beanBen.resetarIdentity();
-        beanBen.carregarArquivo(id, log);
+//        ImpBenPeopleTempBeanImpl beanBen = new ImpBenPeopleTempBeanImpl();
+//        beanBen.limparTbTemp();
+//        beanBen.resetarIdentity();
+//        beanBen.carregarArquivo(id, log);
         
         ImpEndPeopleTempBeanImpl beanEnd = new ImpEndPeopleTempBeanImpl();
         beanEnd.limparTbTemp();
@@ -80,8 +81,5 @@ public class CargaPeopleBeanImpl implements CargaPeopleBean, Runnable {
         }
     }
     
-    @Override
-    public void run() {
-        inicar();
-    }
+
 }

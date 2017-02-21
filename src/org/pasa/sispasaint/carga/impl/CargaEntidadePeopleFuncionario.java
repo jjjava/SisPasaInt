@@ -1,4 +1,4 @@
-package org.pasa.sispasaint.carga;
+package org.pasa.sispasaint.carga.impl;
 
 import org.pasa.sispasa.core.model.Empresa;
 import org.pasa.sispasa.core.model.Endereco;

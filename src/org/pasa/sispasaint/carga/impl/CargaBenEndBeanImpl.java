@@ -1,10 +1,11 @@
-package org.pasa.sispasaint.carga;
+package org.pasa.sispasaint.carga.impl;
 
 import org.apache.log4j.Logger;
 import org.pasa.sispasa.core.model.Funcionario;
 import org.pasa.sispasaint.bean.impl.BeneficiarioBeanImpl;
 import org.pasa.sispasaint.bean.impl.FuncionarioBeanImpl;
 import org.pasa.sispasaint.bean.impl.ModeloBenEndBeanImpl;
+import org.pasa.sispasaint.carga.CargaBenEndBean;
 import org.pasa.sispasaint.model.intg.Log;
 import org.pasa.sispasaint.model.intg.ModeloBenEnd;
 import org.pasa.sispasaint.util.SisPasaIntCommon;

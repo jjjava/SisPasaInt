@@ -1,11 +1,11 @@
 package org.pasa.sispasaint.rw;
 
-import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileNotFoundException;
-import java.io.FileReader;
 import java.io.IOException;
-import java.time.Instant;
+import java.io.RandomAccessFile;
+import java.nio.MappedByteBuffer;
+import java.nio.channels.FileChannel;
 import java.util.Map;
 import org.pasa.sispasa.core.enumeration.EnumBanco;
 import org.pasa.sispasaint.config.Configuracao;
@@ -21,72 +21,81 @@ import org.pasa.sispasaint.util.StringUtil;
  * @author Hudson Schumaker
  * @version 1.0.0
  */
-public class LerArquivoBenPeople implements Runnable {
+public class LerArquivoBenPeople {
 
-    private boolean read;
     private Log log;
     private Long id;
     private String benNomeArq;
     private PosicaoCampo campo;
     private final Map<String, PosicaoCampo> mapa;
     private final ImpBenPeopleTempDAOImpl modeloDAO;
+    private int ini;
+    private int fim;
+    private int lote;
+    private int loteLines;
 
     public LerArquivoBenPeople(Log log) {
         this.log = log;
+
         modeloDAO = new ImpBenPeopleTempDAOImpl();
         mapa = new MapaCamposModeloBen().getMapa();
-        read = true;
     }
 
-    public void lerArquivo(Long id) {
+    public void lerArquivo(Long id, int ini, int fim, int lote, int loteLines) {
         this.id = id;
+        this.ini = ini;
+        this.fim = fim;
+        this.lote = lote;
+        this.loteLines = loteLines;
+        
         lerArquivo(Configuracao.getInstance().getBenNomeArqComPath(id),
                 Configuracao.getInstance().getNomeArqBen(id));
     }
 
-    public void lerArquivo(String path, String nomeArq) {
+    private void lerArquivo(String path, String nomeArq) {
         this.benNomeArq = nomeArq;
-        lerArquivo(new File(path), nomeArq);
+        lerArquivo(new File(path));
     }
 
-    public void lerArquivo(File file, String nomeArq) {
-        BufferedReader br = null;
+    private void lerArquivo(File file) {
+        String out = "";
         try {
-            br = new BufferedReader(new FileReader(file));
-            String line = null;
-            while (read) {
-                line = br.readLine();
-                if (line == null) {
-                    read = false;
-                    break;
-                }
-                if (line.length() > 2) {
-                    line = normalizaLinha(line);
-                    line = acerta400Pos(line);
-                    modeloDAO.cadastrar(parseCampos(line, nomeArq));// vrf se usar trim() o nao														// ñ
-                }
+            RandomAccessFile aFile = new RandomAccessFile(file, "r");
+            FileChannel inChannel = aFile.getChannel();
+            //   MappedByteBuffer buffer = inChannel.map(FileChannel.MapMode.READ_ONLY, ini, 19594 * 401);
+            //   buffer.load();
 
+            for (int i = 0; i < loteLines; i++) {
+                MappedByteBuffer buffer = inChannel.map(FileChannel.MapMode.READ_ONLY, ini, 400);
+                buffer.load();
+                out = "";
+                for (int j = 0; j < 400; j++) {
+                    //  System.out.println("j "+j);
+                    out = out + ((char) buffer.get());
+                }
+                System.out.println("out " + out);
+                ini = ini + 401;
+                buffer.clear();
+
+                modeloDAO.cadastrar(parseCampos(out, benNomeArq));
             }
+            //        buffer.clear(); // do something with the data and clear/compact it.
+            inChannel.close();
+            aFile.close();
         } catch (FileNotFoundException e) {
             System.err.println(e);
         } catch (IOException e) {
             System.err.println(e);
-        } finally {
-            try {
-                if (br != null) {
-                    br.close();
-                }
-                zipArq(file, benNomeArq,
-                        Configuracao.getInstance().getBenNomeArqComPath(id),
-                        Configuracao.getInstance().getBenNomeProcComPath(id));
-            } catch (IOException e) {
-                System.err.println(e);
-            }
         }
     }
 
     private ModeloBenPeople parseCampos(String line, String nomeArq) {
+
+        //NORMALIZACOES DA LINHA
+        line = acerta400Pos(line);
         line = StringUtil.removeCharsEspeciais(line);
+        line = normalizaLinha(line);
+
         ModeloBenPeople modelo = new ModeloBenPeople();
         //BENEFICIARIO - FUNCIONARIO
         campo = (PosicaoCampo) mapa.get(CamposModelo.EMPRESA);
@@ -195,6 +204,7 @@ public class LerArquivoBenPeople implements Runnable {
         modelo.setCodigoFilialVLI(line.substring(campo.getInicioCampo(), campo.getFimCampo()));
 
         modelo.setNomeArquivo(nomeArq);
+        //  System.err.println(line);
         return modelo;
     }
 
@@ -227,16 +237,5 @@ public class LerArquivoBenPeople implements Runnable {
             zipArquivo.zip(name, pathOri, pathDest);
             //  file.delete();
         }).start();
-    }
-
-    public void start() {
-        Thread t = new Thread(this);
-        t.setPriority(Thread.MAX_PRIORITY);
-        t.start();
-    }
-
-    @Override
-    public void run() {
-
     }
 }

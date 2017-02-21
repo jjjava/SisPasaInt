@@ -1,4 +1,4 @@
-package org.pasa.sispasaint.carga;
+package org.pasa.sispasaint.carga.impl;
 
 import java.util.ArrayList;
 import java.util.List;

@@ -25,5 +25,7 @@ public class SisPasaIntCommon {
     public static final String CONTACORRENTE = "C";
     public static final String TIPO_JOB = "TIPO";
     public static final String ID_EMPRESA = "ID";
-    public static final Long USER_CARGA = 1000L;
+    public static final Long USER_CARGA = 1L;
+    public static final Integer LINE_TAM_1 = 402;
+    public static final Integer LINE_TAM_2 = 401;
 }

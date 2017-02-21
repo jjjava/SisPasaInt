@@ -5,6 +5,9 @@ import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.IOException;
+import java.io.RandomAccessFile;
+import java.nio.MappedByteBuffer;
+import java.nio.channels.FileChannel;
 import java.util.Map;
 import org.pasa.sispasaint.config.Configuracao;
 import org.pasa.sispasaint.dao.impl.ImpEndPeopleTempDAOImpl;
@@ -27,6 +30,10 @@ public class LerArquivoEndPeople {
     private PosicaoCampo campo;
     private final Map<String, PosicaoCampo> mapa;
     private final ImpEndPeopleTempDAOImpl modeloDAO;
+    private int ini;
+    private int fim;
+    private int lote;
+    private int loteLines;
 
     public LerArquivoEndPeople(Log log) {
         this.log = log;
@@ -34,51 +41,57 @@ public class LerArquivoEndPeople {
         modeloDAO = new ImpEndPeopleTempDAOImpl();
     }
 
-    public void lerArquivo(Long id) {
+    public void lerArquivo(Long id, int ini, int fim, int lote, int loteLines) {
         this.id = id;
+        this.ini = ini;
+        this.fim = fim;
+        this.lote = lote;
+        this.loteLines = loteLines;
         lerArquivo(Configuracao.getInstance().getEndNomeArqComPath(id),
                 Configuracao.getInstance().getNomeArqEnd(id));
     }
 
     public void lerArquivo(String path, String nomeArq) {
         this.endNomeArq = nomeArq;
-        lerArquivo(new File(path), nomeArq);
+        lerArquivo(new File(path));
     }
 
-    public void lerArquivo(File file, String nomeArq) {
-        BufferedReader br = null;
+    public void lerArquivo(File file) {
+        String out = "";
         try {
-            br = new BufferedReader(new FileReader(file));
-            String line = null;
-            while ((line = br.readLine()) != null) {
-                if (line.length() > 1) {
-                    line = normalizaLinha(line);
-                    if (line.length() < 190) {
-                        line = acerta190Pos(line);
-                    }
-                    modeloDAO.cadastrar(parseCampos(line, nomeArq));// vrf se usar trim() ou  ñ
+            RandomAccessFile aFile = new RandomAccessFile(file, "r");
+            FileChannel inChannel = aFile.getChannel();
+            //   MappedByteBuffer buffer = inChannel.map(FileChannel.MapMode.READ_ONLY, ini, 19594 * 401);
+            //   buffer.load();
+
+            for (int i = 0; i < loteLines; i++) {
+                MappedByteBuffer buffer = inChannel.map(FileChannel.MapMode.READ_ONLY, ini, 190);
+                buffer.load();
+                out = "";
+                for (int j = 0; j < 190; j++) {
+                    //  System.out.println("j "+j);
+                    out = out + ((char) buffer.get());
                 }
+                System.out.println("out " + out);
+                ini = ini + 191;
+                buffer.clear();
+
+                modeloDAO.cadastrar(parseCampos(out, endNomeArq));
             }
+            //        buffer.clear(); // do something with the data and clear/compact it.
+            inChannel.close();
+            aFile.close();
         } catch (FileNotFoundException e) {
             System.err.println(e);
         } catch (IOException e) {
             System.err.println(e);
-        } finally {
-            try {
-                if (br != null) {
-                    br.close();
-                }
-                zipArq(file, endNomeArq,
-                        Configuracao.getInstance().getBenNomeArqComPath(id),
-                        Configuracao.getInstance().getBenNomeProcComPath(id));
-            } catch (IOException e) {
-                System.err.println(e);
-            }
         }
     }
 
     private ModeloEndPeople parseCampos(String line, String nomeArq) {
+        line = acerta190Pos(line);
         line = StringUtil.removeCharsEspeciais(line);
+        line = normalizaLinha(line);
         ModeloEndPeople modelo = new ModeloEndPeople();
         try {
             //ENDEREÇO
