@@ -16,7 +16,8 @@ import org.pasa.sispasa.core.vo.EstadoVO;
 
 /**
  *
- * @author Hudson Schumaker / Andre Gomes
+ * @author Hudson Schumaker 
+ * @author Andre Gomes
  * @version 1.0.0
  */
 @Entity

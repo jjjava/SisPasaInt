@@ -22,7 +22,7 @@ public enum EnumSituacaoAssociado {
 
 	public static EnumSituacaoAssociado getFromIndice(Long indice) {
 		for (EnumSituacaoAssociado enumSituacao : EnumSituacaoAssociado.values()) {
-			if (enumSituacao.getIndice() == indice) {
+			if (enumSituacao.getIndice().equals(indice)) {
 				return enumSituacao;
 			}
 		}

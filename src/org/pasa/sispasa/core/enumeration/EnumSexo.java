@@ -17,20 +17,15 @@ public enum EnumSexo {
         this.descricao = descricao;
     }
 
-    /**
-     *
-     * @param indice
-     * @return
-     */
-    public static EnumSexo getSexoByIndice(String indice) {
-        if (indice.equals(EnumSexo.FEMININO.getIndice())) {
-            return EnumSexo.FEMININO;
-        } else {
-            return EnumSexo.MASCULINO;
-        }
-    }
-
-    //getters e setters
+	public static EnumSexo getSexoByIndice(String id) {
+		for (EnumSexo enumSexo : EnumSexo.values()) {
+			if (enumSexo.indice.equals(id)) {
+				return enumSexo;
+			}
+		}
+		return null;
+	}
+       
     /**
      * @return the indice
      */

@@ -12,7 +12,7 @@ import org.pasa.sispasa.core.util.Utils;
  * @author andre
  *
  */
-public class PessoaVO extends AtributosComunsVO {
+public class PessoaVO extends AtributosComunsVO  {
 
 	private Date dataUltimaAtualizacao;
 	private String cpfFormatado;

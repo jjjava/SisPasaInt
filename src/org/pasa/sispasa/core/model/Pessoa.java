@@ -4,14 +4,13 @@ import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
+
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.Inheritance;
-import javax.persistence.InheritanceType;
 import javax.persistence.JoinColumn;
 import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
@@ -19,11 +18,16 @@ import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
+
 import org.hibernate.envers.AuditTable;
 import org.hibernate.envers.Audited;
 import org.hibernate.envers.NotAudited;
 import org.pasa.sispasa.core.constants.ConstantesBanco;
+import org.pasa.sispasa.core.enumeration.EnumEstadoCivil;
 import org.pasa.sispasa.core.enumeration.EnumNivelEscolaridade;
+import org.pasa.sispasa.core.enumeration.EnumSexo;
+import org.pasa.sispasa.core.enumeration.EnumSimNao;
+import org.pasa.sispasa.core.util.Utils;
 
 /**
  *
@@ -212,10 +216,22 @@ public class Pessoa extends BaseEntity implements Serializable {
     }
 
     public EnumNivelEscolaridade getNivelEscolaridadeAsEnum() {
-        return EnumNivelEscolaridade.getNivelEscolaridadeByIndice(getNivelEscolaridade().getId().intValue());
+        return EnumNivelEscolaridade.getNivelEscolaridadeByIndice(getNivelEscolaridade().getId());
+	}
+
+	public EnumSexo getSexoAsEnum() {
+		return EnumSexo.getSexoByIndice(getSexo());
+	}
+
+	public EnumEstadoCivil getEstadoCivilAsEnum() {
+		return EnumEstadoCivil.getEstadoCivilByIndice(estadoCivil.getId());
+	}
+	
+	public String getCpfFormatado() {
+        return Utils.formataCpf(cpf);
     }
 
-    @Override
+	@Override
     public Long getId() {
         return id;
     }
@@ -311,6 +327,10 @@ public class Pessoa extends BaseEntity implements Serializable {
     public void setEmail(String email) {
         this.email = email;
     }
+
+	public EnumSimNao getIndConclusaoEscolaridadeAsEnum() {
+		return EnumSimNao.valueFromIndice(getIndConclusaoEscolaridade());
+	}
 
     public Integer getIndConclusaoEscolaridade() {
         return indConclusaoEscolaridade;

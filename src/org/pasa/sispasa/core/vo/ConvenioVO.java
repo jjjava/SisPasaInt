@@ -8,12 +8,15 @@ import org.pasa.sispasa.core.enumeration.EnumTipoParticipacao;
 /**
  * 
  * @author Andre Gomes
+ * @author Hudson Schumaker
  *
  */
 public class ConvenioVO extends AtributosComunsVO {
 
 	private Date dataInicioVigencia;
 	private Date dataFimVigencia;
+	private Integer diaVencimento;
+	
 	private Integer qtdDiasAssociacao;
 	private Integer qtdDiasAdesao;
 
@@ -61,6 +64,10 @@ public class ConvenioVO extends AtributosComunsVO {
 
 	public boolean isEnumTipoParticipacaoSemParticipacao() {
 		return EnumTipoParticipacao.SEM_PARTICIPACAO.equals(enumTipoParticipacao);
+	}
+
+	public boolean isEnumTipoParticipacaoPatrocinioTemp() {
+		return EnumTipoParticipacao.PATROCINIO_TEMPORARIO.equals(enumTipoParticipacao);
 	}
 
 	public Integer getQtdDiasAssociacao() {
@@ -190,4 +197,13 @@ public class ConvenioVO extends AtributosComunsVO {
 	public void setIndConvenioPrincipal(boolean indConvenioPrincipal) {
 		this.indConvenioPrincipal = indConvenioPrincipal;
 	}
+
+	public Integer getDiaVencimento() {
+		return diaVencimento;
+	}
+
+	public void setDiaVencimento(Integer diaVencimento) {
+		this.diaVencimento = diaVencimento;
+	}
+
 }

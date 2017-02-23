@@ -7,7 +7,7 @@ package org.pasa.sispasa.core.enumeration;
 public enum EnumTipoAssociado {
 	
 	A("Ativo"),
-	E("Ex-empregado ou aposentado"),		
+	E("Ex-empregado/Aposentado"),		
 	P("Pensionista"),
 	R("Pré-PASA");
 		
@@ -20,4 +20,5 @@ public enum EnumTipoAssociado {
 	public String getDescricao() {
 		return descricao;
 	}
+	
 }

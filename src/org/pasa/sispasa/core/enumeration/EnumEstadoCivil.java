@@ -19,38 +19,16 @@ public enum EnumEstadoCivil {
 		this.indice = indice;
 		this.descricao = descricao;
 	}
-	
-	/**
-	 * 
-	 * @param indice
-	 * @return
-	 */
-	public static EnumEstadoCivil getEstadoCivilByIndice(Long indice){
 
-		switch (indice.intValue()) {
-			
-			case 1:
-				return EnumEstadoCivil.SOLTEIRO;
-				
-			case 2:
-				return EnumEstadoCivil.CASADO;
-			
-			case 3:
-				return EnumEstadoCivil.DIVORCIADO;
-				
-			case 4:
-				return EnumEstadoCivil.DESQUITADO;	
-				
-			case 5:
-				return EnumEstadoCivil.VIUVO;				
-
-			default:
-				break;
+	public static EnumEstadoCivil getEstadoCivilByIndice(Long indice) {
+		for (EnumEstadoCivil enumEstadoCivil : EnumEstadoCivil.values()) {
+			if (enumEstadoCivil.indice.equals(indice)) {
+				return enumEstadoCivil;
+			}
 		}
 		return null;
 	}
-	
-	//getters e setters
+
     public Long getIndice() {
 		return indice;
 	}
@@ -58,4 +36,5 @@ public enum EnumEstadoCivil {
 	public String getDescricao() {
 		return descricao;
 	}
+	
 }

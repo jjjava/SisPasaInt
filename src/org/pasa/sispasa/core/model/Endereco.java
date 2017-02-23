@@ -66,8 +66,6 @@ public class Endereco extends BaseEntity implements Serializable {
 	@Column(name = "ID_USUARIO", nullable = false, columnDefinition = ConstantesBanco.BIGINT)
 	private Long idUsuario;
 
-	// RELACIONAMENTOS
-
 	@ManyToOne()
 	@JoinColumn(name = "ID_MUNICIPIO")
 	@NotAudited
@@ -81,33 +79,34 @@ public class Endereco extends BaseEntity implements Serializable {
 	public static Endereco getEntity(EnderecoVO enderecoVO) {
 
 		Endereco endereco = new Endereco();
-		endereco.setId(enderecoVO.getId());
-		endereco.setDataUltimaAtualizacao(new Date());
-		endereco.setIdUsuario(enderecoVO.getIdUsuario());
-		endereco.setIndAtivo(enderecoVO.getEnumIndAtivo().getIndice());		
-		endereco.setCep(Utils.desformataCep(enderecoVO.getCep()));
-		endereco.setLogradouro(enderecoVO.getLogradouro());
-		endereco.setNumero(enderecoVO.getNumero());
-		endereco.setComplemento(enderecoVO.getComplemento());
-		endereco.setBairro(enderecoVO.getBairro());
 		endereco.setMunicipio(new Municipio(enderecoVO.getMunicipio().getId()));
 		endereco.setEstado(new Estado(enderecoVO.getEstado().getIdEstado()));
+		endereco.setIndAtivo(enderecoVO.getEnumIndAtivo().getIndice());
+		endereco.setCep(Utils.desformataCep(enderecoVO.getCep()));
+		endereco.setComplemento(enderecoVO.getComplemento());
+		endereco.setLogradouro(enderecoVO.getLogradouro());
 		endereco.setIdUsuario(enderecoVO.getIdUsuario());
-		
+		endereco.setIdUsuario(enderecoVO.getIdUsuario());
+		endereco.setDataUltimaAtualizacao(new Date());
+		endereco.setBairro(enderecoVO.getBairro());
+		endereco.setNumero(enderecoVO.getNumero());
+		endereco.setId(enderecoVO.getId());
+
 		return endereco;
 	}
-	
+
 	public EnderecoVO getEntityVO() {
 
 		EnderecoVO enderecoVO = new EnderecoVO();
-		enderecoVO.setId(getId());
-		enderecoVO.setCep(getCep());
-		enderecoVO.setBairro(getBairro());
-		enderecoVO.setComplemento(getComplemento());
-		enderecoVO.setEstado(new EstadoVO(estado.getId(), estado.getNome()));
-		enderecoVO.setLogradouro(getLogradouro());
 		enderecoVO.setMunicipio(new MunicipioVO(municipio.getId(), municipio.getNome()));
+		enderecoVO.setEstado(new EstadoVO(estado.getId(), estado.getNome()));
+		enderecoVO.setComplemento(getComplemento());
+		enderecoVO.setLogradouro(getLogradouro());
+		enderecoVO.setIdUsuario(getIdUsuario());
+		enderecoVO.setBairro(getBairro());
 		enderecoVO.setNumero(getNumero());
+		enderecoVO.setCep(getCep());
+		enderecoVO.setId(getId());
 
 		return enderecoVO;
 	}

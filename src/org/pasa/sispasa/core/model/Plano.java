@@ -18,6 +18,7 @@ import org.hibernate.envers.AuditTable;
 import org.hibernate.envers.Audited;
 import org.hibernate.envers.NotAudited;
 import org.pasa.sispasa.core.constants.ConstantesBanco;
+import org.pasa.sispasa.core.enumeration.EnumSimNao;
 
 /**
  *
@@ -30,184 +31,198 @@ import org.pasa.sispasa.core.constants.ConstantesBanco;
 @AuditTable(value = "HIST_PLANO")
 public class Plano extends BaseEntity implements Serializable {
 
-    private static final long serialVersionUID = 1L;
+	private static final long serialVersionUID = 1L;
 
-    @Id
-    @Column(name = "ID_PLANO", columnDefinition = ConstantesBanco.BIGINT)
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
+	@Id
+	@Column(name = "ID_PLANO", columnDefinition = ConstantesBanco.BIGINT)
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	private Long id;
 
-    @Column(name = "CD_PLANO", length = 10)
-    private String codPlano;
+	@Column(name = "CD_PLANO", length = 10)
+	private String codPlano;
 
-    @Column(name = "NOME", length = 30, nullable = false)
-    private String nome;
+	@Column(name = "NOME", length = 30, nullable = false)
+	private String nome;
 
-    @Column(name = "DESCRICAO", length = 60, nullable = false)
-    private String descricao;
+	@Column(name = "DESCRICAO", length = 60, nullable = false)
+	private String descricao;
 
-    @Column(name = "DT_INICIO_VIGENCIA", columnDefinition = ConstantesBanco.DATE, nullable = false)
-    @Temporal(TemporalType.DATE)
-    private Date dataInicioVigencia;
+	@Column(name = "DT_INICIO_VIGENCIA", columnDefinition = ConstantesBanco.DATE, nullable = false)
+	@Temporal(TemporalType.DATE)
+	private Date dataInicioVigencia;
 
-    @Column(name = "DT_FIM_VIGENCIA", columnDefinition = ConstantesBanco.DATE)
-    @Temporal(TemporalType.DATE)
-    private Date dataFimVigencia;
+	@Column(name = "DT_FIM_VIGENCIA", columnDefinition = ConstantesBanco.DATE)
+	@Temporal(TemporalType.DATE)
+	private Date dataFimVigencia;
 
-    @Column(name = "QTD_DIAS_CARENCIA", nullable = false, columnDefinition = ConstantesBanco.SMALLINT)
-    private Integer qtdDiasCarencia;
+	@Column(name = "QTD_DIAS_CARENCIA", nullable = false, columnDefinition = ConstantesBanco.SMALLINT)
+	private Integer qtdDiasCarencia;
 
-    @Column(name = "REGISTRO_ANS", length = 30)
-    private String registroANS;
+	@Column(name = "REGISTRO_ANS", length = 30)
+	private String registroANS;
 
-    @Column(name = "ID_USUARIO", nullable = false, columnDefinition = ConstantesBanco.BIGINT)
-    private Long idUsuario;
+	@Column(name = "IND_PERMIS_ASSOC", nullable = false, columnDefinition = ConstantesBanco.SMALLINT)
+	private Integer indPermissaoAssociacao;
 
-    @Column(name = "IND_ATIVO", nullable = false, columnDefinition = ConstantesBanco.SMALLINT)
-    private Integer indAtivo;
+	@Column(name = "ID_USUARIO", nullable = false, columnDefinition = ConstantesBanco.BIGINT)
+	private Long idUsuario;
 
-    @Column(name = "DT_ULT_ATULZ", nullable = false)
-    @Temporal(TemporalType.TIMESTAMP)
-    private Date dataUltimaAtualizacao;
+	@Column(name = "IND_ATIVO", nullable = false, columnDefinition = ConstantesBanco.SMALLINT)
+	private Integer indAtivo;
 
-    //RELACIONAMENTOS
+	@Column(name = "DT_ULT_ATULZ", nullable = false)
+	@Temporal(TemporalType.TIMESTAMP)
+	private Date dataUltimaAtualizacao;
 
-    @ManyToOne
-    @JoinColumn(name = "ID_TP_PLANO", nullable = false)
-    @NotAudited
-    private TipoPlano tipoPlano;
+	// RELACIONAMENTOS
 
-    @ManyToOne
-    @JoinColumn(name = "ID_PLANO_PAI", referencedColumnName = "ID_PLANO")
-    @NotAudited
-    private Plano planoPai;
+	@ManyToOne
+	@JoinColumn(name = "ID_TP_PLANO", nullable = false)
+	@NotAudited
+	private TipoPlano tipoPlano;
 
-    @ManyToOne
-    @JoinColumn(name = "ID_CONTRATO")
-    @NotAudited
-    private Contrato contrato;
+	@ManyToOne
+	@JoinColumn(name = "ID_PLANO_PAI", referencedColumnName = "ID_PLANO")
+	@NotAudited
+	private Plano planoPai;
 
-    //CONSTRUTORES
-    public Plano() {
-    	//CONSTRUTOR DEFAULT
-    }
+	@ManyToOne
+	@JoinColumn(name = "ID_CONTRATO")
+	@NotAudited
+	private Contrato contrato;
 
-    public Plano(Long id, String nome) {
-        this.id = id;
-        this.nome = nome;
-    }
+	// CONSTRUTORES
+	public Plano() {
+		// CONSTRUTOR DEFAULT
+	}
 
-    //GETTERS E SETTERS
-    @Override
-    public Long getId() {
-        return id;
-    }
+	public Plano(Long id, String nome) {
+		this.id = id;
+		this.nome = nome;
+	}
 
-    public void setId(Long id) {
-        this.id = id;
-    }
+	public boolean naoPermiteAssociação() {
+		return EnumSimNao.NAO.getIndice().equals(getIndPermissaoAssociacao());
+	}
 
-    public String getNome() {
-        return nome;
-    }
+	@Override
+	public Long getId() {
+		return id;
+	}
 
-    public void setNome(String nome) {
-        this.nome = nome;
-    }
+	public void setId(Long id) {
+		this.id = id;
+	}
 
-    public String getDescricao() {
-        return descricao;
-    }
+	public String getNome() {
+		return nome;
+	}
 
-    public void setDescricao(String descricao) {
-        this.descricao = descricao;
-    }
+	public void setNome(String nome) {
+		this.nome = nome;
+	}
 
-    public Date getDataInicioVigencia() {
-        return dataInicioVigencia;
-    }
+	public String getDescricao() {
+		return descricao;
+	}
 
-    public void setDataInicioVigencia(Date dataInicioVigencia) {
-        this.dataInicioVigencia = dataInicioVigencia;
-    }
+	public void setDescricao(String descricao) {
+		this.descricao = descricao;
+	}
 
-    public Date getDataFimVigencia() {
-        return dataFimVigencia;
-    }
+	public Date getDataInicioVigencia() {
+		return dataInicioVigencia;
+	}
 
-    public void setDataFimVigencia(Date dataFimVigencia) {
-        this.dataFimVigencia = dataFimVigencia;
-    }
+	public void setDataInicioVigencia(Date dataInicioVigencia) {
+		this.dataInicioVigencia = dataInicioVigencia;
+	}
 
-    public Integer getQtdDiasCarencia() {
-        return qtdDiasCarencia;
-    }
+	public Date getDataFimVigencia() {
+		return dataFimVigencia;
+	}
 
-    public void setQtdDiasCarencia(Integer qtdDiasCarencia) {
-        this.qtdDiasCarencia = qtdDiasCarencia;
-    }
+	public void setDataFimVigencia(Date dataFimVigencia) {
+		this.dataFimVigencia = dataFimVigencia;
+	}
 
-    public String getRegistroANS() {
-        return registroANS;
-    }
+	public Integer getQtdDiasCarencia() {
+		return qtdDiasCarencia;
+	}
 
-    public void setRegistroANS(String registroANS) {
-        this.registroANS = registroANS;
-    }
+	public void setQtdDiasCarencia(Integer qtdDiasCarencia) {
+		this.qtdDiasCarencia = qtdDiasCarencia;
+	}
 
-    public Long getIdUsuario() {
-        return idUsuario;
-    }
+	public String getRegistroANS() {
+		return registroANS;
+	}
 
-    public void setIdUsuario(Long idUsuario) {
-        this.idUsuario = idUsuario;
-    }
+	public void setRegistroANS(String registroANS) {
+		this.registroANS = registroANS;
+	}
 
-    public Integer getIndAtivo() {
-        return indAtivo;
-    }
+	public Long getIdUsuario() {
+		return idUsuario;
+	}
 
-    public void setIndAtivo(Integer indAtivo) {
-        this.indAtivo = indAtivo;
-    }
+	public void setIdUsuario(Long idUsuario) {
+		this.idUsuario = idUsuario;
+	}
 
-    public TipoPlano getTipoPlano() {
-        return tipoPlano;
-    }
+	public Integer getIndAtivo() {
+		return indAtivo;
+	}
 
-    public void setTipoPlano(TipoPlano tipoPlano) {
-        this.tipoPlano = tipoPlano;
-    }
+	public void setIndAtivo(Integer indAtivo) {
+		this.indAtivo = indAtivo;
+	}
 
-    public Plano getPlanoPai() {
-        return planoPai;
-    }
+	public TipoPlano getTipoPlano() {
+		return tipoPlano;
+	}
 
-    public void setPlanoPai(Plano planoPai) {
-        this.planoPai = planoPai;
-    }
+	public void setTipoPlano(TipoPlano tipoPlano) {
+		this.tipoPlano = tipoPlano;
+	}
 
-    public String getCodPlano() {
-        return codPlano;
-    }
+	public Plano getPlanoPai() {
+		return planoPai;
+	}
 
-    public void setCodPlano(String codPlano) {
-        this.codPlano = codPlano;
-    }
+	public void setPlanoPai(Plano planoPai) {
+		this.planoPai = planoPai;
+	}
 
-    public Date getDataUltimaAtualizacao() {
-        return dataUltimaAtualizacao;
-    }
+	public String getCodPlano() {
+		return codPlano;
+	}
 
-    public void setDataUltimaAtualizacao(Date dataUltimaAtualizacao) {
-        this.dataUltimaAtualizacao = dataUltimaAtualizacao;
-    }
+	public void setCodPlano(String codPlano) {
+		this.codPlano = codPlano;
+	}
 
-    public Contrato getContrato() {
-        return contrato;
-    }
+	public Date getDataUltimaAtualizacao() {
+		return dataUltimaAtualizacao;
+	}
 
-    public void setContrato(Contrato contrato) {
-        this.contrato = contrato;
-    }
+	public void setDataUltimaAtualizacao(Date dataUltimaAtualizacao) {
+		this.dataUltimaAtualizacao = dataUltimaAtualizacao;
+	}
+
+	public Contrato getContrato() {
+		return contrato;
+	}
+
+	public void setContrato(Contrato contrato) {
+		this.contrato = contrato;
+	}
+
+	public Integer getIndPermissaoAssociacao() {
+		return indPermissaoAssociacao;
+	}
+
+	public void setIndPermissaoAssociacao(Integer indPermissaoAssociacao) {
+		this.indPermissaoAssociacao = indPermissaoAssociacao;
+	}
 }

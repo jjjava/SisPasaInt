@@ -1,3 +1,4 @@
+
 package org.pasa.sispasa.core.vo;
 
 import java.util.ArrayList;
@@ -5,6 +6,7 @@ import java.util.Collection;
 
 import org.pasa.sispasa.core.enumeration.EnumFiltroPesquisaFuncionario;
 import org.pasa.sispasa.core.enumeration.EnumTipoAssociado;
+import org.pasa.sispasa.core.util.Utils;
 
 public class PesquisaAssociadoVO {
 
@@ -16,7 +18,16 @@ public class PesquisaAssociadoVO {
 	private EmpresaVO empresaVO;
 	private String nrDocFuncionario;
 	private boolean exibirGridResultado;
+	private boolean exibirGridMovimentarAss;
 	private String nome;
+	private Long id;
+
+	public PesquisaAssociadoVO() {
+	}
+
+	public PesquisaAssociadoVO(String nome) {
+		this.nome = nome;
+	}
 
 	public boolean isFiltroPesquisaMatrOrigem() {
 		return EnumFiltroPesquisaFuncionario.M_ORIGEM.equals(enumFiltroPesquisaFuncionario);
@@ -28,6 +39,10 @@ public class PesquisaAssociadoVO {
 
 	public boolean isFiltroPesquisaCPF() {
 		return EnumFiltroPesquisaFuncionario.CPF.equals(enumFiltroPesquisaFuncionario);
+	}
+
+	public String getNrDocFuncionarioSemMascara() {
+		return Utils.desformataCpfCnpj(nrDocFuncionario);
 	}
 
 	public EnumTipoAssociado getEnumTipoAssociado() {
@@ -47,7 +62,7 @@ public class PesquisaAssociadoVO {
 	}
 
 	public String getNomeFormatado() {
-		return "%" + nome.trim().toLowerCase() + "%";	
+		return nome.trim().toLowerCase() + "%";
 	}
 
 	public EmpresaVO getEmpresaVO() {
@@ -94,6 +109,22 @@ public class PesquisaAssociadoVO {
 
 	public void setExibirGridResultado(boolean exibirGridResultado) {
 		this.exibirGridResultado = exibirGridResultado;
+	}
+
+	public boolean isExibirGridMovimentarAss() {
+		return exibirGridMovimentarAss;
+	}
+
+	public void setExibirGridMovimentarAss(boolean exibirGridMovimentarAss) {
+		this.exibirGridMovimentarAss = exibirGridMovimentarAss;
+	}
+
+	public Long getId() {
+		return id;
+	}
+
+	public void setId(Long id) {
+		this.id = id;
 	}
 
 }

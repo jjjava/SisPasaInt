@@ -1,17 +1,16 @@
 package org.pasa.sispasa.core.model;
 
 import java.io.Serializable;
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
-import javax.persistence.EnumType;
-import javax.persistence.Enumerated;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
+
 import org.hibernate.envers.AuditTable;
 import org.hibernate.envers.Audited;
-import org.pasa.sispasa.core.enumeration.EnumSimNao;
 
 @Entity
 @Table(name = "TIPO_TAXA")
@@ -29,10 +28,6 @@ public class TipoTaxa implements Serializable {
     @Column(name = "DESCRICAO")
     private String descricao;
 
-    @Enumerated(EnumType.ORDINAL)
-    @Column(name = "IND_ATIVO")
-    private EnumSimNao indAtivo;
-
     public Long getId() {
         return id;
     }
@@ -49,11 +44,4 @@ public class TipoTaxa implements Serializable {
         this.descricao = descricao;
     }
 
-    public EnumSimNao getIndAtivo() {
-        return indAtivo;
-    }
-
-    public void setIndAtivo(EnumSimNao indAtivo) {
-        this.indAtivo = indAtivo;
-    }
 }

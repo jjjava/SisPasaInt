@@ -1,3 +1,4 @@
+
 package org.pasa.sispasa.core.vo;
 
 import java.util.ArrayList;
@@ -9,71 +10,112 @@ import org.pasa.sispasa.core.enumeration.EnumMotivoDesligamento;
 import org.pasa.sispasa.core.enumeration.EnumSimNao;
 import org.pasa.sispasa.core.enumeration.EnumSituacaoAssociado;
 import org.pasa.sispasa.core.enumeration.EnumTipoAssociado;
-import org.pasa.sispasa.core.enumeration.EnumTipoEnvioCobranca;
-import org.pasa.sispasa.core.enumeration.EnumTipoPagamento;
-import org.pasa.sispasa.core.enumeration.EnumTipoResponsavel;
 import org.pasa.sispasa.core.model.MotivoDesligamento;
-import org.pasa.sispasa.core.model.TipoPagamento;
+import org.pasa.sispasa.core.util.Utils;
 
 public class CadastroAssociadoVO extends FuncionarioVO {
 
-	private List<String> listEnumTipoAposentadoria;
 	private List<UsuarioAssociadoVO> listUsuariosAssociadoVO;
-	private List<ConvenioVO> listConvenioVO;
+	private List<String> listEnumTipoAposentadoria;
 
-	private EnumTipoEnvioCobranca enumTipoEnvioCobranca = EnumTipoEnvioCobranca.E;
 	private EnumMotivoDesligamento enumMotivoDesligamentoAssociado;
 	private EnumSituacaoAssociado enumSituacaoAssociado;
-	private EnumTipoResponsavel enumTipoResponsavel;
 	private EnumGrauParentesco enumGrauParentesco;
 	private EnumSimNao enumConclusaoEscolaridade;
 	private EnumTipoAssociado enumTipoAssociado;
-	private EnumTipoPagamento enumTipoPagamento;
 	private EnumSimNao enumSimNao;
 
 	private DadosBancariosVO dadosBancariosReembolso;
-	private ConvenioVO convenioVO;
+	private ConfigPagamentoVO configPagamentoVO;
 
+	private Date dataAssociacao;
+	private Date dataReadmissao;
+	private Date dataDesligamentoAssociado;
 	private Date dataAposentadoria;
 	private Date dtCriacaoPreCadastro;
 	private Date dtAnalisePreCadastro;
-	private Date dtReadmissao;
-	private Date dtInicioVinculo;
-	private Date dtDesligamentoAssociado;
+
 	private String matriculaParticipante;
 	private String matriculaRepresentante;
-	private Long idTaxaAssociado;
+	private String nomeAssAtalhoPesquisa;
+	private String nomeTitularPensionista;
+	private String cpfTitularPensionista;
+	private String cpfPensionista;
 
 	private Long idFuncionario;
 	private Long idParticipante;
 	private Long idAssociado;
+	private Long idUsuarioLogado;
+
+	private Long idAssocUltimaAlt;
+	private String nomeAssocUltimAlt;
 
 	private boolean exibirTabInfoGerais = false;
+	private boolean dadosPreCarregados = true;
 	private boolean bloquearAbas = true;
 	private boolean isTelaDetalhe;
 
-	public boolean isEnumTipoPagamentoBoleto() {
-		return EnumTipoPagamento.BOLETO.equals(enumTipoPagamento);
+	public CadastroAssociadoVO() {
+	}
+
+	public CadastroAssociadoVO(Long idFuncionario, String nomeTitularPensionista, String cpfPensionista) {
+		this.idFuncionario = idFuncionario;
+		this.nomeTitularPensionista = nomeTitularPensionista;
+		this.cpfPensionista = cpfPensionista;
+	}
+
+	public String getCpfPensionistaSemMascara() {
+		return Utils.desformataCpfCnpj(cpfPensionista);
+	}
+
+	public MotivoDesligamento getMotivoDesligamentoAssociado() {
+		return null == enumMotivoDesligamentoAssociado ? null
+				: new MotivoDesligamento(getEnumMotivoDesligamentoAssociado().getIndice());
+	}
+
+	public boolean exibirConvenio() {
+		return isTipoAssociadoAtivo() || isTipoAssociadoExEmpreAposentado();
+	}
+
+	public boolean isTipoAssociadoExEmpreAposentado() {
+		return null != enumTipoAssociado && EnumTipoAssociado.E.equals(enumTipoAssociado);
 	}
 
 	public boolean isTipoAssociadoPensionista() {
 		return null != enumTipoAssociado && EnumTipoAssociado.P.equals(enumTipoAssociado);
 	}
 
+	public boolean isTipoAssociadoAtivo() {
+		return null != enumTipoAssociado && EnumTipoAssociado.A.equals(enumTipoAssociado);
+	}
+
+	public boolean isTipoAssociadoPrePASA() {
+		return null != enumTipoAssociado && EnumTipoAssociado.R.equals(enumTipoAssociado);
+	}
+
 	public boolean isSituacaoAssociadoPreCadastro() {
-		return null != enumSituacaoAssociado && EnumSituacaoAssociado.PRE_CADASTRO.equals(enumSituacaoAssociado);
+		// return null != enumSituacaoAssociado &&
+		// EnumSituacaoAssociado.PRE_CADASTRO.equals(enumSituacaoAssociado);
+		return false;
+	}
+
+	public String getCpfDeAcordoComTipoAss() {
+		return isTipoAssociadoPensionista() ? getCpfPensionista() : getPessoa().getCpfFormatado();
 	}
 
 	public Long getEnumNivelEscolaridadeIndice() {
-		return getEnumNivelEscolaridade().getIndice();
+		return getPessoa().getEnumNivelEscolaridade().getIndice();
 	}
 
 	public Integer getEnumConclusaoEscolaridadeIndice() {
 		return getEnumConclusaoEscolaridade().getIndice();
 	}
 
-	public TipoPagamento getTipoPagamento() {
-		return new TipoPagamento(enumTipoPagamento.getIndice());
+	public Long getIdUsuarioUltAltDocumento() {
+		if (null != getCtps().getIdUsuario()) {
+			return getCtps().getIdUsuario();
+		}
+		return null == getPisPasep().getIdUsuario() ? null : getPisPasep().getIdUsuario();
 	}
 
 	@Override
@@ -159,54 +201,6 @@ public class CadastroAssociadoVO extends FuncionarioVO {
 		this.enumSituacaoAssociado = enumSituacaoAssociado;
 	}
 
-	public Date getDtInicioVinculo() {
-		return dtInicioVinculo;
-	}
-
-	public void setDtInicioVinculo(Date dtInicioVinculo) {
-		this.dtInicioVinculo = dtInicioVinculo;
-	}
-
-	public Date getDtDesligamentoAssociado() {
-		return dtDesligamentoAssociado;
-	}
-
-	public void setDtDesligamentoAssociado(Date dtDesligamentoAssociado) {
-		this.dtDesligamentoAssociado = dtDesligamentoAssociado;
-	}
-
-	public Date getDtReadmissao() {
-		return dtReadmissao;
-	}
-
-	public void setDtReadmissao(Date dtReadmissao) {
-		this.dtReadmissao = dtReadmissao;
-	}
-
-	public Long getIdTaxaAssociado() {
-		return idTaxaAssociado;
-	}
-
-	public void setIdTaxaAssociado(Long idTaxaAssociado) {
-		this.idTaxaAssociado = idTaxaAssociado;
-	}
-
-	public EnumGrauParentesco getEnumGrauParentesco() {
-		return enumGrauParentesco;
-	}
-
-	public void setEnumGrauParentesco(EnumGrauParentesco enumGrauParentesco) {
-		this.enumGrauParentesco = enumGrauParentesco;
-	}
-
-	public EnumTipoResponsavel getEnumTipoResponsavel() {
-		return enumTipoResponsavel;
-	}
-
-	public void setEnumTipoResponsavel(EnumTipoResponsavel enumTipoResponsavel) {
-		this.enumTipoResponsavel = enumTipoResponsavel;
-	}
-
 	public List<UsuarioAssociadoVO> getListUsuariosAssociadoVO() {
 		if (null == listUsuariosAssociadoVO) {
 			listUsuariosAssociadoVO = new ArrayList<UsuarioAssociadoVO>();
@@ -229,22 +223,6 @@ public class CadastroAssociadoVO extends FuncionarioVO {
 	public MotivoDesligamento getMotivoDesligamento() {
 		return null == getEnumMotivoDesligamento() ? null
 				: new MotivoDesligamento(getEnumMotivoDesligamento().getIndice());
-	}
-
-	public MotivoDesligamento getMotivoDesligamentoAssociado() {
-		return null == enumMotivoDesligamentoAssociado ? null
-				: new MotivoDesligamento(getEnumMotivoDesligamentoAssociado().getIndice());
-	}
-
-	public List<ConvenioVO> getListConvenioVO() {
-		if (null == listConvenioVO) {
-			listConvenioVO = new ArrayList<ConvenioVO>();
-		}
-		return listConvenioVO;
-	}
-
-	public void setListConvenioVO(List<ConvenioVO> listConvenioVO) {
-		this.listConvenioVO = listConvenioVO;
 	}
 
 	public Long getIdFuncionario() {
@@ -298,20 +276,63 @@ public class CadastroAssociadoVO extends FuncionarioVO {
 		this.listEnumTipoAposentadoria = listEnumTipoAposentadoria;
 	}
 
-	public EnumTipoPagamento getEnumTipoPagamento() {
-		return enumTipoPagamento;
+	public boolean isTelaDetalhe() {
+		return isTelaDetalhe;
 	}
 
-	public void setEnumTipoPagamento(EnumTipoPagamento enumTipoPagamento) {
-		this.enumTipoPagamento = enumTipoPagamento;
+	public void setTelaDetalhe(boolean isTelaDetalhe) {
+		this.isTelaDetalhe = isTelaDetalhe;
 	}
 
-	public EnumTipoEnvioCobranca getEnumTipoEnvioCobranca() {
-		return enumTipoEnvioCobranca;
+	public Long getIdUsuarioLogado() {
+		return idUsuarioLogado;
 	}
 
-	public void setEnumTipoEnvioCobranca(EnumTipoEnvioCobranca enumTipoEnvioCobranca) {
-		this.enumTipoEnvioCobranca = enumTipoEnvioCobranca;
+	public void setIdUsuarioLogado(Long idUsuarioLogado) {
+		this.idUsuarioLogado = idUsuarioLogado;
+	}
+
+	public Long getIdAssocUltimaAlt() {
+		return idAssocUltimaAlt;
+	}
+
+	public void setIdAssocUltimaAlt(Long idAssocUltimaAlt) {
+		this.idAssocUltimaAlt = idAssocUltimaAlt;
+	}
+
+	public String getNomeAssocUltimAlt() {
+		return nomeAssocUltimAlt;
+	}
+
+	public void setNomeAssocUltimAlt(String nomeAssocUltimAlt) {
+		this.nomeAssocUltimAlt = nomeAssocUltimAlt;
+	}
+
+	public ConfigPagamentoVO getConfigPagamentoVO() {
+		if (null == configPagamentoVO) {
+			configPagamentoVO = new ConfigPagamentoVO();
+		}
+		return configPagamentoVO;
+	}
+
+	public void setConfigPagamentoVO(ConfigPagamentoVO configPagamentoVO) {
+		this.configPagamentoVO = configPagamentoVO;
+	}
+
+	public String getNomeAssAtalhoPesquisa() {
+		return nomeAssAtalhoPesquisa;
+	}
+
+	public void setNomeAssAtalhoPesquisa(String nomeAssAtalhoPesquisa) {
+		this.nomeAssAtalhoPesquisa = nomeAssAtalhoPesquisa;
+	}
+
+	public String getNomeTitularPensionista() {
+		return nomeTitularPensionista;
+	}
+
+	public void setNomeTitularPensionista(String nomeTitularPensionista) {
+		this.nomeTitularPensionista = nomeTitularPensionista;
 	}
 
 	public EnumMotivoDesligamento getEnumMotivoDesligamentoAssociado() {
@@ -322,20 +343,60 @@ public class CadastroAssociadoVO extends FuncionarioVO {
 		this.enumMotivoDesligamentoAssociado = enumMotivoDesligamentoAssociado;
 	}
 
-	public ConvenioVO getConvenioVO() {
-		return convenioVO;
+	public Date getDataAssociacao() {
+		return dataAssociacao;
 	}
 
-	public void setConvenioVO(ConvenioVO convenioVO) {
-		this.convenioVO = convenioVO;
+	public void setDataAssociacao(Date dataAssociacao) {
+		this.dataAssociacao = dataAssociacao;
 	}
 
-	public boolean isTelaDetalhe() {
-		return isTelaDetalhe;
+	public Date getDataReadmissao() {
+		return dataReadmissao;
 	}
 
-	public void setTelaDetalhe(boolean isTelaDetalhe) {
-		this.isTelaDetalhe = isTelaDetalhe;
+	public void setDataReadmissao(Date dataReadmissao) {
+		this.dataReadmissao = dataReadmissao;
+	}
+
+	public Date getDataDesligamentoAssociado() {
+		return dataDesligamentoAssociado;
+	}
+
+	public void setDataDesligamentoAssociado(Date dataDesligamentoAssociado) {
+		this.dataDesligamentoAssociado = dataDesligamentoAssociado;
+	}
+
+	public boolean isDadosPreCarregados() {
+		return dadosPreCarregados;
+	}
+
+	public void setDadosPreCarregados(boolean dadosPreCarregados) {
+		this.dadosPreCarregados = dadosPreCarregados;
+	}
+
+	public String getCpfPensionista() {
+		return cpfPensionista;
+	}
+
+	public void setCpfPensionista(String cpfPensionista) {
+		this.cpfPensionista = cpfPensionista;
+	}
+
+	public EnumGrauParentesco getEnumGrauParentesco() {
+		return enumGrauParentesco;
+	}
+
+	public void setEnumGrauParentesco(EnumGrauParentesco enumGrauParentesco) {
+		this.enumGrauParentesco = enumGrauParentesco;
+	}
+
+	public String getCpfTitularPensionista() {
+		return cpfTitularPensionista;
+	}
+
+	public void setCpfTitularPensionista(String cpfTitularPensionista) {
+		this.cpfTitularPensionista = cpfTitularPensionista;
 	}
 
 }

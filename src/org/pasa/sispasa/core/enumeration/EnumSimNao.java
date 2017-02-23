@@ -7,7 +7,7 @@ package org.pasa.sispasa.core.enumeration;
 public enum EnumSimNao {
 
     /* Não mudar ordem do enum pois a entidade usa o EnumType ORDINAL. */
-    NAO(0, "Nao"),
+    NAO(0, "Não"),
     SIM(1, "Sim");
 
     private Integer indice;

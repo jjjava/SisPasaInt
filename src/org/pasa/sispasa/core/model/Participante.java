@@ -28,7 +28,9 @@ import org.pasa.sispasa.core.constants.ConstantesBanco;
 import org.pasa.sispasa.core.enumeration.EnumEstadoCivil;
 import org.pasa.sispasa.core.enumeration.EnumIndAtivo;
 import org.pasa.sispasa.core.enumeration.EnumNivelEscolaridade;
+import org.pasa.sispasa.core.enumeration.EnumSexo;
 import org.pasa.sispasa.core.enumeration.EnumSimNao;
+import org.pasa.sispasa.core.util.Utils;
 
 @Entity
 @Table(name = "PARTICIPANTE")
@@ -43,50 +45,46 @@ public class Participante extends BaseEntity implements Serializable {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
 
-	@Column(name = "ID_USUARIO")
+	@Column(name = "ID_USUARIO", nullable = false, columnDefinition = ConstantesBanco.BIGINT)
 	private Long idUsuario;
 
-	@Column(name = "CPF")
+	@Column(name = "CPF", columnDefinition = ConstantesBanco.CHAR_11)
 	private String cpf;
 
-	@Column(name = "NOME")
+	@Column(name = "NOME", length = 60, nullable = false)
 	private String nome;
 
-	@Column(name = "DT_NASCIMENTO")
 	@Temporal(TemporalType.DATE)
+	@Column(name = "DT_NASCIMENTO", columnDefinition = ConstantesBanco.DATE)
 	private Date dataNascimento;
 
-	@Column(name = "DT_FALECIMENTO")
 	@Temporal(TemporalType.DATE)
+	@Column(name = "DT_FALECIMENTO", columnDefinition = ConstantesBanco.DATE)
 	private Date dataFalecimento;
 
-	@Column(name = "DT_INCLUSAO_SISTEMA")
 	@Temporal(TemporalType.TIMESTAMP)
-	private Date dataInclusaoSistema;
-
 	@Column(name = "DT_INATIVACAO")
-	@Temporal(TemporalType.TIMESTAMP)
 	private Date dataInativacao;
 
-	@Column(name = "SEXO")
+	@Column(name = "SEXO", columnDefinition = ConstantesBanco.CHAR_1)
 	private String sexo;
 
-	@Column(name = "NM_MAE")
+	@Column(name = "NM_MAE", length = 60)
 	private String nomeMae;
 
-	@Column(name = "NM_PAI")
+	@Column(name = "NM_PAI", length = 60)
 	private String nomePai;
 
-	@Column(name = "EMAIL")
+	@Column(name = "EMAIL", length = 60)
 	private String email;
 
-	@Column(name = "EMAIL_COMERCIAL")
+	@Column(name = "EMAIL_COMERCIAL", length = 60)
 	private String emailComercial;
 
-	@Column(name = "ID_CONCL_ESCOL")
+	@Column(name = "ID_CONCL_ESCOL", nullable = false, columnDefinition = ConstantesBanco.SMALLINT)
 	private Integer indConclusaoEscolaridade;
 
-	@Column(name = "IND_ATIVO")
+	@Column(name = "IND_ATIVO", nullable = false, columnDefinition = ConstantesBanco.SMALLINT)
 	private Integer indAtivo = EnumIndAtivo.ATIVO.getIndice();
 
 	@Column(name = "DT_ULT_ATULZ")
@@ -101,7 +99,7 @@ public class Participante extends BaseEntity implements Serializable {
 	@JoinColumn(name = "ID_ENDERECO")
 	@NotAudited
 	private Endereco endereco;
-	
+
 	@OneToMany(mappedBy = "participante")
 	@NotAudited
 	private List<ParticipanteDadosBancarios> partDadosBancarios;
@@ -218,7 +216,7 @@ public class Participante extends BaseEntity implements Serializable {
 	}
 
 	public EnumNivelEscolaridade getNivelEscolaridadeAsEnum() {
-		return EnumNivelEscolaridade.getNivelEscolaridadeByIndice(getNivelEscolaridade().getId().intValue());
+		return EnumNivelEscolaridade.getNivelEscolaridadeByIndice(getNivelEscolaridade().getId());
 	}
 
 	public EnumSimNao getIndConclusaoEscolaridadeAsEnum() {
@@ -227,6 +225,14 @@ public class Participante extends BaseEntity implements Serializable {
 
 	public EnumEstadoCivil getEstadoCivilAsEnum() {
 		return EnumEstadoCivil.getEstadoCivilByIndice(estadoCivil.getId());
+	}
+
+	public EnumSexo getSexoAsEnum() {
+		return EnumSexo.getSexoByIndice(getSexo());
+	}
+	
+	public String getCpfFormatado() {
+		return Utils.formataCpf(cpf);
 	}
 
 	public Long getId() {
@@ -267,14 +273,6 @@ public class Participante extends BaseEntity implements Serializable {
 
 	public void setDataFalecimento(Date dataFalecimento) {
 		this.dataFalecimento = dataFalecimento;
-	}
-
-	public Date getDataInclusaoSistema() {
-		return dataInclusaoSistema;
-	}
-
-	public void setDataInclusaoSistema(Date dataInclusaoSistema) {
-		this.dataInclusaoSistema = dataInclusaoSistema;
 	}
 
 	public Date getDataInativacao() {

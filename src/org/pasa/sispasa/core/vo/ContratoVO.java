@@ -9,11 +9,12 @@ import org.pasa.sispasa.core.enumeration.EnumTipoContrato;
 /**
 *
 * @author Andre Gomes
+* @author Hudson Schumaker
 */
 public class ContratoVO extends AtributosComunsVO {
 
 
-    private Long numeroContrato;
+    private String numeroContrato;
     private String observacao;
     private Date dataInicioVigencia;
     private Date dataFimVigencia;
@@ -31,12 +32,11 @@ public class ContratoVO extends AtributosComunsVO {
     
 
     //GETTERS E SETTERS
-
-    public Long getNumeroContrato() {
+    public String getNumeroContrato() {
         return numeroContrato;
     }
 
-    public void setNumeroContrato(Long numeroContrato) {
+    public void setNumeroContrato(String numeroContrato) {
         this.numeroContrato = numeroContrato;
     }
 

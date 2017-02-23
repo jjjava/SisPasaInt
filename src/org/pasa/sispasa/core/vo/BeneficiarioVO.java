@@ -7,9 +7,10 @@ import org.pasa.sispasa.core.enumeration.EnumTipoBeneficiario;
  *
  * @author Andre Gomes
  */
-public class BeneficiarioVO extends PessoaVO {
+public class BeneficiarioVO extends AtributosComunsVO {
 
-    private String codBeneficiario;
+    private PessoaVO pessoa;
+	private String codBeneficiario;
     private String matriculaAMS;
     private String carteirinha;
     private String direitoAmsCredenciar;
@@ -209,6 +210,14 @@ public class BeneficiarioVO extends PessoaVO {
 	 */
 	public void setFuncionario(FuncionarioVO funcionario) {
 		this.funcionario = funcionario;
+	}
+
+	public PessoaVO getPessoa() {
+		return pessoa;
+	}
+
+	public void setPessoa(PessoaVO pessoa) {
+		this.pessoa = pessoa;
 	}
 
 }

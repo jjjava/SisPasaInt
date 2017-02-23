@@ -6,27 +6,27 @@ package org.pasa.sispasa.core.enumeration;
  */
 public enum EnumTipoTaxa {
 
-	PASA(1, "Padrão"), 
-	LEGADO(0, "Legado");
+	LEGADO(0, "Legado"), 
+	PASA(1, "Padrão");
 
-	private Integer indAtivo;
+	private Integer id;
 	private String descricao;
 
-	private EnumTipoTaxa(Integer indAtivo, String descricao) {
-		this.indAtivo = indAtivo;
+	private EnumTipoTaxa(Integer id, String descricao) {
+		this.id = id;
 		this.descricao = descricao;
 	}
 
 	public static EnumTipoTaxa[] valueAtivo() {
-		return new EnumTipoTaxa[] {EnumTipoTaxa.PASA};
-	}
-
-	public Integer getIndAtivo() {
-		return indAtivo;
+		return new EnumTipoTaxa[] { EnumTipoTaxa.PASA };
 	}
 
 	public String getDescricao() {
 		return descricao;
+	}
+
+	public Integer getId() {
+		return id;
 	}
 
 }

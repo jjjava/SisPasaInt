@@ -1,7 +1,6 @@
 package org.pasa.sispasa.core.model;
 
 import java.io.Serializable;
-import java.util.Date;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -13,8 +12,6 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
-import javax.persistence.Temporal;
-import javax.persistence.TemporalType;
 
 import org.hibernate.envers.AuditTable;
 import org.hibernate.envers.Audited;
@@ -35,19 +32,8 @@ public class ParticipanteDadosBancarios extends BaseEntity implements Serializab
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
 
-	@Column(name = "ID_USUARIO")
-	private Long idUsuario;
-
-	@Column(name = "DT_INCLUSAO_SISTEMA")
-	@Temporal(TemporalType.TIMESTAMP)
-	private Date dataInclusaoSistema;
-
-	@Column(name = "DT_ULT_ATULZ")
-	@Temporal(TemporalType.TIMESTAMP)
-	private Date dataUltimaAtualizacao;
-
 	@Enumerated(EnumType.STRING)
-	@Column(name = "TP_CONTA")
+	@Column(name = "TP_CONTA", nullable = false, columnDefinition = ConstantesBanco.CHAR_1)
 	private EnumTipoContaAssociado tipoConta;
 
 	@ManyToOne
@@ -74,30 +60,6 @@ public class ParticipanteDadosBancarios extends BaseEntity implements Serializab
 
 	public void setId(Long id) {
 		this.id = id;
-	}
-
-	public Long getIdUsuario() {
-		return idUsuario;
-	}
-
-	public void setIdUsuario(Long idUsuario) {
-		this.idUsuario = idUsuario;
-	}
-
-	public Date getDataInclusaoSistema() {
-		return dataInclusaoSistema;
-	}
-
-	public void setDataInclusaoSistema(Date dataInclusaoSistema) {
-		this.dataInclusaoSistema = dataInclusaoSistema;
-	}
-
-	public Date getDataUltimaAtualizacao() {
-		return dataUltimaAtualizacao;
-	}
-
-	public void setDataUltimaAtualizacao(Date dataUltimaAtualizacao) {
-		this.dataUltimaAtualizacao = dataUltimaAtualizacao;
 	}
 
 	public EnumTipoContaAssociado getTipoConta() {

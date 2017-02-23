@@ -1,29 +1,43 @@
+
 package org.pasa.sispasa.core.vo;
 
 import java.util.Date;
+import java.util.List;
+
+import org.pasa.sispasa.core.enumeration.EnumTipoAssociado;
 
 /**
  * @author Allan Garcia
  */
 public class AssociadoVO {
 
-	private Long id;
-	private String empresa;
-	private String matriculaPASA;
-	private String matriculaOrigem;
-	private String cpf;
-	private String nome;
-	private Date dataNascimento;
-	private String plano;
-	private String situacao;
-	private String tipoAssociado;
+	private List<String> listEnumTipoAposentadoria;
+	private EnumTipoAssociado tipoAssociado;
 
-	public String getEmpresa() {
-		return empresa;
+	private EmpresaVO empresaVO;
+
+	private String situacaoFuncionario;
+	private String matriculaOrigem;
+	private String matrValiaPart;
+	private String matriculaPASA;
+	private String situacao;
+	private String plano;
+	private String nome;
+	private String cpf;
+
+	private Date dataNascimento;
+	private Long id;
+
+	public boolean isTipoAssociadoAtivo() {
+		return EnumTipoAssociado.A == tipoAssociado;
 	}
 
-	public void setEmpresa(String empresa) {
-		this.empresa = empresa;
+	public boolean isTipoAssociadoExEmpreAposentado() {
+		return EnumTipoAssociado.E == tipoAssociado;
+	}
+
+	public boolean isTipoAssociadoPensionista() {
+		return EnumTipoAssociado.P == tipoAssociado;
 	}
 
 	public String getMatriculaOrigem() {
@@ -74,14 +88,6 @@ public class AssociadoVO {
 		this.situacao = situacao;
 	}
 
-	public String getTipoAssociado() {
-		return tipoAssociado;
-	}
-
-	public void setTipoAssociado(String tipoAssociado) {
-		this.tipoAssociado = tipoAssociado;
-	}
-
 	public String getMatriculaPASA() {
 		return matriculaPASA;
 	}
@@ -96,6 +102,46 @@ public class AssociadoVO {
 
 	public void setId(Long id) {
 		this.id = id;
+	}
+
+	public EnumTipoAssociado getTipoAssociado() {
+		return tipoAssociado;
+	}
+
+	public void setTipoAssociado(EnumTipoAssociado tipoAssociado) {
+		this.tipoAssociado = tipoAssociado;
+	}
+
+	public List<String> getListEnumTipoAposentadoria() {
+		return listEnumTipoAposentadoria;
+	}
+
+	public void setListEnumTipoAposentadoria(List<String> listEnumTipoAposentadoria) {
+		this.listEnumTipoAposentadoria = listEnumTipoAposentadoria;
+	}
+
+	public String getMatrValiaPart() {
+		return matrValiaPart;
+	}
+
+	public void setMatrValiaPart(String matrValiaPart) {
+		this.matrValiaPart = matrValiaPart;
+	}
+
+	public EmpresaVO getEmpresaVO() {
+		return empresaVO;
+	}
+
+	public void setEmpresaVO(EmpresaVO empresaVO) {
+		this.empresaVO = empresaVO;
+	}
+
+	public String getSituacaoFuncionario() {
+		return situacaoFuncionario;
+	}
+
+	public void setSituacaoFuncionario(String situacaoFuncionario) {
+		this.situacaoFuncionario = situacaoFuncionario;
 	}
 
 }

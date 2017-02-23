@@ -21,7 +21,8 @@ import org.pasa.sispasa.core.constants.ConstantesBanco;
 
 /**
  *
- * @author Hudson Schumaker / Andre Gomes
+ * @author Hudson Schumaker 
+ * @author Andre Gomes
  * @version 1.0.0
  */
 @Entity
@@ -37,8 +38,8 @@ public class Contrato extends BaseEntity  implements Serializable {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @Column(name = "NR_CONTRATO", columnDefinition = ConstantesBanco.BIGINT)
-    private Long numeroContrato;
+    @Column(name = "NR_CONTRATO", length = 15)
+    private String numeroContrato;
 
     @Column(name = "OBSERVACAO", length = 245)
     private String observacao;
@@ -104,11 +105,11 @@ public class Contrato extends BaseEntity  implements Serializable {
         this.id = id;
     }
 
-    public Long getNumeroContrato() {
+    public String getNumeroContrato() {
         return numeroContrato;
     }
 
-    public void setNumeroContrato(Long numeroContrato) {
+    public void setNumeroContrato(String numeroContrato) {
         this.numeroContrato = numeroContrato;
     }
 

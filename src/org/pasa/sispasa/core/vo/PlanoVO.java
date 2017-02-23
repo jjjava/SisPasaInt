@@ -17,7 +17,7 @@ public class PlanoVO extends AtributosComunsVO{
     private Date dataFimVigencia;
     private Integer qtdDiasCarencia;
     private String registroANS;
-
+    private Integer indPermissaoAssociacao;
     private ContratoVO contrato;
     private EnumTipoPlano enumTipoPlano;
     private PlanoVO planoPai;
@@ -27,14 +27,14 @@ public class PlanoVO extends AtributosComunsVO{
     	//CONSTRUTOR DEFAULT
     }
     
-    public PlanoVO(Long id, String nome){
+    public PlanoVO(Long id, String nome, String descricao){
     	super.id = id;
     	this.nome = nome;
+    	this.descricao = descricao;
     }
     
     
     //GETTERS E SETTERS
-    
     public String getNome() {
         return nome;
     }
@@ -113,5 +113,13 @@ public class PlanoVO extends AtributosComunsVO{
 
 	public void setContrato(ContratoVO contrato) {
 		this.contrato = contrato;
+	}
+
+	public Integer getIndPermissaoAssociacao() {
+		return indPermissaoAssociacao;
+	}
+
+	public void setIndPermissaoAssociacao(Integer indPermissaoAssociacao) {
+		this.indPermissaoAssociacao = indPermissaoAssociacao;
 	}
 }

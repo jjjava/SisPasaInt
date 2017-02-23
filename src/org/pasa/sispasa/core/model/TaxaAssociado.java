@@ -35,17 +35,17 @@ public class TaxaAssociado extends BaseEntity implements Serializable {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
 
-	@Column(name = "ID_USUARIO")
+	@Column(name = "ID_USUARIO", nullable = false)
 	private Long idUsuario;
 
-	@Column(name = "VALOR")
+	@Column(name = "VALOR", nullable = false)
 	private BigDecimal valor;
 
 	@Column(name = "DESCRICAO")
 	private String descricao;
 
-	@Column(name = "DT_INICIO")
 	@Temporal(TemporalType.TIMESTAMP)
+	@Column(name = "DT_INICIO", nullable = false)
 	private Date dataInicio;
 
 	@Column(name = "DT_FIM")
@@ -56,12 +56,12 @@ public class TaxaAssociado extends BaseEntity implements Serializable {
 	private String observacao;
 
 	@Enumerated(EnumType.ORDINAL)
-	@Column(name = "IND_ATIVO")
+	@Column(name = "IND_ATIVO", nullable = false)
 	private EnumSimNao indAtivo;
 
-	@Temporal(TemporalType.DATE)
-	@Column(name = "DT_INCLUSAO_SISTEMA")
-	private Date dataInclusaoSistema;
+	@Temporal(TemporalType.TIMESTAMP)
+	@Column(name = "DT_ULT_ATULZ", nullable = false)
+	private Date dataUltimaAlteracao;
 
 	@ManyToOne()
 	@JoinColumn(name = "ID_TIPO_TAXA")
@@ -139,12 +139,12 @@ public class TaxaAssociado extends BaseEntity implements Serializable {
 		this.tipoTaxa = tipoTaxa;
 	}
 
-	public Date getDataInclusaoSistema() {
-		return dataInclusaoSistema;
+	public Date getDataUltimaAlteracao() {
+		return dataUltimaAlteracao;
 	}
 
-	public void setDataInclusaoSistema(Date dataInclusaoSistema) {
-		this.dataInclusaoSistema = dataInclusaoSistema;
+	public void setDataUltimaAlteracao(Date dataUltimaAlteracao) {
+		this.dataUltimaAlteracao = dataUltimaAlteracao;
 	}
 
 }

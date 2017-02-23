@@ -14,8 +14,9 @@ import org.pasa.sispasa.core.util.Utils;
  * @author Andre Gomes
  *
  */
-public class FuncionarioVO extends PessoaVO {
+public class FuncionarioVO extends AtributosComunsVO {
 
+	private PessoaVO pessoa;
 	private String matriculaOrigem;
 	private Date dataAdmissao;
 	private Date dataDesligamento;
@@ -303,5 +304,16 @@ public class FuncionarioVO extends PessoaVO {
 
 	public void setTelefoneSecundarioCarga(String telefoneSecundarioCarga) {
 		this.telefoneSecundarioCarga = telefoneSecundarioCarga;
+	}
+
+	public PessoaVO getPessoa() {
+		if(null == pessoa) {
+			pessoa = new PessoaVO();
+		}
+		return pessoa;
+	}
+
+	public void setPessoa(PessoaVO pessoa) {
+		this.pessoa = pessoa;
 	}
 }

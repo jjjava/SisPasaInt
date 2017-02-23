@@ -42,29 +42,29 @@ public class Associado extends BaseEntity {
 	@Column(name = "ID_PARTICIPANTE", columnDefinition = ConstantesBanco.BIGINT)
 	private Long id;
 
-	@Column(name = "MATR_PASA")
+	@Column(name = "MATR_PASA", length = 15)
 	private String matriculaPasa;
 
-	@Column(name = "MATR_VALIA_REPRESENTANTE")
+	@Column(name = "MATR_VALIA_REPRESENTANTE", length = 15)
 	private String matriculaValiaRepresentante;
 
-	@Column(name = "MATR_VALIA_PARTICIPANTE")
+	@Column(name = "MATR_VALIA_PARTICIPANTE", length = 15)
 	private String matriculaValiaParticipante;
 
 	@Enumerated(EnumType.ORDINAL)
-	@Column(name = "IND_CURATELADO")
+	@Column(name = "IND_CURATELADO", columnDefinition = ConstantesBanco.SMALLINT, nullable = false)
 	private EnumSimNao indCuratelado = EnumSimNao.NAO;
 
 	@Enumerated(EnumType.ORDINAL)
-	@Column(name = "IND_TUTELADO")
+	@Column(name = "IND_TUTELADO", columnDefinition = ConstantesBanco.SMALLINT, nullable = false)
 	private EnumSimNao indTutelado = EnumSimNao.NAO;
 
 	@Enumerated(EnumType.ORDINAL)
-	@Column(name = "TP_APOSENTADORIA")
+	@Column(name = "TP_APOSENTADORIA", columnDefinition = ConstantesBanco.SMALLINT)
 	private EnumTipoAposentadoria tipoAposentadoria;
 
 	@Enumerated(EnumType.STRING)
-	@Column(name = "TP_ASSOCIADO")
+	@Column(name = "TP_ASSOCIADO", nullable = false)
 	private EnumTipoAssociado tipoAssociado;
 
 	@Temporal(TemporalType.TIMESTAMP)
@@ -86,25 +86,21 @@ public class Associado extends BaseEntity {
 	@Temporal(TemporalType.TIMESTAMP)
 	@Column(name = "DT_DESLIGAMENTO_ASSOCIACAO")
 	private Date dataDesligamentoAssociacao;
-	
+
 	@Temporal(TemporalType.TIMESTAMP)
 	@Column(name = "DT_READMISSAO")
 	private Date dataReadmissao;
 
-	@Column(name = "ID_USUARIO")
+	@Column(name = "ID_USUARIO", nullable = false, columnDefinition = ConstantesBanco.BIGINT)
 	private Long idUsuario;
 
 	@Temporal(TemporalType.TIMESTAMP)
-	@Column(name = "DT_INCLUSAO_SISTEMA")
-	private Date dataInclusaoSistema;
-
-	@Temporal(TemporalType.TIMESTAMP)
-	@Column(name = "DT_ULT_ATULZ")
+	@Column(name = "DT_ULT_ATULZ", nullable = false)
 	private Date dataUltimaAlteracao;
 
 	@OneToOne
 	@JoinColumn(name = "ID_FUNCIONARIO")
-	private Funcionario funcionario;		
+	private Funcionario funcionario;
 
 	@OneToOne
 	@PrimaryKeyJoinColumn
@@ -133,6 +129,23 @@ public class Associado extends BaseEntity {
 	@NotAudited
 	private SituacaoAssociado situacaoAssociado;
 
+	public boolean isSituacaoAssociadoInativo() {
+		return EnumSituacaoAssociado.INATIVO == getSituacaoAssociadoAsEnum();
+	}
+	
+	public boolean isMotivoDesligAssociadoFalecimento() {
+		return null != motivoDesligamentoAssociado
+				&& EnumMotivoDesligamento.FALECIMENTO == getMotivoDesligamentoAssociadoAsEnum();
+	}
+
+	public boolean isTipoAssociadoAtivo() {
+		return EnumTipoAssociado.A.equals(tipoAssociado);
+	}
+	
+	public boolean isTipoAssociadoPensionista() {
+		return EnumTipoAssociado.P.equals(tipoAssociado);
+	}
+	
 	public EnumSituacaoAssociado getSituacaoAssociadoAsEnum() {
 		return EnumSituacaoAssociado.getFromIndice(situacaoAssociado.getId());
 	}
@@ -141,14 +154,14 @@ public class Associado extends BaseEntity {
 		if (null == motivoDesligamentoGrupo) {
 			return null;
 		}
-		return EnumMotivoDesligamento.getMotivoDesligamentoByIndice(motivoDesligamentoGrupo.getId().intValue());
+		return EnumMotivoDesligamento.getFromIndice(motivoDesligamentoGrupo.getId());
 	}
 
 	public EnumMotivoDesligamento getMotivoDesligamentoAssociadoAsEnum() {
 		if (null == motivoDesligamentoAssociado) {
 			return null;
 		}
-		return EnumMotivoDesligamento.getMotivoDesligamentoByIndice(motivoDesligamentoAssociado.getId().intValue());
+		return EnumMotivoDesligamento.getFromIndice(motivoDesligamentoAssociado.getId());
 	}
 
 	@Override
@@ -286,14 +299,6 @@ public class Associado extends BaseEntity {
 
 	public void setTaxaAssociado(TaxaAssociado taxaAssociado) {
 		this.taxaAssociado = taxaAssociado;
-	}
-
-	public Date getDataInclusaoSistema() {
-		return dataInclusaoSistema;
-	}
-
-	public void setDataInclusaoSistema(Date dataInclusaoSistema) {
-		this.dataInclusaoSistema = dataInclusaoSistema;
 	}
 
 	public Date getDataUltimaAlteracao() {

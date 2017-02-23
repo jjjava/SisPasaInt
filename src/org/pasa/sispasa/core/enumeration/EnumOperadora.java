@@ -8,7 +8,7 @@ package org.pasa.sispasa.core.enumeration;
  */
 public enum EnumOperadora {
 
-    AMS(1L, "AMS"),
+	AMS(1L, "AMS"),
     PASA(2L, "PASA");
 
     private Long indice;
@@ -20,16 +20,15 @@ public enum EnumOperadora {
     }
 
     public static EnumOperadora getOperadoraByIndice(Long indice) {
-        switch (indice.intValue()) {
-            case 1:
-                return EnumOperadora.PASA;
-            case 2:
-                return EnumOperadora.AMS;
-            default:
-                break;
-        }
-        return null;
+    	for (EnumOperadora enumOperadora : EnumOperadora.values()) {
+			if (enumOperadora.getIndice().equals(indice)) {
+				return enumOperadora;
+			}
+		}
+		return null;
     }
+    
+    
 
     //getters e setters
     public Long getIndice() {

@@ -4,6 +4,7 @@ import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
+
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -18,15 +19,17 @@ import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
+
 import org.hibernate.envers.AuditTable;
 import org.hibernate.envers.Audited;
 import org.hibernate.envers.NotAudited;
 import org.pasa.sispasa.core.constants.ConstantesBanco;
+import org.pasa.sispasa.core.enumeration.EnumSimNao;
 import org.pasa.sispasa.core.vo.EmpresaVO;
 
 /**
  *
- * @author Hudson Schumaker 
+ * @author Hudson Schumaker
  * @author Andre Gomes
  */
 @Entity
@@ -94,15 +97,15 @@ public class Empresa extends BaseEntity implements Serializable {
 
 	@ManyToMany(cascade = CascadeType.ALL)
 	@JoinTable(name = "ENDERECO_EMPRESA", 
-	joinColumns = @JoinColumn(name = "ID_EMPRESA"), 
-        inverseJoinColumns = @JoinColumn(name = "ID_ENDERECO"))
+				joinColumns = @JoinColumn(name = "ID_EMPRESA"), 
+				inverseJoinColumns = @JoinColumn(name = "ID_ENDERECO"))
 	@NotAudited
 	private List<Endereco> enderecos;
 
 	@ManyToMany(cascade = CascadeType.ALL)
 	@JoinTable(name = "CONTATO_EMPRESA", 
-        joinColumns = @JoinColumn(name = "ID_EMPRESA"), 
-	inverseJoinColumns = @JoinColumn(name = "ID_CONTATO"))
+				joinColumns = @JoinColumn(name = "ID_EMPRESA"), 
+				inverseJoinColumns = @JoinColumn(name = "ID_CONTATO"))
 	@NotAudited
 	private List<Contato> contatos;
 
@@ -116,32 +119,44 @@ public class Empresa extends BaseEntity implements Serializable {
 
 	// CONSTRUTORES
 	public Empresa(Long id) {
-            this.id = id;
+		this.id = id;
 	}
 
 	public Empresa(Long id, String nomeFantasia) {
-            this.id = id;
-            this.nomeFantasia = nomeFantasia;
+		this.id = id;
+		this.nomeFantasia = nomeFantasia;
 	}
 
 	public Empresa() {
-            enderecos = new ArrayList<>();
-            contatos = new ArrayList<>();
+		enderecos = new ArrayList<>();
+		contatos = new ArrayList<>();
 	}
 
 	public EmpresaVO getEntityVO() {
-            return new EmpresaVO(id, nomeFantasia, razaoSocial);
+		return new EmpresaVO(id, nomeFantasia, razaoSocial);
 	}
 
 	// MÉTODOS ADD
 	public void addEndereco(Endereco e) {
-            enderecos.add(e);
+		enderecos.add(e);
 	}
 
 	public void addContato(Contato c) {
-            contatos.add(c);
+		contatos.add(c);
 	}
 
+	public Convenio getConvenioPrincipal() {
+		for (Convenio convenio : getConvenios()) {
+			if (EnumSimNao.SIM.getIndice().equals(convenio.getIndConvenioPrincipal())) {
+				return convenio;
+			}
+		}
+		//TODO obrigatoriamente a empresa deve ter ao menos um convenio
+		// principal, quando essa regra for implementada esse get(0) pode ser
+		// substituido por null.
+		return getConvenios().get(0);
+	}
+	
 	// GETTERS E SETTERS
 	@Override
 	public Long getId() {
@@ -298,5 +313,5 @@ public class Empresa extends BaseEntity implements Serializable {
 	public void setConvenios(List<Convenio> convenios) {
 		this.convenios = convenios;
 	}
-	
+
 }

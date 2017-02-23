@@ -6,8 +6,8 @@ package org.pasa.sispasa.core.enumeration;
  */
 public enum EnumIndAtivo {
 	
-	ATIVO(1, "Ativo"),
 	INATIVO(0, "Inativo"),
+	ATIVO(1, "Ativo"),
 	TODOS(2,"Todos");
 	
 	private int indice;
