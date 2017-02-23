@@ -1,4 +1,4 @@
-package org.pasa.sispasaint.carga.impl;
+package org.pasa.sispasaint.carga.thread;
 
 import org.pasa.sispasaint.model.intg.Log;
 import org.pasa.sispasaint.rw.LerArquivoEndPeople;

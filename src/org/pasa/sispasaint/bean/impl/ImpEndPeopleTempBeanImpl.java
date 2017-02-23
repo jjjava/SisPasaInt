@@ -9,7 +9,7 @@ import org.pasa.sispasaint.model.intg.Log;
 import org.pasa.sispasaint.model.intg.ModeloBenPeople;
 import org.pasa.sispasaint.model.intg.ModeloEndPeople;
 import org.pasa.sispasaint.bean.ImpEndPeopleTempBean;
-import org.pasa.sispasaint.carga.impl.CargaEndPeopleThread;
+import org.pasa.sispasaint.carga.thread.CargaEndPeopleThread;
 import org.pasa.sispasaint.config.Configuracao;
 import org.pasa.sispasaint.util.ArquivoUtil;
 import org.pasa.sispasaint.util.Sistema;

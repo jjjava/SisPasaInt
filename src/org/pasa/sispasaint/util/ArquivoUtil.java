@@ -25,6 +25,10 @@ public class ArquivoUtil {
         return numeroLinha / Sistema.getNumberProcessors();
     }
     
+    public static long getNumeroLinhasLote(long numeroLinha) {
+        return (long)(numeroLinha / Sistema.getNumberProcessors());
+    }
+    
     public int getNumerolLinhasResto(int numeroLinha){
         return numeroLinha % Sistema.getNumberProcessors();
     }

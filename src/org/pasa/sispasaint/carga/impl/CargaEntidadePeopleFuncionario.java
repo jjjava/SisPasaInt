@@ -37,7 +37,7 @@ import org.pasa.sispasaint.util.StringUtil;
  * @author Hudson Schumaker
  * @version 1.0.0
  */
-public class CargaEntidadePeopleFuncionario {
+    public class CargaEntidadePeopleFuncionario {
 
     private Funcionario funcionario;
     private final ImpBenPeopleTempBeanImpl impBenPeopleTempBeanImpl;
