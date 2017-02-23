@@ -51,7 +51,7 @@ public class BeneficiarioDAOImpl extends DaoGenerico<Beneficiario> implements Be
         try {
             beneficiarios = q1.getResultList();
         } catch (NoResultException e) {
-            System.err.println(e);
+            System.err.println("Ben:" + e);
             Logger.getLogger(BeneficiarioDAOImpl.class).error(e);
             return null;
         }
@@ -68,7 +68,7 @@ public class BeneficiarioDAOImpl extends DaoGenerico<Beneficiario> implements Be
             return q1.executeUpdate();
         } catch (Exception e) {
             Logger.getLogger(BeneficiarioDAOImpl.class).error(e);
-            System.err.println(e);
+            System.err.println("Ben:" + e);
         } finally {
             getEntityManager().getTransaction().commit();
         }
@@ -78,14 +78,14 @@ public class BeneficiarioDAOImpl extends DaoGenerico<Beneficiario> implements Be
     @Override
     public Long getInativos(String empresa) {
         Query q1 = getEntityManager().
-        createQuery("select count(b) from Beneficiario b where b.indAtivo = :status and SUBSTRING(b.carteirinha,1,2) = '" + empresa + "'");
-        q1.setParameter("status",SisPasaIntCommon.INATIVO);
+                createQuery("select count(b) from Beneficiario b where b.indAtivo = :status and SUBSTRING(b.carteirinha,1,2) = '" + empresa + "'");
+        q1.setParameter("status", SisPasaIntCommon.INATIVO);
         Long count = 0L;
         try {
             count = (Long) q1.getSingleResult();
         } catch (NoResultException e) {
             Logger.getLogger(BeneficiarioDAOImpl.class).error(e);
-            System.err.println(e);
+            System.err.println("Ben:" + e);
         }
         return count;
     }

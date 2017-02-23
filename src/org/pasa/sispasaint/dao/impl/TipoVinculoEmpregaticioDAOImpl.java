@@ -41,6 +41,7 @@ public class TipoVinculoEmpregaticioDAOImpl extends DaoGenerico<TipoVinculoEmpre
 
     @Override
     public TipoVinculoEmpregaticio existe(TipoVinculoEmpregaticio tve) {
+        //remover esse metodo
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 }

@@ -1,8 +1,3 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package org.pasa.sispasaint.carga.thread;
 
 import org.apache.log4j.Logger;
@@ -16,7 +11,7 @@ import org.pasa.sispasaint.util.SisPasaIntCommon;
 
 /**
  *
- * @author 90J00318
+ * @author Hudson Schumaker
  */
 public class CargaMapeaEntidadesThread implements Runnable {
     
@@ -26,12 +21,13 @@ public class CargaMapeaEntidadesThread implements Runnable {
     private final FuncionarioBeanImpl funcionarioBeanImpl;
     private final ImpBenPeopleTempBeanImpl modeloBenBean;
     private final CargaEntidadePeopleFuncionario cargaEntidadePeopleFuncionario;
+    private String name;
 
-    public CargaMapeaEntidadesThread(Long ini, Long qtdRegistros) {
+    public CargaMapeaEntidadesThread(Long ini, Long qtdRegistros, String name) {
     
         this.ini = ini;
         this.qtdRegistros = qtdRegistros;
-        
+        this.name = name;
         modeloBenBean = new ImpBenPeopleTempBeanImpl();
         funcionarioBeanImpl = new FuncionarioBeanImpl();
         cargaEntidadePeopleFuncionario = new CargaEntidadePeopleFuncionario();
@@ -46,8 +42,10 @@ public class CargaMapeaEntidadesThread implements Runnable {
     public void mapearEntidades() {
         Funcionario funcionario = null;
         try {
+            int j =1;
+            System.out.println(name+" iniciou...");
             for (Long k = ini ; k < qtdRegistros; k++) {
-                System.out.println(k);
+                //System.out.println(k);
                 ModeloBenPeople mBen = modeloBenBean.obter(k);
                 if (mBen.getTipoBeneficiario().equalsIgnoreCase(SisPasaIntCommon.FUNCIONARIO)) {
                     funcionario = funcionarioBeanImpl.obter(mBen.getEmpresa(), mBen.getMatriculaPeople());
@@ -59,9 +57,14 @@ public class CargaMapeaEntidadesThread implements Runnable {
                             //log.addMatriculaErro(modeloBenEnd.getEmpresa() + modeloBenEnd.getMatricula());
                         }
                     } else {
+                       if(mBen.getEmpresa().equalsIgnoreCase("90")){
+                           System.out.println("PASA");
+                       }
                     }
                 }
+                j++;
             }
+            System.out.println("Contei "+name+" :"+j);
         } catch (Exception e) {
             System.err.println(e);
             Logger.getLogger(CargaPeopleBeanImpl.class).error(e);

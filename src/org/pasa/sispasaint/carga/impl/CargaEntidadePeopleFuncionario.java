@@ -30,6 +30,7 @@ import org.pasa.sispasa.core.model.Telefone;
 import org.pasa.sispasa.core.model.TipoDocumento;
 import org.pasa.sispasa.core.model.TipoVinculoEmpregaticio;
 import org.pasa.sispasaint.bean.impl.NivelEscolaridadeBeanImpl;
+import org.pasa.sispasaint.bean.impl.TipoVinculoEmpregaticioBeanImpl;
 import org.pasa.sispasaint.util.StringUtil;
 
 /**
@@ -37,7 +38,7 @@ import org.pasa.sispasaint.util.StringUtil;
  * @author Hudson Schumaker
  * @version 1.0.0
  */
-    public class CargaEntidadePeopleFuncionario {
+public class CargaEntidadePeopleFuncionario {
 
     private Funcionario funcionario;
     private final ImpBenPeopleTempBeanImpl impBenPeopleTempBeanImpl;
@@ -48,6 +49,7 @@ import org.pasa.sispasaint.util.StringUtil;
     private final EstadoBeanImpl estadoBeanImpl;
     private final MunicipioBeanImpl municipioBeanImpl;
     private final NivelEscolaridadeBeanImpl nivelEscolaridadeBean;
+    private final TipoVinculoEmpregaticioBeanImpl tipoVinculoEmpregaticioBean;
 
     public CargaEntidadePeopleFuncionario() {
         cargaEntidadePeopleBeneficiario = new CargaEntidadePeopleBeneficiario();
@@ -58,13 +60,18 @@ import org.pasa.sispasaint.util.StringUtil;
         estadoBeanImpl = new EstadoBeanImpl();
         municipioBeanImpl = new MunicipioBeanImpl();
         nivelEscolaridadeBean = new NivelEscolaridadeBeanImpl();
+        tipoVinculoEmpregaticioBean = new TipoVinculoEmpregaticioBeanImpl();
     }
 
     public boolean newFuncionario(ModeloBenPeople modelo) {
         Empresa empresa = empresaBean.existe(modelo.getEmpresa());
+
         if (empresa == null) {
             return false;
         } else {
+            if (empresa.getCodEmpresaVale().equalsIgnoreCase("90")) {
+                System.out.println("PASA");
+            }
             funcionario = new Funcionario();
             funcionario.setPessoa(new Pessoa());
             funcionario.setEmpresa(empresa);
@@ -86,8 +93,8 @@ import org.pasa.sispasaint.util.StringUtil;
             //ORIGEM INFORMACOES
             funcionario.getPessoa().setOrigemInformacoes(newOrigemInformacoes());
             //VINCULO
-            funcionario.setTipoVinculoEmpregaticio(newTipoVinculoEmpregaticio(modelo));
-            
+            funcionario.setTipoVinculoEmpregaticio(newTipoVinculoEmpregaticio());
+
             //MATRICULAS
             funcionario.setMatriculaOrigem(modelo.getMatriculaPeople());//IMPORTANTE
             funcionario.setMatriculaAtualizadora(modelo.getMatriculaAtulizador());
@@ -98,9 +105,9 @@ import org.pasa.sispasaint.util.StringUtil;
             funcionario.setIndAtivo(SisPasaIntCommon.ATIVO);
             funcionario.setDataUltimaAtualizacao(DateUtil.obterDataAtual());
             funcionario.getPessoa().setDataInclusaoSistema(DateUtil.obterDataAtual());
-            
+
             funcionarioBean.cadastrar(funcionario);//gerar ID
-            
+
             //BENEFICIARIOS
             List<ModeloBenPeople> benef = impBenPeopleTempBeanImpl.listarBeneficiarios(modelo);
             for (ModeloBenPeople f : benef) {
@@ -109,7 +116,7 @@ import org.pasa.sispasaint.util.StringUtil;
                     return false;
                 } else {
                     b.setFuncionario(funcionario);
-                    if(f.getCodBeneficiario().equals("00")){
+                    if (f.getCodBeneficiario().equals("00")) {
                         b.setId(funcionario.getId());
                     }
                     funcionario.addBeneficiario(b);
@@ -178,19 +185,26 @@ import org.pasa.sispasaint.util.StringUtil;
         ModeloEndPeople modeloEndPeople = impEndPeopleTempBeanImpl.obterPorMatricula(mBen);
         List<Telefone> listaTelefones = new ArrayList<>();
 
-        Telefone tel1 = new Telefone();
-        tel1.setNumeroTelefone(modeloEndPeople.getTelefone1());
-        tel1.setIndAtivo(SisPasaIntCommon.ATIVO);
-        tel1.setIdUsuario(SisPasaIntCommon.USER_CARGA);
-        tel1.setDataUltimaAtualizacao(DateUtil.obterDataAtual());
-        listaTelefones.add(tel1);
+        if (!modeloEndPeople.getTelefone1().trim().equals("")) {
+            Telefone tel1 = new Telefone();
+            tel1.setNumeroTelefone(modeloEndPeople.getTelefone1().replaceAll(" ", ""));
+            tel1.setIndAtivo(SisPasaIntCommon.ATIVO);
+            tel1.setIdUsuario(SisPasaIntCommon.USER_CARGA);
+            tel1.setDataUltimaAtualizacao(DateUtil.obterDataAtual());
+            System.out.println(tel1.getNumeroTelefone());
 
-        Telefone tel2 = new Telefone();
-        tel2.setNumeroTelefone(modeloEndPeople.getTelefone2());
-        tel2.setIndAtivo(SisPasaIntCommon.ATIVO);
-        tel2.setIdUsuario(SisPasaIntCommon.USER_CARGA);
-        tel2.setDataUltimaAtualizacao(DateUtil.obterDataAtual());
-        listaTelefones.add(tel2);
+            listaTelefones.add(tel1);
+        }
+
+        if (!modeloEndPeople.getTelefone2().trim().equals("")) {
+            Telefone tel2 = new Telefone();
+            tel2.setNumeroTelefone(modeloEndPeople.getTelefone2().replaceAll(" ", ""));
+            tel2.setIndAtivo(SisPasaIntCommon.ATIVO);
+            tel2.setIdUsuario(SisPasaIntCommon.USER_CARGA);
+            tel2.setDataUltimaAtualizacao(DateUtil.obterDataAtual());
+            System.out.println(tel2.getNumeroTelefone());
+            listaTelefones.add(tel2);
+        }
         return listaTelefones;
     }
 
@@ -211,10 +225,8 @@ import org.pasa.sispasaint.util.StringUtil;
         return dadosBancarios;
     }
 
-    private TipoVinculoEmpregaticio newTipoVinculoEmpregaticio(ModeloBenPeople modelo) {
-        TipoVinculoEmpregaticio tipoVinculoEmpregaticio = new TipoVinculoEmpregaticio();
-        tipoVinculoEmpregaticio.setId(EnumTipoVinculoEmpregaticio.EmpregadoAtivo.getIndice());
-        tipoVinculoEmpregaticio.setCodExterno(modelo.getVinculo());
+    private TipoVinculoEmpregaticio newTipoVinculoEmpregaticio() {
+        TipoVinculoEmpregaticio tipoVinculoEmpregaticio = tipoVinculoEmpregaticioBean.obter(EnumTipoVinculoEmpregaticio.EmpregadoAtivo.getIndice());
         return tipoVinculoEmpregaticio;
     }
 

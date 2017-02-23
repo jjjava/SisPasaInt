@@ -88,27 +88,27 @@ public class LerArquivoEndPeople {
         try {
             //ENDEREÇO
             campo = (PosicaoCampo) mapa.get(CamposModelo.EMPRESA);
-            modelo.setEmpresa(line.substring(campo.getInicioCampo(), campo.getFimCampo()));
+            modelo.setEmpresa(line.substring(campo.getInicioCampo(), campo.getFimCampo()).trim());
             campo = (PosicaoCampo) mapa.get(CamposModelo.MATRICULA);
-            modelo.setMatricula(line.substring(campo.getInicioCampo(), campo.getFimCampo()));
+            modelo.setMatricula(line.substring(campo.getInicioCampo(), campo.getFimCampo()).trim());
             campo = (PosicaoCampo) mapa.get(CamposModelo.COD_BENEFICIARIO);
-            modelo.setCodBeneficiario(line.substring(campo.getInicioCampo(), campo.getFimCampo()));
+            modelo.setCodBeneficiario(line.substring(campo.getInicioCampo(), campo.getFimCampo()).trim());
             campo = (PosicaoCampo) mapa.get(CamposModelo.TELEFONE1);
-            modelo.setTelefone1(line.substring(campo.getInicioCampo(), campo.getFimCampo()));
+            modelo.setTelefone1(line.substring(campo.getInicioCampo(), campo.getFimCampo()).trim());
             campo = (PosicaoCampo) mapa.get(CamposModelo.TELEFONE2);
-            modelo.setTelefone2(line.substring(campo.getInicioCampo(), campo.getFimCampo()));
+            modelo.setTelefone2(line.substring(campo.getInicioCampo(), campo.getFimCampo()).trim());
             campo = (PosicaoCampo) mapa.get(CamposModelo.BRANCO);
-            modelo.setBrancos(line.substring(campo.getInicioCampo(), campo.getFimCampo()));
+            modelo.setBrancos(line.substring(campo.getInicioCampo(), campo.getFimCampo()).trim());
             campo = (PosicaoCampo) mapa.get(CamposModelo.ENDERECO);
-            modelo.setEndereco(line.substring(campo.getInicioCampo(), campo.getFimCampo()));
+            modelo.setEndereco(line.substring(campo.getInicioCampo(), campo.getFimCampo()).trim());
             campo = (PosicaoCampo) mapa.get(CamposModelo.BAIRRO);
-            modelo.setBairro(line.substring(campo.getInicioCampo(), campo.getFimCampo()));
+            modelo.setBairro(line.substring(campo.getInicioCampo(), campo.getFimCampo()).trim());
             campo = (PosicaoCampo) mapa.get(CamposModelo.CIDADE);
-            modelo.setCidade(line.substring(campo.getInicioCampo(), campo.getFimCampo()));
+            modelo.setCidade(line.substring(campo.getInicioCampo(), campo.getFimCampo()).trim());
             campo = (PosicaoCampo) mapa.get(CamposModelo.UF);
-            modelo.setUf(line.substring(campo.getInicioCampo(), campo.getFimCampo()));
+            modelo.setUf(line.substring(campo.getInicioCampo(), campo.getFimCampo()).trim());
             campo = (PosicaoCampo) mapa.get(CamposModelo.CEP);
-            modelo.setCep(line.substring(campo.getInicioCampo(), campo.getFimCampo()));
+            modelo.setCep(line.substring(campo.getInicioCampo(), campo.getFimCampo()).trim());
 
             modelo.setNomeArquivo(nomeArq);
         } catch (Exception e) {

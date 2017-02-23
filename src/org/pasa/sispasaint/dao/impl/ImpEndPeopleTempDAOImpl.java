@@ -29,7 +29,8 @@ public class ImpEndPeopleTempDAOImpl extends DaoGenerico<ModeloEndPeople> implem
            //q1.setParameter("cod", codBeneficiario);
             m = (ModeloEndPeople) q1.getSingleResult();
         } catch (NoResultException e) {
-            System.err.println(e);
+            System.out.println("empresa: "+empresa+ " mat :"+matricula);
+            System.err.println("ImpEndPeopleTempDAOImpl :"+ e);
             return m;
         }
         return m;
@@ -67,7 +68,8 @@ public class ImpEndPeopleTempDAOImpl extends DaoGenerico<ModeloEndPeople> implem
         try {
             ModeloEndVLIs = q1.getResultList();
         } catch (NoResultException e) {
-            System.err.println(e);
+            System.out.println("empresa: "+empresa+ " mat :"+matricula);
+            System.err.println("ImpEndPeopleTempDAOImpl :"+e);
             return null;
         }
         return ModeloEndVLIs;

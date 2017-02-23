@@ -118,20 +118,27 @@ public class CargaEntidadePeopleBeneficiario {
     private List<Telefone> newTelefones(ModeloBenPeople mBen) {
         ModeloEndPeople modeloEndPeople = impEndPeopleTempBeanImpl.obterPorMatricula(mBen);
         List<Telefone> listaTelefones = new ArrayList<>();
+        
+        if (!modeloEndPeople.getTelefone1().trim().equals("")) {
+            
+            Telefone tel1 = new Telefone();
+            tel1.setNumeroTelefone(modeloEndPeople.getTelefone1().replaceAll(" ",""));
+            tel1.setIndAtivo(SisPasaIntCommon.ATIVO);
+            tel1.setIdUsuario(SisPasaIntCommon.USER_CARGA);
+            tel1.setDataUltimaAtualizacao(DateUtil.obterDataAtual());
+            System.out.println(tel1.getNumeroTelefone());
+            listaTelefones.add(tel1);
+        }
 
-        Telefone tel1 = new Telefone();
-        tel1.setNumeroTelefone(modeloEndPeople.getTelefone1());
-        tel1.setIndAtivo(SisPasaIntCommon.ATIVO);
-        tel1.setIdUsuario(SisPasaIntCommon.USER_CARGA);
-        tel1.setDataUltimaAtualizacao(DateUtil.obterDataAtual());
-        listaTelefones.add(tel1);
-
-        Telefone tel2 = new Telefone();
-        tel2.setNumeroTelefone(modeloEndPeople.getTelefone2());
-        tel2.setIndAtivo(SisPasaIntCommon.ATIVO);
-        tel2.setIdUsuario(SisPasaIntCommon.USER_CARGA);
-        tel2.setDataUltimaAtualizacao(DateUtil.obterDataAtual());
-        listaTelefones.add(tel2);
+        if (!modeloEndPeople.getTelefone2().trim().equals("")) {
+            Telefone tel2 = new Telefone();
+            tel2.setNumeroTelefone(modeloEndPeople.getTelefone2().replaceAll(" ",""));
+            tel2.setIndAtivo(SisPasaIntCommon.ATIVO);
+            tel2.setIdUsuario(SisPasaIntCommon.USER_CARGA);
+            tel2.setDataUltimaAtualizacao(DateUtil.obterDataAtual());
+            System.out.println(tel2.getNumeroTelefone());
+            listaTelefones.add(tel2);
+        }
         return listaTelefones;
     }
 
@@ -151,9 +158,12 @@ public class CargaEntidadePeopleBeneficiario {
         beneficiario.getPessoa().setDataObito(DateUtil.toDate(modeloBenEnd.getDataFalecimento()));
         beneficiario.getPessoa().setSexo(modeloBenEnd.getSexo());
         beneficiario.getPessoa().setIndConclusaoEscolaridade(StringUtil.parserIndicadorConclusao(modeloBenEnd.getIndicadorConclusao()));
-        beneficiario.setDireitoAMSReenbolso(modeloBenEnd.getDireitoAMSCredenciamento());
-        beneficiario.setDataValidadeCredenciado(DateUtil.toDate(modeloBenEnd.getDataValidadeCredenciado()));
         beneficiario.setDireitoAMSReenbolso(modeloBenEnd.getDireitoAmsReembolso());
+        if (beneficiario.getDireitoAMSReenbolso().equals("S")) {
+            beneficiario.setDataValidadeReembolso(DateUtil.toDate(modeloBenEnd.getDataValidadeReembolso()));
+        }else{
+            beneficiario.setDataValidadeReembolso(null);
+        }
         beneficiario.setDataValidadeReembolso(DateUtil.toDate(modeloBenEnd.getDataValidadeReembolso()));
         beneficiario.setDataUltimaAtulizacao(DateUtil.toDate(modeloBenEnd.getDataDeAtualizacao()));
         beneficiario.setCodCR(modeloBenEnd.getCodigoCR());

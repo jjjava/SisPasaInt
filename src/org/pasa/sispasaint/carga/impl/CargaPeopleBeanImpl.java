@@ -33,16 +33,16 @@ public class CargaPeopleBeanImpl implements CargaPeopleBean {
     }
     @Override
     public void inicar() {
-        this.cargaArquivosTemp();
+       // this.cargaArquivosTemp();
         this.mapearEntidades();
     }
 
     @Override
     public void cargaArquivosTemp() {
-//        ImpBenPeopleTempBeanImpl beanBen = new ImpBenPeopleTempBeanImpl();
-//        beanBen.limparTbTemp();
-//        beanBen.resetarIdentity();
-//        beanBen.carregarArquivo(id, log);
+        ImpBenPeopleTempBeanImpl beanBen = new ImpBenPeopleTempBeanImpl();
+        beanBen.limparTbTemp();
+        beanBen.resetarIdentity();
+        beanBen.carregarArquivo(id, log);
 
         ImpEndPeopleTempBeanImpl beanEnd = new ImpEndPeopleTempBeanImpl();
         beanEnd.limparTbTemp();
@@ -55,14 +55,17 @@ public class CargaPeopleBeanImpl implements CargaPeopleBean {
 
         ExecutorService executor = Executors.newFixedThreadPool(Sistema.getNumberProcessors());
         Long qtdRegistros = modeloBenBean.contar();
+        System.out.println("qtd rgistros "+qtdRegistros);
         long lote = ArquivoUtil.getNumeroLinhasLote(qtdRegistros);
+        System.out.println("lote :"+lote);
         long ini = 1;
         long fim = lote;
         try {
             for (int k = 0; k < Sistema.getNumberProcessors(); k++) {   
-                executor.execute(new CargaMapeaEntidadesThread(ini, fim));
-                ini = fim +1;
+                executor.execute(new CargaMapeaEntidadesThread(ini, fim, "Thread"+k));
+                ini = fim;
                 fim = fim + lote;
+              //  System.out.println("K "+k);
             }
             executor.shutdown();
             while (!executor.isTerminated()) {

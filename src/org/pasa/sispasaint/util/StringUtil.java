@@ -1,6 +1,5 @@
 package org.pasa.sispasaint.util;
 
-import org.pasa.sispasa.core.enumeration.EnumNivelEscolaridade;
 import org.pasa.sispasa.core.enumeration.EnumSexo;
 
 /**
@@ -33,20 +32,7 @@ public class StringUtil {
             return EnumSexo.FEMININO;
         }
     }
-
-    public static EnumNivelEscolaridade parseEscolocaridad(String s) {
-        
-        if (s.equalsIgnoreCase("3")) {
-            return EnumNivelEscolaridade.SUPERIOR;
-        } else if (s.equalsIgnoreCase("2")) {
-            return EnumNivelEscolaridade.MEDIO;
-        } else if (s.equalsIgnoreCase("1")) {
-            return EnumNivelEscolaridade.SUPERIOR;
-        } else {
-            return EnumNivelEscolaridade.SEM;
-        }
-    }
-
+ 
     public static Integer parserIndicadorConclusao(String s) {
         if (s.equalsIgnoreCase("C")) {
             return SisPasaIntCommon.VERDADEIRO;
@@ -70,43 +56,5 @@ public class StringUtil {
                 .replace('Ç', 'C')
                 .replace('ñ', 'n')
                 .replace('Ñ', 'N');
-    }
-    
-    public static String parseParentesco(String value){
-        if(value.equalsIgnoreCase("0")){
-            return "Pai/Mãe";
-        }else if( value.equalsIgnoreCase("1")){
-            return "Cônjuge";
-        }else if(value.equalsIgnoreCase("2")){
-            return "Filho/Filha";
-        }else if(value.equalsIgnoreCase("3")){
-            return "Companheiro/Companheira";
-        }else if(value.equalsIgnoreCase("4")){
-            return "Enteado/Enteada";
-        }else if(value.equalsIgnoreCase("5")){
-            return "Descendete";
-        }else if (value.equalsIgnoreCase("6")){
-            return "Ascendente";
-        }else if(value.equalsIgnoreCase("7")){
-            return "Irmão/Irmã";
-        }else if(value.equalsIgnoreCase("8")){
-            return "Menor sob dependência";
-        }else if(value.equalsIgnoreCase("9")){
-            return "Menor sob guarda";
-        }else if(value.equalsIgnoreCase("A")){
-            return "Menor sob tutela";
-        }else if(value.equalsIgnoreCase("B")){
-            return "Ex-Cônjuge Div. C/ Pensão";
-        }else if(value.equalsIgnoreCase("C")){
-            return "Sogro";
-        }else if(value.equalsIgnoreCase("D")){
-            return "Menor adotado";
-        }else if(value.equalsIgnoreCase("E")){
-            return "Esposa";
-        }else if(value.equalsIgnoreCase("G")){
-            return "Designiado";
-        }else{
-            return "Sobrinho";
-        }
     }
 }

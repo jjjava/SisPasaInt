@@ -41,22 +41,7 @@ public class EstadoDAOImpl extends DaoGenerico<Estado> implements EstadoDAO {
 
     @Override
     public Estado existe(Estado e) {
-//        Query q1 = getEntityManager().
-//        createQuery("select e from Estado e where e.uf = :uf");
-//        q1.setParameter("uf", e.getUf());
-//        q1.setMaxResults(1);
-//        List<Estado> estado = null;
-//        try {
-//            estado = q1.getResultList();
-//        } catch (NoResultException ex) {
-//               Logger.getLogger(EstadoDAOImpl.class).error(ex);
-//            System.err.println(ex);
-//            return null;
-//        }
-//        if (estado.size() > 0) {
-//            System.out.println(estado.get(0).getUf());
-//            return estado.get(0);
-//        }
+        //Remover metodo
         return null;
     }
 }

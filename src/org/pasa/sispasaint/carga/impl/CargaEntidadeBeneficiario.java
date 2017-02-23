@@ -146,7 +146,12 @@ public class CargaEntidadeBeneficiario {
         beneficiario.setDireitoAMSReenbolso(modeloBenEnd.getDireitoAMSCredenciamento());
         beneficiario.setDataValidadeCredenciado(DateUtil.toDate(modeloBenEnd.getDataValidadeCredenciado()));
         beneficiario.setDireitoAMSReenbolso(modeloBenEnd.getDireitoAmsReembolso());
-        beneficiario.setDataValidadeReembolso(DateUtil.toDate(modeloBenEnd.getDataValidadeReembolso()));
+        if(beneficiario.getDireitoAMSReenbolso().equals("S")){
+            beneficiario.setDataValidadeReembolso(DateUtil.toDate(modeloBenEnd.getDataValidadeReembolso()));
+        }
+        else{
+            beneficiario.setDataValidadeReembolso(null);
+        }
         beneficiario.setDataUltimaAtulizacao(DateUtil.toDate(modeloBenEnd.getDataDeAtualizacao()));
         beneficiario.setCodCR(modeloBenEnd.getCodigoCR());
         beneficiario.setOrgaoPessoal(modeloBenEnd.getOrgaoPessoal());

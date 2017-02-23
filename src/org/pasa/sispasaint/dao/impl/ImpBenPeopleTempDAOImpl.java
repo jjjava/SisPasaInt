@@ -35,7 +35,7 @@ public class ImpBenPeopleTempDAOImpl extends DaoGenerico<ModeloBenPeople> implem
                 getEntityManager().persist(model);
                 getEntityManager().getTransaction().commit();
             } catch (Exception ex) {
-                System.err.println(ex);
+                System.err.println("ImpBenPeopleTempDAOImpl :"+ ex);
                 getEntityManager().getTransaction().rollback();
             }
         }
@@ -52,7 +52,7 @@ public class ImpBenPeopleTempDAOImpl extends DaoGenerico<ModeloBenPeople> implem
             modelos = q1.getResultList();
         } catch (NoResultException e) {
             Logger.getLogger(ImpBenPeopleTempDAOImpl.class).error(e);
-            System.err.println(e);
+            System.err.println("ImpBenPeopleTempDAOImpl "+e);
             return null;
         }
         return modelos;
