@@ -75,7 +75,6 @@ public class LerArquivoBenPeople {
                 buffer.clear();
                 modeloDAO.cadastrar(parseCampos(out, benNomeArq));
             }
-            //buffer.clear(); // do something with the data and clear/compact it.
             inChannel.close();
             aFile.close();
         } catch (FileNotFoundException e) {

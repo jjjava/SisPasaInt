@@ -3,18 +3,13 @@ package org.pasa.sispasaint.carga.impl;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 import org.apache.log4j.Logger;
-import org.pasa.sispasa.core.model.Funcionario;
-import org.pasa.sispasaint.bean.impl.FuncionarioBeanImpl;
 import org.pasa.sispasaint.bean.impl.ImpBenPeopleTempBeanImpl;
 import org.pasa.sispasaint.bean.impl.ImpEndPeopleTempBeanImpl;
 import org.pasa.sispasaint.bean.impl.LogBeanImpl;
 import org.pasa.sispasaint.carga.CargaPeopleBean;
 import org.pasa.sispasaint.carga.thread.CargaMapeaEntidadesThread;
-import org.pasa.sispasaint.config.Configuracao;
 import org.pasa.sispasaint.model.intg.Log;
-import org.pasa.sispasaint.model.intg.ModeloBenPeople;
 import org.pasa.sispasaint.util.ArquivoUtil;
-import org.pasa.sispasaint.util.SisPasaIntCommon;
 import org.pasa.sispasaint.util.Sistema;
 
 /**
@@ -44,10 +39,10 @@ public class CargaPeopleBeanImpl implements CargaPeopleBean {
 
     @Override
     public void cargaArquivosTemp() {
-        ImpBenPeopleTempBeanImpl beanBen = new ImpBenPeopleTempBeanImpl();
-        beanBen.limparTbTemp();
-        beanBen.resetarIdentity();
-        beanBen.carregarArquivo(id, log);
+//        ImpBenPeopleTempBeanImpl beanBen = new ImpBenPeopleTempBeanImpl();
+//        beanBen.limparTbTemp();
+//        beanBen.resetarIdentity();
+//        beanBen.carregarArquivo(id, log);
 
         ImpEndPeopleTempBeanImpl beanEnd = new ImpEndPeopleTempBeanImpl();
         beanEnd.limparTbTemp();

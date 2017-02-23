@@ -53,15 +53,13 @@ public class ImpBenPeopleTempBeanImpl implements ImpBenPeopleTempBean {
         try {
             ExecutorService executor = Executors.newFixedThreadPool(Sistema.getNumberProcessors());
             int lote = ArquivoUtil.getNumeroLinhasLote(ArquivoUtil.getNumerosLinhaArquivo(Configuracao.getInstance().getBenNomeArqComPath(id)));
-            
             int loteLines = lote;
             lote = lote * 401;
             int ini = 0;
             int fim = lote;
-
             for (int i = 0; i < Sistema.getNumberProcessors() ; i++) {
                 executor.execute(new CargaBenPeopleThread(id, ini, fim, lote, loteLines));
-                ini = fim ;
+                ini = fim;
                 fim = fim + lote;
             }
             executor.shutdown();

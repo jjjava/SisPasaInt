@@ -22,7 +22,7 @@ public class ImpBenPeopleTempDAOImpl extends DaoGenerico<ModeloBenPeople> implem
     @Override
     public void resetarIdentity() {
         getEntityManager().getTransaction().begin();
-        Query q1 = getEntityManager().createNativeQuery("DBCC CHECKIDENT ('[sispasa-dev].[dbo].[CARG_BEN_PEOPLE]', RESEED, 0)");
+        Query q1 = getEntityManager().createNativeQuery("DBCC CHECKIDENT ('[sispasa].[dbo].[CARG_BEN_PEOPLE]', RESEED, 0)");
         q1.executeUpdate();
         getEntityManager().getTransaction().commit();
     }

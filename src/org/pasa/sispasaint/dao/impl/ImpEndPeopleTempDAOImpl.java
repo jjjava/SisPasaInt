@@ -38,7 +38,7 @@ public class ImpEndPeopleTempDAOImpl extends DaoGenerico<ModeloEndPeople> implem
     @Override
     public void resetarIdentity() {
         getEntityManager().getTransaction().begin();
-        Query q1 = getEntityManager().createNativeQuery("DBCC CHECKIDENT ('[sispasa-dev].[dbo].[CARG_END_PEOPLE]', RESEED, 0)");
+        Query q1 = getEntityManager().createNativeQuery("DBCC CHECKIDENT ('[sispasa].[dbo].[CARG_END_PEOPLE]', RESEED, 0)");
         q1.executeUpdate();
         getEntityManager().getTransaction().commit();
     }

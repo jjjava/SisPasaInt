@@ -1,9 +1,7 @@
 package org.pasa.sispasaint.rw;
 
-import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileNotFoundException;
-import java.io.FileReader;
 import java.io.IOException;
 import java.io.RandomAccessFile;
 import java.nio.MappedByteBuffer;
@@ -61,24 +59,18 @@ public class LerArquivoEndPeople {
         try {
             RandomAccessFile aFile = new RandomAccessFile(file, "r");
             FileChannel inChannel = aFile.getChannel();
-            //   MappedByteBuffer buffer = inChannel.map(FileChannel.MapMode.READ_ONLY, ini, 19594 * 401);
-            //   buffer.load();
-
             for (int i = 0; i < loteLines; i++) {
                 MappedByteBuffer buffer = inChannel.map(FileChannel.MapMode.READ_ONLY, ini, 190);
                 buffer.load();
                 out = "";
                 for (int j = 0; j < 190; j++) {
-                    //  System.out.println("j "+j);
                     out = out + ((char) buffer.get());
                 }
-                System.out.println("out " + out);
+                System.out.println(out);
                 ini = ini + 191;
                 buffer.clear();
-
                 modeloDAO.cadastrar(parseCampos(out, endNomeArq));
             }
-            //        buffer.clear(); // do something with the data and clear/compact it.
             inChannel.close();
             aFile.close();
         } catch (FileNotFoundException e) {
