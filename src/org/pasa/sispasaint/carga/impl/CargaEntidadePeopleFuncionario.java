@@ -30,6 +30,7 @@ import org.pasa.sispasa.core.model.Telefone;
 import org.pasa.sispasa.core.model.TipoDocumento;
 import org.pasa.sispasa.core.model.TipoVinculoEmpregaticio;
 import org.pasa.sispasaint.bean.impl.NivelEscolaridadeBeanImpl;
+import org.pasa.sispasaint.bean.impl.TipoDocumentoBeanImpl;
 import org.pasa.sispasaint.bean.impl.TipoVinculoEmpregaticioBeanImpl;
 import org.pasa.sispasaint.util.StringUtil;
 
@@ -49,23 +50,24 @@ public class CargaEntidadePeopleFuncionario {
     private final EstadoBeanImpl estadoBeanImpl;
     private final MunicipioBeanImpl municipioBeanImpl;
     private final NivelEscolaridadeBeanImpl nivelEscolaridadeBean;
+    private final TipoDocumentoBeanImpl tipoDocumentoBean;
     private final TipoVinculoEmpregaticioBeanImpl tipoVinculoEmpregaticioBean;
 
     public CargaEntidadePeopleFuncionario() {
-        cargaEntidadePeopleBeneficiario = new CargaEntidadePeopleBeneficiario();
-        empresaBean = new EmpresaBeanImpl();
-        funcionarioBean = new FuncionarioBeanImpl();
-        impBenPeopleTempBeanImpl = new ImpBenPeopleTempBeanImpl();
-        impEndPeopleTempBeanImpl = new ImpEndPeopleTempBeanImpl();
-        estadoBeanImpl = new EstadoBeanImpl();
-        municipioBeanImpl = new MunicipioBeanImpl();
-        nivelEscolaridadeBean = new NivelEscolaridadeBeanImpl();
-        tipoVinculoEmpregaticioBean = new TipoVinculoEmpregaticioBeanImpl();
+        this.cargaEntidadePeopleBeneficiario = new CargaEntidadePeopleBeneficiario();
+        this.empresaBean = new EmpresaBeanImpl();
+        this.funcionarioBean = new FuncionarioBeanImpl();
+        this.impBenPeopleTempBeanImpl = new ImpBenPeopleTempBeanImpl();
+        this.impEndPeopleTempBeanImpl = new ImpEndPeopleTempBeanImpl();
+        this.estadoBeanImpl = new EstadoBeanImpl();
+        this.municipioBeanImpl = new MunicipioBeanImpl();
+        this.nivelEscolaridadeBean = new NivelEscolaridadeBeanImpl();
+        this.tipoDocumentoBean = new TipoDocumentoBeanImpl();
+        this.tipoVinculoEmpregaticioBean = new TipoVinculoEmpregaticioBeanImpl();
     }
 
     public boolean newFuncionario(ModeloBenPeople modelo) {
         Empresa empresa = empresaBean.existe(modelo.getEmpresa());
-
         if (empresa == null) {
             return false;
         } else {
@@ -76,38 +78,33 @@ public class CargaEntidadePeopleFuncionario {
             funcionario.setPessoa(new Pessoa());
             funcionario.setEmpresa(empresa);
             //ENDERECO
-            if (newEndereco(modelo) == null) {
-                return false;
-            } else {
-                funcionario.getPessoa().addEndereco(newEndereco(modelo));
-            }
+            if (!(newEndereco(modelo) == null)) {
+               funcionario.getPessoa().addEndereco(newEndereco(modelo));
+            } 
             //DOCUMENTOS
             funcionario.getPessoa().setCpf(modelo.getCpf());
             funcionario.getPessoa().addDocumento(newPis(modelo));
             //TELEFONES
             funcionario.getPessoa().setTelefones(newTelefones(modelo));
             //ATRIBUTOS 
-            setAtributos(modelo);
+            this.setAtributos(modelo);
             //DADOS BANCARIOS
             funcionario.setDadosBancarios(newDadosBancarios(modelo));
             //ORIGEM INFORMACOES
             funcionario.getPessoa().setOrigemInformacoes(newOrigemInformacoes());
             //VINCULO
             funcionario.setTipoVinculoEmpregaticio(newTipoVinculoEmpregaticio());
-
             //MATRICULAS
             funcionario.setMatriculaOrigem(modelo.getMatriculaPeople());//IMPORTANTE
             funcionario.setMatriculaAtualizadora(modelo.getMatriculaAtulizador());
             funcionario.setMatriculaPasa(modelo.getMatriculaPasa());
-
-            //INSERT
+            //ATRIBUTOS CARGA
             funcionario.setIdUsuario(SisPasaIntCommon.USER_CARGA);
             funcionario.setIndAtivo(SisPasaIntCommon.ATIVO);
             funcionario.setDataUltimaAtualizacao(DateUtil.obterDataAtual());
             funcionario.getPessoa().setDataInclusaoSistema(DateUtil.obterDataAtual());
-
+            //PERSISTIR
             funcionarioBean.cadastrar(funcionario);//gerar ID
-
             //BENEFICIARIOS
             List<ModeloBenPeople> benef = impBenPeopleTempBeanImpl.listarBeneficiarios(modelo);
             for (ModeloBenPeople f : benef) {
@@ -128,6 +125,9 @@ public class CargaEntidadePeopleFuncionario {
 
     private Endereco newEndereco(ModeloBenPeople mBen) {
         ModeloEndPeople modeloEndPeople = impEndPeopleTempBeanImpl.obterPorMatricula(mBen);
+        if(modeloEndPeople == null){
+            return null;
+        }
         Estado estado = estadoBeanImpl.obter(modeloEndPeople.getUf());
         Municipio municipio = municipioBeanImpl.existe(modeloEndPeople.getCidade());
         if (municipio == null) {
@@ -170,11 +170,8 @@ public class CargaEntidadePeopleFuncionario {
 
     private Documento newPis(ModeloBenPeople modelo) {
         Documento pis = new Documento();
-        TipoDocumento tpPIS = new TipoDocumento();
+        TipoDocumento tpPIS = tipoDocumentoBean.obter(EnumTipoDocumento.PIS_PASEP.getIndice());
         pis.setNumero(modelo.getPis());
-        pis.setNumero(modelo.getPis());
-        tpPIS.setId(EnumTipoDocumento.PIS_PASEP.getIndice());
-        tpPIS.setDescricao(EnumTipoDocumento.PIS_PASEP.getDescricao());
         pis.setTipoDocumento(tpPIS);
         pis.setIdUsuario(SisPasaIntCommon.USER_CARGA);
         pis.setDataUltimaAtualizacao(DateUtil.obterDataAtual());
@@ -187,22 +184,19 @@ public class CargaEntidadePeopleFuncionario {
 
         if (!modeloEndPeople.getTelefone1().trim().equals("")) {
             Telefone tel1 = new Telefone();
-            tel1.setNumeroTelefone(modeloEndPeople.getTelefone1().replaceAll(" ", ""));
+            tel1.setNumeroTelefone(StringUtil.truncTelefone(modeloEndPeople.getTelefone1().replaceAll(" ", "")));
             tel1.setIndAtivo(SisPasaIntCommon.ATIVO);
             tel1.setIdUsuario(SisPasaIntCommon.USER_CARGA);
             tel1.setDataUltimaAtualizacao(DateUtil.obterDataAtual());
-            System.out.println(tel1.getNumeroTelefone());
-
             listaTelefones.add(tel1);
         }
 
         if (!modeloEndPeople.getTelefone2().trim().equals("")) {
             Telefone tel2 = new Telefone();
-            tel2.setNumeroTelefone(modeloEndPeople.getTelefone2().replaceAll(" ", ""));
+            tel2.setNumeroTelefone(StringUtil.truncTelefone(modeloEndPeople.getTelefone2().replaceAll(" ", "")));
             tel2.setIndAtivo(SisPasaIntCommon.ATIVO);
             tel2.setIdUsuario(SisPasaIntCommon.USER_CARGA);
             tel2.setDataUltimaAtualizacao(DateUtil.obterDataAtual());
-            System.out.println(tel2.getNumeroTelefone());
             listaTelefones.add(tel2);
         }
         return listaTelefones;

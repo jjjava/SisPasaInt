@@ -85,7 +85,6 @@ public class LerArquivoBenPeople {
     }
 
     private ModeloBenPeople parseCampos(String line, String nomeArq) {
-
         //NORMALIZACOES DA LINHA
         line = acerta400Pos(line);
         line = StringUtil.removeCharsEspeciais(line);

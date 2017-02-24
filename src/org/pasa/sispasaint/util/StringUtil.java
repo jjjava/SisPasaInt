@@ -57,4 +57,13 @@ public class StringUtil {
                 .replace('ñ', 'n')
                 .replace('Ñ', 'N');
     }
+    
+    public static String truncTelefone(String tel){
+        char aux[] = tel.toCharArray();
+        tel = "";
+        for(int k=0;k<18;k++){
+            tel = tel + aux[k]; 
+        }
+        return tel;
+    }
 }

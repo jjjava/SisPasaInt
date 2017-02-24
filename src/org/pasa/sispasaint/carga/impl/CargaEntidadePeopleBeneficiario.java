@@ -21,6 +21,7 @@ import org.pasa.sispasaint.bean.impl.ImpEndPeopleTempBeanImpl;
 import org.pasa.sispasaint.bean.impl.MunicipioBeanImpl;
 import org.pasa.sispasaint.bean.impl.NivelEscolaridadeBeanImpl;
 import org.pasa.sispasaint.bean.impl.PlanoBeanImpl;
+import org.pasa.sispasaint.bean.impl.TipoDocumentoBeanImpl;
 import org.pasa.sispasaint.model.intg.ModeloBenPeople;
 import org.pasa.sispasaint.model.intg.ModeloEndPeople;
 import org.pasa.sispasaint.util.DateUtil;
@@ -38,6 +39,7 @@ public class CargaEntidadePeopleBeneficiario {
     private final PlanoBeanImpl planoBean;
     private final EstadoBeanImpl estadoBean;
     private final MunicipioBeanImpl municipioBean;
+    private final TipoDocumentoBeanImpl tipoDocumentoBean;
     private final ImpEndPeopleTempBeanImpl impEndPeopleTempBeanImpl;
     private final NivelEscolaridadeBeanImpl nivelEscolaridadeBean;
 
@@ -46,6 +48,7 @@ public class CargaEntidadePeopleBeneficiario {
         this.estadoBean = new EstadoBeanImpl();
         this.municipioBean = new MunicipioBeanImpl();
         this.impEndPeopleTempBeanImpl = new ImpEndPeopleTempBeanImpl();
+        this.tipoDocumentoBean = new TipoDocumentoBeanImpl();
         this.nivelEscolaridadeBean = new NivelEscolaridadeBeanImpl();
     }
 
@@ -53,9 +56,7 @@ public class CargaEntidadePeopleBeneficiario {
         beneficiario = new Beneficiario();
         beneficiario.setPessoa(new Pessoa());
         //ENDERECO
-        if (newEndereco(modelo) == null) {
-            return null;
-        } else {
+        if (!(newEndereco(modelo) == null)) {
             beneficiario.getPessoa().addEndereco(newEndereco(modelo));
         }
         //DOCUMENTOS
@@ -64,7 +65,7 @@ public class CargaEntidadePeopleBeneficiario {
         //TELEFONES
         beneficiario.getPessoa().setTelefones(newTelefones(modelo));
         //ATRIBUTOS 
-        setAtributos(modelo);
+        this.setAtributos(modelo);
         //PLANO
         if (newPlano(modelo) == null) {
             return null;
@@ -74,12 +75,14 @@ public class CargaEntidadePeopleBeneficiario {
         beneficiario.setDataUltimaAtulizacao(DateUtil.obterDataAtual());
         beneficiario.setIdUsuario(SisPasaIntCommon.USER_CARGA);
         beneficiario.setIndAtivo(SisPasaIntCommon.ATIVO);
-
         return beneficiario;
     }
 
     private Endereco newEndereco(ModeloBenPeople mBen) {
         ModeloEndPeople modeloEndPeople = impEndPeopleTempBeanImpl.obterPorMatricula(mBen);
+        if (modeloEndPeople == null) {
+            return null;
+        }
         Estado estado = estadoBean.obter(modeloEndPeople.getUf());
         Municipio municipio = municipioBean.existe(modeloEndPeople.getCidade());
         if (municipio == null) {
@@ -99,11 +102,8 @@ public class CargaEntidadePeopleBeneficiario {
 
     private Documento newPis(ModeloBenPeople modelo) {
         Documento pis = new Documento();
-        TipoDocumento tpPIS = new TipoDocumento();
+        TipoDocumento tpPIS = tipoDocumentoBean.obter(EnumTipoDocumento.PIS_PASEP.getIndice());
         pis.setNumero(modelo.getPis());
-        pis.setNumero(modelo.getPis());
-        tpPIS.setId(EnumTipoDocumento.PIS_PASEP.getIndice());
-        tpPIS.setDescricao(EnumTipoDocumento.PIS_PASEP.getDescricao());
         pis.setTipoDocumento(tpPIS);
         pis.setIdUsuario(SisPasaIntCommon.USER_CARGA);
         pis.setDataUltimaAtualizacao(DateUtil.obterDataAtual());
@@ -118,25 +118,22 @@ public class CargaEntidadePeopleBeneficiario {
     private List<Telefone> newTelefones(ModeloBenPeople mBen) {
         ModeloEndPeople modeloEndPeople = impEndPeopleTempBeanImpl.obterPorMatricula(mBen);
         List<Telefone> listaTelefones = new ArrayList<>();
-        
+
         if (!modeloEndPeople.getTelefone1().trim().equals("")) {
-            
             Telefone tel1 = new Telefone();
-            tel1.setNumeroTelefone(modeloEndPeople.getTelefone1().replaceAll(" ",""));
+            tel1.setNumeroTelefone(StringUtil.truncTelefone(modeloEndPeople.getTelefone1().replaceAll(" ", "")));
             tel1.setIndAtivo(SisPasaIntCommon.ATIVO);
             tel1.setIdUsuario(SisPasaIntCommon.USER_CARGA);
             tel1.setDataUltimaAtualizacao(DateUtil.obterDataAtual());
-            System.out.println(tel1.getNumeroTelefone());
             listaTelefones.add(tel1);
         }
 
         if (!modeloEndPeople.getTelefone2().trim().equals("")) {
             Telefone tel2 = new Telefone();
-            tel2.setNumeroTelefone(modeloEndPeople.getTelefone2().replaceAll(" ",""));
+            tel2.setNumeroTelefone(StringUtil.truncTelefone(modeloEndPeople.getTelefone2().replaceAll(" ", "")));
             tel2.setIndAtivo(SisPasaIntCommon.ATIVO);
             tel2.setIdUsuario(SisPasaIntCommon.USER_CARGA);
             tel2.setDataUltimaAtualizacao(DateUtil.obterDataAtual());
-            System.out.println(tel2.getNumeroTelefone());
             listaTelefones.add(tel2);
         }
         return listaTelefones;
@@ -161,7 +158,7 @@ public class CargaEntidadePeopleBeneficiario {
         beneficiario.setDireitoAMSReenbolso(modeloBenEnd.getDireitoAmsReembolso());
         if (beneficiario.getDireitoAMSReenbolso().equals("S")) {
             beneficiario.setDataValidadeReembolso(DateUtil.toDate(modeloBenEnd.getDataValidadeReembolso()));
-        }else{
+        } else {
             beneficiario.setDataValidadeReembolso(null);
         }
         beneficiario.setDataValidadeReembolso(DateUtil.toDate(modeloBenEnd.getDataValidadeReembolso()));

@@ -26,12 +26,11 @@ public class ImpEndPeopleTempDAOImpl extends DaoGenerico<ModeloEndPeople> implem
             createQuery("select e from ModeloEndPeople e WHERE e.empresa = :empresa AND e.matricula = :matricula");
             q1.setParameter("empresa", empresa);
             q1.setParameter("matricula", matricula);
-           //q1.setParameter("cod", codBeneficiario);
+            q1.setMaxResults(1);
             m = (ModeloEndPeople) q1.getSingleResult();
         } catch (NoResultException e) {
             System.out.println("empresa: "+empresa+ " mat :"+matricula);
-            System.err.println("ImpEndPeopleTempDAOImpl :"+ e);
-            return m;
+            return null;
         }
         return m;
     }
@@ -69,7 +68,7 @@ public class ImpEndPeopleTempDAOImpl extends DaoGenerico<ModeloEndPeople> implem
             ModeloEndVLIs = q1.getResultList();
         } catch (NoResultException e) {
             System.out.println("empresa: "+empresa+ " mat :"+matricula);
-            System.err.println("ImpEndPeopleTempDAOImpl :"+e);
+            System.err.println("ImpEndPeopleTempDAOImpl HH:"+e);
             return null;
         }
         return ModeloEndVLIs;

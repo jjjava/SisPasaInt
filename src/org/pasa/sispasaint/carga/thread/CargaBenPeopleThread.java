@@ -5,7 +5,7 @@ import org.pasa.sispasaint.rw.LerArquivoBenPeople;
 
 /**
  *
- * @author 90J00318
+ * @author HUdson Schumaker
  */
 public class CargaBenPeopleThread implements Runnable {
 
@@ -25,13 +25,11 @@ public class CargaBenPeopleThread implements Runnable {
     
     public void start(){
         Thread t = new Thread(this);
-        //t.setPriority(Thread.NORM_PRIORITY);
         t.start();
     }
 
     @Override
     public void run() {
-       // this.start();
         new LerArquivoBenPeople(new Log()).lerArquivo(id,ini,fim,lote,loteLines);
     }
 }

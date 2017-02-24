@@ -5,7 +5,8 @@ import org.pasa.sispasaint.model.intg.Destinatario;
 
 /**
  *
- * @author 90J00318
+ * @author Hudson Schumaker
+ * @version 1.0.0
  */
 public interface DestinatarioDAO {
     Destinatario obter(Long id);

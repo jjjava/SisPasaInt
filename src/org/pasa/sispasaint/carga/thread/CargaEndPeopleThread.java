@@ -5,7 +5,7 @@ import org.pasa.sispasaint.rw.LerArquivoEndPeople;
 
 /**
  *
- * @author 90J00318
+ * @author Hudson Schumaker
  */
 public class CargaEndPeopleThread implements Runnable {
 
@@ -25,7 +25,6 @@ public class CargaEndPeopleThread implements Runnable {
 
     public void start() {
         Thread t = new Thread(this);
-        //t.setPriority(Thread.NORM_PRIORITY);
         t.start();
     }
 

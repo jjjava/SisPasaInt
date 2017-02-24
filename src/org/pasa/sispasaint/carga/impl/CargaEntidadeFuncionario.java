@@ -63,11 +63,9 @@ public class CargaEntidadeFuncionario {
             //EMPRESA
             funcionario.setEmpresa(empresa);
             //ENDERECO
-            if (newEndereco(modeloBenEnd) == null) {
-                return false;
-            } else {
+            if (!(newEndereco(modeloBenEnd) == null)) {
                 funcionario.getPessoa().addEndereco(newEndereco(modeloBenEnd));
-            }
+            } 
             //DOCUMENTOS
             funcionario.getPessoa().setCpf(modeloBenEnd.getCpf());
             funcionario.getPessoa().addDocumento(newPis(modeloBenEnd));
@@ -154,7 +152,6 @@ public class CargaEntidadeFuncionario {
         listaTelefones.add(tel1);
 
         Telefone tel2 = new Telefone();
-        tel1.setNumeroTelefone(modelo.getTelefone1());
         tel2.setNumeroTelefone(modelo.getTelefone2());
         tel2.setIndAtivo(SisPasaIntCommon.ATIVO);
         tel2.setIdUsuario(SisPasaIntCommon.USER_CARGA);

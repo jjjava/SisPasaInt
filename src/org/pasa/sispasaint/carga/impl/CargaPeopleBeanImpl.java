@@ -55,9 +55,7 @@ public class CargaPeopleBeanImpl implements CargaPeopleBean {
 
         ExecutorService executor = Executors.newFixedThreadPool(Sistema.getNumberProcessors());
         Long qtdRegistros = modeloBenBean.contar();
-        System.out.println("qtd rgistros "+qtdRegistros);
         long lote = ArquivoUtil.getNumeroLinhasLote(qtdRegistros);
-        System.out.println("lote :"+lote);
         long ini = 1;
         long fim = lote;
         try {
@@ -65,7 +63,6 @@ public class CargaPeopleBeanImpl implements CargaPeopleBean {
                 executor.execute(new CargaMapeaEntidadesThread(ini, fim, "Thread"+k));
                 ini = fim;
                 fim = fim + lote;
-              //  System.out.println("K "+k);
             }
             executor.shutdown();
             while (!executor.isTerminated()) {
