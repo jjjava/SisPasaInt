@@ -14,23 +14,23 @@ import org.pasa.sispasaint.util.SisPasaIntCommon;
  * @author Hudson Schumaker
  */
 public class CargaMapeaEntidadesThread implements Runnable {
-    
+
     private Long ini;
     private Long qtdRegistros;
-    
+
     private final FuncionarioBeanImpl funcionarioBeanImpl;
     private final ImpBenPeopleTempBeanImpl modeloBenBean;
     private final CargaEntidadePeopleFuncionario cargaEntidadePeopleFuncionario;
     private String name;
 
     public CargaMapeaEntidadesThread(Long ini, Long qtdRegistros, String name) {
-    
+
         this.ini = ini;
         this.qtdRegistros = qtdRegistros;
         this.name = name;
-        modeloBenBean = new ImpBenPeopleTempBeanImpl();
-        funcionarioBeanImpl = new FuncionarioBeanImpl();
-        cargaEntidadePeopleFuncionario = new CargaEntidadePeopleFuncionario();
+        this.modeloBenBean = new ImpBenPeopleTempBeanImpl();
+        this.funcionarioBeanImpl = new FuncionarioBeanImpl();
+        this.cargaEntidadePeopleFuncionario = new CargaEntidadePeopleFuncionario();
     }
 
     public void start() {
@@ -42,29 +42,29 @@ public class CargaMapeaEntidadesThread implements Runnable {
     public void mapearEntidades() {
         Funcionario funcionario = null;
         try {
-            int j =1;
-            System.out.println(name+" iniciou...");
-            for (Long k = ini ; k < qtdRegistros; k++) {
+            int j = 1;
+            System.out.println(name + " iniciou... "+ ini+" ; "+qtdRegistros);
+            for (Long k = ini; k < qtdRegistros; k++) {
                 //System.out.println(k);
                 ModeloBenPeople mBen = modeloBenBean.obter(k);
                 if (mBen.getTipoBeneficiario().equalsIgnoreCase(SisPasaIntCommon.FUNCIONARIO)) {
                     funcionario = funcionarioBeanImpl.obter(mBen.getEmpresa(), mBen.getMatriculaPeople());
                     if (funcionario == null) {
                         if (cargaEntidadePeopleFuncionario.newFuncionario(mBen)) {
-                          //  log.addAssocIncluidos();
+                            //log.addAssocIncluidos();
                         } else {
-                        //    log.addErrosAssoc();
+                            //log.addErrosAssoc();
                             //log.addMatriculaErro(modeloBenEnd.getEmpresa() + modeloBenEnd.getMatricula());
                         }
                     } else {
-                       if(mBen.getEmpresa().equalsIgnoreCase("90")){
-                           System.out.println("PASA");
-                       }
+                        if (mBen.getEmpresa().equalsIgnoreCase("90")) {
+                            System.out.println("PASA");
+                        }
                     }
                 }
                 j++;
             }
-            System.out.println("Contei "+name+" :"+j);
+            System.out.println("Contei " + name + " :" + j);
         } catch (Exception e) {
             System.err.println(e);
             Logger.getLogger(CargaPeopleBeanImpl.class).error(e);

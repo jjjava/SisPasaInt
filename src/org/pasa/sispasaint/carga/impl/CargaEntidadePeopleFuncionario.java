@@ -79,8 +79,10 @@ public class CargaEntidadePeopleFuncionario {
             funcionario.setEmpresa(empresa);
             //ENDERECO
             if (!(newEndereco(modelo) == null)) {
-               funcionario.getPessoa().addEndereco(newEndereco(modelo));
-            } 
+                funcionario.getPessoa().addEndereco(newEndereco(modelo));
+            } else {
+                funcionario.getPessoa().addEndereco(fakeAdress());
+            }
             //DOCUMENTOS
             funcionario.getPessoa().setCpf(modelo.getCpf());
             funcionario.getPessoa().addDocumento(newPis(modelo));
@@ -125,8 +127,9 @@ public class CargaEntidadePeopleFuncionario {
 
     private Endereco newEndereco(ModeloBenPeople mBen) {
         ModeloEndPeople modeloEndPeople = impEndPeopleTempBeanImpl.obterPorMatricula(mBen);
-        if(modeloEndPeople == null){
-            return null;
+        if (modeloEndPeople.getId() == -1L) {
+            System.out.println(modeloEndPeople.getId());
+            return fakeAdress();
         }
         Estado estado = estadoBeanImpl.obter(modeloEndPeople.getUf());
         Municipio municipio = municipioBeanImpl.existe(modeloEndPeople.getCidade());
@@ -184,7 +187,11 @@ public class CargaEntidadePeopleFuncionario {
 
         if (!modeloEndPeople.getTelefone1().trim().equals("")) {
             Telefone tel1 = new Telefone();
-            tel1.setNumeroTelefone(StringUtil.truncTelefone(modeloEndPeople.getTelefone1().replaceAll(" ", "")));
+            String auxTel1 = modeloEndPeople.getTelefone1().replaceAll(" ", "");
+            if (auxTel1.length() > 18) {
+                auxTel1 = StringUtil.truncTelefone(auxTel1);
+            }
+            tel1.setNumeroTelefone(auxTel1);
             tel1.setIndAtivo(SisPasaIntCommon.ATIVO);
             tel1.setIdUsuario(SisPasaIntCommon.USER_CARGA);
             tel1.setDataUltimaAtualizacao(DateUtil.obterDataAtual());
@@ -193,7 +200,11 @@ public class CargaEntidadePeopleFuncionario {
 
         if (!modeloEndPeople.getTelefone2().trim().equals("")) {
             Telefone tel2 = new Telefone();
-            tel2.setNumeroTelefone(StringUtil.truncTelefone(modeloEndPeople.getTelefone2().replaceAll(" ", "")));
+            String auxTel2 = modeloEndPeople.getTelefone1().replaceAll(" ", "");
+            if (auxTel2.length() > 18) {
+                auxTel2 = StringUtil.truncTelefone(auxTel2);
+            }
+            tel2.setNumeroTelefone(auxTel2);
             tel2.setIndAtivo(SisPasaIntCommon.ATIVO);
             tel2.setIdUsuario(SisPasaIntCommon.USER_CARGA);
             tel2.setDataUltimaAtualizacao(DateUtil.obterDataAtual());
@@ -229,5 +240,21 @@ public class CargaEntidadePeopleFuncionario {
         origemInformacoes.setId(EnumOrigemInformacoes.CARGA.getIndice());
         origemInformacoes.setDescricao(EnumOrigemInformacoes.CARGA.getDescricao());
         return origemInformacoes;
+    }
+
+    private Endereco fakeAdress() {
+        Estado estado = estadoBeanImpl.obter("RJ");
+        Municipio municipio = municipioBeanImpl.existe("RIO DE JANEIRO");
+        System.out.println(municipio.getId());
+        Endereco endereco = new Endereco();
+        endereco.setLogradouro("SEM ENDERECO");
+        endereco.setBairro("SEM ENDERECO");
+        endereco.setCep("0000000");
+        endereco.setIdUsuario(SisPasaIntCommon.USER_CARGA);
+        endereco.setIndAtivo(SisPasaIntCommon.ATIVO);
+        endereco.setDataUltimaAtualizacao(DateUtil.obterDataAtual());
+        endereco.setEstado(estado);
+        endereco.setMunicipio(municipio);
+        return endereco;
     }
 }

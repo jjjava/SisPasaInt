@@ -30,7 +30,8 @@ public class ImpEndPeopleTempDAOImpl extends DaoGenerico<ModeloEndPeople> implem
             m = (ModeloEndPeople) q1.getSingleResult();
         } catch (NoResultException e) {
             System.out.println("empresa: "+empresa+ " mat :"+matricula);
-            return null;
+            m.setId(-1L);
+            return m;
         }
         return m;
     }
