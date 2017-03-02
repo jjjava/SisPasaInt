@@ -128,7 +128,6 @@ public class CargaEntidadePeopleFuncionario {
     private Endereco newEndereco(ModeloBenPeople mBen) {
         ModeloEndPeople modeloEndPeople = impEndPeopleTempBeanImpl.obterPorMatricula(mBen);
         if (modeloEndPeople.getId() == -1L) {
-            System.out.println(modeloEndPeople.getId());
             return fakeAdress();
         }
         Estado estado = estadoBeanImpl.obter(modeloEndPeople.getUf());

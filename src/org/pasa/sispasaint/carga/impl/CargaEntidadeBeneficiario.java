@@ -128,7 +128,7 @@ public class CargaEntidadeBeneficiario {
     }
     
     private Plano newPlano(ModeloBenEnd modelo) {
-        return planoBean.existe(modelo.getPlano());
+        return planoBean.existe(modelo.getPlano(), modelo.getEmpresa());
     }
     
     private void setAtributos(ModeloBenEnd modeloBenEnd) {

@@ -126,8 +126,11 @@ public class LerArquivosBenEnd {
         modelo.setOrgaoPessoal(benLine.substring(campo.getInicioCampo(), campo.getFimCampo()));
         campo = (PosicaoCampo) mapaBen.get(CamposModelo.VINCULO);
         modelo.setVinculo(benLine.substring(campo.getInicioCampo(), campo.getFimCampo()));
+        
+        //Acerta Plano
         campo = (PosicaoCampo) mapaBen.get(CamposModelo.PLANO);
-        modelo.setPlano(benLine.substring(campo.getInicioCampo(), campo.getFimCampo()));
+        modelo.setPlano(acertaPlano(benLine.substring(campo.getInicioCampo(), campo.getFimCampo())));
+        
         campo = (PosicaoCampo) mapaBen.get(CamposModelo.FAIXA_NIVEL);
         modelo.setFaixaNivel(benLine.substring(campo.getInicioCampo(), campo.getFimCampo()));
         campo = (PosicaoCampo) mapaBen.get(CamposModelo.DATA_NASCIMENTO);
@@ -228,8 +231,6 @@ public class LerArquivosBenEnd {
 
         //NOME ARQUIVO
         modelo.setNomeArquivo(benNomeArq + " | " + endNomeArq);
-        
-        System.out.println(modelo.toString());
         return modelo;
     }
 
@@ -261,6 +262,13 @@ public class LerArquivosBenEnd {
         } else {
             return "";
         }
+    }
+    
+    private String acertaPlano(String plano){
+        if(plano.equals(" ")){
+            return "0";
+        }
+        return plano;
     }
 
     private void zipArq(File file, String name, String pathOri, String pathDest) {

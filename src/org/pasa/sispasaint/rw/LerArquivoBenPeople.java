@@ -47,7 +47,7 @@ public class LerArquivoBenPeople {
         this.fim = fim;
         this.lote = lote;
         this.loteLines = loteLines;
-        
+
         lerArquivo(Configuracao.getInstance().getBenNomeArqComPath(id),
                 Configuracao.getInstance().getNomeArqBen(id));
     }
@@ -62,7 +62,7 @@ public class LerArquivoBenPeople {
         try {
             RandomAccessFile aFile = new RandomAccessFile(file, "r");
             FileChannel inChannel = aFile.getChannel();
-            
+
             for (int i = 0; i < loteLines; i++) {
                 MappedByteBuffer buffer = inChannel.map(FileChannel.MapMode.READ_ONLY, ini, 400);
                 buffer.load();
@@ -116,8 +116,10 @@ public class LerArquivoBenPeople {
         modelo.setOrgaoPessoal(line.substring(campo.getInicioCampo(), campo.getFimCampo()).trim());
         campo = (PosicaoCampo) mapa.get(CamposModelo.VINCULO);
         modelo.setVinculo(line.substring(campo.getInicioCampo(), campo.getFimCampo()).trim());
-        campo = (PosicaoCampo) mapa.get(CamposModelo.PLANO);
-        modelo.setPlano(line.substring(campo.getInicioCampo(), campo.getFimCampo()).trim());
+        
+        campo = (PosicaoCampo) mapa.get(CamposModelo.PLANO);//Acerto Plano
+        modelo.setPlano(acertaPlano(line.substring(campo.getInicioCampo(), campo.getFimCampo()).trim()));
+        
         campo = (PosicaoCampo) mapa.get(CamposModelo.FAIXA_NIVEL);
         modelo.setFaixaNivel(line.substring(campo.getInicioCampo(), campo.getFimCampo()).trim());
         campo = (PosicaoCampo) mapa.get(CamposModelo.DATA_NASCIMENTO);
@@ -223,6 +225,13 @@ public class LerArquivoBenPeople {
         } else {
             return "";
         }
+    }
+    
+    private String acertaPlano(String plano){
+        if(plano.equals(" ")){
+            return "0";
+        }
+        return plano;
     }
 
     private void zipArq(File file, String name, String pathOri, String pathDest) {

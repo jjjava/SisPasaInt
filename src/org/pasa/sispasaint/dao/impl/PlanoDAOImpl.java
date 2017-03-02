@@ -21,12 +21,11 @@ public class PlanoDAOImpl extends DaoGenerico<Plano> implements PlanoDAO{
     }
 
     @Override
-    public Plano existe(String codigo) {
+    public Plano existe(String codPlano, String codEmpresa) {
         Query q1 = getEntityManager().
-        createQuery("select p from Plano p where p.codPlano = :cod");
-       // createQuery("select p from Plano p where p.codPlano = :cod AND ");
-        
-        q1.setParameter("cod", codigo);
+        createQuery("select p from Plano p where p.codPlano = :codPlan and p.contrato.empresa.codEmpresaVale = :codEmp");
+        q1.setParameter("codPlan", codPlano);
+        q1.setParameter("codEmp", codEmpresa);
         q1.setMaxResults(1);
         List<Plano> plano = null;
         try {

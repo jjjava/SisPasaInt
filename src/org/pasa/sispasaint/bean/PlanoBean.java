@@ -14,5 +14,5 @@ public interface PlanoBean {
     void atualizar(Plano p);
     void apagar(Plano p);
     List<Plano> listar();
-    Plano existe(String codigo);
+    Plano existe(String codPlano, String codEmpresa);
 }

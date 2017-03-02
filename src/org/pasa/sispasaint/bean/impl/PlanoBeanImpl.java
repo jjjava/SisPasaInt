@@ -45,7 +45,7 @@ public class PlanoBeanImpl implements PlanoBean {
     }
 
     @Override
-    public Plano existe(String codigo) {
-        return planoDAO.existe(codigo);
+    public Plano existe(String codPlano, String codEmpresa) {
+        return planoDAO.existe(codPlano, codEmpresa);
     }
 }
