@@ -35,7 +35,8 @@ public class Log implements Serializable {
     @Column(name = "ID_LOG", columnDefinition = ConstantesBanco.BIGINT)
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-    private String codEmpresaVale;
+    private String tipoJob;
+    private String  empresaVale;
     private Integer qtdLinhasArquivo;
     private Integer qtdRegistros;
     private Integer qtdAssocIncluidos;
@@ -45,6 +46,8 @@ public class Log implements Serializable {
     private Integer qtdAssocInativo;
     private String nomeArquivoBen;
     private String nomeArquivoEnd;
+    private Integer qtdThreads;
+    private Long qtdLote;
 
     @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
     @JoinColumn(name = "ID_LOG")
@@ -221,11 +224,35 @@ public class Log implements Serializable {
         this.qtdAssocInativo = qtdAssocInativo;
     }
 
-    public String getCodEmpresaVale() {
-        return codEmpresaVale;
+    public String getEmpresaVale() {
+        return empresaVale;
     }
 
-    public void setCodEmpresaVale(String codEmpresaVale) {
-        this.codEmpresaVale = codEmpresaVale;
+    public void setEmpresaVale(String empresaVale) {
+        this.empresaVale = empresaVale;
+    }
+
+    public String getTipoJob() {
+        return tipoJob;
+    }
+
+    public void setTipoJob(String tipoJob) {
+        this.tipoJob = tipoJob;
+    }
+
+    public Integer getQtdThreads() {
+        return qtdThreads;
+    }
+
+    public void setQtdThreads(Integer qtdThreads) {
+        this.qtdThreads = qtdThreads;
+    }
+
+    public Long getQtdLote() {
+        return qtdLote;
+    }
+
+    public void setQtdLote(Long qtdLote) {
+        this.qtdLote = qtdLote;
     }
 }

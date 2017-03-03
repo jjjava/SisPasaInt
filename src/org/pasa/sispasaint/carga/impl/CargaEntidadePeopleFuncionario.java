@@ -32,6 +32,8 @@ import org.pasa.sispasa.core.model.TipoVinculoEmpregaticio;
 import org.pasa.sispasaint.bean.impl.NivelEscolaridadeBeanImpl;
 import org.pasa.sispasaint.bean.impl.TipoDocumentoBeanImpl;
 import org.pasa.sispasaint.bean.impl.TipoVinculoEmpregaticioBeanImpl;
+import org.pasa.sispasaint.model.intg.Log;
+import org.pasa.sispasaint.util.SisPasaIntErro;
 import org.pasa.sispasaint.util.StringUtil;
 
 /**
@@ -41,6 +43,7 @@ import org.pasa.sispasaint.util.StringUtil;
  */
 public class CargaEntidadePeopleFuncionario {
 
+    private Log log;
     private Funcionario funcionario;
     private final ImpBenPeopleTempBeanImpl impBenPeopleTempBeanImpl;
     private final ImpEndPeopleTempBeanImpl impEndPeopleTempBeanImpl;
@@ -53,7 +56,8 @@ public class CargaEntidadePeopleFuncionario {
     private final TipoDocumentoBeanImpl tipoDocumentoBean;
     private final TipoVinculoEmpregaticioBeanImpl tipoVinculoEmpregaticioBean;
 
-    public CargaEntidadePeopleFuncionario() {
+    public CargaEntidadePeopleFuncionario(Log log) {
+        this.log = log;
         this.cargaEntidadePeopleBeneficiario = new CargaEntidadePeopleBeneficiario();
         this.empresaBean = new EmpresaBeanImpl();
         this.funcionarioBean = new FuncionarioBeanImpl();
@@ -69,11 +73,11 @@ public class CargaEntidadePeopleFuncionario {
     public boolean newFuncionario(ModeloBenPeople modelo) {
         Empresa empresa = empresaBean.existe(modelo.getEmpresa());
         if (empresa == null) {
+            log.addMatriculaErro(modelo.getEmpresa(), modelo.getMatriculaPeople(),
+                    modelo.getCodBeneficiario(), modelo.getCpf(), SisPasaIntErro.TP_LOG_1,
+                    SisPasaIntErro.ERRO_EMPRESA);
             return false;
         } else {
-            if (empresa.getCodEmpresaVale().equalsIgnoreCase("90")) {
-                System.out.println("PASA");
-            }
             funcionario = new Funcionario();
             funcionario.setPessoa(new Pessoa());
             funcionario.setEmpresa(empresa);
@@ -81,6 +85,9 @@ public class CargaEntidadePeopleFuncionario {
             if (!(newEndereco(modelo) == null)) {
                 funcionario.getPessoa().addEndereco(newEndereco(modelo));
             } else {
+                log.addMatriculaErro(modelo.getEmpresa(), modelo.getMatriculaPeople(),
+                        modelo.getCodBeneficiario(), modelo.getCpf(), SisPasaIntErro.TP_LOG_1,
+                        SisPasaIntErro.ERRO_ENDERECO);
                 funcionario.getPessoa().addEndereco(fakeAdress());
             }
             //DOCUMENTOS

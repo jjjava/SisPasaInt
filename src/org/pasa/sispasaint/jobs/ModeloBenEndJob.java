@@ -9,7 +9,6 @@ import org.pasa.sispasaint.carga.impl.CargaBenEndBeanImpl;
 import org.pasa.sispasaint.carga.impl.CargaPeopleBeanImpl;
 import org.pasa.sispasaint.model.intg.ListaDestinatarios;
 import org.pasa.sispasaint.model.intg.Log;
-import org.pasa.sispasaint.util.DateUtil;
 import org.pasa.sispasaint.util.SisPasaIntCommon;
 import org.quartz.DisallowConcurrentExecution;
 import org.quartz.Job;
@@ -36,7 +35,8 @@ public class ModeloBenEndJob implements Job {
     public void execute(JobExecutionContext jec) throws JobExecutionException {
         JobDataMap dataMap = jec.getJobDetail().getJobDataMap();
         long tipo = dataMap.getLong(SisPasaIntCommon.TIPO_JOB);
-        idEmpresa = dataMap.getLong(SisPasaIntCommon.ID_EMPRESA);
+        this.idEmpresa = dataMap.getLong(SisPasaIntCommon.ID_EMPRESA);
+        this.log.setEmpresaVale(new EmpresaBeanImpl().obter(idEmpresa).getNomeFantasia());
         if (idEmpresa == 1) {
             CargaPeopleBeanImpl cargaPeopleBeanImpl = new CargaPeopleBeanImpl(idEmpresa, log);
             cargaPeopleBeanImpl.inicar();

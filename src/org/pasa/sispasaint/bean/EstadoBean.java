@@ -16,5 +16,4 @@ public interface EstadoBean {
     Estado obter(Long id);
     Estado obter(String uf);
     List<Estado> listar();
-    Estado existe(Estado e);
 }

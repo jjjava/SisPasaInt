@@ -5,6 +5,7 @@ import javax.persistence.NoResultException;
 import javax.persistence.Query;
 import org.apache.log4j.Logger;
 import org.pasa.sispasa.core.model.Beneficiario;
+import org.pasa.sispasaint.bean.impl.LogBeanImpl;
 import org.pasa.sispasaint.dao.BeneficiarioDAO;
 import org.pasa.sispasaint.dao.DaoGenerico;
 import org.pasa.sispasaint.util.SisPasaIntCommon;
@@ -30,9 +31,10 @@ public class BeneficiarioDAOImpl extends DaoGenerico<Beneficiario> implements Be
         List<Beneficiario> beneficiario = null;
         try {
             beneficiario = q1.getResultList();
-        } catch (NoResultException e) {
-            System.err.println("Ben:" + e);
-            Logger.getLogger(BeneficiarioDAOImpl.class).error(e);
+        } catch (NoResultException ex) {
+            System.err.println(ex);
+            new LogBeanImpl().logErroClass(this.getClass().getName(), ex.getMessage());
+            Logger.getLogger(BeneficiarioDAOImpl.class).error(ex);
             return null;
         }
         if (beneficiario.size() > 0) {
@@ -50,9 +52,10 @@ public class BeneficiarioDAOImpl extends DaoGenerico<Beneficiario> implements Be
         List<Beneficiario> beneficiarios = null;
         try {
             beneficiarios = q1.getResultList();
-        } catch (NoResultException e) {
-            System.err.println("Ben:" + e);
-            Logger.getLogger(BeneficiarioDAOImpl.class).error(e);
+        } catch (NoResultException ex) {
+           System.err.println(ex);
+            new LogBeanImpl().logErroClass(this.getClass().getName(), ex.getMessage());
+            Logger.getLogger(BeneficiarioDAOImpl.class).error(ex);
             return null;
         }
         return beneficiarios;
@@ -66,9 +69,10 @@ public class BeneficiarioDAOImpl extends DaoGenerico<Beneficiario> implements Be
                     createQuery("update Beneficiario b set b.indAtivo = :status where SUBSTRING(b.carteirinha,1,2) = '" + empresa + "'");
             q1.setParameter("status", SisPasaIntCommon.INATIVO);
             return q1.executeUpdate();
-        } catch (Exception e) {
-            Logger.getLogger(BeneficiarioDAOImpl.class).error(e);
-            System.err.println("Ben:" + e);
+        } catch (Exception ex) {
+            System.err.println(ex);
+            new LogBeanImpl().logErroClass(this.getClass().getName(), ex.getMessage());
+            Logger.getLogger(BeneficiarioDAOImpl.class).error(ex);
         } finally {
             getEntityManager().getTransaction().commit();
         }
@@ -83,9 +87,10 @@ public class BeneficiarioDAOImpl extends DaoGenerico<Beneficiario> implements Be
         Long count = 0L;
         try {
             count = (Long) q1.getSingleResult();
-        } catch (NoResultException e) {
-            Logger.getLogger(BeneficiarioDAOImpl.class).error(e);
-            System.err.println("Ben:" + e);
+        } catch (NoResultException ex) {
+            System.err.println(ex);
+            new LogBeanImpl().logErroClass(this.getClass().getName(), ex.getMessage());
+            Logger.getLogger(BeneficiarioDAOImpl.class).error(ex);
         }
         return count;
     }

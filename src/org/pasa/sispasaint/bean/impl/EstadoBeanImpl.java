@@ -46,9 +46,4 @@ public class EstadoBeanImpl implements EstadoBean {
     public List<Estado> listar() {
         return estadoDAO.listar();
     }
-
-    @Override
-    public Estado existe(Estado e) {
-        return estadoDAO.existe(e);
-    }
 }

@@ -34,7 +34,6 @@ import org.pasa.sispasa.core.enumeration.EnumMotivoDesligamento;
  */
 @Entity
 @Table(name = "FUNCIONARIO")
-// @PrimaryKeyJoinColumn(name = "ID_PESSOA")
 @Audited
 @AuditTable(value = "HIST_FUNCIONARIO")
 public class Funcionario extends BaseEntity implements Serializable {
@@ -157,7 +156,6 @@ public class Funcionario extends BaseEntity implements Serializable {
         return id;
     }
 
-    // @Override
     public void setId(Long id) {
         this.id = id;
     }

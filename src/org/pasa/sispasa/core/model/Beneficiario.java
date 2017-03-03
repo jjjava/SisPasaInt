@@ -29,7 +29,6 @@ import org.pasa.sispasa.core.constants.ConstantesBanco;
  */
 @Entity
 @Table(name = "BENEFICIARIO")
-//@PrimaryKeyJoinColumn(name = "ID_PESSOA")
 @Audited
 @AuditTable(value = "HIST_BENEFICIARIO")
 public class Beneficiario extends BaseEntity implements Serializable{

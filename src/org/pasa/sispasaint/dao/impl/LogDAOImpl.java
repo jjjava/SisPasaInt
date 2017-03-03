@@ -7,7 +7,7 @@ import org.pasa.sispasaint.model.intg.Log;
 /**
  *
  * @author Hudson Schumaker
- * @version 1.0.0
+ * @version 1.2.0
  */
 public class LogDAOImpl extends DaoGenerico<Log> implements LogDAO{
 

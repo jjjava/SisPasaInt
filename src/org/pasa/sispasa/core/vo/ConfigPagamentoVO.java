@@ -8,16 +8,26 @@ import org.pasa.sispasa.core.enumeration.EnumTipoPagamento;
 import org.pasa.sispasa.core.model.TipoPagamento;
 
 public class ConfigPagamentoVO extends AtributosComunsVO {
-	
+
 	private List<ConvenioVO> listConvenioVO;
-	
+
 	private EnumTipoEnvioCobranca enumTipoEnvioCobranca;
 	private EnumTipoPagamento enumTipoPagamento;
-	
+
 	private ConvenioVO convenioVO;
 
 	private Integer periodoPatrocinioTemp;
+	private Integer periodoPatrocinio;
 	private Long idTaxaAssociado;
+
+	public ConfigPagamentoVO() {
+
+	}
+
+	public ConfigPagamentoVO(EnumTipoEnvioCobranca enumTipoEnvioCobranca, ConvenioVO convenioVO) {
+		this.enumTipoEnvioCobranca = enumTipoEnvioCobranca;
+		this.convenioVO = convenioVO;
+	}
 
 	public boolean isEnumTipoPagamentoBoleto() {
 		return EnumTipoPagamento.BOLETO.equals(enumTipoPagamento);
@@ -76,6 +86,14 @@ public class ConfigPagamentoVO extends AtributosComunsVO {
 
 	public void setPeriodoPatrocinioTemp(Integer periodoPatrocinioTemp) {
 		this.periodoPatrocinioTemp = periodoPatrocinioTemp;
+	}
+
+	public Integer getPeriodoPatrocinio() {
+		return periodoPatrocinio;
+	}
+
+	public void setPeriodoPatrocinio(Integer periodoPatrocinio) {
+		this.periodoPatrocinio = periodoPatrocinio;
 	}
 
 }

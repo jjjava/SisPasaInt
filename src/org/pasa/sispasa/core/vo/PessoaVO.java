@@ -12,7 +12,7 @@ import org.pasa.sispasa.core.util.Utils;
  * @author andre
  *
  */
-public class PessoaVO extends AtributosComunsVO  {
+public class PessoaVO extends AtributosComunsVO {
 
 	private Date dataUltimaAtualizacao;
 	private String cpfFormatado;
@@ -32,6 +32,10 @@ public class PessoaVO extends AtributosComunsVO  {
 	private EnumNivelEscolaridade enumNivelEscolaridade;
 	private EnumOrigemInformacoes enumOrigemInformacoes;
 	private EnumEstadoCivil enumEstadoCivil;
+
+	public String getCpfSemFormatado() {
+		return Utils.desformataCpfCnpj(cpfFormatado);
+	}
 
 	public String getDataNascimentoFormatada() {
 		return Utils.formatarData(dataNascimento, "dd/MM/yyyy");

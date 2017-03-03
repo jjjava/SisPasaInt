@@ -100,7 +100,7 @@ public class CadastroAssociadoVO extends FuncionarioVO {
 	}
 
 	public String getCpfDeAcordoComTipoAss() {
-		return isTipoAssociadoPensionista() ? getCpfPensionista() : getPessoa().getCpfFormatado();
+		return isTipoAssociadoPensionista() ? getCpfPensionista() : getPessoa().getCpfSemFormatado();
 	}
 
 	public Long getEnumNivelEscolaridadeIndice() {

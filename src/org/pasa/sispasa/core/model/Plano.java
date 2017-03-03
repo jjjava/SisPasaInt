@@ -1,6 +1,7 @@
 package org.pasa.sispasa.core.model;
 
 import java.io.Serializable;
+import java.math.BigDecimal;
 import java.util.Date;
 
 import javax.persistence.Column;
@@ -73,9 +74,23 @@ public class Plano extends BaseEntity implements Serializable {
 	@Column(name = "DT_ULT_ATULZ", nullable = false)
 	@Temporal(TemporalType.TIMESTAMP)
 	private Date dataUltimaAtualizacao;
+	
+	@Column(name="VALOR_FIXO", nullable=true)
+	private BigDecimal valorFixo;
+	
+	@Column(name = "IND_VALOR_FIXO_TITULAR", nullable = false, columnDefinition = ConstantesBanco.SMALLINT)
+	private Integer indValorFixoTitular;
+	
+	@Column(name = "IND_VALOR_FIXO_AGREGADO", nullable = false, columnDefinition = ConstantesBanco.SMALLINT)
+	private Integer indValorFixoAgregado;
+	
+	@Column(name = "IND_VALOR_FIXO_DEPENDENTE", nullable = false, columnDefinition = ConstantesBanco.SMALLINT)
+	private Integer indValorFixoDependente;
 
+	@Column(name = "IND_ANTES_RN63", nullable = false, columnDefinition = ConstantesBanco.SMALLINT)
+	private Integer indAntesRN63;
+	
 	// RELACIONAMENTOS
-
 	@ManyToOne
 	@JoinColumn(name = "ID_TP_PLANO", nullable = false)
 	@NotAudited
@@ -224,5 +239,45 @@ public class Plano extends BaseEntity implements Serializable {
 
 	public void setIndPermissaoAssociacao(Integer indPermissaoAssociacao) {
 		this.indPermissaoAssociacao = indPermissaoAssociacao;
+	}
+
+	public BigDecimal getValorFixo() {
+		return valorFixo;
+	}
+
+	public void setValorFixo(BigDecimal valorFixo) {
+		this.valorFixo = valorFixo;
+	}
+
+	public Integer getIndValorFixoTitular() {
+		return indValorFixoTitular;
+	}
+
+	public void setIndValorFixoTitular(Integer indValorFixoTitular) {
+		this.indValorFixoTitular = indValorFixoTitular;
+	}
+
+	public Integer getIndValorFixoAgregado() {
+		return indValorFixoAgregado;
+	}
+
+	public void setIndValorFixoAgregado(Integer indValorFixoAgregado) {
+		this.indValorFixoAgregado = indValorFixoAgregado;
+	}
+
+	public Integer getIndValorFixoDependente() {
+		return indValorFixoDependente;
+	}
+
+	public void setIndValorFixoDependente(Integer indValorFixoDependente) {
+		this.indValorFixoDependente = indValorFixoDependente;
+	}
+
+	public Integer getIndAntesRN63() {
+		return indAntesRN63;
+	}
+
+	public void setIndAntesRN63(Integer indAntesRN63) {
+		this.indAntesRN63 = indAntesRN63;
 	}
 }

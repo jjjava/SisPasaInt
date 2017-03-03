@@ -6,6 +6,7 @@ import org.pasa.sispasa.core.model.Estado;
 /**
  *
  * @author Hudson Schumaker
+ * @version 1.0.0
  */
 public interface EstadoDAO {
     boolean cadastrar(Estado e);
@@ -14,5 +15,4 @@ public interface EstadoDAO {
     Estado obter(Long id);
     Estado obter(String uf);
     List<Estado> listar();
-    Estado existe(Estado e);
 }

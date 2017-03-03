@@ -1,12 +1,12 @@
 package org.pasa.sispasaint.run;
 
 import java.util.List;
+import org.apache.log4j.Logger;
 import org.pasa.sispasaint.bean.impl.AgendaBeanImpl;
 import org.pasa.sispasaint.bean.impl.LogBeanImpl;
 import org.pasa.sispasaint.jobs.ModeloBenEndJob;
 import org.pasa.sispasaint.model.intg.Agenda;
 import org.pasa.sispasaint.util.SisPasaIntCommon;
-import org.pasa.sispasaint.util.SisPasaIntErro;
 import org.quartz.CronScheduleBuilder;
 import org.quartz.JobBuilder;
 import org.quartz.JobDetail;
@@ -32,11 +32,13 @@ public class Maestro {
 
     public void iniciar() {
         try {
-            schedFact = new StdSchedulerFactory();
-            scheduler = schedFact.getScheduler();
-            scheduler.start();
+            this.schedFact = new StdSchedulerFactory();
+            this.scheduler = schedFact.getScheduler();
+            this.scheduler.start();
             this.carregaJobs();
         } catch (SchedulerException ex) {
+            System.err.println(ex);
+            Logger.getLogger(Maestro.class).error(ex);
             new LogBeanImpl().logErroClass(this.getClass().getName(), ex.getMessage());
         }
     }
@@ -55,8 +57,10 @@ public class Maestro {
                         .withIdentity(a.getDescricao(), a.getGrupo())
                         .withSchedule(CronScheduleBuilder.cronSchedule(parseSchedule(a)))
                         .build();
-                scheduler.scheduleJob(job, trigger);
+                this.scheduler.scheduleJob(job, trigger);
             } catch (SchedulerException ex) {
+                System.err.println(ex);
+                Logger.getLogger(Maestro.class).error(ex);
                 new LogBeanImpl().logErroClass(this.getClass().getName(), ex.getMessage());
             }
         }

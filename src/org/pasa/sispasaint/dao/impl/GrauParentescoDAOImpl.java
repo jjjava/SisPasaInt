@@ -5,6 +5,7 @@ import javax.persistence.NoResultException;
 import javax.persistence.Query;
 import org.apache.log4j.Logger;
 import org.pasa.sispasa.core.model.GrauParentesco;
+import org.pasa.sispasaint.bean.impl.LogBeanImpl;
 import org.pasa.sispasaint.dao.DaoGenerico;
 import org.pasa.sispasaint.dao.GrauParentescoDAO;
 
@@ -29,9 +30,10 @@ public class GrauParentescoDAOImpl extends DaoGenerico<GrauParentesco> implement
         List<GrauParentesco> grauParentesco = null;
         try {
             grauParentesco = q1.getResultList();
-        } catch (NoResultException e) {
-            Logger.getLogger(GrauParentescoDAOImpl.class).error(e);
-            System.err.println("GrauParentesco "+e);
+        } catch (NoResultException ex) {
+            System.err.println(ex);
+            Logger.getLogger(GrauParentescoDAOImpl.class).error(ex); 
+            new LogBeanImpl().logErroClass(this.getClass().getName(), ex.getMessage());
             return null;
         }
         if (grauParentesco.size() > 0) {

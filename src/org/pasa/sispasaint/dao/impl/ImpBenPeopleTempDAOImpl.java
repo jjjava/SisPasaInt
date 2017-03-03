@@ -4,6 +4,7 @@ import java.util.List;
 import javax.persistence.NoResultException;
 import javax.persistence.Query;
 import org.apache.log4j.Logger;
+import org.pasa.sispasaint.bean.impl.LogBeanImpl;
 import org.pasa.sispasaint.dao.DaoGenerico;
 import org.pasa.sispasaint.model.intg.ModeloBenPeople;
 import org.pasa.sispasaint.dao.ImpBenPeopleTempDAO;
@@ -35,7 +36,9 @@ public class ImpBenPeopleTempDAOImpl extends DaoGenerico<ModeloBenPeople> implem
                 getEntityManager().persist(model);
                 getEntityManager().getTransaction().commit();
             } catch (Exception ex) {
-                System.err.println("ImpBenPeopleTempDAOImpl :"+ ex);
+                System.err.println(ex);
+                Logger.getLogger(ImpBenPeopleTempDAOImpl.class).error(ex); 
+                new LogBeanImpl().logErroClass(this.getClass().getName(), ex.getMessage());
                 getEntityManager().getTransaction().rollback();
             }
         }
@@ -50,9 +53,10 @@ public class ImpBenPeopleTempDAOImpl extends DaoGenerico<ModeloBenPeople> implem
         List<ModeloBenPeople> modelos = null;
         try {
             modelos = q1.getResultList();
-        } catch (NoResultException e) {
-            Logger.getLogger(ImpBenPeopleTempDAOImpl.class).error(e);
-            System.err.println("ImpBenPeopleTempDAOImpl "+e);
+        } catch (NoResultException ex) {
+            System.err.println(ex);
+            Logger.getLogger(ImpBenPeopleTempDAOImpl.class).error(ex);
+            new LogBeanImpl().logErroClass(this.getClass().getName(), ex.getMessage());
             return null;
         }
         return modelos;

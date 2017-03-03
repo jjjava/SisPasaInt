@@ -86,7 +86,7 @@ public class Convenio extends BaseEntity implements Serializable {
 
 	@Column(name = "IND_ATIVO", nullable = false, columnDefinition = ConstantesBanco.SMALLINT)
 	private Integer indAtivo;
-	
+
 	@Column(name = "DIA_VENCIMENTO", columnDefinition = ConstantesBanco.SMALLINT)
 	private Integer diaVencimento;
 
@@ -125,9 +125,7 @@ public class Convenio extends BaseEntity implements Serializable {
 		vo.setDataUltimaAtualizacao(dataUltimaAtualizacao);
 		vo.setDataInicioVigencia(dataInicioVigencia);
 		vo.setDataFimVigencia(dataFimVigencia);
-		if (null != tipoPagamento) {
-			vo.setEnumTipoPagamento(EnumTipoPagamento.getFromIndice(tipoPagamento.getId()));
-		}
+		vo.setEnumTipoPagamento(getTipoPagamentoAsEnum());
 		vo.setEnumTipoParticipacao(getTipoParticipacaoAsEnum());
 		vo.setQtdDiasAdesao(qtdDiasAdesao);
 		vo.setQtdDiasAssociacao(qtdDiasAssociacao);
@@ -201,6 +199,10 @@ public class Convenio extends BaseEntity implements Serializable {
 		return convenio;
 	}
 
+	public boolean possuiParticipacaoNaTaxaAssociativa() {
+		return null != indParticipacaoTaxaAssociado && EnumSimNao.SIM.getIndice().equals(indParticipacaoTaxaAssociado);
+	}
+
 	public boolean isTipoParticipacaoIntermediacao() {
 		return EnumTipoParticipacao.INTERMEDIACAO.equals(getTipoParticipacaoAsEnum());
 	}
@@ -211,6 +213,10 @@ public class Convenio extends BaseEntity implements Serializable {
 
 	public EnumTipoParticipacao getTipoParticipacaoAsEnum() {
 		return null == tipoParticipacao ? null : EnumTipoParticipacao.getFromIndice(tipoParticipacao.getId());
+	}
+
+	public EnumTipoPagamento getTipoPagamentoAsEnum() {
+		return null == tipoPagamento ? null : EnumTipoPagamento.getFromIndice(tipoPagamento.getId());
 	}
 
 	public Long getId() {

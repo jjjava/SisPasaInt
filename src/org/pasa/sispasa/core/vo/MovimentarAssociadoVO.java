@@ -4,12 +4,13 @@ package org.pasa.sispasa.core.vo;
 import java.util.List;
 
 import org.pasa.sispasa.core.enumeration.EnumTipoAssociado;
+import org.pasa.sispasa.core.util.Utils;
 
 public class MovimentarAssociadoVO {
 
 	private List<String> listEnumTipoAposentadoria;
+	private ConfigPagamentoVO configPagamentoVO;
 	private EmpresaVO empresaVO;
-
 
 	private EnumTipoAssociado enumTipoAssociado;
 	private String situacaoFuncionario;
@@ -17,29 +18,41 @@ public class MovimentarAssociadoVO {
 	private String matrOrigem;
 	private String matrPASA;
 	private String nome;
+	private String cpf;
+	private Long idFuncionario;
 	private Long id;
-	
+
 	private EmpresaVO empresaModalVO;
 	private String matrOrigemModal;
 	private String situacaoModal;
 	private String nomeModal;
 	private Long idFuncModal;
 
-	private boolean exibirTipoPensionista;
-	private boolean exibirMatrValia;
+	private EmpresaVO empresaNovoFuncVO;
+	private String matrOrigemNovoFunc;
+	private String situacaoNovoFunc;
+	private String nomeNovoFunc;
+
+	private boolean exibirNovoFuncionario;
 	private boolean exibirNomeFuncModal;
+	private boolean exibirMatrValia;
 
 	public void limparModal() {
 		setEmpresaModalVO(new EmpresaVO());
 		setMatrOrigemModal(null);
 		limparModalMenosFiltro();
 	}
-	
-	public void limparModalMenosFiltro() {		
-		setExibirNomeFuncModal(false);		
+
+	public void limparModalMenosFiltro() {
+		setExibirNomeFuncModal(false);
 		setSituacaoModal(null);
+		setIdFuncionario(null);
 		setIdFuncModal(null);
 		setNomeModal(null);
+	}
+
+	public boolean matriculaOrigemFoiAlterada() {
+		return null != getIdFuncModal();
 	}
 
 	public boolean isTipoAssociadoExEmpreAposentado() {
@@ -50,12 +63,8 @@ public class MovimentarAssociadoVO {
 		return null != enumTipoAssociado && EnumTipoAssociado.A.equals(enumTipoAssociado);
 	}
 
-	public List<String> getListEnumTipoAposentadoria() {
-		return listEnumTipoAposentadoria;
-	}
-
-	public void setListEnumTipoAposentadoria(List<String> listEnumTipoAposentadoria) {
-		this.listEnumTipoAposentadoria = listEnumTipoAposentadoria;
+	public String getCpfSemMascara() {
+		return Utils.desformataCpfCnpj(cpf);
 	}
 
 	public EmpresaVO getEmpresaVO() {
@@ -112,14 +121,6 @@ public class MovimentarAssociadoVO {
 
 	public void setMatrOrigem(String matrOrigem) {
 		this.matrOrigem = matrOrigem;
-	}
-
-	public boolean isExibirTipoPensionista() {
-		return exibirTipoPensionista;
-	}
-
-	public void setExibirTipoPensionista(boolean exibirTipoPensionista) {
-		this.exibirTipoPensionista = exibirTipoPensionista;
 	}
 
 	public boolean isExibirMatrValia() {
@@ -184,6 +185,81 @@ public class MovimentarAssociadoVO {
 
 	public void setId(Long id) {
 		this.id = id;
+	}
+
+	public String getCpf() {
+		return cpf;
+	}
+
+	public void setCpf(String cpf) {
+		this.cpf = cpf;
+	}
+
+	public boolean isExibirNovoFuncionario() {
+		return exibirNovoFuncionario;
+	}
+
+	public void setExibirNovoFuncionario(boolean exibirNovoFuncionario) {
+		this.exibirNovoFuncionario = exibirNovoFuncionario;
+	}
+
+	public EmpresaVO getEmpresaNovoFuncVO() {
+		return empresaNovoFuncVO;
+	}
+
+	public void setEmpresaNovoFuncVO(EmpresaVO empresaNovoFuncVO) {
+		this.empresaNovoFuncVO = empresaNovoFuncVO;
+	}
+
+	public String getMatrOrigemNovoFunc() {
+		return matrOrigemNovoFunc;
+	}
+
+	public void setMatrOrigemNovoFunc(String matrOrigemNovoFunc) {
+		this.matrOrigemNovoFunc = matrOrigemNovoFunc;
+	}
+
+	public String getSituacaoNovoFunc() {
+		return situacaoNovoFunc;
+	}
+
+	public void setSituacaoNovoFunc(String situacaoNovoFunc) {
+		this.situacaoNovoFunc = situacaoNovoFunc;
+	}
+
+	public String getNomeNovoFunc() {
+		return nomeNovoFunc;
+	}
+
+	public void setNomeNovoFunc(String nomeNovoFunc) {
+		this.nomeNovoFunc = nomeNovoFunc;
+	}
+
+	public List<String> getListEnumTipoAposentadoria() {
+		return listEnumTipoAposentadoria;
+	}
+
+	public void setListEnumTipoAposentadoria(List<String> listEnumTipoAposentadoria) {
+		this.listEnumTipoAposentadoria = listEnumTipoAposentadoria;
+	}
+
+	public ConfigPagamentoVO getConfigPagamentoVO() {
+		if (null == configPagamentoVO) {
+			configPagamentoVO = new ConfigPagamentoVO();
+		}
+		return configPagamentoVO;
+	}
+
+	public void setConfigPagamentoVO(ConfigPagamentoVO configPagamentoVO) {
+		this.configPagamentoVO = configPagamentoVO;
+	}
+
+	public Long getIdFuncionario() {
+		return idFuncionario;
+	}
+
+	public void setIdFuncionario(Long idFuncionario) {
+		this.idFuncionario = idFuncionario;
 	}
 
 }

@@ -15,13 +15,12 @@ public abstract class BaseEntity implements Serializable {
 
     private static final long serialVersionUID = 1L;
 
-    protected abstract Long getId();
+    public abstract Long getId();
 
     @Override
     public int hashCode() {
         int hash = 0;
         hash += (this.getId() != null ? this.getId().hashCode() : 0);
-
         return hash;
     }
 

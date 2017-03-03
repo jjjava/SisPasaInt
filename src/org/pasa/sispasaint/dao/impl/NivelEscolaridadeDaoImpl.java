@@ -5,6 +5,7 @@ import javax.persistence.NoResultException;
 import javax.persistence.Query;
 import org.apache.log4j.Logger;
 import org.pasa.sispasa.core.model.NivelEscolaridade;
+import org.pasa.sispasaint.bean.impl.LogBeanImpl;
 import org.pasa.sispasaint.dao.DaoGenerico;
 import org.pasa.sispasaint.dao.NivelEscolaridadeDao;
 
@@ -22,15 +23,16 @@ public class NivelEscolaridadeDaoImpl extends DaoGenerico<NivelEscolaridade> imp
     @Override
     public NivelEscolaridade obter(String codExterno) {
         Query q1 = getEntityManager().
-        createQuery("select n from NivelEscolaridade n where n.codExterno = :cod");
+        createQuery("Select n From NivelEscolaridade n Where n.codExterno = :cod");
         q1.setParameter("cod", codExterno);
         q1.setMaxResults(1);
         List<NivelEscolaridade> nvEscolaridade = null;
         try {
             nvEscolaridade = q1.getResultList();
         } catch (NoResultException ex) {
+            System.err.println(ex);
             Logger.getLogger(MunicipioDAOImpl.class).error(ex);
-            System.err.println("NvEsco: "+ex);
+            new LogBeanImpl().logErroClass(this.getClass().getName(), ex.getMessage());
             return null;
         }
         if (nvEscolaridade.size() > 0) {

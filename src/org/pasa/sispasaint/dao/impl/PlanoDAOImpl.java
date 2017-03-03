@@ -5,6 +5,7 @@ import javax.persistence.NoResultException;
 import javax.persistence.Query;
 import org.apache.log4j.Logger;
 import org.pasa.sispasa.core.model.Plano;
+import org.pasa.sispasaint.bean.impl.LogBeanImpl;
 import org.pasa.sispasaint.dao.DaoGenerico;
 import org.pasa.sispasaint.dao.PlanoDAO;
 
@@ -23,7 +24,7 @@ public class PlanoDAOImpl extends DaoGenerico<Plano> implements PlanoDAO{
     @Override
     public Plano existe(String codPlano, String codEmpresa) {
         Query q1 = getEntityManager().
-        createQuery("select p from Plano p where p.codPlano = :codPlan and p.contrato.empresa.codEmpresaVale = :codEmp");
+        createQuery("Select p from Plano p Where p.codPlano = :codPlan And p.contrato.empresa.codEmpresaVale = :codEmp");
         q1.setParameter("codPlan", codPlano);
         q1.setParameter("codEmp", codEmpresa);
         q1.setMaxResults(1);
@@ -31,8 +32,9 @@ public class PlanoDAOImpl extends DaoGenerico<Plano> implements PlanoDAO{
         try {
             plano = q1.getResultList();
         } catch (NoResultException ex) {
+            System.err.println(ex);
             Logger.getLogger(PlanoDAOImpl.class).error(ex);
-            System.err.println("Plano "+ex);
+            new LogBeanImpl().logErroClass(this.getClass().getName(), ex.getMessage());
             return null;
         }
         if (plano.size() > 0) {

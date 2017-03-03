@@ -21,19 +21,18 @@ public class CargaPeopleBeanImpl implements CargaPeopleBean {
 
     private Long id;
     private Log log;
-    private final LogBeanImpl logBeanImpl;
     private final ImpBenPeopleTempBeanImpl modeloBenBean;
 
     public CargaPeopleBeanImpl(Long id, Log log) {
         this.id = id;
         this.log = log;
-        logBeanImpl = new LogBeanImpl();
-        modeloBenBean = new ImpBenPeopleTempBeanImpl();
+        this.modeloBenBean = new ImpBenPeopleTempBeanImpl();
 
     }
+
     @Override
     public void inicar() {
-       // this.cargaArquivosTemp();
+        // this.cargaArquivosTemp();
         this.mapearEntidades();
     }
 
@@ -52,25 +51,25 @@ public class CargaPeopleBeanImpl implements CargaPeopleBean {
 
     @Override
     public void mapearEntidades() {
-
         ExecutorService executor = Executors.newFixedThreadPool(Sistema.getNumberProcessors());
-        Long qtdRegistros = modeloBenBean.contar();
+        long qtdRegistros = modeloBenBean.contar();
         long lote = ArquivoUtil.getNumeroLinhasLote(qtdRegistros);
+        this.log.setQtdLote(lote);
         long ini = 1;
         long fim = lote;
         try {
-            for (int k = 0; k < Sistema.getNumberProcessors(); k++) {   
-                executor.execute(new CargaMapeaEntidadesThread(ini, fim, "Thread"+k));
+            for (int k = 0; k < Sistema.getNumberProcessors(); k++) {
+                executor.execute(new CargaMapeaEntidadesThread(log, ini, fim, "Thread" + k + 1));
                 ini = fim;
                 fim = fim + lote;
             }
             executor.shutdown();
             while (!executor.isTerminated()) {
             }
-            System.out.println("Acabou !!!!!!!!");
-        } catch (Exception e) {
-            System.err.println(e);
-            Logger.getLogger(CargaPeopleBeanImpl.class).error(e);
+        } catch (Exception ex) {
+            System.err.println(ex);
+            new LogBeanImpl().logErroClass(this.getClass().getName(), ex.getMessage());
+            Logger.getLogger(CargaPeopleBeanImpl.class).error(ex);
         }
     }
 }
