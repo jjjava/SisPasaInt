@@ -18,14 +18,17 @@ import org.pasa.sispasa.core.model.Telefone;
 import org.pasa.sispasa.core.model.TipoDocumento;
 import org.pasa.sispasaint.bean.impl.EstadoBeanImpl;
 import org.pasa.sispasaint.bean.impl.ImpEndPeopleTempBeanImpl;
+import org.pasa.sispasaint.bean.impl.LogBeanImpl;
 import org.pasa.sispasaint.bean.impl.MunicipioBeanImpl;
 import org.pasa.sispasaint.bean.impl.NivelEscolaridadeBeanImpl;
 import org.pasa.sispasaint.bean.impl.PlanoBeanImpl;
 import org.pasa.sispasaint.bean.impl.TipoDocumentoBeanImpl;
+import org.pasa.sispasaint.model.intg.Log;
 import org.pasa.sispasaint.model.intg.ModeloBenPeople;
 import org.pasa.sispasaint.model.intg.ModeloEndPeople;
 import org.pasa.sispasaint.util.DateUtil;
 import org.pasa.sispasaint.util.SisPasaIntCommon;
+import org.pasa.sispasaint.util.SisPasaIntErro;
 import org.pasa.sispasaint.util.StringUtil;
 
 /**
@@ -35,6 +38,7 @@ import org.pasa.sispasaint.util.StringUtil;
  */
 public class CargaEntidadePeopleBeneficiario {
 
+    private Log log;
     private Beneficiario beneficiario;
     private final PlanoBeanImpl planoBean;
     private final EstadoBeanImpl estadoBean;
@@ -43,7 +47,8 @@ public class CargaEntidadePeopleBeneficiario {
     private final ImpEndPeopleTempBeanImpl impEndPeopleTempBeanImpl;
     private final NivelEscolaridadeBeanImpl nivelEscolaridadeBean;
 
-    public CargaEntidadePeopleBeneficiario() {
+    public CargaEntidadePeopleBeneficiario(Log log) {
+        this.log = log;
         this.planoBean = new PlanoBeanImpl();
         this.estadoBean = new EstadoBeanImpl();
         this.municipioBean = new MunicipioBeanImpl();
@@ -58,8 +63,7 @@ public class CargaEntidadePeopleBeneficiario {
         //ENDERECO
         if (!(newEndereco(modelo) == null)) {
             beneficiario.getPessoa().addEndereco(newEndereco(modelo));
-        }
-        else{
+        } else {
             beneficiario.getPessoa().addEndereco(fakeAdress());
         }
         //DOCUMENTOS
@@ -71,7 +75,9 @@ public class CargaEntidadePeopleBeneficiario {
         this.setAtributos(modelo);
         //PLANO
         if (newPlano(modelo) == null) {
-            System.out.println("Plano nulo");
+            log.addMatriculaErro(modelo.getEmpresa(), modelo.getMatriculaPeople(),
+                    modelo.getCodBeneficiario(), modelo.getCpf(), SisPasaIntErro.TP_LOG_1,
+                    SisPasaIntErro.ERRO_PLANO);
             return null;
         }
         beneficiario.getPessoa().setOrigemInformacoes(newOrigemInformacoes());
@@ -85,7 +91,6 @@ public class CargaEntidadePeopleBeneficiario {
     private Endereco newEndereco(ModeloBenPeople mBen) {
         ModeloEndPeople modeloEndPeople = impEndPeopleTempBeanImpl.obterPorMatricula(mBen);
         if (modeloEndPeople.getId() == -1L) {
-            System.out.println(modeloEndPeople.getId());
             return fakeAdress();
         }
         Estado estado = estadoBean.obter(modeloEndPeople.getUf());
@@ -127,7 +132,7 @@ public class CargaEntidadePeopleBeneficiario {
         if (!modeloEndPeople.getTelefone1().trim().equals("")) {
             Telefone tel1 = new Telefone();
             String auxTel1 = modeloEndPeople.getTelefone1().replaceAll(" ", "");
-            if (auxTel1.length() > 18) {
+            if (auxTel1.length() > SisPasaIntCommon.TAM_TELEFONE) {
                 auxTel1 = StringUtil.truncTelefone(auxTel1);
             }
             tel1.setNumeroTelefone(auxTel1);
@@ -140,7 +145,7 @@ public class CargaEntidadePeopleBeneficiario {
         if (!modeloEndPeople.getTelefone2().trim().equals("")) {
             Telefone tel2 = new Telefone();
             String auxTel2 = modeloEndPeople.getTelefone2().replaceAll(" ", "");
-            if (auxTel2.length() > 18) {
+            if (auxTel2.length() > SisPasaIntCommon.TAM_TELEFONE) {
                 auxTel2 = StringUtil.truncTelefone(auxTel2);
             }
             tel2.setNumeroTelefone(auxTel2);
@@ -201,11 +206,10 @@ public class CargaEntidadePeopleBeneficiario {
         origemInformacoes.setDescricao(EnumOrigemInformacoes.CARGA.getDescricao());
         return origemInformacoes;
     }
-    
-    private Endereco fakeAdress(){
+
+    private Endereco fakeAdress() {
         Estado estado = estadoBean.obter("RJ");
         Municipio municipio = municipioBean.existe("RIO DE JANEIRO");
-        System.out.println(municipio.getId());
         Endereco endereco = new Endereco();
         endereco.setLogradouro("SEM ENDERECO");
         endereco.setBairro("SEM ENDERECO");

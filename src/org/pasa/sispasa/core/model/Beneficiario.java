@@ -134,7 +134,6 @@ public class Beneficiario extends BaseEntity implements Serializable{
         return id;
     }
 
-    //@Override
     public void setId(Long id) {
         this.id = id;
     }

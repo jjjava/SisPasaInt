@@ -42,7 +42,6 @@
     <class>org.pasa.sispasa.core.model.TipoTaxa</class>
     <class>org.pasa.sispasa.core.model.TipoTelefone</class>
     <class>org.pasa.sispasa.core.model.TipoVinculoEmpregaticio</class>
-    <class>org.pasa.sispasaint.config.DadosConfig</class>
     <class>org.pasa.sispasaint.mail.MailConfig</class>
     <class>org.pasa.sispasaint.model.intg.Agenda</class>
     <class>org.pasa.sispasaint.model.intg.Destinatario</class>
@@ -53,6 +52,7 @@
     <class>org.pasa.sispasaint.model.intg.ModeloBenPeople</class>
     <class>org.pasa.sispasaint.model.intg.ModeloEndPeople</class>
     <class>org.pasa.sispasaint.model.intg.LogDetalhe</class>
+    <class>org.pasa.sispasaint.config.DadosConfiguracao</class>
     <properties>
       <!--  <property name="javax.persistence.jdbc.url" value="jdbc:jtds:sqlserver://192.168.232.25:1433;DatabaseName=sispasa-dev"/> -->
       <!--  <property name="javax.persistence.jdbc.user" value="usrsispasadev"/> -->

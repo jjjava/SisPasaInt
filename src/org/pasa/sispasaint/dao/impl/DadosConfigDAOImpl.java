@@ -5,7 +5,7 @@ import javax.persistence.NoResultException;
 import javax.persistence.Query;
 import org.apache.log4j.Logger;
 import org.pasa.sispasaint.bean.impl.LogBeanImpl;
-import org.pasa.sispasaint.config.DadosConfig;
+import org.pasa.sispasaint.config.DadosConfiguracao;
 import org.pasa.sispasaint.dao.DadosConfigDAO;
 import org.pasa.sispasaint.dao.DaoGenerico;
 
@@ -14,19 +14,19 @@ import org.pasa.sispasaint.dao.DaoGenerico;
  * @author Hudson Schumaker
  * @version 1.0.0
  */
-public class DadosConfigDAOImpl extends DaoGenerico<DadosConfig> implements DadosConfigDAO {
+public class DadosConfigDAOImpl extends DaoGenerico<DadosConfiguracao> implements DadosConfigDAO {
 
     public DadosConfigDAOImpl() {
-        super(DadosConfig.class);
+        super(DadosConfiguracao.class);
     }
 
     @Override
-    public DadosConfig obterPorEmpresa(Long id) {
+    public DadosConfiguracao obterPorEmpresa(Long id) {
         Query q1 = getEntityManager().
                 createQuery("select e from DadosConfig e where e.idEmpresa = :id");
         q1.setParameter("id", id);
         q1.setMaxResults(1);
-        List<DadosConfig> dados = null;
+        List<DadosConfiguracao> dados = null;
         try {
             dados = q1.getResultList();
         } catch (NoResultException ex) {

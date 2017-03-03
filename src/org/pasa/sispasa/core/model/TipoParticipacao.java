@@ -16,44 +16,43 @@ import org.pasa.sispasa.core.constants.ConstantesBanco;
  * @author Hudson Schumaker
  * @version 1.0.0
  */
-
 @Entity
 @Table(name = "TIPO_PARTICIPACAO")
 public class TipoParticipacao implements Serializable {
 
-	private static final long serialVersionUID = 1L;
+    private static final long serialVersionUID = 1L;
 
-	@Id
-	@Column(name = "ID_PARTICIPACAO", columnDefinition = ConstantesBanco.BIGINT)
-	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	private Long id;
+    @Id
+    @Column(name = "ID_PARTICIPACAO", columnDefinition = ConstantesBanco.BIGINT)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long id;
 
-	@Column(name = "DESCRICAO", length = 30, nullable = false)
-	private String descricao;
+    @Column(name = "DESCRICAO", length = 30, nullable = false)
+    private String descricao;
 
-	//CONSTRUTORES
-	public TipoParticipacao() {
-		//CONSTRUTOR DEFAULT
-	}
-		
-	public TipoParticipacao(Long id) {
-		this.id = id;
-	}
+    //CONSTRUTORES
+    public TipoParticipacao() {
+        //CONSTRUTOR DEFAULT
+    }
 
-	//GETTERS E SETTERS
-	public Long getId() {
-		return id;
-	}
+    public TipoParticipacao(Long id) {
+        this.id = id;
+    }
 
-	public void setId(Long id) {
-		this.id = id;
-	}
+    //GETTERS E SETTERS
+    public Long getId() {
+        return id;
+    }
 
-	public String getDescricao() {
-		return descricao;
-	}
+    public void setId(Long id) {
+        this.id = id;
+    }
 
-	public void setDescricao(String descricao) {
-		this.descricao = descricao;
-	}
+    public String getDescricao() {
+        return descricao;
+    }
+
+    public void setDescricao(String descricao) {
+        this.descricao = descricao;
+    }
 }

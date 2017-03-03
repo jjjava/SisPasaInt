@@ -19,7 +19,7 @@ public class Configuracao {
     }
 
     private void setUp() {
-        mailConfig = new MailConfigDAOImpl().obter(1L);
+        mailConfig = new MailConfigDAOImpl().obter(1L);//melhorar
     }
 
     public static synchronized Configuracao getInstance() {

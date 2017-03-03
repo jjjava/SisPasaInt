@@ -1,26 +1,21 @@
 package org.pasa.sispasaint.model.intg;
 
 import org.apache.commons.lang3.builder.CompareToBuilder;
-import org.pasa.sispasa.core.model.Funcionario;
+import org.pasa.sispasa.core.model.Beneficiario;
 
 /**
  *
  * @author Hudson Schumaker
  * @version 1.0.0
  */
-public class ComparadorFuncionario {
+public class ComparadorBeneficiario {
 
-    public ComparadorFuncionario() {
+    public ComparadorBeneficiario() {
     }
 
-    public int comparar(Funcionario a, Funcionario b) {
+    public int comparar(Beneficiario a, Beneficiario b) {
 
         return new CompareToBuilder()
-                .append(a.getTipoVinculoEmpregaticio().getCodExterno(), b.getTipoVinculoEmpregaticio().getCodExterno())
-                //DADOS BANCARIOS
-                .append(a.getDadosBancarios().getCodBanco(), b.getDadosBancarios().getCodBanco())
-                .append(a.getDadosBancarios().getAgencia(), b.getDadosBancarios().getAgencia())
-                .append(a.getDadosBancarios().getConta(), b.getDadosBancarios().getConta())
                 //ENDERECO
                 .append(a.getPessoa().getEnderecos().get(0).getCep(), b.getPessoa().getEnderecos().get(0).getCep())
                 .append(a.getPessoa().getEnderecos().get(0).getBairro().toLowerCase(), b.getPessoa().getEnderecos().get(0).getBairro().toLowerCase())

@@ -16,7 +16,7 @@ import org.pasa.sispasaint.util.DateUtil;
  */
 @Entity
 @Table(name = "CARG_DADOS_CONFIGURACAO")
-public class DadosConfig implements Serializable {
+public class DadosConfiguracao implements Serializable {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -31,7 +31,7 @@ public class DadosConfig implements Serializable {
     private String nomeBen;
     private String nomeEnd;
 
-    public DadosConfig() {
+    public DadosConfiguracao() {
     }
 
     public String getBenNomeArqComPath() {

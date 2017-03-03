@@ -53,7 +53,8 @@ public class Maestro {
             try {
                 JobDetail job = JobBuilder.newJob(ModeloBeneficiarioEnderecoJob.class)
                         .withIdentity(a.getDescricao(), a.getGrupo())
-                        .usingJobData(SisPasaIntCommon.TIPO_JOB, a.getIdLista())
+                        .usingJobData(SisPasaIntCommon.ID_LISTA, a.getIdLista())
+                        .usingJobData(SisPasaIntCommon.TIPO_JOB, a.getDescricao())
                         .usingJobData(SisPasaIntCommon.ID_EMPRESA, a.getIdEmpresa())
                         .build();
                 Trigger trigger = TriggerBuilder
@@ -61,7 +62,7 @@ public class Maestro {
                         .withIdentity(a.getDescricao(), a.getGrupo())
                         .withSchedule(CronScheduleBuilder.cronSchedule(parseSchedule(a)))
                         .build();
-                this.scheduler.scheduleJob(job, trigger);
+                this.scheduler.scheduleJob(job, trigger);//agenda os jobs
             } catch (SchedulerException ex) {
                 System.err.println(ex);
                 Logger.getLogger(Maestro.class).error(ex);

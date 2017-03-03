@@ -71,12 +71,9 @@ public class PlanoReciprocidade implements Serializable {
     @NotAudited
     private List<Contato> contatos;
 
-    //CONSTRUTORES
     public PlanoReciprocidade() {
-        //CONSTRUTOR DEFAULT
     }
 
-    //GETTERS E SETTERS
     public Long getId() {
         return id;
     }

@@ -1,7 +1,7 @@
 package org.pasa.sispasaint.dao;
 
 import java.util.List;
-import org.pasa.sispasaint.config.DadosConfig;
+import org.pasa.sispasaint.config.DadosConfiguracao;
 
 /**
  *
@@ -9,10 +9,10 @@ import org.pasa.sispasaint.config.DadosConfig;
  */
 
 public interface DadosConfigDAO {
-    boolean cadastrar(DadosConfig  dadosConfig);
-    boolean atualizar(DadosConfig  dadosConfig);
-    void apagar(DadosConfig  dadosConfig);
-    DadosConfig obter(Long id);
-    DadosConfig obterPorEmpresa(Long id);
-    List<DadosConfig> listar();
+    boolean cadastrar(DadosConfiguracao  dadosConfig);
+    boolean atualizar(DadosConfiguracao  dadosConfig);
+    void apagar(DadosConfiguracao  dadosConfig);
+    DadosConfiguracao obter(Long id);
+    DadosConfiguracao obterPorEmpresa(Long id);
+    List<DadosConfiguracao> listar();
 }

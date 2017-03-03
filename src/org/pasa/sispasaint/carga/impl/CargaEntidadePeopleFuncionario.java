@@ -58,16 +58,16 @@ public class CargaEntidadePeopleFuncionario {
 
     public CargaEntidadePeopleFuncionario(Log log) {
         this.log = log;
-        this.cargaEntidadePeopleBeneficiario = new CargaEntidadePeopleBeneficiario();
         this.empresaBean = new EmpresaBeanImpl();
-        this.funcionarioBean = new FuncionarioBeanImpl();
-        this.impBenPeopleTempBeanImpl = new ImpBenPeopleTempBeanImpl();
-        this.impEndPeopleTempBeanImpl = new ImpEndPeopleTempBeanImpl();
         this.estadoBeanImpl = new EstadoBeanImpl();
         this.municipioBeanImpl = new MunicipioBeanImpl();
-        this.nivelEscolaridadeBean = new NivelEscolaridadeBeanImpl();
+        this.funcionarioBean = new FuncionarioBeanImpl();
         this.tipoDocumentoBean = new TipoDocumentoBeanImpl();
+        this.nivelEscolaridadeBean = new NivelEscolaridadeBeanImpl();
+        this.impBenPeopleTempBeanImpl = new ImpBenPeopleTempBeanImpl();
+        this.impEndPeopleTempBeanImpl = new ImpEndPeopleTempBeanImpl();
         this.tipoVinculoEmpregaticioBean = new TipoVinculoEmpregaticioBeanImpl();
+        this.cargaEntidadePeopleBeneficiario = new CargaEntidadePeopleBeneficiario(log);
     }
 
     public boolean newFuncionario(ModeloBenPeople modelo) {
@@ -130,6 +130,51 @@ public class CargaEntidadePeopleFuncionario {
             }
             return funcionarioBean.atualizar(funcionario);
         }
+    }
+
+    public Funcionario funcionarioFromModelo(ModeloBenPeople modelo) {
+        Empresa empresa = empresaBean.existe(modelo.getEmpresa());
+        funcionario = new Funcionario();
+        funcionario.setPessoa(new Pessoa());
+        funcionario.setEmpresa(empresa);
+        //ENDERECO
+        funcionario.getPessoa().addEndereco(newEndereco(modelo));
+        funcionario.getPessoa().addEndereco(fakeAdress());
+        //DOCUMENTOS
+        funcionario.getPessoa().setCpf(modelo.getCpf());
+        funcionario.getPessoa().addDocumento(newPis(modelo));
+        //TELEFONES
+        funcionario.getPessoa().setTelefones(newTelefones(modelo));
+        //ATRIBUTOS 
+        this.setAtributos(modelo);
+        //DADOS BANCARIOS
+        funcionario.setDadosBancarios(newDadosBancarios(modelo));
+        //ORIGEM INFORMACOES
+        funcionario.getPessoa().setOrigemInformacoes(newOrigemInformacoes());
+        //VINCULO
+        funcionario.setTipoVinculoEmpregaticio(newTipoVinculoEmpregaticio());
+        //MATRICULAS
+        funcionario.setMatriculaOrigem(modelo.getMatriculaPeople());//IMPORTANTE
+        funcionario.setMatriculaAtualizadora(modelo.getMatriculaAtulizador());
+        funcionario.setMatriculaPasa(modelo.getMatriculaPasa());
+        //ATRIBUTOS CARGA
+        funcionario.setIdUsuario(SisPasaIntCommon.USER_CARGA);
+        funcionario.setIndAtivo(SisPasaIntCommon.ATIVO);
+        funcionario.setDataUltimaAtualizacao(DateUtil.obterDataAtual());
+        funcionario.getPessoa().setDataInclusaoSistema(DateUtil.obterDataAtual());
+        //PERSISTIR
+        funcionarioBean.cadastrar(funcionario);//gerar ID
+        //BENEFICIARIOS
+        List<ModeloBenPeople> benef = impBenPeopleTempBeanImpl.listarBeneficiarios(modelo);
+        for (ModeloBenPeople f : benef) {
+            Beneficiario b = cargaEntidadePeopleBeneficiario.newBeneficiario(f);
+            b.setFuncionario(funcionario);
+            if (f.getCodBeneficiario().equals("00")) {
+                b.setId(funcionario.getId());
+            }
+            funcionario.addBeneficiario(b);
+        }
+        return funcionario;
     }
 
     private Endereco newEndereco(ModeloBenPeople mBen) {

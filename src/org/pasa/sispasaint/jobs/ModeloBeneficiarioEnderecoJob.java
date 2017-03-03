@@ -21,12 +21,12 @@ import org.quartz.JobExecutionException;
 /**
  *
  * @author Hudson Schumaker
- * @version 1.0.0
+ * @version 1.1.1
  */
 @DisallowConcurrentExecution
 public class ModeloBeneficiarioEnderecoJob implements Job {
 
-    private Log log;
+    private final Log log;
     private Long idEmpresa;
 
     public ModeloBeneficiarioEnderecoJob() {
@@ -36,17 +36,20 @@ public class ModeloBeneficiarioEnderecoJob implements Job {
     @Override
     public void execute(JobExecutionContext jec) throws JobExecutionException {
         JobDataMap dataMap = jec.getJobDetail().getJobDataMap();
-        long tipo = dataMap.getLong(SisPasaIntCommon.TIPO_JOB);
+        String tipo = dataMap.getString(SisPasaIntCommon.TIPO_JOB);
+        long idLista = dataMap.getLong(SisPasaIntCommon.ID_LISTA);
         this.idEmpresa = dataMap.getLong(SisPasaIntCommon.ID_EMPRESA);
         this.log.setEmpresaVale(new EmpresaBeanImpl().obter(idEmpresa).getNomeFantasia());
-        if (idEmpresa == 1) {
+        
+        if (tipo.equals(SisPasaIntCommon.CARGA_PEOPLE)) {
             CargaPeopleBeanImpl cargaPeopleBeanImpl = new CargaPeopleBeanImpl(idEmpresa, log);
             cargaPeopleBeanImpl.inicar();
         } else {
             CargaBenEndBeanImpl cargaBenEndBeanImpl = new CargaBenEndBeanImpl(idEmpresa, log);
             cargaBenEndBeanImpl.start();
         }
-        EnviaEmail enviaEmail = new EnviaEmail(getDestinatariosList(new ListaDestinatariosBeanImpl().listar(tipo)),
+        
+        EnviaEmail enviaEmail = new EnviaEmail(getDestinatariosList(new ListaDestinatariosBeanImpl().listar(idLista)),
                 "#CARGA AMS ",
                 setMensagem());
         enviaEmail.enviar();
