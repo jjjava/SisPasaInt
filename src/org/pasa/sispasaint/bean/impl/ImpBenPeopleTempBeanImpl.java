@@ -4,6 +4,7 @@ import java.io.IOException;
 import java.util.List;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
+import org.apache.log4j.Logger;
 import org.pasa.sispasaint.dao.impl.ImpBenPeopleTempDAOImpl;
 import org.pasa.sispasaint.model.intg.Log;
 import org.pasa.sispasaint.model.intg.ModeloBenPeople;
@@ -11,6 +12,7 @@ import org.pasa.sispasaint.bean.ImpBenPeopleTempBean;
 import org.pasa.sispasaint.carga.thread.CargaBenPeopleThread;
 import org.pasa.sispasaint.config.Configuracao;
 import org.pasa.sispasaint.util.ArquivoUtil;
+import org.pasa.sispasaint.util.SisPasaIntCommon;
 import org.pasa.sispasaint.util.Sistema;
 
 /**
@@ -23,7 +25,7 @@ public class ImpBenPeopleTempBeanImpl implements ImpBenPeopleTempBean {
     private final ImpBenPeopleTempDAOImpl modeloDAO;
 
     public ImpBenPeopleTempBeanImpl() {
-        modeloDAO = new ImpBenPeopleTempDAOImpl();
+        this.modeloDAO = new ImpBenPeopleTempDAOImpl();
     }
 
     @Override
@@ -54,20 +56,21 @@ public class ImpBenPeopleTempBeanImpl implements ImpBenPeopleTempBean {
             ExecutorService executor = Executors.newFixedThreadPool(Sistema.getNumberProcessors());
             int lote = ArquivoUtil.getNumeroLinhasLote(ArquivoUtil.getNumerosLinhaArquivo(Configuracao.getInstance().getBenNomeArqComPath(id)));
             int loteLines = lote;
-            lote = lote * 401;
+            lote = lote * SisPasaIntCommon.LINE_TAM_2;
             int ini = 0;
             int fim = lote;
-            for (int i = 0; i < Sistema.getNumberProcessors() ; i++) {
-                executor.execute(new CargaBenPeopleThread(id, ini, fim, lote, loteLines));
+            for (int i = 0; i < Sistema.getNumberProcessors(); i++) {
+                executor.execute(new CargaBenPeopleThread(log, id, ini, fim, lote, loteLines));
                 ini = fim;
                 fim = fim + lote;
             }
             executor.shutdown();
             while (!executor.isTerminated()) {
             }
-            System.out.println("Acabou !!!!!!!!");
-        } catch (IOException e) {
-            System.err.println(e);
+        } catch (IOException ex) {
+            System.err.println(ex);
+            Logger.getLogger(ImpBenPeopleTempBeanImpl.class).error(ex);
+            new LogBeanImpl().logErroClass(this.getClass().getName(), ex.getMessage());
         }
     }
 

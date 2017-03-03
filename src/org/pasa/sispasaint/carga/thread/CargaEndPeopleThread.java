@@ -6,17 +6,20 @@ import org.pasa.sispasaint.rw.LerArquivoEndPeople;
 /**
  *
  * @author Hudson Schumaker
+ * @version 1.0.0
  */
 public class CargaEndPeopleThread implements Runnable {
 
     private Long id;
+    private Log log;
     private int ini;
     private int fim;
     private int lote;
     private int loteLines;
 
-    public CargaEndPeopleThread(Long id, int ini, int fim, int lote, int loteLines) {
+    public CargaEndPeopleThread(Log log, Long id, int ini, int fim, int lote, int loteLines) {
         this.id = id;
+        this.log = log;
         this.ini = ini;
         this.fim = fim;
         this.lote = lote;
@@ -30,6 +33,6 @@ public class CargaEndPeopleThread implements Runnable {
 
     @Override
     public void run() {
-        new LerArquivoEndPeople(new Log()).lerArquivo(id, ini, fim, lote, loteLines);
+        new LerArquivoEndPeople(log).lerArquivo(id, ini, fim, lote, loteLines);
     }
 }

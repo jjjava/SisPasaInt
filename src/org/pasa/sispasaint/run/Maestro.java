@@ -4,7 +4,7 @@ import java.util.List;
 import org.apache.log4j.Logger;
 import org.pasa.sispasaint.bean.impl.AgendaBeanImpl;
 import org.pasa.sispasaint.bean.impl.LogBeanImpl;
-import org.pasa.sispasaint.jobs.ModeloBenEndJob;
+import org.pasa.sispasaint.jobs.ModeloBeneficiarioEnderecoJob;
 import org.pasa.sispasaint.model.intg.Agenda;
 import org.pasa.sispasaint.model.intg.Log;
 import org.pasa.sispasaint.util.SisPasaIntCommon;
@@ -51,7 +51,7 @@ public class Maestro {
         List<Agenda> listAgenda = new AgendaBeanImpl().listar();
         for (Agenda a : listAgenda) {
             try {
-                JobDetail job = JobBuilder.newJob(ModeloBenEndJob.class)
+                JobDetail job = JobBuilder.newJob(ModeloBeneficiarioEnderecoJob.class)
                         .withIdentity(a.getDescricao(), a.getGrupo())
                         .usingJobData(SisPasaIntCommon.TIPO_JOB, a.getIdLista())
                         .usingJobData(SisPasaIntCommon.ID_EMPRESA, a.getIdEmpresa())

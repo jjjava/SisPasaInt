@@ -56,7 +56,6 @@ public class CargaBenEndBeanImpl implements CargaBenEndBean, Runnable {
         Funcionario funcionario = null;
         try {
             for (Long k = 1L; k < qtdRegistros; k++) {
-                System.out.println(k);
                 ModeloBenEnd modeloBenEnd = modeloBean.obter(k);
                 if (modeloBenEnd.getTipoBeneficiario().equalsIgnoreCase(SisPasaIntCommon.FUNCIONARIO)) {
                     funcionario = funcionarioBeanImpl.obter(modeloBenEnd.getEmpresa(), modeloBenEnd.getMatriculaPeople());//verificar
@@ -72,15 +71,10 @@ public class CargaBenEndBeanImpl implements CargaBenEndBean, Runnable {
                     }
                 }
             }
-        } catch (Exception e) {
-            System.err.println(e);
-            Logger.getLogger(CargaBenEndBeanImpl.class).error(e);
+        } catch (Exception ex) {
+            System.err.println(ex);
+            Logger.getLogger(CargaBenEndBeanImpl.class).error(ex);
         }
-    }
-
-    private void setStatusEntidades() {
-        new FuncionarioBeanImpl().atualizaStatus(idEmpresa);
-        new BeneficiarioBeanImpl().atulizaStatus("" + idEmpresa);
     }
 
     private void setQtdInativos() {

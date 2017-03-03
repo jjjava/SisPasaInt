@@ -4,9 +4,11 @@ import java.util.ArrayList;
 import java.util.List;
 import org.pasa.sispasaint.bean.impl.DestinatarioBeanImpl;
 import org.pasa.sispasaint.bean.impl.EmpresaBeanImpl;
+import org.pasa.sispasaint.bean.impl.ListaDestinatariosBeanImpl;
 import org.pasa.sispasaint.bean.impl.LogBeanImpl;
 import org.pasa.sispasaint.carga.impl.CargaBenEndBeanImpl;
 import org.pasa.sispasaint.carga.impl.CargaPeopleBeanImpl;
+import org.pasa.sispasaint.mail.EnviaEmail;
 import org.pasa.sispasaint.model.intg.ListaDestinatarios;
 import org.pasa.sispasaint.model.intg.Log;
 import org.pasa.sispasaint.util.SisPasaIntCommon;
@@ -22,12 +24,12 @@ import org.quartz.JobExecutionException;
  * @version 1.0.0
  */
 @DisallowConcurrentExecution
-public class ModeloBenEndJob implements Job {
+public class ModeloBeneficiarioEnderecoJob implements Job {
 
     private Log log;
     private Long idEmpresa;
 
-    public ModeloBenEndJob() {
+    public ModeloBeneficiarioEnderecoJob() {
         log = new Log();
     }
 
@@ -44,12 +46,10 @@ public class ModeloBenEndJob implements Job {
             CargaBenEndBeanImpl cargaBenEndBeanImpl = new CargaBenEndBeanImpl(idEmpresa, log);
             cargaBenEndBeanImpl.start();
         }
-//        EnviaEmail enviaEmail = new EnviaEmail(getDestinatariosList(new ListaDestinatariosBeanImpl().listar(tipo)),
-//                "#CARGA AMS ",
-//                setMensagem());
-//        enviaEmail.enviar();
-
-     
+        EnviaEmail enviaEmail = new EnviaEmail(getDestinatariosList(new ListaDestinatariosBeanImpl().listar(tipo)),
+                "#CARGA AMS ",
+                setMensagem());
+        enviaEmail.enviar();
         new LogBeanImpl().cadastrar(log);
     }
 

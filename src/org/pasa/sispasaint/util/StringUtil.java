@@ -32,7 +32,7 @@ public class StringUtil {
             return EnumSexo.FEMININO;
         }
     }
- 
+
     public static Integer parserIndicadorConclusao(String s) {
         if (s.equalsIgnoreCase("C")) {
             return SisPasaIntCommon.VERDADEIRO;
@@ -57,12 +57,12 @@ public class StringUtil {
                 .replace('ñ', 'n')
                 .replace('Ñ', 'N');
     }
-    
-    public static String truncTelefone(String tel){
+
+    public static String truncTelefone(String tel) {
         char aux[] = tel.toCharArray();
         tel = "";
-        for(int k=0;k<18;k++){
-            tel = tel + aux[k]; 
+        for (int k = 0; k < SisPasaIntCommon.TAM_TELEFONE; k++) {
+            tel = tel + aux[k];
         }
         return tel;
     }

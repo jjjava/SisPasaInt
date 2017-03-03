@@ -74,6 +74,7 @@ public class LerArquivoBenPeople {
                 ini = ini + SisPasaIntCommon.LINE_TAM_2;
                 buffer.clear();
                 modeloDAO.cadastrar(parseCampos(out, benNomeArq));
+                log.addLinhaArq();
             }
             inChannel.close();
             aFile.close();
@@ -95,117 +96,123 @@ public class LerArquivoBenPeople {
         line = acerta400Pos(line);
         line = StringUtil.removeCharsEspeciais(line);
         line = normalizaLinha(line);
-
         ModeloBenPeople modelo = new ModeloBenPeople();
-        //BENEFICIARIO - FUNCIONARIO
-        campo = (PosicaoCampo) mapa.get(CamposModelo.EMPRESA);
-        modelo.setEmpresa(line.substring(campo.getInicioCampo(), campo.getFimCampo()).trim());
-        campo = (PosicaoCampo) mapa.get(CamposModelo.MATRICULA);
-        modelo.setMatricula(line.substring(campo.getInicioCampo(), campo.getFimCampo()).trim());
-        campo = (PosicaoCampo) mapa.get(CamposModelo.COD_BENEFICIARIO);
-        modelo.setCodBeneficiario(line.substring(campo.getInicioCampo(), campo.getFimCampo()).trim());
-        campo = (PosicaoCampo) mapa.get(CamposModelo.DIREITO_AMS_CREDENCIAMENTO);
-        modelo.setDireitoAMSCredenciamento(line.substring(campo.getInicioCampo(), campo.getFimCampo()).trim());
-        campo = (PosicaoCampo) mapa.get(CamposModelo.DIREITO_AMS_REEMBOLSO);
-        modelo.setDireitoAmsReembolso(line.substring(campo.getInicioCampo(), campo.getFimCampo()).trim());
-        campo = (PosicaoCampo) mapa.get(CamposModelo.DATA_VALIDADE_CREDENCIADO);
-        modelo.setDataValidadeCredenciado(line.substring(campo.getInicioCampo(), campo.getFimCampo()).trim());
-        campo = (PosicaoCampo) mapa.get(CamposModelo.DATA_VALIDADE_REEMBOLSO);
-        modelo.setDataValidadeReembolso(line.substring(campo.getInicioCampo(), campo.getFimCampo()).trim());
-        campo = (PosicaoCampo) mapa.get(CamposModelo.DATA_DE_ATUALIZACAO);
-        modelo.setDataDeAtualizacao(line.substring(campo.getInicioCampo(), campo.getFimCampo()).trim());
-        campo = (PosicaoCampo) mapa.get(CamposModelo.NOME_BENEFICIARIO_ABREVIADO);
-        modelo.setNomeBeneficiarioAbreviado(line.substring(campo.getInicioCampo(), campo.getFimCampo()).trim());
-        campo = (PosicaoCampo) mapa.get(CamposModelo.CODIGO_CR);
-        modelo.setCodigoCR(line.substring(campo.getInicioCampo(), campo.getFimCampo()).trim());
-        campo = (PosicaoCampo) mapa.get(CamposModelo.ORGAO_PESSOAL);
-        modelo.setOrgaoPessoal(line.substring(campo.getInicioCampo(), campo.getFimCampo()).trim());
-        campo = (PosicaoCampo) mapa.get(CamposModelo.VINCULO);
-        modelo.setVinculo(line.substring(campo.getInicioCampo(), campo.getFimCampo()).trim());
-        
-        campo = (PosicaoCampo) mapa.get(CamposModelo.PLANO);//Acerto Plano
-        modelo.setPlano(acertaPlano(line.substring(campo.getInicioCampo(), campo.getFimCampo()).trim()));
-        
-        campo = (PosicaoCampo) mapa.get(CamposModelo.FAIXA_NIVEL);
-        modelo.setFaixaNivel(line.substring(campo.getInicioCampo(), campo.getFimCampo()).trim());
-        campo = (PosicaoCampo) mapa.get(CamposModelo.DATA_NASCIMENTO);
-        modelo.setDataNascimento(line.substring(campo.getInicioCampo(), campo.getFimCampo()).trim());
-        campo = (PosicaoCampo) mapa.get(CamposModelo.DIREITO_ABATER_IR);
-        modelo.setDireitoAbaterIR(line.substring(campo.getInicioCampo(), campo.getFimCampo()).trim());
-        campo = (PosicaoCampo) mapa.get(CamposModelo.NUCLEO_DA_AMS);
-        modelo.setNucleoDaAms(line.substring(campo.getInicioCampo(), campo.getFimCampo()).trim());
-        campo = (PosicaoCampo) mapa.get(CamposModelo.AGENCIA_BANCARIA);
-        modelo.setAgenciaBancaria(line.substring(campo.getInicioCampo(), campo.getFimCampo()).trim());
+        try {
+            //BENEFICIARIO - FUNCIONARIO
+            campo = (PosicaoCampo) mapa.get(CamposModelo.EMPRESA);
+            modelo.setEmpresa(line.substring(campo.getInicioCampo(), campo.getFimCampo()).trim());
+            campo = (PosicaoCampo) mapa.get(CamposModelo.MATRICULA);
+            modelo.setMatricula(line.substring(campo.getInicioCampo(), campo.getFimCampo()).trim());
+            campo = (PosicaoCampo) mapa.get(CamposModelo.COD_BENEFICIARIO);
+            modelo.setCodBeneficiario(line.substring(campo.getInicioCampo(), campo.getFimCampo()).trim());
+            campo = (PosicaoCampo) mapa.get(CamposModelo.DIREITO_AMS_CREDENCIAMENTO);
+            modelo.setDireitoAMSCredenciamento(line.substring(campo.getInicioCampo(), campo.getFimCampo()).trim());
+            campo = (PosicaoCampo) mapa.get(CamposModelo.DIREITO_AMS_REEMBOLSO);
+            modelo.setDireitoAmsReembolso(line.substring(campo.getInicioCampo(), campo.getFimCampo()).trim());
+            campo = (PosicaoCampo) mapa.get(CamposModelo.DATA_VALIDADE_CREDENCIADO);
+            modelo.setDataValidadeCredenciado(line.substring(campo.getInicioCampo(), campo.getFimCampo()).trim());
+            campo = (PosicaoCampo) mapa.get(CamposModelo.DATA_VALIDADE_REEMBOLSO);
+            modelo.setDataValidadeReembolso(line.substring(campo.getInicioCampo(), campo.getFimCampo()).trim());
+            campo = (PosicaoCampo) mapa.get(CamposModelo.DATA_DE_ATUALIZACAO);
+            modelo.setDataDeAtualizacao(line.substring(campo.getInicioCampo(), campo.getFimCampo()).trim());
+            campo = (PosicaoCampo) mapa.get(CamposModelo.NOME_BENEFICIARIO_ABREVIADO);
+            modelo.setNomeBeneficiarioAbreviado(line.substring(campo.getInicioCampo(), campo.getFimCampo()).trim());
+            campo = (PosicaoCampo) mapa.get(CamposModelo.CODIGO_CR);
+            modelo.setCodigoCR(line.substring(campo.getInicioCampo(), campo.getFimCampo()).trim());
+            campo = (PosicaoCampo) mapa.get(CamposModelo.ORGAO_PESSOAL);
+            modelo.setOrgaoPessoal(line.substring(campo.getInicioCampo(), campo.getFimCampo()).trim());
+            campo = (PosicaoCampo) mapa.get(CamposModelo.VINCULO);
+            modelo.setVinculo(line.substring(campo.getInicioCampo(), campo.getFimCampo()).trim());
 
-        //NORMALIZA CODIGO BANCARIO.
-        campo = (PosicaoCampo) mapa.get(CamposModelo.BANCO);
-        modelo.setBanco(normalizaBanco(line.substring(campo.getInicioCampo(), campo.getFimCampo())));
-        campo = (PosicaoCampo) mapa.get(CamposModelo.CONTA_CORRENTE);
-        modelo.setContaCorrente(line.substring(campo.getInicioCampo(), campo.getFimCampo()).trim());
-        campo = (PosicaoCampo) mapa.get(CamposModelo.DATA_ADMISSAO);
-        modelo.setDataAdmissao(line.substring(campo.getInicioCampo(), campo.getFimCampo()).trim());
-        campo = (PosicaoCampo) mapa.get(CamposModelo.GRAU_PARENTESCO);
-        modelo.setGrauParentesco(line.substring(campo.getInicioCampo(), campo.getFimCampo()).trim());
-        campo = (PosicaoCampo) mapa.get(CamposModelo.FINACEIRA);
-        modelo.setFinanceira(line.substring(campo.getInicioCampo(), campo.getFimCampo()).trim());
-        campo = (PosicaoCampo) mapa.get(CamposModelo.CONTRATO_TRABALHO);
-        modelo.setContratoTrabalho(line.substring(campo.getInicioCampo(), campo.getFimCampo()).trim());
-        campo = (PosicaoCampo) mapa.get(CamposModelo.SEXO);
-        modelo.setSexo(line.substring(campo.getInicioCampo(), campo.getFimCampo()).trim());
-        campo = (PosicaoCampo) mapa.get(CamposModelo.EMPRESA_ATUALIZADOR);
-        modelo.setEmpresaAtualizador(line.substring(campo.getInicioCampo(), campo.getFimCampo()).trim());
-        campo = (PosicaoCampo) mapa.get(CamposModelo.MATRICULA_ATUALIZADOR);
-        modelo.setMatriculaAtulizador(line.substring(campo.getInicioCampo(), campo.getFimCampo()).trim());
-        campo = (PosicaoCampo) mapa.get(CamposModelo.TIPO_BENEFICIARIO);
-        modelo.setTipoBeneficiario(line.substring(campo.getInicioCampo(), campo.getFimCampo()).trim());
-        campo = (PosicaoCampo) mapa.get(CamposModelo.CODIGO_DIREITO_PASA);
-        modelo.setCodigoDireitoPasa(line.substring(campo.getInicioCampo(), campo.getFimCampo()).trim());
-        campo = (PosicaoCampo) mapa.get(CamposModelo.GRAU_ESCOLARIDADE);
-        modelo.setGrauEscolaridade(line.substring(campo.getInicioCampo(), campo.getFimCampo()).trim());
-        campo = (PosicaoCampo) mapa.get(CamposModelo.INDICAR_CONCLUSAO);
-        modelo.setIndicadorConclusao(line.substring(campo.getInicioCampo(), campo.getFimCampo()).trim());
-        campo = (PosicaoCampo) mapa.get(CamposModelo.DATA_FALECIMENTO);
-        modelo.setDataFalecimento(line.substring(campo.getInicioCampo(), campo.getFimCampo()).trim());
-        campo = (PosicaoCampo) mapa.get(CamposModelo.MATRICULA_PASA);
-        modelo.setMatriculaPasa(line.substring(campo.getInicioCampo(), campo.getFimCampo()).trim());
-        campo = (PosicaoCampo) mapa.get(CamposModelo.NOME_DA_MAE);
-        modelo.setNomeDaMae(line.substring(campo.getInicioCampo(), campo.getFimCampo()).trim());
-        campo = (PosicaoCampo) mapa.get(CamposModelo.PIS);
-        modelo.setPis(line.substring(campo.getInicioCampo(), campo.getFimCampo()).trim());
-        campo = (PosicaoCampo) mapa.get(CamposModelo.CPF);
-        modelo.setCpf(line.substring(campo.getInicioCampo(), campo.getFimCampo()).trim());
-        campo = (PosicaoCampo) mapa.get(CamposModelo.EMPRESA_ORIGEM);
-        modelo.setEmpresaOrigem(line.substring(campo.getInicioCampo(), campo.getFimCampo()).trim());
-        campo = (PosicaoCampo) mapa.get(CamposModelo.MATRICULA_ORIGEM);
-        modelo.setMatriculaOrigem(line.substring(campo.getInicioCampo(), campo.getFimCampo()).trim());
-        campo = (PosicaoCampo) mapa.get(CamposModelo.EMPRESA_PEOPLE);
-        modelo.setEmpresaPeople(line.substring(campo.getInicioCampo(), campo.getFimCampo()).trim());
-        campo = (PosicaoCampo) mapa.get(CamposModelo.MATRICULA_PEOPLE);
-        modelo.setMatriculaPeople(line.substring(campo.getInicioCampo(), campo.getFimCampo()).trim());
-        campo = (PosicaoCampo) mapa.get(CamposModelo.UNIDADE_DE_CONTROLE);
-        modelo.setUnidadeDeControle(line.substring(campo.getInicioCampo(), campo.getFimCampo()).trim());
-        campo = (PosicaoCampo) mapa.get(CamposModelo.CENTRO_DE_CUSTO);
-        modelo.setCentroDeCusto(line.substring(campo.getInicioCampo(), campo.getFimCampo()).trim());
-        campo = (PosicaoCampo) mapa.get(CamposModelo.MATRICULA_PARTICIPANTE);
-        modelo.setMatriculaParticipante(line.substring(campo.getInicioCampo(), campo.getFimCampo()).trim());
-        campo = (PosicaoCampo) mapa.get(CamposModelo.MATRICULA_REPRESENTANTE_LEGAL);
-        modelo.setMatriculaRepresentanteLegal(line.substring(campo.getInicioCampo(), campo.getFimCampo()).trim());
-        campo = (PosicaoCampo) mapa.get(CamposModelo.NOME_BENEFICIARIO);
-        modelo.setNomeBeneficiario(line.substring(campo.getInicioCampo(), campo.getFimCampo()).trim());
-        campo = (PosicaoCampo) mapa.get(CamposModelo.PLANO_DE_RECIPROCIDADE_CASSI);
-        modelo.setPlanoDeReciprocidadeCassi(line.substring(campo.getInicioCampo(), campo.getFimCampo()).trim());
-        campo = (PosicaoCampo) mapa.get(CamposModelo.CODIGO_NACIONAL_DE_SAUDE);
-        modelo.setCodigoNacionalDeSaude(line.substring(campo.getInicioCampo(), campo.getFimCampo()).trim());
-        campo = (PosicaoCampo) mapa.get(CamposModelo.DECLARACAO_NASCIDO_VIVO);
-        modelo.setDeclaracaoNascidoVivo(line.substring(campo.getInicioCampo(), campo.getFimCampo()).trim());
-        campo = (PosicaoCampo) mapa.get(CamposModelo.CASSI_DATA);// fim direito do plano
-        modelo.setCassiData(line.substring(campo.getInicioCampo(), campo.getFimCampo()).trim());
-        campo = (PosicaoCampo) mapa.get(CamposModelo.BRANCO);
-        modelo.setBranco(line.substring(campo.getInicioCampo(), campo.getFimCampo()).trim());
-        campo = (PosicaoCampo) mapa.get(CamposModelo.CODIGO_FILIAL_VLI);
-        modelo.setCodigoFilialVLI(line.substring(campo.getInicioCampo(), campo.getFimCampo()).trim());
+            campo = (PosicaoCampo) mapa.get(CamposModelo.PLANO);//Acerto Plano
+            modelo.setPlano(acertaPlano(line.substring(campo.getInicioCampo(), campo.getFimCampo()).trim()));
 
-        modelo.setNomeArquivo(nomeArq);
+            campo = (PosicaoCampo) mapa.get(CamposModelo.FAIXA_NIVEL);
+            modelo.setFaixaNivel(line.substring(campo.getInicioCampo(), campo.getFimCampo()).trim());
+            campo = (PosicaoCampo) mapa.get(CamposModelo.DATA_NASCIMENTO);
+            modelo.setDataNascimento(line.substring(campo.getInicioCampo(), campo.getFimCampo()).trim());
+            campo = (PosicaoCampo) mapa.get(CamposModelo.DIREITO_ABATER_IR);
+            modelo.setDireitoAbaterIR(line.substring(campo.getInicioCampo(), campo.getFimCampo()).trim());
+            campo = (PosicaoCampo) mapa.get(CamposModelo.NUCLEO_DA_AMS);
+            modelo.setNucleoDaAms(line.substring(campo.getInicioCampo(), campo.getFimCampo()).trim());
+            campo = (PosicaoCampo) mapa.get(CamposModelo.AGENCIA_BANCARIA);
+            modelo.setAgenciaBancaria(line.substring(campo.getInicioCampo(), campo.getFimCampo()).trim());
+
+            //NORMALIZA CODIGO BANCARIO.
+            campo = (PosicaoCampo) mapa.get(CamposModelo.BANCO);
+            modelo.setBanco(normalizaBanco(line.substring(campo.getInicioCampo(), campo.getFimCampo())));
+            campo = (PosicaoCampo) mapa.get(CamposModelo.CONTA_CORRENTE);
+            modelo.setContaCorrente(line.substring(campo.getInicioCampo(), campo.getFimCampo()).trim());
+            campo = (PosicaoCampo) mapa.get(CamposModelo.DATA_ADMISSAO);
+            modelo.setDataAdmissao(line.substring(campo.getInicioCampo(), campo.getFimCampo()).trim());
+            campo = (PosicaoCampo) mapa.get(CamposModelo.GRAU_PARENTESCO);
+            modelo.setGrauParentesco(line.substring(campo.getInicioCampo(), campo.getFimCampo()).trim());
+            campo = (PosicaoCampo) mapa.get(CamposModelo.FINACEIRA);
+            modelo.setFinanceira(line.substring(campo.getInicioCampo(), campo.getFimCampo()).trim());
+            campo = (PosicaoCampo) mapa.get(CamposModelo.CONTRATO_TRABALHO);
+            modelo.setContratoTrabalho(line.substring(campo.getInicioCampo(), campo.getFimCampo()).trim());
+            campo = (PosicaoCampo) mapa.get(CamposModelo.SEXO);
+            modelo.setSexo(line.substring(campo.getInicioCampo(), campo.getFimCampo()).trim());
+            campo = (PosicaoCampo) mapa.get(CamposModelo.EMPRESA_ATUALIZADOR);
+            modelo.setEmpresaAtualizador(line.substring(campo.getInicioCampo(), campo.getFimCampo()).trim());
+            campo = (PosicaoCampo) mapa.get(CamposModelo.MATRICULA_ATUALIZADOR);
+            modelo.setMatriculaAtulizador(line.substring(campo.getInicioCampo(), campo.getFimCampo()).trim());
+            campo = (PosicaoCampo) mapa.get(CamposModelo.TIPO_BENEFICIARIO);
+            modelo.setTipoBeneficiario(line.substring(campo.getInicioCampo(), campo.getFimCampo()).trim());
+            campo = (PosicaoCampo) mapa.get(CamposModelo.CODIGO_DIREITO_PASA);
+            modelo.setCodigoDireitoPasa(line.substring(campo.getInicioCampo(), campo.getFimCampo()).trim());
+            campo = (PosicaoCampo) mapa.get(CamposModelo.GRAU_ESCOLARIDADE);
+            modelo.setGrauEscolaridade(line.substring(campo.getInicioCampo(), campo.getFimCampo()).trim());
+            campo = (PosicaoCampo) mapa.get(CamposModelo.INDICAR_CONCLUSAO);
+            modelo.setIndicadorConclusao(line.substring(campo.getInicioCampo(), campo.getFimCampo()).trim());
+            campo = (PosicaoCampo) mapa.get(CamposModelo.DATA_FALECIMENTO);
+            modelo.setDataFalecimento(line.substring(campo.getInicioCampo(), campo.getFimCampo()).trim());
+            campo = (PosicaoCampo) mapa.get(CamposModelo.MATRICULA_PASA);
+            modelo.setMatriculaPasa(line.substring(campo.getInicioCampo(), campo.getFimCampo()).trim());
+            campo = (PosicaoCampo) mapa.get(CamposModelo.NOME_DA_MAE);
+            modelo.setNomeDaMae(line.substring(campo.getInicioCampo(), campo.getFimCampo()).trim());
+            campo = (PosicaoCampo) mapa.get(CamposModelo.PIS);
+            modelo.setPis(line.substring(campo.getInicioCampo(), campo.getFimCampo()).trim());
+            campo = (PosicaoCampo) mapa.get(CamposModelo.CPF);
+            modelo.setCpf(line.substring(campo.getInicioCampo(), campo.getFimCampo()).trim());
+            campo = (PosicaoCampo) mapa.get(CamposModelo.EMPRESA_ORIGEM);
+            modelo.setEmpresaOrigem(line.substring(campo.getInicioCampo(), campo.getFimCampo()).trim());
+            campo = (PosicaoCampo) mapa.get(CamposModelo.MATRICULA_ORIGEM);
+            modelo.setMatriculaOrigem(line.substring(campo.getInicioCampo(), campo.getFimCampo()).trim());
+            campo = (PosicaoCampo) mapa.get(CamposModelo.EMPRESA_PEOPLE);
+            modelo.setEmpresaPeople(line.substring(campo.getInicioCampo(), campo.getFimCampo()).trim());
+            campo = (PosicaoCampo) mapa.get(CamposModelo.MATRICULA_PEOPLE);
+            modelo.setMatriculaPeople(line.substring(campo.getInicioCampo(), campo.getFimCampo()).trim());
+            campo = (PosicaoCampo) mapa.get(CamposModelo.UNIDADE_DE_CONTROLE);
+            modelo.setUnidadeDeControle(line.substring(campo.getInicioCampo(), campo.getFimCampo()).trim());
+            campo = (PosicaoCampo) mapa.get(CamposModelo.CENTRO_DE_CUSTO);
+            modelo.setCentroDeCusto(line.substring(campo.getInicioCampo(), campo.getFimCampo()).trim());
+            campo = (PosicaoCampo) mapa.get(CamposModelo.MATRICULA_PARTICIPANTE);
+            modelo.setMatriculaParticipante(line.substring(campo.getInicioCampo(), campo.getFimCampo()).trim());
+            campo = (PosicaoCampo) mapa.get(CamposModelo.MATRICULA_REPRESENTANTE_LEGAL);
+            modelo.setMatriculaRepresentanteLegal(line.substring(campo.getInicioCampo(), campo.getFimCampo()).trim());
+            campo = (PosicaoCampo) mapa.get(CamposModelo.NOME_BENEFICIARIO);
+            modelo.setNomeBeneficiario(line.substring(campo.getInicioCampo(), campo.getFimCampo()).trim());
+            campo = (PosicaoCampo) mapa.get(CamposModelo.PLANO_DE_RECIPROCIDADE_CASSI);
+            modelo.setPlanoDeReciprocidadeCassi(line.substring(campo.getInicioCampo(), campo.getFimCampo()).trim());
+            campo = (PosicaoCampo) mapa.get(CamposModelo.CODIGO_NACIONAL_DE_SAUDE);
+            modelo.setCodigoNacionalDeSaude(line.substring(campo.getInicioCampo(), campo.getFimCampo()).trim());
+            campo = (PosicaoCampo) mapa.get(CamposModelo.DECLARACAO_NASCIDO_VIVO);
+            modelo.setDeclaracaoNascidoVivo(line.substring(campo.getInicioCampo(), campo.getFimCampo()).trim());
+            campo = (PosicaoCampo) mapa.get(CamposModelo.CASSI_DATA);// fim direito do plano
+            modelo.setCassiData(line.substring(campo.getInicioCampo(), campo.getFimCampo()).trim());
+            campo = (PosicaoCampo) mapa.get(CamposModelo.BRANCO);
+            modelo.setBranco(line.substring(campo.getInicioCampo(), campo.getFimCampo()).trim());
+            campo = (PosicaoCampo) mapa.get(CamposModelo.CODIGO_FILIAL_VLI);
+            modelo.setCodigoFilialVLI(line.substring(campo.getInicioCampo(), campo.getFimCampo()).trim());
+
+            modelo.setNomeArquivo(nomeArq);
+        } catch (Exception ex) {
+            System.err.println(ex);
+            Logger.getLogger(LerArquivoBenPeople.class).error(ex);
+            new LogBeanImpl().logErroClass(this.getClass().getName(), ex.getMessage());
+            log.addLinhaArqErro();
+        }
         return modelo;
     }
 
@@ -231,9 +238,9 @@ public class LerArquivoBenPeople {
             return "";
         }
     }
-    
-    private String acertaPlano(String plano){
-        if(plano.equals(" ")){
+
+    private String acertaPlano(String plano) {
+        if (plano.equals(" ")) {
             return "0";
         }
         return plano;

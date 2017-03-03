@@ -7,6 +7,8 @@ import java.io.RandomAccessFile;
 import java.nio.MappedByteBuffer;
 import java.nio.channels.FileChannel;
 import java.util.Map;
+import org.apache.log4j.Logger;
+import org.pasa.sispasaint.bean.impl.LogBeanImpl;
 import org.pasa.sispasaint.config.Configuracao;
 import org.pasa.sispasaint.dao.impl.ImpEndPeopleTempDAOImpl;
 import org.pasa.sispasaint.map.CamposModelo;
@@ -61,7 +63,7 @@ public class LerArquivoEndPeople {
             RandomAccessFile aFile = new RandomAccessFile(file, "r");
             FileChannel inChannel = aFile.getChannel();
             for (int i = 0; i < loteLines; i++) {
-                MappedByteBuffer buffer = inChannel.map(FileChannel.MapMode.READ_ONLY, ini,SisPasaIntCommon.LINE_TAM_3);
+                MappedByteBuffer buffer = inChannel.map(FileChannel.MapMode.READ_ONLY, ini, SisPasaIntCommon.LINE_TAM_3);
                 buffer.load();
                 out = "";
                 for (int j = 0; j < SisPasaIntCommon.LINE_TAM_3; j++) {
@@ -71,23 +73,31 @@ public class LerArquivoEndPeople {
                 ini = ini + SisPasaIntCommon.LINE_TAM_4;
                 buffer.clear();
                 modeloDAO.cadastrar(parseCampos(out, endNomeArq));
+                log.addLinhaArq();
             }
             inChannel.close();
             aFile.close();
-        } catch (FileNotFoundException e) {
-            System.err.println(e);
-        } catch (IOException e) {
-            System.err.println(e);
+        } catch (FileNotFoundException ex) {
+            System.err.println(ex);
+            Logger.getLogger(LerArquivoEndPeople.class).error(ex);
+            new LogBeanImpl().logErroClass(this.getClass().getName(), ex.getMessage());
+            log.addLinhaArqErro();
+        } catch (IOException ex) {
+            System.err.println(ex);
+            Logger.getLogger(LerArquivoEndPeople.class).error(ex);
+            new LogBeanImpl().logErroClass(this.getClass().getName(), ex.getMessage());
+            log.addLinhaArqErro();
         }
     }
 
     private ModeloEndPeople parseCampos(String line, String nomeArq) {
+        //NORMALIZACOES DA LINHA
         line = acerta190Pos(line);
         line = StringUtil.removeCharsEspeciais(line);
         line = normalizaLinha(line);
         ModeloEndPeople modelo = new ModeloEndPeople();
         try {
-            //ENDERECO
+            //ENDERECO - TELEFONES
             campo = (PosicaoCampo) mapa.get(CamposModelo.EMPRESA);
             modelo.setEmpresa(line.substring(campo.getInicioCampo(), campo.getFimCampo()).trim());
             campo = (PosicaoCampo) mapa.get(CamposModelo.MATRICULA);
@@ -112,8 +122,11 @@ public class LerArquivoEndPeople {
             modelo.setCep(line.substring(campo.getInicioCampo(), campo.getFimCampo()).trim());
 
             modelo.setNomeArquivo(nomeArq);
-        } catch (Exception e) {
-            System.out.println(e);
+        } catch (Exception ex) {
+            System.err.println(ex);
+            Logger.getLogger(LerArquivoEndPeople.class).error(ex);
+            new LogBeanImpl().logErroClass(this.getClass().getName(), ex.getMessage());
+            log.addLinhaArqErro();
         }
         return modelo;
     }

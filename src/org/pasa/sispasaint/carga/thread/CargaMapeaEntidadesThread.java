@@ -14,6 +14,7 @@ import org.pasa.sispasaint.util.SisPasaIntErro;
 /**
  *
  * @author Hudson Schumaker
+ * @version 1.0.0
  */
 public class CargaMapeaEntidadesThread implements Runnable {
 
