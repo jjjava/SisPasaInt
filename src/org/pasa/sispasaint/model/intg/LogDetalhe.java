@@ -14,28 +14,33 @@ import org.pasa.sispasa.core.constants.ConstantesBanco;
 /**
  *
  * @author Hudson Schumaker
+ * @version 1.0.0
  */
 @Entity
-@Table(name = "CARG_LOG_MATRICULAS")
-public class LogMatriculas implements Serializable{
+@Table(name = "CARG_LOG_DETALHE")
+public class LogDetalhe implements Serializable{
     
     private static final long serialVersionUID = 1L;
 
     @Id
-    @Column(name = "ID_LOG_MATRICULAS", columnDefinition = ConstantesBanco.BIGINT)
+    @Column(name = "ID_LOG_DETALHE", columnDefinition = ConstantesBanco.BIGINT)
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
+    private String codEmpresa;
     private String matricula;
+    private String codBeneficiario;
+    private String tipoErro;
     private String erro;
     private String cpf;
+    private String classe;
     
     @ManyToOne(cascade = CascadeType.ALL)
     private Log log;
     
-    public LogMatriculas(){
+    public LogDetalhe(){
     }
     
-    public LogMatriculas(String matricula){
+    public LogDetalhe(String matricula){
         this.matricula = matricula;
     }
 
@@ -77,5 +82,37 @@ public class LogMatriculas implements Serializable{
 
     public void setCpf(String cpf) {
         this.cpf = cpf;
+    }
+
+    public String getCodEmpresa() {
+        return codEmpresa;
+    }
+
+    public void setCodEmpresa(String codEmpresa) {
+        this.codEmpresa = codEmpresa;
+    }
+
+    public String getTipoErro() {
+        return tipoErro;
+    }
+
+    public void setTipoErro(String tipoErro) {
+        this.tipoErro = tipoErro;
+    }
+
+    public String getCodBeneficiario() {
+        return codBeneficiario;
+    }
+
+    public void setCodBeneficiario(String codBeneficiario) {
+        this.codBeneficiario = codBeneficiario;
+    }
+
+    public String getClasse() {
+        return classe;
+    }
+
+    public void setClasse(String classe) {
+        this.classe = classe;
     }
 }

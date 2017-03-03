@@ -12,7 +12,7 @@ import org.pasa.sispasaint.dao.impl.EnderecoDAOImpl;
  */
 public class EnderecoBeanImpl implements EnderecoBean {
 
-    private EnderecoDAOImpl enderecoDAO;
+    private final EnderecoDAOImpl enderecoDAO;
     public EnderecoBeanImpl() {
         this.enderecoDAO = new EnderecoDAOImpl();
     }

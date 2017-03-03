@@ -65,7 +65,7 @@ public class CargaBenEndBeanImpl implements CargaBenEndBean, Runnable {
                             log.addAssocIncluidos();
                         } else {
                             log.addErrosAssoc();
-                            log.addMatriculaErro(modeloBenEnd.getEmpresa() + modeloBenEnd.getMatricula());
+                         //   log.addMatriculaErro(modeloBenEnd.getEmpresa() + modeloBenEnd.getMatricula());
                         }
                     } else {
 

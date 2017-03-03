@@ -28,4 +28,6 @@ public class SisPasaIntCommon {
     public static final Long USER_CARGA = 1L;
     public static final Integer LINE_TAM_1 = 402;
     public static final Integer LINE_TAM_2 = 401;
+    public static final Integer LINE_TAM_3 = 190; 
+    public static final String COD_PASA = "90";
 }

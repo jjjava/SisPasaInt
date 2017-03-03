@@ -4,6 +4,8 @@ import java.util.List;
 import org.pasa.sispasaint.bean.LogBean;
 import org.pasa.sispasaint.dao.impl.LogDAOImpl;
 import org.pasa.sispasaint.model.intg.Log;
+import org.pasa.sispasaint.util.DateUtil;
+import org.pasa.sispasaint.util.SisPasaIntErro;
 
 /**
  *
@@ -17,6 +19,7 @@ public class LogBeanImpl implements LogBean{
 
     @Override
     public void cadastrar(Log l) {
+        l.setDataFim(DateUtil.obterDataAtual());
         new LogDAOImpl().cadastrar(l);
     }
 
@@ -33,5 +36,12 @@ public class LogBeanImpl implements LogBean{
     @Override
     public List<Log> listar() {
         return new LogDAOImpl().listar();
-    }   
+    }
+    
+    public void logErroClass(String classe, String erro){
+       Log l = new Log();
+       l.addClasseErro(classe, SisPasaIntErro.TP_LOG_0 , erro);
+       l.setDataFim(DateUtil.obterDataAtual());
+       new LogDAOImpl().cadastrar(l);
+    }
 }

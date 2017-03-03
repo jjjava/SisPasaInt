@@ -2,9 +2,11 @@ package org.pasa.sispasaint.run;
 
 import java.util.List;
 import org.pasa.sispasaint.bean.impl.AgendaBeanImpl;
+import org.pasa.sispasaint.bean.impl.LogBeanImpl;
 import org.pasa.sispasaint.jobs.ModeloBenEndJob;
 import org.pasa.sispasaint.model.intg.Agenda;
 import org.pasa.sispasaint.util.SisPasaIntCommon;
+import org.pasa.sispasaint.util.SisPasaIntErro;
 import org.quartz.CronScheduleBuilder;
 import org.quartz.JobBuilder;
 import org.quartz.JobDetail;
@@ -23,7 +25,7 @@ import org.quartz.impl.StdSchedulerFactory;
 public class Maestro {
 
     private SchedulerFactory schedFact;
-    private Scheduler sched;
+    private Scheduler scheduler;
 
     public Maestro() {
     }
@@ -31,18 +33,17 @@ public class Maestro {
     public void iniciar() {
         try {
             schedFact = new StdSchedulerFactory();
-            sched = schedFact.getScheduler();
-            sched.start();
+            scheduler = schedFact.getScheduler();
+            scheduler.start();
             this.carregaJobs();
         } catch (SchedulerException ex) {
-            System.err.println(ex);
+            new LogBeanImpl().logErroClass(this.getClass().getName(), ex.getMessage());
         }
     }
 
     private void carregaJobs() {
         List<Agenda> listAgenda = new AgendaBeanImpl().listar();
         for (Agenda a : listAgenda) {
-            System.out.println(parseSchedule(a));
             try {
                 JobDetail job = JobBuilder.newJob(ModeloBenEndJob.class)
                         .withIdentity(a.getDescricao(), a.getGrupo())
@@ -54,9 +55,9 @@ public class Maestro {
                         .withIdentity(a.getDescricao(), a.getGrupo())
                         .withSchedule(CronScheduleBuilder.cronSchedule(parseSchedule(a)))
                         .build();
-                sched.scheduleJob(job, trigger);
-            } catch (SchedulerException e) {
-                System.out.println("erro: " + e);
+                scheduler.scheduleJob(job, trigger);
+            } catch (SchedulerException ex) {
+                new LogBeanImpl().logErroClass(this.getClass().getName(), ex.getMessage());
             }
         }
     }

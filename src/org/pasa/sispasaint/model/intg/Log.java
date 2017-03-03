@@ -17,13 +17,14 @@ import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 import org.pasa.sispasa.core.constants.ConstantesBanco;
+import org.pasa.sispasaint.util.DateUtil;
+import org.pasa.sispasaint.util.SisPasaIntCommon;
 
 /**
  *
  * @author Hudson Schumaker
  * @version 1.0.0
  */
-
 @Entity
 @Table(name = "CARG_LOG")
 public class Log implements Serializable {
@@ -34,6 +35,7 @@ public class Log implements Serializable {
     @Column(name = "ID_LOG", columnDefinition = ConstantesBanco.BIGINT)
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
+    private String codEmpresaVale;
     private Integer qtdLinhasArquivo;
     private Integer qtdRegistros;
     private Integer qtdAssocIncluidos;
@@ -46,7 +48,7 @@ public class Log implements Serializable {
 
     @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
     @JoinColumn(name = "ID_LOG")
-    private List<LogMatriculas> matriculasErros;
+    private List<LogDetalhe> listaErros;
 
     @Column(name = "DT_INICIO", nullable = false)
     @Temporal(TemporalType.TIMESTAMP)
@@ -57,7 +59,7 @@ public class Log implements Serializable {
     private Date dataFim;
 
     public Log() {
-        matriculasErros = new ArrayList<>();
+        listaErros = new ArrayList<>();
         qtdLinhasArquivo = 0;
         qtdErroLinhaArquivo = 0;
         qtdRegistros = 0;
@@ -65,10 +67,50 @@ public class Log implements Serializable {
         qtdAssocAlterados = 0;
         qtdErrosAssoc = 0;
         qtdAssocInativo = 0;
+        dataInicio = DateUtil.obterDataAtual();
     }
 
-    public void addMatriculaErro(String mat) {
-        getMatriculasErros().add(new LogMatriculas(mat));
+    public void addMatriculaErro(String codEmpresa, String tipoErro, String erro) {
+        LogDetalhe log = new LogDetalhe();
+        log.setCodEmpresa(codEmpresa);
+        log.setTipoErro(tipoErro);
+        log.setErro(erro);
+        getListaErros().add(log);
+    }
+
+    public void addMatriculaErro(String codEmpresa, String matricula, String tipoErro, String erro) {
+        LogDetalhe log = new LogDetalhe(matricula);
+        log.setCodEmpresa(codEmpresa);
+        log.setTipoErro(tipoErro);
+        log.setErro(erro);
+        getListaErros().add(log);
+    }
+
+    public void addMatriculaErro(String codEmpresa, String matricula, String codBenef, String tipoErro, String erro) {
+        LogDetalhe log = new LogDetalhe(matricula);
+        log.setCodEmpresa(codEmpresa);
+        log.setCodBeneficiario(codBenef);
+        log.setTipoErro(tipoErro);
+        log.setErro(erro);
+        getListaErros().add(log);
+    }
+
+    public void addMatriculaErro(String codEmpresa, String matricula, String codBenef, String cpf, String tipoErro, String erro) {
+        LogDetalhe log = new LogDetalhe(matricula);
+        log.setCodEmpresa(codEmpresa);
+        log.setCodBeneficiario(codBenef);
+        log.setCpf(cpf);
+        log.setTipoErro(tipoErro);
+        log.setErro(erro);
+        getListaErros().add(log);
+    }
+
+    public void addClasseErro(String classe, String tipoErro, String erro) {
+        LogDetalhe log = new LogDetalhe();
+        log.setCodEmpresa(SisPasaIntCommon.COD_PASA);
+        log.setClasse(classe);
+        log.setTipoErro(tipoErro);
+        log.setErro(erro);
     }
 
     public void addLinhaArq() {
@@ -147,8 +189,8 @@ public class Log implements Serializable {
         this.nomeArquivoEnd = nomeArquivoEnd;
     }
 
-    public List<LogMatriculas> getMatriculasErros() {
-        return matriculasErros;
+    public List<LogDetalhe> getListaErros() {
+        return listaErros;
     }
 
     public Date getDataInicio() {
@@ -177,5 +219,13 @@ public class Log implements Serializable {
 
     public void setQtdAssocInativo(Integer qtdAssocInativo) {
         this.qtdAssocInativo = qtdAssocInativo;
+    }
+
+    public String getCodEmpresaVale() {
+        return codEmpresaVale;
+    }
+
+    public void setCodEmpresaVale(String codEmpresaVale) {
+        this.codEmpresaVale = codEmpresaVale;
     }
 }

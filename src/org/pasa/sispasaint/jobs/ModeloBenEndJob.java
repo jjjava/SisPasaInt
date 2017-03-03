@@ -4,11 +4,9 @@ import java.util.ArrayList;
 import java.util.List;
 import org.pasa.sispasaint.bean.impl.DestinatarioBeanImpl;
 import org.pasa.sispasaint.bean.impl.EmpresaBeanImpl;
-import org.pasa.sispasaint.bean.impl.ListaDestinatariosBeanImpl;
 import org.pasa.sispasaint.bean.impl.LogBeanImpl;
 import org.pasa.sispasaint.carga.impl.CargaBenEndBeanImpl;
 import org.pasa.sispasaint.carga.impl.CargaPeopleBeanImpl;
-import org.pasa.sispasaint.mail.EnviaEmail;
 import org.pasa.sispasaint.model.intg.ListaDestinatarios;
 import org.pasa.sispasaint.model.intg.Log;
 import org.pasa.sispasaint.util.DateUtil;
@@ -36,7 +34,6 @@ public class ModeloBenEndJob implements Job {
 
     @Override
     public void execute(JobExecutionContext jec) throws JobExecutionException {
-        log.setDataInicio(DateUtil.obterDataAtual());
         JobDataMap dataMap = jec.getJobDetail().getJobDataMap();
         long tipo = dataMap.getLong(SisPasaIntCommon.TIPO_JOB);
         idEmpresa = dataMap.getLong(SisPasaIntCommon.ID_EMPRESA);
@@ -52,7 +49,7 @@ public class ModeloBenEndJob implements Job {
 //                setMensagem());
 //        enviaEmail.enviar();
 
-        log.setDataFim(DateUtil.obterDataAtual());
+     
         new LogBeanImpl().cadastrar(log);
     }
 
