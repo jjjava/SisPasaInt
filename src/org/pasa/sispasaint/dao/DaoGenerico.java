@@ -11,11 +11,13 @@ import javax.persistence.criteria.CriteriaBuilder;
 import javax.persistence.criteria.CriteriaDelete;
 import javax.persistence.criteria.CriteriaQuery;
 import org.apache.log4j.Logger;
+import org.pasa.sispasaint.bean.impl.LogBeanImpl;
 
 /**
  *
  * @author Hudson Schumaker
- * @param <T>
+ * @param <T> Classe concreta (Model)
+ *
  */
 public abstract class DaoGenerico<T> {
 
@@ -40,10 +42,10 @@ public abstract class DaoGenerico<T> {
             em.persist(entity);
             em.getTransaction().commit();
             return true;
-        } catch (Exception e) {
-            System.err.println(e);
-            Logger.getLogger(DaoGenerico.class).error(e);
-            // em.getTransaction().rollback();
+        } catch (Exception ex) {
+            System.err.println(ex);
+            Logger.getLogger(DaoGenerico.class).error(ex);
+            new LogBeanImpl().logErroClass(this.getClass().getName(), ex.getMessage());
             return false;
         }
     }
@@ -54,9 +56,10 @@ public abstract class DaoGenerico<T> {
             em.merge(entity);
             em.getTransaction().commit();
             return true;
-        } catch (Exception e) {
-            System.err.println(e);
-            Logger.getLogger(DaoGenerico.class).error(e);
+        } catch (Exception ex) {
+            System.err.println(ex);
+            Logger.getLogger(DaoGenerico.class).error(ex);
+             new LogBeanImpl().logErroClass(this.getClass().getName(), ex.getMessage());
             return false;
         }
     }

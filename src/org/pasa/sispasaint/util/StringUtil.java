@@ -61,7 +61,6 @@ public class StringUtil {
     public static String truncTelefone(String tel){
         char aux[] = tel.toCharArray();
         tel = "";
-        System.out.println(aux.length);
         for(int k=0;k<18;k++){
             tel = tel + aux[k]; 
         }

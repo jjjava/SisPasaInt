@@ -6,10 +6,13 @@ import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.Locale;
+import org.apache.log4j.Logger;
+import org.pasa.sispasaint.bean.impl.LogBeanImpl;
 
 /**
  *
- * @author 90J00318
+ * @author Hudson Schumaker
+ * @version 1.0.0
  */
 public class DateUtil {
 
@@ -38,7 +41,6 @@ public class DateUtil {
 
     public static Date toDate(final String data) {
         Date retorno;
-
         if (data == null) {
             return null;
         }
@@ -49,8 +51,10 @@ public class DateUtil {
         try {
             final SimpleDateFormat simpleDateFormat = new SimpleDateFormat(PATTERN_DATA, Locale.getDefault());
             retorno = simpleDateFormat.parse(trim);
-        } catch (ParseException e) {
-            System.err.println(e);
+        } catch (ParseException ex) {
+            System.err.println(ex);
+            Logger.getLogger(DateUtil.class).error(ex);
+            new LogBeanImpl().logErroClass("DateUtil", ex.getMessage());//metodo statico.
             retorno = null;
         }
         return retorno;

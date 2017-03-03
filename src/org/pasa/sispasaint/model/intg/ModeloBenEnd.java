@@ -9,7 +9,7 @@ import javax.persistence.Table;
 
 /**
  *
- * @author hudson schumaker
+ * @author Hudson Schumaker
  * @version 1.0.0
  */
 @Entity

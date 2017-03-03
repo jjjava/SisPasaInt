@@ -13,6 +13,7 @@ import org.pasa.sispasaint.map.CamposModelo;
 import org.pasa.sispasaint.map.MapaCamposModeloEnd;
 import org.pasa.sispasaint.model.intg.Log;
 import org.pasa.sispasaint.model.intg.ModeloEndPeople;
+import org.pasa.sispasaint.util.SisPasaIntCommon;
 import org.pasa.sispasaint.util.StringUtil;
 
 /**
@@ -35,8 +36,8 @@ public class LerArquivoEndPeople {
 
     public LerArquivoEndPeople(Log log) {
         this.log = log;
-        mapa = new MapaCamposModeloEnd().getMapa();
-        modeloDAO = new ImpEndPeopleTempDAOImpl();
+        this.mapa = new MapaCamposModeloEnd().getMapa();
+        this.modeloDAO = new ImpEndPeopleTempDAOImpl();
     }
 
     public void lerArquivo(Long id, int ini, int fim, int lote, int loteLines) {
@@ -60,14 +61,14 @@ public class LerArquivoEndPeople {
             RandomAccessFile aFile = new RandomAccessFile(file, "r");
             FileChannel inChannel = aFile.getChannel();
             for (int i = 0; i < loteLines; i++) {
-                MappedByteBuffer buffer = inChannel.map(FileChannel.MapMode.READ_ONLY, ini, 190);
+                MappedByteBuffer buffer = inChannel.map(FileChannel.MapMode.READ_ONLY, ini,SisPasaIntCommon.LINE_TAM_3);
                 buffer.load();
                 out = "";
-                for (int j = 0; j < 190; j++) {
+                for (int j = 0; j < SisPasaIntCommon.LINE_TAM_3; j++) {
                     out = out + ((char) buffer.get());
                 }
                 System.out.println(out);
-                ini = ini + 191;
+                ini = ini + SisPasaIntCommon.LINE_TAM_4;
                 buffer.clear();
                 modeloDAO.cadastrar(parseCampos(out, endNomeArq));
             }
@@ -86,7 +87,7 @@ public class LerArquivoEndPeople {
         line = normalizaLinha(line);
         ModeloEndPeople modelo = new ModeloEndPeople();
         try {
-            //ENDEREÇO
+            //ENDERECO
             campo = (PosicaoCampo) mapa.get(CamposModelo.EMPRESA);
             modelo.setEmpresa(line.substring(campo.getInicioCampo(), campo.getFimCampo()).trim());
             campo = (PosicaoCampo) mapa.get(CamposModelo.MATRICULA);

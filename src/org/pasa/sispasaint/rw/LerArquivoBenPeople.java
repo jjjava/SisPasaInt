@@ -7,13 +7,16 @@ import java.io.RandomAccessFile;
 import java.nio.MappedByteBuffer;
 import java.nio.channels.FileChannel;
 import java.util.Map;
+import org.apache.log4j.Logger;
 import org.pasa.sispasa.core.enumeration.EnumBanco;
+import org.pasa.sispasaint.bean.impl.LogBeanImpl;
 import org.pasa.sispasaint.config.Configuracao;
 import org.pasa.sispasaint.dao.impl.ImpBenPeopleTempDAOImpl;
 import org.pasa.sispasaint.map.CamposModelo;
 import org.pasa.sispasaint.map.MapaCamposModeloBen;
 import org.pasa.sispasaint.model.intg.Log;
 import org.pasa.sispasaint.model.intg.ModeloBenPeople;
+import org.pasa.sispasaint.util.SisPasaIntCommon;
 import org.pasa.sispasaint.util.StringUtil;
 
 /**
@@ -36,12 +39,11 @@ public class LerArquivoBenPeople {
 
     public LerArquivoBenPeople(Log log) {
         this.log = log;
-
-        modeloDAO = new ImpBenPeopleTempDAOImpl();
-        mapa = new MapaCamposModeloBen().getMapa();
+        this.modeloDAO = new ImpBenPeopleTempDAOImpl();
+        this.mapa = new MapaCamposModeloBen().getMapa();
     }
 
-    public void lerArquivo(Long id, int ini, int fim, int lote, int loteLines) {
+    public void lerArquivo(long id, int ini, int fim, int lote, int loteLines) {
         this.id = id;
         this.ini = ini;
         this.fim = fim;
@@ -62,25 +64,29 @@ public class LerArquivoBenPeople {
         try {
             RandomAccessFile aFile = new RandomAccessFile(file, "r");
             FileChannel inChannel = aFile.getChannel();
-
             for (int i = 0; i < loteLines; i++) {
-                MappedByteBuffer buffer = inChannel.map(FileChannel.MapMode.READ_ONLY, ini, 400);
+                MappedByteBuffer buffer = inChannel.map(FileChannel.MapMode.READ_ONLY, ini, SisPasaIntCommon.LINE_TAM_1);
                 buffer.load();
                 out = "";
-                for (int j = 0; j < 400; j++) {
+                for (int j = 0; j < SisPasaIntCommon.LINE_TAM_1; j++) {
                     out = out + ((char) buffer.get());
                 }
-                System.out.println(out);
-                ini = ini + 401;
+                ini = ini + SisPasaIntCommon.LINE_TAM_2;
                 buffer.clear();
                 modeloDAO.cadastrar(parseCampos(out, benNomeArq));
             }
             inChannel.close();
             aFile.close();
-        } catch (FileNotFoundException e) {
-            System.err.println(e);
-        } catch (IOException e) {
-            System.err.println(e);
+        } catch (FileNotFoundException ex) {
+            System.err.println(ex);
+            Logger.getLogger(LerArquivoBenPeople.class).error(ex);
+            new LogBeanImpl().logErroClass(this.getClass().getName(), ex.getMessage());
+            log.addLinhaArqErro();
+        } catch (IOException ex) {
+            System.err.println(ex);
+            Logger.getLogger(LerArquivoBenPeople.class).error(ex);
+            new LogBeanImpl().logErroClass(this.getClass().getName(), ex.getMessage());
+            log.addLinhaArqErro();
         }
     }
 
@@ -131,7 +137,7 @@ public class LerArquivoBenPeople {
         campo = (PosicaoCampo) mapa.get(CamposModelo.AGENCIA_BANCARIA);
         modelo.setAgenciaBancaria(line.substring(campo.getInicioCampo(), campo.getFimCampo()).trim());
 
-        //Normaliza codigo bancario.
+        //NORMALIZA CODIGO BANCARIO.
         campo = (PosicaoCampo) mapa.get(CamposModelo.BANCO);
         modelo.setBanco(normalizaBanco(line.substring(campo.getInicioCampo(), campo.getFimCampo())));
         campo = (PosicaoCampo) mapa.get(CamposModelo.CONTA_CORRENTE);
@@ -200,7 +206,6 @@ public class LerArquivoBenPeople {
         modelo.setCodigoFilialVLI(line.substring(campo.getInicioCampo(), campo.getFimCampo()).trim());
 
         modelo.setNomeArquivo(nomeArq);
-        //  System.err.println(line);
         return modelo;
     }
 

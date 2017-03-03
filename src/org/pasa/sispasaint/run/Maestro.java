@@ -6,6 +6,7 @@ import org.pasa.sispasaint.bean.impl.AgendaBeanImpl;
 import org.pasa.sispasaint.bean.impl.LogBeanImpl;
 import org.pasa.sispasaint.jobs.ModeloBenEndJob;
 import org.pasa.sispasaint.model.intg.Agenda;
+import org.pasa.sispasaint.model.intg.Log;
 import org.pasa.sispasaint.util.SisPasaIntCommon;
 import org.quartz.CronScheduleBuilder;
 import org.quartz.JobBuilder;
@@ -28,6 +29,9 @@ public class Maestro {
     private Scheduler scheduler;
 
     public Maestro() {
+        Log log = new Log();
+        log.setEmpresaVale(SisPasaIntCommon.COD_PASA);
+        new LogBeanImpl().cadastrar(log);
     }
 
     public void iniciar() {

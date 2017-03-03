@@ -8,7 +8,8 @@ import javax.persistence.Table;
 
 /**
  *
- * @author 90J00318
+ * @author Hudson Schumaker
+ * @version 1.0.0
  */
 @Entity
 @Table(name = "CARG_AGENDA")

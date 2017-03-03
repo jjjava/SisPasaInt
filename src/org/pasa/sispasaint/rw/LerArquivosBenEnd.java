@@ -8,6 +8,7 @@ import java.io.IOException;
 import java.util.Map;
 import org.apache.log4j.Logger;
 import org.pasa.sispasa.core.enumeration.EnumBanco;
+import org.pasa.sispasaint.bean.impl.LogBeanImpl;
 import org.pasa.sispasaint.config.Configuracao;
 import org.pasa.sispasaint.dao.impl.ModeloBenEndDAOImpl;
 import org.pasa.sispasaint.map.CamposModelo;
@@ -34,9 +35,9 @@ public class LerArquivosBenEnd {
 
     public LerArquivosBenEnd(Log log) {
         this.log = log;
-        mapaBen = new MapaCamposModeloBen().getMapa();
-        mapaEnd = new MapaCamposModeloEnd().getMapa();
-        read = true;
+        this.mapaBen = new MapaCamposModeloBen().getMapa();
+        this.mapaEnd = new MapaCamposModeloEnd().getMapa();
+        this.read = true;
     }
 
     public void ler(Long id) {
@@ -78,12 +79,15 @@ public class LerArquivosBenEnd {
             }
             brBen.close();
             brEnd.close();
-        } catch (FileNotFoundException e) {
-            System.err.println(e);
-            Logger.getLogger(LerArquivosBenEnd.class).error(e);
+        } catch (FileNotFoundException ex) {
+            System.err.println(ex);
+            Logger.getLogger(LerArquivosBenEnd.class).error(ex);
+            new LogBeanImpl().logErroClass(this.getClass().getName(), ex.getMessage());
             log.addLinhaArqErro();
-        } catch (IOException e) {
-            System.err.println(e);
+        } catch (IOException ex) {
+            System.err.println(ex);
+            Logger.getLogger(LerArquivosBenEnd.class).error(ex);
+            new LogBeanImpl().logErroClass(this.getClass().getName(), ex.getMessage());
             log.addLinhaArqErro();
         } finally {
             zipArq(ben, benNomeArq,
@@ -127,7 +131,7 @@ public class LerArquivosBenEnd {
         campo = (PosicaoCampo) mapaBen.get(CamposModelo.VINCULO);
         modelo.setVinculo(benLine.substring(campo.getInicioCampo(), campo.getFimCampo()));
         
-        //Acerta Plano
+        //ACERTA PLANO
         campo = (PosicaoCampo) mapaBen.get(CamposModelo.PLANO);
         modelo.setPlano(acertaPlano(benLine.substring(campo.getInicioCampo(), campo.getFimCampo())));
         
@@ -142,7 +146,7 @@ public class LerArquivosBenEnd {
         campo = (PosicaoCampo) mapaBen.get(CamposModelo.AGENCIA_BANCARIA);
         modelo.setAgenciaBancaria(benLine.substring(campo.getInicioCampo(), campo.getFimCampo()));
 
-        //Normaliza codigo bancario.
+        //NORMALIZA CODIGO BANCARIO.
         campo = (PosicaoCampo) mapaBen.get(CamposModelo.BANCO);
         modelo.setBanco(normalizaBanco(benLine.substring(campo.getInicioCampo(), campo.getFimCampo())));
 
@@ -211,7 +215,7 @@ public class LerArquivosBenEnd {
         campo = (PosicaoCampo) mapaBen.get(CamposModelo.CODIGO_FILIAL_VLI);
         modelo.setCodigoFilialVLI(benLine.substring(campo.getInicioCampo(), campo.getFimCampo()));
 
-        //ENDEREÇO
+        //ENDERECO
         campo = (PosicaoCampo) mapaEnd.get(CamposModelo.TELEFONE1);
         modelo.setTelefone1(endLine.substring(campo.getInicioCampo(), campo.getFimCampo()));
         campo = (PosicaoCampo) mapaEnd.get(CamposModelo.TELEFONE2);

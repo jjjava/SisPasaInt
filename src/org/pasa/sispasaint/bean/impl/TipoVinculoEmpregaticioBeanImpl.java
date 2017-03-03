@@ -47,9 +47,4 @@ public class TipoVinculoEmpregaticioBeanImpl implements TipoVinculoEmpregaticioB
     public List<TipoVinculoEmpregaticio> listar() {
         return tipoVinculoEmpregaticioDAO.listar();
     }
-
-    @Override
-    public TipoVinculoEmpregaticio existe(TipoVinculoEmpregaticio tve) {
-        return tipoVinculoEmpregaticioDAO.existe(tve);
-    }
 }

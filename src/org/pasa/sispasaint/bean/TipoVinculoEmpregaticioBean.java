@@ -15,5 +15,4 @@ public interface TipoVinculoEmpregaticioBean {
     TipoVinculoEmpregaticio obter(Long id);
     TipoVinculoEmpregaticio obter(String cdExterno);
     List<TipoVinculoEmpregaticio> listar();
-    TipoVinculoEmpregaticio existe(TipoVinculoEmpregaticio tve);
 }

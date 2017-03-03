@@ -9,7 +9,7 @@ import org.pasa.sispasaint.dao.impl.GrauParentescoDAOImpl;
 /**
  *
  * @author Hudson Schumaker
- * @vresion 1.0.0
+ * @version 1.0.0
  */
 public class GrauParentescoBeanImpl implements GrauParentescoBean {
 

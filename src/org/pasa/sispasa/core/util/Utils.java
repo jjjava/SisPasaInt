@@ -20,48 +20,22 @@ public abstract class Utils {
     private Utils() {
     }
 
-    /**
-     * Retorna uma data no formato Java.Util.Date a partir de uma String de Data
-     * no formato SqlServer ()
-     *
-     * @param dataSql
-     * @param String dataSql
-     * @return Date
-     * @throws ParseException
-     */
     public static Date converteStringDataSqlToJavaDate(String dataSql) throws ParseException {
         SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
         return sdf.parse(dataSql);
     }
 
-    /**
-     * Retorna uma data formatada (String) de acordo com o parâmetro desejado.
-     *
-     * @param data
-     * @param formato
-     * @return data formatada
-     */
     public static String formatarData(Date data, String formato) {
         SimpleDateFormat sdf = new SimpleDateFormat(formato);
         return sdf.format(data);
     }
 
-    /**
-     * @author André Gomes
-     * @param formatado
-     * @return
-     */
     public static String desformataCep(String formatado) {
         String desformatado = formatado.trim();
         desformatado = desformatado.replace("-", "");
         return desformatado;
     }
 
-    /**
-     * @author André Gomes
-     * @param desformatado
-     * @return
-     */
     public static String formataCpf(String cpf) {
         String bloco1 = cpf.substring(0, 3);
         String bloco2 = cpf.substring(3, 6);
@@ -71,11 +45,6 @@ public abstract class Utils {
         return cpf;
     }
 
-    /**
-     * @author André Gomes
-     * @param desformatado
-     * @return
-     */
     public static String formataCnpj(String cnpj) {
         String bloco1 = cnpj.substring(0, 2);
         String bloco2 = cnpj.substring(2, 5);
@@ -86,11 +55,6 @@ public abstract class Utils {
         return cnpj;
     }
 
-    /**
-     * @author André Gomes
-     * @param formatado
-     * @return
-     */
     public static String desformataCpfCnpj(String formatado) {
         String desformatado = formatado.trim();
         desformatado = desformatado.replace("-", "");
@@ -99,11 +63,6 @@ public abstract class Utils {
         return desformatado;
     }
 
-    /**
-     * @author André Gomes
-     * @param formatado
-     * @return
-     */
     public static String desformataTelefone(String formatado) {
         String desformatado = formatado.trim();
         desformatado = desformatado.replace("(", "");
@@ -113,11 +72,6 @@ public abstract class Utils {
         return desformatado;
     }
 
-    /**
-     * @author André Gomes
-     * @param formatado
-     * @return
-     */
     public static String formataTelefone(String desformatado) {
 
         desformatado = desformatado.trim();
@@ -125,7 +79,6 @@ public abstract class Utils {
         String numero = retornaNumeroTelefone(desformatado);
 
         ddd = "(" + ddd + ") ";
-
         if (8 == numero.length()) {
             numero = (numero.substring(0, 4) + "-" + numero.substring(4, 8));
         } else {
@@ -134,34 +87,14 @@ public abstract class Utils {
         return ddd + numero;
     }
 
-    /**
-     * Retorna o DDD de um telefone desformatado com ddd+numero (Ex:2199998888 -
-     * Retorna: 21)
-     *
-     * @param String telefone
-     * @return String
-     */
     public static String retornaDDDTelefone(String telefone) {
         return telefone.substring(0, 2);
     }
 
-    /**
-     * Retorna o DDD de um telefone desformatado com ddd+numero (Ex:2199998888 -
-     * Retorna: 99998888)
-     *
-     * @param String telefone
-     * @return String
-     */
     public static String retornaNumeroTelefone(String telefone) {
         return telefone.substring(2);
     }
 
-    /**
-     * @author André Gomes
-     * @param str
-     * @param peso
-     * @return
-     */
     private static int calcularDigitoCpfCnpj(String str, int[] peso) {
         int soma = 0;
         for (int indice = str.length() - 1, digito; indice >= 0; indice--) {
@@ -172,11 +105,6 @@ public abstract class Utils {
         return soma > 9 ? 0 : soma;
     }
 
-    /**
-     * @author André Gomes
-     * @param cpf
-     * @return
-     */
     public static boolean isValidCPF(String cpf) {
 
         if ((cpf == null) || (cpf.length() != 11)) {
@@ -196,11 +124,6 @@ public abstract class Utils {
         return cpf.equals(cpf.substring(0, 9) + digito1.toString() + digito2.toString());
     }
 
-    /**
-     * @author André Gomes
-     * @param cnpj
-     * @return
-     */
     public static boolean isValidCNPJ(String cnpj) {
         if ((cnpj == null) || (cnpj.length() != 14)) {
             return false;
@@ -210,24 +133,14 @@ public abstract class Utils {
         return cnpj.equals(cnpj.substring(0, 12) + digito1.toString() + digito2.toString());
     }
 
-    /**
-     * @author André Gomes
-     * @param cnpj
-     * @return
-     */
     public static boolean isValidData(Date data) {
-
         SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
         sdf.setLenient(false);
-
         try {
-
             String dataFormatada = sdf.format(data);
-
             if (StringUtils.isBlank(dataFormatada)) {
                 return false;
             }
-
             sdf.parse(dataFormatada);
             return true;
         } catch (ParseException e) {
@@ -235,28 +148,14 @@ public abstract class Utils {
         }
     }
 
-    /**
-     * @author André Gomes
-     * @param cnpj
-     * @return
-     */
     public static boolean isDataFutura(Date data) throws ParseException {
         int resultCompare = data.compareTo(new Date());
-
         if (resultCompare <= 0) {
             return false;
         }
         return true;
     }
 
-    /**
-     *
-     * Metodo responsavel por verificar se o e-mail informado eh valido
-     *
-     * @author Regiane Mesquita
-     * @param String email
-     * @return boolean
-     */
     public static boolean isEmailValido(final String email) {
         final Pattern ptt = Pattern.compile("^[\\w-]+(\\.[\\w-]+)*@([\\w-]+\\.)+[a-zA-Z]{2,3}$");
         final Matcher mtc = ptt.matcher(email);

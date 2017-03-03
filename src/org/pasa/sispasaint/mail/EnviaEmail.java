@@ -9,6 +9,8 @@ import javax.mail.Transport;
 import javax.mail.internet.AddressException;
 import javax.mail.internet.InternetAddress;
 import javax.mail.internet.MimeMessage;
+import org.apache.log4j.Logger;
+import org.pasa.sispasaint.bean.impl.LogBeanImpl;
 import org.pasa.sispasaint.config.Configuracao;
 import org.pasa.sispasaint.util.DateUtil;
 
@@ -36,8 +38,8 @@ public class EnviaEmail {
             props.put("mail.smtp.port", "587");
             props.put("mail.smtp.auth", "true");
             props.put("mail.smtp.starttls.enable", "true");
-            Session s = Session.getDefaultInstance(props, new Autenticar(Configuracao.getInstance().getUsuario(), Configuracao.getInstance().getSenha()));
 
+            Session s = Session.getDefaultInstance(props, new Autenticar(Configuracao.getInstance().getUsuario(), Configuracao.getInstance().getSenha()));
             MimeMessage email = new MimeMessage(s);
             InternetAddress de = new InternetAddress(Configuracao.getInstance().getUsuario());
             email.setFrom(de);
@@ -49,9 +51,13 @@ public class EnviaEmail {
             email.setText(message);
             Transport.send(email);
         } catch (AddressException ex) {
-            System.out.println(ex);
+            System.err.println(ex);
+            Logger.getLogger(EnviaEmail.class).error(ex);
+            new LogBeanImpl().logErroClass(this.getClass().getName(), ex.getMessage());
         } catch (MessagingException ex) {
-            System.out.println(ex);
+            System.err.println(ex);
+            Logger.getLogger(EnviaEmail.class).error(ex);
+            new LogBeanImpl().logErroClass(this.getClass().getName(), ex.getMessage());
         }
     }
 }

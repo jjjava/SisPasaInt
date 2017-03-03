@@ -11,27 +11,28 @@ import javax.persistence.Table;
 /**
  *
  * @author Hudson Schumaker
+ * @version 1.0.0
  */
 @Entity
-@Table(name = "EMAIL_CONFIGURACAO")
+@Table(name = "CARG_EMAIL_CONFIGURACAO")
 public class MailConfig implements Serializable {
-    
+
     private static final long serialVersionUID = 1L;
 
     @Id
     @Column(name = "ID_CONFIG")
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long ID;
-    
+
     @Column(name = "USUARIO", length = 30)
     private String usuario;
-    
+
     @Column(name = "SENHA", length = 8)
     private String senha;
-    
+
     @Column(name = "SERVIDOR", length = 30)
     private String servidor;
-    
+
     public MailConfig() {
     }
 

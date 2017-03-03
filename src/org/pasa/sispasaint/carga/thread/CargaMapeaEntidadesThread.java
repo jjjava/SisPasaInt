@@ -24,13 +24,13 @@ public class CargaMapeaEntidadesThread implements Runnable {
     private final FuncionarioBeanImpl funcionarioBeanImpl;
     private final ImpBenPeopleTempBeanImpl modeloBenBean;
     private final CargaEntidadePeopleFuncionario cargaEntidadePeopleFuncionario;
-    private final String name;
+    private final String nome;
 
-    public CargaMapeaEntidadesThread(Log log, long ini, long qtdRegistros, String name) {
+    public CargaMapeaEntidadesThread(Log log, long ini, long qtdRegistros, String nome) {
         this.log = log;
         this.ini = ini;
         this.qtdRegistros = qtdRegistros;
-        this.name = name;
+        this.nome = nome;
         this.modeloBenBean = new ImpBenPeopleTempBeanImpl();
         this.funcionarioBeanImpl = new FuncionarioBeanImpl();
         this.cargaEntidadePeopleFuncionario = new CargaEntidadePeopleFuncionario(log);
@@ -63,9 +63,9 @@ public class CargaMapeaEntidadesThread implements Runnable {
                 }
             }
         } catch (Exception ex) {
-            System.err.println(ex);
-            new LogBeanImpl().logErroClass(this.getClass().getName(), ex.getMessage());
+            System.err.println(nome+" "+ex);
             Logger.getLogger(CargaMapeaEntidadesThread.class).error(ex);
+            new LogBeanImpl().logErroClass(this.getClass().getName(), ex.getMessage());
         }
     }
 

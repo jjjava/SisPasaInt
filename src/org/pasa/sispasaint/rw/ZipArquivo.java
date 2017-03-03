@@ -5,11 +5,13 @@ import java.io.FileOutputStream;
 import java.io.IOException;
 import java.util.zip.ZipEntry;
 import java.util.zip.ZipOutputStream;
+import org.apache.log4j.Logger;
+import org.pasa.sispasaint.bean.impl.LogBeanImpl;
 
 /**
  *
  * @author Hudson Schumaker
- * @version 1.0.0
+ * @version 1.0.1
  */
 public class ZipArquivo {
 
@@ -34,7 +36,9 @@ public class ZipArquivo {
             zos.closeEntry();
             zos.close();
         } catch (IOException ex) {
-            System.out.println(ex);
+            System.err.println(ex);
+            Logger.getLogger(ZipArquivo.class).error(ex);
+            new LogBeanImpl().logErroClass(this.getClass().getName(), ex.getMessage());
         }
     }
 }
