@@ -2,6 +2,7 @@ package org.pasa.sispasa.core.vo;
 
 import java.util.Date;
 import java.util.List;
+import java.util.Map;
 
 import org.pasa.sispasa.core.enumeration.EnumTipoPlano;
 import org.pasa.sispasa.core.model.FaixaEtariaPlano;
@@ -26,6 +27,7 @@ public class PlanoVO extends AtributosComunsVO{
     private EnumTipoPlano enumTipoPlano;
     private PlanoVO planoPai;
     private List<FaixaEtariaPlano> listaFaixaEtaria;
+    private Map<Long, FaixaEtariaPlano> mapFaixas;
     
     
     private List<Plano> listaPlanos;
@@ -33,6 +35,8 @@ public class PlanoVO extends AtributosComunsVO{
     private Plano plano;
     
     private VigenciaFaixaEtaria vigenciaPlano;
+    
+    private VigenciaFaixaEtaria vigenciaClone;
     
     private boolean exibirAbaInfoGerais;
     
@@ -168,13 +172,13 @@ public class PlanoVO extends AtributosComunsVO{
 		this.exibirAbaFaixaEtaria = exibirAbaFaixaEtaria;
 	}
 
-	public List<FaixaEtariaPlano> getListaFaixaEtaria() {
+	/*public List<FaixaEtariaPlano> getListaFaixaEtaria() {
 		return listaFaixaEtaria;
 	}
 
 	public void setListaFaixaEtaria(List<FaixaEtariaPlano> listaFaixaEtaria) {
 		this.listaFaixaEtaria = listaFaixaEtaria;
-	}
+	}*/
 
 	public Plano getPlano() {
 		return plano;
@@ -215,6 +219,30 @@ public class PlanoVO extends AtributosComunsVO{
 
 	public void setConfirmRegraVarAcum(String confirmRegraVarAcum) {
 		this.confirmRegraVarAcum = confirmRegraVarAcum;
+	}
+
+	public VigenciaFaixaEtaria getVigenciaClone() {
+		return vigenciaClone;
+	}
+
+	public void setVigenciaClone(VigenciaFaixaEtaria vigenciaClone) {
+		this.vigenciaClone = vigenciaClone;
+	}
+
+	public Map<Long, FaixaEtariaPlano> getMapFaixas() {
+		return mapFaixas;
+	}
+
+	public void setMapFaixas(Map<Long, FaixaEtariaPlano> mapFaixas) {
+		this.mapFaixas = mapFaixas;
+	}
+
+	public List<FaixaEtariaPlano> getListaFaixaEtaria() {
+		return listaFaixaEtaria;
+	}
+
+	public void setListaFaixaEtaria(List<FaixaEtariaPlano> listaFaixaEtaria) {
+		this.listaFaixaEtaria = listaFaixaEtaria;
 	}
 
 

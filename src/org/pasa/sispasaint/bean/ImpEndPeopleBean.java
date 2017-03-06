@@ -10,10 +10,11 @@ import org.pasa.sispasaint.model.intg.ModeloEndPeople;
  * @author Hudson Schumaker
  * @version 1.0.0
  */
-public interface ImpEndPeopleTempBean {
+public interface ImpEndPeopleBean {
 
     ModeloEndPeople obter(ModeloEndPeople modeloEndVli);
     ModeloEndPeople obterPorMatricula(ModeloBenPeople modeloBenVli);
+    void copiarTabela();
     void limparTbTemp();
     void resetarIdentity();
     void carregarArquivo(Long id, Log log);

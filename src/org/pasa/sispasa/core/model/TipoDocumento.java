@@ -13,8 +13,7 @@ import org.pasa.sispasa.core.constants.ConstantesBanco;
 
 /**
  *
- * @author Hudson Schumaker 
- * @author Andre Gomes
+ * @author Hudson Schumaker / Andr� Gomes
  * @version 1.0.0
  */
 

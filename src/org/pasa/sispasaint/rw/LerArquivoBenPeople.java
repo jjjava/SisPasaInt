@@ -11,7 +11,7 @@ import org.apache.log4j.Logger;
 import org.pasa.sispasa.core.enumeration.EnumBanco;
 import org.pasa.sispasaint.bean.impl.LogBeanImpl;
 import org.pasa.sispasaint.config.Configuracao;
-import org.pasa.sispasaint.dao.impl.ImpBenPeopleTempDAOImpl;
+import org.pasa.sispasaint.dao.impl.ImpBenPeopleDAOImpl;
 import org.pasa.sispasaint.map.CamposModelo;
 import org.pasa.sispasaint.map.MapaCamposModeloBen;
 import org.pasa.sispasaint.model.intg.Log;
@@ -31,7 +31,7 @@ public class LerArquivoBenPeople {
     private String benNomeArq;
     private PosicaoCampo campo;
     private final Map<String, PosicaoCampo> mapa;
-    private final ImpBenPeopleTempDAOImpl modeloDAO;
+    private final ImpBenPeopleDAOImpl modeloDAO;
     private int ini;
     private int fim;
     private int lote;
@@ -39,7 +39,7 @@ public class LerArquivoBenPeople {
 
     public LerArquivoBenPeople(Log log) {
         this.log = log;
-        this.modeloDAO = new ImpBenPeopleTempDAOImpl();
+        this.modeloDAO = new ImpBenPeopleDAOImpl();
         this.mapa = new MapaCamposModeloBen().getMapa();
     }
 

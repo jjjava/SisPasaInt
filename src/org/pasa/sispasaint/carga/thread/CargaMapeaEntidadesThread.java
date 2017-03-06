@@ -3,7 +3,7 @@ package org.pasa.sispasaint.carga.thread;
 import org.apache.log4j.Logger;
 import org.pasa.sispasa.core.model.Funcionario;
 import org.pasa.sispasaint.bean.impl.FuncionarioBeanImpl;
-import org.pasa.sispasaint.bean.impl.ImpBenPeopleTempBeanImpl;
+import org.pasa.sispasaint.bean.impl.ImpBenPeopleBeanImpl;
 import org.pasa.sispasaint.bean.impl.LogBeanImpl;
 import org.pasa.sispasaint.carga.impl.CargaEntidadePeopleFuncionario;
 import org.pasa.sispasaint.model.intg.ComparadorFuncionario;
@@ -26,7 +26,7 @@ public class CargaMapeaEntidadesThread implements Runnable {
     private final String nome;
     private final ComparadorFuncionario comparadorFuncionario;
     private final FuncionarioBeanImpl funcionarioBean;
-    private final ImpBenPeopleTempBeanImpl modeloBenBean;
+    private final ImpBenPeopleBeanImpl modeloBenBean;
     private final CargaEntidadePeopleFuncionario cargaEntidadePeopleFuncionario;
 
     public CargaMapeaEntidadesThread(Log log, long ini, long qtdRegistros, String nome) {
@@ -34,7 +34,7 @@ public class CargaMapeaEntidadesThread implements Runnable {
         this.ini = ini;
         this.qtdRegistros = qtdRegistros;
         this.nome = nome;
-        this.modeloBenBean = new ImpBenPeopleTempBeanImpl();
+        this.modeloBenBean = new ImpBenPeopleBeanImpl();
         this.funcionarioBean = new FuncionarioBeanImpl();
         this.comparadorFuncionario = new ComparadorFuncionario();
         this.cargaEntidadePeopleFuncionario = new CargaEntidadePeopleFuncionario(log);

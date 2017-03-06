@@ -23,124 +23,130 @@ import org.pasa.sispasa.core.constants.ConstantesBanco;
 @Table(name = "FAIXA_ETARIA_PLANO")
 @Audited
 @AuditTable(value = "HIST_FAIXA_ETARIA_PLANO")
-public class FaixaEtariaPlano extends BaseEntity implements Serializable {
+public class FaixaEtariaPlano extends BaseEntity implements Serializable, Cloneable  {
 
-    private static final long serialVersionUID = -201920239210512624L;
+	private static final long serialVersionUID = -201920239210512624L;
+	
+	@Id
+	@Column(name = "ID_FAIXA_ETARIA_PLANO", columnDefinition = ConstantesBanco.BIGINT)
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	private Long id;
 
-    @Id
-    @Column(name = "ID_FAIXA_ETARIA_PLANO", columnDefinition = ConstantesBanco.BIGINT)
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
+	@Column(name="VALOR", nullable=false)
+	private BigDecimal valor;
+	
+	@Column(name="IDADE_INICIO", nullable=false , columnDefinition = ConstantesBanco.SMALLINT)
+	private Integer idadeInicio;
+	
+	@Column(name="IDADE_FIM", nullable=true , columnDefinition = ConstantesBanco.SMALLINT)
+	private Integer idadeFim;
+	
+	@Column(name="PERCENTUAL_REAJUSTE", nullable=true)
+	private BigDecimal percentualReajuste;
+	
+	@Column(name = "DT_ULT_ATULZ", nullable = false)
+	@Temporal(TemporalType.TIMESTAMP)
+	private Date dataUltimaAtualizacao;
+	
+	@Column(name = "ID_USUARIO", nullable = false, columnDefinition = ConstantesBanco.BIGINT)
+	private Long idUsuario;
 
-    @Column(name = "VALOR", nullable = false)
-    private BigDecimal valor;
+	@Column(name = "IND_ATIVO", nullable = false, columnDefinition = ConstantesBanco.SMALLINT)
+	private Integer indAtivo;
 
-    @Column(name = "IDADE_INICIO", nullable = false, columnDefinition = ConstantesBanco.SMALLINT)
-    private Integer idadeInicio;
+	@ManyToOne
+	@JoinColumn(name = "ID_PLANO", referencedColumnName = "ID_PLANO")
+	private Plano plano;
+	
+	@ManyToOne
+	@JoinColumn(name = "ID_VIGENCIA_FAIXA_ETARIA", referencedColumnName = "ID_VIGENCIA_FAIXA_ETARIA")
+	private VigenciaFaixaEtaria vigencia; 
+	
+	@Override
+	public Long getId() {
+		return id;
+	}
 
-    @Column(name = "IDADE_FIM", nullable = true, columnDefinition = ConstantesBanco.SMALLINT)
-    private Integer idadeFim;
+	public void setId(Long id) {
+		this.id = id;
+	}
 
-    @Column(name = "PERCENTUAL_REAJUSTE", nullable = true)
-    private BigDecimal percentualReajuste;
+	public BigDecimal getValor() {
+		return valor;
+	}
 
-    @Column(name = "DT_ULT_ATULZ", nullable = false)
-    @Temporal(TemporalType.TIMESTAMP)
-    private Date dataUltimaAtualizacao;
+	public void setValor(BigDecimal valor) {
+		this.valor = valor;
+	}
 
-    @Column(name = "ID_USUARIO", nullable = false, columnDefinition = ConstantesBanco.BIGINT)
-    private Long idUsuario;
+	public Integer getIdadeInicio() {
+		return idadeInicio;
+	}
 
-    @Column(name = "IND_ATIVO", nullable = false, columnDefinition = ConstantesBanco.SMALLINT)
-    private Integer indAtivo;
+	public void setIdadeInicio(Integer idadeInicio) {
+		this.idadeInicio = idadeInicio;
+	}
 
-    @ManyToOne
-    @JoinColumn(name = "ID_PLANO", referencedColumnName = "ID_PLANO")
-    private Plano plano;
+	public Integer getIdadeFim() {
+		return idadeFim;
+	}
 
-    @ManyToOne
-    @JoinColumn(name = "ID_VIGENCIA_FAIXA_ETARIA", referencedColumnName = "ID_VIGENCIA_FAIXA_ETARIA")
-    private VigenciaFaixaEtaria vigencia;
+	public void setIdadeFim(Integer idadeFim) {
+		this.idadeFim = idadeFim;
+	}
 
-    @Override
-    public Long getId() {
-        return id;
-    }
+	public BigDecimal getPercentualReajuste() {
+		return percentualReajuste;
+	}
 
-    public void setId(Long id) {
-        this.id = id;
-    }
+	public void setPercentualReajuste(BigDecimal percentualReajuste) {
+		this.percentualReajuste = percentualReajuste;
+	}
 
-    public BigDecimal getValor() {
-        return valor;
-    }
+	public Date getDataUltimaAtualizacao() {
+		return dataUltimaAtualizacao;
+	}
 
-    public void setValor(BigDecimal valor) {
-        this.valor = valor;
-    }
+	public void setDataUltimaAtualizacao(Date dataUltimaAtualizacao) {
+		this.dataUltimaAtualizacao = dataUltimaAtualizacao;
+	}
 
-    public Integer getIdadeInicio() {
-        return idadeInicio;
-    }
+	public Long getIdUsuario() {
+		return idUsuario;
+	}
 
-    public void setIdadeInicio(Integer idadeInicio) {
-        this.idadeInicio = idadeInicio;
-    }
+	public void setIdUsuario(Long idUsuario) {
+		this.idUsuario = idUsuario;
+	}
 
-    public Integer getIdadeFim() {
-        return idadeFim;
-    }
+	public Integer getIndAtivo() {
+		return indAtivo;
+	}
 
-    public void setIdadeFim(Integer idadeFim) {
-        this.idadeFim = idadeFim;
-    }
+	public void setIndAtivo(Integer indAtivo) {
+		this.indAtivo = indAtivo;
+	}
 
-    public BigDecimal getPercentualReajuste() {
-        return percentualReajuste;
-    }
+	public Plano getPlano() {
+		return plano;
+	}
 
-    public void setPercentualReajuste(BigDecimal percentualReajuste) {
-        this.percentualReajuste = percentualReajuste;
-    }
+	public void setPlano(Plano plano) {
+		this.plano = plano;
+	}
 
-    public Date getDataUltimaAtualizacao() {
-        return dataUltimaAtualizacao;
-    }
+	public VigenciaFaixaEtaria getVigencia() {
+		return vigencia;
+	}
 
-    public void setDataUltimaAtualizacao(Date dataUltimaAtualizacao) {
-        this.dataUltimaAtualizacao = dataUltimaAtualizacao;
-    }
+	public void setVigencia(VigenciaFaixaEtaria vigencia) {
+		this.vigencia = vigencia;
+	}
 
-    public Long getIdUsuario() {
-        return idUsuario;
-    }
+	public Object clone()throws CloneNotSupportedException  {
+		return (FaixaEtariaPlano) super.clone();
+	}
 
-    public void setIdUsuario(Long idUsuario) {
-        this.idUsuario = idUsuario;
-    }
-
-    public Integer getIndAtivo() {
-        return indAtivo;
-    }
-
-    public void setIndAtivo(Integer indAtivo) {
-        this.indAtivo = indAtivo;
-    }
-
-    public Plano getPlano() {
-        return plano;
-    }
-
-    public void setPlano(Plano plano) {
-        this.plano = plano;
-    }
-
-    public VigenciaFaixaEtaria getVigencia() {
-        return vigencia;
-    }
-
-    public void setVigencia(VigenciaFaixaEtaria vigencia) {
-        this.vigencia = vigencia;
-    }
+	
 
 }

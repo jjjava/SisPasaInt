@@ -17,7 +17,7 @@ import org.pasa.sispasa.core.model.Plano;
 import org.pasa.sispasa.core.model.Telefone;
 import org.pasa.sispasa.core.model.TipoDocumento;
 import org.pasa.sispasaint.bean.impl.EstadoBeanImpl;
-import org.pasa.sispasaint.bean.impl.ImpEndPeopleTempBeanImpl;
+import org.pasa.sispasaint.bean.impl.ImpEndPeopleBeanImpl;
 import org.pasa.sispasaint.bean.impl.LogBeanImpl;
 import org.pasa.sispasaint.bean.impl.MunicipioBeanImpl;
 import org.pasa.sispasaint.bean.impl.NivelEscolaridadeBeanImpl;
@@ -44,7 +44,7 @@ public class CargaEntidadePeopleBeneficiario {
     private final EstadoBeanImpl estadoBean;
     private final MunicipioBeanImpl municipioBean;
     private final TipoDocumentoBeanImpl tipoDocumentoBean;
-    private final ImpEndPeopleTempBeanImpl impEndPeopleTempBeanImpl;
+    private final ImpEndPeopleBeanImpl impEndPeopleTempBeanImpl;
     private final NivelEscolaridadeBeanImpl nivelEscolaridadeBean;
 
     public CargaEntidadePeopleBeneficiario(Log log) {
@@ -52,7 +52,7 @@ public class CargaEntidadePeopleBeneficiario {
         this.planoBean = new PlanoBeanImpl();
         this.estadoBean = new EstadoBeanImpl();
         this.municipioBean = new MunicipioBeanImpl();
-        this.impEndPeopleTempBeanImpl = new ImpEndPeopleTempBeanImpl();
+        this.impEndPeopleTempBeanImpl = new ImpEndPeopleBeanImpl();
         this.tipoDocumentoBean = new TipoDocumentoBeanImpl();
         this.nivelEscolaridadeBean = new NivelEscolaridadeBeanImpl();
     }

@@ -11,6 +11,7 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.Index;
 import javax.persistence.JoinColumn;
 import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
@@ -33,7 +34,8 @@ import org.pasa.sispasa.core.vo.EmpresaVO;
  * @author Andre Gomes
  */
 @Entity
-@Table(name = "EMPRESA")
+@Table(name = "EMPRESA", indexes = {
+		@Index(name = "cd_empresa_vale_idx", columnList = "cd_empresa_vale", unique = true)})
 @Audited
 @AuditTable(value = "HIST_EMPRESA")
 public class Empresa extends BaseEntity implements Serializable {
@@ -96,16 +98,12 @@ public class Empresa extends BaseEntity implements Serializable {
 	private TipoIntegracao tipoIntegracao;
 
 	@ManyToMany(cascade = CascadeType.ALL)
-	@JoinTable(name = "ENDERECO_EMPRESA", 
-				joinColumns = @JoinColumn(name = "ID_EMPRESA"), 
-				inverseJoinColumns = @JoinColumn(name = "ID_ENDERECO"))
+	@JoinTable(name = "ENDERECO_EMPRESA", joinColumns = @JoinColumn(name = "ID_EMPRESA"), inverseJoinColumns = @JoinColumn(name = "ID_ENDERECO"))
 	@NotAudited
 	private List<Endereco> enderecos;
 
 	@ManyToMany(cascade = CascadeType.ALL)
-	@JoinTable(name = "CONTATO_EMPRESA", 
-				joinColumns = @JoinColumn(name = "ID_EMPRESA"), 
-				inverseJoinColumns = @JoinColumn(name = "ID_CONTATO"))
+	@JoinTable(name = "CONTATO_EMPRESA", joinColumns = @JoinColumn(name = "ID_EMPRESA"), inverseJoinColumns = @JoinColumn(name = "ID_CONTATO"))
 	@NotAudited
 	private List<Contato> contatos;
 
@@ -151,12 +149,12 @@ public class Empresa extends BaseEntity implements Serializable {
 				return convenio;
 			}
 		}
-		//TODO obrigatoriamente a empresa deve ter ao menos um convenio
+		// TODO obrigatoriamente a empresa deve ter ao menos um convenio
 		// principal, quando essa regra for implementada esse get(0) pode ser
 		// substituido por null.
 		return getConvenios().get(0);
 	}
-	
+
 	// GETTERS E SETTERS
 	@Override
 	public Long getId() {

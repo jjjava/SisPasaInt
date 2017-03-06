@@ -1,7 +1,6 @@
 package org.pasa.sispasaint.dao;
 
-import java.util.List;
-import org.pasa.sispasaint.model.intg.ModeloBenPeople;
+import org.pasa.sispasaint.model.intg.ModeloBenPeopleTemp;
 
 /**
  *
@@ -9,11 +8,9 @@ import org.pasa.sispasaint.model.intg.ModeloBenPeople;
  */
 
 public interface ImpBenPeopleTempDAO {
-    ModeloBenPeople obter(Long id);
-    boolean cadastrar(ModeloBenPeople modelo);
+    ModeloBenPeopleTemp obter(Long id);
+    boolean cadastrar(ModeloBenPeopleTemp modelo);
     Long contar();
     void limpaTB();
     void resetarIdentity(); 
-    void salvarTbTemp(List<ModeloBenPeople> listaModeloBenVLI);
-    List<ModeloBenPeople> listarBeneficiarios(String empresa, String matricula);
 }

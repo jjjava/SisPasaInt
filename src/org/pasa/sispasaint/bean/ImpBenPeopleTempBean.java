@@ -1,8 +1,6 @@
 package org.pasa.sispasaint.bean;
 
-import java.util.List;
-import org.pasa.sispasaint.model.intg.Log;
-import org.pasa.sispasaint.model.intg.ModeloBenPeople;
+import org.pasa.sispasaint.model.intg.ModeloBenPeopleTemp;
 
 /**
  *
@@ -10,13 +8,8 @@ import org.pasa.sispasaint.model.intg.ModeloBenPeople;
  * @version 1.0.0
  */
 public interface ImpBenPeopleTempBean {
-    ModeloBenPeople obter(Long id);
-    ModeloBenPeople obter(ModeloBenPeople modeloBenPeople);
-    void limparTbTemp();
+    ModeloBenPeopleTemp obter(Long id);
+    void limparTabela(String nomeArquivo);
     void resetarIdentity();
-    void carregarArquivo(Long id, Log log);
-    void salvarTbTemp(List<ModeloBenPeople> listaModeloBenPeople);
     Long contar();
-    List<ModeloBenPeople> listarBeneficiarios(ModeloBenPeople modeloBenPeople);
-    List<ModeloBenPeople> listarBeneficiarios(String empresa, String matricula);
 }

@@ -1,7 +1,5 @@
 package org.pasa.sispasaint.dao;
 
-import java.time.Duration;
-import java.time.Instant;
 import java.util.List;
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;

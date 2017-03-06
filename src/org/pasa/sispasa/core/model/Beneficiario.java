@@ -9,6 +9,7 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.Index;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToOne;
@@ -25,10 +26,11 @@ import org.pasa.sispasa.core.constants.ConstantesBanco;
  *
  * @author Hudson Schumaker 
  * @author Andre Gomes
- * @version 1.0.0
+ * @version 2.0.0
  */
 @Entity
-@Table(name = "BENEFICIARIO")
+@Table(name = "BENEFICIARIO" , indexes = {
+		@Index(name = "ID_FUNCIONARIO_IDX", columnList = "ID_FUNCIONARIO", unique = true)})
 @Audited
 @AuditTable(value = "HIST_BENEFICIARIO")
 public class Beneficiario extends BaseEntity implements Serializable{

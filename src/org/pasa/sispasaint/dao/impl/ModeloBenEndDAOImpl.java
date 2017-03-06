@@ -83,4 +83,56 @@ public class ModeloBenEndDAOImpl extends DaoGenerico<ModeloBenEnd> implements Mo
         }
         return empresas;
     }
+
+    public void copiarTabelaBenPeople() {
+        try {
+            getEntityManager().getTransaction().begin();
+            Query q1 = getEntityManager().createNativeQuery("");
+            q1.executeUpdate();
+            getEntityManager().getTransaction().commit();
+        } catch (Exception ex) {
+            System.err.println(ex);
+            Logger.getLogger(ModeloBenEndDAOImpl.class).error(ex);
+            new LogBeanImpl().logErroClass(this.getClass().getName(), ex.getMessage());
+        }
+    }
+
+    public void copiarTabela() {
+        try {
+            getEntityManager().getTransaction().begin();
+            Query q1 = getEntityManager().createNativeQuery("insert into "
+                    + " [sispasa].[dbo].[CARG_END_PEOPLE_TMP] ("
+                    + " [BAIRRO]"
+                    + ",[BRANCOS]"
+                    + ",[CEP]"
+                    + ",[CIDADE]"
+                    + ",[CODBENEFICIARIO]"
+                    + ",[EMPRESA]"
+                    + ",[ENDERECO]"
+                    + ",[MATRICULA]"
+                    + ",[NOMEARQUIVO]"
+                    + ",[TELEFONE1]"
+                    + ",[TELEFONE2]"
+                    + ",[UF]) select "
+                    + " [BAIRRO]"
+                    + ",[BRANCOS]"
+                    + ",[CEP]"
+                    + ",[CIDADE]"
+                    + ",[CODBENEFICIARIO]"
+                    + ",[EMPRESA]"
+                    + ",[ENDERECO]"
+                    + ",[MATRICULA]"
+                    + ",[NOMEARQUIVO]"
+                    + ",[TELEFONE1]"
+                    + ",[TELEFONE2]"
+                    + ",[UF] from [sispasa].[dbo].[CARG_END_PEOPLE]");
+            q1.executeUpdate();
+            getEntityManager().getTransaction().commit();
+        } catch (Exception ex) {
+            System.err.println(ex);
+            Logger.getLogger(ModeloBenEndDAOImpl.class).error(ex);
+            new LogBeanImpl().logErroClass(this.getClass().getName(), ex.getMessage());
+        }
+    }
+    
 }

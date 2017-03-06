@@ -7,16 +7,16 @@ import org.apache.log4j.Logger;
 import org.pasa.sispasaint.bean.impl.LogBeanImpl;
 import org.pasa.sispasaint.dao.DaoGenerico;
 import org.pasa.sispasaint.model.intg.ModeloEndPeople;
-import org.pasa.sispasaint.dao.ImpEndPeopleTempDAO;
+import org.pasa.sispasaint.dao.ImpEndPeopleDAO;
 
 /**
  *
  * @author Hudson Schumaker
  * @version 1.0.0
  */
-public class ImpEndPeopleTempDAOImpl extends DaoGenerico<ModeloEndPeople> implements ImpEndPeopleTempDAO {
+public class ImpEndPeopleDAOImpl extends DaoGenerico<ModeloEndPeople> implements ImpEndPeopleDAO {
 
-    public ImpEndPeopleTempDAOImpl() {
+    public ImpEndPeopleDAOImpl() {
         super(ModeloEndPeople.class);
     }
 
@@ -32,7 +32,7 @@ public class ImpEndPeopleTempDAOImpl extends DaoGenerico<ModeloEndPeople> implem
             m = (ModeloEndPeople) q1.getSingleResult();
         } catch (NoResultException ex) {
             System.err.println(ex);
-            Logger.getLogger(ImpEndPeopleTempDAOImpl.class).error(ex);
+            Logger.getLogger(ImpEndPeopleDAOImpl.class).error(ex);
             new LogBeanImpl().logErroClass(this.getClass().getName(), ex.getMessage());
             m.setId(-1L);
             return m;
@@ -49,7 +49,7 @@ public class ImpEndPeopleTempDAOImpl extends DaoGenerico<ModeloEndPeople> implem
             getEntityManager().getTransaction().commit();
         } catch (Exception ex) {
             System.err.println(ex);
-            Logger.getLogger(ImpEndPeopleTempDAOImpl.class).error(ex);
+            Logger.getLogger(ImpEndPeopleDAOImpl.class).error(ex);
             new LogBeanImpl().logErroClass(this.getClass().getName(), ex.getMessage());
         }
     }
@@ -63,7 +63,7 @@ public class ImpEndPeopleTempDAOImpl extends DaoGenerico<ModeloEndPeople> implem
                 getEntityManager().getTransaction().commit();
             } catch (Exception ex) {
                 System.err.println(ex);
-                Logger.getLogger(ImpEndPeopleTempDAOImpl.class).error(ex);
+                Logger.getLogger(ImpEndPeopleDAOImpl.class).error(ex);
                 new LogBeanImpl().logErroClass(this.getClass().getName(), ex.getMessage());
                 getEntityManager().getTransaction().rollback();
             }
@@ -81,10 +81,49 @@ public class ImpEndPeopleTempDAOImpl extends DaoGenerico<ModeloEndPeople> implem
             ModeloEnd = q1.getResultList();
         } catch (NoResultException ex) {
             System.err.println(ex);
-            Logger.getLogger(ImpEndPeopleTempDAOImpl.class).error(ex);
+            Logger.getLogger(ImpEndPeopleDAOImpl.class).error(ex);
             new LogBeanImpl().logErroClass(this.getClass().getName(), ex.getMessage());
             return null;
         }
         return ModeloEnd;
+    }
+
+    @Override
+    public void copiarTabela() {
+        try {
+            getEntityManager().getTransaction().begin();
+            Query q1 = getEntityManager().createNativeQuery("insert into "
+                    + " [sispasa].[dbo].[CARG_END_PEOPLE_TMP] select "
+                    + " [BAIRRO]"
+                    + ",[BRANCOS]"
+                    + ",[CEP]"
+                    + ",[CIDADE]"
+                    + ",[CODBENEFICIARIO]"
+                    + ",[EMPRESA]"
+                    + ",[ENDERECO]"
+                    + ",[MATRICULA]"
+                    + ",[NOMEARQUIVO]"
+                    + ",[TELEFONE1]"
+                    + ",[TELEFONE2]"
+                    + ",[UF]) select "
+                    + " [BAIRRO]"
+                    + ",[BRANCOS]"
+                    + ",[CEP]"
+                    + ",[CIDADE]"
+                    + ",[CODBENEFICIARIO]"
+                    + ",[EMPRESA]"
+                    + ",[ENDERECO]"
+                    + ",[MATRICULA]"
+                    + ",[NOMEARQUIVO]"
+                    + ",[TELEFONE1]"
+                    + ",[TELEFONE2]"
+                    + ",[UF] from [sispasa].[dbo].[CARG_END_PEOPLE]");
+            q1.executeUpdate();
+            getEntityManager().getTransaction().commit();
+        } catch (Exception ex) {
+            System.err.println(ex);
+            Logger.getLogger(ImpBenPeopleDAOImpl.class).error(ex);
+            new LogBeanImpl().logErroClass(this.getClass().getName(), ex.getMessage());
+        }
     }
 }

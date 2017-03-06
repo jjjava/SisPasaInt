@@ -9,6 +9,7 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.Index;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
@@ -27,7 +28,8 @@ import org.pasa.sispasa.core.enumeration.EnumSimNao;
  * @version 1.0.0
  */
 @Entity
-@Table(name = "PLANO")
+@Table(name = "PLANO", indexes = 
+	{@Index(name = "CD_PLANO_IDX",  columnList="CD_PLANO", unique = false)})
 @Audited
 @AuditTable(value = "HIST_PLANO")
 public class Plano extends BaseEntity implements Serializable {

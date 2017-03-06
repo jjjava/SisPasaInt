@@ -48,7 +48,7 @@ public class FuncionarioDAOImpl extends DaoGenerico<Funcionario> implements Func
         try {
             getEntityManager().getTransaction().begin();
             Query q1 = getEntityManager().
-                    createQuery("Ipdate Funcionario f set f.indAtivo = :status");
+                    createQuery("update Funcionario f set f.indAtivo = :status");
             return q1.setParameter("status", SisPasaIntCommon.INATIVO).executeUpdate();
         } catch (Exception ex) {
             System.err.println(ex);

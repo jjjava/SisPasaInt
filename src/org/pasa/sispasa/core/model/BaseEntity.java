@@ -21,6 +21,7 @@ public abstract class BaseEntity implements Serializable {
     public int hashCode() {
         int hash = 0;
         hash += (this.getId() != null ? this.getId().hashCode() : 0);
+
         return hash;
     }
 

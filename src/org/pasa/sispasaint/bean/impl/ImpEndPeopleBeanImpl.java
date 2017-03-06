@@ -5,28 +5,28 @@ import java.util.List;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 import org.apache.log4j.Logger;
-import org.pasa.sispasaint.dao.impl.ImpEndPeopleTempDAOImpl;
+import org.pasa.sispasaint.dao.impl.ImpEndPeopleDAOImpl;
 import org.pasa.sispasaint.model.intg.Log;
 import org.pasa.sispasaint.model.intg.ModeloBenPeople;
 import org.pasa.sispasaint.model.intg.ModeloEndPeople;
-import org.pasa.sispasaint.bean.ImpEndPeopleTempBean;
 import org.pasa.sispasaint.carga.thread.CargaEndPeopleThread;
 import org.pasa.sispasaint.config.Configuracao;
 import org.pasa.sispasaint.util.ArquivoUtil;
 import org.pasa.sispasaint.util.SisPasaIntCommon;
 import org.pasa.sispasaint.util.Sistema;
+import org.pasa.sispasaint.bean.ImpEndPeopleBean;
 
 /**
  *
  * @author Hudson Schumaker
  * @version 1.0.0
  */
-public class ImpEndPeopleTempBeanImpl implements ImpEndPeopleTempBean {
+public class ImpEndPeopleBeanImpl implements ImpEndPeopleBean {
 
-    private final ImpEndPeopleTempDAOImpl modeloDAO;
+    private final ImpEndPeopleDAOImpl modeloDAO;
 
-    public ImpEndPeopleTempBeanImpl() {
-        modeloDAO = new ImpEndPeopleTempDAOImpl();
+    public ImpEndPeopleBeanImpl() {
+        modeloDAO = new ImpEndPeopleDAOImpl();
     }
 
     @Override
@@ -68,7 +68,7 @@ public class ImpEndPeopleTempBeanImpl implements ImpEndPeopleTempBean {
             }
         } catch (IOException ex) {
             System.err.println(ex);
-            Logger.getLogger(ImpEndPeopleTempBeanImpl.class).error(ex);
+            Logger.getLogger(ImpEndPeopleBeanImpl.class).error(ex);
             new LogBeanImpl().logErroClass(this.getClass().getName(), ex.getMessage());
         }
     }
@@ -86,5 +86,10 @@ public class ImpEndPeopleTempBeanImpl implements ImpEndPeopleTempBean {
     @Override
     public List<ModeloEndPeople> list(String empresa, String matricula) {
         return modeloDAO.list(empresa, matricula);
+    }
+
+    @Override
+    public void copiarTabela() {
+        modeloDAO.copiarTabela();
     }
 }

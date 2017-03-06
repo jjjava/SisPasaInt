@@ -8,8 +8,8 @@ import org.pasa.sispasa.core.model.Municipio;
 import org.pasa.sispasaint.bean.impl.EmpresaBeanImpl;
 import org.pasa.sispasaint.bean.impl.EstadoBeanImpl;
 import org.pasa.sispasaint.bean.impl.FuncionarioBeanImpl;
-import org.pasa.sispasaint.bean.impl.ImpBenPeopleTempBeanImpl;
-import org.pasa.sispasaint.bean.impl.ImpEndPeopleTempBeanImpl;
+import org.pasa.sispasaint.bean.impl.ImpBenPeopleBeanImpl;
+import org.pasa.sispasaint.bean.impl.ImpEndPeopleBeanImpl;
 import org.pasa.sispasaint.bean.impl.MunicipioBeanImpl;
 import org.pasa.sispasaint.model.intg.ModeloBenPeople;
 import org.pasa.sispasaint.model.intg.ModeloEndPeople;
@@ -45,8 +45,8 @@ public class CargaEntidadePeopleFuncionario {
 
     private Log log;
     private Funcionario funcionario;
-    private final ImpBenPeopleTempBeanImpl impBenPeopleTempBeanImpl;
-    private final ImpEndPeopleTempBeanImpl impEndPeopleTempBeanImpl;
+    private final ImpBenPeopleBeanImpl impBenPeopleTempBeanImpl;
+    private final ImpEndPeopleBeanImpl impEndPeopleTempBeanImpl;
     private final CargaEntidadePeopleBeneficiario cargaEntidadePeopleBeneficiario;
     private final EmpresaBeanImpl empresaBean;
     private final FuncionarioBeanImpl funcionarioBean;
@@ -64,8 +64,8 @@ public class CargaEntidadePeopleFuncionario {
         this.funcionarioBean = new FuncionarioBeanImpl();
         this.tipoDocumentoBean = new TipoDocumentoBeanImpl();
         this.nivelEscolaridadeBean = new NivelEscolaridadeBeanImpl();
-        this.impBenPeopleTempBeanImpl = new ImpBenPeopleTempBeanImpl();
-        this.impEndPeopleTempBeanImpl = new ImpEndPeopleTempBeanImpl();
+        this.impBenPeopleTempBeanImpl = new ImpBenPeopleBeanImpl();
+        this.impEndPeopleTempBeanImpl = new ImpEndPeopleBeanImpl();
         this.tipoVinculoEmpregaticioBean = new TipoVinculoEmpregaticioBeanImpl();
         this.cargaEntidadePeopleBeneficiario = new CargaEntidadePeopleBeneficiario(log);
     }

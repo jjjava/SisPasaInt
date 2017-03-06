@@ -31,9 +31,9 @@ import org.pasa.sispasa.core.util.Utils;
 
 /**
  *
- * @author Hudson Schumaker
+ * @author Hudson Schumaker 
  * @author Andre Gomes
- * @version 1.0.0
+ * @version 2.0.0
  */
 @Entity
 @Table(name = "PESSOA")
@@ -91,7 +91,7 @@ public class Pessoa extends BaseEntity implements Serializable {
     //RELACIONAMENTOS
     @ManyToMany(cascade = CascadeType.ALL)
     @JoinTable(name = "PESSOA_ENDERECO",
-            joinColumns = @JoinColumn(name = "ID_PESSOA"),
+            joinColumns = @JoinColumn(name = "ID_PESSOA"), 
             inverseJoinColumns = @JoinColumn(name = "ID_ENDERECO"))
     @NotAudited
     private List<Endereco> enderecos;
@@ -216,21 +216,21 @@ public class Pessoa extends BaseEntity implements Serializable {
 
     public EnumNivelEscolaridade getNivelEscolaridadeAsEnum() {
         return EnumNivelEscolaridade.getNivelEscolaridadeByIndice(getNivelEscolaridade().getId());
-    }
+	}
 
-    public EnumSexo getSexoAsEnum() {
-        return EnumSexo.getSexoByIndice(getSexo());
-    }
+	public EnumSexo getSexoAsEnum() {
+		return EnumSexo.getSexoByIndice(getSexo());
+	}
 
-    public EnumEstadoCivil getEstadoCivilAsEnum() {
-        return EnumEstadoCivil.getEstadoCivilByIndice(estadoCivil.getId());
-    }
-
-    public String getCpfFormatado() {
+	public EnumEstadoCivil getEstadoCivilAsEnum() {
+		return EnumEstadoCivil.getEstadoCivilByIndice(estadoCivil.getId());
+	}
+	
+	public String getCpfFormatado() {
         return Utils.formataCpf(cpf);
     }
 
-    @Override
+	@Override
     public Long getId() {
         return id;
     }
@@ -327,9 +327,9 @@ public class Pessoa extends BaseEntity implements Serializable {
         this.email = email;
     }
 
-    public EnumSimNao getIndConclusaoEscolaridadeAsEnum() {
-        return EnumSimNao.valueFromIndice(getIndConclusaoEscolaridade());
-    }
+	public EnumSimNao getIndConclusaoEscolaridadeAsEnum() {
+		return EnumSimNao.valueFromIndice(getIndConclusaoEscolaridade());
+	}
 
     public Integer getIndConclusaoEscolaridade() {
         return indConclusaoEscolaridade;
