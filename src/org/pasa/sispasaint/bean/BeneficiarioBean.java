@@ -6,6 +6,7 @@ import org.pasa.sispasa.core.model.Beneficiario;
 /**
  *
  * @author Hudson Schumaker
+ * @version 1.0.0
  */
 public interface BeneficiarioBean {
     Beneficiario obter(Beneficiario b);

@@ -26,7 +26,7 @@ import org.pasa.sispasa.core.constants.ConstantesBanco;
  *
  * @author Hudson Schumaker 
  * @author Andre Gomes
- * @version 2.0.0
+ * @version 2.1.0
  */
 @Entity
 @Table(name = "BENEFICIARIO" , indexes = {
@@ -324,11 +324,11 @@ public class Beneficiario extends BaseEntity implements Serializable{
         this.tipoBeneficiario = tipoBeneficiario;
     }
 
-    public Date getDataUltimaAtulizacao() {
+    public Date getDataUltimaAtualizacao() {
         return dataUltimaAtualizacao;
     }
 
-    public void setDataUltimaAtulizacao(Date dataUltimaAtualizacao) {
+    public void setDataUltimaAtualizacao(Date dataUltimaAtualizacao) {
         this.dataUltimaAtualizacao = dataUltimaAtualizacao;
     }
     

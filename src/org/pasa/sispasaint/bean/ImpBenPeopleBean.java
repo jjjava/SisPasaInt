@@ -12,14 +12,14 @@ import org.pasa.sispasaint.model.intg.ModeloBenPeople;
 public interface ImpBenPeopleBean {
     ModeloBenPeople obter(Long id);
     ModeloBenPeople obter(ModeloBenPeople modeloBenPeople);
+    Long contar();
     void copiarTabela();
     void limparTabela();
     void resetarIdentity();
     void carregarArquivo(Long id, Log log);
+    void inativar(List<ModeloBenPeople> listaInativar);
     void salvarTbTemp(List<ModeloBenPeople> listaModeloBenPeople);
-    Long contar();
+    List<ModeloBenPeople> verificarInativos();
     List<ModeloBenPeople> listarBeneficiarios(ModeloBenPeople modeloBenPeople);
     List<ModeloBenPeople> listarBeneficiarios(String empresa, String matricula);
-    List<ModeloBenPeople> verificarInativos();
-    void inativar(List<ModeloBenPeople> listaInativar);
 }

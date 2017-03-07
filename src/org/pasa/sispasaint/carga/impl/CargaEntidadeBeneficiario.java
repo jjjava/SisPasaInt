@@ -64,7 +64,7 @@ public class CargaEntidadeBeneficiario {
         }
         beneficiario.getPessoa().setOrigemInformacoes(newOrigemInformacoes());
         beneficiario.setPlano(newPlano(modeloBenEnd));
-        beneficiario.setDataUltimaAtulizacao(DateUtil.obterDataAtual());
+        beneficiario.setDataUltimaAtualizacao(DateUtil.obterDataAtual());
         beneficiario.setIdUsuario(SisPasaIntCommon.USER_CARGA);
         beneficiario.setIndAtivo(SisPasaIntCommon.ATIVO);
         
@@ -152,7 +152,7 @@ public class CargaEntidadeBeneficiario {
         else{
             beneficiario.setDataValidadeReembolso(null);
         }
-        beneficiario.setDataUltimaAtulizacao(DateUtil.toDate(modeloBenEnd.getDataDeAtualizacao()));
+        beneficiario.setDataUltimaAtualizacao(DateUtil.toDate(modeloBenEnd.getDataDeAtualizacao()));
         beneficiario.setCodCR(modeloBenEnd.getCodigoCR());
         beneficiario.setOrgaoPessoal(modeloBenEnd.getOrgaoPessoal());
         beneficiario.setFaixaNivel(modeloBenEnd.getFaixaNivel());

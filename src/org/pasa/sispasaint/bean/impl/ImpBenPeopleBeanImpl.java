@@ -5,6 +5,7 @@ import java.util.List;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 import org.apache.log4j.Logger;
+import org.pasa.sispasa.core.model.Beneficiario;
 import org.pasa.sispasa.core.model.Funcionario;
 import org.pasa.sispasaint.dao.impl.ImpBenPeopleDAOImpl;
 import org.pasa.sispasaint.model.intg.Log;
@@ -23,37 +24,39 @@ import org.pasa.sispasaint.bean.ImpBenPeopleBean;
  * @version 1.0.0
  */
 public class ImpBenPeopleBeanImpl implements ImpBenPeopleBean {
-
+    
     private final ImpBenPeopleDAOImpl modeloDAO;
     private final FuncionarioBeanImpl funcionarioBean;
-
+    private final BeneficiarioBeanImpl beneficiarioBean;
+    
     public ImpBenPeopleBeanImpl() {
         this.modeloDAO = new ImpBenPeopleDAOImpl();
         this.funcionarioBean = new FuncionarioBeanImpl();
+        this.beneficiarioBean = new BeneficiarioBeanImpl();
     }
-
+    
     @Override
     public ModeloBenPeople obter(Long id) {
         ModeloBenPeople modeloBenPeople = new ModeloBenPeople();
         modeloBenPeople.setId(id);
         return obter(modeloBenPeople);
     }
-
+    
     @Override
     public ModeloBenPeople obter(ModeloBenPeople modelo) {
         return modeloDAO.obter(modelo.getId());
     }
-
+    
     @Override
     public void limparTabela() {
         modeloDAO.limpaTB();
     }
-
+    
     @Override
     public void resetarIdentity() {
         modeloDAO.resetarIdentity();
     }
-
+    
     @Override
     public void carregarArquivo(Long id, Log log) {
         try {
@@ -77,44 +80,52 @@ public class ImpBenPeopleBeanImpl implements ImpBenPeopleBean {
             new LogBeanImpl().logErroClass(this.getClass().getName(), ex.getMessage());
         }
     }
-
+    
     @Override
     public void salvarTbTemp(List<ModeloBenPeople> listaModeloBenVLI) {
         modeloDAO.salvarTbTemp(listaModeloBenVLI);
     }
-
+    
     @Override
     public Long contar() {
         return modeloDAO.contar();
     }
-
+    
     @Override
     public List<ModeloBenPeople> listarBeneficiarios(ModeloBenPeople modeloBenPeople) {
         return listarBeneficiarios(modeloBenPeople.getEmpresa(), modeloBenPeople.getMatricula());
     }
-
+    
     @Override
     public List<ModeloBenPeople> listarBeneficiarios(String empresa, String matricula) {
         return modeloDAO.listarBeneficiarios(empresa, matricula);
     }
-
+    
     @Override
     public void copiarTabela() {
         modeloDAO.copiarTabela();
     }
-
+    
     @Override
     public List<ModeloBenPeople> verificarInativos() {
         return modeloDAO.verificarInativos();
     }
-
+    
     @Override
     public void inativar(List<ModeloBenPeople> listaInativar) {
         for (ModeloBenPeople modelo : listaInativar) {
             Funcionario f = funcionarioBean.obter(modelo.getEmpresa(), modelo.getMatricula());
             f.setIndAtivo(SisPasaIntCommon.INATIVO);
             f.setDataDesligamento(DateUtil.obterDataAtual());
+            f.setDataUltimaAtualizacao(DateUtil.obterDataAtual());
             funcionarioBean.atualizar(f);
+            //BENEFICIARIOS
+            List<Beneficiario> lista = beneficiarioBean.listar(modelo.getEmpresa(), modelo.getMatricula());
+            for (Beneficiario b : lista) {
+                b.setIndAtivo(SisPasaIntCommon.INATIVO);
+                b.setDataUltimaAtualizacao(DateUtil.obterDataAtual());
+                beneficiarioBean.atualizar(b);
+            }
         }
     }
 }

@@ -10,6 +10,7 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.Index;
 import javax.persistence.JoinColumn;
 import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
@@ -33,7 +34,9 @@ import org.pasa.sispasa.core.enumeration.EnumSimNao;
 import org.pasa.sispasa.core.util.Utils;
 
 @Entity
-@Table(name = "PARTICIPANTE")
+@Table(name = "PARTICIPANTE", 
+indexes = {@Index(name = "CPF_IDX", columnList = "CPF", unique = true),
+		@Index(name = "NOME_IDX", columnList = "NOME", unique = false)})
 @Audited
 @AuditTable(value = "HIST_PARTICIPANTE")
 public class Participante extends BaseEntity implements Serializable {

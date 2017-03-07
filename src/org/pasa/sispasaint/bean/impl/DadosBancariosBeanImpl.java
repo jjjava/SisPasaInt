@@ -5,6 +5,11 @@ import org.pasa.sispasa.core.model.DadosBancarios;
 import org.pasa.sispasaint.bean.DadosBancariosBean;
 import org.pasa.sispasaint.dao.impl.DadosBancariosDAOImpl;
 
+/**
+ *
+ * @author Hudson Schumaker
+ * @version 1.0.0
+ */
 public class DadosBancariosBeanImpl implements DadosBancariosBean {
     
     private final DadosBancariosDAOImpl dadosBancariosDAO;
@@ -37,5 +42,4 @@ public class DadosBancariosBeanImpl implements DadosBancariosBean {
     public List<DadosBancarios> listar() {
         return dadosBancariosDAO.listar();
     }
-
 }

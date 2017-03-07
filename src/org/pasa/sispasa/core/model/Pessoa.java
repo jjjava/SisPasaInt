@@ -11,6 +11,7 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.Index;
 import javax.persistence.JoinColumn;
 import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
@@ -31,12 +32,14 @@ import org.pasa.sispasa.core.util.Utils;
 
 /**
  *
- * @author Hudson Schumaker 
+ * @author Hudson Schumaker
  * @author Andre Gomes
  * @version 2.0.0
  */
 @Entity
-@Table(name = "PESSOA")
+@Table(name = "PESSOA",
+        indexes = {
+            @Index(name = "CPF_IDX", columnList = "CPF", unique = true)})
 @Audited
 @AuditTable(value = "HIST_PESSOA")
 public class Pessoa extends BaseEntity implements Serializable {
@@ -88,25 +91,19 @@ public class Pessoa extends BaseEntity implements Serializable {
     @Column(name = "ID_CONCL_ESCOL", nullable = false, columnDefinition = ConstantesBanco.SMALLINT)
     private Integer indConclusaoEscolaridade;
 
-    //RELACIONAMENTOS
+    // RELACIONAMENTOS
     @ManyToMany(cascade = CascadeType.ALL)
-    @JoinTable(name = "PESSOA_ENDERECO",
-            joinColumns = @JoinColumn(name = "ID_PESSOA"), 
-            inverseJoinColumns = @JoinColumn(name = "ID_ENDERECO"))
+    @JoinTable(name = "PESSOA_ENDERECO", joinColumns = @JoinColumn(name = "ID_PESSOA"), inverseJoinColumns = @JoinColumn(name = "ID_ENDERECO"))
     @NotAudited
     private List<Endereco> enderecos;
 
     @ManyToMany(cascade = CascadeType.ALL)
-    @JoinTable(name = "PESSOA_TELEFONE",
-            joinColumns = @JoinColumn(name = "ID_PESSOA"),
-            inverseJoinColumns = @JoinColumn(name = "ID_TELEFONE"))
+    @JoinTable(name = "PESSOA_TELEFONE", joinColumns = @JoinColumn(name = "ID_PESSOA"), inverseJoinColumns = @JoinColumn(name = "ID_TELEFONE"))
     @NotAudited
     private List<Telefone> telefones;
 
     @ManyToMany(cascade = CascadeType.ALL)
-    @JoinTable(name = "DOCUMENTO_PESSOA",
-            joinColumns = @JoinColumn(name = "ID_PESSOA"),
-            inverseJoinColumns = @JoinColumn(name = "ID_DOCUMENTO"))
+    @JoinTable(name = "DOCUMENTO_PESSOA", joinColumns = @JoinColumn(name = "ID_PESSOA"), inverseJoinColumns = @JoinColumn(name = "ID_DOCUMENTO"))
     @NotAudited
     private List<Documento> documentos;
 
@@ -216,21 +213,21 @@ public class Pessoa extends BaseEntity implements Serializable {
 
     public EnumNivelEscolaridade getNivelEscolaridadeAsEnum() {
         return EnumNivelEscolaridade.getNivelEscolaridadeByIndice(getNivelEscolaridade().getId());
-	}
+    }
 
-	public EnumSexo getSexoAsEnum() {
-		return EnumSexo.getSexoByIndice(getSexo());
-	}
+    public EnumSexo getSexoAsEnum() {
+        return EnumSexo.getSexoByIndice(getSexo());
+    }
 
-	public EnumEstadoCivil getEstadoCivilAsEnum() {
-		return EnumEstadoCivil.getEstadoCivilByIndice(estadoCivil.getId());
-	}
-	
-	public String getCpfFormatado() {
+    public EnumEstadoCivil getEstadoCivilAsEnum() {
+        return EnumEstadoCivil.getEstadoCivilByIndice(estadoCivil.getId());
+    }
+
+    public String getCpfFormatado() {
         return Utils.formataCpf(cpf);
     }
 
-	@Override
+    @Override
     public Long getId() {
         return id;
     }
@@ -327,9 +324,9 @@ public class Pessoa extends BaseEntity implements Serializable {
         this.email = email;
     }
 
-	public EnumSimNao getIndConclusaoEscolaridadeAsEnum() {
-		return EnumSimNao.valueFromIndice(getIndConclusaoEscolaridade());
-	}
+    public EnumSimNao getIndConclusaoEscolaridadeAsEnum() {
+        return EnumSimNao.valueFromIndice(getIndConclusaoEscolaridade());
+    }
 
     public Integer getIndConclusaoEscolaridade() {
         return indConclusaoEscolaridade;

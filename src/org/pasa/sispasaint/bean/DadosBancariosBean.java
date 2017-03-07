@@ -7,6 +7,7 @@ import org.pasa.sispasa.core.model.DadosBancarios;
 /**
  *
  * @author Hudson Schumaker
+ * @version 1.0.0
  */
 public interface DadosBancariosBean {
     void cadastrar( DadosBancarios db);

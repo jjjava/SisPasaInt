@@ -6,6 +6,7 @@ import org.pasa.sispasaint.model.intg.Agenda;
 /**
  *
  * @author Hudson Schumaker
+ * @version 1.0.0
  */
 public interface AgendaBean {
     Agenda obter(Agenda a);

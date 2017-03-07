@@ -6,6 +6,7 @@ import org.pasa.sispasaint.model.intg.Destinatario;
 /**
  *
  * @author Hudson Schumaker
+ * @version 1.0.0
  */
 public interface DestinatarioBean {
     Destinatario obter(Long id);

@@ -20,8 +20,8 @@ import org.pasa.sispasaint.util.SisPasaIntErro;
 public class CargaMapeaEntidadesThread implements Runnable {
 
     private Log log;
-    private long ini;
-    private long qtdRegistros;
+    private final long ini;
+    private final long qtdRegistros;
 
     private final String nome;
     private final ComparadorFuncionario comparadorFuncionario;

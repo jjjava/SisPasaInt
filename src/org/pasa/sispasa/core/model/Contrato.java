@@ -21,7 +21,7 @@ import org.pasa.sispasa.core.constants.ConstantesBanco;
 
 /**
  *
- * @author Hudson Schumaker 
+ * @author Hudson Schumaker
  * @author Andre Gomes
  * @version 1.0.0
  */
@@ -29,7 +29,7 @@ import org.pasa.sispasa.core.constants.ConstantesBanco;
 @Table(name = "CONTRATO")
 @Audited
 @AuditTable(value = "HIST_CONTRATO")
-public class Contrato extends BaseEntity  implements Serializable {
+public class Contrato extends BaseEntity implements Serializable {
 
     private static final long serialVersionUID = 1L;
 
@@ -84,13 +84,13 @@ public class Contrato extends BaseEntity  implements Serializable {
     @NotAudited
     private Empresa empresa;
 
-    @OneToMany(mappedBy="contrato")
+    @OneToMany(mappedBy = "contrato")
     private List<Plano> planos;
-    
+
     //CONSTRUTORES
     public Contrato() {
     }
-    
+
     public Contrato(Long id) {
         this.id = id;
     }
@@ -201,11 +201,11 @@ public class Contrato extends BaseEntity  implements Serializable {
         this.indAtivo = indAtivo;
     }
 
-	public Empresa getEmpresa() {
-		return empresa;
-	}
+    public Empresa getEmpresa() {
+        return empresa;
+    }
 
-	public void setEmpresa(Empresa empresa) {
-		this.empresa = empresa;
-	}
+    public void setEmpresa(Empresa empresa) {
+        this.empresa = empresa;
+    }
 }

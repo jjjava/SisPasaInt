@@ -12,10 +12,10 @@ public class CargaBenPeopleThread implements Runnable {
 
     private Long id;
     private Log log;
-    private int ini;
-    private int fim;
-    private int lote;
-    private int loteLines;
+    private final int ini;
+    private final int fim;
+    private final int lote;
+    private final int loteLines;
 
     public CargaBenPeopleThread(Log log, Long id, int ini, int fim, int lote, int loteLines) {
         this.log = log;

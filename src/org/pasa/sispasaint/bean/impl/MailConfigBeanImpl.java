@@ -6,7 +6,8 @@ import org.pasa.sispasaint.mail.MailConfig;
 
 /**
  *
- * @author 90J00318
+ * @author Hudson Schumaker
+ * @version 1.0.0
  */
 public class MailConfigBeanImpl implements MailConfigBean {
 
