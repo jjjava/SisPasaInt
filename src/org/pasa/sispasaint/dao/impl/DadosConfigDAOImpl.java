@@ -23,7 +23,7 @@ public class DadosConfigDAOImpl extends DaoGenerico<DadosConfiguracao> implement
     @Override
     public DadosConfiguracao obterPorEmpresa(Long id) {
         Query q1 = getEntityManager().
-                createQuery("select e from DadosConfig e where e.idEmpresa = :id");
+                createQuery("select e from DadosConfiguracao e where e.idEmpresa = :id");
         q1.setParameter("id", id);
         q1.setMaxResults(1);
         List<DadosConfiguracao> dados = null;

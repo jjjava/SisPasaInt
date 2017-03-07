@@ -44,7 +44,7 @@ public class ImpEndPeopleDAOImpl extends DaoGenerico<ModeloEndPeople> implements
     public void resetarIdentity() {
         try {
             getEntityManager().getTransaction().begin();
-            Query q1 = getEntityManager().createNativeQuery("DBCC CHECKIDENT ('[sispasa].[dbo].[CARG_END_PEOPLE]', RESEED, 0)");
+            Query q1 = getEntityManager().createNativeQuery("DBCC CHECKIDENT ('[sispasa-dev].[dbo].[CARG_END_PEOPLE]', RESEED, 0)");
             q1.executeUpdate();
             getEntityManager().getTransaction().commit();
         } catch (Exception ex) {
@@ -93,7 +93,7 @@ public class ImpEndPeopleDAOImpl extends DaoGenerico<ModeloEndPeople> implements
         try {
             getEntityManager().getTransaction().begin();
             Query q1 = getEntityManager().createNativeQuery("insert into "
-                    + " [sispasa].[dbo].[CARG_END_PEOPLE_TMP] select "
+                    + " [sispasa-dev].[dbo].[CARG_END_PEOPLE_TMP] select "
                     + " [BAIRRO]"
                     + ",[BRANCOS]"
                     + ",[CEP]"

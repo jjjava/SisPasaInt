@@ -23,7 +23,7 @@ public class ImpBenPeopleDAOImpl extends DaoGenerico<ModeloBenPeople> implements
     @Override
     public void resetarIdentity() {
         getEntityManager().getTransaction().begin();
-        Query q1 = getEntityManager().createNativeQuery("DBCC CHECKIDENT ('[sispasa].[dbo].[CARG_BEN_PEOPLE]', RESEED, 0)");
+        Query q1 = getEntityManager().createNativeQuery("DBCC CHECKIDENT ('[sispasa-dev].[dbo].[CARG_BEN_PEOPLE]', RESEED, 0)");
         q1.executeUpdate();
         getEntityManager().getTransaction().commit();
     }
@@ -84,7 +84,7 @@ public class ImpBenPeopleDAOImpl extends DaoGenerico<ModeloBenPeople> implements
     public void copiarTabela() {
         try {
             getEntityManager().getTransaction().begin();
-            Query q1 = getEntityManager().createNativeQuery("insert into [sispasa].[dbo].[CARG_BEN_PEOPLE_TMP] "
+            Query q1 = getEntityManager().createNativeQuery("insert into [sispasa-dev].[dbo].[CARG_BEN_PEOPLE_TMP] "
                     + "select [AGENCIABANCARIA]"
                     + ",[BANCO]"
                     + ",[BRANCO]"
@@ -136,7 +136,7 @@ public class ImpBenPeopleDAOImpl extends DaoGenerico<ModeloBenPeople> implements
                     + ",[SEXO]"
                     + ",[TIPOBENEFICIARIO]"
                     + ",[UNIDADEDECONTROLE]"
-                    + ",[VINCULO] from [sispasa].[dbo].[CARG_BEN_PEOPLE]");
+                    + ",[VINCULO] from [sispasa-dev].[dbo].[CARG_BEN_PEOPLE]");
             q1.executeUpdate();
             getEntityManager().getTransaction().commit();
         } catch (Exception ex) {

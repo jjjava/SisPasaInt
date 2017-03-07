@@ -42,11 +42,12 @@ public class CargaPeopleBeanImpl implements CargaPeopleBean {
 
     @Override
     public void cargaArquivosTemp() {
+        //BENEFICIARIO
         ImpBenPeopleBeanImpl beanBen = new ImpBenPeopleBeanImpl();
         beanBen.limparTabela();
         beanBen.resetarIdentity();
         beanBen.carregarArquivo(id, log);
-
+        //ENDERECO
         ImpEndPeopleBeanImpl beanEnd = new ImpEndPeopleBeanImpl();
         beanEnd.limparTbTemp();
         beanEnd.resetarIdentity();

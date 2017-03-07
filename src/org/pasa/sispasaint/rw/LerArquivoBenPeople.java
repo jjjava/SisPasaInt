@@ -240,7 +240,7 @@ public class LerArquivoBenPeople {
     }
 
     private String acertaPlano(String plano) {
-        if (plano.equals(" ")) {
+        if (plano.equals("") || plano.equals(" ") || plano.equals("  ") ) {
             return "0";
         }
         return plano;

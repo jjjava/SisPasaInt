@@ -79,6 +79,7 @@ public class Log implements Serializable {
         log.setTipoErro(tipoErro);
         log.setErro(erro);
         getListaErros().add(log);
+        listaErros.add(log);
     }
 
     public void addMatriculaErro(String codEmpresa, String matricula, String tipoErro, String erro) {
@@ -87,6 +88,7 @@ public class Log implements Serializable {
         log.setTipoErro(tipoErro);
         log.setErro(erro);
         getListaErros().add(log);
+        listaErros.add(log);
     }
 
     public void addMatriculaErro(String codEmpresa, String matricula, String codBenef, String tipoErro, String erro) {
@@ -96,6 +98,7 @@ public class Log implements Serializable {
         log.setTipoErro(tipoErro);
         log.setErro(erro);
         getListaErros().add(log);
+        listaErros.add(log);
     }
 
     public void addMatriculaErro(String codEmpresa, String matricula, String codBenef, String cpf, String tipoErro, String erro) {
@@ -106,6 +109,7 @@ public class Log implements Serializable {
         log.setTipoErro(tipoErro);
         log.setErro(erro);
         getListaErros().add(log);
+        listaErros.add(log);
     }
 
     public void addClasseErro(String classe, String tipoErro, String erro) {
@@ -114,6 +118,7 @@ public class Log implements Serializable {
         log.setClasse(classe);
         log.setTipoErro(tipoErro);
         log.setErro(erro);
+        listaErros.add(log);
     }
 
     public void addLinhaArq() {
