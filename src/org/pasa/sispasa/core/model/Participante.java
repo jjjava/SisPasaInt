@@ -35,7 +35,7 @@ import org.pasa.sispasa.core.util.Utils;
 
 @Entity
 @Table(name = "PARTICIPANTE", 
-indexes = {@Index(name = "CPF_IDX", columnList = "CPF", unique = true),
+indexes = {@Index(name = "CPF_PARTICIP_IDX", columnList = "CPF", unique = true),
 		@Index(name = "NOME_IDX", columnList = "NOME", unique = false)})
 @Audited
 @AuditTable(value = "HIST_PARTICIPANTE")

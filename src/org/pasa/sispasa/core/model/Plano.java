@@ -28,258 +28,258 @@ import org.pasa.sispasa.core.enumeration.EnumSimNao;
  * @version 1.0.0
  */
 @Entity
-@Table(name = "PLANO", indexes = {
-    @Index(name = "CD_PLANO_IDX", columnList = "CD_PLANO", unique = false)})
+@Table(name = "PLANO", indexes = 
+	{@Index(name = "CD_PLANO_IDX",  columnList="CD_PLANO", unique = false)})
 @Audited
 @AuditTable(value = "HIST_PLANO")
 public class Plano extends BaseEntity implements Serializable {
 
-    private static final long serialVersionUID = 1L;
+	private static final long serialVersionUID = 1L;
 
-    @Id
-    @Column(name = "ID_PLANO", columnDefinition = ConstantesBanco.BIGINT)
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
+	@Id
+	@Column(name = "ID_PLANO", columnDefinition = ConstantesBanco.BIGINT)
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	private Long id;
 
-    @Column(name = "CD_PLANO", length = 10)
-    private String codPlano;
+	@Column(name = "CD_PLANO", length = 10)
+	private String codPlano;
 
-    @Column(name = "NOME", length = 30, nullable = false)
-    private String nome;
+	@Column(name = "NOME", length = 30, nullable = false)
+	private String nome;
 
-    @Column(name = "DESCRICAO", length = 60, nullable = false)
-    private String descricao;
+	@Column(name = "DESCRICAO", length = 60, nullable = false)
+	private String descricao;
 
-    @Column(name = "DT_INICIO_VIGENCIA", columnDefinition = ConstantesBanco.DATE, nullable = false)
-    @Temporal(TemporalType.DATE)
-    private Date dataInicioVigencia;
+	@Column(name = "DT_INICIO_VIGENCIA", columnDefinition = ConstantesBanco.DATE, nullable = false)
+	@Temporal(TemporalType.DATE)
+	private Date dataInicioVigencia;
 
-    @Column(name = "DT_FIM_VIGENCIA", columnDefinition = ConstantesBanco.DATE)
-    @Temporal(TemporalType.DATE)
-    private Date dataFimVigencia;
+	@Column(name = "DT_FIM_VIGENCIA", columnDefinition = ConstantesBanco.DATE)
+	@Temporal(TemporalType.DATE)
+	private Date dataFimVigencia;
 
-    @Column(name = "QTD_DIAS_CARENCIA", nullable = false, columnDefinition = ConstantesBanco.SMALLINT)
-    private Integer qtdDiasCarencia;
+	@Column(name = "QTD_DIAS_CARENCIA", nullable = false, columnDefinition = ConstantesBanco.SMALLINT)
+	private Integer qtdDiasCarencia;
 
-    @Column(name = "REGISTRO_ANS", length = 30)
-    private String registroANS;
+	@Column(name = "REGISTRO_ANS", length = 30)
+	private String registroANS;
 
-    @Column(name = "IND_PERMIS_ASSOC", nullable = false, columnDefinition = ConstantesBanco.SMALLINT)
-    private Integer indPermissaoAssociacao;
+	@Column(name = "IND_PERMIS_ASSOC", nullable = false, columnDefinition = ConstantesBanco.SMALLINT)
+	private Integer indPermissaoAssociacao;
 
-    @Column(name = "ID_USUARIO", nullable = false, columnDefinition = ConstantesBanco.BIGINT)
-    private Long idUsuario;
+	@Column(name = "ID_USUARIO", nullable = false, columnDefinition = ConstantesBanco.BIGINT)
+	private Long idUsuario;
 
-    @Column(name = "IND_ATIVO", nullable = false, columnDefinition = ConstantesBanco.SMALLINT)
-    private Integer indAtivo;
+	@Column(name = "IND_ATIVO", nullable = false, columnDefinition = ConstantesBanco.SMALLINT)
+	private Integer indAtivo;
 
-    @Column(name = "DT_ULT_ATULZ", nullable = false)
-    @Temporal(TemporalType.TIMESTAMP)
-    private Date dataUltimaAtualizacao;
+	@Column(name = "DT_ULT_ATULZ", nullable = false)
+	@Temporal(TemporalType.TIMESTAMP)
+	private Date dataUltimaAtualizacao;
+	
+	@Column(name="VALOR_FIXO", nullable=true)
+	private BigDecimal valorFixo;
+	
+	@Column(name = "IND_VALOR_FIXO_TITULAR", nullable = false, columnDefinition = ConstantesBanco.SMALLINT)
+	private Integer indValorFixoTitular;
+	
+	@Column(name = "IND_VALOR_FIXO_AGREGADO", nullable = false, columnDefinition = ConstantesBanco.SMALLINT)
+	private Integer indValorFixoAgregado;
+	
+	@Column(name = "IND_VALOR_FIXO_DEPENDENTE", nullable = false, columnDefinition = ConstantesBanco.SMALLINT)
+	private Integer indValorFixoDependente;
 
-    @Column(name = "VALOR_FIXO", nullable = true)
-    private BigDecimal valorFixo;
+	@Column(name = "IND_ANTES_RN63", nullable = false, columnDefinition = ConstantesBanco.SMALLINT)
+	private Integer indAntesRN63;
+	
+	// RELACIONAMENTOS
+	@ManyToOne
+	@JoinColumn(name = "ID_TP_PLANO", nullable = false)
+	@NotAudited
+	private TipoPlano tipoPlano;
 
-    @Column(name = "IND_VALOR_FIXO_TITULAR", nullable = false, columnDefinition = ConstantesBanco.SMALLINT)
-    private Integer indValorFixoTitular;
+	@ManyToOne
+	@JoinColumn(name = "ID_PLANO_PAI", referencedColumnName = "ID_PLANO")
+	@NotAudited
+	private Plano planoPai;
 
-    @Column(name = "IND_VALOR_FIXO_AGREGADO", nullable = false, columnDefinition = ConstantesBanco.SMALLINT)
-    private Integer indValorFixoAgregado;
+	@ManyToOne
+	@JoinColumn(name = "ID_CONTRATO")
+	@NotAudited
+	private Contrato contrato;
 
-    @Column(name = "IND_VALOR_FIXO_DEPENDENTE", nullable = false, columnDefinition = ConstantesBanco.SMALLINT)
-    private Integer indValorFixoDependente;
+	// CONSTRUTORES
+	public Plano() {
+		// CONSTRUTOR DEFAULT
+	}
 
-    @Column(name = "IND_ANTES_RN63", nullable = false, columnDefinition = ConstantesBanco.SMALLINT)
-    private Integer indAntesRN63;
+	public Plano(Long id, String nome) {
+		this.id = id;
+		this.nome = nome;
+	}
 
-    // RELACIONAMENTOS
-    @ManyToOne
-    @JoinColumn(name = "ID_TP_PLANO", nullable = false)
-    @NotAudited
-    private TipoPlano tipoPlano;
+	public boolean naoPermiteAssociação() {
+		return EnumSimNao.NAO.getIndice().equals(getIndPermissaoAssociacao());
+	}
 
-    @ManyToOne
-    @JoinColumn(name = "ID_PLANO_PAI", referencedColumnName = "ID_PLANO")
-    @NotAudited
-    private Plano planoPai;
+	@Override
+	public Long getId() {
+		return id;
+	}
 
-    @ManyToOne
-    @JoinColumn(name = "ID_CONTRATO")
-    @NotAudited
-    private Contrato contrato;
+	public void setId(Long id) {
+		this.id = id;
+	}
 
-    // CONSTRUTORES
-    public Plano() {
-        // CONSTRUTOR DEFAULT
-    }
+	public String getNome() {
+		return nome;
+	}
 
-    public Plano(Long id, String nome) {
-        this.id = id;
-        this.nome = nome;
-    }
+	public void setNome(String nome) {
+		this.nome = nome;
+	}
 
-    public boolean naoPermiteAssociação() {
-        return EnumSimNao.NAO.getIndice().equals(getIndPermissaoAssociacao());
-    }
+	public String getDescricao() {
+		return descricao;
+	}
 
-    @Override
-    public Long getId() {
-        return id;
-    }
+	public void setDescricao(String descricao) {
+		this.descricao = descricao;
+	}
 
-    public void setId(Long id) {
-        this.id = id;
-    }
+	public Date getDataInicioVigencia() {
+		return dataInicioVigencia;
+	}
 
-    public String getNome() {
-        return nome;
-    }
+	public void setDataInicioVigencia(Date dataInicioVigencia) {
+		this.dataInicioVigencia = dataInicioVigencia;
+	}
 
-    public void setNome(String nome) {
-        this.nome = nome;
-    }
+	public Date getDataFimVigencia() {
+		return dataFimVigencia;
+	}
 
-    public String getDescricao() {
-        return descricao;
-    }
+	public void setDataFimVigencia(Date dataFimVigencia) {
+		this.dataFimVigencia = dataFimVigencia;
+	}
 
-    public void setDescricao(String descricao) {
-        this.descricao = descricao;
-    }
+	public Integer getQtdDiasCarencia() {
+		return qtdDiasCarencia;
+	}
 
-    public Date getDataInicioVigencia() {
-        return dataInicioVigencia;
-    }
+	public void setQtdDiasCarencia(Integer qtdDiasCarencia) {
+		this.qtdDiasCarencia = qtdDiasCarencia;
+	}
 
-    public void setDataInicioVigencia(Date dataInicioVigencia) {
-        this.dataInicioVigencia = dataInicioVigencia;
-    }
+	public String getRegistroANS() {
+		return registroANS;
+	}
 
-    public Date getDataFimVigencia() {
-        return dataFimVigencia;
-    }
+	public void setRegistroANS(String registroANS) {
+		this.registroANS = registroANS;
+	}
 
-    public void setDataFimVigencia(Date dataFimVigencia) {
-        this.dataFimVigencia = dataFimVigencia;
-    }
+	public Long getIdUsuario() {
+		return idUsuario;
+	}
 
-    public Integer getQtdDiasCarencia() {
-        return qtdDiasCarencia;
-    }
+	public void setIdUsuario(Long idUsuario) {
+		this.idUsuario = idUsuario;
+	}
 
-    public void setQtdDiasCarencia(Integer qtdDiasCarencia) {
-        this.qtdDiasCarencia = qtdDiasCarencia;
-    }
+	public Integer getIndAtivo() {
+		return indAtivo;
+	}
 
-    public String getRegistroANS() {
-        return registroANS;
-    }
+	public void setIndAtivo(Integer indAtivo) {
+		this.indAtivo = indAtivo;
+	}
 
-    public void setRegistroANS(String registroANS) {
-        this.registroANS = registroANS;
-    }
+	public TipoPlano getTipoPlano() {
+		return tipoPlano;
+	}
 
-    public Long getIdUsuario() {
-        return idUsuario;
-    }
+	public void setTipoPlano(TipoPlano tipoPlano) {
+		this.tipoPlano = tipoPlano;
+	}
 
-    public void setIdUsuario(Long idUsuario) {
-        this.idUsuario = idUsuario;
-    }
+	public Plano getPlanoPai() {
+		return planoPai;
+	}
 
-    public Integer getIndAtivo() {
-        return indAtivo;
-    }
+	public void setPlanoPai(Plano planoPai) {
+		this.planoPai = planoPai;
+	}
 
-    public void setIndAtivo(Integer indAtivo) {
-        this.indAtivo = indAtivo;
-    }
+	public String getCodPlano() {
+		return codPlano;
+	}
 
-    public TipoPlano getTipoPlano() {
-        return tipoPlano;
-    }
+	public void setCodPlano(String codPlano) {
+		this.codPlano = codPlano;
+	}
 
-    public void setTipoPlano(TipoPlano tipoPlano) {
-        this.tipoPlano = tipoPlano;
-    }
+	public Date getDataUltimaAtualizacao() {
+		return dataUltimaAtualizacao;
+	}
 
-    public Plano getPlanoPai() {
-        return planoPai;
-    }
+	public void setDataUltimaAtualizacao(Date dataUltimaAtualizacao) {
+		this.dataUltimaAtualizacao = dataUltimaAtualizacao;
+	}
 
-    public void setPlanoPai(Plano planoPai) {
-        this.planoPai = planoPai;
-    }
+	public Contrato getContrato() {
+		return contrato;
+	}
 
-    public String getCodPlano() {
-        return codPlano;
-    }
+	public void setContrato(Contrato contrato) {
+		this.contrato = contrato;
+	}
 
-    public void setCodPlano(String codPlano) {
-        this.codPlano = codPlano;
-    }
+	public Integer getIndPermissaoAssociacao() {
+		return indPermissaoAssociacao;
+	}
 
-    public Date getDataUltimaAtualizacao() {
-        return dataUltimaAtualizacao;
-    }
+	public void setIndPermissaoAssociacao(Integer indPermissaoAssociacao) {
+		this.indPermissaoAssociacao = indPermissaoAssociacao;
+	}
 
-    public void setDataUltimaAtualizacao(Date dataUltimaAtualizacao) {
-        this.dataUltimaAtualizacao = dataUltimaAtualizacao;
-    }
+	public BigDecimal getValorFixo() {
+		return valorFixo;
+	}
 
-    public Contrato getContrato() {
-        return contrato;
-    }
+	public void setValorFixo(BigDecimal valorFixo) {
+		this.valorFixo = valorFixo;
+	}
 
-    public void setContrato(Contrato contrato) {
-        this.contrato = contrato;
-    }
+	public Integer getIndValorFixoTitular() {
+		return indValorFixoTitular;
+	}
 
-    public Integer getIndPermissaoAssociacao() {
-        return indPermissaoAssociacao;
-    }
+	public void setIndValorFixoTitular(Integer indValorFixoTitular) {
+		this.indValorFixoTitular = indValorFixoTitular;
+	}
 
-    public void setIndPermissaoAssociacao(Integer indPermissaoAssociacao) {
-        this.indPermissaoAssociacao = indPermissaoAssociacao;
-    }
+	public Integer getIndValorFixoAgregado() {
+		return indValorFixoAgregado;
+	}
 
-    public BigDecimal getValorFixo() {
-        return valorFixo;
-    }
+	public void setIndValorFixoAgregado(Integer indValorFixoAgregado) {
+		this.indValorFixoAgregado = indValorFixoAgregado;
+	}
 
-    public void setValorFixo(BigDecimal valorFixo) {
-        this.valorFixo = valorFixo;
-    }
+	public Integer getIndValorFixoDependente() {
+		return indValorFixoDependente;
+	}
 
-    public Integer getIndValorFixoTitular() {
-        return indValorFixoTitular;
-    }
+	public void setIndValorFixoDependente(Integer indValorFixoDependente) {
+		this.indValorFixoDependente = indValorFixoDependente;
+	}
 
-    public void setIndValorFixoTitular(Integer indValorFixoTitular) {
-        this.indValorFixoTitular = indValorFixoTitular;
-    }
+	public Integer getIndAntesRN63() {
+		return indAntesRN63;
+	}
 
-    public Integer getIndValorFixoAgregado() {
-        return indValorFixoAgregado;
-    }
-
-    public void setIndValorFixoAgregado(Integer indValorFixoAgregado) {
-        this.indValorFixoAgregado = indValorFixoAgregado;
-    }
-
-    public Integer getIndValorFixoDependente() {
-        return indValorFixoDependente;
-    }
-
-    public void setIndValorFixoDependente(Integer indValorFixoDependente) {
-        this.indValorFixoDependente = indValorFixoDependente;
-    }
-
-    public Integer getIndAntesRN63() {
-        return indAntesRN63;
-    }
-
-    public void setIndAntesRN63(Integer indAntesRN63) {
-        this.indAntesRN63 = indAntesRN63;
-    }
+	public void setIndAntesRN63(Integer indAntesRN63) {
+		this.indAntesRN63 = indAntesRN63;
+	}
 }
