@@ -4,6 +4,7 @@
     <provider>org.eclipse.persistence.jpa.PersistenceProvider</provider>
     <class>org.pasa.sispasa.core.model.Associado</class>
     <class>org.pasa.sispasa.core.model.Beneficiario</class>
+    <class>org.pasa.sispasa.core.model.ConfiguracaoPagamento</class>
     <class>org.pasa.sispasa.core.model.Contato</class>
     <class>org.pasa.sispasa.core.model.Contrato</class>
     <class>org.pasa.sispasa.core.model.Convenio</class>
@@ -15,11 +16,14 @@
     <class>org.pasa.sispasa.core.model.Estado</class>
     <class>org.pasa.sispasa.core.model.EstadoCivil</class>
     <class>org.pasa.sispasa.core.model.EventoAtualizacao</class>
+    <class>org.pasa.sispasa.core.model.FaixaEtariaPlano</class>
     <class>org.pasa.sispasa.core.model.Funcionario</class>
     <class>org.pasa.sispasa.core.model.GrauParentesco</class>
     <class>org.pasa.sispasa.core.model.MotivoDesligamento</class>
     <class>org.pasa.sispasa.core.model.Municipio</class>
     <class>org.pasa.sispasa.core.model.NivelEscolaridade</class>
+    <class>org.pasa.sispasa.core.model.Nucleo</class>
+    <class>org.pasa.sispasa.core.model.NucleoMunicipio</class>
     <class>org.pasa.sispasa.core.model.Operadora</class>
     <class>org.pasa.sispasa.core.model.OperadoraReciprocidade</class>
     <class>org.pasa.sispasa.core.model.OrigemInformacoes</class>
@@ -29,6 +33,10 @@
     <class>org.pasa.sispasa.core.model.Pessoa</class>
     <class>org.pasa.sispasa.core.model.Plano</class>
     <class>org.pasa.sispasa.core.model.PlanoReciprocidade</class>
+    <class>org.pasa.sispasa.core.model.RegiaoSaude</class>
+    <class>org.pasa.sispasa.core.model.RegiaoSaudeMunicipio</class>
+    <class>org.pasa.sispasa.core.model.Regional</class>
+    <class>org.pasa.sispasa.core.model.ResponsavelLegal</class>
     <class>org.pasa.sispasa.core.model.SituacaoAssociado</class>
     <class>org.pasa.sispasa.core.model.TaxaAssociado</class>
     <class>org.pasa.sispasa.core.model.Telefone</class>
@@ -42,28 +50,20 @@
     <class>org.pasa.sispasa.core.model.TipoTaxa</class>
     <class>org.pasa.sispasa.core.model.TipoTelefone</class>
     <class>org.pasa.sispasa.core.model.TipoVinculoEmpregaticio</class>
+    <class>org.pasa.sispasa.core.model.VigenciaFaixaEtaria</class>
+    <class>org.pasa.sispasaint.config.DadosConfiguracao</class>
     <class>org.pasa.sispasaint.mail.MailConfig</class>
     <class>org.pasa.sispasaint.model.intg.Agenda</class>
     <class>org.pasa.sispasaint.model.intg.Destinatario</class>
     <class>org.pasa.sispasaint.model.intg.ListaDestinatarios</class>
     <class>org.pasa.sispasaint.model.intg.Log</class>
-    <class>org.pasa.sispasaint.model.intg.ModeloBenEnd</class>
-    <class>org.pasa.sispasaint.model.intg.TipoAgenda</class>
-    <class>org.pasa.sispasaint.model.intg.ModeloBenPeople</class>
-    <class>org.pasa.sispasaint.model.intg.ModeloEndPeople</class>
     <class>org.pasa.sispasaint.model.intg.LogDetalhe</class>
-    <class>org.pasa.sispasaint.config.DadosConfiguracao</class>
-    <class>org.pasa.sispasa.core.model.ConfiguracaoPagamento</class>
-    <class>org.pasa.sispasa.core.model.FaixaEtariaPlano</class>
-    <class>org.pasa.sispasa.core.model.Nucleo</class>
-    <class>org.pasa.sispasa.core.model.NucleoMunicipio</class>
-    <class>org.pasa.sispasa.core.model.RegiaoSaude</class>
-    <class>org.pasa.sispasa.core.model.RegiaoSaudeMunicipio</class>
-    <class>org.pasa.sispasa.core.model.Regional</class>
-    <class>org.pasa.sispasa.core.model.ResponsavelLegal</class>
-    <class>org.pasa.sispasa.core.model.VigenciaFaixaEtaria</class>
+    <class>org.pasa.sispasaint.model.intg.ModeloBenEnd</class>
+    <class>org.pasa.sispasaint.model.intg.ModeloBenPeople</class>
     <class>org.pasa.sispasaint.model.intg.ModeloBenPeopleTemp</class>
+    <class>org.pasa.sispasaint.model.intg.ModeloEndPeople</class>
     <class>org.pasa.sispasaint.model.intg.ModeloEndPeopleTemp</class>
+    <class>org.pasa.sispasaint.model.intg.TipoAgenda</class>
     <shared-cache-mode>ENABLE_SELECTIVE</shared-cache-mode>
     <properties>
       <property name="javax.persistence.jdbc.url" value="jdbc:jtds:sqlserver://192.168.232.25:1433;DatabaseName=sispasa-dev"/>
