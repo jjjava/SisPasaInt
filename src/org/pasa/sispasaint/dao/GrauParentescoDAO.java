@@ -5,7 +5,7 @@ import org.pasa.sispasa.core.model.GrauParentesco;
 
 /**
  *
- * @author 90J00318
+ * @author Hudson Schumaker
  */
 public interface GrauParentescoDAO {
     GrauParentesco obter(Long id);

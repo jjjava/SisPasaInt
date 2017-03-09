@@ -21,9 +21,9 @@ import org.pasa.sispasaint.util.DateUtil;
  */
 public class EnviaEmail {
 
-    private List<String> lista;
-    private String subject;
-    private String message;
+    private final List<String> lista;
+    private final String subject;
+    private final String message;
 
     public EnviaEmail(List<String> lista, String subject, String message) {
         this.lista = lista;

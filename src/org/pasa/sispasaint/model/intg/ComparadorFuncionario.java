@@ -1,9 +1,7 @@
 package org.pasa.sispasaint.model.intg;
 
-import java.util.Objects;
 import org.apache.commons.lang3.builder.CompareToBuilder;
 import org.pasa.sispasa.core.model.Funcionario;
-import org.pasa.sispasa.core.model.Pessoa;
 
 /**
  *
@@ -41,7 +39,4 @@ public class ComparadorFuncionario {
                 .append(a.getPessoa().getDocumentoPIS(), b.getPessoa().getDocumentoPIS())
                 .toComparison();
     }
-    
-   
-
 }

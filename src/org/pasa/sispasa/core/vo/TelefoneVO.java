@@ -17,6 +17,10 @@ public class TelefoneVO extends AtributosComunsVO {
 	public TelefoneVO() {
 	}
 
+	public TelefoneVO(EnumTipoTelefone tipo) {
+		this.enumTipoTelefone = tipo;
+	}
+
 	public TelefoneVO(String numeroTelefoneComDDD, String ramal, EnumTipoTelefone tipo) {
 		this(null, numeroTelefoneComDDD, ramal, tipo);
 	}

@@ -6,6 +6,7 @@ import org.pasa.sispasaint.dao.impl.LogDAOImpl;
 import org.pasa.sispasaint.model.intg.Log;
 import org.pasa.sispasaint.util.DateUtil;
 import org.pasa.sispasaint.util.SisPasaIntErro;
+import org.pasa.sispasaint.util.StringUtil;
 
 /**
  *
@@ -40,7 +41,7 @@ public class LogBeanImpl implements LogBean{
     
     public void logErroClass(String classe, String erro){
        Log l = new Log();
-       l.addClasseErro(classe, SisPasaIntErro.TP_LOG_0 , erro);
+       l.addClasseErro(classe, SisPasaIntErro.TP_LOG_0 , StringUtil.truncErroLog(erro));
        l.setDataFim(DateUtil.obterDataAtual());
        new LogDAOImpl().cadastrar(l);
     }

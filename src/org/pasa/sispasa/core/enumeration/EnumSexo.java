@@ -17,15 +17,15 @@ public enum EnumSexo {
         this.descricao = descricao;
     }
 
-	public static EnumSexo getSexoByIndice(String id) {
-		for (EnumSexo enumSexo : EnumSexo.values()) {
-			if (enumSexo.indice.equals(id)) {
-				return enumSexo;
-			}
-		}
-		return null;
-	}
-       
+    public static EnumSexo getSexoByIndice(String id) {
+        for (EnumSexo enumSexo : EnumSexo.values()) {
+            if (enumSexo.indice.equals(id)) {
+                return enumSexo;
+            }
+        }
+        return null;
+    }
+
     /**
      * @return the indice
      */

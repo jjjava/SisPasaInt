@@ -6,7 +6,7 @@ import org.pasa.sispasa.core.model.Empresa;
 
 /**
  *
- * @author 90J00318
+ * @author Hudson Schumaker
  */
 public interface EmpresaDAO {
     Empresa obter(Long id);

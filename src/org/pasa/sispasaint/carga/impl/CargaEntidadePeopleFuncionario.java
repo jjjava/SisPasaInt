@@ -72,7 +72,7 @@ public class CargaEntidadePeopleFuncionario {
 
     public boolean newFuncionario(ModeloBenPeople modelo) {
         Empresa empresa = empresaBean.existe(modelo.getEmpresa());
-        if (empresa == null) {
+        if (null == empresa) {
             log.addMatriculaErro(modelo.getEmpresa(), modelo.getMatriculaPeople(),
                     modelo.getCodBeneficiario(), modelo.getCpf(), SisPasaIntErro.TP_LOG_1,
                     SisPasaIntErro.ERRO_EMPRESA);
@@ -82,7 +82,7 @@ public class CargaEntidadePeopleFuncionario {
             funcionario.setPessoa(new Pessoa());
             funcionario.setEmpresa(empresa);
             //ENDERECO
-            if (!(newEndereco(modelo) == null)) {
+            if (!(null == newEndereco(modelo))) {
                 funcionario.getPessoa().addEndereco(newEndereco(modelo));
             } else {
                 log.addMatriculaErro(modelo.getEmpresa(), modelo.getMatriculaPeople(),
@@ -118,7 +118,7 @@ public class CargaEntidadePeopleFuncionario {
             List<ModeloBenPeople> benef = impBenPeopleTempBeanImpl.listarBeneficiarios(modelo);
             for (ModeloBenPeople f : benef) {
                 Beneficiario b = cargaEntidadePeopleBeneficiario.newBeneficiario(f);
-                if (b == null) {
+                if (null == b) {
                     return false;
                 } else {
                     b.setFuncionario(funcionario);
@@ -183,7 +183,7 @@ public class CargaEntidadePeopleFuncionario {
         }
         Estado estado = estadoBeanImpl.obter(modeloEndPeople.getUf());
         Municipio municipio = municipioBeanImpl.existe(modeloEndPeople.getCidade());
-        if (municipio == null) {
+        if (null == municipio) {
             return null;
         }
         Endereco endereco = new Endereco();

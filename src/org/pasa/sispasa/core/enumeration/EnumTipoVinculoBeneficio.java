@@ -11,8 +11,8 @@ public enum EnumTipoVinculoBeneficio {
     Dependente(1, "Dependente"),
     Agregado(2, "Agregado");
 
-    private int indice;
-    private String descricao;
+    private final int indice;
+    private final String descricao;
 
     private EnumTipoVinculoBeneficio(int indice, String descricao) {
         this.indice = indice;
@@ -26,5 +26,4 @@ public enum EnumTipoVinculoBeneficio {
     public String getDescricao() {
         return descricao;
     }
-
 }

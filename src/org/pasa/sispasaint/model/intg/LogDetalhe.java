@@ -30,6 +30,8 @@ public class LogDetalhe implements Serializable{
     private String matricula;
     private String codBeneficiario;
     private String tipoErro;
+    
+    @Column(name = "ERRO", columnDefinition = ConstantesBanco.CHAR_1000)
     private String erro;
     private String cpf;
     private String classe;

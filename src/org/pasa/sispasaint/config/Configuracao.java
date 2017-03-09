@@ -23,7 +23,7 @@ public class Configuracao {
     }
 
     public static synchronized Configuracao getInstance() {
-        if (instance == null) {
+        if (null == instance) {
             instance = new Configuracao();
         }
         return instance;

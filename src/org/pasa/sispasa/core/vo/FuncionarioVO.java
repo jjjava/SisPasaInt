@@ -16,24 +16,27 @@ import org.pasa.sispasa.core.util.Utils;
  */
 public class FuncionarioVO extends AtributosComunsVO {
 
-	private PessoaVO pessoa;
-	private String matriculaOrigem;
-	private Date dataAdmissao;
-	private Date dataDesligamento;
-	private String emailCorporativo;
-	private EmpresaVO empresa;
-	private DadosBancariosVO dadosBancarios;
-	private EnderecoVO endereco;
-	private TelefoneVO telefoneResidencial;
-	private TelefoneVO telefoneCelular;
-	private TelefoneVO telefoneComercial;
-	private String telefonePrimarioCarga;
-	private String telefoneSecundarioCarga;
-	private DocumentoVO rg;
-	private DocumentoVO ctps;
-	private DocumentoVO pisPasep;
-	private List<BeneficiarioVO> beneficiarios;
 	private EnumMotivoDesligamento enumMotivoDesligamento;
+	private List<BeneficiarioVO> beneficiarios;
+
+	private DadosBancariosVO dadosBancarios;
+	private TelefoneVO telefoneResidencial;
+	private TelefoneVO telefoneComercial;
+	private TelefoneVO telefoneCelular;
+	private EnderecoVO endereco;
+	private EmpresaVO empresa;
+	private PessoaVO pessoa;
+
+	private DocumentoVO pisPasep;
+	private DocumentoVO ctps;
+	private DocumentoVO rg;
+
+	private String telefoneSecundarioCarga;
+	private String telefonePrimarioCarga;
+	private String emailCorporativo;
+	private String matriculaOrigem;
+	private Date dataDesligamento;
+	private Date dataAdmissao;
 
 	public String getTelefoneResidencialFormatado() {
 		return null == telefoneResidencial ? null
@@ -307,7 +310,7 @@ public class FuncionarioVO extends AtributosComunsVO {
 	}
 
 	public PessoaVO getPessoa() {
-		if(null == pessoa) {
+		if (null == pessoa) {
 			pessoa = new PessoaVO();
 		}
 		return pessoa;

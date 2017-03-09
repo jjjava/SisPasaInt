@@ -66,4 +66,13 @@ public class StringUtil {
         }
         return tel;
     }
+    
+    public static String truncErroLog(String erro){
+        char aux [] = erro.toCharArray();
+        erro = "";
+        for(int k =0;k<SisPasaIntCommon.TAM_ERRO_LOG;k++){
+            erro = erro +aux[k];
+        }
+        return erro;
+    }
 }

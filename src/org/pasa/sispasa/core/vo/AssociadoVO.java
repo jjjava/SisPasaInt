@@ -4,6 +4,7 @@ package org.pasa.sispasa.core.vo;
 import java.util.Date;
 import java.util.List;
 
+import org.pasa.sispasa.core.enumeration.EnumSituacaoAssociado;
 import org.pasa.sispasa.core.enumeration.EnumTipoAssociado;
 
 /**
@@ -13,6 +14,7 @@ public class AssociadoVO {
 
 	private List<String> listEnumTipoAposentadoria;
 	private EnumTipoAssociado tipoAssociado;
+	private EnumSituacaoAssociado situacao;
 
 	private EmpresaVO empresaVO;
 
@@ -20,13 +22,16 @@ public class AssociadoVO {
 	private String matriculaOrigem;
 	private String matrValiaPart;
 	private String matriculaPASA;
-	private String situacao;
 	private String plano;
 	private String nome;
 	private String cpf;
 
 	private Date dataNascimento;
 	private Long id;
+
+	public boolean isSituacaoAtiva() {
+		return EnumSituacaoAssociado.ATIVO_COM_DEBITO == situacao || EnumSituacaoAssociado.ATIVO_SEM_DEBITO == situacao;
+	}
 
 	public boolean isTipoAssociadoAtivo() {
 		return EnumTipoAssociado.A == tipoAssociado;
@@ -78,14 +83,6 @@ public class AssociadoVO {
 
 	public void setPlano(String plano) {
 		this.plano = plano;
-	}
-
-	public String getSituacao() {
-		return situacao;
-	}
-
-	public void setSituacao(String situacao) {
-		this.situacao = situacao;
 	}
 
 	public String getMatriculaPASA() {
@@ -142,6 +139,14 @@ public class AssociadoVO {
 
 	public void setSituacaoFuncionario(String situacaoFuncionario) {
 		this.situacaoFuncionario = situacaoFuncionario;
+	}
+
+	public EnumSituacaoAssociado getSituacao() {
+		return situacao;
+	}
+
+	public void setSituacao(EnumSituacaoAssociado situacao) {
+		this.situacao = situacao;
 	}
 
 }

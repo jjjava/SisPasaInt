@@ -30,6 +30,7 @@ public final class ConstantesBanco {
     public static final String CHAR_60 = "char(60)";
     public static final String CHAR_100 = "char(100)";
     public static final String CHAR_245 ="char(245)";
+    public static final String CHAR_1000 ="char(1000)";
 
     public static final String BIGINT = "bigint";
     public static final String SMALLINT = "smallint";

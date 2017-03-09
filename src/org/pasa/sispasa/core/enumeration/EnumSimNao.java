@@ -10,8 +10,8 @@ public enum EnumSimNao {
     NAO(0, "Não"),
     SIM(1, "Sim");
 
-    private Integer indice;
-    private String descricao;
+    private final Integer indice;
+    private final String descricao;
 
     private EnumSimNao(Integer indice, String descricao) {
         this.indice = indice;

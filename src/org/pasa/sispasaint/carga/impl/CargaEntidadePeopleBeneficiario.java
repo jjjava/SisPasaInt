@@ -61,7 +61,7 @@ public class CargaEntidadePeopleBeneficiario {
         beneficiario = new Beneficiario();
         beneficiario.setPessoa(new Pessoa());
         //ENDERECO
-        if (!(newEndereco(modelo) == null)) {
+        if (!(null == newEndereco(modelo))) {
             beneficiario.getPessoa().addEndereco(newEndereco(modelo));
         } else {
             beneficiario.getPessoa().addEndereco(fakeAdress());
@@ -74,7 +74,7 @@ public class CargaEntidadePeopleBeneficiario {
         //ATRIBUTOS 
         this.setAtributos(modelo);
         //PLANO
-        if (newPlano(modelo) == null) {
+        if (null == newPlano(modelo)) {
             log.addMatriculaErro(modelo.getEmpresa(), modelo.getMatriculaPeople(),
                     modelo.getCodBeneficiario(), modelo.getCpf(), SisPasaIntErro.TP_LOG_1,
                     SisPasaIntErro.ERRO_PLANO);
@@ -95,7 +95,7 @@ public class CargaEntidadePeopleBeneficiario {
         }
         Estado estado = estadoBean.obter(modeloEndPeople.getUf());
         Municipio municipio = municipioBean.existe(modeloEndPeople.getCidade());
-        if (municipio == null) {
+        if (null == municipio) {
             return null;
         }
         Endereco endereco = new Endereco();

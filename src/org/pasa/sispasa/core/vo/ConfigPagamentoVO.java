@@ -5,6 +5,7 @@ import java.util.List;
 
 import org.pasa.sispasa.core.enumeration.EnumTipoEnvioCobranca;
 import org.pasa.sispasa.core.enumeration.EnumTipoPagamento;
+import org.pasa.sispasa.core.enumeration.EnumTipoRespPagamento;
 import org.pasa.sispasa.core.model.TipoPagamento;
 
 public class ConfigPagamentoVO extends AtributosComunsVO {
@@ -12,21 +13,27 @@ public class ConfigPagamentoVO extends AtributosComunsVO {
 	private List<ConvenioVO> listConvenioVO;
 
 	private EnumTipoEnvioCobranca enumTipoEnvioCobranca;
+	private EnumTipoRespPagamento enumTipoResponsavel;
 	private EnumTipoPagamento enumTipoPagamento;
 
+	private ResponsavelLegalVO rpLegalVO;
 	private ConvenioVO convenioVO;
 
 	private Integer periodoPatrocinioTemp;
+	private String nomeResponsavelPag;
 	private Integer periodoPatrocinio;
 	private Long idTaxaAssociado;
 
 	public ConfigPagamentoVO() {
-
 	}
 
-	public ConfigPagamentoVO(EnumTipoEnvioCobranca enumTipoEnvioCobranca, ConvenioVO convenioVO) {
+	public ConfigPagamentoVO(ConvenioVO convenioVO, EnumTipoEnvioCobranca enumTipoEnvioCobranca) {
 		this.enumTipoEnvioCobranca = enumTipoEnvioCobranca;
 		this.convenioVO = convenioVO;
+	}
+
+	public boolean isEnumTipoResponsavelTitular() {
+		return null != enumTipoResponsavel && EnumTipoRespPagamento.T == enumTipoResponsavel;
 	}
 
 	public boolean isEnumTipoPagamentoBoleto() {
@@ -94,6 +101,33 @@ public class ConfigPagamentoVO extends AtributosComunsVO {
 
 	public void setPeriodoPatrocinio(Integer periodoPatrocinio) {
 		this.periodoPatrocinio = periodoPatrocinio;
+	}
+
+	public EnumTipoRespPagamento getEnumTipoResponsavel() {
+		return enumTipoResponsavel;
+	}
+
+	public void setEnumTipoResponsavel(EnumTipoRespPagamento enumTipoResponsavel) {
+		this.enumTipoResponsavel = enumTipoResponsavel;
+	}
+
+	public String getNomeResponsavelPag() {
+		return nomeResponsavelPag;
+	}
+
+	public void setNomeResponsavelPag(String nomeResponsavelPag) {
+		this.nomeResponsavelPag = nomeResponsavelPag;
+	}
+
+	public ResponsavelLegalVO getRpLegalVO() {
+		if (null == rpLegalVO) {
+			rpLegalVO = new ResponsavelLegalVO();
+		}
+		return rpLegalVO;
+	}
+
+	public void setRpLegalVO(ResponsavelLegalVO rpLegalVO) {
+		this.rpLegalVO = rpLegalVO;
 	}
 
 }

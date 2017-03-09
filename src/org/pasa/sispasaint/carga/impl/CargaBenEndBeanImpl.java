@@ -59,7 +59,7 @@ public class CargaBenEndBeanImpl implements CargaBenEndBean, Runnable {
                 ModeloBenEnd modeloBenEnd = modeloBean.obter(k);
                 if (modeloBenEnd.getTipoBeneficiario().equalsIgnoreCase(SisPasaIntCommon.FUNCIONARIO)) {
                     funcionario = funcionarioBeanImpl.obter(modeloBenEnd.getEmpresa(), modeloBenEnd.getMatriculaPeople());//verificar
-                    if (funcionario == null) {
+                    if (null == funcionario) {
                         if (cargaEntidadeFuncionario.newFuncionario(modeloBenEnd)) {
                             log.addAssocIncluidos();
                         } else {

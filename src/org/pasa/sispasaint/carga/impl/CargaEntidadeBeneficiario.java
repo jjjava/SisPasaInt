@@ -46,7 +46,7 @@ public class CargaEntidadeBeneficiario {
         beneficiario = new Beneficiario();
         beneficiario.setPessoa(new Pessoa());
         //ENDERECO
-        if (newEndereco(modeloBenEnd) == null) {
+        if (null == newEndereco(modeloBenEnd)) {
             return null;
         } else {
             beneficiario.getPessoa().addEndereco(newEndereco(modeloBenEnd));
@@ -59,7 +59,7 @@ public class CargaEntidadeBeneficiario {
         //ATRIBUTOS 
         setAtributos(modeloBenEnd);
         //PLANO
-        if (newPlano(modeloBenEnd) == null) {
+        if (null == newPlano(modeloBenEnd)) {
             return null;
         }
         beneficiario.getPessoa().setOrigemInformacoes(newOrigemInformacoes());
@@ -74,7 +74,7 @@ public class CargaEntidadeBeneficiario {
     private Endereco newEndereco(ModeloBenEnd modelo) {
         Estado estado = estadoBean.obter(modelo.getUf());
         Municipio municipio = municipioBean.existe(modelo.getCidade());
-        if (municipio == null) {
+        if (null == municipio) {
             return null;
         }
         Endereco endereco = new Endereco();

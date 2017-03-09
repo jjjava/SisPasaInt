@@ -5,7 +5,7 @@ import org.pasa.sispasaint.model.intg.ListaDestinatarios;
 
 /**
  *
- * @author 90J00318
+ * @author Hudson Schumaker
  */
 public interface ListaDestinatariosDAO {
     ListaDestinatarios obter(Long id);

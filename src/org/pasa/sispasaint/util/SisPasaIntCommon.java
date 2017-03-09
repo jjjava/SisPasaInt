@@ -31,6 +31,7 @@ public class SisPasaIntCommon {
     public static final Integer ATUALIZADO = 1;
     public static final Integer PENDENTE = 2;
     public static final Integer TAM_TELEFONE = 18;
+    public static final Integer TAM_ERRO_LOG = 1000;
     public static final Integer LINE_TAM_1 = 400;
     public static final Integer LINE_TAM_2 = 401;
     public static final Integer LINE_TAM_3 = 190;

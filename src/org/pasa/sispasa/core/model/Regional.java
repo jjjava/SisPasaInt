@@ -18,18 +18,18 @@ import org.pasa.sispasa.core.constants.ConstantesBanco;
 @Table(name = "REGIONAL")
 @Audited
 @AuditTable(value = "HIST_REGIONAL")
-public class Regional implements Serializable {
+public class Regional  implements Serializable{
 
-    private static final long serialVersionUID = 6746856102530814730L;
+	private static final long serialVersionUID = 6746856102530814730L;
 
-    @Id
-    @Column(name = "ID_REGIONAL", columnDefinition = ConstantesBanco.CHAR_4)
-    private String codRegional;
+	@Id
+	@Column(name="ID_REGIONAL", columnDefinition = ConstantesBanco.CHAR_4)
+	private String codRegional;
 
-    @Column(name = "DESCRICAO", length = 100)
-    private String descricao;
-
-    @Column(name = "ID_USUARIO", nullable = false, columnDefinition = ConstantesBanco.BIGINT)
+	@Column(name="DESCRICAO", length=100)
+	private String descricao;
+	
+	@Column(name = "ID_USUARIO", nullable = false, columnDefinition = ConstantesBanco.BIGINT)
     private Long idUsuario;
 
     @Column(name = "IND_ATIVO", nullable = false, columnDefinition = ConstantesBanco.SMALLINT)
@@ -39,43 +39,43 @@ public class Regional implements Serializable {
     @Temporal(TemporalType.TIMESTAMP)
     private Date dataUltimaAtualizacao;
 
-    public String getDescricao() {
-        return descricao;
-    }
+	public String getDescricao() {
+		return descricao;
+	}
 
-    public void setDescricao(String descricao) {
-        this.descricao = descricao;
-    }
+	public void setDescricao(String descricao) {
+		this.descricao = descricao;
+	}
 
-    public String getCodRegional() {
-        return codRegional;
-    }
+	public String getCodRegional() {
+		return codRegional;
+	}
 
-    public void setCodRegional(String codRegional) {
-        this.codRegional = codRegional;
-    }
+	public void setCodRegional(String codRegional) {
+		this.codRegional = codRegional;
+	}
 
-    public Long getIdUsuario() {
-        return idUsuario;
-    }
+	public Long getIdUsuario() {
+		return idUsuario;
+	}
 
-    public void setIdUsuario(Long idUsuario) {
-        this.idUsuario = idUsuario;
-    }
+	public void setIdUsuario(Long idUsuario) {
+		this.idUsuario = idUsuario;
+	}
 
-    public Integer getIndAtivo() {
-        return indAtivo;
-    }
+	public Integer getIndAtivo() {
+		return indAtivo;
+	}
 
-    public void setIndAtivo(Integer indAtivo) {
-        this.indAtivo = indAtivo;
-    }
+	public void setIndAtivo(Integer indAtivo) {
+		this.indAtivo = indAtivo;
+	}
 
-    public Date getDataUltimaAtualizacao() {
-        return dataUltimaAtualizacao;
-    }
+	public Date getDataUltimaAtualizacao() {
+		return dataUltimaAtualizacao;
+	}
 
-    public void setDataUltimaAtualizacao(Date dataUltimaAtualizacao) {
-        this.dataUltimaAtualizacao = dataUltimaAtualizacao;
-    }
+	public void setDataUltimaAtualizacao(Date dataUltimaAtualizacao) {
+		this.dataUltimaAtualizacao = dataUltimaAtualizacao;
+	}
 }

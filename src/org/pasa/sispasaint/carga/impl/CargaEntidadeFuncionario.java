@@ -25,7 +25,6 @@ import org.pasa.sispasaint.bean.impl.FuncionarioBeanImpl;
 import org.pasa.sispasaint.bean.impl.ModeloBenEndBeanImpl;
 import org.pasa.sispasaint.bean.impl.MunicipioBeanImpl;
 import org.pasa.sispasaint.bean.impl.NivelEscolaridadeBeanImpl;
-import org.pasa.sispasaint.dao.impl.FuncionarioDAOImpl;
 import org.pasa.sispasaint.model.intg.ModeloBenEnd;
 import org.pasa.sispasaint.util.DateUtil;
 import org.pasa.sispasaint.util.SisPasaIntCommon;
@@ -55,7 +54,7 @@ public class CargaEntidadeFuncionario {
 
     public boolean newFuncionario(ModeloBenEnd modeloBenEnd) {
         Empresa empresa = empresaBean.existe(modeloBenEnd.getEmpresa());
-        if (empresa == null) {
+        if (null == empresa) {
             return false;
         } else {
             funcionario = new Funcionario();
@@ -63,9 +62,9 @@ public class CargaEntidadeFuncionario {
             //EMPRESA
             funcionario.setEmpresa(empresa);
             //ENDERECO
-            if (!(newEndereco(modeloBenEnd) == null)) {
+            if (!(null == newEndereco(modeloBenEnd))) {
                 funcionario.getPessoa().addEndereco(newEndereco(modeloBenEnd));
-            } 
+            }
             //DOCUMENTOS
             funcionario.getPessoa().setCpf(modeloBenEnd.getCpf());
             funcionario.getPessoa().addDocumento(newPis(modeloBenEnd));
@@ -79,7 +78,7 @@ public class CargaEntidadeFuncionario {
             funcionario.getPessoa().setOrigemInformacoes(newOrigemInformacoes());
             //VINCULO
             funcionario.setTipoVinculoEmpregaticio(newTipoVinculoEmpregaticio(modeloBenEnd));
-           
+
             //MATRICULAS
             funcionario.setMatriculaOrigem(modeloBenEnd.getMatriculaPeople());//IMPORTANTE
             funcionario.setMatriculaAtualizadora(modeloBenEnd.getMatriculaAtulizador());
@@ -90,18 +89,18 @@ public class CargaEntidadeFuncionario {
             funcionario.setIndAtivo(SisPasaIntCommon.ATIVO);
             funcionario.setDataUltimaAtualizacao(DateUtil.obterDataAtual());
             funcionario.getPessoa().setDataInclusaoSistema(DateUtil.obterDataAtual());
-            
+
             funcionarioBean.cadastrar(funcionario);//gerar ID
-            
-             //BENEFICIARIOS
+
+            //BENEFICIARIOS
             List<ModeloBenEnd> benef = modeloBenEndBean.listarBeneficiarios(modeloBenEnd);
             for (ModeloBenEnd f : benef) {
                 Beneficiario b = cargaEntidadeBeneficiario.newBeneficiario(f);
-                if (b == null) {
+                if (null == b) {
                     return false;
                 } else {
                     b.setFuncionario(funcionario);
-                    if(f.getCodBeneficiario().equals("00")){
+                    if (f.getCodBeneficiario().equals("00")) {
                         b.setPessoa(funcionario.getPessoa());
                     }
                     funcionario.addBeneficiario(b);
@@ -114,7 +113,7 @@ public class CargaEntidadeFuncionario {
     private Endereco newEndereco(ModeloBenEnd modelo) {
         Estado estado = new EstadoBeanImpl().obter(modelo.getUf());
         Municipio municipio = new MunicipioBeanImpl().existe(modelo.getCidade());
-        if (municipio == null) {
+        if (null == municipio) {
             return null;
         }
         Endereco endereco = new Endereco();

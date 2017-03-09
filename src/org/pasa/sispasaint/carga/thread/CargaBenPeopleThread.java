@@ -10,8 +10,8 @@ import org.pasa.sispasaint.rw.LerArquivoBenPeople;
  */
 public class CargaBenPeopleThread implements Runnable {
 
-    private Long id;
-    private Log log;
+    private final Long id;
+    private final Log log;
     private final int ini;
     private final int fim;
     private final int lote;

@@ -6,6 +6,7 @@ import org.pasa.sispasa.core.enumeration.EnumEstadoCivil;
 import org.pasa.sispasa.core.enumeration.EnumNivelEscolaridade;
 import org.pasa.sispasa.core.enumeration.EnumOrigemInformacoes;
 import org.pasa.sispasa.core.enumeration.EnumSexo;
+import org.pasa.sispasa.core.model.EstadoCivil;
 import org.pasa.sispasa.core.util.Utils;
 
 /**
@@ -14,31 +15,36 @@ import org.pasa.sispasa.core.util.Utils;
  */
 public class PessoaVO extends AtributosComunsVO {
 
+	private Integer indConclusaoEscolaridade;
 	private Date dataUltimaAtualizacao;
-	private String cpfFormatado;
-	private String nome;
-	private Date dataNascimento;
 	private Date dataInclusaoSistema;
+	private Date dataNascimento;
+	private String cpfFormatado;
 	private String nomeMae;
 	private String nomePai;
 	private String email;
-	private Integer indConclusaoEscolaridade;
+	private String nome;
+	private String cpf;
 
-	private PaisVO nacionalidade;
-	private EstadoVO naturalidade;
 	private MunicipioVO cidadeOrigem;
+	private EstadoVO naturalidade;
+	private PaisVO nacionalidade;
 
-	private EnumSexo enumSexo;
 	private EnumNivelEscolaridade enumNivelEscolaridade;
 	private EnumOrigemInformacoes enumOrigemInformacoes;
 	private EnumEstadoCivil enumEstadoCivil;
+	private EnumSexo enumSexo;
 
 	public String getCpfSemFormatado() {
-		return Utils.desformataCpfCnpj(cpfFormatado);
+		return null == cpfFormatado ? null : Utils.desformataCpfCnpj(cpfFormatado);
 	}
 
 	public String getDataNascimentoFormatada() {
 		return Utils.formatarData(dataNascimento, "dd/MM/yyyy");
+	}
+
+	public EstadoCivil getEstadoCivil() {
+		return null == enumEstadoCivil ? null : new EstadoCivil(getEnumEstadoCivil().getIndice());
 	}
 
 	/**
@@ -289,4 +295,13 @@ public class PessoaVO extends AtributosComunsVO {
 	public void setCidadeOrigem(MunicipioVO cidadeOrigem) {
 		this.cidadeOrigem = cidadeOrigem;
 	}
+
+	public String getCpf() {
+		return cpf;
+	}
+
+	public void setCpf(String cpf) {
+		this.cpf = cpf;
+	}
+
 }

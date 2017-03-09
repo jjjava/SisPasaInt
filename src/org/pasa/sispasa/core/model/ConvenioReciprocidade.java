@@ -19,13 +19,13 @@ import org.pasa.sispasa.core.constants.ConstantesBanco;
 @Entity
 @Table(name = "CONVENIO_RECIPROCIDADE")
 @Audited
-@AuditTable(value="HIST_CONVENIO_RECIPROCIDADE")
+@AuditTable(value = "HIST_CONVENIO_RECIPROCIDADE")
 public class ConvenioReciprocidade implements Serializable {
 
     private static final long serialVersionUID = 1L;
 
     @Id
-    @Column(name = "ID_CONVENIO_RECIPROCIDAE",columnDefinition = ConstantesBanco.BIGINT)
+    @Column(name = "ID_CONVENIO_RECIPROCIDAE", columnDefinition = ConstantesBanco.BIGINT)
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
@@ -33,7 +33,7 @@ public class ConvenioReciprocidade implements Serializable {
     public ConvenioReciprocidade() {
     }
 
-   //GETTERS E SETTERS
+    //GETTERS E SETTERS
     public Long getId() {
         return id;
     }

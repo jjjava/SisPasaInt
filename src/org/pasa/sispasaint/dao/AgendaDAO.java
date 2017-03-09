@@ -5,7 +5,7 @@ import org.pasa.sispasaint.model.intg.Agenda;
 
 /**
  *
- * @author 90J00318
+ * @author Hudson Schumaker
  */
 public interface AgendaDAO {
     Agenda obter(Long id);

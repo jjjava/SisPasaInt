@@ -1,29 +1,28 @@
 package org.pasa.sispasa.core.enumeration;
 
 /**
-*
-* @author Hudson Schumaker
-* @version 1.0.0
-*/
-
+ *
+ * @author Hudson Schumaker
+ * @version 1.0.0
+ */
 public enum EnumTipoReciprocidade {
 
-	PASA(0,"PASA"),
-	RedeConveniada(1, "Rede Conveniada");
-	
-	private int indice;
-	private String descricao;
-	
-	EnumTipoReciprocidade(int indice, String descricao) {
-		this.indice = indice;
-		this.descricao = descricao;
-	}
+    PASA(0, "PASA"),
+    RedeConveniada(1, "Rede Conveniada");
 
-	public int getIndice() {
-		return indice;
-	}
+    private final int indice;
+    private final String descricao;
 
-	public String getDescricao() {
-		return descricao;
-	}
+    EnumTipoReciprocidade(int indice, String descricao) {
+        this.indice = indice;
+        this.descricao = descricao;
+    }
+
+    public int getIndice() {
+        return indice;
+    }
+
+    public String getDescricao() {
+        return descricao;
+    }
 }

@@ -7,7 +7,6 @@ import org.pasa.sispasaint.config.DadosConfiguracao;
  *
  * @author Hudson Schumaker
  */
-
 public interface DadosConfigDAO {
     boolean cadastrar(DadosConfiguracao  dadosConfig);
     boolean atualizar(DadosConfiguracao  dadosConfig);

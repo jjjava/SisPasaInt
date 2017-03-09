@@ -19,21 +19,23 @@ import org.pasa.sispasaint.util.SisPasaIntErro;
  */
 public class CargaMapeaEntidadesThread implements Runnable {
 
-    private Log log;
+    private final Log log;
     private final long ini;
     private final long qtdRegistros;
 
     private final String nome;
+    private final LogBeanImpl logBeanImpl;
     private final ComparadorFuncionario comparadorFuncionario;
     private final FuncionarioBeanImpl funcionarioBean;
     private final ImpBenPeopleBeanImpl modeloBenBean;
     private final CargaEntidadePeopleFuncionario cargaEntidadePeopleFuncionario;
-
+    
     public CargaMapeaEntidadesThread(Log log, long ini, long qtdRegistros, String nome) {
         this.log = log;
         this.ini = ini;
         this.qtdRegistros = qtdRegistros;
         this.nome = nome;
+        this.logBeanImpl = new LogBeanImpl();
         this.modeloBenBean = new ImpBenPeopleBeanImpl();
         this.funcionarioBean = new FuncionarioBeanImpl();
         this.comparadorFuncionario = new ComparadorFuncionario();
@@ -54,9 +56,10 @@ public class CargaMapeaEntidadesThread implements Runnable {
                 log.addRegistro();
                 if (mBenef.getTipoBeneficiario().equalsIgnoreCase(SisPasaIntCommon.FUNCIONARIO)) {
                     funcionario = funcionarioBean.obter(mBenef.getEmpresa(), mBenef.getMatriculaPeople());
-                    if (funcionario == null) {
+                    if (null == funcionario) {
                         if (cargaEntidadePeopleFuncionario.newFuncionario(mBenef)) {
                             log.addAssocIncluidos();
+                            logBeanImpl.atualizar(log);
                         } else {
                             log.addErrosAssoc();
                             log.addMatriculaErro(mBenef.getEmpresa(), mBenef.getMatriculaPeople(),
@@ -67,6 +70,7 @@ public class CargaMapeaEntidadesThread implements Runnable {
 //                        if (comparadorFuncionario.comparar(funcionario, b) != 0) {
 //                            funcionarioBean.atualizar(b);
 //                            log.addAlterados();
+                              logBeanImpl.atualizar(log);
 //                        }
                     }
                 }

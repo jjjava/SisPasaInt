@@ -50,7 +50,9 @@ public class CadastroAssociadoVO extends FuncionarioVO {
 	private Long idAssocUltimaAlt;
 	private String nomeAssocUltimAlt;
 
+	private boolean bloquearCamposRespPagamento;
 	private boolean exibirTabInfoGerais = false;
+	private boolean exibirNomeRespPagConfigPag;
 	private boolean dadosPreCarregados = true;
 	private boolean bloquearAbas = true;
 	private boolean isTelaDetalhe;
@@ -397,6 +399,22 @@ public class CadastroAssociadoVO extends FuncionarioVO {
 
 	public void setCpfTitularPensionista(String cpfTitularPensionista) {
 		this.cpfTitularPensionista = cpfTitularPensionista;
+	}
+
+	public boolean isExibirNomeRespPagConfigPag() {
+		return exibirNomeRespPagConfigPag;
+	}
+
+	public void setExibirNomeRespPagConfigPag(boolean exibirNomeRespPagConfigPag) {
+		this.exibirNomeRespPagConfigPag = exibirNomeRespPagConfigPag;
+	}
+
+	public boolean isBloquearCamposRespPagamento() {
+		return bloquearCamposRespPagamento;
+	}
+
+	public void setBloquearCamposRespPagamento(boolean bloquearCamposRespPagamento) {
+		this.bloquearCamposRespPagamento = bloquearCamposRespPagamento;
 	}
 
 }

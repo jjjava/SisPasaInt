@@ -5,14 +5,15 @@ package org.pasa.sispasa.core.enumeration;
  * @author Allan Garcia
  */
 
-public enum EnumTipoResponsavel {
+public enum EnumTipoRespPagamento {
 
 	T("Titular"), 
-	C("Curador");
+	C("Curador"),
+	U("Tutor");
 
 	private String descricao;
 
-	private EnumTipoResponsavel(String descricao) {
+	private EnumTipoRespPagamento(String descricao) {
 
 		this.descricao = descricao;
 	}
