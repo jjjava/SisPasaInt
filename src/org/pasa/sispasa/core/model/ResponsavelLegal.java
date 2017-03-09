@@ -18,7 +18,7 @@ import org.hibernate.envers.Audited;
 import org.pasa.sispasa.core.constants.ConstantesBanco;
 
 /**
- * 
+ *
  * @author Allan Garcia
  *
  */
@@ -28,61 +28,62 @@ import org.pasa.sispasa.core.constants.ConstantesBanco;
 @AuditTable(value = "HIST_RESPONSAVEL_LEGAL")
 public class ResponsavelLegal extends BaseEntity {
 
-	private static final long serialVersionUID = 1L;
+    private static final long serialVersionUID = 1L;
 
-	@Id
-	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	@Column(name = "ID_RESPONSAVEL_LEGAL")
-	private Long id;
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "ID_RESPONSAVEL_LEGAL")
+    private Long id;
 
-	@Temporal(TemporalType.TIMESTAMP)
-	@Column(name = "DT_ULT_ATULZ", nullable = false)
-	private Date dataUltimaAlteracao;
+    @Temporal(TemporalType.TIMESTAMP)
+    @Column(name = "DT_ULT_ATULZ", nullable = false)
+    private Date dataUltimaAlteracao;
 
-	@Column(name = "ID_USUARIO", nullable = false, columnDefinition = ConstantesBanco.BIGINT)
-	private Long idUsuario;
+    @Column(name = "ID_USUARIO", nullable = false, columnDefinition = ConstantesBanco.BIGINT)
+    private Long idUsuario;
 
-	@ManyToOne
-	@JoinColumn(name = "ID_PARTICIPANTE_RESPONSAVEL")
-	private Participante participante;
+    @ManyToOne
+    @JoinColumn(name = "ID_PARTICIPANTE_RESPONSAVEL")
+    private Participante participante;
 
-	public ResponsavelLegal() {
-	}
+    public ResponsavelLegal() {
+    }
 
-	public ResponsavelLegal(Participante participante) {
-		this.participante = participante;
-	}
+    public ResponsavelLegal(Participante participante) {
+        this.participante = participante;
+    }
 
-	public Long getId() {
-		return id;
-	}
+    @Override
+    public Long getId() {
+        return id;
+    }
 
-	public void setId(Long id) {
-		this.id = id;
-	}
+    public void setId(Long id) {
+        this.id = id;
+    }
 
-	public Participante getParticipante() {
-		return participante;
-	}
+    public Participante getParticipante() {
+        return participante;
+    }
 
-	public void setParticipante(Participante participante) {
-		this.participante = participante;
-	}
+    public void setParticipante(Participante participante) {
+        this.participante = participante;
+    }
 
-	public Date getDataUltimaAlteracao() {
-		return dataUltimaAlteracao;
-	}
+    public Date getDataUltimaAlteracao() {
+        return dataUltimaAlteracao;
+    }
 
-	public void setDataUltimaAlteracao(Date dataUltimaAlteracao) {
-		this.dataUltimaAlteracao = dataUltimaAlteracao;
-	}
+    public void setDataUltimaAlteracao(Date dataUltimaAlteracao) {
+        this.dataUltimaAlteracao = dataUltimaAlteracao;
+    }
 
-	public Long getIdUsuario() {
-		return idUsuario;
-	}
+    public Long getIdUsuario() {
+        return idUsuario;
+    }
 
-	public void setIdUsuario(Long idUsuario) {
-		this.idUsuario = idUsuario;
-	}
+    public void setIdUsuario(Long idUsuario) {
+        this.idUsuario = idUsuario;
+    }
 
 }

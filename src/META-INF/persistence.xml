@@ -53,6 +53,17 @@
     <class>org.pasa.sispasaint.model.intg.ModeloEndPeople</class>
     <class>org.pasa.sispasaint.model.intg.LogDetalhe</class>
     <class>org.pasa.sispasaint.config.DadosConfiguracao</class>
+    <class>org.pasa.sispasa.core.model.ConfiguracaoPagamento</class>
+    <class>org.pasa.sispasa.core.model.FaixaEtariaPlano</class>
+    <class>org.pasa.sispasa.core.model.Nucleo</class>
+    <class>org.pasa.sispasa.core.model.NucleoMunicipio</class>
+    <class>org.pasa.sispasa.core.model.RegiaoSaude</class>
+    <class>org.pasa.sispasa.core.model.RegiaoSaudeMunicipio</class>
+    <class>org.pasa.sispasa.core.model.Regional</class>
+    <class>org.pasa.sispasa.core.model.ResponsavelLegal</class>
+    <class>org.pasa.sispasa.core.model.VigenciaFaixaEtaria</class>
+    <class>org.pasa.sispasaint.model.intg.ModeloBenPeopleTemp</class>
+    <class>org.pasa.sispasaint.model.intg.ModeloEndPeopleTemp</class>
     <shared-cache-mode>ENABLE_SELECTIVE</shared-cache-mode>
     <properties>
       <property name="javax.persistence.jdbc.url" value="jdbc:jtds:sqlserver://192.168.232.25:1433;DatabaseName=sispasa-dev"/>
