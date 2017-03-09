@@ -21,8 +21,8 @@ import org.pasa.sispasaint.util.Sistema;
  */
 public class CargaPeopleBeanImpl implements CargaPeopleBean {
 
-    private Long id;
     private Log log;
+    private final Long id;
     private final ImpBenPeopleBeanImpl modeloBenBean;
     private final ImpBenPeopleTempBeanImpl modeloBenBeanTemp;
 
@@ -37,7 +37,7 @@ public class CargaPeopleBeanImpl implements CargaPeopleBean {
     public void inicar() {
         this.cargaArquivosTemp();
         this.mapearEntidades();
-        this.inativacao();
+      //  this.inativacao();
     }
 
     @Override
@@ -64,7 +64,7 @@ public class CargaPeopleBeanImpl implements CargaPeopleBean {
         long fim = lote;
         try {
             for (int k = 0; k < Sistema.getNumberProcessors(); k++) {
-                executor.execute(new CargaMapeaEntidadesThread(log, ini, fim, "Thread" + k + 1));
+                executor.execute(new CargaMapeaEntidadesThread(log, ini, fim, " Thread" + k + 1));
                 ini = fim;
                 fim = fim + lote;
             }

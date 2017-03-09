@@ -53,7 +53,7 @@ public class ImpEndPeopleBeanImpl implements ImpEndPeopleBean {
     public void carregarArquivo(Long id, Log log) {
         try {
             ExecutorService executor = Executors.newFixedThreadPool(Sistema.getNumberProcessors());
-            int lote = ArquivoUtil.getNumeroLinhasLote(ArquivoUtil.getNumerosLinhaArquivo(Configuracao.getInstance().getBenNomeArqComPath(id)));
+            int lote = ArquivoUtil.getNumeroLinhasLote(ArquivoUtil.getNumerosLinhaArquivo(Configuracao.getInstance().getEndNomeArqComPath(id)));
             int loteLines = lote;
             lote = lote * SisPasaIntCommon.LINE_TAM_4;
             int ini = 0;

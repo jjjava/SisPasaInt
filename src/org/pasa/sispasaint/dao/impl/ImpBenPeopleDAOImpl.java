@@ -84,7 +84,7 @@ public class ImpBenPeopleDAOImpl extends DaoGenerico<ModeloBenPeople> implements
     public void copiarTabela() {
         try {
             getEntityManager().getTransaction().begin();
-            Query q1 = getEntityManager().createNativeQuery("insert into [sispasa-dev].[dbo].[CARG_BEN_PEOPLE_TMP] "
+            Query q1 = getEntityManager().createNativeQuery("insert into [sispasa].[dbo].[CARG_BEN_PEOPLE_TMP] "
                     + "select [AGENCIABANCARIA]"
                     + ",[BANCO]"
                     + ",[BRANCO]"

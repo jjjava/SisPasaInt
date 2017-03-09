@@ -19,7 +19,7 @@ public class SisPasaIntCommon {
     public static final String TIPO_JOB = "TIPO";
     public static final String ID_EMPRESA = "ID";
     public static final String ID_LISTA = "ID_LISTA";
-    public static final String COD_PASA = "90";
+    public static final String COD_PASA = "CARGA CORE";
 
     public static final Long USER_CARGA = 1L;
 

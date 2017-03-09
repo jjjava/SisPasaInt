@@ -87,7 +87,7 @@ public class CargaEntidadePeopleFuncionario {
             } else {
                 log.addMatriculaErro(modelo.getEmpresa(), modelo.getMatriculaPeople(),
                         modelo.getCodBeneficiario(), modelo.getCpf(), SisPasaIntErro.TP_LOG_1,
-                        SisPasaIntErro.ERRO_ENDERECO);
+                        SisPasaIntErro.ERRO_ENDERECO);                
                 funcionario.getPessoa().addEndereco(fakeAdress());
             }
             //DOCUMENTOS
@@ -139,7 +139,6 @@ public class CargaEntidadePeopleFuncionario {
         funcionario.setEmpresa(empresa);
         //ENDERECO
         funcionario.getPessoa().addEndereco(newEndereco(modelo));
-        funcionario.getPessoa().addEndereco(fakeAdress());
         //DOCUMENTOS
         funcionario.getPessoa().setCpf(modelo.getCpf());
         funcionario.getPessoa().addDocumento(newPis(modelo));

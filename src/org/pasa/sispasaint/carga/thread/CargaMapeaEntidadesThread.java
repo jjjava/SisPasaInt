@@ -42,7 +42,7 @@ public class CargaMapeaEntidadesThread implements Runnable {
 
     public void start() {
         Thread t = new Thread(this);
-        t.setPriority(Thread.MAX_PRIORITY);
+       // t.setPriority(Thread.MAX_PRIORITY);
         t.start();
     }
 
@@ -63,11 +63,11 @@ public class CargaMapeaEntidadesThread implements Runnable {
                                     mBenef.getCodBeneficiario(), SisPasaIntErro.ERRO_NAO_CADASTRADO, SisPasaIntErro.MSG_FALSE_DAO);
                         }
                     } else {
-                        Funcionario b = cargaEntidadePeopleFuncionario.funcionarioFromModelo(mBenef);
-                        if (comparadorFuncionario.comparar(funcionario, b) != 0) {
-                            funcionarioBean.atualizar(b);
-                            log.addAlterados();
-                        }
+//                        Funcionario b = cargaEntidadePeopleFuncionario.funcionarioFromModelo(mBenef);
+//                        if (comparadorFuncionario.comparar(funcionario, b) != 0) {
+//                            funcionarioBean.atualizar(b);
+//                            log.addAlterados();
+//                        }
                     }
                 }
             }

@@ -93,7 +93,7 @@ public class ImpEndPeopleDAOImpl extends DaoGenerico<ModeloEndPeople> implements
         try {
             getEntityManager().getTransaction().begin();
             Query q1 = getEntityManager().createNativeQuery("insert into "
-                    + " [sispasa-dev].[dbo].[CARG_END_PEOPLE_TMP] select "
+                    + " [sispasa].[dbo].[CARG_END_PEOPLE_TMP] select "
                     + " [BAIRRO]"
                     + ",[BRANCOS]"
                     + ",[CEP]"

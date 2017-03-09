@@ -48,8 +48,12 @@ public class LerArquivoEndPeople {
         this.fim = fim;
         this.lote = lote;
         this.loteLines = loteLines;
+        
+        System.err.println(Configuracao.getInstance().getEndNomeArqComPath(id));
         lerArquivo(Configuracao.getInstance().getEndNomeArqComPath(id),
                 Configuracao.getInstance().getNomeArqEnd(id));
+        
+        
     }
 
     public void lerArquivo(String path, String nomeArq) {
@@ -69,7 +73,6 @@ public class LerArquivoEndPeople {
                 for (int j = 0; j < SisPasaIntCommon.LINE_TAM_3; j++) {
                     out = out + ((char) buffer.get());
                 }
-                System.out.println(out);
                 ini = ini + SisPasaIntCommon.LINE_TAM_4;
                 buffer.clear();
                 modeloDAO.cadastrar(parseCampos(out, endNomeArq));

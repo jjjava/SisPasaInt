@@ -18,6 +18,7 @@ public class ArquivoUtil {
         lnr.skip(Long.MAX_VALUE);
         int lines = lnr.getLineNumber() + 1; //Add 1, index starts at 0
         lnr.close();
+        System.err.println(lines);
         return (lines);
     }
 
