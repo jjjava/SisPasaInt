@@ -29,6 +29,11 @@ public class EmpresaBeanImpl implements EmpresaBean {
     }
 
     @Override
+    public Empresa obter(String cdVale) {
+        return empresaDAO.existe(cdVale);
+    }
+
+    @Override
     public void cadastrar(Empresa e) {
         empresaDAO.cadastrar(e);
     }

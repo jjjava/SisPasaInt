@@ -17,17 +17,17 @@ import org.pasa.sispasaint.util.Sistema;
 /**
  *
  * @author Hudson Schumaker
- * @version 1.0.0
+ * @version 1.1.15
  */
 public class CargaPeopleBeanImpl implements CargaPeopleBean {
 
-    private Log log;
-    private final Long id;
+    private final Log log;
+    private final String cdVale;
     private final ImpBenPeopleBeanImpl modeloBenBean;
     private final ImpBenPeopleTempBeanImpl modeloBenBeanTemp;
 
-    public CargaPeopleBeanImpl(Long id, Log log) {
-        this.id = id;
+    public CargaPeopleBeanImpl(String cdVale, Log log) {
+        this.cdVale = cdVale;
         this.log = log;
         this.modeloBenBean = new ImpBenPeopleBeanImpl();
         this.modeloBenBeanTemp = new ImpBenPeopleTempBeanImpl();
@@ -35,52 +35,72 @@ public class CargaPeopleBeanImpl implements CargaPeopleBean {
 
     @Override
     public void inicar() {
-        this.cargaArquivosTemp();
+     //   this.cargaArquivosTemp();
         this.mapearEntidades();
-      //  this.inativacao();
+        this.inativacao();
     }
 
     @Override
     public void cargaArquivosTemp() {
+
         //BENEFICIARIO
         ImpBenPeopleBeanImpl beanBen = new ImpBenPeopleBeanImpl();
         beanBen.limparTabela();
         beanBen.resetarIdentity();
-        beanBen.carregarArquivo(id, log);
+        beanBen.carregarArquivo(cdVale, log);
+
         //ENDERECO
         ImpEndPeopleBeanImpl beanEnd = new ImpEndPeopleBeanImpl();
         beanEnd.limparTbTemp();
         beanEnd.resetarIdentity();
-        beanEnd.carregarArquivo(id, log);
+        beanEnd.carregarArquivo(cdVale, log);
     }
 
     @Override
     public void mapearEntidades() {
         ExecutorService executor = Executors.newFixedThreadPool(Sistema.getNumberProcessors());
         long qtdRegistros = modeloBenBean.contar();
-        long lote = ArquivoUtil.getNumeroLinhasLote(qtdRegistros);
-        this.log.setQtdLote(lote);
-        long ini = 1;
-        long fim = lote;
-        try {
-            for (int k = 0; k < Sistema.getNumberProcessors(); k++) {
-                executor.execute(new CargaMapeaEntidadesThread(log, ini, fim, " Thread" + k + 1));
-                ini = fim;
-                fim = fim + lote;
+        if (qtdRegistros > 2001) {
+            long lote = ArquivoUtil.getNumeroLinhasLote(qtdRegistros);
+            long ini = 1;
+            long fim = lote;
+            this.log.setQtdLote(lote);
+            this.log.setQtdThreads(Sistema.getNumberProcessors());
+            try {
+                for (int k = 0; k < Sistema.getNumberProcessors(); k++) {
+                    if ((Sistema.getNumberProcessors() - k) == 1) {
+                        fim = fim + ArquivoUtil.getNumeroLinhasResto(qtdRegistros);
+                    }
+                    executor.execute(new CargaMapeaEntidadesThread(log, ini, fim, " Thread" + (k + 1)));
+                    ini = fim;
+                    fim = fim + lote;
+                }
+                executor.shutdown();
+                while (!executor.isTerminated()) {
+                }
+            } catch (Exception ex) {
+                System.err.println(ex);
+                new LogBeanImpl().logErroClass(this.getClass().getName(), ex.getMessage());
+                Logger.getLogger(CargaPeopleBeanImpl.class).error(ex);
             }
-            executor.shutdown();
-            while (!executor.isTerminated()) {
+        } else {
+            long ini = 1;
+            long fim = qtdRegistros;
+            this.log.setQtdLote(qtdRegistros);
+            this.log.setQtdThreads(1);
+            try {
+                executor.execute(new CargaMapeaEntidadesThread(log, ini, fim, " Thread"));
+            } catch (Exception ex) {
+                System.err.println(ex);
+                new LogBeanImpl().logErroClass(this.getClass().getName(), ex.getMessage());
+                Logger.getLogger(CargaPeopleBeanImpl.class).error(ex);
             }
-        } catch (Exception ex) {
-            System.err.println(ex);
-            new LogBeanImpl().logErroClass(this.getClass().getName(), ex.getMessage());
-            Logger.getLogger(CargaPeopleBeanImpl.class).error(ex);
         }
     }
 
     public void inativacao() {
         modeloBenBean.inativar(modeloBenBean.verificarInativos());
-        modeloBenBeanTemp.limparTabela(Configuracao.getInstance().getNomeArqBen(id));
+        modeloBenBeanTemp.limparTabela(Configuracao.getInstance().getNomeArqBen(cdVale));
         modeloBenBean.copiarTabela();
     }
 }

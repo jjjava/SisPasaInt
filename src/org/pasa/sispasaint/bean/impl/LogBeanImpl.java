@@ -26,6 +26,7 @@ public class LogBeanImpl implements LogBean{
 
     @Override
     public void atualizar(Log l) {
+        l.setDataFim(DateUtil.obterDataAtual());
         new LogDAOImpl().atualizar(l);
     }
 

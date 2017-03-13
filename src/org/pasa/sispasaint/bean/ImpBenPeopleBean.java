@@ -16,7 +16,7 @@ public interface ImpBenPeopleBean {
     void copiarTabela();
     void limparTabela();
     void resetarIdentity();
-    void carregarArquivo(Long id, Log log);
+    void carregarArquivo(String cdVale, Log log);
     void inativar(List<ModeloBenPeople> listaInativar);
     void salvarTbTemp(List<ModeloBenPeople> listaModeloBenPeople);
     List<ModeloBenPeople> verificarInativos();

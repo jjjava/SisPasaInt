@@ -6,7 +6,7 @@ import javax.persistence.Query;
 import org.apache.log4j.Logger;
 import org.pasa.sispasaint.bean.impl.LogBeanImpl;
 import org.pasa.sispasaint.config.DadosConfiguracao;
-import org.pasa.sispasaint.dao.DadosConfigDAO;
+import org.pasa.sispasaint.dao.DadosConfiguracaoDAO;
 import org.pasa.sispasaint.dao.DaoGenerico;
 
 /**
@@ -14,24 +14,24 @@ import org.pasa.sispasaint.dao.DaoGenerico;
  * @author Hudson Schumaker
  * @version 1.0.0
  */
-public class DadosConfigDAOImpl extends DaoGenerico<DadosConfiguracao> implements DadosConfigDAO {
+public class DadosConfiguracaoDAOImpl extends DaoGenerico<DadosConfiguracao> implements DadosConfiguracaoDAO {
 
-    public DadosConfigDAOImpl() {
+    public DadosConfiguracaoDAOImpl() {
         super(DadosConfiguracao.class);
     }
 
     @Override
-    public DadosConfiguracao obterPorEmpresa(Long id) {
+    public DadosConfiguracao obterPorEmpresa(String cdVale) {
         Query q1 = getEntityManager().
-                createQuery("select e from DadosConfiguracao e where e.idEmpresa = :id");
-        q1.setParameter("id", id);
+                createQuery("select e from DadosConfiguracao e where e.idEmpresa = :cd");
+        q1.setParameter("cd", cdVale);
         q1.setMaxResults(1);
         List<DadosConfiguracao> dados = null;
         try {
             dados = q1.getResultList();
         } catch (NoResultException ex) {
-            System.err.println(ex);
-            Logger.getLogger(DadosConfigDAOImpl.class).error(ex);
+            System.err.println(this.getClass().getName()+"\n"+ex);
+            Logger.getLogger(DadosConfiguracaoDAOImpl.class).error(ex);
             new LogBeanImpl().logErroClass(this.getClass().getName(), ex.getMessage());
             return null;
         }

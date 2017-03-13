@@ -24,18 +24,18 @@ public class CargaMapeaEntidadesThread implements Runnable {
     private final long qtdRegistros;
 
     private final String nome;
-    private final LogBeanImpl logBeanImpl;
+    private final LogBeanImpl logBean;
     private final ComparadorFuncionario comparadorFuncionario;
     private final FuncionarioBeanImpl funcionarioBean;
     private final ImpBenPeopleBeanImpl modeloBenBean;
     private final CargaEntidadePeopleFuncionario cargaEntidadePeopleFuncionario;
-    
+
     public CargaMapeaEntidadesThread(Log log, long ini, long qtdRegistros, String nome) {
         this.log = log;
         this.ini = ini;
         this.qtdRegistros = qtdRegistros;
         this.nome = nome;
-        this.logBeanImpl = new LogBeanImpl();
+        this.logBean = new LogBeanImpl();
         this.modeloBenBean = new ImpBenPeopleBeanImpl();
         this.funcionarioBean = new FuncionarioBeanImpl();
         this.comparadorFuncionario = new ComparadorFuncionario();
@@ -44,41 +44,55 @@ public class CargaMapeaEntidadesThread implements Runnable {
 
     public void start() {
         Thread t = new Thread(this);
-       // t.setPriority(Thread.MAX_PRIORITY);
         t.start();
     }
 
     public void mapearEntidades() {
         Funcionario funcionario = null;
+        long k = 0;
         try {
-            for (long k = ini; k < qtdRegistros; k++) {
-                ModeloBenPeople mBenef = modeloBenBean.obter(k);
-                log.addRegistro();
-                if (mBenef.getTipoBeneficiario().equalsIgnoreCase(SisPasaIntCommon.FUNCIONARIO)) {
-                    funcionario = funcionarioBean.obter(mBenef.getEmpresa(), mBenef.getMatriculaPeople());
-                    if (null == funcionario) {
-                        if (cargaEntidadePeopleFuncionario.newFuncionario(mBenef)) {
-                            log.addAssocIncluidos();
-                            logBeanImpl.atualizar(log);
-                        } else {
-                            log.addErrosAssoc();
-                            log.addMatriculaErro(mBenef.getEmpresa(), mBenef.getMatriculaPeople(),
-                                    mBenef.getCodBeneficiario(), SisPasaIntErro.ERRO_NAO_CADASTRADO, SisPasaIntErro.MSG_FALSE_DAO);
+            for (k = ini; k < qtdRegistros; k++) {
+                try {
+                    ModeloBenPeople mBenef = modeloBenBean.obter(k);
+                    if (null != mBenef) {
+                        log.addRegistro();
+                        if (mBenef.getTipoBeneficiario().equalsIgnoreCase(SisPasaIntCommon.FUNCIONARIO)) {
+                            funcionario = funcionarioBean.obter(mBenef.getEmpresa(), mBenef.getMatriculaPeople());
+                            if (null == funcionario) {
+                                if (cargaEntidadePeopleFuncionario.newFuncionario(mBenef)) {
+                                    log.addAssocIncluidos();
+                                    logBean.atualizar(log);
+                                } else {
+                                    log.addErrosAssoc();
+                                    log.addMatriculaErro(mBenef.getEmpresa(), mBenef.getMatriculaPeople(), mBenef.getCodBeneficiario(), SisPasaIntErro.ERRO_NAO_CADASTRADO, SisPasaIntErro.MSG_FALSE_DAO);
+                                    logBean.atualizar(log);
+                                }
+                                System.out.println(nome + "     " + k + "VIVA");
+                            } else {
+//                                Funcionario b = cargaEntidadePeopleFuncionario.funcionarioFromModelo(mBenef);
+//                                if (comparadorFuncionario.comparar(funcionario, b) != 0) {
+//                                    funcionarioBean.atualizar(b);
+//                                    log.addAlterados();
+//                                    logBean.atualizar(log);
+//                                }
+                            }
                         }
                     } else {
-//                        Funcionario b = cargaEntidadePeopleFuncionario.funcionarioFromModelo(mBenef);
-//                        if (comparadorFuncionario.comparar(funcionario, b) != 0) {
-//                            funcionarioBean.atualizar(b);
-//                            log.addAlterados();
-                              logBeanImpl.atualizar(log);
-//                        }
+                        System.err.println(nome + "   contador :" + k + " ModeloBenPeople = null");
+                        Logger.getLogger(CargaMapeaEntidadesThread.class).error(nome + "   contador :" + k + " ModeloBenPeople = null");
+                        new LogBeanImpl().logErroClass(this.getClass().getName() + nome + " contador: " + k, "ModeloBenPeople = null");
                     }
+                } catch (Exception ex) {
+                    System.err.println(nome + "   contador :" + k + "   " + ex);
+                    Logger.getLogger(CargaMapeaEntidadesThread.class).error(ex);
+                    new LogBeanImpl().logErroClass(this.getClass().getName() + nome + " contador: " + k, ex.getMessage());
                 }
             }
         } catch (Exception ex) {
-            System.err.println(nome + " " + ex);
+            System.err.println(nome + "   contador :" + k + "   " + ex);
             Logger.getLogger(CargaMapeaEntidadesThread.class).error(ex);
-            new LogBeanImpl().logErroClass(this.getClass().getName() + nome, ex.getMessage());
+            new LogBeanImpl().logErroClass(this.getClass().getName() + nome + " contador: " + k, ex.getMessage());
+
         }
     }
 

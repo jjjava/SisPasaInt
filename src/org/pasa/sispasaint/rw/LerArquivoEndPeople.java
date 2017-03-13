@@ -15,6 +15,7 @@ import org.pasa.sispasaint.map.CamposModelo;
 import org.pasa.sispasaint.map.MapaCamposModeloEnd;
 import org.pasa.sispasaint.model.intg.Log;
 import org.pasa.sispasaint.model.intg.ModeloEndPeople;
+import org.pasa.sispasaint.util.DateUtil;
 import org.pasa.sispasaint.util.SisPasaIntCommon;
 import org.pasa.sispasaint.util.StringUtil;
 
@@ -25,8 +26,8 @@ import org.pasa.sispasaint.util.StringUtil;
  */
 public class LerArquivoEndPeople {
 
-    private Log log;
-    private Long id;
+    private final Log log;
+    private String cdVale;
     private String endNomeArq;
     private PosicaoCampo campo;
     private final Map<String, PosicaoCampo> mapa;
@@ -42,22 +43,19 @@ public class LerArquivoEndPeople {
         this.modeloDAO = new ImpEndPeopleDAOImpl();
     }
 
-    public void lerArquivo(Long id, int ini, int fim, int lote, int loteLines) {
-        this.id = id;
+    public void lerArquivo(String cdVale, int ini, int fim, int lote, int loteLines) {
+        this.cdVale = cdVale;
         this.ini = ini;
         this.fim = fim;
         this.lote = lote;
         this.loteLines = loteLines;
-        
-        System.err.println(Configuracao.getInstance().getEndNomeArqComPath(id));
-        lerArquivo(Configuracao.getInstance().getEndNomeArqComPath(id),
-                Configuracao.getInstance().getNomeArqEnd(id));
-        
-        
+        lerArquivo(Configuracao.getInstance().getEndNomeArqComPath(cdVale),
+                Configuracao.getInstance().getNomeArqEnd(cdVale));
     }
 
     public void lerArquivo(String path, String nomeArq) {
         this.endNomeArq = nomeArq;
+        log.setNomeArquivoEnd(endNomeArq);
         lerArquivo(new File(path));
     }
 
@@ -81,15 +79,19 @@ public class LerArquivoEndPeople {
             inChannel.close();
             aFile.close();
         } catch (FileNotFoundException ex) {
-            System.err.println(ex);
+            System.err.println(this.getClass().getName()+"\n"+ex);
             Logger.getLogger(LerArquivoEndPeople.class).error(ex);
             new LogBeanImpl().logErroClass(this.getClass().getName(), ex.getMessage());
             log.addLinhaArqErro();
         } catch (IOException ex) {
-            System.err.println(ex);
+            System.err.println(this.getClass().getName()+"\n"+ex);
             Logger.getLogger(LerArquivoEndPeople.class).error(ex);
             new LogBeanImpl().logErroClass(this.getClass().getName(), ex.getMessage());
             log.addLinhaArqErro();
+        } finally {
+            zipArq(file, file.getName() + "_PROC_" + DateUtil.dataParaArquivo(),
+                    Configuracao.getInstance().getEndNomeArqComPath(cdVale),
+                    Configuracao.getInstance().getEndNomeProcComPath(cdVale));
         }
     }
 
@@ -126,7 +128,7 @@ public class LerArquivoEndPeople {
 
             modelo.setNomeArquivo(nomeArq);
         } catch (Exception ex) {
-            System.err.println(ex);
+            System.err.println(this.getClass().getName()+"\n"+ex);
             Logger.getLogger(LerArquivoEndPeople.class).error(ex);
             new LogBeanImpl().logErroClass(this.getClass().getName(), ex.getMessage());
             log.addLinhaArqErro();
@@ -150,7 +152,7 @@ public class LerArquivoEndPeople {
         new Thread(() -> {
             ZipArquivo zipArquivo = new ZipArquivo();
             zipArquivo.zip(name, pathOri, pathDest);
-            //  file.delete();
+            file.delete();
         }).start();
     }
 }

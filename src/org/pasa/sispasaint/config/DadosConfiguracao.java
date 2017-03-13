@@ -18,13 +18,15 @@ import org.pasa.sispasaint.util.DateUtil;
 @Table(name = "CARG_DADOS_CONFIGURACAO")
 public class DadosConfiguracao implements Serializable {
 
+    private static final long serialVersionUID = 1L;
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-    
-    @Column(name = "ID_EMPRESA")
-    private Long idEmpresa;
-    
+
+    @Column(name = "CD_EMPRESA_VALE")
+    private String idEmpresa;
+
     private String pathIn;
     private String pathOut;
     private String pathProc;
@@ -35,19 +37,19 @@ public class DadosConfiguracao implements Serializable {
     }
 
     public String getBenNomeArqComPath() {
-        return pathIn + "/" + nomeBen+"_"+DateUtil.dataParaArquivo()+".TXT";
+        return pathIn + "/" + nomeBen + "_" + DateUtil.dataParaArquivo() + ".TXT";
     }
 
     public String getEndNomeArqComPath() {
-        return pathIn + "/" + nomeEnd+"_"+DateUtil.dataParaArquivo()+".TXT";
+        return pathIn + "/" + nomeEnd + "_" + DateUtil.dataParaArquivo() + ".TXT";
     }
-    
-    public String getBenNomeProcComPath(){
-        return pathProc + "/" + nomeBen+"_"+DateUtil.dataParaArquivo()+".zip";
+
+    public String getBenNomeProcComPath() {
+        return pathProc + "/" + nomeBen + "_" + DateUtil.dataParaArquivo() + ".zip";
     }
-    
-    public String getEndNomeProcComPath(){
-        return pathProc + "/" + nomeEnd+"_"+DateUtil.dataParaArquivo()+".zip";
+
+    public String getEndNomeProcComPath() {
+        return pathProc + "/" + nomeEnd + "_" + DateUtil.dataParaArquivo() + ".zip";
     }
 
     public Long getId() {
@@ -66,11 +68,11 @@ public class DadosConfiguracao implements Serializable {
         this.pathIn = pathIn;
     }
 
-    public Long getIdEmpresa() {
+    public String getIdEmpresa() {
         return idEmpresa;
     }
 
-    public void setIdEmpresa(Long idEmpresa) {
+    public void setIdEmpresa(String idEmpresa) {
         this.idEmpresa = idEmpresa;
     }
 
@@ -83,7 +85,7 @@ public class DadosConfiguracao implements Serializable {
     }
 
     public String getNomeBen() {
-        return nomeBen+"_"+DateUtil.dataParaArquivo()+".TXT";
+        return nomeBen + "_" + DateUtil.dataParaArquivo() + ".TXT";
     }
 
     public void setNomeBen(String nomeBen) {
@@ -91,7 +93,7 @@ public class DadosConfiguracao implements Serializable {
     }
 
     public String getNomeEnd() {
-        return nomeEnd+"_"+DateUtil.dataParaArquivo()+".TXT";
+        return nomeEnd + "_" + DateUtil.dataParaArquivo() + ".TXT";
     }
 
     public void setNomeEnd(String nomeEnd) {

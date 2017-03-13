@@ -3,8 +3,12 @@ package org.pasa.sispasaint.model.intg;
 import java.io.Serializable;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
+
+import org.pasa.sispasa.core.constants.ConstantesBanco;
 
 /**
  *
@@ -18,10 +22,11 @@ public class Agenda implements Serializable {
     private static final long serialVersionUID = 1L;
     
     @Id
-    @Column(name = "ID_AGENDA")
+    @Column(name = "ID_AGENDA", columnDefinition = ConstantesBanco.BIGINT)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @Column(name = "DES_AGENDA")
+    @Column(name = "TP_JOB")
     private String descricao;
     private String grupo;
     private String segundo;
@@ -35,8 +40,8 @@ public class Agenda implements Serializable {
     @Column(name = "ID_LISTA")
     private Long idLista;
     
-    @Column(name = "ID_EMPRESA")
-    private Long idEmpresa;
+    @Column(name = "CD_EMPRESA_VALE")
+    private String idEmpresa;
 
     public Agenda() {
     }
@@ -157,11 +162,11 @@ public class Agenda implements Serializable {
         this.idLista = idLista;
     }
 
-    public Long getIdEmpresa() {
+    public String getIdEmpresa() {
         return idEmpresa;
     }
 
-    public void setIdEmpresa(Long idEmpresa) {
+    public void setIdEmpresa(String idEmpresa) {
         this.idEmpresa = idEmpresa;
     }
 }

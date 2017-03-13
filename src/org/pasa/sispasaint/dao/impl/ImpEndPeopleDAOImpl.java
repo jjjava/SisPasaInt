@@ -5,6 +5,7 @@ import javax.persistence.NoResultException;
 import javax.persistence.Query;
 import org.apache.log4j.Logger;
 import org.pasa.sispasaint.bean.impl.LogBeanImpl;
+import org.pasa.sispasaint.config.Configuracao;
 import org.pasa.sispasaint.dao.DaoGenerico;
 import org.pasa.sispasaint.model.intg.ModeloEndPeople;
 import org.pasa.sispasaint.dao.ImpEndPeopleDAO;
@@ -23,19 +24,23 @@ public class ImpEndPeopleDAOImpl extends DaoGenerico<ModeloEndPeople> implements
     @Override
     public ModeloEndPeople obterPorMatricula(String empresa, String matricula, String codBeneficiario) {
         ModeloEndPeople m = new ModeloEndPeople();
+        m.setId(-1L);
+        List<ModeloEndPeople> lista = null;
         try {
             Query q1 = getEntityManager().
                     createQuery("select e from ModeloEndPeople e WHERE e.empresa = :empresa AND e.matricula = :matricula");
             q1.setParameter("empresa", empresa);
             q1.setParameter("matricula", matricula);
             q1.setMaxResults(1);
-            m = (ModeloEndPeople) q1.getSingleResult();
+            lista = q1.getResultList();
         } catch (NoResultException ex) {
-            System.err.println(ex);
-            Logger.getLogger(ImpEndPeopleDAOImpl.class).error(ex);
-            new LogBeanImpl().logErroClass(this.getClass().getName(), ex.getMessage());
-            m.setId(-1L);
+            System.err.println(this.getClass().getName() + " Mat:" + empresa + matricula + codBeneficiario + "\n" + ex);
+            Logger.getLogger(ImpEndPeopleDAOImpl.class).error(empresa + matricula + codBeneficiario + "\n" + ex);
+            new LogBeanImpl().logErroClass(this.getClass().getName(), empresa + matricula + codBeneficiario + "\n" + ex.getMessage());
             return m;
+        }
+        if (lista.size() > 0) {
+            return lista.get(0);
         }
         return m;
     }
@@ -44,11 +49,11 @@ public class ImpEndPeopleDAOImpl extends DaoGenerico<ModeloEndPeople> implements
     public void resetarIdentity() {
         try {
             getEntityManager().getTransaction().begin();
-            Query q1 = getEntityManager().createNativeQuery("DBCC CHECKIDENT ('[sispasa-dev].[dbo].[CARG_END_PEOPLE]', RESEED, 0)");
+            Query q1 = getEntityManager().createNativeQuery("DBCC CHECKIDENT ('[" + Configuracao.getInstance().getBanco() + "].[" + Configuracao.getInstance().getEsquema() + "].[CARG_END_PEOPLE]', RESEED, 0)");
             q1.executeUpdate();
             getEntityManager().getTransaction().commit();
         } catch (Exception ex) {
-            System.err.println(ex);
+            System.err.println(this.getClass().getName() + "\n" + ex);
             Logger.getLogger(ImpEndPeopleDAOImpl.class).error(ex);
             new LogBeanImpl().logErroClass(this.getClass().getName(), ex.getMessage());
         }
@@ -62,7 +67,7 @@ public class ImpEndPeopleDAOImpl extends DaoGenerico<ModeloEndPeople> implements
                 getEntityManager().persist(model);
                 getEntityManager().getTransaction().commit();
             } catch (Exception ex) {
-                System.err.println(ex);
+                System.err.println(this.getClass().getName() + "\n" + ex);
                 Logger.getLogger(ImpEndPeopleDAOImpl.class).error(ex);
                 new LogBeanImpl().logErroClass(this.getClass().getName(), ex.getMessage());
                 getEntityManager().getTransaction().rollback();
@@ -80,7 +85,7 @@ public class ImpEndPeopleDAOImpl extends DaoGenerico<ModeloEndPeople> implements
         try {
             ModeloEnd = q1.getResultList();
         } catch (NoResultException ex) {
-            System.err.println(ex);
+            System.err.println(this.getClass().getName() + "\n" + ex);
             Logger.getLogger(ImpEndPeopleDAOImpl.class).error(ex);
             new LogBeanImpl().logErroClass(this.getClass().getName(), ex.getMessage());
             return null;
@@ -121,7 +126,7 @@ public class ImpEndPeopleDAOImpl extends DaoGenerico<ModeloEndPeople> implements
             q1.executeUpdate();
             getEntityManager().getTransaction().commit();
         } catch (Exception ex) {
-            System.err.println(ex);
+            System.err.println(this.getClass().getName() + "\n" + ex);
             Logger.getLogger(ImpBenPeopleDAOImpl.class).error(ex);
             new LogBeanImpl().logErroClass(this.getClass().getName(), ex.getMessage());
         }

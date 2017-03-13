@@ -30,7 +30,7 @@ public class MunicipioDAOImpl extends DaoGenerico<Municipio> implements Municipi
         try {
             municipio = q1.getResultList();
         } catch (NoResultException ex) {
-            System.err.println(ex);
+            System.err.println(this.getClass().getName()+"\n"+ex);
             Logger.getLogger(MunicipioDAOImpl.class).error(ex);
             new LogBeanImpl().logErroClass(this.getClass().getName(), ex.getMessage());
             return null;

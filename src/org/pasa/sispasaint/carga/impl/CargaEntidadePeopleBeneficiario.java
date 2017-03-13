@@ -40,6 +40,7 @@ public class CargaEntidadePeopleBeneficiario {
 
     private Log log;
     private Beneficiario beneficiario;
+    private final LogBeanImpl logBean;
     private final PlanoBeanImpl planoBean;
     private final EstadoBeanImpl estadoBean;
     private final MunicipioBeanImpl municipioBean;
@@ -49,6 +50,7 @@ public class CargaEntidadePeopleBeneficiario {
 
     public CargaEntidadePeopleBeneficiario(Log log) {
         this.log = log;
+        this.logBean = new LogBeanImpl();
         this.planoBean = new PlanoBeanImpl();
         this.estadoBean = new EstadoBeanImpl();
         this.municipioBean = new MunicipioBeanImpl();
@@ -60,24 +62,24 @@ public class CargaEntidadePeopleBeneficiario {
     public Beneficiario newBeneficiario(ModeloBenPeople modelo) {
         beneficiario = new Beneficiario();
         beneficiario.setPessoa(new Pessoa());
-        //ENDERECO
+        // ENDERECO
         if (!(null == newEndereco(modelo))) {
             beneficiario.getPessoa().addEndereco(newEndereco(modelo));
         } else {
             beneficiario.getPessoa().addEndereco(fakeAdress());
         }
-        //DOCUMENTOS
+        // DOCUMENTOS
         beneficiario.getPessoa().setCpf(modelo.getCpf());
         beneficiario.getPessoa().addDocumento(newPis(modelo));
-        //TELEFONES
+        // TELEFONES
         beneficiario.getPessoa().setTelefones(newTelefones(modelo));
-        //ATRIBUTOS 
+        // ATRIBUTOS
         this.setAtributos(modelo);
-        //PLANO
+        // PLANO
         if (null == newPlano(modelo)) {
-            log.addMatriculaErro(modelo.getEmpresa(), modelo.getMatriculaPeople(),
-                    modelo.getCodBeneficiario(), modelo.getCpf(), SisPasaIntErro.TP_LOG_1,
-                    SisPasaIntErro.ERRO_PLANO);
+            log.addMatriculaErro(modelo.getEmpresa(), modelo.getMatriculaPeople(), modelo.getCodBeneficiario(),
+                    modelo.getCpf(), SisPasaIntErro.TP_LOG_1, SisPasaIntErro.ERRO_PLANO);
+            logBean.atualizar(log);
             return null;
         }
         beneficiario.getPessoa().setOrigemInformacoes(newOrigemInformacoes());
@@ -94,8 +96,17 @@ public class CargaEntidadePeopleBeneficiario {
             return fakeAdress();
         }
         Estado estado = estadoBean.obter(modeloEndPeople.getUf());
+        if (null == estado) {
+            log.addMatriculaErro(mBen.getEmpresa(), mBen.getMatriculaPeople(), mBen.getCodBeneficiario(),
+                    mBen.getCpf(), SisPasaIntErro.TP_LOG_1, SisPasaIntErro.ERRO_UF);
+            logBean.atualizar(log);
+            return null;
+        }
         Municipio municipio = municipioBean.existe(modeloEndPeople.getCidade());
         if (null == municipio) {
+            log.addMatriculaErro(mBen.getEmpresa(), mBen.getMatriculaPeople(), mBen.getCodBeneficiario(),
+                    mBen.getCpf(), SisPasaIntErro.TP_LOG_1, SisPasaIntErro.ERRO_CIDADE);
+            logBean.atualizar(log);
             return null;
         }
         Endereco endereco = new Endereco();
@@ -132,9 +143,7 @@ public class CargaEntidadePeopleBeneficiario {
         if (!modeloEndPeople.getTelefone1().trim().equals("")) {
             Telefone tel1 = new Telefone();
             String auxTel1 = modeloEndPeople.getTelefone1().replaceAll(" ", "");
-            if (auxTel1.length() > SisPasaIntCommon.TAM_TELEFONE) {
-                auxTel1 = StringUtil.truncTelefone(auxTel1);
-            }
+            auxTel1 = StringUtil.truncTelefone(auxTel1);
             tel1.setNumeroTelefone(auxTel1);
             tel1.setIndAtivo(SisPasaIntCommon.ATIVO);
             tel1.setIdUsuario(SisPasaIntCommon.USER_CARGA);
@@ -145,9 +154,7 @@ public class CargaEntidadePeopleBeneficiario {
         if (!modeloEndPeople.getTelefone2().trim().equals("")) {
             Telefone tel2 = new Telefone();
             String auxTel2 = modeloEndPeople.getTelefone2().replaceAll(" ", "");
-            if (auxTel2.length() > SisPasaIntCommon.TAM_TELEFONE) {
-                auxTel2 = StringUtil.truncTelefone(auxTel2);
-            }
+            auxTel2 = StringUtil.truncTelefone(auxTel2);
             tel2.setNumeroTelefone(auxTel2);
             tel2.setIndAtivo(SisPasaIntCommon.ATIVO);
             tel2.setIdUsuario(SisPasaIntCommon.USER_CARGA);
@@ -162,7 +169,7 @@ public class CargaEntidadePeopleBeneficiario {
     }
 
     private void setAtributos(ModeloBenPeople modeloBenEnd) {
-        //ATRIBUTOS
+        // ATRIBUTOS
         beneficiario.setCarteirinha(modeloBenEnd.getEmpresa() + modeloBenEnd.getMatricula() + modeloBenEnd.getCodBeneficiario());
         beneficiario.setMatriculaAMS(modeloBenEnd.getMatricula());
         beneficiario.setCodBeneficiario(modeloBenEnd.getCodBeneficiario());
@@ -172,7 +179,8 @@ public class CargaEntidadePeopleBeneficiario {
         beneficiario.getPessoa().setDataNascimento(DateUtil.toDate(modeloBenEnd.getDataNascimento()));
         beneficiario.getPessoa().setDataObito(DateUtil.toDate(modeloBenEnd.getDataFalecimento()));
         beneficiario.getPessoa().setSexo(modeloBenEnd.getSexo());
-        beneficiario.getPessoa().setIndConclusaoEscolaridade(StringUtil.parserIndicadorConclusao(modeloBenEnd.getIndicadorConclusao()));
+        beneficiario.getPessoa()
+                .setIndConclusaoEscolaridade(StringUtil.parserIndicadorConclusao(modeloBenEnd.getIndicadorConclusao()));
         beneficiario.setDireitoAMSReenbolso(modeloBenEnd.getDireitoAmsReembolso());
         if (beneficiario.getDireitoAMSReenbolso().equals("S")) {
             beneficiario.setDataValidadeReembolso(DateUtil.toDate(modeloBenEnd.getDataValidadeReembolso()));
@@ -215,7 +223,7 @@ public class CargaEntidadePeopleBeneficiario {
         endereco.setBairro("SEM ENDERECO");
         endereco.setCep("0000000");
         endereco.setIdUsuario(SisPasaIntCommon.USER_CARGA);
-        endereco.setIndAtivo(SisPasaIntCommon.ATIVO);
+        endereco.setIndAtivo(SisPasaIntCommon.INATIVO);
         endereco.setDataUltimaAtualizacao(DateUtil.obterDataAtual());
         endereco.setEstado(estado);
         endereco.setMunicipio(municipio);

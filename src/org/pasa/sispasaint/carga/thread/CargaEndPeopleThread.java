@@ -10,15 +10,15 @@ import org.pasa.sispasaint.rw.LerArquivoEndPeople;
  */
 public class CargaEndPeopleThread implements Runnable {
 
-    private final Long id;
+    private final String cdVale;
     private final Log log;
     private final int ini;
     private final int fim;
     private final int lote;
     private final int loteLines;
 
-    public CargaEndPeopleThread(Log log, Long id, int ini, int fim, int lote, int loteLines) {
-        this.id = id;
+    public CargaEndPeopleThread(Log log, String cdVale, int ini, int fim, int lote, int loteLines) {
+        this.cdVale = cdVale;
         this.log = log;
         this.ini = ini;
         this.fim = fim;
@@ -33,6 +33,6 @@ public class CargaEndPeopleThread implements Runnable {
 
     @Override
     public void run() {
-        new LerArquivoEndPeople(log).lerArquivo(id, ini, fim, lote, loteLines);
+        new LerArquivoEndPeople(log).lerArquivo(cdVale, ini, fim, lote, loteLines);
     }
 }

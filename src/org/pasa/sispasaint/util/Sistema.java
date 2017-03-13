@@ -1,6 +1,5 @@
 package org.pasa.sispasaint.util;
 
-import java.lang.management.ManagementFactory;
 import java.net.InetAddress;
 import java.net.UnknownHostException;
 import java.text.DecimalFormat;
@@ -59,14 +58,6 @@ public class Sistema {
 
     public static String getLoggedUserName() {
         return System.getProperty("user.name");
-    }
-
-    public static String getTotalMemory() {
-        com.sun.management.OperatingSystemMXBean mxbean = (com.sun.management.OperatingSystemMXBean) ManagementFactory.getOperatingSystemMXBean();
-        Long l = mxbean.getTotalPhysicalMemorySize();
-        String size = Long.toString(l);
-        double d = Double.parseDouble(size);
-        return toGB(d);
     }
 
     public static int getNumberProcessors() {

@@ -41,7 +41,7 @@ public class Maestro {
             this.scheduler.start();
             this.carregaJobs();
         } catch (SchedulerException ex) {
-            System.err.println(ex);
+            System.err.println(this.getClass().getName()+"\n"+ex);
             Logger.getLogger(Maestro.class).error(ex);
             new LogBeanImpl().logErroClass(this.getClass().getName(), ex.getMessage());
         }
@@ -52,19 +52,19 @@ public class Maestro {
         for (Agenda a : listAgenda) {
             try {
                 JobDetail job = JobBuilder.newJob(ModeloBeneficiarioEnderecoJob.class)
-                        .withIdentity(a.getDescricao(), a.getGrupo())
+                        .withIdentity(a.getIdEmpresa(), a.getGrupo())
                         .usingJobData(SisPasaIntCommon.ID_LISTA, a.getIdLista())
                         .usingJobData(SisPasaIntCommon.TIPO_JOB, a.getDescricao())
                         .usingJobData(SisPasaIntCommon.ID_EMPRESA, a.getIdEmpresa())
                         .build();
                 Trigger trigger = TriggerBuilder
                         .newTrigger()
-                        .withIdentity(a.getDescricao(), a.getGrupo())
+                        .withIdentity(a.getIdEmpresa(), a.getGrupo())
                         .withSchedule(CronScheduleBuilder.cronSchedule(parseSchedule(a)))
                         .build();
                 this.scheduler.scheduleJob(job, trigger);//agenda os jobs
             } catch (SchedulerException ex) {
-                System.err.println(ex);
+                System.err.println(this.getClass().getName()+"\n"+ex);
                 Logger.getLogger(Maestro.class).error(ex);
                 new LogBeanImpl().logErroClass(this.getClass().getName(), ex.getMessage());
             }
@@ -80,6 +80,7 @@ public class Maestro {
         s = s + a.getMes() + " ";
         s = s + a.getDiaSemana() + " ";
         s = s + a.getAno();
+        System.out.println(s);
         return s;
     }
 }

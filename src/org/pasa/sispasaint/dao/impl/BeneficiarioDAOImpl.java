@@ -32,7 +32,7 @@ public class BeneficiarioDAOImpl extends DaoGenerico<Beneficiario> implements Be
         try {
             beneficiario = q1.getResultList();
         } catch (NoResultException ex) {
-            System.err.println(ex);
+            System.err.println(this.getClass().getName() + "\n" + ex);
             new LogBeanImpl().logErroClass(this.getClass().getName(), ex.getMessage());
             Logger.getLogger(BeneficiarioDAOImpl.class).error(ex);
             return null;
@@ -53,7 +53,7 @@ public class BeneficiarioDAOImpl extends DaoGenerico<Beneficiario> implements Be
         try {
             beneficiarios = q1.getResultList();
         } catch (NoResultException ex) {
-           System.err.println(ex);
+            System.err.println(this.getClass().getName() + "\n" + ex);
             new LogBeanImpl().logErroClass(this.getClass().getName(), ex.getMessage());
             Logger.getLogger(BeneficiarioDAOImpl.class).error(ex);
             return null;
@@ -70,7 +70,7 @@ public class BeneficiarioDAOImpl extends DaoGenerico<Beneficiario> implements Be
             q1.setParameter("status", SisPasaIntCommon.INATIVO);
             return q1.executeUpdate();
         } catch (Exception ex) {
-            System.err.println(ex);
+            System.err.println(this.getClass().getName()+"\n"+ex);
             new LogBeanImpl().logErroClass(this.getClass().getName(), ex.getMessage());
             Logger.getLogger(BeneficiarioDAOImpl.class).error(ex);
         } finally {
@@ -88,7 +88,7 @@ public class BeneficiarioDAOImpl extends DaoGenerico<Beneficiario> implements Be
         try {
             count = (Long) q1.getSingleResult();
         } catch (NoResultException ex) {
-            System.err.println(ex);
+            System.err.println(this.getClass().getName()+"\n"+ex);
             new LogBeanImpl().logErroClass(this.getClass().getName(), ex.getMessage());
             Logger.getLogger(BeneficiarioDAOImpl.class).error(ex);
         }

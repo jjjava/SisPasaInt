@@ -16,6 +16,7 @@ import org.pasa.sispasaint.map.CamposModelo;
 import org.pasa.sispasaint.map.MapaCamposModeloBen;
 import org.pasa.sispasaint.model.intg.Log;
 import org.pasa.sispasaint.model.intg.ModeloBenPeople;
+import org.pasa.sispasaint.util.DateUtil;
 import org.pasa.sispasaint.util.SisPasaIntCommon;
 import org.pasa.sispasaint.util.StringUtil;
 
@@ -26,8 +27,9 @@ import org.pasa.sispasaint.util.StringUtil;
  */
 public class LerArquivoBenPeople {
 
-    private Log log;
-    private Long id;
+    
+    private String cdVale;
+    private final Log log;
     private String benNomeArq;
     private PosicaoCampo campo;
     private final Map<String, PosicaoCampo> mapa;
@@ -43,19 +45,20 @@ public class LerArquivoBenPeople {
         this.mapa = new MapaCamposModeloBen().getMapa();
     }
 
-    public void lerArquivo(long id, int ini, int fim, int lote, int loteLines) {
-        this.id = id;
+    public void lerArquivo(String cdVale, int ini, int fim, int lote, int loteLines) {
+        this.cdVale = cdVale;
         this.ini = ini;
         this.fim = fim;
         this.lote = lote;
         this.loteLines = loteLines;
 
-        lerArquivo(Configuracao.getInstance().getBenNomeArqComPath(id),
-                Configuracao.getInstance().getNomeArqBen(id));
+        lerArquivo(Configuracao.getInstance().getBenNomeArqComPath(cdVale),
+                Configuracao.getInstance().getNomeArqBen(cdVale));
     }
 
     private void lerArquivo(String path, String nomeArq) {
         this.benNomeArq = nomeArq;
+        log.setNomeArquivoBen(benNomeArq);
         lerArquivo(new File(path));
     }
 
@@ -79,15 +82,19 @@ public class LerArquivoBenPeople {
             inChannel.close();
             aFile.close();
         } catch (FileNotFoundException ex) {
-            System.err.println(ex);
+            System.err.println(this.getClass().getName()+"\n"+ex);
             Logger.getLogger(LerArquivoBenPeople.class).error(ex);
             new LogBeanImpl().logErroClass(this.getClass().getName(), ex.getMessage());
             log.addLinhaArqErro();
         } catch (IOException ex) {
-            System.err.println(ex);
+            System.err.println(this.getClass().getName()+"\n"+ex);
             Logger.getLogger(LerArquivoBenPeople.class).error(ex);
             new LogBeanImpl().logErroClass(this.getClass().getName(), ex.getMessage());
             log.addLinhaArqErro();
+        }finally{
+        	zipArq(file,file.getName()+"_PROC_"+DateUtil.dataParaArquivo(),
+                    Configuracao.getInstance().getBenNomeArqComPath(cdVale),
+                    Configuracao.getInstance().getBenNomeProcComPath(cdVale));
         }
     }
 
@@ -208,7 +215,7 @@ public class LerArquivoBenPeople {
 
             modelo.setNomeArquivo(nomeArq);
         } catch (Exception ex) {
-            System.err.println(ex);
+            System.err.println(this.getClass().getName()+"\n"+ex);
             Logger.getLogger(LerArquivoBenPeople.class).error(ex);
             new LogBeanImpl().logErroClass(this.getClass().getName(), ex.getMessage());
             log.addLinhaArqErro();
@@ -250,7 +257,7 @@ public class LerArquivoBenPeople {
         new Thread(() -> {
             ZipArquivo zipArquivo = new ZipArquivo();
             zipArquivo.zip(name, pathOri, pathDest);
-            //  file.delete();
+            file.delete();
         }).start();
     }
 }

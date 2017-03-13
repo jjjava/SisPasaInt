@@ -32,7 +32,7 @@ public class PlanoDAOImpl extends DaoGenerico<Plano> implements PlanoDAO{
         try {
             plano = q1.getResultList();
         } catch (NoResultException ex) {
-            System.err.println(ex);
+            System.err.println(this.getClass().getName()+"\n"+ex);
             Logger.getLogger(PlanoDAOImpl.class).error(ex);
             new LogBeanImpl().logErroClass(this.getClass().getName(), ex.getMessage());
             return null;

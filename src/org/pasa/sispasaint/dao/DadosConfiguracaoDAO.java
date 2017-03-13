@@ -7,11 +7,11 @@ import org.pasa.sispasaint.config.DadosConfiguracao;
  *
  * @author Hudson Schumaker
  */
-public interface DadosConfigDAO {
+public interface DadosConfiguracaoDAO {
     boolean cadastrar(DadosConfiguracao  dadosConfig);
     boolean atualizar(DadosConfiguracao  dadosConfig);
     void apagar(DadosConfiguracao  dadosConfig);
     DadosConfiguracao obter(Long id);
-    DadosConfiguracao obterPorEmpresa(Long id);
+    DadosConfiguracao obterPorEmpresa(String id);
     List<DadosConfiguracao> listar();
 }

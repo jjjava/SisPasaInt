@@ -58,16 +58,16 @@ public class ImpBenPeopleBeanImpl implements ImpBenPeopleBean {
     }
     
     @Override
-    public void carregarArquivo(Long id, Log log) {
+    public void carregarArquivo(String cdVale, Log log) {
         try {
             ExecutorService executor = Executors.newFixedThreadPool(Sistema.getNumberProcessors());
-            int lote = ArquivoUtil.getNumeroLinhasLote(ArquivoUtil.getNumerosLinhaArquivo(Configuracao.getInstance().getBenNomeArqComPath(id)));
+            int lote = ArquivoUtil.getNumeroLinhasLote(ArquivoUtil.getNumerosLinhaArquivo(Configuracao.getInstance().getBenNomeArqComPath(cdVale)));
             int loteLines = lote;
             lote = lote * SisPasaIntCommon.LINE_TAM_2;
             int ini = 0;
             int fim = lote;
             for (int i = 0; i < Sistema.getNumberProcessors(); i++) {
-                executor.execute(new CargaBenPeopleThread(log, id, ini, fim, lote, loteLines));
+                executor.execute(new CargaBenPeopleThread(log, cdVale, ini, fim, lote, loteLines));
                 ini = fim;
                 fim = fim + lote;
             }
@@ -75,7 +75,7 @@ public class ImpBenPeopleBeanImpl implements ImpBenPeopleBean {
             while (!executor.isTerminated()) {
             }
         } catch (IOException ex) {
-            System.err.println(ex);
+            System.err.println(this.getClass().getName()+"\n"+ex);
             Logger.getLogger(ImpBenPeopleBeanImpl.class).error(ex);
             new LogBeanImpl().logErroClass(this.getClass().getName(), ex.getMessage());
         }

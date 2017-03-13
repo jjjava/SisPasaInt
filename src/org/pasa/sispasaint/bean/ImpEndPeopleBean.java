@@ -17,7 +17,7 @@ public interface ImpEndPeopleBean {
     void copiarTabela();
     void limparTbTemp();
     void resetarIdentity();
-    void carregarArquivo(Long id, Log log);
+    void carregarArquivo(String cdVale, Log log);
     void salvarTbTemp(List<ModeloEndPeople> listaModeloEndVLI);
     List<ModeloEndPeople> list(String empresa, String matricula);
     Long contar();

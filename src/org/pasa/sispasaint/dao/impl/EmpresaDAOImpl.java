@@ -30,7 +30,7 @@ public class EmpresaDAOImpl extends DaoGenerico<Empresa> implements EmpresaDAO{
         try {
             empresa = q1.getResultList();
         } catch (NoResultException ex) {
-            System.err.println( ex);
+            System.err.println(this.getClass().getName()+"\n"+ex);
             Logger.getLogger(EmpresaDAOImpl.class).error(ex);
             new LogBeanImpl().logErroClass(this.getClass().getName(), ex.getMessage());
             return null;

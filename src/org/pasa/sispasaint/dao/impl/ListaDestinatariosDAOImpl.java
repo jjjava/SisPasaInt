@@ -29,7 +29,7 @@ public class ListaDestinatariosDAOImpl extends DaoGenerico<ListaDestinatarios> i
         try {
             listaDestinatarios = q1.getResultList();
         } catch (NoResultException ex) {
-            System.err.println(ex);
+            System.err.println(this.getClass().getName()+"\n"+ex);
             Logger.getLogger(ListaDestinatariosDAOImpl.class).error(ex);
             new LogBeanImpl().logErroClass(this.getClass().getName(), ex.getMessage());
             return null;

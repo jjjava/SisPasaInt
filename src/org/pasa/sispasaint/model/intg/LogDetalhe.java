@@ -23,9 +23,9 @@ public class LogDetalhe implements Serializable{
     private static final long serialVersionUID = 1L;
 
     @Id
-    @Column(name = "ID_LOG_DETALHE", columnDefinition = ConstantesBanco.BIGINT)
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
+    
     private String codEmpresa;
     private String matricula;
     private String codBeneficiario;

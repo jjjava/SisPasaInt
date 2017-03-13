@@ -12,24 +12,27 @@ import org.pasa.sispasaint.model.intg.ListaDestinatarios;
  */
 public class ListaDestinatariosBeanImpl implements ListaDestinatariosBean {
 
+    public ListaDestinatariosBeanImpl(){
+    }
+    
     @Override
     public ListaDestinatarios obter(Long id) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        return new ListaDestinatariosDAOImpl().obter(id);
     }
 
     @Override
     public void cadastrar(ListaDestinatarios ld) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        new ListaDestinatariosDAOImpl().cadastrar(ld);
     }
 
     @Override
     public void atualizar(ListaDestinatarios ld) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        new ListaDestinatariosDAOImpl().atualizar(ld);
     }
 
     @Override
     public void apagar(ListaDestinatarios ld) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        new ListaDestinatariosDAOImpl().apagar(ld);
     }
 
     @Override

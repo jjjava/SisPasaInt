@@ -5,6 +5,7 @@ import javax.persistence.NoResultException;
 import javax.persistence.Query;
 import org.apache.log4j.Logger;
 import org.pasa.sispasaint.bean.impl.LogBeanImpl;
+import org.pasa.sispasaint.config.Configuracao;
 import org.pasa.sispasaint.dao.DaoGenerico;
 import org.pasa.sispasaint.model.intg.ModeloBenPeople;
 import org.pasa.sispasaint.dao.ImpBenPeopleDAO;
@@ -23,7 +24,7 @@ public class ImpBenPeopleDAOImpl extends DaoGenerico<ModeloBenPeople> implements
     @Override
     public void resetarIdentity() {
         getEntityManager().getTransaction().begin();
-        Query q1 = getEntityManager().createNativeQuery("DBCC CHECKIDENT ('[sispasa-dev].[dbo].[CARG_BEN_PEOPLE]', RESEED, 0)");
+        Query q1 = getEntityManager().createNativeQuery("DBCC CHECKIDENT ('["+Configuracao.getInstance().getBanco()+"].["+Configuracao.getInstance().getEsquema()+"].[CARG_BEN_PEOPLE]', RESEED, 0)");
         q1.executeUpdate();
         getEntityManager().getTransaction().commit();
     }
@@ -36,7 +37,7 @@ public class ImpBenPeopleDAOImpl extends DaoGenerico<ModeloBenPeople> implements
                 getEntityManager().persist(model);
                 getEntityManager().getTransaction().commit();
             } catch (Exception ex) {
-                System.err.println(ex);
+                System.err.println(this.getClass().getName()+"\n"+ex);
                 Logger.getLogger(ImpBenPeopleDAOImpl.class).error(ex);
                 new LogBeanImpl().logErroClass(this.getClass().getName(), ex.getMessage());
                 getEntityManager().getTransaction().rollback();
@@ -54,7 +55,7 @@ public class ImpBenPeopleDAOImpl extends DaoGenerico<ModeloBenPeople> implements
         try {
             modelos = q1.getResultList();
         } catch (NoResultException ex) {
-            System.err.println(ex);
+            System.err.println(this.getClass().getName()+"\n"+ex);
             Logger.getLogger(ImpBenPeopleDAOImpl.class).error(ex);
             new LogBeanImpl().logErroClass(this.getClass().getName(), ex.getMessage());
             return null;
@@ -72,7 +73,7 @@ public class ImpBenPeopleDAOImpl extends DaoGenerico<ModeloBenPeople> implements
         try {
             modelos = q1.getResultList();
         } catch (NoResultException ex) {
-            System.err.println(ex);
+            System.err.println(this.getClass().getName()+"\n"+ex);
             new LogBeanImpl().logErroClass(this.getClass().getName(), ex.getMessage());
             Logger.getLogger(BeneficiarioDAOImpl.class).error(ex);
             return null;
@@ -84,7 +85,7 @@ public class ImpBenPeopleDAOImpl extends DaoGenerico<ModeloBenPeople> implements
     public void copiarTabela() {
         try {
             getEntityManager().getTransaction().begin();
-            Query q1 = getEntityManager().createNativeQuery("insert into [sispasa].[dbo].[CARG_BEN_PEOPLE_TMP] "
+            Query q1 = getEntityManager().createNativeQuery("insert into ["+Configuracao.getInstance().getBanco()+"].["+Configuracao.getInstance().getEsquema()+".[CARG_BEN_PEOPLE_TMP] "
                     + "select [AGENCIABANCARIA]"
                     + ",[BANCO]"
                     + ",[BRANCO]"
@@ -140,7 +141,7 @@ public class ImpBenPeopleDAOImpl extends DaoGenerico<ModeloBenPeople> implements
             q1.executeUpdate();
             getEntityManager().getTransaction().commit();
         } catch (Exception ex) {
-            System.err.println(ex);
+            System.err.println(this.getClass().getName()+"\n"+ex);
             Logger.getLogger(ImpBenPeopleDAOImpl.class).error(ex);
             new LogBeanImpl().logErroClass(this.getClass().getName(), ex.getMessage());
         }

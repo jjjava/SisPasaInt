@@ -11,6 +11,7 @@ import org.pasa.sispasa.core.model.Empresa;
 public interface EmpresaBean {
     Empresa obter(Long id);
     Empresa obter(Empresa e);
+    Empresa obter(String cdVale);
     void cadastrar(Empresa e);
     void atualizar(Empresa e);
     void apagar(Empresa e);

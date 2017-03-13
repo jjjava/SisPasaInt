@@ -57,7 +57,7 @@ public abstract class DaoGenerico<T> {
         } catch (Exception ex) {
             System.err.println(ex);
             Logger.getLogger(DaoGenerico.class).error(ex);
-             new LogBeanImpl().logErroClass(this.getClass().getName(), ex.getMessage());
+            new LogBeanImpl().logErroClass(this.getClass().getName(), ex.getMessage());
             return false;
         }
     }

@@ -29,6 +29,7 @@ import org.pasa.sispasa.core.model.Pessoa;
 import org.pasa.sispasa.core.model.Telefone;
 import org.pasa.sispasa.core.model.TipoDocumento;
 import org.pasa.sispasa.core.model.TipoVinculoEmpregaticio;
+import org.pasa.sispasaint.bean.impl.LogBeanImpl;
 import org.pasa.sispasaint.bean.impl.NivelEscolaridadeBeanImpl;
 import org.pasa.sispasaint.bean.impl.TipoDocumentoBeanImpl;
 import org.pasa.sispasaint.bean.impl.TipoVinculoEmpregaticioBeanImpl;
@@ -43,8 +44,9 @@ import org.pasa.sispasaint.util.StringUtil;
  */
 public class CargaEntidadePeopleFuncionario {
 
-    private Log log;
+    private final Log log;
     private Funcionario funcionario;
+    private final LogBeanImpl logBean;
     private final ImpBenPeopleBeanImpl impBenPeopleTempBeanImpl;
     private final ImpEndPeopleBeanImpl impEndPeopleTempBeanImpl;
     private final CargaEntidadePeopleBeneficiario cargaEntidadePeopleBeneficiario;
@@ -58,6 +60,7 @@ public class CargaEntidadePeopleFuncionario {
 
     public CargaEntidadePeopleFuncionario(Log log) {
         this.log = log;
+        this.logBean = new LogBeanImpl();
         this.empresaBean = new EmpresaBeanImpl();
         this.estadoBeanImpl = new EstadoBeanImpl();
         this.municipioBeanImpl = new MunicipioBeanImpl();
@@ -76,6 +79,7 @@ public class CargaEntidadePeopleFuncionario {
             log.addMatriculaErro(modelo.getEmpresa(), modelo.getMatriculaPeople(),
                     modelo.getCodBeneficiario(), modelo.getCpf(), SisPasaIntErro.TP_LOG_1,
                     SisPasaIntErro.ERRO_EMPRESA);
+            logBean.atualizar(log);
             return false;
         } else {
             funcionario = new Funcionario();
@@ -87,7 +91,8 @@ public class CargaEntidadePeopleFuncionario {
             } else {
                 log.addMatriculaErro(modelo.getEmpresa(), modelo.getMatriculaPeople(),
                         modelo.getCodBeneficiario(), modelo.getCpf(), SisPasaIntErro.TP_LOG_1,
-                        SisPasaIntErro.ERRO_ENDERECO);                
+                        SisPasaIntErro.ERRO_ENDERECO);
+                logBean.atualizar(log);
                 funcionario.getPessoa().addEndereco(fakeAdress());
             }
             //DOCUMENTOS
@@ -182,8 +187,17 @@ public class CargaEntidadePeopleFuncionario {
             return fakeAdress();
         }
         Estado estado = estadoBeanImpl.obter(modeloEndPeople.getUf());
+        if (null == estado) {
+            log.addMatriculaErro(mBen.getEmpresa(), mBen.getMatriculaPeople(), mBen.getCodBeneficiario(),
+                    mBen.getCpf(), SisPasaIntErro.TP_LOG_1, SisPasaIntErro.ERRO_UF);
+            logBean.atualizar(log);
+            return null;
+        }
         Municipio municipio = municipioBeanImpl.existe(modeloEndPeople.getCidade());
         if (null == municipio) {
+            log.addMatriculaErro(mBen.getEmpresa(), mBen.getMatriculaPeople(), mBen.getCodBeneficiario(),
+                    mBen.getCpf(), SisPasaIntErro.TP_LOG_1, SisPasaIntErro.ERRO_CIDADE);
+            logBean.atualizar(log);
             return null;
         }
         Endereco endereco = new Endereco();
@@ -301,7 +315,7 @@ public class CargaEntidadePeopleFuncionario {
         endereco.setBairro("SEM ENDERECO");
         endereco.setCep("0000000");
         endereco.setIdUsuario(SisPasaIntCommon.USER_CARGA);
-        endereco.setIndAtivo(SisPasaIntCommon.ATIVO);
+        endereco.setIndAtivo(SisPasaIntCommon.INATIVO);
         endereco.setDataUltimaAtualizacao(DateUtil.obterDataAtual());
         endereco.setEstado(estado);
         endereco.setMunicipio(municipio);

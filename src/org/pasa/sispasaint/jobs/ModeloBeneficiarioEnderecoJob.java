@@ -2,11 +2,11 @@ package org.pasa.sispasaint.jobs;
 
 import java.util.ArrayList;
 import java.util.List;
+import org.apache.log4j.Logger;
 import org.pasa.sispasaint.bean.impl.DestinatarioBeanImpl;
 import org.pasa.sispasaint.bean.impl.EmpresaBeanImpl;
 import org.pasa.sispasaint.bean.impl.ListaDestinatariosBeanImpl;
 import org.pasa.sispasaint.bean.impl.LogBeanImpl;
-import org.pasa.sispasaint.carga.impl.CargaBenEndBeanImpl;
 import org.pasa.sispasaint.carga.impl.CargaPeopleBeanImpl;
 import org.pasa.sispasaint.mail.EnviaEmail;
 import org.pasa.sispasaint.model.intg.ListaDestinatarios;
@@ -27,7 +27,8 @@ import org.quartz.JobExecutionException;
 public class ModeloBeneficiarioEnderecoJob implements Job {
 
     private final Log log;
-    private Long idEmpresa;
+    private String cdVale;
+    private Long idLista;
 
     public ModeloBeneficiarioEnderecoJob() {
         log = new Log();
@@ -35,25 +36,35 @@ public class ModeloBeneficiarioEnderecoJob implements Job {
 
     @Override
     public void execute(JobExecutionContext jec) throws JobExecutionException {
-        JobDataMap dataMap = jec.getJobDetail().getJobDataMap();
-        String tipo = dataMap.getString(SisPasaIntCommon.TIPO_JOB);
-        long idLista = dataMap.getLong(SisPasaIntCommon.ID_LISTA);
-        this.idEmpresa = dataMap.getLong(SisPasaIntCommon.ID_EMPRESA);
-        this.log.setEmpresaVale(new EmpresaBeanImpl().obter(idEmpresa).getNomeFantasia());
-        
-        if (tipo.equals(SisPasaIntCommon.CARGA_PEOPLE)) {
-            CargaPeopleBeanImpl cargaPeopleBeanImpl = new CargaPeopleBeanImpl(idEmpresa, log);
-            cargaPeopleBeanImpl.inicar();
-        } else {
-            CargaBenEndBeanImpl cargaBenEndBeanImpl = new CargaBenEndBeanImpl(idEmpresa, log);
-            cargaBenEndBeanImpl.start();
+        try {
+            JobDataMap dataMap = jec.getJobDetail().getJobDataMap();
+            String tipo = dataMap.getString(SisPasaIntCommon.TIPO_JOB);
+            this.idLista = dataMap.getLong(SisPasaIntCommon.ID_LISTA);
+            this.cdVale = dataMap.getString(SisPasaIntCommon.ID_EMPRESA);
+            this.log.setEmpresaVale(new EmpresaBeanImpl().obter(cdVale).getNomeFantasia());
+            if (tipo.equals(SisPasaIntCommon.CARGA_PEOPLE)) {
+                log.setTipoJob(SisPasaIntCommon.CARGA_PEOPLE);
+                CargaPeopleBeanImpl cargaPeopleBeanImpl = new CargaPeopleBeanImpl(cdVale, log);
+                cargaPeopleBeanImpl.inicar();
+            } else {
+                // CargaBenEndBeanImpl cargaBenEndBeanImpl = new
+                // CargaBenEndBeanImpl(idEmpresa, log);
+                // cargaBenEndBeanImpl.start();
+            }
+            new LogBeanImpl().atualizar(log);
+        } catch (Exception ex) {
+            System.err.println(this.getClass().getName()+"\n"+ex);
+            Logger.getLogger(ModeloBeneficiarioEnderecoJob.class).error(ex);
+            new LogBeanImpl().logErroClass(this.getClass().getName(), ex.getMessage());
+        } finally {
+            enviarEmail();
         }
-        
+    }
+
+    private void enviarEmail() {
         EnviaEmail enviaEmail = new EnviaEmail(getDestinatariosList(new ListaDestinatariosBeanImpl().listar(idLista)),
-                "#CARGA AMS ",
-                setMensagem());
+                "#CARGA AMS ", setMensagem());
         enviaEmail.enviar();
-        new LogBeanImpl().cadastrar(log);
     }
 
     private List<String> getDestinatariosList(List<ListaDestinatarios> lista) {
@@ -67,7 +78,7 @@ public class ModeloBeneficiarioEnderecoJob implements Job {
     private String setMensagem() {
         StringBuilder sb = new StringBuilder();
         sb.append("CARGA ");
-        sb.append(new EmpresaBeanImpl().obter(idEmpresa).getNomeFantasia());
+        sb.append(new EmpresaBeanImpl().existe(cdVale).getNomeFantasia());
         sb.append("\n");
         sb.append("Nome Arquivos Beneficiario: ");
         sb.append(log.getNomeArquivoBen());

@@ -1,6 +1,7 @@
 package org.pasa.sispasaint.config;
 
-import org.pasa.sispasaint.dao.impl.DadosConfigDAOImpl;
+import org.pasa.sispasaint.dao.impl.BancoConfiguracaoDAOImpl;
+import org.pasa.sispasaint.dao.impl.DadosConfiguracaoDAOImpl;
 import org.pasa.sispasaint.dao.impl.MailConfigDAOImpl;
 import org.pasa.sispasaint.mail.MailConfig;
 
@@ -13,13 +14,15 @@ public class Configuracao {
 
     private static Configuracao instance = null;
     private MailConfig mailConfig;
+    private BancoConfiguracao bancoConfiguracao;
 
     private Configuracao() {
         this.setUp();
     }
 
     private void setUp() {
-        mailConfig = new MailConfigDAOImpl().obter(1L);//melhorar
+        this.mailConfig = new MailConfigDAOImpl().obter(1L);//melhorar
+        this.bancoConfiguracao = new BancoConfiguracaoDAOImpl().obter(1L);//melhorar 
     }
 
     public static synchronized Configuracao getInstance() {
@@ -40,36 +43,44 @@ public class Configuracao {
     public String getServidor() {
         return mailConfig.getServidor();
     }
-
-    public String getBenNomeArqComPath(Long id) {
-        return new DadosConfigDAOImpl().obterPorEmpresa(id).getBenNomeArqComPath();
+    
+    public String getBanco(){
+    	return bancoConfiguracao.getDataBase();
+    }
+    
+    public String getEsquema(){
+    	return bancoConfiguracao.getOwner();
     }
 
-    public String getEndNomeArqComPath(Long id) {
-        return new DadosConfigDAOImpl().obterPorEmpresa(id).getEndNomeArqComPath();
+    public String getBenNomeArqComPath(String id) {
+        return new DadosConfiguracaoDAOImpl().obterPorEmpresa(id).getBenNomeArqComPath();
     }
 
-    public String getNomeArqBen(Long id) {
-        return new DadosConfigDAOImpl().obterPorEmpresa(id).getNomeBen();
+    public String getEndNomeArqComPath(String id) {
+        return new DadosConfiguracaoDAOImpl().obterPorEmpresa(id).getEndNomeArqComPath();
     }
 
-    public String getNomeArqEnd(Long id) {
-        return new DadosConfigDAOImpl().obterPorEmpresa(id).getNomeEnd();
+    public String getNomeArqBen(String id) {
+        return new DadosConfiguracaoDAOImpl().obterPorEmpresa(id).getNomeBen();
     }
 
-    public String getBenNomeProcComPath(Long id) {
-        return new DadosConfigDAOImpl().obterPorEmpresa(id).getBenNomeProcComPath();
+    public String getNomeArqEnd(String id) {
+        return new DadosConfiguracaoDAOImpl().obterPorEmpresa(id).getNomeEnd();
     }
 
-    public String getEndNomeProcComPath(Long id) {
-        return new DadosConfigDAOImpl().obterPorEmpresa(id).getEndNomeProcComPath();
+    public String getBenNomeProcComPath(String id) {
+        return new DadosConfiguracaoDAOImpl().obterPorEmpresa(id).getBenNomeProcComPath();
     }
 
-    public String getPathIn(Long id) {
-        return new DadosConfigDAOImpl().obterPorEmpresa(id).getPathIn();
+    public String getEndNomeProcComPath(String id) {
+        return new DadosConfiguracaoDAOImpl().obterPorEmpresa(id).getEndNomeProcComPath();
     }
 
-    public String getPathOut(Long id) {
-        return new DadosConfigDAOImpl().obterPorEmpresa(id).getPathOut();
+    public String getPathIn(String id) {
+        return new DadosConfiguracaoDAOImpl().obterPorEmpresa(id).getPathIn();
+    }
+
+    public String getPathOut(String id) {
+        return new DadosConfiguracaoDAOImpl().obterPorEmpresa(id).getPathOut();
     }
 }

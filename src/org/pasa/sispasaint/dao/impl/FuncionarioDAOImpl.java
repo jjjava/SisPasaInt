@@ -32,7 +32,7 @@ public class FuncionarioDAOImpl extends DaoGenerico<Funcionario> implements Func
         try {
             funcionarios = q1.getResultList();
         } catch (NoResultException ex) {
-            System.err.println(ex);
+            System.err.println(this.getClass().getName()+"\n"+ex);
             Logger.getLogger(FuncionarioDAOImpl.class).error(ex);
             new LogBeanImpl().logErroClass(this.getClass().getName(), ex.getMessage());
             return null;
@@ -51,7 +51,7 @@ public class FuncionarioDAOImpl extends DaoGenerico<Funcionario> implements Func
                     createQuery("update Funcionario f set f.indAtivo = :status");
             return q1.setParameter("status", SisPasaIntCommon.INATIVO).executeUpdate();
         } catch (Exception ex) {
-            System.err.println(ex);
+            System.err.println(this.getClass().getName()+"\n"+ex);
             Logger.getLogger(FuncionarioDAOImpl.class).error(ex);
             new LogBeanImpl().logErroClass(this.getClass().getName(), ex.getMessage());
         } finally {

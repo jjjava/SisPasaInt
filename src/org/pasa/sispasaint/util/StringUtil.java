@@ -54,24 +54,30 @@ public class StringUtil {
                 .replaceAll("[ÛÙÚÜ]", "U")
                 .replace('ç', 'c')
                 .replace('Ç', 'C')
-                .replace('ñ', 'n')
-                .replace('Ñ', 'N');
+                .replace('ñ', 'n').replace('Ñ', 'N');
     }
 
     public static String truncTelefone(String tel) {
-        char aux[] = tel.toCharArray();
-        tel = "";
-        for (int k = 0; k < SisPasaIntCommon.TAM_TELEFONE; k++) {
-            tel = tel + aux[k];
+        if (tel.length() > SisPasaIntCommon.TAM_ERRO_LOG) {
+            char aux[] = tel.toCharArray();
+            tel = "";
+            for (int k = 0; k < SisPasaIntCommon.TAM_TELEFONE; k++) {
+                tel = tel + aux[k];
+            }
         }
         return tel;
     }
-    
-    public static String truncErroLog(String erro){
-        char aux [] = erro.toCharArray();
-        erro = "";
-        for(int k =0;k<SisPasaIntCommon.TAM_ERRO_LOG;k++){
-            erro = erro +aux[k];
+
+    public static String truncErroLog(String erro) {
+        if(null == erro){
+            return "objeto nulo truncErroLog";
+        }
+        if (erro.length() > SisPasaIntCommon.TAM_ERRO_LOG) {
+            char aux[] = erro.toCharArray();
+            erro = "";
+            for (int k = 0; k < SisPasaIntCommon.TAM_ERRO_LOG; k++) {
+                erro = erro + aux[k];
+            }
         }
         return erro;
     }
