@@ -23,60 +23,58 @@ import org.pasa.sispasa.core.constants.ConstantesBanco;
 @Table(name = "EVENTO_ATUALIZACAO")
 public class EventoAtualizacao implements Serializable {
 
-	private static final long serialVersionUID = 1L;
+    private static final long serialVersionUID = 1L;
 
-	@Id
-	@Column(name = "ID_EVENTO_ATUALIZACAO", columnDefinition = ConstantesBanco.BIGINT)
-	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	private Long id;
+    @Id
+    @Column(name = "ID_EVENTO_ATUALIZACAO", columnDefinition = ConstantesBanco.BIGINT)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long id;
 
-	@Column(name = "EMPRESA_ATUALIZADORA", columnDefinition = ConstantesBanco.CHAR_2)
-	private String empresaAtualizadora;
+    @Column(name = "EMPRESA_ATUALIZADORA", columnDefinition = ConstantesBanco.CHAR_2)
+    private String empresaAtualizadora;
 
-	@Column(name = "MATRICULA_ATUALIZADOR", columnDefinition = ConstantesBanco.CHAR_10)
-	private String matriculaAtualizador;
+    @Column(name = "MATRICULA_ATUALIZADOR", columnDefinition = ConstantesBanco.CHAR_10)
+    private String matriculaAtualizador;
 
-	@Column(name = "DT_ATUALIZACAO")
-	@Temporal(TemporalType.TIMESTAMP)
-	private Date dataUltimaAtualizacao;
+    @Column(name = "DT_ATUALIZACAO")
+    @Temporal(TemporalType.TIMESTAMP)
+    private Date dataUltimaAtualizacao;
 
-	//CONSTRUTORES
-	
-	public EventoAtualizacao() {
-		//CONSTRUTOR DEFAULT
-	}
+    //CONSTRUTORES
+    public EventoAtualizacao() {
+        //CONSTRUTOR DEFAULT
+    }
 
-	//GETTERS E SETTERS
-	
-	public Long getId() {
-		return id;
-	}
+    //GETTERS E SETTERS
+    public Long getId() {
+        return id;
+    }
 
-	public void setId(Long id) {
-		this.id = id;
-	}
+    public void setId(Long id) {
+        this.id = id;
+    }
 
-	public String getEmpresaAtualizadora() {
-		return empresaAtualizadora;
-	}
+    public String getEmpresaAtualizadora() {
+        return empresaAtualizadora;
+    }
 
-	public void setEmpresaAtualizadora(String empresaAtualizadora) {
-		this.empresaAtualizadora = empresaAtualizadora;
-	}
+    public void setEmpresaAtualizadora(String empresaAtualizadora) {
+        this.empresaAtualizadora = empresaAtualizadora;
+    }
 
-	public String getMatriculaAtualizador() {
-		return matriculaAtualizador;
-	}
+    public String getMatriculaAtualizador() {
+        return matriculaAtualizador;
+    }
 
-	public void setMatriculaAtualizador(String matriculaAtualizador) {
-		this.matriculaAtualizador = matriculaAtualizador;
-	}
+    public void setMatriculaAtualizador(String matriculaAtualizador) {
+        this.matriculaAtualizador = matriculaAtualizador;
+    }
 
-	public Date getDataAtualizacao() {
-		return dataUltimaAtualizacao;
-	}
+    public Date getDataAtualizacao() {
+        return dataUltimaAtualizacao;
+    }
 
-	public void setDataAtualizacao(Date dataUltimaAtualizacao) {
-		this.dataUltimaAtualizacao = dataUltimaAtualizacao;
-	}
+    public void setDataAtualizacao(Date dataUltimaAtualizacao) {
+        this.dataUltimaAtualizacao = dataUltimaAtualizacao;
+    }
 }
