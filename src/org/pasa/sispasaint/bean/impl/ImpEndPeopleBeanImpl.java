@@ -35,8 +35,8 @@ public class ImpEndPeopleBeanImpl implements ImpEndPeopleBean {
     }
 
     @Override
-    public ModeloEndPeople obterPorMatricula(ModeloBenPeople modeloBenVli) {
-        return modeloDAO.obterPorMatricula(modeloBenVli.getEmpresa(), modeloBenVli.getMatricula(), modeloBenVli.getCodBeneficiario());
+    public ModeloEndPeople obterPorMatricula(ModeloBenPeople modeloBenPeople) {
+        return modeloDAO.obterPorMatricula(modeloBenPeople.getEmpresa(), modeloBenPeople.getMatricula(), modeloBenPeople.getCodBeneficiario());
     }
 
     @Override

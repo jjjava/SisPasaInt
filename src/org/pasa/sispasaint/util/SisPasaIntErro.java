@@ -13,6 +13,7 @@ public class SisPasaIntErro {
     public static final String ERRO_PLANO = "Plano não existe.";
     public static final String ERRO_ENDERECO = "Sem endereço.";
     public static final String ERRO_NAO_CADASTRADO = "Não cadastrado.";
+    public static final String ERRO_ADD_BENEF = "Erro ao adicionar Beneficiario";
     
     public static final String MSG_FALSE_DAO = "Erro no DAO.";
     

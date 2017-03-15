@@ -24,7 +24,6 @@ public class ImpEndPeopleDAOImpl extends DaoGenerico<ModeloEndPeople> implements
     @Override
     public ModeloEndPeople obterPorMatricula(String empresa, String matricula, String codBeneficiario) {
         ModeloEndPeople m = new ModeloEndPeople();
-        m.setId(-1L);
         List<ModeloEndPeople> lista = null;
         try {
             Query q1 = getEntityManager().
@@ -37,12 +36,12 @@ public class ImpEndPeopleDAOImpl extends DaoGenerico<ModeloEndPeople> implements
             System.err.println(this.getClass().getName() + " Mat:" + empresa + matricula + codBeneficiario + "\n" + ex);
             Logger.getLogger(ImpEndPeopleDAOImpl.class).error(empresa + matricula + codBeneficiario + "\n" + ex);
             new LogBeanImpl().logErroClass(this.getClass().getName(), empresa + matricula + codBeneficiario + "\n" + ex.getMessage());
-            return m;
+            return null;
         }
         if (lista.size() > 0) {
             return lista.get(0);
         }
-        return m;
+        return null;
     }
 
     @Override

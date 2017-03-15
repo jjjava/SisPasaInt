@@ -38,7 +38,7 @@ import org.pasa.sispasaint.util.StringUtil;
  */
 public class CargaEntidadePeopleBeneficiario {
 
-    private Log log;
+    private final Log log;
     private Beneficiario beneficiario;
     private final LogBeanImpl logBean;
     private final PlanoBeanImpl planoBean;

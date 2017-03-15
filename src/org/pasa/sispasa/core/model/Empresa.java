@@ -4,6 +4,7 @@ import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
+import javax.persistence.Cacheable;
 
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
@@ -38,6 +39,7 @@ import org.pasa.sispasa.core.vo.EmpresaVO;
     @Index(name = "CD_EMPRESA_VALE_IDX", columnList = "CD_EMPRESA_VALE", unique = true)})
 @Audited
 @AuditTable(value = "HIST_EMPRESA")
+@Cacheable
 public class Empresa extends BaseEntity implements Serializable {
 
     private static final long serialVersionUID = 1L;

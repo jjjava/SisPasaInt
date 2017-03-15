@@ -59,25 +59,17 @@ public class StringUtil {
 
     public static String truncTelefone(String tel) {
         if (tel.length() > SisPasaIntCommon.TAM_ERRO_LOG) {
-            char aux[] = tel.toCharArray();
-            tel = "";
-            for (int k = 0; k < SisPasaIntCommon.TAM_TELEFONE; k++) {
-                tel = tel + aux[k];
-            }
+            return tel.substring(0, SisPasaIntCommon.TAM_TELEFONE);
         }
         return tel;
     }
 
     public static String truncErroLog(String erro) {
-        if(null == erro){
+        if (null == erro) {
             return "objeto nulo truncErroLog";
         }
         if (erro.length() > SisPasaIntCommon.TAM_ERRO_LOG) {
-            char aux[] = erro.toCharArray();
-            erro = "";
-            for (int k = 0; k < SisPasaIntCommon.TAM_ERRO_LOG; k++) {
-                erro = erro + aux[k];
-            }
+            return erro.substring(0, SisPasaIntCommon.TAM_ERRO_LOG);
         }
         return erro;
     }

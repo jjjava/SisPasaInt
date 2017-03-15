@@ -67,7 +67,6 @@ public class CargaMapeaEntidadesThread implements Runnable {
                                     log.addMatriculaErro(mBenef.getEmpresa(), mBenef.getMatriculaPeople(), mBenef.getCodBeneficiario(), SisPasaIntErro.ERRO_NAO_CADASTRADO, SisPasaIntErro.MSG_FALSE_DAO);
                                     logBean.atualizar(log);
                                 }
-                                System.out.println(nome + "     " + k + "VIVA");
                             } else {
 //                                Funcionario b = cargaEntidadePeopleFuncionario.funcionarioFromModelo(mBenef);
 //                                if (comparadorFuncionario.comparar(funcionario, b) != 0) {
@@ -92,7 +91,6 @@ public class CargaMapeaEntidadesThread implements Runnable {
             System.err.println(nome + "   contador :" + k + "   " + ex);
             Logger.getLogger(CargaMapeaEntidadesThread.class).error(ex);
             new LogBeanImpl().logErroClass(this.getClass().getName() + nome + " contador: " + k, ex.getMessage());
-
         }
     }
 

@@ -169,21 +169,27 @@ public class CargaEntidadePeopleFuncionario {
         //PERSISTIR
         funcionarioBean.cadastrar(funcionario);//gerar ID
         //BENEFICIARIOS
-        List<ModeloBenPeople> benef = impBenPeopleTempBeanImpl.listarBeneficiarios(modelo);
-        for (ModeloBenPeople f : benef) {
-            Beneficiario b = cargaEntidadePeopleBeneficiario.newBeneficiario(f);
-            b.setFuncionario(funcionario);
-            if (f.getCodBeneficiario().equals("00")) {
-                b.setId(funcionario.getId());
+        try {
+            List<ModeloBenPeople> benef = impBenPeopleTempBeanImpl.listarBeneficiarios(modelo);
+            for (ModeloBenPeople f : benef) {
+                Beneficiario b = cargaEntidadePeopleBeneficiario.newBeneficiario(f);
+                b.setFuncionario(funcionario);
+                if (f.getCodBeneficiario().equals("00")) {
+                    b.setId(funcionario.getId());
+                }
+                funcionario.addBeneficiario(b);
             }
-            funcionario.addBeneficiario(b);
+        } catch (Exception ex) {
+            log.addMatriculaErro(modelo.getEmpresa(), modelo.getMatriculaPeople(), modelo.getCodBeneficiario(),
+                    modelo.getCpf(), SisPasaIntErro.TP_LOG_0, SisPasaIntErro.ERRO_ADD_BENEF);
+            logBean.atualizar(log);
         }
         return funcionario;
     }
 
     private Endereco newEndereco(ModeloBenPeople mBen) {
         ModeloEndPeople modeloEndPeople = impEndPeopleTempBeanImpl.obterPorMatricula(mBen);
-        if (modeloEndPeople.getId() == -1L) {
+        if (null == modeloEndPeople) {
             return fakeAdress();
         }
         Estado estado = estadoBeanImpl.obter(modeloEndPeople.getUf());
@@ -249,10 +255,14 @@ public class CargaEntidadePeopleFuncionario {
         ModeloEndPeople modeloEndPeople = impEndPeopleTempBeanImpl.obterPorMatricula(mBen);
         List<Telefone> listaTelefones = new ArrayList<>();
 
+        if (null == modeloEndPeople) {
+            listaTelefones.add(fakeTelefone());
+            return listaTelefones;
+        }
         if (!modeloEndPeople.getTelefone1().trim().equals("")) {
             Telefone tel1 = new Telefone();
             String auxTel1 = modeloEndPeople.getTelefone1().replaceAll(" ", "");
-            if (auxTel1.length() > 18) {
+            if (auxTel1.length() > SisPasaIntCommon.TAM_TELEFONE) {
                 auxTel1 = StringUtil.truncTelefone(auxTel1);
             }
             tel1.setNumeroTelefone(auxTel1);
@@ -265,7 +275,7 @@ public class CargaEntidadePeopleFuncionario {
         if (!modeloEndPeople.getTelefone2().trim().equals("")) {
             Telefone tel2 = new Telefone();
             String auxTel2 = modeloEndPeople.getTelefone1().replaceAll(" ", "");
-            if (auxTel2.length() > 18) {
+            if (auxTel2.length() > SisPasaIntCommon.TAM_TELEFONE) {
                 auxTel2 = StringUtil.truncTelefone(auxTel2);
             }
             tel2.setNumeroTelefone(auxTel2);
@@ -274,6 +284,7 @@ public class CargaEntidadePeopleFuncionario {
             tel2.setDataUltimaAtualizacao(DateUtil.obterDataAtual());
             listaTelefones.add(tel2);
         }
+
         return listaTelefones;
     }
 
@@ -309,7 +320,6 @@ public class CargaEntidadePeopleFuncionario {
     private Endereco fakeAdress() {
         Estado estado = estadoBeanImpl.obter("RJ");
         Municipio municipio = municipioBeanImpl.existe("RIO DE JANEIRO");
-        System.out.println(municipio.getId());
         Endereco endereco = new Endereco();
         endereco.setLogradouro("SEM ENDERECO");
         endereco.setBairro("SEM ENDERECO");
@@ -320,5 +330,15 @@ public class CargaEntidadePeopleFuncionario {
         endereco.setEstado(estado);
         endereco.setMunicipio(municipio);
         return endereco;
+    }
+
+    private Telefone fakeTelefone() {
+        Telefone tel = new Telefone();
+        tel.setDdd("00");
+        tel.setNumeroTelefone("00000");
+        tel.setIndAtivo(SisPasaIntCommon.INATIVO);
+        tel.setIdUsuario(SisPasaIntCommon.USER_CARGA);
+        tel.setDataUltimaAtualizacao(DateUtil.obterDataAtual());
+        return tel;
     }
 }
