@@ -42,18 +42,28 @@ public class ModeloBeneficiarioEnderecoJob implements Job {
             this.idLista = dataMap.getLong(SisPasaIntCommon.ID_LISTA);
             this.cdVale = dataMap.getString(SisPasaIntCommon.ID_EMPRESA);
             this.log.setEmpresaVale(new EmpresaBeanImpl().obter(cdVale).getNomeFantasia());
+           
+            new LogBeanImpl().atualizar(log);
+
             if (tipo.equals(SisPasaIntCommon.CARGA_PEOPLE)) {
                 log.setTipoJob(SisPasaIntCommon.CARGA_PEOPLE);
                 CargaPeopleBeanImpl cargaPeopleBeanImpl = new CargaPeopleBeanImpl(cdVale, log);
                 cargaPeopleBeanImpl.inicar();
-            } else {
-                // CargaBenEndBeanImpl cargaBenEndBeanImpl = new
-                // CargaBenEndBeanImpl(idEmpresa, log);
-                // cargaBenEndBeanImpl.start();
             }
-            new LogBeanImpl().atualizar(log);
+
+            if (tipo.equals(SisPasaIntCommon.CARGA_VLI)) {
+                log.setTipoJob(SisPasaIntCommon.CARGA_VLI);
+                CargaPeopleBeanImpl cargaPeopleBeanImpl = new CargaPeopleBeanImpl(cdVale, log);
+                cargaPeopleBeanImpl.inicar();
+            }
+
+            if (tipo.equals(SisPasaIntCommon.CARGA_EXT)) {
+                log.setTipoJob(SisPasaIntCommon.CARGA_EXT);
+                CargaPeopleBeanImpl cargaPeopleBeanImpl = new CargaPeopleBeanImpl(cdVale, log);
+                cargaPeopleBeanImpl.inicar();
+            }
         } catch (Exception ex) {
-            System.err.println(this.getClass().getName()+"\n"+ex);
+            System.err.println(this.getClass().getName() + "\n" + ex);
             Logger.getLogger(ModeloBeneficiarioEnderecoJob.class).error(ex);
             new LogBeanImpl().logErroClass(this.getClass().getName(), ex.getMessage());
         } finally {
