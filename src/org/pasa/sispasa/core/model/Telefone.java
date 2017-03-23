@@ -58,16 +58,16 @@ public class Telefone extends BaseEntity implements Serializable {
     @Temporal(TemporalType.TIMESTAMP)
     private Date dataUltimaAtualizacao;
 
+    @OneToOne
+    @NotAudited
+    private TipoTelefone tipoTelefone;
+    
     public Telefone() {
     }
 
     public Telefone(Long id) {
         this.id = id;
     }
-
-    @OneToOne
-    @NotAudited
-    private TipoTelefone tipoTelefone;
 
     public static Telefone getEntity(TelefoneVO vo) {
         String temp = Utils.desformataTelefone(vo.getNumeroTelefoneComDDD());

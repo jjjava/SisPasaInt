@@ -60,9 +60,12 @@ public class CamposModelo {
     //ENDERECO
     public static final String TELEFONE1 = "telefone1";
     public static final String TELEFONE2 = "telefone2";
+    public static final String TELEFONE3 = "telefone3";
+    
     public static final String ENDERECO = "endereco";
     public static final String BAIRRO = "bairro";
     public static final String CIDADE = "cidade";
     public static final String UF = "uf";
     public static final String CEP = "cep";
+    public static final String EMAIL = "email";
 }

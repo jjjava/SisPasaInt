@@ -1,7 +1,6 @@
 package org.pasa.sispasa.core.model;
 
 import java.io.Serializable;
-import javax.persistence.Cacheable;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -25,7 +24,6 @@ import org.pasa.sispasa.core.vo.MunicipioVO;
 @Table(name = "MUNICIPIO")
 @Audited
 @AuditTable(value = "HIST_MUNICIPIO")
-@Cacheable
 public class Municipio extends BaseEntity implements Serializable {
 
     private static final long serialVersionUID = 1L;

@@ -19,39 +19,38 @@ import org.pasa.sispasa.core.constants.ConstantesBanco;
 @Table(name = "TIPO_INTEGRACAO")
 public class TipoIntegracao implements Serializable {
 
-	private static final long serialVersionUID = 1L;
+    private static final long serialVersionUID = 1L;
 
-	@Id
-	@Column(name = "ID_TP_INTEGRACAO", columnDefinition = ConstantesBanco.BIGINT)
-	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	private Long id;
+    @Id
+    @Column(name = "ID_TP_INTEGRACAO", columnDefinition = ConstantesBanco.BIGINT)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long id;
 
-	@Column(name = "DESCRICAO", length = 30, nullable = false)
-	private String descricao;
+    @Column(name = "DESCRICAO", length = 30, nullable = false)
+    private String descricao;
 
-	public TipoIntegracao() {
-		//CONSTRUTOR DEFAULT
-	}
-	
-	public TipoIntegracao(Long id) {
-		this.id = id;
-	}
+    public TipoIntegracao() {
+        //CONSTRUTOR DEFAULT
+    }
 
-	
-	//GETTERS E SETTERS
-	public Long getId() {
-		return id;
-	}
+    public TipoIntegracao(Long id) {
+        this.id = id;
+    }
 
-	public void setId(Long id) {
-		this.id = id;
-	}
+    //GETTERS E SETTERS
+    public Long getId() {
+        return id;
+    }
 
-	public String getDescricao() {
-		return descricao;
-	}
+    public void setId(Long id) {
+        this.id = id;
+    }
 
-	public void setDescricao(String descricao) {
-		this.descricao = descricao;
-	}
+    public String getDescricao() {
+        return descricao;
+    }
+
+    public void setDescricao(String descricao) {
+        this.descricao = descricao;
+    }
 }

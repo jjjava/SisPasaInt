@@ -34,9 +34,8 @@ import org.pasa.sispasa.core.enumeration.EnumTipoRespPagamento;
  */
 @Entity
 @Table(name = "ASSOCIADO",
-        indexes = {
-            @Index(name = "MATR_PASA_IDX", columnList = "MATR_PASA", unique = false),
-            @Index(name = "ID_FUNCIONARIO_ASSC_IDX", columnList = "ID_FUNCIONARIO", unique = false)})
+        indexes = {@Index(name = "MATR_PASA_IDX", columnList = "MATR_PASA", unique = false),
+        @Index(name = "ID_FUNCIONARIO_ASSC_IDX", columnList = "ID_FUNCIONARIO", unique = false)})
 @Audited
 @AuditTable(value = "HIST_ASSOCIADO")
 public class Associado extends BaseEntity {

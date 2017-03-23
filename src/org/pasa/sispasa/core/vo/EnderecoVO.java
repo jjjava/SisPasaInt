@@ -12,6 +12,12 @@ public class EnderecoVO extends AtributosComunsVO {
 	private String cep;
 	private MunicipioVO municipio;
 	private EstadoVO estado;
+	
+	private String regiaoSaude;
+	
+	private NucleoVo nucleoVo;
+	
+	private boolean exibirNucleoRegiao;
 
 	// GETTERS E SETTERS
 
@@ -82,5 +88,32 @@ public class EnderecoVO extends AtributosComunsVO {
 	 */
 	public void setMunicipio(MunicipioVO municipio) {
 		this.municipio = municipio;
+	}
+
+	public String getRegiaoSaude() {
+		return regiaoSaude;
+	}
+
+	public void setRegiaoSaude(String regiaoSaude) {
+		this.regiaoSaude = regiaoSaude;
+	}
+
+	public NucleoVo getNucleoVo() {
+		if (null == nucleoVo) {
+			nucleoVo = new NucleoVo();
+		}
+		return nucleoVo;
+	}
+
+	public void setNucleoVo(NucleoVo nucleoVo) {
+		this.nucleoVo = nucleoVo;
+	}
+
+	public boolean isExibirNucleoRegiao() {
+		return exibirNucleoRegiao;
+	}
+
+	public void setExibirNucleoRegiao(boolean exibirNucleoRegiao) {
+		this.exibirNucleoRegiao = exibirNucleoRegiao;
 	}
 }

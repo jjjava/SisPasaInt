@@ -10,8 +10,8 @@ public enum EnumTipoBeneficiario {
     TITULAR("T", "Titular"),
     DEPENDENTE("D", "Dependente");
 
-    private final String indice;
-    private final String descricao;
+    private String indice;
+    private String descricao;
 
     private EnumTipoBeneficiario(String indice, String descricao) {
         this.indice = indice;

@@ -1,7 +1,6 @@
 package org.pasa.sispasa.core.model;
 
 import java.io.Serializable;
-
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -11,41 +10,22 @@ import javax.persistence.Table;
 
 import org.pasa.sispasa.core.constants.ConstantesBanco;
 
-/**
- *
- * @author Hudson Schumaker 
- * @author Andre Gomes
- * @version 1.0.0
- */
-
 @Entity
-@Table(name = "TIPO_PAGAMENTO")
-public class TipoPagamento implements Serializable {
-
+@Table(name = "EVENTO")
+public class TipoEvento implements Serializable {
 	private static final long serialVersionUID = 1L;
 
 	@Id
-	@Column(name = "ID_PAGAMENTO", columnDefinition = ConstantesBanco.BIGINT)
+	@Column(name = "ID_TP_EVENTO", columnDefinition = ConstantesBanco.BIGINT)
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
-
+	
 	@Column(name = "DESCRICAO", length = 30, nullable = false)
 	private String descricao;
-
-	@Column(name = "TP_PAGADOR", columnDefinition = ConstantesBanco.CHAR_1, nullable = false)
-	private String tipoPagador;
-
-	//CONSTRUTORES
-	public TipoPagamento() {
-		//CONSTRUTOR DEFAULT
-	}
 	
-	public TipoPagamento(Long id) {
-		this.id = id;
+	public TipoEvento(){
 	}
 
-	
-	//GETTERS E SETTERS
 	public Long getId() {
 		return id;
 	}
@@ -60,13 +40,5 @@ public class TipoPagamento implements Serializable {
 
 	public void setDescricao(String descricao) {
 		this.descricao = descricao;
-	}
-
-	public String getTipoPagador() {
-		return tipoPagador;
-	}
-
-	public void setTipoPagador(String tipoPagador) {
-		this.tipoPagador = tipoPagador;
 	}
 }

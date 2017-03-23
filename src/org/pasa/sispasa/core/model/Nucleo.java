@@ -5,9 +5,9 @@ import java.util.Date;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
@@ -16,23 +16,27 @@ import org.hibernate.envers.AuditTable;
 import org.hibernate.envers.Audited;
 import org.pasa.sispasa.core.constants.ConstantesBanco;
 
-
 @Entity
-@Table(name = "REGIAO_SAUDE")
+@Table(name = "NUCLEO")
 @Audited
-@AuditTable(value = "HIST_REGIAO_SAUDE")
-public class RegiaoSaude extends BaseEntity  implements Serializable{
+@AuditTable(value = "HIST_NUCLEO")
+public class Nucleo implements Serializable{
+
+	private static final long serialVersionUID = -5722315282383336785L;
+
+    @Id
+    @Column(name = "COD_NUCLEO", columnDefinition = ConstantesBanco.CHAR_2)
+	private String codNucleo;
 	
-	
-	private static final long serialVersionUID = 3423185605786526350L;
-	
-	@Id
-	@Column(name="ID_REGIAO_SAUDE", columnDefinition = ConstantesBanco.BIGINT)
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-	private Long id;
-	
-	@Column(name="NOME", length = 60, nullable = false)
+    @Column(name="NOME", length=60)
 	private String nome;
+	
+    @Column(name="DESCRICAO",  length=100)
+	private String descricao;
+	
+	@ManyToOne
+    @JoinColumn(name = "ID_REGIONAL")
+	private Regional regional;
 	
 	 @Column(name = "ID_USUARIO", nullable = false, columnDefinition = ConstantesBanco.BIGINT)
     private Long idUsuario;
@@ -43,14 +47,13 @@ public class RegiaoSaude extends BaseEntity  implements Serializable{
     @Column(name = "DT_ULT_ATULZ", nullable = false)
     @Temporal(TemporalType.TIMESTAMP)
     private Date dataUltimaAtualizacao;
-	
-	@Override
-	public Long getId() {
-		return id;
+
+	public String getCodNucleo() {
+		return codNucleo;
 	}
 
-	public void setId(Long id) {
-		this.id = id;
+	public void setCodNucleo(String codNucleo) {
+		this.codNucleo = codNucleo;
 	}
 
 	public String getNome() {
@@ -61,13 +64,28 @@ public class RegiaoSaude extends BaseEntity  implements Serializable{
 		this.nome = nome;
 	}
 
+	public String getDescricao() {
+		return descricao;
+	}
+
+	public void setDescricao(String descricao) {
+		this.descricao = descricao;
+	}
+
+	public Regional getRegional() {
+		return regional;
+	}
+
+	public void setRegional(Regional regional) {
+		this.regional = regional;
+	}
 
 	@Override
 	public int hashCode() {
 		final int prime = 31;
-		int result = super.hashCode();
-		result = prime * result + ((id == null) ? 0 : id.hashCode());
-		result = prime * result + ((nome == null) ? 0 : nome.hashCode());
+		int result = 1;
+		result = prime * result + ((codNucleo == null) ? 0 : codNucleo.hashCode());
+		result = prime * result + ((regional == null) ? 0 : regional.hashCode());
 		return result;
 	}
 
@@ -75,22 +93,21 @@ public class RegiaoSaude extends BaseEntity  implements Serializable{
 	public boolean equals(Object obj) {
 		if (this == obj)
 			return true;
-		if (!super.equals(obj))
+		if (obj == null)
 			return false;
 		if (getClass() != obj.getClass())
 			return false;
-		RegiaoSaude other = (RegiaoSaude) obj;
-		if (id == null) {
-			if (other.id != null)
+		Nucleo other = (Nucleo) obj;
+		if (codNucleo == null) {
+			if (other.codNucleo != null)
 				return false;
-		} else if (!id.equals(other.id))
+		} else if (!codNucleo.equals(other.codNucleo))
 			return false;
-		if (nome == null) {
-			if (other.nome != null)
+		if (regional == null) {
+			if (other.regional != null)
 				return false;
-		} else if (!nome.equals(other.nome))
+		} else if (!regional.equals(other.regional))
 			return false;
-		
 		return true;
 	}
 
@@ -117,6 +134,7 @@ public class RegiaoSaude extends BaseEntity  implements Serializable{
 	public void setDataUltimaAtualizacao(Date dataUltimaAtualizacao) {
 		this.dataUltimaAtualizacao = dataUltimaAtualizacao;
 	}
+	
 	
 	
 }

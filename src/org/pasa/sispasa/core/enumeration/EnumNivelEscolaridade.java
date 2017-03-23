@@ -16,28 +16,28 @@ public enum EnumNivelEscolaridade {
     MESTRADO(6L, "Mestrado"),
     DOUTORADO(7L, "Doutorado");
 
-    private Long indice;
-    private String descricao;
+	private Long indice;
+	private String descricao;
 
-    private EnumNivelEscolaridade(Long indice, String descricao) {
-        this.indice = indice;
-        this.descricao = descricao;
-    }
+	private EnumNivelEscolaridade(Long indice, String descricao) {
+		this.indice = indice;
+		this.descricao = descricao;
+	}
 
-    public static EnumNivelEscolaridade getNivelEscolaridadeByIndice(Long id) {
-        for (EnumNivelEscolaridade enumNivelEscol : EnumNivelEscolaridade.values()) {
-            if (enumNivelEscol.indice.equals(id)) {
-                return enumNivelEscol;
-            }
-        }
-        return null;
-    }
+	public static EnumNivelEscolaridade getNivelEscolaridadeByIndice(Long id) {
+		for (EnumNivelEscolaridade enumNivelEscol : EnumNivelEscolaridade.values()) {
+			if (enumNivelEscol.indice.equals(id)) {
+				return enumNivelEscol;
+			}
+		}
+		return null;
+	}
 
-    public Long getIndice() {
-        return indice;
-    }
+	public Long getIndice() {
+		return indice;
+	}
 
-    public String getDescricao() {
-        return descricao;
-    }
+	public String getDescricao() {
+		return descricao;
+	}
 }

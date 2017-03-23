@@ -1,23 +1,23 @@
 package org.pasa.sispasa.core.enumeration;
 
 /**
- *
+ * 
  * @author Allan Garcia
  *
  */
 public enum EnumTipoEnvioCobranca {
 
-    E("Email"),
-    C("Correios");
+	E("Email"), 
+	C("Correios");
 
-    private final String descricao;
+	private String descricao;
 
-    private EnumTipoEnvioCobranca(String descricao) {
-        this.descricao = descricao;
-    }
+	private EnumTipoEnvioCobranca(String descricao) {
+		this.descricao = descricao;
+	}
 
-    public String getDescricao() {
-        return descricao;
-    }
+	public String getDescricao() {
+		return descricao;
+	}
 
 }

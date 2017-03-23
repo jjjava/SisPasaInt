@@ -15,8 +15,8 @@ public enum EnumTipoVinculoEmpregaticio {
     Pensionista(5L, "Pensionista"),
     ExEmpregado(6L, "Ex-Empregado");
 
-    private final Long indice;
-    private final String descricao;
+    private Long indice;
+    private String descricao;
 
     private EnumTipoVinculoEmpregaticio(Long indice, String descricao) {
         this.indice = indice;
