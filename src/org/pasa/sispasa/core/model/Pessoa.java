@@ -88,7 +88,7 @@ public class Pessoa extends BaseEntity implements Serializable {
     @Column(name = "EMAIL", length = 60)
     private String email;
 
-    @Column(name = "ID_CONCL_ESCOL", nullable = false, columnDefinition = ConstantesBanco.SMALLINT)
+    @Column(name = "IND_CONCL_ESCOL", nullable = false, columnDefinition = ConstantesBanco.SMALLINT)
     private Integer indConclusaoEscolaridade;
 
     // RELACIONAMENTOS

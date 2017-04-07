@@ -20,7 +20,7 @@ import org.pasa.sispasaint.bean.impl.LogBeanImpl;
 public abstract class DaoGenerico<T> {
 
     @PersistenceContext
-    private final EntityManager em;
+    protected final EntityManager em;
     private final EntityManagerFactory emf;
     public final Class<T> entityClass;
 

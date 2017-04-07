@@ -21,7 +21,7 @@ public class BancoConfiguracaoBeanImpl implements BancoConfiguracaoBean {
 
     @Override
     public boolean atualizar(BancoConfiguracao bc) {
-        return new BancoConfiguracaoDAOImpl().atualizar(bc);
+        return false;// Uselless
     }
 
     @Override

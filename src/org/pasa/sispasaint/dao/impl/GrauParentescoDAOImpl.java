@@ -24,7 +24,7 @@ public class GrauParentescoDAOImpl extends DaoGenerico<GrauParentesco> implement
     @Override
     public GrauParentesco existe(String codigo) {
         Query q1 = getEntityManager().
-                createQuery("select g from GrauParentesco g where g.descricao = :cod");
+                createQuery("select g from GrauParentesco g where g.codExterno = :cod");
         q1.setParameter("cod", codigo);
         q1.setMaxResults(1);
         List<GrauParentesco> grauParentesco = null;

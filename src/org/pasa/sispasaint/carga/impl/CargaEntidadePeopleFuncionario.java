@@ -118,7 +118,7 @@ public class CargaEntidadePeopleFuncionario {
             funcionario.setDataUltimaAtualizacao(DateUtil.obterDataAtual());
             funcionario.getPessoa().setDataInclusaoSistema(DateUtil.obterDataAtual());
             //PERSISTIR
-            funcionarioBean.cadastrar(funcionario);//gerar ID
+            funcionario = funcionarioBean.atualizaComId(funcionario);//gerar ID
             //BENEFICIARIOS
             List<ModeloBenPeople> benef = impBenPeopleTempBeanImpl.listarBeneficiarios(modelo);
             for (ModeloBenPeople f : benef) {
@@ -129,6 +129,7 @@ public class CargaEntidadePeopleFuncionario {
                     b.setFuncionario(funcionario);
                     if (f.getCodBeneficiario().equals("00")) {
                         b.setId(funcionario.getId());
+                        b.setPessoa(funcionario.getPessoa());
                     }
                     funcionario.addBeneficiario(b);
                 }

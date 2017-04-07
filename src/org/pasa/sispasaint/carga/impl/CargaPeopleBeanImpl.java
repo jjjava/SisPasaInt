@@ -8,7 +8,7 @@ import org.pasa.sispasaint.bean.impl.ImpBenPeopleTempBeanImpl;
 import org.pasa.sispasaint.bean.impl.ImpEndPeopleBeanImpl;
 import org.pasa.sispasaint.bean.impl.LogBeanImpl;
 import org.pasa.sispasaint.carga.CargaPeopleBean;
-import org.pasa.sispasaint.carga.thread.CargaMapeaEntidadesThread;
+import org.pasa.sispasaint.carga.thread.CargaMapeiaEntidadesThread;
 import org.pasa.sispasaint.config.Configuracao;
 import org.pasa.sispasaint.model.intg.Log;
 import org.pasa.sispasaint.util.ArquivoUtil;
@@ -35,9 +35,9 @@ public class CargaPeopleBeanImpl implements CargaPeopleBean {
 
     @Override
     public void inicar() {
-        this.cargaArquivosTemp();
+        //this.cargaArquivosTemp();
         this.mapearEntidades();
-        this.inativacao();
+        //this.inativacao();
     }
 
     @Override
@@ -59,6 +59,7 @@ public class CargaPeopleBeanImpl implements CargaPeopleBean {
     @Override
     public void mapearEntidades() {
         ExecutorService executor = Executors.newFixedThreadPool(Sistema.getNumberProcessors());
+     //   ExecutorService executor = Executors.newFixedThreadPool(1);
         long qtdRegistros = modeloBenBean.contar();
         if (qtdRegistros > 2001) {
             long lote = ArquivoUtil.getNumeroLinhasLote(qtdRegistros);
@@ -71,7 +72,7 @@ public class CargaPeopleBeanImpl implements CargaPeopleBean {
                     if ((Sistema.getNumberProcessors() - k) == 1) {
                         fim = fim + ArquivoUtil.getNumeroLinhasResto(qtdRegistros);
                     }
-                    executor.execute(new CargaMapeaEntidadesThread(log, ini, fim, " Thread_" + (k + 1)));
+                    executor.execute(new CargaMapeiaEntidadesThread(log, ini, fim, " Thread_" + (k + 1)));
                     ini = fim;
                     fim = fim + lote;
                 }
@@ -89,7 +90,7 @@ public class CargaPeopleBeanImpl implements CargaPeopleBean {
             this.log.setQtdLote(qtdRegistros);
             this.log.setQtdThreads(1);
             try {
-                executor.execute(new CargaMapeaEntidadesThread(log, ini, fim, " Thread"));
+                executor.execute(new CargaMapeiaEntidadesThread(log, ini, fim, " Thread"));
             } catch (Exception ex) {
                 System.err.println(this.getClass().getName() + "\n" + ex);
                 Logger.getLogger(CargaPeopleBeanImpl.class).error(ex);

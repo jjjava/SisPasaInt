@@ -17,7 +17,7 @@ import org.pasa.sispasaint.util.SisPasaIntErro;
  * @author Hudson Schumaker
  * @version 1.0.0
  */
-public class CargaMapeaEntidadesThread implements Runnable {
+public class CargaMapeiaEntidadesThread implements Runnable {
 
     private final Log log;
     private final long ini;
@@ -30,7 +30,7 @@ public class CargaMapeaEntidadesThread implements Runnable {
     private final ImpBenPeopleBeanImpl modeloBenBean;
     private final CargaEntidadePeopleFuncionario cargaEntidadePeopleFuncionario;
 
-    public CargaMapeaEntidadesThread(Log log, long ini, long qtdRegistros, String nome) {
+    public CargaMapeiaEntidadesThread(Log log, long ini, long qtdRegistros, String nome) {
         this.log = log;
         this.ini = ini;
         this.qtdRegistros = qtdRegistros;
@@ -78,18 +78,18 @@ public class CargaMapeaEntidadesThread implements Runnable {
                         }
                     } else {
                         System.err.println(nome + "   contador :" + k + " ModeloBenPeople = null");
-                        Logger.getLogger(CargaMapeaEntidadesThread.class).error(nome + "   contador :" + k + " ModeloBenPeople = null");
+                        Logger.getLogger(CargaMapeiaEntidadesThread.class).error(nome + "   contador :" + k + " ModeloBenPeople = null");
                         new LogBeanImpl().logErroClass(this.getClass().getName() + nome + " contador: " + k, "ModeloBenPeople = null");
                     }
                 } catch (Exception ex) {
                     System.err.println(nome + "   contador :" + k + "   " + ex);
-                    Logger.getLogger(CargaMapeaEntidadesThread.class).error(ex);
+                    Logger.getLogger(CargaMapeiaEntidadesThread.class).error(ex);
                     new LogBeanImpl().logErroClass(this.getClass().getName() + nome + " contador: " + k, ex.getMessage());
                 }
             }
         } catch (Exception ex) {
             System.err.println(nome + "   contador :" + k + "   " + ex);
-            Logger.getLogger(CargaMapeaEntidadesThread.class).error(ex);
+            Logger.getLogger(CargaMapeiaEntidadesThread.class).error(ex);
             new LogBeanImpl().logErroClass(this.getClass().getName() + nome + " contador: " + k, ex.getMessage());
         }
     }

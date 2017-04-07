@@ -104,6 +104,7 @@ public class LerArquivoBenPeople {
         line = StringUtil.removeCharsEspeciais(line);
         line = normalizaLinha(line);
         ModeloBenPeople modelo = new ModeloBenPeople();
+        
         try {
             //BENEFICIARIO - FUNCIONARIO
             campo = (PosicaoCampo) mapa.get(CamposModelo.EMPRESA);

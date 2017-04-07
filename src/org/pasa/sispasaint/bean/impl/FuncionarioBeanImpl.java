@@ -13,18 +13,18 @@ import org.pasa.sispasaint.dao.impl.FuncionarioDAOImpl;
 public class FuncionarioBeanImpl implements FuncionarioBean {
 
     private final FuncionarioDAOImpl funcionarioDAO;
-    
+
     public FuncionarioBeanImpl() {
         this.funcionarioDAO = new FuncionarioDAOImpl();
     }
-    
+
     @Override
     public Funcionario obter(Funcionario f) {
         return funcionarioDAO.obter(f.getId());
     }
-    
+
     @Override
-    public Funcionario obter(String empresa, String matricula){
+    public Funcionario obter(String empresa, String matricula) {
         return funcionarioDAO.obter(empresa, matricula);
     }
 
@@ -35,7 +35,8 @@ public class FuncionarioBeanImpl implements FuncionarioBean {
 
     @Override
     public boolean atualizar(Funcionario funcionario) {
-      return  funcionarioDAO.atualizar(funcionario);
+        funcionarioDAO.atualizar(funcionario);
+        return true;
     }
 
     @Override
@@ -45,11 +46,15 @@ public class FuncionarioBeanImpl implements FuncionarioBean {
 
     @Override
     public List<Funcionario> listar() {
-         return funcionarioDAO.listar();
+        return funcionarioDAO.listar();
     }
 
     @Override
     public Integer atualizaStatus(Long empresa) {
         return funcionarioDAO.atualizaStatus(empresa);
+    }
+
+    public Funcionario atualizaComId(Funcionario func) {
+        return funcionarioDAO.atualizaComID(func);
     }
 }

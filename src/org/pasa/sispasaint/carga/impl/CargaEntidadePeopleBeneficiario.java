@@ -9,6 +9,7 @@ import org.pasa.sispasa.core.model.Beneficiario;
 import org.pasa.sispasa.core.model.Documento;
 import org.pasa.sispasa.core.model.Endereco;
 import org.pasa.sispasa.core.model.Estado;
+import org.pasa.sispasa.core.model.GrauParentesco;
 import org.pasa.sispasa.core.model.Municipio;
 import org.pasa.sispasa.core.model.NivelEscolaridade;
 import org.pasa.sispasa.core.model.OrigemInformacoes;
@@ -17,6 +18,7 @@ import org.pasa.sispasa.core.model.Plano;
 import org.pasa.sispasa.core.model.Telefone;
 import org.pasa.sispasa.core.model.TipoDocumento;
 import org.pasa.sispasaint.bean.impl.EstadoBeanImpl;
+import org.pasa.sispasaint.bean.impl.GrauParentescoBeanImpl;
 import org.pasa.sispasaint.bean.impl.ImpEndPeopleBeanImpl;
 import org.pasa.sispasaint.bean.impl.LogBeanImpl;
 import org.pasa.sispasaint.bean.impl.MunicipioBeanImpl;
@@ -47,6 +49,7 @@ public class CargaEntidadePeopleBeneficiario {
     private final TipoDocumentoBeanImpl tipoDocumentoBean;
     private final ImpEndPeopleBeanImpl impEndPeopleTempBeanImpl;
     private final NivelEscolaridadeBeanImpl nivelEscolaridadeBean;
+    private final GrauParentescoBeanImpl grauParentescoBean;
 
     public CargaEntidadePeopleBeneficiario(Log log) {
         this.log = log;
@@ -57,6 +60,7 @@ public class CargaEntidadePeopleBeneficiario {
         this.impEndPeopleTempBeanImpl = new ImpEndPeopleBeanImpl();
         this.tipoDocumentoBean = new TipoDocumentoBeanImpl();
         this.nivelEscolaridadeBean = new NivelEscolaridadeBeanImpl();
+        this.grauParentescoBean = new GrauParentescoBeanImpl();
     }
 
     public Beneficiario newBeneficiario(ModeloBenPeople modelo) {
@@ -132,8 +136,11 @@ public class CargaEntidadePeopleBeneficiario {
     }
 
     private NivelEscolaridade newNivelEscolaridade(ModeloBenPeople modelo) {
-        NivelEscolaridade nivelEscolaridade = nivelEscolaridadeBean.obter(modelo.getGrauEscolaridade());
-        return nivelEscolaridade;
+        return nivelEscolaridadeBean.obter(modelo.getGrauEscolaridade());
+    }
+    
+    private GrauParentesco newGrauParentesco(ModeloBenPeople modelo){
+        return grauParentescoBean.existe(modelo.getGrauParentesco());
     }
 
     private List<Telefone> newTelefones(ModeloBenPeople mBen) {
@@ -200,6 +207,7 @@ public class CargaEntidadePeopleBeneficiario {
         beneficiario.setDataFimPlanoCassi(DateUtil.toDate(modeloBenEnd.getCassiData()));
         beneficiario.getPessoa().setDataInclusaoSistema(DateUtil.obterDataAtual());
         beneficiario.getPessoa().setNivelEscolaridade(newNivelEscolaridade(modeloBenEnd));
+        beneficiario.setGrauParentesco(newGrauParentesco(modeloBenEnd));
 
         if (modeloBenEnd.getTipoBeneficiario().equalsIgnoreCase(EnumTipoBeneficiario.TITULAR.getIndice())) {
             beneficiario.setTipoBeneficiario(EnumTipoBeneficiario.TITULAR.getIndice());

@@ -21,13 +21,13 @@ public class LogBeanImpl implements LogBean{
     @Override
     public void cadastrar(Log l) {
         l.setDataFim(DateUtil.obterDataAtual());
-        new LogDAOImpl().cadastrar(l);
+       // new LogDAOImpl().atualizar(l);
     }
 
     @Override
     public void atualizar(Log l) {
         l.setDataFim(DateUtil.obterDataAtual());
-        new LogDAOImpl().atualizar(l);
+      //  new LogDAOImpl().atualizar(l);
     }
 
     @Override
@@ -44,6 +44,6 @@ public class LogBeanImpl implements LogBean{
        Log l = new Log();
        l.addClasseErro(classe, SisPasaIntErro.TP_LOG_0 , StringUtil.truncErroLog(erro));
        l.setDataFim(DateUtil.obterDataAtual());
-       new LogDAOImpl().cadastrar(l);
+     //  new LogDAOImpl().cadastrar(l);
     }
 }

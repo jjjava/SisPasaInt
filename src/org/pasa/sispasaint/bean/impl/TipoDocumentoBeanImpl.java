@@ -30,7 +30,7 @@ public class TipoDocumentoBeanImpl implements TipoDocumentoBean {
 
     @Override
     public boolean atualizar(TipoDocumento td) {
-        return tipoDocumentoDAO.atualizar(td);
+        return true;
     }
 
     @Override

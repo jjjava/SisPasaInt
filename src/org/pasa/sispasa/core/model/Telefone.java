@@ -7,6 +7,7 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
@@ -59,6 +60,7 @@ public class Telefone extends BaseEntity implements Serializable {
     private Date dataUltimaAtualizacao;
 
     @OneToOne
+    @JoinColumn(name = "ID_TP_TELEFONE")
     @NotAudited
     private TipoTelefone tipoTelefone;
     
