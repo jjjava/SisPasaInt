@@ -35,7 +35,7 @@ import org.pasa.sispasa.core.vo.EmpresaVO;
  */
 @Entity
 @Table(name = "EMPRESA", indexes = {
-    @Index(name = "CD_EMPRESA_VALE_IDX", columnList = "CD_EMPRESA_VALE", unique = true)})
+@Index(name = "CD_EMPRESA_VALE_IDX", columnList = "CD_EMPRESA_VALE", unique = true)})
 @Audited
 @AuditTable(value = "HIST_EMPRESA")
 public class Empresa extends BaseEntity implements Serializable {

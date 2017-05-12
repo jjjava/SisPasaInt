@@ -35,7 +35,7 @@ public class CargaPeopleBeanImpl implements CargaPeopleBean {
 
     @Override
     public void inicar() {
-        //this.cargaArquivosTemp();
+        this.cargaArquivosTemp();
         this.mapearEntidades();
         //this.inativacao();
     }

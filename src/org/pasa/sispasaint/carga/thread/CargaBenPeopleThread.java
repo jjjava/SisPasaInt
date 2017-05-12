@@ -12,10 +12,17 @@ public class CargaBenPeopleThread implements Runnable {
 
     private final String cdVale;
     private final Log log;
-    private final int ini;
-    private final int fim;
-    private final int lote;
-    private final int loteLines;
+    private int ini;
+    private int fim;
+    private int lote;
+    private int loteLines;
+    private boolean isSmallFile = false;
+
+    public CargaBenPeopleThread(Log log, String cdVale) {
+        this.log = log;
+        this.cdVale = cdVale;
+        this.isSmallFile = true;
+    }
 
     public CargaBenPeopleThread(Log log, String cdVale, int ini, int fim, int lote, int loteLines) {
         this.log = log;
@@ -33,6 +40,10 @@ public class CargaBenPeopleThread implements Runnable {
 
     @Override
     public void run() {
-        new LerArquivoBenPeople(log).lerArquivo(cdVale, ini, fim, lote, loteLines);
+        if (isSmallFile) {
+             new LerArquivoBenPeople(log).lerArquivo(cdVale);
+        } else {
+            new LerArquivoBenPeople(log).lerArquivo(cdVale, ini, fim, lote, loteLines);
+        }
     }
 }

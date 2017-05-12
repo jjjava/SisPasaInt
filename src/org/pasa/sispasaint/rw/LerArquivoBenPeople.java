@@ -1,7 +1,9 @@
 package org.pasa.sispasaint.rw;
 
+import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileNotFoundException;
+import java.io.FileReader;
 import java.io.IOException;
 import java.io.RandomAccessFile;
 import java.nio.MappedByteBuffer;
@@ -27,7 +29,6 @@ import org.pasa.sispasaint.util.StringUtil;
  */
 public class LerArquivoBenPeople {
 
-    
     private String cdVale;
     private final Log log;
     private String benNomeArq;
@@ -56,10 +57,33 @@ public class LerArquivoBenPeople {
                 Configuracao.getInstance().getNomeArqBen(cdVale));
     }
 
+    public void lerArquivo(String cdVale) {
+        this.benNomeArq = Configuracao.getInstance().getNomeArqBen(cdVale);
+        lerArquivoPequeno(new File(Configuracao.getInstance().getBenNomeArqComPath(cdVale)));
+    }
+
     private void lerArquivo(String path, String nomeArq) {
         this.benNomeArq = nomeArq;
         log.setNomeArquivoBen(benNomeArq);
         lerArquivo(new File(path));
+    }
+
+    private void lerArquivoPequeno(File file) {
+        BufferedReader in;
+        try {
+            in = new BufferedReader(new FileReader(file));
+            String line;
+            while ((line = in.readLine()) != null) {
+                modeloDAO.cadastrar(parseCampos(line, benNomeArq));
+                log.addLinhaArq();
+            }
+            in.close();
+        } catch (IOException ex) {
+            System.err.println(this.getClass().getName() + "\n" + ex);
+            Logger.getLogger(LerArquivoBenPeople.class).error(ex);
+            new LogBeanImpl().logErroClass(this.getClass().getName(), ex.getMessage());
+            log.addLinhaArqErro();
+        }
     }
 
     private void lerArquivo(File file) {
@@ -82,17 +106,17 @@ public class LerArquivoBenPeople {
             inChannel.close();
             aFile.close();
         } catch (FileNotFoundException ex) {
-            System.err.println(this.getClass().getName()+"\n"+ex);
+            System.err.println(this.getClass().getName() + "\n" + ex);
             Logger.getLogger(LerArquivoBenPeople.class).error(ex);
             new LogBeanImpl().logErroClass(this.getClass().getName(), ex.getMessage());
             log.addLinhaArqErro();
         } catch (IOException ex) {
-            System.err.println(this.getClass().getName()+"\n"+ex);
+            System.err.println(this.getClass().getName() + "\n" + ex);
             Logger.getLogger(LerArquivoBenPeople.class).error(ex);
             new LogBeanImpl().logErroClass(this.getClass().getName(), ex.getMessage());
             log.addLinhaArqErro();
-        }finally{
-        	zipArq(file,file.getName()+"_PROC_"+DateUtil.dataParaArquivo(),
+        } finally {
+            zipArq(file, file.getName() + "_PROC_" + DateUtil.dataParaArquivo(),
                     Configuracao.getInstance().getBenNomeArqComPath(cdVale),
                     Configuracao.getInstance().getBenNomeProcComPath(cdVale));
         }
@@ -104,7 +128,7 @@ public class LerArquivoBenPeople {
         line = StringUtil.removeCharsEspeciais(line);
         line = normalizaLinha(line);
         ModeloBenPeople modelo = new ModeloBenPeople();
-        
+
         try {
             //BENEFICIARIO - FUNCIONARIO
             campo = (PosicaoCampo) mapa.get(CamposModelo.EMPRESA);
@@ -216,7 +240,7 @@ public class LerArquivoBenPeople {
 
             modelo.setNomeArquivo(nomeArq);
         } catch (Exception ex) {
-            System.err.println(this.getClass().getName()+"\n"+ex);
+            System.err.println(this.getClass().getName() + "\n" + ex);
             Logger.getLogger(LerArquivoBenPeople.class).error(ex);
             new LogBeanImpl().logErroClass(this.getClass().getName(), ex.getMessage());
             log.addLinhaArqErro();
@@ -227,6 +251,9 @@ public class LerArquivoBenPeople {
     private String acerta400Pos(String line) {
         while (line.length() < 400) {
             line = line + " ";
+        }
+        if (line.length() > 400) {
+            line = line.substring(0, 400);
         }
         return line;
     }
@@ -248,7 +275,7 @@ public class LerArquivoBenPeople {
     }
 
     private String acertaPlano(String plano) {
-        if (plano.equals("") || plano.equals(" ") || plano.equals("  ") ) {
+        if (plano.equals("") || plano.equals(" ") || plano.equals("  ")) {
             return "0";
         }
         return plano;
