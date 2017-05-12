@@ -24,93 +24,98 @@ import org.pasa.sispasaint.bean.ImpBenPeopleBean;
  * @version 1.0.0
  */
 public class ImpBenPeopleBeanImpl implements ImpBenPeopleBean {
-    
+
     private final ImpBenPeopleDAOImpl modeloDAO;
     private final FuncionarioBeanImpl funcionarioBean;
     private final BeneficiarioBeanImpl beneficiarioBean;
-    
+
     public ImpBenPeopleBeanImpl() {
         this.modeloDAO = new ImpBenPeopleDAOImpl();
         this.funcionarioBean = new FuncionarioBeanImpl();
         this.beneficiarioBean = new BeneficiarioBeanImpl();
     }
-    
+
     @Override
     public ModeloBenPeople obter(Long id) {
         ModeloBenPeople modeloBenPeople = new ModeloBenPeople();
         modeloBenPeople.setId(id);
         return obter(modeloBenPeople);
     }
-    
+
     @Override
     public ModeloBenPeople obter(ModeloBenPeople modelo) {
         return modeloDAO.obter(modelo.getId());
     }
-    
+
     @Override
     public void limparTabela() {
         modeloDAO.limpaTB();
     }
-    
+
     @Override
     public void resetarIdentity() {
         modeloDAO.resetarIdentity();
     }
-    
+
     @Override
     public void carregarArquivo(String cdVale, Log log) {
         try {
-            ExecutorService executor = Executors.newFixedThreadPool(Sistema.getNumberProcessors());
-            int lote = ArquivoUtil.getNumeroLinhasLote(ArquivoUtil.getNumerosLinhaArquivo(Configuracao.getInstance().getBenNomeArqComPath(cdVale)));
-            int loteLines = lote;
-            lote = lote * SisPasaIntCommon.LINE_TAM_2;
-            int ini = 0;
-            int fim = lote;
-            for (int i = 0; i < Sistema.getNumberProcessors(); i++) {
-                executor.execute(new CargaBenPeopleThread(log, cdVale, ini, fim, lote, loteLines));
-                ini = fim;
-                fim = fim + lote;
-            }
-            executor.shutdown();
-            while (!executor.isTerminated()) {
+            if (ArquivoUtil.getNumerosLinhaArquivo(Configuracao.getInstance().getBenNomeArqComPath(cdVale)) > 20000) {
+                ExecutorService executor = Executors.newFixedThreadPool(Sistema.getNumberProcessors());
+                int lote = ArquivoUtil.getNumeroLinhasLote(ArquivoUtil.getNumerosLinhaArquivo(Configuracao.getInstance().getBenNomeArqComPath(cdVale)));
+                int loteLines = lote;
+                lote = lote * SisPasaIntCommon.LINE_TAM_2;
+                int ini = 0;
+                int fim = lote;
+                for (int i = 0; i < Sistema.getNumberProcessors(); i++) {
+                    executor.execute(new CargaBenPeopleThread(log, cdVale, ini, fim, lote, loteLines));
+                    ini = fim;
+                    fim = fim + lote;
+                }
+                executor.shutdown();
+                while (!executor.isTerminated()) {
+                }
+            } else {
+                ExecutorService executor = Executors.newFixedThreadPool(1);
+                executor.execute(new CargaBenPeopleThread(log, cdVale));
             }
         } catch (IOException ex) {
-            System.err.println(this.getClass().getName()+"\n"+ex);
+            System.err.println(this.getClass().getName() + "\n" + ex);
             Logger.getLogger(ImpBenPeopleBeanImpl.class).error(ex);
             new LogBeanImpl().logErroClass(this.getClass().getName(), ex.getMessage());
         }
     }
-    
+
     @Override
     public void salvarTbTemp(List<ModeloBenPeople> listaModeloBenVLI) {
         modeloDAO.salvarTbTemp(listaModeloBenVLI);
     }
-    
+
     @Override
     public Long contar() {
         return modeloDAO.contar();
     }
-    
+
     @Override
     public List<ModeloBenPeople> listarBeneficiarios(ModeloBenPeople modeloBenPeople) {
         return listarBeneficiarios(modeloBenPeople.getEmpresa(), modeloBenPeople.getMatricula());
     }
-    
+
     @Override
     public List<ModeloBenPeople> listarBeneficiarios(String empresa, String matricula) {
         return modeloDAO.listarBeneficiarios(empresa, matricula);
     }
-    
+
     @Override
     public void copiarTabela() {
         modeloDAO.copiarTabela();
     }
-    
+
     @Override
     public List<ModeloBenPeople> verificarInativos() {
         return modeloDAO.verificarInativos();
     }
-    
+
     @Override
     public void inativar(List<ModeloBenPeople> listaInativar) {
         for (ModeloBenPeople modelo : listaInativar) {

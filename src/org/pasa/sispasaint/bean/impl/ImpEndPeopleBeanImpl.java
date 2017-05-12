@@ -52,23 +52,29 @@ public class ImpEndPeopleBeanImpl implements ImpEndPeopleBean {
     @Override
     public void carregarArquivo(String cdVale, Log log) {
         try {
-            ExecutorService executor = Executors.newFixedThreadPool(Sistema.getNumberProcessors());
-            int lote = ArquivoUtil.getNumeroLinhasLote(ArquivoUtil.getNumerosLinhaArquivo(Configuracao.getInstance().getEndNomeArqComPath(cdVale)));
-            int loteLines = lote;
-            lote = lote * SisPasaIntCommon.LINE_TAM_4;
-            int ini = 0;
-            int fim = lote;
-            for (int i = 0; i < Sistema.getNumberProcessors(); i++) {
-                if ((Sistema.getNumberProcessors() - i) == 1) {
-                    fim = fim + ArquivoUtil.getNumeroLinhasResto(lote);
+            if (ArquivoUtil.getNumerosLinhaArquivo(Configuracao.getInstance().getEndNomeArqComPath(cdVale)) > 20000) {
+                ExecutorService executor = Executors.newFixedThreadPool(Sistema.getNumberProcessors());
+                int lote = ArquivoUtil.getNumeroLinhasLote(ArquivoUtil.getNumerosLinhaArquivo(Configuracao.getInstance().getEndNomeArqComPath(cdVale)));
+                int loteLines = lote;
+                lote = lote * SisPasaIntCommon.LINE_TAM_4;
+                int ini = 0;
+                int fim = lote;
+                for (int i = 0; i < Sistema.getNumberProcessors(); i++) {
+                    if ((Sistema.getNumberProcessors() - i) == 1) {
+                        fim = fim + ArquivoUtil.getNumeroLinhasResto(lote);
+                    }
+                    executor.execute(new CargaEndPeopleThread(log, cdVale, ini, fim, lote, loteLines));
+                    ini = fim;
+                    fim = fim + lote;
                 }
-                executor.execute(new CargaEndPeopleThread(log, cdVale, ini, fim, lote, loteLines));
-                ini = fim;
-                fim = fim + lote;
+                executor.shutdown();
+                while (!executor.isTerminated()) {
+                }
+            } else {
+                ExecutorService executor = Executors.newFixedThreadPool(1);
+                executor.execute(new CargaEndPeopleThread(log, cdVale));
             }
-            executor.shutdown();
-            while (!executor.isTerminated()) {
-            }
+
         } catch (IOException ex) {
             System.err.println(this.getClass().getName() + "\n" + ex);
             Logger.getLogger(ImpEndPeopleBeanImpl.class).error(ex);

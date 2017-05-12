@@ -1,7 +1,9 @@
 package org.pasa.sispasaint.rw;
 
+import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileNotFoundException;
+import java.io.FileReader;
 import java.io.IOException;
 import java.io.RandomAccessFile;
 import java.nio.MappedByteBuffer;
@@ -53,6 +55,29 @@ public class LerArquivoEndPeople {
                 Configuracao.getInstance().getNomeArqEnd(cdVale));
     }
 
+    public void lerArquivo(String cdVale) {
+        this.endNomeArq = Configuracao.getInstance().getNomeArqEnd(cdVale);
+         lerArquivoPequeno(new File(Configuracao.getInstance().getEndNomeArqComPath(cdVale)));
+    }
+
+    private void lerArquivoPequeno(File file) {
+        BufferedReader in;
+        try {
+            in = new BufferedReader(new FileReader(file));
+            String line;
+            while ((line = in.readLine()) != null) {
+                modeloDAO.cadastrar(parseCampos(line, endNomeArq));
+                log.addLinhaArq();
+            }
+            in.close();
+        } catch (IOException ex) {
+            System.err.println(this.getClass().getName() + "\n" + ex);
+            Logger.getLogger(LerArquivoBenPeople.class).error(ex);
+            new LogBeanImpl().logErroClass(this.getClass().getName(), ex.getMessage());
+            log.addLinhaArqErro();
+        }
+    }
+
     public void lerArquivo(String path, String nomeArq) {
         this.endNomeArq = nomeArq;
         log.setNomeArquivoEnd(endNomeArq);
@@ -79,12 +104,12 @@ public class LerArquivoEndPeople {
             inChannel.close();
             aFile.close();
         } catch (FileNotFoundException ex) {
-            System.err.println(this.getClass().getName()+"\n"+ex);
+            System.err.println(this.getClass().getName() + "\n" + ex);
             Logger.getLogger(LerArquivoEndPeople.class).error(ex);
             new LogBeanImpl().logErroClass(this.getClass().getName(), ex.getMessage());
             log.addLinhaArqErro();
         } catch (IOException ex) {
-            System.err.println(this.getClass().getName()+"\n"+ex);
+            System.err.println(this.getClass().getName() + "\n" + ex);
             Logger.getLogger(LerArquivoEndPeople.class).error(ex);
             new LogBeanImpl().logErroClass(this.getClass().getName(), ex.getMessage());
             log.addLinhaArqErro();
@@ -128,7 +153,7 @@ public class LerArquivoEndPeople {
 
             modelo.setNomeArquivo(nomeArq);
         } catch (Exception ex) {
-            System.err.println(this.getClass().getName()+"\n"+ex);
+            System.err.println(this.getClass().getName() + "\n" + ex);
             Logger.getLogger(LerArquivoEndPeople.class).error(ex);
             new LogBeanImpl().logErroClass(this.getClass().getName(), ex.getMessage());
             log.addLinhaArqErro();
@@ -139,6 +164,9 @@ public class LerArquivoEndPeople {
     private String acerta190Pos(String line) {
         while (line.length() < 190) {
             line = line + " ";
+        }
+        if (line.length() > 190) {
+            line = line.substring(0, 190);
         }
         return line;
     }
